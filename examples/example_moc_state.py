@@ -11,8 +11,8 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 path_abi = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi')
 moc_state_address = Web3.toChecksumAddress('0x0adb40132cB0ffcEf6ED81c26A1881e214100555')
-moc_state = connection_manager.load_abi_contract(os.path.join(path_abi, "MoCState.abi"),
-                                                 contract_address=moc_state_address)
+moc_state = connection_manager.load_abi_contract_file(os.path.join(path_abi, "MoCState.abi"),
+                                                      contract_address=moc_state_address)
 
 print("Starting to call contract...")
 

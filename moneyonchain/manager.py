@@ -288,18 +288,8 @@ class ConnectionManager(BaseConnectionManager):
 
         return tx_receipt
 
-    def sc_from_json_bytecode(self, json_filename):
-        """ Get the json content from json compiled """
-
-        with open(json_filename) as f:
-            json_content = json.load(f)
-
-        sc = self.web3.eth.contract(abi=json_content["abi"], bytecode=json_content["bytecode"])
-
-        return sc, json_content
-
     def load_json_contract(self, json_filename, deploy_address=None):
-        """ Load the abi """
+        """ Load the abi from json file """
 
         network = self.network
 
@@ -326,7 +316,7 @@ class ConnectionManager(BaseConnectionManager):
         return sc
 
     def load_bytecode_contract_file(self, abi_filename, bin_filename):
-        """ Get the json content from json compiled """
+        """ Load abi and bin content """
 
         with open(abi_filename) as f:
             content_abi = json.load(f)
@@ -337,6 +327,21 @@ class ConnectionManager(BaseConnectionManager):
         sc = self.web3.eth.contract(abi=content_abi, bytecode=content_bin)
 
         return sc, content_abi, content_bin
+
+    def load_bytecode_contract_file_json(self, json_filename, link_library=None):
+        """ Get the json content from json compiled """
+
+        with open(json_filename) as f:
+            json_content = json.load(f)
+
+        bytecode = json_content["bytecode"]
+        if link_library:
+            for lib_name, lib_address in link_library:
+                bytecode = bytecode.replace(lib_name, lib_address)
+
+        sc = self.web3.eth.contract(abi=json_content["abi"], bytecode=bytecode)
+
+        return sc
 
     @staticmethod
     def all_events_from(sc, events_functions=None, from_block=0, to_block='latest'):
