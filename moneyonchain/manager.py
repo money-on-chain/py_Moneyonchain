@@ -315,6 +315,13 @@ class ConnectionManager(BaseConnectionManager):
 
         return sc
 
+    def load_contract(self, abi, contract_address):
+        """ Load contract """
+
+        sc = self.web3.eth.contract(address=Web3.toChecksumAddress(contract_address), abi=abi)
+
+        return sc
+
     def load_bytecode_contract_file(self, abi_filename, bin_filename):
         """ Load abi and bin content """
 

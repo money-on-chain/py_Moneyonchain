@@ -3,47 +3,6 @@
   "timeout_wait": 300,
   "gas_price": 60000000,
   "networks": {
-    "mocGanacheDesktop": {
-      "uri": ["http://192.168.56.2:8545"],
-      "chain_id": 123456,
-      "accounts": [
-        {
-          "address": "0x0e424e9a8598a55918e12de47172f3180c4b4e13",
-          "private_key":  "0x9e790b185e5b7f11f2924c7b809936866c38ed3ab3f33e0fbd3cfe791c2cdbd6"
-        }
-      ],
-      "addresses": {
-        "governor": "0xb8b1B46e6f0246D8714fb1fB79F7Fc0f305ac2eE",
-        "oracle": "0x111301D0B6Ea6d588ba50b0eB8be7c02B6271AEA",
-        "upgradeDelegator": "0xDcf946e17E38D3409542a2B59C7a86c6D441AA4E",
-        "mocInrate": "0xd73C11A8f9A62f6CBE4C502a9EDC81410dCD4f5E",
-        "mocState": "0x1cCEc68641721f33C112c57F4332B5EffafF53F3",
-        "mocExchange": "0xDF27e64390dBa517bB492A99266f99A4E70c19fF",
-        "MoCHelperLib": "0x0FE6D1e1aD3003a0DE1062bE8051f00CDba21B01",
-        "MoCSettlement": "0xD3F6605850d72A906C7216DDC0d665C3A55548Dd"
-      }
-
-    },
-    "mocRegTestDesktop": {
-      "uri": ["http://192.168.56.2:4444"],
-      "chain_id": 33,
-      "accounts": [
-        {
-          "address": "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
-          "private_key":  "0xc85ef7d79691fe79573b1a7064c19c1a9819ebdbd1faaab1a8ec92344438aaf4"
-        }
-      ],
-      "addresses": {
-        "governor": "0x275eD9A7A6424c930cB730043e75ea9e58A02459",
-        "oracle": "0x0239eCA75c86DF869e72089568aca18845CCfe52",
-        "upgradeDelegator": "0xd4cbdf4bB6F6871b5922c96ca4Aab6680c9d5555",
-        "mocInrate": "0x99B9028f0046063dba7103F0Acc55F5639C6713F",
-        "mocState": "0x8e584834E873F51f91fA272a2Cf407af30676092",
-        "mocExchange": "0xbCBABDb9F5A5f0F3DcfFa8aD2e646CcE05bdadB6",
-        "MoCHelperLib": "0x880116Ee7fE09F3dc1DAa00077F36b3FCD6b2a84"
-      }
-
-    },
     "mocTestnetAlpha": {
       "uri": ["https://public-node.testnet.rsk.co"],
       "chain_id": 31,
@@ -62,7 +21,9 @@
         "mocExchange": "0x2706e5611FCb5ef52FCe3FA09c4F85A89ad43302",
         "MoCHelperLib": "0xaF495D7f05e84b589122dA410eAda0188E1b12A5",
         "MoCBProxManager": "0x2cF92DA59D690fBd2506a9A3a2439625F00f2dc8",
-        "MoCSettlement": "0xa0dA80B5E5bdf96F9e99630Fa333821fB741A308"
+        "MoCSettlement": "0xa0dA80B5E5bdf96F9e99630Fa333821fB741A308",
+        "BProToken": "",
+        "DoCToken": ""
       }
 
     },
@@ -90,7 +51,9 @@
         "PriceFeed_0": "0xa33EAbE3e2CFbEBB2c16c98994E5EE041A28411a",
         "PriceFeed_1": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "PriceFeed_2": "0x5d111d1b49Aa39d0172712266B0DE2F1eB9957F4",
-        "PriceFeed_3": "0x02baf7348859aAC6CfEEc53498A077790244bBe6"
+        "PriceFeed_3": "0x02baf7348859aAC6CfEEc53498A077790244bBe6",
+        "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+        "DoCToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0"
       }
 
     },
@@ -112,7 +75,9 @@
         "mocExchange": "0xD013583Ee84D174a26f362175b45E7B3258121A2",
         "MoCHelperLib": "0xFfbEe1089b1ad5f31c92aFf9918e668e1a15C22A",
         "MoCBProxManager": "0xba51357A790555187765427B1b111D825344B9d3",
-        "MoCSettlement": "0x4ec03005Ef7a7D1b4924Eb1c735A7F3987a898c7"
+        "MoCSettlement": "0x4ec03005Ef7a7D1b4924Eb1c735A7F3987a898c7",
+        "BProToken": "",
+        "DoCToken": ""
       }
     },
     "mocMainnet2": {
@@ -140,7 +105,8 @@
         "PriceFeed_1": "0xbDbE9cA38cDD2f32ccE11114549E41712BeDe771",
         "PriceFeed_2": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "PriceFeed_3": "0xE94007E81412eDfdB87680F768e331E8c691f0e1",
-        "BProToken": "0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8"
+        "BProToken": "0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8",
+        "DoCToken": ""
       }
     }
 
