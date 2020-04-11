@@ -272,7 +272,9 @@ class MoC(Contract):
         return total_amount, commission_value, interest_value
 
     def mint_bpro(self, amount: float, default_account=None):
-        """ Mint amount bitpro """
+        """ Mint amount bitpro
+        NOTE: amount is in RBTC value
+        """
 
         if amount <= 0.00000001:
             raise Exception("Value too low")
@@ -292,7 +294,7 @@ class MoC(Contract):
 
     def mint_doc(self, amount: float, default_account=None):
         """ Mint amount DOC
-        NOTE amount is in RBTC value
+        NOTE: amount is in RBTC value
         """
 
         if amount <= 0.00000001:
@@ -305,6 +307,44 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def mint_btc2x(self, amount: float, default_account=None):
+        """ Mint amount BTC2X
+        NOTE: amount is in RBTC value
+        """
+
+        if amount <= 0.00000001:
+            raise Exception("Value too low")
+
+        if not self.moc_inrate:
+            self.load_inrate_contract()
+
+        total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
+        bucket = str.encode('X2')
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
+                                                          tx_params={'value': int(total_amount * self.precision)},
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def reedeem_bpro(self, amount_token: float, default_account=None):
+        """ Reedem BitPro amount of token """
+
+        if amount_token <= 0.00000001:
+            raise Exception("Value too low")
+
+        if not self.moc_inrate:
+            self.load_inrate_contract()
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
                                                           default_account=default_account)
 
         tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
