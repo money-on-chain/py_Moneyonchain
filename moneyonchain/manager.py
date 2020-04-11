@@ -193,7 +193,6 @@ class ConnectionManager(BaseConnectionManager):
         self.log.debug("Sending transaction to {} with {} as arguments.\n".format(function_, tx_args))
 
         from_address = self.accounts[default_account].address
-        pk = self.accounts[default_account].key
         nonce = self.web3.eth.getTransactionCount(from_address)
 
         tx_value = 0
@@ -213,6 +212,7 @@ class ConnectionManager(BaseConnectionManager):
 
         transaction = built_fxn.buildTransaction(transaction_dict)
 
+        pk = self.accounts[default_account].key
         signed = self.web3.eth.account.signTransaction(transaction,
                                                        private_key=pk)
 

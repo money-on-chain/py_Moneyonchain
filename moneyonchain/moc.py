@@ -174,6 +174,17 @@ class MoCInrate(Contract):
 
         return result
 
+    def calc_mint_interest_value(self, amount, formatted: bool = True):
+        """ Calc interest value amount in ether float"""
+
+        bucket = str.encode('X2')
+
+        result = self.sc.functions.calcMintInterestValues(bucket, int(amount * self.precision)).call()
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
 
 class MoC(Contract):
     log = logging.getLogger()
@@ -182,6 +193,8 @@ class MoC(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoC.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoC.bin'))
+
+    precision = 10 ** 18
 
     def __init__(self, connection_manager,
                  contract_address=None,
@@ -224,14 +237,14 @@ class MoC(Contract):
 
         return result
 
-    def amount_mint_bitpro(self, amount: float):
-        """Final amount need it to mint bitpro"""
+    def amount_mint_bpro(self, amount: float):
+        """Final amount need it to mint bitpro in RBTC"""
 
         if not self.moc_inrate:
             self.load_inrate_contract()
 
-        commission_value = self.moc_inrate.calc_commission_value(amount)
-        total_amount = amount + float(commission_value)
+        commission_value = float(self.moc_inrate.calc_commission_value(amount))
+        total_amount = amount + commission_value
 
         return total_amount, commission_value
 
@@ -241,7 +254,59 @@ class MoC(Contract):
         if not self.moc_inrate:
             self.load_inrate_contract()
 
-        commission_value = self.moc_inrate.calc_commission_value(amount)
-        total_amount = amount + float(commission_value)
+        commission_value = float(self.moc_inrate.calc_commission_value(amount))
+        total_amount = amount + commission_value
 
         return total_amount, commission_value
+
+    def amount_mint_btc2x(self, amount: float):
+        """Final amount need it to mint btc2x"""
+
+        if not self.moc_inrate:
+            self.load_inrate_contract()
+
+        commission_value = float(self.moc_inrate.calc_commission_value(amount))
+        interest_value = float(self.moc_inrate.calc_mint_interest_value(amount))
+        total_amount = amount + commission_value + interest_value
+
+        return total_amount, commission_value, interest_value
+
+    def mint_bpro(self, amount: float, default_account=None):
+        """ Mint amount bitpro """
+
+        if amount <= 0.00000001:
+            raise Exception("Value too low")
+
+        if not self.moc_inrate:
+            self.load_inrate_contract()
+
+        total_amount, commission_value = self.amount_mint_bpro(amount)
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision),
+                                                          tx_params={'value': int(total_amount * self.precision)},
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def mint_doc(self, amount: float, default_account=None):
+        """ Mint amount DOC
+        NOTE amount is in RBTC value
+        """
+
+        if amount <= 0.00000001:
+            raise Exception("Value too low")
+
+        if not self.moc_inrate:
+            self.load_inrate_contract()
+
+        total_amount, commission_value = self.amount_mint_doc(amount)
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
+                                                          tx_params={'value': int(total_amount * self.precision)},
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
