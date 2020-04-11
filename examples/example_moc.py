@@ -11,7 +11,7 @@ print("Connecting to MoC Main Contract")
 moc_main = MoC(connection_manager)
 print("The contract is paused?: {0}".format(moc_main.paused()))
 
-total_amount, commission_value = moc_main.amount_mint_bitpro(10.0)
+total_amount, commission_value = moc_main.amount_mint_bpro(10.0)
 print("To mint 10 bitpro need {0} RBTC. Commision {1}".format(total_amount, commission_value))
 
 
