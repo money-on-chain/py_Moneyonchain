@@ -200,7 +200,8 @@ class MoC(Contract):
                  contract_address=None,
                  contract_abi=None,
                  contract_bin=None,
-                 contract_address_inrate=None):
+                 contract_address_moc_state=None,
+                 contract_address_moc_inrate=None):
 
         network = connection_manager.network
         if not contract_address:
@@ -212,21 +213,36 @@ class MoC(Contract):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-        # MoC Inrate contract
-        self.moc_inrate = None
-        if contract_address_inrate:
-            self.contract_address_inrate = contract_address_inrate
-        else:
-            # load from connection manager
-            self.contract_address_inrate = connection_manager.options['networks'][network]['addresses']['MoCInrate']
-
-        # finally load the contract
+        # load main contract
         self.load_contract()
 
-    def load_inrate_contract(self):
+        # load contract moc state
+        self.sc_moc_state = self.load_moc_state_contract(contract_address_moc_state)
 
-        self.moc_inrate = MoCInrate(self.connection_manager,
-                                    contract_address=self.contract_address_inrate)
+        # load contract moc inrate
+        self.sc_moc_inrate = self.load_moc_inrate_contract(contract_address_moc_inrate)
+
+    def load_moc_inrate_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCInrate']
+
+        sc = MoCInrate(self.connection_manager,
+                       contract_address=contract_address)
+
+        return sc
+
+    def load_moc_state_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCState']
+
+        sc = MoCState(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
 
     def paused(self, formatted: bool = True,
                block_identifier: BlockIdentifier = 'latest'):
@@ -240,10 +256,7 @@ class MoC(Contract):
     def amount_mint_bpro(self, amount: float):
         """Final amount need it to mint bitpro in RBTC"""
 
-        if not self.moc_inrate:
-            self.load_inrate_contract()
-
-        commission_value = float(self.moc_inrate.calc_commission_value(amount))
+        commission_value = float(self.sc_moc_inrate.calc_commission_value(amount))
         total_amount = amount + commission_value
 
         return total_amount, commission_value
@@ -251,10 +264,7 @@ class MoC(Contract):
     def amount_mint_doc(self, amount: float):
         """Final amount need it to mint doc"""
 
-        if not self.moc_inrate:
-            self.load_inrate_contract()
-
-        commission_value = float(self.moc_inrate.calc_commission_value(amount))
+        commission_value = float(self.sc_moc_inrate.calc_commission_value(amount))
         total_amount = amount + commission_value
 
         return total_amount, commission_value
@@ -262,11 +272,8 @@ class MoC(Contract):
     def amount_mint_btc2x(self, amount: float):
         """Final amount need it to mint btc2x"""
 
-        if not self.moc_inrate:
-            self.load_inrate_contract()
-
-        commission_value = float(self.moc_inrate.calc_commission_value(amount))
-        interest_value = float(self.moc_inrate.calc_mint_interest_value(amount))
+        commission_value = float(self.sc_moc_inrate.calc_commission_value(amount))
+        interest_value = float(self.sc_moc_inrate.calc_mint_interest_value(amount))
         total_amount = amount + commission_value + interest_value
 
         return total_amount, commission_value, interest_value
@@ -278,9 +285,6 @@ class MoC(Contract):
 
         if amount <= 0.00000001:
             raise Exception("Value too low")
-
-        if not self.moc_inrate:
-            self.load_inrate_contract()
 
         total_amount, commission_value = self.amount_mint_bpro(amount)
 
@@ -300,9 +304,6 @@ class MoC(Contract):
         if amount <= 0.00000001:
             raise Exception("Value too low")
 
-        if not self.moc_inrate:
-            self.load_inrate_contract()
-
         total_amount, commission_value = self.amount_mint_doc(amount)
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
@@ -321,9 +322,6 @@ class MoC(Contract):
         if amount <= 0.00000001:
             raise Exception("Value too low")
 
-        if not self.moc_inrate:
-            self.load_inrate_contract()
-
         total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
         bucket = str.encode('X2')
 
@@ -340,9 +338,6 @@ class MoC(Contract):
 
         if amount_token <= 0.00000001:
             raise Exception("Value too low")
-
-        if not self.moc_inrate:
-            self.load_inrate_contract()
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
                                                           default_account=default_account)
