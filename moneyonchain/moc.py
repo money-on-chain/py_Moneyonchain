@@ -53,6 +53,28 @@ class MoCState(Contract):
 
         return result
 
+    def bpro_price(self, formatted: bool = True,
+                   block_identifier: BlockIdentifier = 'latest'):
+        """BPro price in USD"""
+
+        result = self.sc.functions.bproUsdPrice().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bpro_tec_price(self, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """BPro Technical price in RBTC"""
+
+        result = self.sc.functions.bproTecPrice().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def bitcoin_moving_average(self, formatted: bool = True,
                                block_identifier: BlockIdentifier = 'latest'):
         """Bitcoin Moving Average price in USD"""
@@ -244,6 +266,24 @@ class MoC(Contract):
 
         return sc
 
+    def bitcoin_price(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """Bitcoin price in USD"""
+
+        result = self.sc_moc_state.bitcoin_price(formatted=formatted,
+                                                 block_identifier=block_identifier)
+
+        return result
+
+    def bpro_price(self, formatted: bool = True,
+                   block_identifier: BlockIdentifier = 'latest'):
+        """BPro price in USD"""
+
+        result = self.sc_moc_state.bpro_price(formatted=formatted,
+                                              block_identifier=block_identifier)
+
+        return result
+
     def paused(self, formatted: bool = True,
                block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
@@ -340,6 +380,55 @@ class MoC(Contract):
             raise Exception("Value too low")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def reedeem_free_doc(self, amount_token: float, default_account=None):
+        """
+        Reedem Free DOC amount of token
+        Free Doc is Doc you can reedeem outside of settlement.
+        """
+
+        if amount_token <= 0.00000001:
+            raise Exception("Value too low")
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc', int(amount_token * self.precision),
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def reedeem_doc_request(self, amount_token: float, default_account=None):
+        """
+        Reedem DOC request amount of token
+        This is the amount of doc you want to reedem on settlement.
+        """
+
+        if amount_token <= 0.00000001:
+            raise Exception("Value too low")
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
+                                                          int(amount_token * self.precision),
+                                                          default_account=default_account)
+
+        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+
+        return tx_receipt
+
+    def reedeem_btc2x(self, amount_token: float, default_account=None):
+        """ Reedem BTC2X amount of token """
+
+        if amount_token <= 0.00000001:
+            raise Exception("Value too low")
+
+        bucket = str.encode('X2')
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBProx', bucket,
+                                                          int(amount_token * self.precision),
                                                           default_account=default_account)
 
         tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
