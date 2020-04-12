@@ -37,6 +37,6 @@ if tx_logs:
     print("Transaction done!")
     amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
     amount_usd = moc_main.bpro_amount_in_usd(amount)
-    print("You mint {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.2f')))
+    print("You mint {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.3f')))
 else:
     print("Transaction Failed")
