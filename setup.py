@@ -7,22 +7,20 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='0.0.4',
+    version='0.0.5',
     packages=['moneyonchain'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',
     author_email='martin.mulone@moneyonchain.com',
-    description='Python interfaces on Money On Chain infraestructure',
+    description='Python interfaces to Money On Chain projects',
     long_description=long_description,
     long_description_content_type="text/markdown",
     license='AGPL3',
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Affero General Public License v3',
         'Operating System :: OS Independent',
-        'Topic :: Internet :: WWW/HTTP',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6'
     ],
