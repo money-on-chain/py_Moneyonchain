@@ -6,7 +6,8 @@
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
- THIS IS A PART OF MONEY ON CHAIN PACKAGE
+ THIS IS A PART OF MONEY ON CHAIN
+ @2020
  by Martin Mulone (martin.mulone@moneyonchain.com)
 
 """
@@ -70,6 +71,17 @@ class MoCState(Contract):
         """BPro Technical price in RBTC"""
 
         result = self.sc.functions.bproTecPrice().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def btc2x_tec_price(self, formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """BTC2X Technical price in RBTC"""
+
+        result = self.sc.functions.bucketBProTecPrice(str.encode('X2')).call(
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -324,9 +336,22 @@ class MoC(Contract):
 
         return result
 
+    def btc2x_tec_price(self, formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """BTC2x price in USD"""
+
+        result = self.sc_moc_state.btc2x_tec_price(formatted=formatted,
+                                                   block_identifier=block_identifier)
+
+        return result
+
     def bpro_amount_in_usd(self, amount: Decimal):
 
         return self.bpro_price() * amount
+
+    def btc2x_amount_in_usd(self, amount: Decimal):
+
+        return self.btc2x_tec_price() * amount
 
     def paused(self, formatted: bool = True,
                block_identifier: BlockIdentifier = 'latest'):
@@ -367,7 +392,7 @@ class MoC(Contract):
         NOTE: amount is in RBTC value
         """
 
-        if amount <= 0.00000001:
+        if amount <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         total_amount, commission_value = self.amount_mint_bpro(amount)
@@ -384,30 +409,34 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs
 
-    def mint_doc(self, amount: Decimal, default_account=None):
+    def mint_doc(self, amount: Decimal, default_account=None, wait_receipt=True):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
         """
 
-        if amount <= 0.00000001:
+        if amount <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         total_amount, commission_value = self.amount_mint_doc(amount)
-
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = self.sc_moc_exchange.events.StableTokenMint().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
 
-    def mint_btc2x(self, amount: Decimal, default_account=None):
+    def mint_btc2x(self, amount: Decimal, default_account=None, wait_receipt=True):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
 
-        if amount <= 0.00000001:
+        if amount <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
@@ -417,57 +446,77 @@ class MoC(Contract):
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = self.sc_moc_exchange.events.RiskProxMint().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
 
-    def reedeem_bpro(self, amount_token: Decimal, default_account=None):
+    def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BitPro amount of token """
 
-        if amount_token <= 0.00000001:
+        if amount_token <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = self.sc_moc_exchange.events.RiskProRedeem().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
 
-    def reedeem_free_doc(self, amount_token: Decimal, default_account=None):
+    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """
         Reedem Free DOC amount of token
         Free Doc is Doc you can reedeem outside of settlement.
         """
 
-        if amount_token <= 0.00000001:
+        if amount_token <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc', int(amount_token * self.precision),
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
 
-    def reedeem_doc_request(self, amount_token: Decimal, default_account=None):
+    def reedeem_doc_request(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """
         Reedem DOC request amount of token
         This is the amount of doc you want to reedem on settlement.
         """
 
-        if amount_token <= 0.00000001:
+        if amount_token <= Decimal(0.00000001):
             raise Exception("Value too low")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
                                                           int(amount_token * self.precision),
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            #tx_logs = self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
 
-    def reedeem_btc2x(self, amount_token: Decimal, default_account=None):
+    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BTC2X amount of token """
 
         if amount_token <= 0.00000001:
@@ -479,6 +528,11 @@ class MoC(Contract):
                                                           int(amount_token * self.precision),
                                                           default_account=default_account)
 
-        tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+        tx_receipt = None
+        tx_logs = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = self.sc_moc_exchange.events.RiskProxRedeem().processReceipt(tx_receipt)
 
-        return tx_receipt
+        return tx_hash, tx_receipt, tx_logs
