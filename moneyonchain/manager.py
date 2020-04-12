@@ -376,6 +376,42 @@ class ConnectionManager(BaseConnectionManager):
                 r_events[fn_events.__name__] = l_event
         return r_events
 
+    def logs_from(self, sc, events_functions, from_block, to_block, block_steps=2880):
+
+        last_block_number = int(self.block_number)
+
+        if to_block <= 0:
+            to_block = last_block_number  # last block number in the node
+
+        current_block = from_block
+
+        l_events = dict()
+        while current_block <= to_block:
+
+            step_end = current_block + block_steps
+            if step_end > to_block:
+                step_end = to_block
+
+            self.log.info("Scanning blocks steps from {0} to {1}".format(current_block, step_end))
+
+            events = self.all_events_from(sc,
+                                          events_functions=events_functions,
+                                          from_block=current_block,
+                                          to_block=step_end)
+
+            # Adjust current blocks to the next step
+            current_block = current_block + block_steps
+
+            # add to the list
+            for fnx_name in events_functions:
+                if fnx_name in events:
+                    if events[fnx_name]:
+                        if fnx_name not in l_events:
+                            l_events[fnx_name] = list()
+                        l_events[fnx_name].append(events[fnx_name])
+
+        return l_events
+
 
 if __name__ == '__main__':
     print("init")

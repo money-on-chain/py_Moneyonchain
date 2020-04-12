@@ -84,4 +84,19 @@ class Contract(object):
 
         return self.sc
 
+    def logs_from(self, events_functions, from_block, to_block, block_steps=2880):
+
+        logs = self.connection_manager.logs_from(self.sc,
+                                                 events_functions,
+                                                 from_block,
+                                                 to_block,
+                                                 block_steps=block_steps)
+
+        return logs
+
+    @property
+    def events(self):
+
+        return self.sc.events
+
 

@@ -44,6 +44,8 @@ class ERC20Token(Contract):
 
     def balance_of(self, account_address, formatted=True):
 
+        account_address = Web3.toChecksumAddress(account_address)
+
         balance = self.sc.functions.balanceOf(account_address).call()
         if formatted:
             balance = Web3.fromWei(balance, 'ether')
