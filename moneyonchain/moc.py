@@ -14,6 +14,7 @@
 
 import os
 import logging
+import datetime
 from decimal import Decimal
 from web3 import Web3
 from web3.types import BlockIdentifier
@@ -43,6 +44,15 @@ class MoCState(Contract):
 
         # finally load the contract
         self.load_contract()
+
+    def blocks_to_settlement(self, formatted: bool = True,
+                             block_identifier: BlockIdentifier = 'latest'):
+        """Blocks to settlement"""
+
+        result = self.sc.functions.blocksToSettlement().call(
+            block_identifier=block_identifier)
+
+        return result
 
     def bitcoin_price(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
@@ -245,6 +255,76 @@ class MoCExchange(Contract):
         self.load_contract()
 
 
+class MoCSettlement(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.bin'))
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCSettlement']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def next_block(self):
+        return int(self.sc.functions.nextSettlementBlock().call())
+
+    def is_enabled(self):
+        return self.sc.functions.isSettlementEnabled().call()
+
+
+class MoCConnector(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCConnector.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCConnector.bin'))
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCConnector']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def contracts_addresses(self):
+
+        d_addresses = dict()
+        d_addresses['MoC'] = self.sc.functions.moc().call()
+        d_addresses['DoCToken'] = self.sc.functions.docToken().call()
+        d_addresses['BProToken'] = self.sc.functions.bproToken().call()
+        d_addresses['MoCBProxManager'] = self.sc.functions.bproxManager().call()
+        d_addresses['MoCState'] = self.sc.functions.mocState().call()
+        d_addresses['MoCConverter'] = self.sc.functions.mocConverter().call()
+        d_addresses['MoCSettlement'] = self.sc.functions.mocSettlement().call()
+        d_addresses['MoCExchange'] = self.sc.functions.mocExchange().call()
+        d_addresses['MoCInrate'] = self.sc.functions.mocInrate().call()
+        d_addresses['MoCBurnout'] = self.sc.functions.mocBurnout().call()
+
+        return d_addresses
+
+
 class MoC(Contract):
     log = logging.getLogger()
 
@@ -261,7 +341,9 @@ class MoC(Contract):
                  contract_bin=None,
                  contract_address_moc_state=None,
                  contract_address_moc_inrate=None,
-                 contract_address_moc_exchange=None):
+                 contract_address_moc_exchange=None,
+                 contract_address_moc_connector=None,
+                 contract_address_moc_settlement=None):
 
         network = connection_manager.network
         if not contract_address:
@@ -284,6 +366,12 @@ class MoC(Contract):
 
         # load contract moc exchange
         self.sc_moc_exchange = self.load_moc_exchange_contract(contract_address_moc_exchange)
+
+        # load contract moc connector
+        self.sc_moc_connector = self.load_moc_connector_contract(contract_address_moc_connector)
+
+        # load contract moc settlement
+        self.sc_moc_settlement = self.load_moc_settlement_contract(contract_address_moc_settlement)
 
     def load_moc_inrate_contract(self, contract_address):
 
@@ -317,6 +405,57 @@ class MoC(Contract):
                          contract_address=contract_address)
 
         return sc
+
+    def load_moc_connector_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCConnector']
+
+        sc = MoCConnector(self.connection_manager,
+                          contract_address=contract_address)
+
+        return sc
+
+    def load_moc_settlement_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCSettlement']
+
+        sc = MoCSettlement(self.connection_manager,
+                           contract_address=contract_address)
+
+        return sc
+
+    def connector(self):
+
+        return self.sc.functions.connector().call()
+
+    def connector_addresses(self):
+
+        return self.sc_moc_connector.contracts_addresses()
+
+    def settlement_remaining(self):
+
+        def convert(seconds):
+            min, sec = divmod(seconds, 60)
+            hour, min = divmod(min, 60)
+            return "%d:%02d:%02d" % (hour, min, sec)
+
+        blocks_to_settlement = self.sc_moc_state.blocks_to_settlement()
+        current_block_number = int(self.connection_manager.block_number)
+        avg_block_time = 33.60  # this info is from  https://stats.testnet.rsk.co/
+        remainin_estimated_seconds = avg_block_time * blocks_to_settlement
+        estimated_time = datetime.datetime.now() + datetime.timedelta(seconds=remainin_estimated_seconds)
+
+        print("Current Block: {0}".format(current_block_number))
+        print("Current avg block time (seconds): {0}".format(avg_block_time))
+        print("Blocks to settlement: {0}".format(blocks_to_settlement))
+        print("Estimated remaining to settlement: {0}".format(convert(remainin_estimated_seconds)))
+        print("Estimated settlement: {0}".format(estimated_time.strftime("%Y-%m-%d %H:%M:%S")))
+        print("Next settlement block:{0}".format(self.sc_moc_settlement.next_block()))
+        print("Is settlement enabled:{0}".format(self.sc_moc_settlement.is_enabled()))
 
     def bitcoin_price(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
