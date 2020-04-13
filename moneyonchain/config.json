@@ -16,14 +16,18 @@
         "governor": "0x9258531274B945eB628656F4b30e8216938A619C",
         "oracle": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
         "upgradeDelegator": "0x00a47D7d7B9bD22e0A862908EC493bDE893f627B",
+        "MoC": "0xE02f9AE8fe5Da307b6C7cd928AEa380392f5a395",
         "MoCInrate": "0xe1DD7DB674d8F218CF7bA0BD8C5Ea17C06b4478d",
         "MoCState": "0xe91d665b9A20BF72fF67E96d26F91E3de2beaF94",
+        "MoCConverter": "0x8b643f77e6b19858F5fB3Ab895d40462472609c9",
         "MoCExchange": "0x2706e5611FCb5ef52FCe3FA09c4F85A89ad43302",
+        "MoCConnector": "0x8E95fd289a5ACA617602B0A6993D618Af9725508",
         "MoCHelperLib": "0xaF495D7f05e84b589122dA410eAda0188E1b12A5",
         "MoCBProxManager": "0x2cF92DA59D690fBd2506a9A3a2439625F00f2dc8",
         "MoCSettlement": "0xa0dA80B5E5bdf96F9e99630Fa333821fB741A308",
-        "BProToken": "",
-        "DoCToken": ""
+        "MoCBurnout": "0x23c85d7036bFBdB760A353F29CeEF0E001cc56d4",
+        "BProToken": "0x5C67868399aF25C9A31c2ce047d68B34162c9E14",
+        "DoCToken": "0xb2D705097d9f80d47289efB2a25bc78FEe9d3E80"
       }
 
     },
@@ -76,17 +80,20 @@
         "MoC": "0xf773B590aF754D597770937Fa8ea7AbDf2668370",
         "MoCInrate": "0xc0f9B54c41E3d0587Ce0F7540738d8d649b0A3F3",
         "MoCState": "0xb9C42EFc8ec54490a37cA91c423F7285Fa01e257",
+        "MoCConverter": "0x0B7507032f140f5Ae5C0f1dA2251a0cd82c82296",
         "MoCExchange": "0x6aCb83bB0281FB847b43cf7dd5e2766BFDF49038",
+        "MoCConnector": "0xcE2A128cC73e5d98355aAfb2595647F2D3171Faa",
         "MoCHelperLib": "0x4E1894debD18b470706A20aC8FE0cc2D9e904218",
         "MoCBProxManager": "0xC4fBFa2270Be87FEe5BC38f7a1Bb6A9415103b6c",
         "MoCSettlement": "0x609dF03D8a85eAffE376189CA7834D4C35e32F22",
+        "MoCBurnout": "0xE69fB8C8fE9dCa08350AF5C47508f3E688D0CDd1",
         "FeedFactory": "0xf0abcc4Cb0B46D9858704eb0C72d9735986B09cF",
         "PriceFeed_0": "0x42157b5e6B0dD6BeFaDe2d1B1dE7937C9fEA02F4",
         "PriceFeed_1": "0xbDbE9cA38cDD2f32ccE11114549E41712BeDe771",
         "PriceFeed_2": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "PriceFeed_3": "0xE94007E81412eDfdB87680F768e331E8c691f0e1",
         "BProToken": "0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8",
-        "DoCToken": ""
+        "DoCToken": "0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db"
       }
     }
 

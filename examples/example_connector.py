@@ -4,7 +4,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC
 
 
-network = 'mocTestnet'
+network = 'mocMainnet2'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
