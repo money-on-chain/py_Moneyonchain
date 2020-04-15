@@ -20,6 +20,13 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
+from moneyonchain.token import BProToken, DoCToken
+
+
+STATE_LIQUIDATED = 0
+STATE_BPRO_DISCOUNT = 1
+STATE_BELOW_COBJ = 2
+STATE_ABOVE_COBJ = 3
 
 
 class MoCState(Contract):
@@ -29,6 +36,9 @@ class MoCState(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCState.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCState.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -44,6 +54,75 @@ class MoCState(Contract):
 
         # finally load the contract
         self.load_contract()
+
+    def state(self, formatted: bool = True,
+              block_identifier: BlockIdentifier = 'latest'):
+        """Blocks to settlement"""
+
+        result = self.sc.functions.state().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def max_mint_bpro_available(self, formatted: bool = True,
+                                block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        result = self.sc.functions.maxMintBProAvalaible().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def absolute_max_doc(self, formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        result = self.sc.functions.absoluteMaxDoc().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def max_bprox_btc_value(self, formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        result = self.sc.functions.maxBProxBtcValue(str.encode('X2')).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def absolute_max_bpro(self, formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        result = self.sc.functions.absoluteMaxBPro().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def free_doc(self, formatted: bool = True,
+                 block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        result = self.sc.functions.freeDoc().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
 
     def blocks_to_settlement(self, formatted: bool = True,
                              block_identifier: BlockIdentifier = 'latest'):
@@ -161,6 +240,7 @@ class MoCInrate(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCInrate.bin'))
 
     precision = 10 ** 18
+    mode = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -239,6 +319,9 @@ class MoCExchange(Contract):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCExchange.bin'))
 
+    precision = 10 ** 18
+    mode = 'MoC'
+
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
         if not contract_address:
@@ -262,6 +345,9 @@ class MoCSettlement(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -293,6 +379,9 @@ class MoCConnector(Contract):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCConnector.bin'))
 
+    precision = 10 ** 18
+    mode = 'MoC'
+
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
         if not contract_address:
@@ -312,15 +401,21 @@ class MoCConnector(Contract):
 
         d_addresses = dict()
         d_addresses['MoC'] = self.sc.functions.moc().call()
-        d_addresses['DoCToken'] = self.sc.functions.docToken().call()
-        d_addresses['BProToken'] = self.sc.functions.bproToken().call()
-        d_addresses['MoCBProxManager'] = self.sc.functions.bproxManager().call()
         d_addresses['MoCState'] = self.sc.functions.mocState().call()
         d_addresses['MoCConverter'] = self.sc.functions.mocConverter().call()
         d_addresses['MoCSettlement'] = self.sc.functions.mocSettlement().call()
         d_addresses['MoCExchange'] = self.sc.functions.mocExchange().call()
         d_addresses['MoCInrate'] = self.sc.functions.mocInrate().call()
         d_addresses['MoCBurnout'] = self.sc.functions.mocBurnout().call()
+        if self.mode == 'MoC':
+            d_addresses['DoCToken'] = self.sc.functions.docToken().call()
+            d_addresses['BProToken'] = self.sc.functions.bproToken().call()
+            d_addresses['MoCBProxManager'] = self.sc.functions.bproxManager().call()
+        else:
+            d_addresses['DoCToken'] = self.sc.functions.stableToken().call()
+            d_addresses['BProToken'] = self.sc.functions.riskProToken().call()
+            d_addresses['MoCBProxManager'] = self.sc.functions.riskProxManager().call()
+            d_addresses['ReserveToken'] = self.sc.functions.reserveToken().call()
 
         return d_addresses
 
@@ -334,6 +429,8 @@ class MoC(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoC.bin'))
 
     precision = 10 ** 18
+    mode = 'MoC'
+    minimum_amount = Decimal(0.00000001)
 
     def __init__(self, connection_manager,
                  contract_address=None,
@@ -343,7 +440,9 @@ class MoC(Contract):
                  contract_address_moc_inrate=None,
                  contract_address_moc_exchange=None,
                  contract_address_moc_connector=None,
-                 contract_address_moc_settlement=None):
+                 contract_address_moc_settlement=None,
+                 contract_address_moc_bpro_token=None,
+                 contract_address_moc_doc_token=None):
 
         network = connection_manager.network
         if not contract_address:
@@ -372,6 +471,12 @@ class MoC(Contract):
 
         # load contract moc settlement
         self.sc_moc_settlement = self.load_moc_settlement_contract(contract_address_moc_settlement)
+
+        # load contract moc bpro_token
+        self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_address_moc_bpro_token)
+
+        # load contract moc doc_token
+        self.sc_moc_doc_token = self.load_moc_bpro_token_contract(contract_address_moc_doc_token)
 
     def load_moc_inrate_contract(self, contract_address):
 
@@ -428,6 +533,28 @@ class MoC(Contract):
 
         return sc
 
+    def load_moc_bpro_token_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['BProToken']
+
+        sc = BProToken(self.connection_manager,
+                       contract_address=contract_address)
+
+        return sc
+
+    def load_moc_doc_token_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['DoCToken']
+
+        sc = DoCToken(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
+
     def connector(self):
 
         return self.sc.functions.connector().call()
@@ -435,6 +562,30 @@ class MoC(Contract):
     def connector_addresses(self):
 
         return self.sc_moc_connector.contracts_addresses()
+
+    def state(self):
+
+        return self.sc_moc_state.state()
+
+    def max_mint_bpro_available(self):
+
+        return self.sc_moc_state.max_mint_bpro_available()
+
+    def absolute_max_doc(self):
+
+        return self.sc_moc_state.absolute_max_doc()
+
+    def max_bprox_btc_value(self):
+
+        return self.sc_moc_state.max_bprox_btc_value()
+
+    def absolute_max_bpro(self):
+
+        return self.sc_moc_state.absolute_max_bpro()
+
+    def free_doc(self):
+
+        return self.sc_moc_state.free_doc()
 
     def settlement_remaining(self):
 
@@ -492,6 +643,45 @@ class MoC(Contract):
 
         return self.btc2x_tec_price() * amount
 
+    def doc_balance_of(self, default_account=None):
+
+        if not default_account:
+            default_account = 0
+
+        return self.sc_moc_doc_token.balance_of(
+            self.connection_manager.accounts[default_account].address)
+
+    def bpro_balance_of(self,
+                        default_account=None,
+                        formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+
+        if not default_account:
+            default_account = 0
+
+        account_address = self.connection_manager.accounts[default_account].address
+
+        return self.sc_moc_bpro_token.balance_of(account_address)
+
+    def bprox_balance_of(self,
+                         default_account=None,
+                         formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+
+        if not default_account:
+            default_account = 0
+
+        bucket = str.encode('X2')
+        account_address = self.connection_manager.accounts[default_account].address
+
+        result = self.sc.functions.bproxBalanceOf(bucket, account_address).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def paused(self, formatted: bool = True,
                block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
@@ -531,10 +721,19 @@ class MoC(Contract):
         NOTE: amount is in RBTC value
         """
 
-        if amount <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        if amount <= self.minimum_amount:
+            raise Exception("Amount value to mint too low")
 
         total_amount, commission_value = self.amount_mint_bpro(amount)
+
+        max_mint_bpro_available = self.max_mint_bpro_available()
+        if total_amount >= max_mint_bpro_available:
+            raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
+                max_mint_bpro_available))
+
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
@@ -553,8 +752,20 @@ class MoC(Contract):
         NOTE: amount is in RBTC value
         """
 
-        if amount <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        if self.state() < STATE_ABOVE_COBJ:
+            raise Exception("Function cannot be called at this state.")
+
+        absolute_max_doc = self.absolute_max_doc()
+        btc_to_doc = amount * self.bitcoin_price()
+        if btc_to_doc > absolute_max_doc:
+            raise Exception("You are trying to mint more than availables. DOC Avalaible: {0}".format(
+                absolute_max_doc))
+
+        if amount <= self.minimum_amount:
+            raise Exception("Amount value to mint too low")
 
         total_amount, commission_value = self.amount_mint_doc(amount)
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
@@ -575,8 +786,16 @@ class MoC(Contract):
         NOTE: amount is in RBTC value
         """
 
-        if amount <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        if amount <= self.minimum_amount:
+            raise Exception("Amount value to mint too low")
+
+        max_bprox_btc_value = self.max_bprox_btc_value()
+        if amount > max_bprox_btc_value:
+            raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
+                max_bprox_btc_value))
 
         total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
         bucket = str.encode('X2')
@@ -597,8 +816,19 @@ class MoC(Contract):
     def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BitPro amount of token """
 
-        if amount_token <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        if self.state() < STATE_ABOVE_COBJ:
+            raise Exception("Function cannot be called at this state.")
+
+        if amount_token > self.bpro_balance_of(default_account):
+            raise Exception("You are trying to redeem more than you have!")
+
+        absolute_max_bpro = self.absolute_max_bpro()
+        if amount_token >= absolute_max_bpro:
+            raise Exception("You are trying to redeem more than availables. Available: {0}".format(
+                absolute_max_bpro))
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
                                                           default_account=default_account)
@@ -618,10 +848,19 @@ class MoC(Contract):
         Free Doc is Doc you can reedeem outside of settlement.
         """
 
-        if amount_token <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc', int(amount_token * self.precision),
+        if amount_token > self.doc_balance_of(default_account):
+            raise Exception("You are trying to redeem more than you have!")
+
+        free_doc = self.free_doc()
+        if amount_token >= free_doc:
+            raise Exception("You are trying to redeem more than availables. Available: {0}".format(
+                free_doc))
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc',
+                                                          int(amount_token * self.precision),
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -639,8 +878,8 @@ class MoC(Contract):
         This is the amount of doc you want to reedem on settlement.
         """
 
-        if amount_token <= Decimal(0.00000001):
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
                                                           int(amount_token * self.precision),
@@ -658,8 +897,8 @@ class MoC(Contract):
     def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BTC2X amount of token """
 
-        if amount_token <= 0.00000001:
-            raise Exception("Value too low")
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
 
         bucket = str.encode('X2')
 
