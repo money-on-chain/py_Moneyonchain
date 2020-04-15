@@ -599,10 +599,12 @@ class MoC(Contract):
         avg_block_time = 33.60  # this info is from  https://stats.testnet.rsk.co/
         remainin_estimated_seconds = avg_block_time * blocks_to_settlement
         estimated_time = datetime.datetime.now() + datetime.timedelta(seconds=remainin_estimated_seconds)
+        days_to_settlement = self.sc_moc_state.days_to_settlement()
 
         print("Current Block: {0}".format(current_block_number))
         print("Current avg block time (seconds): {0}".format(avg_block_time))
         print("Blocks to settlement: {0}".format(blocks_to_settlement))
+        print("Days to settlement: {0}".format(days_to_settlement))
         print("Estimated remaining to settlement: {0}".format(convert(remainin_estimated_seconds)))
         print("Estimated settlement: {0}".format(estimated_time.strftime("%Y-%m-%d %H:%M:%S")))
         print("Next settlement block:{0}".format(self.sc_moc_settlement.next_block()))

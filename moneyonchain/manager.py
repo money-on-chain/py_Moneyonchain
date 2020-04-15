@@ -323,13 +323,18 @@ class ConnectionManager(BaseConnectionManager):
         return sc
 
     def load_bytecode_contract_file(self, abi_filename, bin_filename):
-        """ Load abi and bin content """
+        """ Load abi and bin content from files """
 
         with open(abi_filename) as f:
             content_abi = json.load(f)
 
         with open(bin_filename) as f:
             content_bin = f.read()
+
+        return self.load_bytecode_contract( content_abi, content_bin)
+
+    def load_bytecode_contract(self, content_abi, content_bin):
+        """ Load abi and bin content """
 
         sc = self.web3.eth.contract(abi=content_abi, bytecode=content_bin)
 
