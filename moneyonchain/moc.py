@@ -663,6 +663,14 @@ class MoC(Contract):
 
         return self.btc2x_tec_price() * amount
 
+    def balance_of(self, default_account=None):
+
+        if not default_account:
+            default_account = 0
+
+        return self.connection_manager.balance(
+            self.connection_manager.accounts[default_account].address)
+
     def doc_balance_of(self, default_account=None):
 
         if not default_account:
@@ -749,6 +757,9 @@ class MoC(Contract):
 
         total_amount, commission_value = self.amount_mint_bpro(amount)
 
+        if total_amount > self.balance_of(default_account):
+            raise Exception("You don't have suficient funds")
+
         max_mint_bpro_available = self.max_mint_bpro_available()
         if total_amount >= max_mint_bpro_available:
             raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
@@ -788,6 +799,10 @@ class MoC(Contract):
             raise Exception("Amount value to mint too low")
 
         total_amount, commission_value = self.amount_mint_doc(amount)
+
+        if total_amount > self.balance_of(default_account):
+            raise Exception("You don't have suficient funds")
+
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
@@ -822,6 +837,9 @@ class MoC(Contract):
 
         total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
         bucket = str.encode('X2')
+
+        if total_amount > self.balance_of(default_account):
+            raise Exception("You don't have suficient funds")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
