@@ -370,6 +370,18 @@ class MoCSettlement(Contract):
     def is_enabled(self):
         return self.sc.functions.isSettlementEnabled().call()
 
+    def is_ready(self):
+        return self.sc.functions.isSettlementReady().call()
+
+    def is_running(self):
+        return self.sc.functions.isSettlementRunning().call()
+
+    def redeem_queue_size(self):
+        return self.sc.functions.redeemQueueSize().call()
+
+    def block_span(self):
+        return self.sc.functions.getBlockSpan().call()
+
 
 class MoCConnector(Contract):
     log = logging.getLogger()
@@ -587,7 +599,7 @@ class MoC(Contract):
 
         return self.sc_moc_state.free_doc()
 
-    def settlement_remaining(self):
+    def settlement_info(self, avg_block_time=30.0):
 
         def convert(seconds):
             min, sec = divmod(seconds, 60)
@@ -595,20 +607,26 @@ class MoC(Contract):
             return "%d:%02d:%02d" % (hour, min, sec)
 
         blocks_to_settlement = self.sc_moc_state.blocks_to_settlement()
-        current_block_number = int(self.connection_manager.block_number)
-        avg_block_time = 33.60  # this info is from  https://stats.testnet.rsk.co/
+
+        l_sett = list()
+        l_sett.append(('Current Block', int(self.connection_manager.block_number)))
+        l_sett.append(('Current avg block time (seconds)', 30.0))
+        l_sett.append(('Blocks to settlement', blocks_to_settlement))
+        l_sett.append(('Days to settlement', self.sc_moc_state.days_to_settlement()))
+
         remainin_estimated_seconds = avg_block_time * blocks_to_settlement
         estimated_time = datetime.datetime.now() + datetime.timedelta(seconds=remainin_estimated_seconds)
-        days_to_settlement = self.sc_moc_state.days_to_settlement()
 
-        print("Current Block: {0}".format(current_block_number))
-        print("Current avg block time (seconds): {0}".format(avg_block_time))
-        print("Blocks to settlement: {0}".format(blocks_to_settlement))
-        print("Days to settlement: {0}".format(days_to_settlement))
-        print("Estimated remaining to settlement: {0}".format(convert(remainin_estimated_seconds)))
-        print("Estimated settlement: {0}".format(estimated_time.strftime("%Y-%m-%d %H:%M:%S")))
-        print("Next settlement block:{0}".format(self.sc_moc_settlement.next_block()))
-        print("Is settlement enabled:{0}".format(self.sc_moc_settlement.is_enabled()))
+        l_sett.append(('Estimated remaining to settlement', convert(remainin_estimated_seconds)))
+        l_sett.append(('Estimated settlement', estimated_time.strftime("%Y-%m-%d %H:%M:%S")))
+        l_sett.append(('Next settlement block', self.sc_moc_settlement.next_block()))
+        l_sett.append(('Is settlement enabled', self.sc_moc_settlement.is_enabled()))
+        l_sett.append(('Is settlement ready', self.sc_moc_settlement.is_ready()))
+        l_sett.append(('Is settlement running', self.sc_moc_settlement.is_running()))
+        l_sett.append(('Reedem queue size', self.sc_moc_settlement.redeem_queue_size()))
+        l_sett.append(('Block Span', self.sc_moc_settlement.block_span()))
+
+        return l_sett
 
     def bitcoin_price(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
@@ -791,6 +809,9 @@ class MoC(Contract):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
+        if not self.sc_moc_settlement.is_ready():
+            raise Exception("You cannot mint on settlement!")
+
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
@@ -901,6 +922,9 @@ class MoC(Contract):
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
+
+        if not self.sc_moc_settlement.is_ready():
+            raise Exception("You cannot reedem on settlement!")
 
         bucket = str.encode('X2')
 

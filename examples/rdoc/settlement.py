@@ -7,4 +7,6 @@ print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
 moc_main = RDOCMoC(connection_manager)
-moc_main.settlement_remaining()
+l_info = moc_main.settlement_info()
+for info in l_info:
+    print("{0}:{1}".format(info[0], info[1]))
