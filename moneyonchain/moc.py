@@ -922,6 +922,9 @@ class MoC(Contract):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
+        if not self.sc_moc_settlement.is_ready():
+            raise Exception("You cannot mint on settlement!")
+
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
                                                           int(amount_token * self.precision),
                                                           default_account=default_account)
