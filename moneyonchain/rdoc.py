@@ -41,6 +41,18 @@ class RDOCMoCState(MoCState):
     mode = 'RDoC'
     precision = 10 ** 18
 
+    def collateral_reserves(self, formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """RiskProx values and interests holdings"""
+
+        result = self.sc.functions.collateralReserves().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
 
 class RDOCMoCInrate(MoCInrate):
     log = logging.getLogger()

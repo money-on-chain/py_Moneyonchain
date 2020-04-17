@@ -279,6 +279,15 @@ class MoCInrate(Contract):
 
         return result
 
+    def daily_enabled(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """"""
+
+        result = self.sc.functions.isDailyEnabled().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def daily_inrate(self, formatted: bool = True,
                      block_identifier: BlockIdentifier = 'latest'):
         """returns the amount of BTC to pay in concept of interest"""
@@ -287,6 +296,15 @@ class MoCInrate(Contract):
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def last_daily_pay(self, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """returns the amount of BTC to pay in concept of interest"""
+
+        result = self.sc.functions.lastDailyPayBlock().call(
+            block_identifier=block_identifier)
 
         return result
 
@@ -307,6 +325,42 @@ class MoCInrate(Contract):
         result = self.sc.functions.calcMintInterestValues(bucket, int(amount * self.precision)).call()
         if formatted:
             result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calc_bitpro_holders_interest(self, formatted: bool = True,
+                                     block_identifier: BlockIdentifier = 'latest'):
+        """ Calc bitpro holders interest"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calculateBitProHoldersInterest().call(block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.calculateRiskProHoldersInterest().call(block_identifier=block_identifier)
+
+        if formatted:
+            result = [Web3.fromWei(result[0], 'ether'), Web3.fromWei(result[1], 'ether')]
+
+        return result
+
+    def bitpro_interest_address(self, formatted: bool = True,
+                                block_identifier: BlockIdentifier = 'latest'):
+        """ Calc bitpro holders interest"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBitProInterestAddress().call(block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getRiskProInterestAddress().call(block_identifier=block_identifier)
+
+        return result
+
+    def is_bitpro_interest_enabled(self, formatted: bool = True,
+                                   block_identifier: BlockIdentifier = 'latest'):
+        """ Calc bitpro holders interest"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.isBitProInterestEnabled().call(block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.isRiskProInterestEnabled().call(block_identifier=block_identifier)
 
         return result
 
