@@ -230,6 +230,22 @@ class MoCState(Contract):
 
         return result
 
+    def is_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
+        """DOC total supply"""
+
+        result = self.sc.functions.isLiquidationReached().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def is_calculate_ema(self, block_identifier: BlockIdentifier = 'latest'):
+        """Is time to calculate ema"""
+
+        result = self.sc.functions.shouldCalculateEma().call(
+            block_identifier=block_identifier)
+
+        return result
+
 
 class MoCInrate(Contract):
     log = logging.getLogger()
@@ -632,6 +648,245 @@ class MoC(Contract):
     def state(self):
 
         return self.sc_moc_state.state()
+
+    def is_bucket_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
+        """DOC total supply"""
+
+        result = self.sc.functions.isBucketLiquidationReached().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def is_settlement_enabled(self, block_identifier: BlockIdentifier = 'latest'):
+        """Is settlement enabled"""
+
+        result = self.sc.functions.isSettlementEnabled().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def is_daily_enabled(self, block_identifier: BlockIdentifier = 'latest'):
+        """Is settlement enabled"""
+
+        result = self.sc.functions.isDailyEnabled().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def is_bitpro_interest_enabled(self, block_identifier: BlockIdentifier = 'latest'):
+        """Is bitpro_interest enabled"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.isBitProInterestEnabled().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.isRiskProInterestEnabled().call(
+                block_identifier=block_identifier)
+
+        return result
+
+    def execute_liquidation(self, execution_steps,
+                            gas_limit=3500000,
+                            wait_timeout=240,
+                            default_account=None,
+                            wait_receipt=True):
+        """Execute liquidation """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.sc_moc_state.is_liquidation():
+
+            self.log.info("Calling evalLiquidation steps [{0}] ...".format(execution_steps))
+
+            # Only if is liquidation reach
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              'evalLiquidation',
+                                                              execution_steps,
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info("Successfully forced Liquidation in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def execute_bucket_liquidation(self,
+                                   gas_limit=3500000,
+                                   wait_timeout=240,
+                                   default_account=None,
+                                   wait_receipt=True):
+        """Execute bucket liquidation """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.is_bucket_liquidation() and not self.is_settlement_enabled():
+
+            self.log.info("Calling evalBucketLiquidation...")
+
+            # Only if is liquidation reach
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              'evalBucketLiquidation',
+                                                              str.encode('X2'),
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info(
+                    "Successfully Bucket X2 Liquidation [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                        tx_receipt['blockNumber'],
+                        Web3.toHex(tx_receipt['transactionHash']),
+                        tx_receipt['gasUsed'],
+                        tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def execute_run_settlement(self, execution_steps,
+                               gas_limit=3500000,
+                               wait_timeout=240,
+                               default_account=None,
+                               wait_receipt=True):
+        """Execute run settlement """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.is_settlement_enabled():
+
+            self.log.info("Calling runSettlement steps [{0}] ...".format(execution_steps))
+
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              'runSettlement',
+                                                              execution_steps,
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info("Successfully runSettlement in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def execute_daily_inrate_payment(self,
+                                     gas_limit=3500000,
+                                     wait_timeout=240,
+                                     default_account=None,
+                                     wait_receipt=True):
+        """Execute daily inrate """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.is_daily_enabled():
+
+            self.log.info("Calling dailyInratePayment ...")
+
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              'dailyInratePayment',
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info("Successfully dailyInratePayment in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                                tx_receipt['blockNumber'],
+                                Web3.toHex(tx_receipt['transactionHash']),
+                                tx_receipt['gasUsed'],
+                                tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def execute_pay_bitpro_holders(self,
+                                   gas_limit=3500000,
+                                   wait_timeout=240,
+                                   default_account=None,
+                                   wait_receipt=True):
+        """Execute pay bitpro holders """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.is_bitpro_interest_enabled():
+
+            self.log.info("Calling payBitProHoldersInterestPayment ...")
+
+            if self.mode == 'MoC':
+                contract_function = 'payBitProHoldersInterestPayment'
+            else:
+                contract_function = 'payRiskProHoldersInterestPayment'
+
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              contract_function,
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info("Successfully payBitProHoldersInterestPayment in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                                tx_receipt['blockNumber'],
+                                Web3.toHex(tx_receipt['transactionHash']),
+                                tx_receipt['gasUsed'],
+                                tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def execute_calculate_ema(self,
+                              gas_limit=3500000,
+                              wait_timeout=240,
+                              default_account=None,
+                              wait_receipt=True):
+        """Execute calculate ema """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.sc_moc_state.is_calculate_ema():
+
+            self.log.info("Calling calculateBitcoinMovingAverage ...")
+
+            if self.mode == 'MoC':
+                contract_function = 'calculateBitcoinMovingAverage'
+            else:
+                contract_function = 'calculateReserveTokenMovingAverage'
+
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              contract_function,
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info(
+                    "Successfully calculateBitcoinMovingAverage in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                        tx_receipt['blockNumber'],
+                        Web3.toHex(tx_receipt['transactionHash']),
+                        tx_receipt['gasUsed'],
+                        tx_receipt['from']))
+
+        return tx_hash, tx_receipt
 
     def max_mint_bpro_available(self):
 
