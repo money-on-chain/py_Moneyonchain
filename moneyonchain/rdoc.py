@@ -20,7 +20,14 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
-from moneyonchain.moc import MoCState, MoCInrate, MoCExchange, MoCSettlement, MoCConnector, MoC
+from moneyonchain.moc import MoCState, \
+    MoCInrate, \
+    MoCExchange, \
+    MoCSettlement, \
+    MoCConnector, \
+    MoC, \
+    MoCMedianizer, \
+    PriceFeed
 from moneyonchain.token import RIFPro, RIFDoC
 
 
@@ -28,6 +35,30 @@ STATE_LIQUIDATED = 0
 STATE_BPRO_DISCOUNT = 1
 STATE_BELOW_COBJ = 2
 STATE_ABOVE_COBJ = 3
+
+
+class RDOCPriceFeed(PriceFeed):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeed.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeed.bin'))
+
+    mode = 'RDoC'
+    precision = 10 ** 18
+
+
+class RDOCMoCMedianizer(MoCMedianizer):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
+
+    mode = 'RDoC'
+    precision = 10 ** 18
 
 
 class RDOCMoCState(MoCState):

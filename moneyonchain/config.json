@@ -28,7 +28,9 @@
         "MoCSettlement": "0xa0dA80B5E5bdf96F9e99630Fa333821fB741A308",
         "MoCBurnout": "0x23c85d7036bFBdB760A353F29CeEF0E001cc56d4",
         "BProToken": "0x5C67868399aF25C9A31c2ce047d68B34162c9E14",
-        "DoCToken": "0xb2D705097d9f80d47289efB2a25bc78FEe9d3E80"
+        "DoCToken": "0xb2D705097d9f80d47289efB2a25bc78FEe9d3E80",
+        "MoCMedianizer": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
+        "PriceFeed": ""
       }
 
     },
@@ -62,7 +64,9 @@
         "PriceFeed_2": "0x5d111d1b49Aa39d0172712266B0DE2F1eB9957F4",
         "PriceFeed_3": "0x02baf7348859aAC6CfEEc53498A077790244bBe6",
         "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
-        "DoCToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0"
+        "DoCToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
+        "MoCMedianizer": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
+        "PriceFeed": ""
       }
 
     },
@@ -96,7 +100,9 @@
         "PriceFeed_2": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "PriceFeed_3": "0xE94007E81412eDfdB87680F768e331E8c691f0e1",
         "BProToken": "0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8",
-        "DoCToken": "0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db"
+        "DoCToken": "0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db",
+        "MoCMedianizer": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
+        "PriceFeed": ""
       }
     },
     "rdocTestnetAlpha": {
@@ -125,7 +131,9 @@
         "MoCBurnout": "0xb8AF52Fd2aDB11cdB55EF9eE0C65204AD59fEA6b",
         "BProToken": "0xf947fe5190D33D812F74B4EEA31509D9D94F149e",
         "DoCToken": "0x7fb303D9806A72563C46aad8d874b301419c374b",
-        "ReserveToken": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE"
+        "ReserveToken": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE",
+        "MoCMedianizer": "0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc",
+        "PriceFeed": ""
       }
 
     },
@@ -155,7 +163,9 @@
         "MoCBurnout": "0x0E4010aF12E09CD7aa758B6ebE8BF1949c5174Ca",
         "BProToken": "0x23A1aA7b11e68beBE560a36beC04D1f79357f28d",
         "DoCToken": "0xC3De9F38581f83e281f260d0DdbaAc0e102ff9F8",
-        "ReserveToken": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE"
+        "ReserveToken": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE",
+        "MoCMedianizer": "0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc",
+        "PriceFeed": ""
       }
 
     },
@@ -185,7 +195,9 @@
         "MoCBurnout": "0x89fBF64ea00123F03b41f60eC23Cf1b6C6E382a8",
         "BProToken": "0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61",
         "DoCToken": "0x2d919F19D4892381D58edeBeca66D5642Cef1a1f",
-        "ReserveToken": "0x2AcC95758f8b5F583470ba265EB685a8F45fC9D5"
+        "ReserveToken": "0x2AcC95758f8b5F583470ba265EB685a8F45fC9D5",
+        "MoCMedianizer": "0x504EfCadFB020d6bBaeC8a5c5BB21453719d0E00",
+        "PriceFeed": ""
       }
 
     }

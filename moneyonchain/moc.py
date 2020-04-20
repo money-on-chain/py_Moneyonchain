@@ -29,6 +29,122 @@ STATE_BELOW_COBJ = 2
 STATE_ABOVE_COBJ = 3
 
 
+class PriceFeed(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeed.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeed.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
+
+    def __init__(self, connection_manager,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None,
+                 contract_address_moc_medianizer=None):
+
+        network = connection_manager.network
+        if not contract_address:
+            # load from connection manager
+
+            contract_address = connection_manager.options['networks'][network]['addresses']['PriceFeed']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        if not contract_address_moc_medianizer:
+            contract_address_moc_medianizer = connection_manager.options['networks'][network]['addresses']['MoCMedianizer']
+
+        self.contract_address_moc_medianizer = contract_address_moc_medianizer
+
+        # finally load the contract
+        self.load_contract()
+
+    def post(self, p_price,
+             block_expiration=300,
+             gas_limit=3500000,
+             wait_timeout=240,
+             default_account=None,
+             wait_receipt=True):
+        """Post price """
+
+        address_moc_medianizer = Web3.toChecksumAddress(self.contract_address_moc_medianizer)
+        last_block = self.connection_manager.get_block('latest')
+        expiration = last_block.timestamp + block_expiration
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'post',
+                                                          int(p_price),
+                                                          int(expiration),
+                                                          address_moc_medianizer,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                          timeout=wait_timeout)
+
+            self.log.info("Successfully post price [{4}] in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                tx_receipt['blockNumber'],
+                Web3.toHex(tx_receipt['transactionHash']),
+                tx_receipt['gasUsed'],
+                tx_receipt['from'],
+                p_price))
+
+        return tx_hash, tx_receipt
+
+
+class MoCMedianizer(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCMedianizer']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def price(self, formatted: bool = True,
+              block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.functions.peek().call(
+            block_identifier=block_identifier)
+
+        if not result[1]:
+            raise Exception("No source value price")
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price
+
+
 class MoCState(Contract):
     log = logging.getLogger()
 
