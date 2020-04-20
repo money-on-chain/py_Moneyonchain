@@ -650,9 +650,9 @@ class MoC(Contract):
         return self.sc_moc_state.state()
 
     def is_bucket_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
-        """DOC total supply"""
+        """Is bucket liquidation reached"""
 
-        result = self.sc.functions.isBucketLiquidationReached().call(
+        result = self.sc.functions.isBucketLiquidationReached(str.encode('X2')).call(
             block_identifier=block_identifier)
 
         return result
