@@ -1381,6 +1381,10 @@ class MoC(Contract):
         if not self.sc_moc_settlement.is_ready():
             raise Exception("You cannot reedem on settlement!")
 
+        account_balance = self.bprox_balance_of(default_account)
+        if amount_token > account_balance:
+            raise Exception("You are trying to redeem more than you have! BTC2X Balance: {0}".format(account_balance))
+
         bucket = str.encode('X2')
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBProx', bucket,
