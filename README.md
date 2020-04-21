@@ -26,6 +26,17 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 ```
 
+#### Connections table
+
+| Network Name      | Project | Enviroment                       | Network    |
+|-------------------|---------|----------------------------------|------------|
+| mocTestnetAlpha   | MOC     |                                  | Testnet    |
+| mocTestnet        | MOC     | moc-testnet.moneyonchain.com     | Testnet    |
+| mocMainnet2       | MOC     | alpha.moneyonchain.com           | Mainnet    |
+| rdocTestnetAlpha  | RIF     |                                  | Testnet    |
+| rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
+| rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
+
 #### DOC Token example
 
 Connect to moc-testnet avalaible trought https://moc-testnet.moneyonchain.com

@@ -19,7 +19,6 @@ connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-print("Connecting to MoC Main Contract")
 moc_main = MoC(connection_manager)
 
 amount_want_to_mint = Decimal(0.001)
@@ -34,10 +33,21 @@ print("To mint {0} BTC2X need {1} RBTC. Commision: {2} Interest: {3}".format(for
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
 tx_hash, tx_receipt, tx_logs = moc_main.mint_btc2x(amount_want_to_mint)
+print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
+print("Transaction done!")
 if tx_logs:
-    print("Transaction done!")
     amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
     amount_usd = moc_main.btc2x_amount_in_usd(amount)
     print("You mint {0} BTC2X equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.3f')))
-else:
-    print("Transaction Failed")
+
+print(tx_receipt)
+print(tx_logs)
+
+"""
+Connected: True
+Connecting to MoC Main Contract
+To mint 0.001000000000000000 BTC2X need 0.001003472177478192 RBTC. Commision: 0.000001000000000000 Interest: 0.000002472177478192
+Please wait to the transaction be mined!...
+Transaction done!
+You mint 0.001008039846725211 BTC2X equivalent to 0.001 USD
+"""

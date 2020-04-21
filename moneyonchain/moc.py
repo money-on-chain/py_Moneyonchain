@@ -674,7 +674,7 @@ class MoC(Contract):
         self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_address_moc_bpro_token)
 
         # load contract moc doc_token
-        self.sc_moc_doc_token = self.load_moc_bpro_token_contract(contract_address_moc_doc_token)
+        self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_address_moc_doc_token)
 
     def load_moc_inrate_contract(self, contract_address):
 
@@ -1086,7 +1086,7 @@ class MoC(Contract):
 
     def btc2x_amount_in_usd(self, amount: Decimal):
 
-        return self.btc2x_tec_price() * amount
+        return self.btc2x_tec_price() * self.bitcoin_price() * amount
 
     def balance_of(self, default_account=None):
 
@@ -1096,13 +1096,17 @@ class MoC(Contract):
         return self.connection_manager.balance(
             self.connection_manager.accounts[default_account].address)
 
-    def doc_balance_of(self, default_account=None):
+    def doc_balance_of(self,
+                       default_account=None,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
 
         if not default_account:
             default_account = 0
 
-        return self.sc_moc_doc_token.balance_of(
-            self.connection_manager.accounts[default_account].address)
+        account_address = self.connection_manager.accounts[default_account].address
+
+        return self.sc_moc_doc_token.balance_of(account_address, formatted=formatted)
 
     def bpro_balance_of(self,
                         default_account=None,
@@ -1114,7 +1118,7 @@ class MoC(Contract):
 
         account_address = self.connection_manager.accounts[default_account].address
 
-        return self.sc_moc_bpro_token.balance_of(account_address)
+        return self.sc_moc_bpro_token.balance_of(account_address, formatted=formatted)
 
     def bprox_balance_of(self,
                          default_account=None,
@@ -1317,8 +1321,9 @@ class MoC(Contract):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        if amount_token > self.doc_balance_of(default_account):
-            raise Exception("You are trying to redeem more than you have!")
+        account_balance = self.doc_balance_of(default_account)
+        if amount_token > account_balance:
+            raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
         free_doc = self.free_doc()
         if amount_token >= free_doc:
@@ -1350,6 +1355,10 @@ class MoC(Contract):
         if not self.sc_moc_settlement.is_ready():
             raise Exception("You cannot mint on settlement!")
 
+        account_balance = self.doc_balance_of(default_account)
+        if amount_token > account_balance:
+            raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
+
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
                                                           int(amount_token * self.precision),
                                                           default_account=default_account)
@@ -1359,7 +1368,7 @@ class MoC(Contract):
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            #tx_logs = self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)
+            tx_logs = self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)
 
         return tx_hash, tx_receipt, tx_logs
 

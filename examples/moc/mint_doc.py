@@ -33,9 +33,18 @@ print("To mint {0} RBTC in DOC need {1} RBTC. Commision {2}".format(format(amoun
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
 tx_hash, tx_receipt, tx_logs = moc_main.mint_doc(amount_want_to_mint)
+print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
+print("Transaction done!")
 if tx_logs:
-    print("Transaction done!")
     amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
     print("You mint {0} DOC".format(format(amount, '.18f')))
-else:
-    print("Transaction Failed")
+
+"""
+Connecting to mocTestnet...
+Connected: True
+Connecting to MoC Main Contract
+To mint 0.001000000000000000 RBTC in DOC need 0.001001000000000000 RBTC. Commision 0.000001000000000000
+Please wait to the transaction be mined!...
+Transaction done!
+You mint 6.833970000000000254 DOC
+"""
