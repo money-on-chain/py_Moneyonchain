@@ -21,6 +21,7 @@ from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
 from moneyonchain.token import BProToken, DoCToken
+from moneyonchain.events import MoCExchangeRiskProMint, MoCExchangeStableTokenMint
 
 
 STATE_LIQUIDATED = 0
@@ -1200,12 +1201,15 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.RiskProMint().processReceipt(tx_receipt)
+            tx_logs = {"RiskProMint": self.sc_moc_exchange.events.RiskProMint().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RiskProMint": MoCExchangeRiskProMint(self.connection_manager,
+                                                                       tx_logs["RiskProMint"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def mint_doc(self, amount: Decimal, default_account=None, wait_receipt=True):
         """ Mint amount DOC
@@ -1238,12 +1242,15 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.StableTokenMint().processReceipt(tx_receipt)
+            tx_logs = {"StableTokenMint": self.sc_moc_exchange.events.StableTokenMint().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"StableTokenMint": MoCExchangeStableTokenMint(self.connection_manager,
+                                                                               tx_logs["StableTokenMint"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def mint_btc2x(self, amount: Decimal, default_account=None, wait_receipt=True):
         """ Mint amount BTC2X

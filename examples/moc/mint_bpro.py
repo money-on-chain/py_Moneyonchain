@@ -31,13 +31,14 @@ print("To mint {0} bitpro need {1} RBTC. Commision {2}".format(format(amount_wan
 # Mint BPro
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs = moc_main.mint_bpro(amount_want_to_mint)
+tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.mint_bpro(amount_want_to_mint)
 print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
 print("Transaction done!")
 if tx_logs:
-    amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
+    amount = Decimal(Web3.fromWei(tx_logs['RiskProMint'][0]['args']['amount'], 'ether'))
     amount_usd = moc_main.bpro_amount_in_usd(amount)
     print("You mint {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.3f')))
+    print(tx_logs_formatted['RiskProMint'].print_row())
 
 
 """

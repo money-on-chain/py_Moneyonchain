@@ -13,12 +13,17 @@
 
 import logging
 from web3 import Web3
+from web3.exceptions import BlockNotFound
 import datetime
 
 
 class BaseEvent(object):
     name = "BaseEvent"
     hours_delta = 0
+
+    def print_row(self):
+        print('\t'.join(self.columns()))
+        print('\t'.join(str(v) for v in self.row()))
 
 
 class MoCExchangeRiskProMint(BaseEvent):
@@ -28,9 +33,12 @@ class MoCExchangeRiskProMint(BaseEvent):
     def __init__(self, connection_manager, event):
 
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
         self.reserveTotal = Web3.fromWei(event['args']['reserveTotal'], 'ether')
@@ -82,9 +90,12 @@ class MoCExchangeRiskProRedeem(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
         self.reserveTotal = Web3.fromWei(event['args']['reserveTotal'], 'ether')
@@ -111,9 +122,12 @@ class MoCExchangeStableTokenMint(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
         self.reserveTotal = Web3.fromWei(event['args']['reserveTotal'], 'ether')
@@ -140,9 +154,12 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
         self.reserveTotal = Web3.fromWei(event['args']['reserveTotal'], 'ether')
@@ -169,9 +186,12 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
         self.reserveTotal = Web3.fromWei(event['args']['reserveTotal'], 'ether')
@@ -200,9 +220,12 @@ class MoCExchangeRiskProxMint(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.bucket = 'X2'
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
@@ -235,9 +258,12 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        ts = connection_manager.block_timestamp(self.blockNumber)
-        dt = ts - datetime.timedelta(hours=self.hours_delta)
-        self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
         self.bucket = 'X2'
         self.account = event['args']['account']
         self.amount = Web3.fromWei(event['args']['amount'], 'ether')
