@@ -729,14 +729,6 @@ class MoCHelperLib(Contract):
         # finally load the contract
         self.load_contract()
 
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.connection_manager)
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
 
 class MoCConnector(Contract):
     log = logging.getLogger()
