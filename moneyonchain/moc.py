@@ -129,9 +129,6 @@ class MoCMedianizer(Contract):
         # finally load the contract
         self.load_contract()
 
-    def address(self):
-        return self.sc.address
-
     def price(self, formatted: bool = True,
               block_identifier: BlockIdentifier = 'latest'):
         """Get price"""

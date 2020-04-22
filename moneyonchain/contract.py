@@ -39,6 +39,9 @@ class Contract(object):
         if contract_bin:
             self.contract_bin = contract_bin
 
+    def address(self):
+        return self.sc.address
+
     @staticmethod
     def content_abi_file(abi_file):
 

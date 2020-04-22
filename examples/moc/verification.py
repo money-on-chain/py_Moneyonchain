@@ -32,7 +32,7 @@ lines.append(line)
 # MoCConnector
 count += 1
 contract = MoCConnector(connection_manager)
-line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConnector', addresses['MoCConnector'],
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConnector', contract.address(),
                                             contract.implementation())
 lines.append(line)
 
