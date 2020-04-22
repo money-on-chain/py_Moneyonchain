@@ -398,6 +398,14 @@ class MoCInrate(Contract):
         # finally load the contract
         self.load_contract()
 
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
     def commision_rate(self, formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
         """Gets commision rate"""
@@ -532,6 +540,14 @@ class MoCExchange(Contract):
         # finally load the contract
         self.load_contract()
 
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
 
 class MoCSettlement(Contract):
     log = logging.getLogger()
@@ -559,6 +575,14 @@ class MoCSettlement(Contract):
         # finally load the contract
         self.load_contract()
 
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
     def next_block(self):
         return int(self.sc.functions.nextSettlementBlock().call())
 
@@ -576,6 +600,142 @@ class MoCSettlement(Contract):
 
     def block_span(self):
         return self.sc.functions.getBlockSpan().call()
+
+
+class MoCBurnout(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBurnout.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBurnout.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCBurnout']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+class MoCBProxManager(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBProxManager.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBProxManager.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCBProxManager']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+class MoCConverter(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCConverter.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCConverter.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCConverter']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+class MoCHelperLib(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCHelperLib.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCHelperLib.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCHelperLib']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
 
 class MoCConnector(Contract):
@@ -603,6 +763,14 @@ class MoCConnector(Contract):
 
         # finally load the contract
         self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
     def contracts_addresses(self):
 
@@ -684,6 +852,14 @@ class MoC(Contract):
 
         # load contract moc doc_token
         self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_address_moc_doc_token)
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
     def load_moc_inrate_contract(self, contract_address):
 
