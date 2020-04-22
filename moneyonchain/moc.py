@@ -371,6 +371,43 @@ class MoCState(Contract):
 
         return result
 
+    def execute_calculate_ema(self,
+                              gas_limit=3500000,
+                              wait_timeout=240,
+                              default_account=None,
+                              wait_receipt=True):
+        """Execute calculate ema """
+
+        tx_hash = None
+        tx_receipt = None
+        if self.is_calculate_ema():
+
+            self.log.info("Calling calculateBitcoinMovingAverage ...")
+
+            if self.mode == 'MoC':
+                contract_function = 'calculateBitcoinMovingAverage'
+            else:
+                contract_function = 'calculateReserveTokenMovingAverage'
+
+            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                              contract_function,
+                                                              default_account=default_account,
+                                                              gas_limit=gas_limit)
+
+            if wait_receipt:
+                # wait to transaction be mined
+                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+                self.log.info(
+                    "Successfully calculateBitcoinMovingAverage in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                        tx_receipt['blockNumber'],
+                        Web3.toHex(tx_receipt['transactionHash']),
+                        tx_receipt['gasUsed'],
+                        tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
 
 class MoCInrate(Contract):
     log = logging.getLogger()
@@ -1151,33 +1188,11 @@ class MoC(Contract):
                               wait_receipt=True):
         """Execute calculate ema """
 
-        tx_hash = None
-        tx_receipt = None
-        if self.sc_moc_state.is_calculate_ema():
-
-            self.log.info("Calling calculateBitcoinMovingAverage ...")
-
-            if self.mode == 'MoC':
-                contract_function = 'calculateBitcoinMovingAverage'
-            else:
-                contract_function = 'calculateReserveTokenMovingAverage'
-
-            tx_hash = self.connection_manager.fnx_transaction(self.sc_moc_state,
-                                                              contract_function,
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
-
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
-                                                                              timeout=wait_timeout)
-
-                self.log.info(
-                    "Successfully calculateBitcoinMovingAverage in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                        tx_receipt['blockNumber'],
-                        Web3.toHex(tx_receipt['transactionHash']),
-                        tx_receipt['gasUsed'],
-                        tx_receipt['from']))
+        tx_hash, tx_receipt = self.sc_moc_state.execute_calculate_ema(
+            gas_limit=gas_limit,
+            wait_timeout=wait_timeout,
+            default_account=default_account,
+            wait_receipt=wait_receipt)
 
         return tx_hash, tx_receipt
 
