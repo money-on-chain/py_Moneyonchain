@@ -27,7 +27,11 @@ from moneyonchain.moc import MoCState, \
     MoCConnector, \
     MoC, \
     MoCMedianizer, \
-    PriceFeed
+    PriceFeed, \
+    MoCHelperLib, \
+    MoCBurnout, \
+    MoCBProxManager, \
+    MoCConverter
 from moneyonchain.token import RIFPro, RIFDoC
 
 
@@ -92,6 +96,54 @@ class RDOCMoCInrate(MoCInrate):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCInrate.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCInrate.bin'))
+
+    precision = 10 ** 18
+    mode = 'RDoC'
+
+
+class RDOCMoCBurnout(MoCBurnout):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCBurnout.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCBurnout.bin'))
+
+    precision = 10 ** 18
+    mode = 'RDoC'
+
+
+class RDOCMoCBProxManager(MoCBProxManager):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCRiskProxManager.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCRiskProxManager.bin'))
+
+    precision = 10 ** 18
+    mode = 'RDoC'
+
+
+class RDOCMoCConverter(MoCConverter):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCConverter.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCConverter.bin'))
+
+    precision = 10 ** 18
+    mode = 'RDoC'
+
+
+class RDOCMoCHelperLib(MoCHelperLib):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCHelperLib.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCHelperLib.bin'))
 
     precision = 10 ** 18
     mode = 'RDoC'
