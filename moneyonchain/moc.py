@@ -1162,7 +1162,7 @@ class MoC(Contract):
             else:
                 contract_function = 'calculateReserveTokenMovingAverage'
 
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
+            tx_hash = self.connection_manager.fnx_transaction(self.sc_moc_state,
                                                               contract_function,
                                                               default_account=default_account,
                                                               gas_limit=gas_limit)
