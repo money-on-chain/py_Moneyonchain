@@ -32,7 +32,8 @@
         "BProToken": "0x5C67868399aF25C9A31c2ce047d68B34162c9E14",
         "DoCToken": "0xb2D705097d9f80d47289efB2a25bc78FEe9d3E80",
         "MoCMedianizer": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
-        "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2"
+        "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
+        "CoinPairPrice": "0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849"
       }
 
     },
@@ -141,7 +142,8 @@
         "DoCToken": "0x7fb303D9806A72563C46aad8d874b301419c374b",
         "ReserveToken": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE",
         "MoCMedianizer": "0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc",
-        "PriceFeed": "0x462D7082F3671a3BE160638Be3f8C23Ca354F48A"
+        "PriceFeed": "0x462D7082F3671a3BE160638Be3f8C23Ca354F48A",
+        "CoinPairPrice": "0xEE9339E9A4Ca067e6AA57834B073ACd0D2b4D699"
       }
 
     },
