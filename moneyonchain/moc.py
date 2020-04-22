@@ -22,6 +22,7 @@ from web3.types import BlockIdentifier
 from moneyonchain.contract import Contract
 from moneyonchain.token import BProToken, DoCToken
 from moneyonchain.events import MoCExchangeRiskProMint, MoCExchangeStableTokenMint
+from moneyonchain.admin import ProxyAdmin
 
 
 STATE_LIQUIDATED = 0
@@ -172,9 +173,16 @@ class MoCState(Contract):
         # finally load the contract
         self.load_contract()
 
-    def state(self, formatted: bool = True,
-              block_identifier: BlockIdentifier = 'latest'):
-        """Blocks to settlement"""
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+    def state(self, block_identifier: BlockIdentifier = 'latest'):
+        """State of contract"""
 
         result = self.sc.functions.state().call(
             block_identifier=block_identifier)

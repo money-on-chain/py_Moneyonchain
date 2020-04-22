@@ -15,6 +15,8 @@
       ],
       "addresses": {
         "governor": "0x9258531274B945eB628656F4b30e8216938A619C",
+        "stopper": "0x0BE712DD242BF133417f6e389436783Fccb62e9e",
+        "admin": "0xcc8fb7E8666F3bEe51511235753406f96C16E26b",
         "oracle": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
         "upgradeDelegator": "0x00a47D7d7B9bD22e0A862908EC493bDE893f627B",
         "MoC": "0xE02f9AE8fe5Da307b6C7cd928AEa380392f5a395",
@@ -46,6 +48,8 @@
       ],
       "addresses": {
         "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "MoC": "0x2820f6d4D199B8D8838A4B26F9917754B86a0c1F",
@@ -82,6 +86,8 @@
       ],
       "addresses": {
         "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
+        "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
         "oracle": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
         "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
         "MoC": "0xf773B590aF754D597770937Fa8ea7AbDf2668370",
@@ -117,6 +123,8 @@
       ],
       "addresses": {
         "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "MoC": "0x4512f4C1d984bbf8B7f7404EddFb1881cFA79EfD",
@@ -149,6 +157,8 @@
       ],
       "addresses": {
         "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "MoC": "0x7e2F245F7dc8e78576ECB13AEFc0a101E9BE1AD3",
@@ -181,6 +191,8 @@
       ],
       "addresses": {
         "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
+        "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
         "oracle": "0x504EfCadFB020d6bBaeC8a5c5BB21453719d0E00",
         "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
         "MoC": "0xCfF3fcaeC2352C672C38d77cb1a064B7D50ce7e1",

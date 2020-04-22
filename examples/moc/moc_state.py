@@ -15,4 +15,5 @@ print("Days to settlement: {0}".format(moc_state.days_to_settlement()))
 print("Global Coverage: {0}".format(moc_state.global_coverage()))
 print("Bitpro Total Supply: {0}".format(moc_state.bitpro_total_supply()))
 print("DOC Total Supply: {0}".format(moc_state.doc_total_supply()))
+print("Implementation: {0}".format(moc_state.implementation()))
 
