@@ -29,6 +29,9 @@ class ERC20Token(Contract):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
+    def address(self):
+        return self.sc.address
+
     def name(self):
         return self.sc.functions.name().call()
 

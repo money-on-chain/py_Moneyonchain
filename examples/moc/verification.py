@@ -4,7 +4,8 @@ This script list all of the proxy and implementation addresses of the contracts
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCInrate, MoCBurnout, MoCBProxManager, \
-    MoCState
+    MoCState, MoCConnector, MoCMedianizer
+from moneyonchain.token import DoCToken, BProToken
 
 
 network = 'mocTestnet'
@@ -27,6 +28,14 @@ md_header = '''
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MOC', addresses['MoC'], moc_main.implementation())
 lines.append(line)
+
+# MoCConnector
+count += 1
+contract = MoCConnector(connection_manager)
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConnector', addresses['MoCConnector'],
+                                            contract.implementation())
+lines.append(line)
+
 
 # MoCState
 count += 1
@@ -76,6 +85,29 @@ contract = MoCBProxManager(connection_manager)
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBProxManager', addresses['MoCBProxManager'],
                                             contract.implementation())
+lines.append(line)
+
+# DoCToken
+contract = DoCToken(connection_manager)
+count += 1
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'DoCToken', '',
+                                            contract.address())
+lines.append(line)
+
+
+# BProToken
+contract = BProToken(connection_manager)
+count += 1
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'BProToken', '',
+                                            contract.address())
+lines.append(line)
+
+
+# Oracle
+contract = MoCMedianizer(connection_manager)
+count += 1
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCMedianizer', '',
+                                            contract.address())
 lines.append(line)
 
 
