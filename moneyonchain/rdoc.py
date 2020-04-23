@@ -100,6 +100,32 @@ class RDOCMoCInrate(MoCInrate):
     precision = 10 ** 18
     mode = 'RDoC'
 
+    def stable_inrate(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate Stable"""
+
+        info = dict()
+
+        result = self.sc.functions.getStableTmax().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['StableTmax'] = result
+
+        result = self.sc.functions.getStablePower().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['StablePower'] = result
+
+        result = self.sc.functions.getStableTmin().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['StableTmin'] = result
+
+        return info
+
 
 class RDOCMoCBurnout(MoCBurnout):
     log = logging.getLogger()

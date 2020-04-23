@@ -104,9 +104,9 @@ class RDOCMoCInrateStableChanger(BaseChanger):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCInrateStableChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MocInrateStableChanger.abi'))
     contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCInrateStableChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MocInrateStableChanger.bin'))
 
     contract_governor_abi = Contract.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.abi'))

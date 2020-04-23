@@ -21,5 +21,7 @@ else:
     print("Error deploying changer")
 
 """
-
+Connecting to rdocTestnetAlpha...
+Connected: True
+Changer Contract Address: 0xccC0aF28935B7715c698E2E1A34e0BF294FC667d
 """

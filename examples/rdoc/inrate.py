@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnetAlpha'
 connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -27,4 +27,6 @@ print(info)
 info = moc_inrate.last_daily_pay()
 print(info)
 
+info = moc_inrate.stable_inrate()
+print(info)
 
