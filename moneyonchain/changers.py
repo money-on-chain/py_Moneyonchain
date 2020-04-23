@@ -165,15 +165,15 @@ class DexAddTokenPairChanger(BaseChanger):
                     execute_change=False):
 
         network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
         tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_address),
-                                                   init_price,
-                                                   price_precision)
+                                                   [Web3.toChecksumAddress(base_token)],
+                                                   [Web3.toChecksumAddress(secondary_address)],
+                                                   [init_price],
+                                                   [price_precision])
 
         self.log.info("Deployed contract done!")
         self.log.info(Web3.toHex(tx_hash))
