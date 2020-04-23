@@ -214,7 +214,32 @@
         "PriceFeed": "0x461750b4824b14c3d9b7702bC6fBB82469082b23"
       }
 
+    },
+    "dexTestnet": {
+      "app_mode": "DEX",
+      "uri": ["https://public-node.testnet.rsk.co"],
+      "chain_id": 31,
+      "accounts": [
+        {
+          "address": "0xE2929d888015EB568AFfa06aaB946923a7236Ad9",
+          "private_key": ""
+        }
+      ],
+      "addresses": {
+        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
+        "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
+        "dex": "0x10F85251097AE4b07C1E7933FC79c59C1D3FbFB0",
+        "doc": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
+        "wrbtc": "0xA274d994F698Dd09256674960d86aBa22C086669",
+        "test": "0x840871cbb73dC94dcb11b2CEA963553Db71a95b7",
+        "bpro": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+        "commissionManager": "0xc90aC21E2041d969F957942a798A948582EB214b"
+      }
+
     }
+
 
   }
 
