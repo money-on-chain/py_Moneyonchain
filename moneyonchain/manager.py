@@ -179,7 +179,11 @@ class ConnectionManager(BaseConnectionManager):
         """ Transaction receipt """
         return self.web3.eth.getTransactionReceipt(transaction_hash)
 
-    def fnx_transaction(self, sc, function_, *tx_args, tx_params=None, gas_limit=3500000, default_account=None):
+    def fnx_transaction(self, sc, function_, *tx_args,
+                        tx_params=None,
+                        gas_limit=3500000,
+                        default_account=None,
+                        nonce_method="pending"):
         """Contract agnostic transaction function with extras"""
 
         network = self.network
@@ -202,7 +206,7 @@ class ConnectionManager(BaseConnectionManager):
         self.log.debug("Sending transaction to {} with {} as arguments.\n".format(function_, tx_args))
 
         from_address = self.accounts[default_account].address
-        nonce = self.web3.eth.getTransactionCount(from_address)
+        nonce = self.web3.eth.getTransactionCount(from_address, nonce_method)
 
         tx_value = 0
         if tx_params:
@@ -230,7 +234,11 @@ class ConnectionManager(BaseConnectionManager):
 
         return transaction_hash
 
-    def fnx_constructor(self, sc, *tx_args, tx_params=None, gas_limit=3500000, default_account=None):
+    def fnx_constructor(self, sc, *tx_args,
+                        tx_params=None,
+                        gas_limit=3500000,
+                        default_account=None,
+                        nonce_method="pending"):
         """Contract agnostic transaction function with extras"""
 
         network = self.network
@@ -253,7 +261,7 @@ class ConnectionManager(BaseConnectionManager):
 
         from_address = self.accounts[default_account].address
         pk = self.accounts[default_account].key
-        nonce = self.web3.eth.getTransactionCount(from_address)
+        nonce = self.web3.eth.getTransactionCount(from_address, nonce_method)
 
         tx_value = 0
         if tx_params:
