@@ -122,6 +122,8 @@ class MoCDecentralizedExchange(Contract):
         return tx_hash, tx_receipt
 
     def run_orders_expiration_for_pair(self, pair, is_buy_order,
+                                       hint=0,
+                                       order_id=0,
                                        gas_limit=3500000,
                                        wait_timeout=240,
                                        matching_steps=70,
@@ -136,9 +138,6 @@ class MoCDecentralizedExchange(Contract):
 
         self.log.info('About to expire {0} orders for pair {1} in blockNumber {2}'.format('buy' if is_buy_order else 'sell',
                                                                                           pair, block_number))
-
-        hint = 0
-        order_id = 0
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc,
                                                           'processExpired',
