@@ -189,6 +189,30 @@ class MoCState(Contract):
 
         return result
 
+    def cobj(self, formatted: bool = True,
+             block_identifier: BlockIdentifier = 'latest'):
+        """cobj"""
+
+        result = self.sc.functions.cobj().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def cobj_X2(self, formatted: bool = True,
+                block_identifier: BlockIdentifier = 'latest'):
+        """cobj"""
+
+        result = self.sc.functions.getBucketCobj(str.encode('X2')).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def max_mint_bpro_available(self, formatted: bool = True,
                                 block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
