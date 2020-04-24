@@ -93,8 +93,17 @@ class ConnectionManager(BaseConnectionManager):
             # obtain from enviroment if exist instead
             private_key = os.environ['ACCOUNT_PK_SECRET']
 
-            account = Account().from_key(private_key)
-            accounts.append(account)
+            l_priv = private_key.split(',')
+            if len(l_priv) > 1:
+                # this is a method:
+                # ACCOUNT_PK_SECRET=PK1,PK2,PK3
+                for a_priv in l_priv:
+                    account = Account().from_key(a_priv)
+                    accounts.append(account)
+            else:
+                # Simple PK: ACCOUNT_PK_SECRET=PK
+                account = Account().from_key(private_key)
+                accounts.append(account)
 
             # scan 10 accounts like this:
             # ACCOUNT_PK_SECRET_1, ACCOUNT_PK_SECRET_2 .. ACCOUNT_PK_SECRET_9
