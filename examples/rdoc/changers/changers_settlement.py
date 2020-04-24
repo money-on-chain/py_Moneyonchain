@@ -10,7 +10,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 contract = RDOCMoCSettlementChanger(connection_manager)
 
-tx_hash, tx_receipt = contract.constructor(60, execute_change=False)
+tx_hash, tx_receipt = contract.constructor(86400, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
 else:
@@ -28,4 +28,9 @@ Changer Contract Address: 0x6E66eE1f677CfdB416F458C69696cBcac5d3C4C2
 Connecting to rdocTestnetAlpha...
 Connected: True
 Changer Contract Address: 0x37A15637D51C5742b9Fdf23628763AEb14D780dC
+
+
+Connecting to rdocTestnetAlpha...
+Connected: True
+Changer Contract Address: 0xB2785651E23A730c5c56Eb0d870AA717Ff014969
 """
