@@ -289,3 +289,178 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
                 format(float(self.leverage), '.18f'),
                 format(float(self.commission), '.18f'),
                 format(float(self.reservePrice), '.18f')]
+
+
+# SETTLEMENT
+
+class MoCSettlementRedeemRequestProcessed(BaseEvent):
+    name = "RedeemRequestProcessed"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.redeemer = event['args']['redeemer']
+        self.commission = Web3.fromWei(event['args']['commission'], 'ether')
+        self.amount = Web3.fromWei(event['args']['amount'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº',  'Timestamp', 'Account', 'Commission', 'Amount']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                self.redeemer,
+                format(float(self.commission), '.18f'),
+                format(float(self.amount), '.18f')]
+
+
+class MoCSettlementSettlementRedeemStableToken(BaseEvent):
+    name = "SettlementRedeemStableToken"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.queueSize = event['args']['queueSize']
+        self.accumCommissions = Web3.fromWei(event['args']['accumCommissions'], 'ether')
+        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'queueSize', 'accumCommissions', 'reservePrice']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                self.queueSize,
+                format(float(self.accumCommissions), '.18f'),
+                format(float(self.reservePrice), '.18f')]
+
+
+class MoCSettlementSettlementCompleted(BaseEvent):
+    name = "SettlementCompleted"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+        self.commissionsPayed = Web3.fromWei(event['args']['commissionsPayed'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'commissionsPayed']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                format(float(self.commissionsPayed), '.18f')]
+
+
+class MoCSettlementSettlementDeleveraging(BaseEvent):
+    name = "SettlementDeleveraging"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.leverage = Web3.fromWei(event['args']['leverage'], 'ether')
+        self.riskProxPrice = Web3.fromWei(event['args']['riskProxPrice'], 'ether')
+        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
+        self.startBlockNumber = Web3.fromWei(event['args']['startBlockNumber'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº',  'Timestamp', 'leverage', 'riskProxPrice', 'reservePrice', 'startBlockNumber']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                format(float(self.leverage), '.18f'),
+                format(float(self.riskProxPrice), '.18f'),
+                format(float(self.reservePrice), '.18f'),
+                self.startBlockNumber]
+
+
+class MoCSettlementSettlementStarted(BaseEvent):
+    name = "SettlementStarted"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.stableTokenRedeemCount = event['args']['stableTokenRedeemCount']
+        self.deleveragingCount = event['args']['deleveragingCount']
+        self.riskProxPrice = Web3.fromWei(event['args']['riskProxPrice'], 'ether')
+        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº',  'Timestamp', 'stableTokenRedeemCount', 'deleveragingCount', 'riskProxPrice', 'reservePrice']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                self.stableTokenRedeemCount,
+                self.deleveragingCount,
+                format(float(self.riskProxPrice), '.18f'),
+                format(float(self.reservePrice), '.18f')]
+
+
+class MoCSettlementRedeemRequestAlter(BaseEvent):
+    name = "RedeemRequestAlter"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.redeemer = event['args']['redeemer']
+        self.isAddition = event['args']['isAddition']
+        self.delta = Web3.fromWei(event['args']['delta'], 'ether')
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp',  'address', 'isAddition', 'delta']
+        return columns
+
+    def row(self):
+        return [self.blockNumber,
+                self.timestamp,
+                self.redeemer,
+                self.isAddition,
+                format(float(self.delta), '.18f')]

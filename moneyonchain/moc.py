@@ -21,7 +21,13 @@ from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
 from moneyonchain.token import BProToken, DoCToken
-from moneyonchain.events import MoCExchangeRiskProMint, MoCExchangeStableTokenMint
+from moneyonchain.events import MoCExchangeRiskProMint, \
+    MoCExchangeStableTokenMint, \
+    MoCExchangeRiskProxMint, \
+    MoCExchangeRiskProRedeem, \
+    MoCExchangeFreeStableTokenRedeem, \
+    MoCExchangeRiskProxRedeem, \
+    MoCSettlementRedeemRequestAlter
 from moneyonchain.admin import ProxyAdmin
 
 
@@ -1498,12 +1504,15 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.RiskProxMint().processReceipt(tx_receipt)
+            tx_logs = {"RiskProxMint": self.sc_moc_exchange.events.RiskProxMint().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RiskProxMint": MoCExchangeRiskProxMint(self.connection_manager,
+                                                                         tx_logs["RiskProxMint"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BitPro amount of token """
@@ -1527,12 +1536,15 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.RiskProRedeem().processReceipt(tx_receipt)
+            tx_logs = {"RiskProRedeem": self.sc_moc_exchange.events.RiskProRedeem().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RiskProRedeem": MoCExchangeRiskProRedeem(self.connection_manager,
+                                                                             tx_logs["RiskProRedeem"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def reedeem_free_doc(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """
@@ -1558,12 +1570,16 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)
+            tx_logs = {"FreeStableTokenRedeem": self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"FreeStableTokenRedeem": MoCExchangeFreeStableTokenRedeem(
+                self.connection_manager,
+                tx_logs["FreeStableTokenRedeem"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def reedeem_doc_request(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """
@@ -1587,12 +1603,49 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)
+            tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
+                                                                                       tx_logs["RedeemRequestAlter"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def reedeem_doc_request_alter(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        """
+        Redeeming DOCs on Settlement: alterRedeemRequestAmount
+
+        There is only at most one redeem request per user during a settlement. A new redeem request is created
+        if the user invokes it for the first time or updates its value if it already exists.
+        """
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        if not self.sc_moc_settlement.is_ready():
+            raise Exception("You cannot mint on settlement!")
+
+        account_balance = self.doc_balance_of(default_account)
+        if amount_token > account_balance:
+            raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'alterRedeemRequestAmount',
+                                                          int(amount_token * self.precision),
+                                                          default_account=default_account)
+
+        tx_receipt = None
+        tx_logs = None
+        tx_logs_formatted = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
+                                                                                       tx_logs["RedeemRequestAlter"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
     def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
         """ Reedem BTC2X amount of token """
@@ -1615,9 +1668,13 @@ class MoC(Contract):
 
         tx_receipt = None
         tx_logs = None
+        tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            tx_logs = self.sc_moc_exchange.events.RiskProxRedeem().processReceipt(tx_receipt)
+            tx_logs = {
+                "RiskProxRedeem": self.sc_moc_exchange.events.RiskProxRedeem().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"RiskProxRedeem": MoCExchangeRiskProxRedeem(self.connection_manager,
+                                                                             tx_logs["RiskProxRedeem"][0])}
 
-        return tx_hash, tx_receipt, tx_logs
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
