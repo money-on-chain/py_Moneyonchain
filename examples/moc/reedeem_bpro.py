@@ -27,13 +27,14 @@ print("Reedem BPro: {0}".format(amount))
 # Reedeem BPro
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs = moc_main.reedeem_bpro(amount)
+tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.reedeem_bpro(amount)
 print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
 print("Transaction done!")
 if tx_logs:
-    amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
+    amount = Decimal(Web3.fromWei(tx_logs['RiskProRedeem'][0]['args']['amount'], 'ether'))
     amount_usd = moc_main.bpro_amount_in_usd(amount)
     print("You reedeem {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.2f')))
+    print(tx_logs_formatted['RiskProRedeem'].print_row())
 
 print(tx_receipt)
 print(tx_logs)
