@@ -2,7 +2,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.changers import RDOCMoCInrateStableChanger
 
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -28,4 +28,9 @@ Changer Contract Address: 0xccC0aF28935B7715c698E2E1A34e0BF294FC667d
 Connecting to rdocTestnet...
 Connected: True
 Changer Contract Address: 0x7732dc9Fb3db490e2f145D8fCA2f5AC60F7cf313
+
+Connecting to rdocMainnet...
+Connected: True
+Changer Contract Address: 0x5fB050a228B1FF958965392e7b2b16C782d3c0De
+
 """
