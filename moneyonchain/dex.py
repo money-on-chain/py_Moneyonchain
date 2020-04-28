@@ -63,6 +63,35 @@ class MoCDecentralizedExchange(Contract):
 
         return result
 
+    def token_pairs_status(self, base_address, secondary_address,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """ Get the token pairs"""
+
+        base_address = Web3.toChecksumAddress(base_address)
+        secondary_address = Web3.toChecksumAddress(secondary_address)
+
+        result = self.sc.functions.getTokenPairStatus(base_address,
+                                                      secondary_address).call(
+            block_identifier=block_identifier)
+
+        if result:
+            d_status = dict()
+            d_status['emergentPrice'] = result[0]
+            d_status['lastBuyMatchId'] = result[1]
+            d_status['lastBuyMatchAmount'] = result[2]
+            d_status['lastSellMatchId'] = result[3]
+            d_status['tickNumber'] = result[4]
+            d_status['nextTickBlock'] = result[5]
+            d_status['lastTickBlock'] = result[6]
+            d_status['lastClosingPrice'] = result[7]
+            d_status['disabled'] = result[8]
+            d_status['EMAPrice'] = result[9]
+            d_status['smoothingFactor'] = result[10]
+
+            return d_status
+
+        return result
+
     def next_tick(self, pair, block_identifier: BlockIdentifier = 'latest'):
         """ Next tick """
 

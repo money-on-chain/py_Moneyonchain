@@ -1,0 +1,85 @@
+"""
+DISABLE PAIRS
+
+[ [ '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0',
+    '0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf',
+    '1000000000000000000',
+    '1000000000000000000' ],
+  [ '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0',
+    '0x840871cbb73dC94dcb11b2CEA963553Db71a95b7',
+    '1000000000000000000',
+    '1000000000000000000' ],
+  [ '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0',
+    '0xA274d994F698Dd09256674960d86aBa22C086669',
+    '1000000000000000000',
+    '1000000000000000000' ],
+  [ '0xA274d994F698Dd09256674960d86aBa22C086669',
+    '0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf',
+    '1000000000000000000',
+    '1000000000000000000' ],
+  [ '0xA274d994F698Dd09256674960d86aBa22C086669',
+    '0x840871cbb73dC94dcb11b2CEA963553Db71a95b7',
+    '1000000000000000000',
+    '1000000000000000000' ] ]
+
+
+
+"""
+
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.changers import DexTokenPairDisabler
+
+import logging
+import logging.config
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
+log = logging.getLogger('default')
+
+
+network = 'dexTestnet'
+connection_manager = ConnectionManager(network=network)
+print("Connecting to %s..." % network)
+print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+contract = DexTokenPairDisabler(connection_manager)
+
+"""
+ [ '0xA274d994F698Dd09256674960d86aBa22C086669',
+    '0x840871cbb73dC94dcb11b2CEA963553Db71a95b7',
+    '1000000000000000000',
+    '1000000000000000000' ]
+"""
+
+base_address = '0xA274d994F698Dd09256674960d86aBa22C086669'
+secondary_address = '0x840871cbb73dC94dcb11b2CEA963553Db71a95b7'
+
+tx_hash, tx_receipt = contract.constructor(base_address,
+                                           secondary_address,
+                                           execute_change=False)
+if tx_receipt:
+    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+else:
+    print("Error deploying changer")
+
+"""
+Connecting to dexTestnet...
+Connected: True
+2020-04-27 16:28:32 root         INFO     Deploying new contract...
+Changer Contract Address: 0x798EC9382F96Ca78Fd66019e8AC718c26E2B1d7b
+2020-04-27 16:29:16 root         INFO     Deployed contract done!
+2020-04-27 16:29:16 root         INFO     0x7d5685235c6b402850c7748c653bedbe6a631e2e84e7d9840baa092ff0d9dfd7
+2020-04-27 16:29:16 root         INFO     AttributeDict({'transactionHash': HexBytes('0x7d5685235c6b402850c7748c653bedbe6a631e2e84e7d9840baa092ff0d9dfd7'), 'transactionIndex': 3, 'blockHash': HexBytes('0x705192bb2be9a770428f7ade2b68ba4e42212eb5ef26bb0f2c7eb25ce1e93376'), 'blockNumber': 805800, 'cumulativeGasUsed': 1076285, 'gasUsed': 229265, 'contractAddress': '0x798EC9382F96Ca78Fd66019e8AC718c26E2B1d7b', 'logs': [], 'from': '0xA8342cC05241E0d940E1c74043faCd931562f19a', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')})
+2020-04-27 16:29:16 root         INFO     Changer Contract Address: 0x798EC9382F96Ca78Fd66019e8AC718c26E2B1d7b
+
+Connecting to dexTestnet...
+Connected: True
+2020-04-27 16:34:10 root         INFO     Deploying new contract...
+Changer Contract Address: 0xAb4a87f6c815b4CEA8e2D4f23Dca75050842e056
+2020-04-27 16:34:54 root         INFO     Deployed contract done!
+2020-04-27 16:34:54 root         INFO     0xc9286da712f02f843006211654b67684d80d41a9d1498d88b1e39c8613055cc4
+2020-04-27 16:34:54 root         INFO     AttributeDict({'transactionHash': HexBytes('0xc9286da712f02f843006211654b67684d80d41a9d1498d88b1e39c8613055cc4'), 'transactionIndex': 1, 'blockHash': HexBytes('0xff790db31831a3a2aee1d162852da731517fa0395420058e6952312a26c79a0f'), 'blockNumber': 805809, 'cumulativeGasUsed': 283558, 'gasUsed': 229265, 'contractAddress': '0xAb4a87f6c815b4CEA8e2D4f23Dca75050842e056', 'logs': [], 'from': '0xA8342cC05241E0d940E1c74043faCd931562f19a', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')})
+2020-04-27 16:34:54 root         INFO     Changer Contract Address: 0xAb4a87f6c815b4CEA8e2D4f23Dca75050842e056
+
+"""

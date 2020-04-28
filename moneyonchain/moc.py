@@ -1678,3 +1678,28 @@ class MoC(Contract):
                                                                              tx_logs["RiskProxRedeem"][0])}
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def search_block_transaction(self, block):
+
+        network = self.connection_manager.network
+        moc_addresses = list()
+        moc_addresses.append(
+            str.lower(self.connection_manager.options['networks'][network]['addresses']['MoC']))
+        moc_addresses.append(str.lower(self.connection_manager.options['networks'][network]['addresses']['MoCSettlement']))
+        moc_addresses.append(str.lower(self.connection_manager.options['networks'][network]['addresses']['MoCExchange']))
+        moc_addresses.append(str.lower(self.connection_manager.options['networks'][network]['addresses']['BProToken']))
+        moc_addresses.append(str.lower(self.connection_manager.options['networks'][network]['addresses']['DoCToken']))
+
+        print(moc_addresses)
+
+        l_transactions = list()
+        f_block = self.connection_manager.get_block(block, full_transactions=True)
+        for transaction in f_block['transactions']:
+            if str.lower(transaction['to']) in moc_addresses or \
+                    str.lower(transaction['from']) in moc_addresses:
+                l_transactions.append(transaction)
+
+        #transaction_receipt = node_manager.web3.eth.getTransactionReceipt(transaction)
+
+        return l_transactions
+
