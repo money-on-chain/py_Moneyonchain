@@ -124,6 +124,30 @@ class RDOCMoCInrate(MoCInrate):
 
         return info
 
+    def riskprox_inrate(self, formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate riskprox"""
+
+        info = dict()
+
+        result = self.sc.functions.getRiskProxTmax().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['RiskProxTmax'] = result
+
+        result = self.sc.functions.getRiskProxPower().call(
+            block_identifier=block_identifier)
+        info['RiskProxPower'] = result
+
+        result = self.sc.functions.getRiskProxTmin().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['RiskProxTmin'] = result
+
+        return info
+
 
 class RDOCMoCBurnout(MoCBurnout):
     log = logging.getLogger()

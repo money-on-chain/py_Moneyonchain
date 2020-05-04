@@ -594,6 +594,22 @@ class MoCInrate(Contract):
 
         return result
 
+    def btc2x_inrate_avg(self, amount, on_minting=False, formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+        """ Calculates an average interest rate between after and before mint/redeem """
+
+        bucket = str.encode('X2')
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.btcxInrateAvg(bucket, int(amount * self.precision), on_minting).call(block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProxInrateAvg(bucket, int(amount * self.precision), on_minting).call(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
 
 class MoCExchange(Contract):
     log = logging.getLogger()
