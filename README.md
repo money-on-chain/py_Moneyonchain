@@ -9,7 +9,7 @@ Python API to Money On Chain projects.
 ### Installation
 
 ```
-pip install moneyonchain
+pip3 install moneyonchain
 ```
 
 ### Usage
