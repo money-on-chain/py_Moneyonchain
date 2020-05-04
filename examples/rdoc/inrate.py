@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -23,7 +23,7 @@ print("=======================")
 info = moc_inrate.stable_inrate()
 print(info)
 
-print("Interest of reedeeming 1.0 DOC")
+print("Interest of reedeeming 0.01 DOC")
 interest_no_days = moc_inrate.doc_inrate_avg(1.0)
 
 for day_to_sett in reversed(range(0, 30)):
