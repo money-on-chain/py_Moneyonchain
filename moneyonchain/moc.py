@@ -580,6 +580,20 @@ class MoCInrate(Contract):
 
         return result
 
+    def doc_inrate_avg(self, amount, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """ Calculates an average interest rate between after and before free doc Redemption"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.docInrateAvg(int(amount * self.precision)).call(block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.stableTokenInrateAvg(int(amount * self.precision)).call(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
 
 class MoCExchange(Contract):
     log = logging.getLogger()

@@ -114,8 +114,6 @@ class RDOCMoCInrate(MoCInrate):
 
         result = self.sc.functions.getStablePower().call(
             block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
         info['StablePower'] = result
 
         result = self.sc.functions.getStableTmin().call(
