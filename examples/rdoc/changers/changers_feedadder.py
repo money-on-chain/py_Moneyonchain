@@ -2,7 +2,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.changers import RDOCPriceFeederAdderChanger
 
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
