@@ -293,14 +293,17 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
 
     mode = 'RDoC'
 
-    def constructor(self, cobj_c0, cobj_x2, execute_change=False):
+    def constructor(self, account_owner, execute_change=False):
 
         network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCBProxManager']
+        contract_address_medianizer = self.connection_manager.options['networks'][network]['addresses']['oracle']
+        contract_address_feedfactory = self.connection_manager.options['networks'][network]['addresses']['FeedFactory']
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address, cobj_c0, cobj_x2)
+        tx_hash, tx_receipt = self.fnx_constructor(contract_address_feedfactory,
+                                                   contract_address_medianizer,
+                                                   Web3.toChecksumAddress(account_owner))
 
         self.log.info("Deployed contract done!")
         self.log.info(tx_hash)

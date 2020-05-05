@@ -31,7 +31,8 @@ from moneyonchain.moc import MoCState, \
     MoCHelperLib, \
     MoCBurnout, \
     MoCBProxManager, \
-    MoCConverter
+    MoCConverter, \
+    FeedFactory
 from moneyonchain.token import RIFPro, RIFDoC
 
 
@@ -48,6 +49,18 @@ class RDOCPriceFeed(PriceFeed):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeed.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeed.bin'))
+
+    mode = 'RDoC'
+    precision = 10 ** 18
+
+
+class RDOCFeedFactory(FeedFactory):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.bin'))
 
     mode = 'RDoC'
     precision = 10 ** 18
