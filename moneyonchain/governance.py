@@ -20,13 +20,13 @@ from web3 import Web3
 from moneyonchain.contract import Contract
 
 
-class CommissionSplitter(Contract):
+class Governed(Contract):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governed.abi'))
     contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governed.bin'))
 
     mode = 'MoC'
     precision = 10 ** 18
@@ -38,9 +38,7 @@ class CommissionSplitter(Contract):
 
         network = connection_manager.network
         if not contract_address:
-            # load from connection manager
-
-            contract_address = connection_manager.options['networks'][network]['addresses']['CommissionSplitter']
+            raise ValueError("You need to pass contract address")
 
         super().__init__(connection_manager,
                          contract_address=contract_address,
@@ -50,40 +48,27 @@ class CommissionSplitter(Contract):
         # finally load the contract
         self.load_contract()
 
-    def commission_address(self, block_identifier: BlockIdentifier = 'latest'):
+    def governor(self, block_identifier: BlockIdentifier = 'latest'):
         """Contract address output"""
 
-        result = self.sc.functions.commissionsAddress().call(
+        result = self.sc.functions.governor().call(
             block_identifier=block_identifier)
 
         return result
 
-    def moc_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """The MOC contract address"""
+    def initialize(self, governor,
+                   gas_limit=3500000,
+                   wait_timeout=240,
+                   default_account=None,
+                   wait_receipt=True):
+        """Initialize"""
 
-        result = self.sc.functions.moc().call(
-            block_identifier=block_identifier)
-
-        return result
-
-    def reserve_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """The reserve contract address"""
-
-        result = self.sc.functions.reserveToken().call(
-            block_identifier=block_identifier)
-
-        return result
-
-    def split(self,
-              gas_limit=3500000,
-              wait_timeout=240,
-              default_account=None,
-              wait_receipt=True):
-        """ split execute """
+        governor_address = Web3.toChecksumAddress(governor)
 
         tx_receipt = None
         tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'split',
+                                                          'initialize',
+                                                          governor_address,
                                                           default_account=default_account,
                                                           gas_limit=gas_limit)
 
@@ -92,7 +77,7 @@ class CommissionSplitter(Contract):
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
                                                                           timeout=wait_timeout)
 
-            self.log.info("Successfully split executed in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+            self.log.info("Successfully initialized in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
                 tx_receipt['blockNumber'],
                 Web3.toHex(tx_receipt['transactionHash']),
                 tx_receipt['gasUsed'],
@@ -101,13 +86,13 @@ class CommissionSplitter(Contract):
         return tx_hash, tx_receipt
 
 
-class RDOCCommissionSplitter(CommissionSplitter):
+class RDOCGoverned(Governed):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governed.abi'))
     contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governed.bin'))
 
     mode = 'RDoC'
     precision = 10 ** 18

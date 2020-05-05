@@ -268,6 +268,49 @@ class RDOCMoCBucketContainerChanger(BaseChanger):
         return tx_hash, tx_receipt
 
 
+class RDOCCommissionSplitterAddressChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/SetCommissionFinalAddressChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/SetCommissionFinalAddressChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.bin'))
+
+    mode = 'RDoC'
+
+    def constructor(self, commission_address, execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = self.connection_manager.options['networks'][network]['addresses']['CommissionSplitter']
+        commission_address = Web3.toChecksumAddress(commission_address)
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(contract_address, commission_address)
+
+        self.log.info("Deployed contract done!")
+        self.log.info(tx_hash)
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(tx_hash)
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
 class RDOCPriceFeederAdderChanger(BaseChanger):
     log = logging.getLogger()
 
