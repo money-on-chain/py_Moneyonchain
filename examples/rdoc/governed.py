@@ -4,13 +4,13 @@ from moneyonchain.governance import RDOCGoverned
 import logging
 import logging.config
 
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')
 log = logging.getLogger('default')
 
 
-network = 'rdocTestnetAlpha'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

@@ -154,7 +154,7 @@
     },
     "rdocTestnet": {
       "app_mode": "RRC20",
-      "uri": ["http://localhost:4444"],
+      "uri": ["https://public-node.testnet.rsk.co"],
       "chain_id": 31,
       "accounts": [
         {
