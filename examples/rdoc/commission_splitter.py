@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -38,4 +38,12 @@ Reserve Address
 0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE
 
 
+INFO:root:Connecting to rdocMainnet...
+INFO:root:Connected: True
+Contract address:
+0x27a3074Db95Ec5f6a0E73DC41a4859F48990e841
+MoC Address
+0xCfF3fcaeC2352C672C38d77cb1a064B7D50ce7e1
+Reserve Address
+0x2AcC95758f8b5F583470ba265EB685a8F45fC9D5
 """

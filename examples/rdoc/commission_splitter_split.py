@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -34,5 +34,11 @@ Connecting to rdocTestnet...
 Connected: True
 2020-05-05 17:23:43 root         INFO     Successfully split executed in Block [826635] Hash: [0xd5fb6ee6a9d3a3161f9c566f97d17f71c676c0df121279198dc16bcd4256fca5] Gas used: [123615] From: [0xa8F94d08d3d9C045fE0b86a953DF39b14206153c]
 Sucessfully initialized
+
+
+Connecting to rdocMainnet...
+Connected: True
+Sucessfully splited
+2020-05-06 14:09:41 root         INFO     Successfully split executed in Block [2332266] Hash: [0x6351a94fc53560c5f9b34f014d03aa023264d257ee1856fd05b4d29912c2b470] Gas used: [113893] From: [0x27a3074Db95Ec5f6a0E73DC41a4859F48990e841]
 
 """

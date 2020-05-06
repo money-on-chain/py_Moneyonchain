@@ -190,7 +190,7 @@
     },
     "rdocMainnet": {
       "app_mode": "RRC20",
-      "uri": ["http://localhost:4444"],
+      "uri": ["https://public-node.rsk.co"],
       "chain_id": 30,
       "accounts": [
         {
