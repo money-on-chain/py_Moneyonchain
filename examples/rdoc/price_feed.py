@@ -24,7 +24,7 @@ feeder = RDOCPriceFeed(connection_manager,
 
 # write price on price feeder
 #feeder.post(0.063 * 10 ** 18, block_expiration=80)
-print(feeder.zzz())
+#print(feeder.zzz())
 print(feeder.peek())
 
 

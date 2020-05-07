@@ -3,7 +3,7 @@ from web3 import Web3
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.rdoc import RDOCFeedFactory
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -12,8 +12,8 @@ moc_feedfactory = RDOCFeedFactory(connection_manager)
 
 events_functions = ['Created']
 hours_delta = 0
-from_block = 820888  # from block start
-to_block = 825888  # block end or 0 to last block
+from_block = 2331218  # from block start
+to_block = 2335218  # block end or 0 to last block
 l_events = moc_feedfactory.logs_from(events_functions, from_block, to_block, block_steps=2880)
 
 l_info = list()
@@ -39,12 +39,12 @@ if 'Created' in l_events:
 print(l_info)
 """
 [
-    {
-        'blockNumber': 825873, 
-        'timestamp': '2020-05-05 10:22:30', 
-        'sender': '0xe127cB398f4f37E126Fa7F7af7a91b1D260eBd78', 
-        'feed': '0xFFF8e36C9e9660a88CD16A215338190AaDbB4F50'
-    }
+{
+'blockNumber': 2335154, 
+'timestamp': '2020-05-07 15:51:43', 
+'sender': '0xFaFdfc8aa79114bF45cC5db630B92318878cAac6', 
+'feed': '0xBEd51D83CC4676660e3fc3819dfAD8238549B975'
+}
 ]
 
 """

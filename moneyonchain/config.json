@@ -226,7 +226,7 @@
     },
     "dexTestnet": {
       "app_mode": "DEX",
-      "uri": ["http://localhost:4444"],
+      "uri": ["https://public-node.testnet.rsk.co"],
       "chain_id": 31,
       "accounts": [
         {
