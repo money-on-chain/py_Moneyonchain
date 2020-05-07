@@ -408,6 +408,22 @@ class MoCPriceProviderChanger(BaseChanger):
         return tx_hash, tx_receipt
 
 
+class RDOCPriceProviderChanger(MoCPriceProviderChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceProviderChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceProviderChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.bin'))
+
+    mode = 'RDoC'
+
+
 class DexAddTokenPairChanger(BaseChanger):
     log = logging.getLogger()
 
