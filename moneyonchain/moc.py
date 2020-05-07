@@ -73,7 +73,8 @@ class PriceFeed(Contract):
         # finally load the contract
         self.load_contract()
 
-    def post(self, p_price,
+    def post(self,
+             p_price,
              block_expiration=300,
              gas_limit=3500000,
              wait_timeout=240,
@@ -107,6 +108,28 @@ class PriceFeed(Contract):
                 p_price))
 
         return tx_hash, tx_receipt
+
+    def zzz(self, block_identifier: BlockIdentifier = 'latest'):
+        """zzz"""
+
+        result = self.sc.functions.zzz().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def peek(self, formatted: bool = True,
+             block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.functions.peek().call(
+            block_identifier=block_identifier)
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price, result[1]
 
 
 class FeedFactory(Contract):
@@ -182,6 +205,20 @@ class MoCMedianizer(Contract):
             price = Web3.fromWei(price, 'ether')
 
         return price
+
+    def peek(self, formatted: bool = True,
+             block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.functions.peek().call(
+            block_identifier=block_identifier)
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price, result[1]
 
 
 class MoCState(Contract):
