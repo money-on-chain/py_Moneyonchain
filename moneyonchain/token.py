@@ -14,6 +14,7 @@
 import os
 import logging
 from web3 import Web3
+from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
 
@@ -35,18 +36,21 @@ class ERC20Token(Contract):
     def symbol(self):
         return self.sc.functions.symbol().call()
 
-    def total_supply(self, formatted=True):
+    def total_supply(self, formatted=True,
+                     block_identifier: BlockIdentifier = 'latest'):
 
-        total = self.sc.functions.totalSupply().call()
+        total = self.sc.functions.totalSupply().call(block_identifier=block_identifier)
         if formatted:
             total = Web3.fromWei(total, 'ether')
         return total
 
-    def balance_of(self, account_address, formatted=True):
+    def balance_of(self, account_address, formatted=True,
+                   block_identifier: BlockIdentifier = 'latest'):
 
         account_address = Web3.toChecksumAddress(account_address)
 
-        balance = self.sc.functions.balanceOf(account_address).call()
+        balance = self.sc.functions.balanceOf(account_address).call(
+            block_identifier=block_identifier)
         if formatted:
             balance = Web3.fromWei(balance, 'ether')
         return balance

@@ -963,6 +963,8 @@ class MoC(Contract):
     precision = 10 ** 18
     mode = 'MoC'
     minimum_amount = Decimal(0.00000001)
+    receipt_timeout = 240
+    poll_latency = 1.0
 
     def __init__(self, connection_manager,
                  contract_address=None,
@@ -1523,7 +1525,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"RiskProMint": self.sc_moc_exchange.events.RiskProMint().processReceipt(tx_receipt)}
             tx_logs_formatted = {"RiskProMint": MoCExchangeRiskProMint(self.connection_manager,
                                                                        tx_logs["RiskProMint"][0])}
@@ -1564,7 +1569,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"StableTokenMint": self.sc_moc_exchange.events.StableTokenMint().processReceipt(tx_receipt)}
             tx_logs_formatted = {"StableTokenMint": MoCExchangeStableTokenMint(self.connection_manager,
                                                                                tx_logs["StableTokenMint"][0])}
@@ -1605,7 +1613,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"RiskProxMint": self.sc_moc_exchange.events.RiskProxMint().processReceipt(tx_receipt)}
             tx_logs_formatted = {"RiskProxMint": MoCExchangeRiskProxMint(self.connection_manager,
                                                                          tx_logs["RiskProxMint"][0])}
@@ -1637,10 +1648,14 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"RiskProRedeem": self.sc_moc_exchange.events.RiskProRedeem().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RiskProRedeem": MoCExchangeRiskProRedeem(self.connection_manager,
-                                                                             tx_logs["RiskProRedeem"][0])}
+            tx_logs_formatted = {"RiskProRedeem": MoCExchangeRiskProRedeem(
+                self.connection_manager,
+                tx_logs["RiskProRedeem"][0])}
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
@@ -1671,7 +1686,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"FreeStableTokenRedeem": self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)}
             tx_logs_formatted = {"FreeStableTokenRedeem": MoCExchangeFreeStableTokenRedeem(
                 self.connection_manager,
@@ -1704,7 +1722,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
             tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
                                                                                        tx_logs["RedeemRequestAlter"][0])}
@@ -1738,7 +1759,10 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
             tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
                                                                                        tx_logs["RedeemRequestAlter"][0])}
@@ -1769,11 +1793,38 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=self.receipt_timeout,
+                poll_latency=self.poll_latency)
             tx_logs = {
                 "RiskProxRedeem": self.sc_moc_exchange.events.RiskProxRedeem().processReceipt(tx_receipt)}
             tx_logs_formatted = {"RiskProxRedeem": MoCExchangeRiskProxRedeem(self.connection_manager,
                                                                              tx_logs["RiskProxRedeem"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def reedeem_all_doc(self, default_account=None, wait_receipt=True):
+        """
+        Reedem All doc only on liquidation
+        """
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemAllDoc',
+                                                          default_account=default_account)
+
+        tx_receipt = None
+        tx_logs = None
+        tx_logs_formatted = None
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            #tx_logs = {"FreeStableTokenRedeem": self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)}
+            #tx_logs_formatted = {"FreeStableTokenRedeem": MoCExchangeFreeStableTokenRedeem(
+            #    self.connection_manager,
+            #    tx_logs["FreeStableTokenRedeem"][0])}
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 

@@ -12,6 +12,9 @@
 """
 
 from web3 import Web3, Account
+from web3._utils.transactions import wait_for_transaction_receipt
+from web3._utils.threads import Timeout
+from web3.exceptions import TimeExhausted
 import json
 import os
 import datetime
@@ -304,6 +307,21 @@ class ConnectionManager(BaseConnectionManager):
         )
 
         return tx_receipt
+
+    def wait_for_transaction_receipt(self, tx_hash, timeout=180, poll_latency=0.1):
+
+        try:
+            return wait_for_transaction_receipt(self.web3,
+                                                tx_hash,
+                                                timeout=timeout,
+                                                poll_latency=poll_latency)
+        except Timeout:
+            raise TimeExhausted(
+                "Transaction {} is not in the chain, after {} seconds".format(
+                    tx_hash,
+                    timeout,
+                )
+            )
 
     def load_json_contract(self, json_filename, deploy_address=None):
         """ Load the abi from json file """

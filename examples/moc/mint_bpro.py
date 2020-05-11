@@ -13,6 +13,14 @@ from web3 import Web3
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC
 
+import logging
+import logging.config
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
+log = logging.getLogger('default')
+
 
 network = 'mocTestnet'
 connection_manager = ConnectionManager(network=network)

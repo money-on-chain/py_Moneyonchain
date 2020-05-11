@@ -8,7 +8,7 @@ from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCI
 from moneyonchain.token import DoCToken, BProToken
 
 
-network = 'mocTestnetAlpha'
+network = 'mocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
