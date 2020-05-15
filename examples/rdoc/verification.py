@@ -38,7 +38,7 @@ from moneyonchain.rdoc import RDOCMoC, \
 from moneyonchain.token import RIFDoC, RIFPro
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

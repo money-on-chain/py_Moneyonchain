@@ -37,6 +37,37 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
 
+#### Token Prices
+
+Get token prices in Dollar
+
+```
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.moc import MoC
+
+network = 'mocMainnet2'
+connection_manager = ConnectionManager(network=network)
+print("Connecting to %s..." % network)
+print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+contract = MoC(connection_manager)
+print("Bitcoin price in usd: {0}".format(contract.bitcoin_price()))
+print("BPRO price in usd: {0}".format(contract.bpro_price()))
+print("BTC2X price in usd: {0}".format(contract.btc2x_tec_price() * contract.bitcoin_price()))
+
+```
+
+result:
+
+```
+Connecting to mocMainnet2...
+Connected: True
+Bitcoin price in usd: 9405.100000000000247435
+BPRO price in usd: 9702.108188434730668324
+BTC2X price in usd: 11869.45000000000341040779478
+```
+
+
 #### DOC Token example
 
 Connect to moc-testnet avalaible trought https://moc-testnet.moneyonchain.com

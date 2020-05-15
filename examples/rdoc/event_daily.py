@@ -3,7 +3,7 @@ from web3 import Web3
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.rdoc import RDOCMoCInrate, RDOCMoC
 
-network = 'rdocMainnet'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -12,8 +12,8 @@ moc_inrate = RDOCMoCInrate(connection_manager)
 
 events_functions = ['InrateDailyPay']
 hours_delta = 0
-from_block = 2270000  # from block start
-to_block = 2280720  # block end or 0 to last block
+from_block = 830859  # from block start
+to_block = 844859  # block end or 0 to last block
 l_events = moc_inrate.logs_from(events_functions, from_block, to_block, block_steps=2880)
 
 l_info = list()
@@ -40,9 +40,11 @@ if 'InrateDailyPay' in l_events:
 print(l_info)
 """
 [
-{'blockNumber': 2272797, 'timestamp': '2020-04-14 12:44:43', 'amount': Decimal('1.478432015673136349'), 'daysToSettlement': 16, 'nReserveBucketC0': Decimal('19422.062734555368925119')}, 
-{'blockNumber': 2275680, 'timestamp': '2020-04-15 13:39:32', 'amount': Decimal('1.478432015673136349'), 'daysToSettlement': 15, 'nReserveBucketC0': Decimal('39520.756960735107326976')}, 
-{'blockNumber': 2280716, 'timestamp': '2020-04-17 09:38:37', 'amount': Decimal('5.58735204719715373'), 'daysToSettlement': 14, 'nReserveBucketC0': Decimal('64050.044705172883757847')}]
+{'blockNumber': 833242, 'timestamp': '2020-05-08 05:43:34', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 17, 'nReserveBucketC0': Decimal('2367.478205379475749698')}, 
+{'blockNumber': 836128, 'timestamp': '2020-05-09 08:18:04', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 16, 'nReserveBucketC0': Decimal('2367.427494777035258405')}, 
+{'blockNumber': 839013, 'timestamp': '2020-05-10 10:39:04', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 15, 'nReserveBucketC0': Decimal('2367.376786601284723118')}, 
+{'blockNumber': 841897, 'timestamp': '2020-05-11 11:57:42', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 14, 'nReserveBucketC0': Decimal('2370.472025514650366083')}, 
+{'blockNumber': 844803, 'timestamp': '2020-05-12 09:49:14', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 13, 'nReserveBucketC0': Decimal('2370.421171646839272184')}]
 
 
 """

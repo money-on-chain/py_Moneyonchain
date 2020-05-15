@@ -23,8 +23,8 @@ feeder = RDOCPriceFeed(connection_manager,
                        contract_address_moc_medianizer=oracle_address)
 
 # write price on price feeder
-#feeder.post(0.063 * 10 ** 18, block_expiration=80)
-#print(feeder.zzz())
+feeder.post(0.05 * 10 ** 18, block_expiration=300)
+print(feeder.zzz())
 print(feeder.peek())
 
 
