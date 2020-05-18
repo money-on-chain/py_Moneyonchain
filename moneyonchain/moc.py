@@ -220,6 +220,17 @@ class MoCMedianizer(Contract):
 
         return price, result[1]
 
+    def indexes(self, feeder_address,
+                block_identifier: BlockIdentifier = 'latest'):
+        """Get index of the price feeder. Result > 0 is an active pricefeeder"""
+
+        feeder_address = Web3.toChecksumAddress(feeder_address)
+
+        result = self.sc.functions.indexes(feeder_address).call(
+            block_identifier=block_identifier)
+
+        return Web3.toInt(result)
+
 
 class MoCState(Contract):
     log = logging.getLogger()

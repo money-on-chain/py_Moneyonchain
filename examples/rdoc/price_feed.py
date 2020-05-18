@@ -16,14 +16,17 @@ connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-feeder_address = '0x652255254E79CD0954Bdd8B72ED00D9614Eba6A8'
-oracle_address = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
+#feeder_address = '0x652255254E79CD0954Bdd8B72ED00D9614Eba6A8'
+#oracle_address = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
+
+feeder_address = '0xe7295C7776Bf5f6a042bA009c41D9f900F8aE819'
+oracle_address = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
 feeder = RDOCPriceFeed(connection_manager,
                        contract_address=feeder_address,
                        contract_address_moc_medianizer=oracle_address)
 
 # write price on price feeder
-feeder.post(0.05 * 10 ** 18, block_expiration=300)
+feeder.post(0.051 * 10 ** 18, block_expiration=300)
 print(feeder.zzz())
 print(feeder.peek())
 
