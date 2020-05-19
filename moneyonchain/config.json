@@ -35,7 +35,9 @@
         "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "CoinPairPrice": "0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849",
         "OracleManager": "0xe8E10f85D33f1343C4Fbd3c24371AcA44eb82D76",
-        "EthernalStorageGobernanza": "0xf83733316eb5f1AcE72B21a4df2FB5e3070aA5A8",
+        "SupportersWhitelisted": "0x25Fb75d55ED262C722943B569EEd8e1942f765fF",
+        "SupportersVested": "0x0517e64eacb8752b279f197308cB6B476BBF202F",
+        "EternalStorageGobernanza": "0xf83733316eb5f1AcE72B21a4df2FB5e3070aA5A8",
         "CommissionSplitter": ""
       }
 
