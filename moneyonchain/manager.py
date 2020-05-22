@@ -182,6 +182,10 @@ class ConnectionManager(BaseConnectionManager):
         """ Transaction receipt """
         return self.web3.eth.getTransactionReceipt(transaction_hash)
 
+    def get_transaction_by_hash(self, transaction_hash):
+        """ Transaction by hash """
+        return self.web3.eth.getTransaction(transaction_hash)
+
     def fnx_transaction(self, sc, function_, *tx_args,
                         tx_params=None,
                         gas_limit=3500000,
