@@ -220,6 +220,20 @@ class MoCMedianizer(Contract):
 
         return price, result[1]
 
+    def compute(self, formatted: bool = True,
+                block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.functions.compute().call(
+            block_identifier=block_identifier)
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price, result[1]
+
     def indexes(self, feeder_address,
                 block_identifier: BlockIdentifier = 'latest'):
         """Get index of the price feeder. Result > 0 is an active pricefeeder"""
@@ -230,6 +244,32 @@ class MoCMedianizer(Contract):
             block_identifier=block_identifier)
 
         return Web3.toInt(result)
+
+    def poke(self,
+             gas_limit=3500000,
+             wait_timeout=240,
+             default_account=None,
+             wait_receipt=True):
+        """Poke """
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'poke',
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                          timeout=wait_timeout)
+
+            self.log.info("Successfully poke in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                tx_receipt['blockNumber'],
+                Web3.toHex(tx_receipt['transactionHash']),
+                tx_receipt['gasUsed'],
+                tx_receipt['from']))
+
+        return tx_hash, tx_receipt
 
 
 class MoCState(Contract):
@@ -271,6 +311,26 @@ class MoCState(Contract):
 
         result = self.sc.functions.state().call(
             block_identifier=block_identifier)
+
+        return result
+
+    def day_block_span(self, block_identifier: BlockIdentifier = 'latest'):
+        """State of contract"""
+
+        result = self.sc.functions.dayBlockSpan().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def rbtc_in_system(self, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """RBTC in system"""
+
+        result = self.sc.functions.rbtcInSystem().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
 
         return result
 
@@ -322,6 +382,19 @@ class MoCState(Contract):
 
         return result
 
+    def max_bprox(self, bucket,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """Max BProX"""
+
+        result = self.sc.functions.maxBProx(bucket).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def max_bprox_btc_value(self, formatted: bool = True,
                             block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
@@ -353,6 +426,55 @@ class MoCState(Contract):
         result = self.sc.functions.freeDoc().call(
             block_identifier=block_identifier)
 
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def leverage(self, bucket,
+                 formatted: bool = True,
+                 block_identifier: BlockIdentifier = 'latest'):
+        """Leverage"""
+
+        result = self.sc.functions.leverage(bucket).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bpro_discount_rate(self,
+                           formatted: bool = True,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """BPro discount rate"""
+
+        result = self.sc.functions.bproSpotDiscountRate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def max_bpro_with_discount(self,
+                               formatted: bool = True,
+                               block_identifier: BlockIdentifier = 'latest'):
+        """Max BPro with discount"""
+
+        result = self.sc.functions.maxBProWithDiscount().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bpro_discount_price(self,
+                            formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """BPro discount price"""
+
+        result = self.sc.functions.bproDiscountPrice().call(
+            block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -400,11 +522,26 @@ class MoCState(Contract):
 
         return result
 
-    def btc2x_tec_price(self, formatted: bool = True,
+    def bprox_price(self,
+                    bucket=str.encode('X2'),
+                    formatted: bool = True,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """BProX price in RBTC"""
+
+        result = self.sc.functions.bproxBProPrice(bucket).call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def btc2x_tec_price(self,
+                        bucket=str.encode('X2'),
+                        formatted: bool = True,
                         block_identifier: BlockIdentifier = 'latest'):
         """BTC2X Technical price in RBTC"""
 
-        result = self.sc.functions.bucketBProTecPrice(str.encode('X2')).call(
+        result = self.sc.functions.bucketBProTecPrice(bucket).call(
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -417,6 +554,58 @@ class MoCState(Contract):
 
         result = self.sc.functions.getBitcoinMovingAverage().call(
             block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def get_inrate_bag(self, bucket,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """Get inrate Bag"""
+
+        result = self.sc.functions.getInrateBag(bucket).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bucket_nbtc(self, bucket,
+                    formatted: bool = True,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """Bucket NBTC"""
+
+        result = self.sc.functions.getBucketNBTC(bucket).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bucket_ndoc(self, bucket,
+                    formatted: bool = True,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """Bucket NDOC"""
+
+        result = self.sc.functions.getBucketNDoc(bucket).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def bucket_nbpro(self, bucket,
+                     formatted: bool = True,
+                     block_identifier: BlockIdentifier = 'latest'):
+        """Bucket NBPRO"""
+
+        result = self.sc.functions.getBucketNBPro(bucket).call(
+            block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -1119,6 +1308,32 @@ class MoC(Contract):
     def state(self):
 
         return self.sc_moc_state.state()
+
+    def reserve_precision(self,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Precision """
+
+        result = self.sc.functions.getReservePrecision().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def sc_precision(self,
+                     formatted: bool = True,
+                     block_identifier: BlockIdentifier = 'latest'):
+        """ Precision """
+
+        result = self.sc.functions.getMocPrecision().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
 
     def is_bucket_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
         """Is bucket liquidation reached"""
