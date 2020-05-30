@@ -480,8 +480,7 @@ class MoCState(Contract):
 
         return result
 
-    def blocks_to_settlement(self, formatted: bool = True,
-                             block_identifier: BlockIdentifier = 'latest'):
+    def blocks_to_settlement(self, block_identifier: BlockIdentifier = 'latest'):
         """Blocks to settlement"""
 
         result = self.sc.functions.blocksToSettlement().call(
@@ -617,6 +616,18 @@ class MoCState(Contract):
 
         result = int(self.sc.functions.daysToSettlement().call(
             block_identifier=block_identifier))
+
+        return result
+
+    def coverage(self, bucket,
+                 formatted: bool = True,
+                 block_identifier: BlockIdentifier = 'latest'):
+        """coverage"""
+
+        result = self.sc.functions.coverage(bucket).call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
 
         return result
 
@@ -777,6 +788,29 @@ class MoCInrate(Contract):
         """returns the amount of BTC to pay in concept of interest"""
 
         result = self.sc.functions.dailyInrate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def spot_inrate(self, formatted: bool = True,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """"""
+
+        result = self.sc.functions.spotInrate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def commission_rate(self,
+                        formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """"""
+
+        result = self.sc.functions.getCommissionRate().call(
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -1687,7 +1721,7 @@ class MoC(Contract):
 
         return result
 
-    def paused(self, formatted: bool = True,
+    def paused(self,
                block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
 
