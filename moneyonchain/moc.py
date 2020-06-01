@@ -835,12 +835,14 @@ class MoCInrate(Contract):
 
         return result
 
-    def calc_mint_interest_value(self, amount, formatted: bool = True):
+    def calc_mint_interest_value(self, amount, formatted: bool = True, precision: bool = True):
         """ Calc interest value amount in ether float"""
 
         bucket = str.encode('X2')
 
-        result = self.sc.functions.calcMintInterestValues(bucket, int(amount * self.precision)).call()
+        if precision:
+            amount = int(amount * self.precision)
+        result = self.sc.functions.calcMintInterestValues(bucket, int(amount)).call()
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -1678,42 +1680,83 @@ class MoC(Contract):
         return self.connection_manager.balance(
             self.connection_manager.accounts[default_account].address)
 
-    def doc_balance_of(self,
-                       default_account=None,
-                       formatted: bool = True,
-                       block_identifier: BlockIdentifier = 'latest'):
-
-        if not default_account:
-            default_account = 0
-
-        account_address = self.connection_manager.accounts[default_account].address
-
-        return self.sc_moc_doc_token.balance_of(account_address, formatted=formatted)
-
-    def bpro_balance_of(self,
-                        default_account=None,
+    def rbtc_balance_of(self,
+                        account_address,
                         formatted: bool = True,
                         block_identifier: BlockIdentifier = 'latest'):
 
-        if not default_account:
-            default_account = 0
+        result = self.connection_manager.balance(account_address)
 
-        account_address = self.connection_manager.accounts[default_account].address
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
 
-        return self.sc_moc_bpro_token.balance_of(account_address, formatted=formatted)
+        return result
+
+    def spendable_balance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Compatibility function see RRC20 """
+
+        result = self.connection_manager.balance(account_address)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def reserve_allowance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Compatibility function see RRC20 """
+
+        result = self.connection_manager.balance(account_address)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def doc_balance_of(self,
+                       account_address,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_doc_token.balance_of(account_address,
+                                                formatted=formatted,
+                                                block_identifier=block_identifier)
+
+    def bpro_balance_of(self,
+                        account_address,
+                        formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_bpro_token.balance_of(account_address,
+                                                 formatted=formatted,
+                                                 block_identifier=block_identifier)
 
     def bprox_balance_of(self,
-                         default_account=None,
+                         account_address,
                          formatted: bool = True,
                          block_identifier: BlockIdentifier = 'latest'):
 
-        if not default_account:
-            default_account = 0
-
         bucket = str.encode('X2')
-        account_address = self.connection_manager.accounts[default_account].address
 
         result = self.sc.functions.bproxBalanceOf(bucket, account_address).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def doc_amount_to_redeem(self,
+                             account_address,
+                             formatted: bool = True,
+                             block_identifier: BlockIdentifier = 'latest'):
+
+        result = self.sc.functions.docAmountToRedeem(account_address).call(
             block_identifier=block_identifier)
 
         if formatted:
@@ -1754,6 +1797,41 @@ class MoC(Contract):
         total_amount = amount + commission_value + interest_value
 
         return total_amount, commission_value, interest_value
+
+    def mint_bpro_gas_estimated(self, amount, precision=False):
+
+        if precision:
+            amount = amount * self.precision
+
+        fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+        built_fxn = fxn_to_call(int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
+
+    def mint_doc_gas_estimated(self, amount, precision=False):
+
+        if precision:
+            amount = amount * self.precision
+
+        fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+        built_fxn = fxn_to_call(int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
+
+    def mint_bprox_gas_estimated(self, amount, precision=False):
+
+        bucket = str.encode('X2')
+
+        if precision:
+            amount = amount * self.precision
+
+        fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+        built_fxn = fxn_to_call(bucket, int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
 
     def mint_bpro(self, amount: Decimal, default_account=None, wait_receipt=True):
         """ Mint amount bitpro
@@ -1892,7 +1970,11 @@ class MoC(Contract):
         if self.state() < STATE_ABOVE_COBJ:
             raise Exception("Function cannot be called at this state.")
 
-        if amount_token > self.bpro_balance_of(default_account):
+        # get bpro balance
+        if not default_account:
+            default_account = 0
+        account_address = self.connection_manager.accounts[default_account].address
+        if amount_token > self.bpro_balance_of(account_address):
             raise Exception("You are trying to redeem more than you have!")
 
         absolute_max_bpro = self.absolute_max_bpro()
@@ -1928,7 +2010,11 @@ class MoC(Contract):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        account_balance = self.doc_balance_of(default_account)
+        # get doc balance
+        if not default_account:
+            default_account = 0
+        account_address = self.connection_manager.accounts[default_account].address
+        account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
@@ -1969,7 +2055,11 @@ class MoC(Contract):
         if not self.sc_moc_settlement.is_ready():
             raise Exception("You cannot mint on settlement!")
 
-        account_balance = self.doc_balance_of(default_account)
+        # get doc balance
+        if not default_account:
+            default_account = 0
+        account_address = self.connection_manager.accounts[default_account].address
+        account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
@@ -2006,7 +2096,11 @@ class MoC(Contract):
         if not self.sc_moc_settlement.is_ready():
             raise Exception("You cannot mint on settlement!")
 
-        account_balance = self.doc_balance_of(default_account)
+        # get doc balance
+        if not default_account:
+            default_account = 0
+        account_address = self.connection_manager.accounts[default_account].address
+        account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
@@ -2038,7 +2132,11 @@ class MoC(Contract):
         if not self.sc_moc_settlement.is_ready():
             raise Exception("You cannot reedem on settlement!")
 
-        account_balance = self.bprox_balance_of(default_account)
+        # get bprox balance of
+        if not default_account:
+            default_account = 0
+        account_address = self.connection_manager.accounts[default_account].address
+        account_balance = self.bprox_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! BTC2X Balance: {0}".format(account_balance))
 
