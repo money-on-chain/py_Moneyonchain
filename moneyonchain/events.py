@@ -415,20 +415,31 @@ class MoCSettlementRedeemRequestProcessed(BaseEvent):
             self.timestamp = ''
 
         self.redeemer = event['args']['redeemer']
-        self.commission = Web3.fromWei(event['args']['commission'], 'ether')
-        self.amount = Web3.fromWei(event['args']['amount'], 'ether')
+        self.commission = event['args']['commission']
+        self.amount = event['args']['amount']
 
     @staticmethod
     def columns():
         columns = ['Block Nº',  'Timestamp', 'Account', 'Commission', 'Amount']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['redeemer'] = self.redeemer
+        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
+        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                self.redeemer,
-                format(float(self.commission), '.18f'),
-                format(float(self.amount), '.18f')]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['redeemer'],
+                format(float(d_event['commission']), '.18f'),
+                format(float(d_event['amount']), '.18f')]
 
 
 class MoCSettlementSettlementRedeemStableToken(BaseEvent):
@@ -444,20 +455,31 @@ class MoCSettlementSettlementRedeemStableToken(BaseEvent):
             self.timestamp = ''
 
         self.queueSize = event['args']['queueSize']
-        self.accumCommissions = Web3.fromWei(event['args']['accumCommissions'], 'ether')
-        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
+        self.accumCommissions = event['args']['accumCommissions']
+        self.reservePrice = event['args']['reservePrice']
 
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'queueSize', 'accumCommissions', 'reservePrice']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['queueSize'] = self.queueSize
+        d_event['accumCommissions'] = Web3.fromWei(self.accumCommissions, 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                self.queueSize,
-                format(float(self.accumCommissions), '.18f'),
-                format(float(self.reservePrice), '.18f')]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['queueSize'],
+                format(float(d_event['accumCommissions']), '.18f'),
+                format(float(d_event['reservePrice']), '.18f')]
 
 
 class MoCSettlementSettlementCompleted(BaseEvent):
@@ -471,17 +493,26 @@ class MoCSettlementSettlementCompleted(BaseEvent):
             self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
         except BlockNotFound:
             self.timestamp = ''
-        self.commissionsPayed = Web3.fromWei(event['args']['commissionsPayed'], 'ether')
+        self.commissionsPayed = event['args']['commissionsPayed']
 
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'commissionsPayed']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['commissionsPayed'] = Web3.fromWei(self.commissionsPayed, 'ether')
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                format(float(self.commissionsPayed), '.18f')]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                format(float(d_event['commissionsPayed']), '.18f')]
 
 
 class MoCSettlementSettlementDeleveraging(BaseEvent):
@@ -496,23 +527,35 @@ class MoCSettlementSettlementDeleveraging(BaseEvent):
         except BlockNotFound:
             self.timestamp = ''
 
-        self.leverage = Web3.fromWei(event['args']['leverage'], 'ether')
-        self.riskProxPrice = Web3.fromWei(event['args']['riskProxPrice'], 'ether')
-        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
-        self.startBlockNumber = Web3.fromWei(event['args']['startBlockNumber'], 'ether')
+        self.leverage = event['args']['leverage']
+        self.riskProxPrice = event['args']['riskProxPrice']
+        self.reservePrice = event['args']['reservePrice']
+        self.startBlockNumber = event['args']['startBlockNumber']
 
     @staticmethod
     def columns():
         columns = ['Block Nº',  'Timestamp', 'leverage', 'riskProxPrice', 'reservePrice', 'startBlockNumber']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['leverage'] = Web3.fromWei(self.leverage, 'ether')
+        d_event['riskProxPrice'] = Web3.fromWei(self.riskProxPrice, 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['startBlockNumber'] = self.startBlockNumber
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                format(float(self.leverage), '.18f'),
-                format(float(self.riskProxPrice), '.18f'),
-                format(float(self.reservePrice), '.18f'),
-                self.startBlockNumber]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                format(float(d_event['leverage']), '.18f'),
+                format(float(d_event['riskProxPrice']), '.18f'),
+                format(float(d_event['reservePrice']), '.18f'),
+                d_event['startBlockNumber']]
 
 
 class MoCSettlementSettlementStarted(BaseEvent):
@@ -529,21 +572,33 @@ class MoCSettlementSettlementStarted(BaseEvent):
 
         self.stableTokenRedeemCount = event['args']['stableTokenRedeemCount']
         self.deleveragingCount = event['args']['deleveragingCount']
-        self.riskProxPrice = Web3.fromWei(event['args']['riskProxPrice'], 'ether')
-        self.reservePrice = Web3.fromWei(event['args']['reservePrice'], 'ether')
+        self.riskProxPrice = event['args']['riskProxPrice']
+        self.reservePrice = event['args']['reservePrice']
 
     @staticmethod
     def columns():
         columns = ['Block Nº',  'Timestamp', 'stableTokenRedeemCount', 'deleveragingCount', 'riskProxPrice', 'reservePrice']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['stableTokenRedeemCount'] = self.stableTokenRedeemCount
+        d_event['deleveragingCount'] = self.deleveragingCount
+        d_event['riskProxPrice'] = Web3.fromWei(self.riskProxPrice, 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                self.stableTokenRedeemCount,
-                self.deleveragingCount,
-                format(float(self.riskProxPrice), '.18f'),
-                format(float(self.reservePrice), '.18f')]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['stableTokenRedeemCount'],
+                d_event['deleveragingCount'],
+                format(float(d_event['riskProxPrice']), '.18f'),
+                format(float(d_event['reservePrice']), '.18f')]
 
 
 class MoCSettlementRedeemRequestAlter(BaseEvent):
@@ -560,16 +615,27 @@ class MoCSettlementRedeemRequestAlter(BaseEvent):
 
         self.redeemer = event['args']['redeemer']
         self.isAddition = event['args']['isAddition']
-        self.delta = Web3.fromWei(event['args']['delta'], 'ether')
+        self.delta = event['args']['delta']
 
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp',  'address', 'isAddition', 'delta']
         return columns
 
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['redeemer'] = self.redeemer
+        d_event['isAddition'] = self.isAddition
+        d_event['delta'] = Web3.fromWei(self.delta, 'ether')
+
+        return d_event
+
     def row(self):
-        return [self.blockNumber,
-                self.timestamp,
-                self.redeemer,
-                self.isAddition,
-                format(float(self.delta), '.18f')]
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['redeemer'],
+                d_event['isAddition'],
+                format(float(d_event['delta']), '.18f')]
