@@ -243,13 +243,8 @@
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
-        "dex": "0x10f4df673E7FbFA55Aa37efD59311416aB4b3dfc",
-        "doc": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
-        "wrbtc": "0xA274d994F698Dd09256674960d86aBa22C086669",
-        "test": "0x840871cbb73dC94dcb11b2CEA963553Db71a95b7",
-        "rif": "0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE",
-        "bpro": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
-        "commissionManager": "0x77996B4674C43079C4aD2fCB91B041e9a0fb1719"
+        "dex": "0x441DB123bA000107EBa57f41Ee3Ce7F9EFD5A3D0",
+        "commissionManager": "0x97d218D689FC197ea2d650D431ee6FE37db6f6bD"
       }
 
     }
