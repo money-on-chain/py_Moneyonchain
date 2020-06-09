@@ -762,3 +762,73 @@ class ERC20Transfer(BaseEvent):
                 format(float(d_event['value']), '.18f'),
                 d_event['e_from'],
                 d_event['e_to']]
+
+
+class MoCBucketLiquidation(BaseEvent):
+    name = "BucketLiquidation"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.bucket = event['args']['bucket']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp',  'bucket']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['bucket'] = self.bucket
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['bucket']
+                ]
+
+
+class MoCStateStateTransition(BaseEvent):
+    name = "StateTransition"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = ''
+
+        self.newState = event['args']['newState']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'newState']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['newState'] = self.newState
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['newState']
+                ]
