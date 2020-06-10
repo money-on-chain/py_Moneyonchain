@@ -9,7 +9,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 print("Connecting to MoCDecentralizedExchange")
 #0xB08A63aE65E55b56790EfE3FBc39EaB20FC62939
-dex = MoCDecentralizedExchange(connection_manager, contract_address='0xB08A63aE65E55b56790EfE3FBc39EaB20FC62939')
+dex = MoCDecentralizedExchange(connection_manager)
 print(dex.token_pairs())
 
 #pair = ['0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0', '0x840871cbb73dC94dcb11b2CEA963553Db71a95b7']
