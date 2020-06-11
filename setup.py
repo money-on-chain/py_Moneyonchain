@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='0.0.31',
+    version='0.0.32',
     packages=['moneyonchain'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',
@@ -25,7 +25,10 @@ setuptools.setup(
         'Programming Language :: Python :: 3.6'
     ],
     package_data={
-        "moneyonchain": ["config.json", "abi/*.abi", "abi/*.bin", "abi_rdoc/*.abi", "abi_rdoc/*.bin", "abi_dex/*.abi", "abi_dex/*.bin"]
+        "moneyonchain": ["config.json", "abi/*.abi", "abi/*.bin",
+                         "abi_rrc20/*.abi", "abi_rrc20/*.bin",
+                         "abi_rdoc/*.abi", "abi_rdoc/*.bin",
+                         "abi_dex/*.abi", "abi_dex/*.bin"]
     },
     python_requires='>=3.6',
     install_requires=[

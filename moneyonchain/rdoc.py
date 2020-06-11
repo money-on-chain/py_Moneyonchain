@@ -20,19 +20,19 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
-from moneyonchain.moc import MoCState, \
-    MoCInrate, \
-    MoCExchange, \
-    MoCSettlement, \
-    MoCConnector, \
-    MoC, \
-    MoCMedianizer, \
-    PriceFeed, \
-    MoCHelperLib, \
-    MoCBurnout, \
-    MoCBProxManager, \
-    MoCConverter, \
-    FeedFactory
+from moneyonchain.rrc20 import RRC20MoCState, \
+    RRC20MoCInrate, \
+    RRC20MoCExchange, \
+    RRC20MoCSettlement, \
+    RRC20MoCConnector, \
+    RRC20MoC, \
+    RRC20MoCMedianizer, \
+    RRC20PriceFeed, \
+    RRC20MoCHelperLib, \
+    RRC20MoCBurnout, \
+    RRC20MoCBProxManager, \
+    RRC20MoCConverter, \
+    RRC20FeedFactory
 from moneyonchain.token import RIFPro, RIFDoC, RIF
 
 
@@ -42,7 +42,7 @@ STATE_BELOW_COBJ = 2
 STATE_ABOVE_COBJ = 3
 
 
-class RDOCPriceFeed(PriceFeed):
+class RDOCPriceFeed(RRC20PriceFeed):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -55,7 +55,7 @@ class RDOCPriceFeed(PriceFeed):
     precision = 10 ** 18
 
 
-class RDOCFeedFactory(FeedFactory):
+class RDOCFeedFactory(RRC20FeedFactory):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -68,7 +68,7 @@ class RDOCFeedFactory(FeedFactory):
     precision = 10 ** 18
 
 
-class RDOCMoCMedianizer(MoCMedianizer):
+class RDOCMoCMedianizer(RRC20MoCMedianizer):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -81,7 +81,7 @@ class RDOCMoCMedianizer(MoCMedianizer):
     precision = 10 ** 18
 
 
-class RDOCMoCState(MoCState):
+class RDOCMoCState(RRC20MoCState):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -93,20 +93,8 @@ class RDOCMoCState(MoCState):
     project = 'RDoC'
     precision = 10 ** 18
 
-    def collateral_reserves(self, formatted: bool = True,
-                            block_identifier: BlockIdentifier = 'latest'):
-        """RiskProx values and interests holdings"""
 
-        result = self.sc.functions.collateralReserves().call(
-            block_identifier=block_identifier)
-
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-
-        return result
-
-
-class RDOCMoCInrate(MoCInrate):
+class RDOCMoCInrate(RRC20MoCInrate):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -118,56 +106,8 @@ class RDOCMoCInrate(MoCInrate):
     mode = 'RRC20'
     project = 'RDoC'
 
-    def stable_inrate(self, formatted: bool = True,
-                      block_identifier: BlockIdentifier = 'latest'):
-        """Parameters inrate Stable"""
 
-        info = dict()
-
-        result = self.sc.functions.getStableTmax().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-        info['StableTmax'] = result
-
-        result = self.sc.functions.getStablePower().call(
-            block_identifier=block_identifier)
-        info['StablePower'] = result
-
-        result = self.sc.functions.getStableTmin().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-        info['StableTmin'] = result
-
-        return info
-
-    def riskprox_inrate(self, formatted: bool = True,
-                        block_identifier: BlockIdentifier = 'latest'):
-        """Parameters inrate riskprox"""
-
-        info = dict()
-
-        result = self.sc.functions.getRiskProxTmax().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-        info['RiskProxTmax'] = result
-
-        result = self.sc.functions.getRiskProxPower().call(
-            block_identifier=block_identifier)
-        info['RiskProxPower'] = result
-
-        result = self.sc.functions.getRiskProxTmin().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-        info['RiskProxTmin'] = result
-
-        return info
-
-
-class RDOCMoCBurnout(MoCBurnout):
+class RDOCMoCBurnout(RRC20MoCBurnout):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -180,7 +120,7 @@ class RDOCMoCBurnout(MoCBurnout):
     project = 'RDoC'
 
 
-class RDOCMoCBProxManager(MoCBProxManager):
+class RDOCMoCBProxManager(RRC20MoCBProxManager):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -193,7 +133,7 @@ class RDOCMoCBProxManager(MoCBProxManager):
     project = 'RDoC'
 
 
-class RDOCMoCConverter(MoCConverter):
+class RDOCMoCConverter(RRC20MoCConverter):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -206,7 +146,7 @@ class RDOCMoCConverter(MoCConverter):
     project = 'RDoC'
 
 
-class RDOCMoCHelperLib(MoCHelperLib):
+class RDOCMoCHelperLib(RRC20MoCHelperLib):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -219,7 +159,7 @@ class RDOCMoCHelperLib(MoCHelperLib):
     project = 'RDoC'
 
 
-class RDOCMoCExchange(MoCExchange):
+class RDOCMoCExchange(RRC20MoCExchange):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -232,7 +172,7 @@ class RDOCMoCExchange(MoCExchange):
     project = 'RDoC'
 
 
-class RDOCMoCSettlement(MoCSettlement):
+class RDOCMoCSettlement(RRC20MoCSettlement):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -245,7 +185,7 @@ class RDOCMoCSettlement(MoCSettlement):
     project = 'RDoC'
 
 
-class RDOCMoCConnector(MoCConnector):
+class RDOCMoCConnector(RRC20MoCConnector):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -258,7 +198,7 @@ class RDOCMoCConnector(MoCConnector):
     project = 'RDoC'
 
 
-class RDOCMoC(MoC):
+class RDOCMoC(RRC20MoC):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
@@ -408,31 +348,3 @@ class RDOCMoC(MoC):
                  contract_address=contract_address)
 
         return sc
-
-    def spendable_balance(self,
-                          account_address,
-                          formatted: bool = True,
-                          block_identifier: BlockIdentifier = 'latest'):
-        """ Spendable Balance """
-
-        result = self.sc.functions.getAllowance(account_address).call(
-            block_identifier=block_identifier)
-
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-
-        return result
-
-    def reserve_allowance(self,
-                          account_address,
-                          formatted: bool = True,
-                          block_identifier: BlockIdentifier = 'latest'):
-        """ Compatibility function see RRC20 """
-
-        result = self.connection_manager.balance(account_address)
-
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-
-        return result
-
