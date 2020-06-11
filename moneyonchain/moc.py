@@ -362,8 +362,12 @@ class MoCState(Contract):
                                 block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
-        result = self.sc.functions.maxMintBProAvalaible().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.maxMintBProAvalaible().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.maxMintRiskProAvalaible().call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -374,8 +378,12 @@ class MoCState(Contract):
                          block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
-        result = self.sc.functions.absoluteMaxDoc().call(
-            block_identifier=block_identifier)
+        if self.mode == "MoC":
+            result = self.sc.functions.absoluteMaxDoc().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.absoluteMaxStableToken().call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -387,8 +395,12 @@ class MoCState(Contract):
                   block_identifier: BlockIdentifier = 'latest'):
         """Max BProX"""
 
-        result = self.sc.functions.maxBProx(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.maxBProx(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.maxRiskProx(bucket).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -411,8 +423,12 @@ class MoCState(Contract):
                           block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
-        result = self.sc.functions.absoluteMaxBPro().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.absoluteMaxBPro().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.absoluteMaxRiskPro().call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -423,8 +439,12 @@ class MoCState(Contract):
                  block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
-        result = self.sc.functions.freeDoc().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.freeDoc().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.freeStableToken().call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -449,8 +469,12 @@ class MoCState(Contract):
                            block_identifier: BlockIdentifier = 'latest'):
         """BPro discount rate"""
 
-        result = self.sc.functions.bproSpotDiscountRate().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproSpotDiscountRate().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProSpotDiscountRate().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -461,8 +485,13 @@ class MoCState(Contract):
                                block_identifier: BlockIdentifier = 'latest'):
         """Max BPro with discount"""
 
-        result = self.sc.functions.maxBProWithDiscount().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.maxBProWithDiscount().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.maxRiskProWithDiscount().call(
+                block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -473,8 +502,13 @@ class MoCState(Contract):
                             block_identifier: BlockIdentifier = 'latest'):
         """BPro discount price"""
 
-        result = self.sc.functions.bproDiscountPrice().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproDiscountPrice().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProDiscountPrice().call(
+                block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -492,8 +526,13 @@ class MoCState(Contract):
                       block_identifier: BlockIdentifier = 'latest'):
         """Bitcoin price in USD"""
 
-        result = self.sc.functions.getBitcoinPrice().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBitcoinPrice().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getReserveTokenPrice().call(
+                block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -503,8 +542,12 @@ class MoCState(Contract):
                    block_identifier: BlockIdentifier = 'latest'):
         """BPro price in USD"""
 
-        result = self.sc.functions.bproUsdPrice().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproUsdPrice().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProUsdPrice().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -514,8 +557,12 @@ class MoCState(Contract):
                        block_identifier: BlockIdentifier = 'latest'):
         """BPro Technical price in RBTC"""
 
-        result = self.sc.functions.bproTecPrice().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproTecPrice().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProTecPrice().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -527,8 +574,12 @@ class MoCState(Contract):
                     block_identifier: BlockIdentifier = 'latest'):
         """BProX price in RBTC"""
 
-        result = self.sc.functions.bproxBProPrice(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == "MoC":
+            result = self.sc.functions.bproxBProPrice(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProxRiskProPrice(bucket).call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -540,8 +591,13 @@ class MoCState(Contract):
                         block_identifier: BlockIdentifier = 'latest'):
         """BTC2X Technical price in RBTC"""
 
-        result = self.sc.functions.bucketBProTecPrice(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bucketBProTecPrice(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.bucketRiskProTecPrice(bucket).call(
+                block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -551,8 +607,12 @@ class MoCState(Contract):
                                block_identifier: BlockIdentifier = 'latest'):
         """Bitcoin Moving Average price in USD"""
 
-        result = self.sc.functions.getBitcoinMovingAverage().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBitcoinMovingAverage().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getExponentalMovingAverage().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -576,8 +636,12 @@ class MoCState(Contract):
                     block_identifier: BlockIdentifier = 'latest'):
         """Bucket NBTC"""
 
-        result = self.sc.functions.getBucketNBTC(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == "MoC":
+            result = self.sc.functions.getBucketNBTC(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getBucketNReserve(bucket).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -589,8 +653,12 @@ class MoCState(Contract):
                     block_identifier: BlockIdentifier = 'latest'):
         """Bucket NDOC"""
 
-        result = self.sc.functions.getBucketNDoc(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == "MoC":
+            result = self.sc.functions.getBucketNDoc(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getBucketNStableToken(bucket).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -602,8 +670,12 @@ class MoCState(Contract):
                      block_identifier: BlockIdentifier = 'latest'):
         """Bucket NBPRO"""
 
-        result = self.sc.functions.getBucketNBPro(bucket).call(
-            block_identifier=block_identifier)
+        if self.mode == "MoC":
+            result = self.sc.functions.getBucketNBPro(bucket).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getBucketNRiskPro(bucket).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -646,8 +718,12 @@ class MoCState(Contract):
                             block_identifier: BlockIdentifier = 'latest'):
         """Bitpro total supply"""
 
-        result = self.sc.functions.bproTotalSupply().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproTotalSupply().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProTotalSupply().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -657,8 +733,12 @@ class MoCState(Contract):
                          block_identifier: BlockIdentifier = 'latest'):
         """DOC total supply"""
 
-        result = self.sc.functions.docTotalSupply().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.docTotalSupply().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.stableTokenTotalSupply().call(
+                block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -1743,8 +1823,12 @@ class MoC(Contract):
 
         bucket = str.encode('X2')
 
-        result = self.sc.functions.bproxBalanceOf(bucket, account_address).call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.bproxBalanceOf(bucket, account_address).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.riskProxBalanceOf(bucket, account_address).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -1756,8 +1840,12 @@ class MoC(Contract):
                              formatted: bool = True,
                              block_identifier: BlockIdentifier = 'latest'):
 
-        result = self.sc.functions.docAmountToRedeem(account_address).call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.docAmountToRedeem(account_address).call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.stableTokenAmountToRedeem(account_address).call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
