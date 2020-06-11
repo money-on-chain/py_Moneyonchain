@@ -46,6 +46,7 @@ class PriceFeed(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeed.bin'))
 
     mode = 'MoC'
+    project = 'MoC'
     precision = 10 ** 18
 
     def __init__(self, connection_manager,
@@ -141,6 +142,7 @@ class FeedFactory(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/FeedFactory.bin'))
 
     mode = 'MoC'
+    project = 'MoC'
     precision = 10 ** 18
 
     def __init__(self, connection_manager,
@@ -172,6 +174,7 @@ class MoCMedianizer(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
 
     mode = 'MoC'
+    project = 'MoC'
     precision = 10 ** 18
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
@@ -281,6 +284,7 @@ class MoCState(Contract):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCState.bin'))
 
     mode = 'MoC'
+    project = 'MoC'
     precision = 10 ** 18
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
@@ -808,6 +812,7 @@ class MoCInrate(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -1005,6 +1010,7 @@ class MoCExchange(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -1040,6 +1046,7 @@ class MoCSettlement(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -1093,6 +1100,7 @@ class MoCBurnout(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
         if not contract_address:
@@ -1127,6 +1135,7 @@ class MoCBProxManager(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
         if not contract_address:
@@ -1161,6 +1170,7 @@ class MoCConverter(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
         if not contract_address:
@@ -1195,6 +1205,7 @@ class MoCHelperLib(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
         if not contract_address:
@@ -1221,6 +1232,7 @@ class MoCConnector(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -1278,6 +1290,7 @@ class MoC(Contract):
 
     precision = 10 ** 18
     mode = 'MoC'
+    project = 'MoC'
     minimum_amount = Decimal(0.00000001)
     receipt_timeout = 240
     poll_latency = 1.0

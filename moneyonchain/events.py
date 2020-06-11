@@ -764,6 +764,48 @@ class ERC20Transfer(BaseEvent):
                 d_event['e_to']]
 
 
+class ERC20Approval(BaseEvent):
+    name = "Approval"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
+        except BlockNotFound:
+            self.timestamp = None
+
+        self.owner = event['args']['owner']
+        self.spender = event['args']['spender']
+        self.value = event['args']['value']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp',  'owner', 'spender', 'value']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        if self.timestamp:
+            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            d_event['timestamp'] = ''
+        d_event['owner'] = self.owner
+        d_event['spender'] = self.spender
+        d_event['value'] = Web3.fromWei(self.value, 'ether')
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['owner'],
+                d_event['spender'],
+                format(float(d_event['value']), '.18f')]
+
+
 class MoCBucketLiquidation(BaseEvent):
     name = "BucketLiquidation"
 

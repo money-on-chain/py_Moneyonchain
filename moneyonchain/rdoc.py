@@ -33,7 +33,7 @@ from moneyonchain.moc import MoCState, \
     MoCBProxManager, \
     MoCConverter, \
     FeedFactory
-from moneyonchain.token import RIFPro, RIFDoC
+from moneyonchain.token import RIFPro, RIFDoC, RIF
 
 
 STATE_LIQUIDATED = 0
@@ -50,7 +50,8 @@ class RDOCPriceFeed(PriceFeed):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeed.bin'))
 
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
     precision = 10 ** 18
 
 
@@ -62,7 +63,8 @@ class RDOCFeedFactory(FeedFactory):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.bin'))
 
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
     precision = 10 ** 18
 
 
@@ -74,7 +76,8 @@ class RDOCMoCMedianizer(MoCMedianizer):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
 
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
     precision = 10 ** 18
 
 
@@ -86,7 +89,8 @@ class RDOCMoCState(MoCState):
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCState.bin'))
 
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
     precision = 10 ** 18
 
     def collateral_reserves(self, formatted: bool = True,
@@ -111,7 +115,8 @@ class RDOCMoCInrate(MoCInrate):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCInrate.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
     def stable_inrate(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
@@ -171,7 +176,8 @@ class RDOCMoCBurnout(MoCBurnout):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCBurnout.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCBProxManager(MoCBProxManager):
@@ -183,7 +189,8 @@ class RDOCMoCBProxManager(MoCBProxManager):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCRiskProxManager.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCConverter(MoCConverter):
@@ -195,7 +202,8 @@ class RDOCMoCConverter(MoCConverter):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCConverter.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCHelperLib(MoCHelperLib):
@@ -207,7 +215,8 @@ class RDOCMoCHelperLib(MoCHelperLib):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCHelperLib.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCExchange(MoCExchange):
@@ -219,7 +228,8 @@ class RDOCMoCExchange(MoCExchange):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCExchange.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCSettlement(MoCSettlement):
@@ -231,7 +241,8 @@ class RDOCMoCSettlement(MoCSettlement):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCSettlement.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoCConnector(MoCConnector):
@@ -243,7 +254,8 @@ class RDOCMoCConnector(MoCConnector):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCConnector.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
 
 
 class RDOCMoC(MoC):
@@ -255,7 +267,8 @@ class RDOCMoC(MoC):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoC.bin'))
 
     precision = 10 ** 18
-    mode = 'RDoC'
+    mode = 'RRC20'
+    project = 'RDoC'
     minimum_amount = Decimal(0.00000001)
 
     def __init__(self, connection_manager,
@@ -268,7 +281,8 @@ class RDOCMoC(MoC):
                  contract_address_moc_connector=None,
                  contract_address_moc_settlement=None,
                  contract_address_moc_bpro_token=None,
-                 contract_address_moc_doc_token=None):
+                 contract_address_moc_doc_token=None,
+                 contract_address_reserve_token=None):
 
         network = connection_manager.network
         if not contract_address:
@@ -303,6 +317,9 @@ class RDOCMoC(MoC):
 
         # load contract moc doc_token
         self.sc_moc_doc_token = self.load_moc_bpro_token_contract(contract_address_moc_doc_token)
+
+        # load_reserve_token_contract
+        self.sc_reserve_token = self.load_reserve_token_contract(contract_address_reserve_token)
 
     def load_moc_inrate_contract(self, contract_address):
 
@@ -380,4 +397,42 @@ class RDOCMoC(MoC):
                     contract_address=contract_address)
 
         return sc
+
+    def load_reserve_token_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['ReserveToken']
+
+        sc = RIF(self.connection_manager,
+                 contract_address=contract_address)
+
+        return sc
+
+    def spendable_balance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Spendable Balance """
+
+        result = self.sc.functions.getAllowance(account_address).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def reserve_allowance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Compatibility function see RRC20 """
+
+        result = self.connection_manager.balance(account_address)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
 
