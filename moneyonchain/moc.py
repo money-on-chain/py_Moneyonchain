@@ -1086,8 +1086,8 @@ class MoCSettlement(Contract):
     def redeem_queue_size(self):
         return self.sc.functions.redeemQueueSize().call()
 
-    def block_span(self):
-        return self.sc.functions.getBlockSpan().call()
+    def block_span(self, block_identifier: BlockIdentifier = 'latest'):
+        return self.sc.functions.getBlockSpan().call(block_identifier=block_identifier)
 
 
 class MoCBurnout(Contract):
@@ -1904,7 +1904,11 @@ class MoC(Contract):
         if precision:
             amount = amount * self.precision
 
-        fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
+
         built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
@@ -1915,7 +1919,11 @@ class MoC(Contract):
         if precision:
             amount = amount * self.precision
 
-        fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
+
         built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
@@ -1928,7 +1936,11 @@ class MoC(Contract):
         if precision:
             amount = amount * self.precision
 
-        fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
+
         built_fxn = fxn_to_call(bucket, int(amount))
         gas_estimate = built_fxn.estimateGas()
 
