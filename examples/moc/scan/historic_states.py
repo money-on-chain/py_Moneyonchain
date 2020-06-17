@@ -18,8 +18,8 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Connecting to MoCState")
 moc_state = MoCState(connection_manager)
 
-from_block = 2160142  # can be manually setting
-to_block = 2161142  # can be manually setting
+from_block = 2243000  # can be manually setting
+to_block = 2244000  # can be manually setting
 block_steps = 2880
 block_skip = 120
 hours_delta = 0
@@ -45,6 +45,8 @@ while current_block <= to_block:
     print("Scanning blocks steps from {0} to {1}".format(current_block, step_end))
 
     for n_block in range(current_block, step_end, block_skip):
+
+        print("Get info from block: {0}".format(n_block))
 
         ts = connection_manager.block_timestamp(n_block)
         dt = ts - datetime.timedelta(hours=hours_delta)
