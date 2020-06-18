@@ -330,8 +330,12 @@ class MoCState(Contract):
                        block_identifier: BlockIdentifier = 'latest'):
         """RBTC in system"""
 
-        result = self.sc.functions.rbtcInSystem().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.rbtcInSystem().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.reserves().call(
+                block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -528,7 +532,9 @@ class MoCState(Contract):
 
     def bitcoin_price(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
-        """Bitcoin price in USD"""
+        """Bitcoin price in USD.
+        NOTE: This call have a required if the price is valid, so it can fail.
+        """
 
         if self.mode == 'MoC':
             result = self.sc.functions.getBitcoinPrice().call(

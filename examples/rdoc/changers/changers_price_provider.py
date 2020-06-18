@@ -19,7 +19,8 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 contract = RDOCPriceProviderChanger(connection_manager)
 
 #price_provider = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
-price_provider = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
+#price_provider = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
+price_provider = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
 tx_hash, tx_receipt = contract.constructor(price_provider, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))

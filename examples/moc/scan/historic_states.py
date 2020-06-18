@@ -5,18 +5,21 @@ This is script getting historic data from MOC State contract
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoCState
+from moneyonchain.rdoc import RDOCMoCState
 
 import datetime
 import csv
 import time
 
-network = 'mocMainnet2'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-print("Connecting to MoCState")
-moc_state = MoCState(connection_manager)
+if connection_manager.options['networks'][network]['app_mode'] == 'MoC':
+    moc_state = MoCState(connection_manager)
+else:
+    moc_state = RDOCMoCState(connection_manager)
 
 from_block = 2243000  # can be manually setting
 to_block = 2244000  # can be manually setting
@@ -31,7 +34,7 @@ if to_block <= 0:
 current_block = from_block
 
 l_historic_data = list()
-print("Getting historic data from MOC... Wait please...")
+print("Getting historic data from MOC/RDOC... Wait please...")
 print("Starting Scan Blocks From Block: {0} To Block: {1}".format(from_block, to_block))
 
 start_time = time.time()
@@ -58,7 +61,11 @@ while current_block <= to_block:
         d_info_data['Timestamp'] = d_timestamp
 
         # bitcoin price
-        d_info_data['BTCprice'] = moc_state.bitcoin_price(block_identifier=n_block)
+        try:
+            d_info_data['BTCprice'] = moc_state.bitcoin_price(block_identifier=n_block)
+        except:
+            print("No price valid in BLOCKHEIGHT: [{0}] skipping!".format(n_block))
+            continue
 
         # Moving average
         d_info_data['EMAvalue'] = moc_state.bitcoin_moving_average(block_identifier=n_block)
@@ -188,4 +195,4 @@ if l_historic_data:
             writer.writerow(row)
 
 duration = time.time() - start_time
-print("Getting historic data from MOC done! Succesfull!! Done in {0} seconds".format(duration))
+print("Getting historic data from MOC/RDOC done! Succesfull!! Done in {0} seconds".format(duration))

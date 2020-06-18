@@ -41,4 +41,11 @@ Connected: True
 Sucessfully splited
 2020-05-06 14:09:41 root         INFO     Successfully split executed in Block [2332266] Hash: [0x6351a94fc53560c5f9b34f014d03aa023264d257ee1856fd05b4d29912c2b470] Gas used: [113893] From: [0x27a3074Db95Ec5f6a0E73DC41a4859F48990e841]
 
+
+Connecting to rdocMainnet...
+Connected: True
+Sucessfully splited
+2020-06-10 17:52:31 root         INFO     Successfully split executed in Block [2432125] Hash: [0xcd7bcf8bc4402f146967754748fa205335f89bdc24f9eef1faaf72bfbc799770] Gas used: [113893] From: [0x27a3074Db95Ec5f6a0E73DC41a4859F48990e841]
+
+
 """
