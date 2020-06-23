@@ -106,6 +106,84 @@ Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance DOC: 443.29468173802
 ```
 
 
+#### RIF Token example balance
+
+**Mainnet**
+
+Connect to RDOC Mainnet avalaible trought https://rif.moneyonchain.com
+
+``` 
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.token import RIF
+
+
+network = 'rdocMainnet'
+connection_manager = ConnectionManager(network=network)
+print("Connecting to %s..." % network)
+print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
+
+print("Connecting to RIF TOKEN")
+rif_token = RIF(connection_manager)
+print("Token Name: {0}".format(rif_token.name()))
+print("Token Symbol: {0}".format(rif_token.symbol()))
+print("Total Supply: {0}".format(rif_token.total_supply()))
+print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account)))
+```
+
+this print
+
+```
+Connecting to rdocMainnet...
+Connected: True
+Connecting to RIF TOKEN
+Token Name: tRIF Token
+Token Symbol: tRIF
+Total Supply: 1000000000
+Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance RIF: 391.072191029720048275
+```
+
+
+
+**Testnet**
+
+Connect to RDOC Testnet avalaible trought https://rif-testnet.moneyonchain.com
+
+``` 
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.token import RIF
+
+
+network = 'rdocTestnet'
+connection_manager = ConnectionManager(network=network)
+print("Connecting to %s..." % network)
+print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
+
+print("Connecting to RIF TOKEN")
+rif_token = RIF(connection_manager)
+print("Token Name: {0}".format(rif_token.name()))
+print("Token Symbol: {0}".format(rif_token.symbol()))
+print("Total Supply: {0}".format(rif_token.total_supply()))
+print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account)))
+```
+
+this print
+
+```
+Connecting to rdocTestnet...
+Connected: True
+Connecting to RIF TOKEN
+Token Name: tRIF Token
+Token Symbol: tRIF
+Total Supply: 1000000000
+Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance RIF: 391.072191029720048275
+```
+
+
+
 #### Mint BPro example
 
 To run this script need private key, where replace with your PK in **PRIVATE_KEY**, and also you need to have funds in this account
