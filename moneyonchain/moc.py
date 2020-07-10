@@ -770,6 +770,18 @@ class MoCState(Contract):
 
         return result
 
+    def price_provider(self, block_identifier: BlockIdentifier = 'latest'):
+        """Price provider address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBtcPriceProvider().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getPriceProvider().call(
+                block_identifier=block_identifier)
+
+        return result
+
     def execute_calculate_ema(self,
                               gas_limit=3500000,
                               wait_timeout=240,
