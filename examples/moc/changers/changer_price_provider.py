@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'mocTestnet'
+network = 'mocTestnetAlpha'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -18,8 +18,8 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 contract = MoCPriceProviderChanger(connection_manager)
 
-price_provider = '0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849'
-tx_hash, tx_receipt = contract.constructor(price_provider, execute_change=False)
+price_provider = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
+tx_hash, tx_receipt = contract.constructor(price_provider, execute_change=True)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
 else:

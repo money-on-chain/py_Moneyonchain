@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -24,3 +24,5 @@ log.info("CObj: {0}".format(info))
 info = moc_state.cobj_X2()
 log.info("CObj X2: {0}".format(info))
 
+info = moc_state.global_coverage()
+log.info("Global Coverage: {0}".format(info))
