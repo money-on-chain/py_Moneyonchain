@@ -2,7 +2,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoCInrate
 
 
-network = 'mocMainnet2'
+network = 'mocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

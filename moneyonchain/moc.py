@@ -326,6 +326,18 @@ class MoCState(Contract):
 
         return result
 
+    def smoothing_factor(self, formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+        """Smoothing factor"""
+
+        result = self.sc.functions.getSmoothingFactor().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def rbtc_in_system(self, formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
         """RBTC in system"""
