@@ -22,7 +22,10 @@ days_to_settlement = moc_state.days_to_settlement()
 print("Interest of MINT {0} BTCX".format(amount_value))
 interest_no_days = moc_inrate.btc2x_inrate_avg(amount_value, on_minting=True)
 
-print("Current day to settlement: {0} Interest: {1}".format(days_to_settlement, interest_no_days * days_to_settlement))
+print("Current day to settlement: {0} Interest: {1}".format(days_to_settlement,
+                                                            interest_no_days * days_to_settlement))
+print("Current day to settlement: {0} Interest %: {1} %".format(days_to_settlement,
+                                                                interest_no_days * days_to_settlement * 100))
 
 print("Interest on minting...")
 for day_to_sett in reversed(range(0, 30)):
