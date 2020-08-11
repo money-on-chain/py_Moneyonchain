@@ -10,7 +10,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 contract = MoCSettlementChanger(connection_manager)
 
-tx_hash, tx_receipt = contract.constructor(6000, execute_change=True)
+tx_hash, tx_receipt = contract.constructor(60, execute_change=True)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
 else:
