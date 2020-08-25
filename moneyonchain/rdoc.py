@@ -256,7 +256,7 @@ class RDOCMoC(RRC20MoC):
         self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_address_moc_bpro_token)
 
         # load contract moc doc_token
-        self.sc_moc_doc_token = self.load_moc_bpro_token_contract(contract_address_moc_doc_token)
+        self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_address_moc_doc_token)
 
         # load_reserve_token_contract
         self.sc_reserve_token = self.load_reserve_token_contract(contract_address_reserve_token)

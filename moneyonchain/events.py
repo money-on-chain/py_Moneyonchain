@@ -383,11 +383,11 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
             self.timestamp = None
         self.bucket = 'X2'
         self.account = event['args']['account']
+        self.commission = event['args']['commission']
         self.amount = event['args']['amount']
         self.reserveTotal = event['args']['reserveTotal']
         self.interests = event['args']['interests']
         self.leverage = event['args']['leverage']
-        self.commission = event['args']['commission']
         self.reservePrice = event['args']['reservePrice']
 
     @staticmethod
