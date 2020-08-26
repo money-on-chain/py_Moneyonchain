@@ -348,3 +348,12 @@ class RDOCMoC(RRC20MoC):
                  contract_address=contract_address)
 
         return sc
+
+    def reserve_balance_of(self,
+                           account_address,
+                           formatted: bool = True,
+                           block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_reserve_token.balance_of(account_address,
+                                                formatted=formatted,
+                                                block_identifier=block_identifier)
