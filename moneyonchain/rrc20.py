@@ -293,54 +293,22 @@ class RRC20MoC(MoC):
         super().__init__(connection_manager,
                          contract_address=contract_address,
                          contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-        # load main contract
-        self.load_contract()
+                         contract_bin=contract_bin,
+                         contract_address_moc_state=contract_address_moc_state,
+                         contract_address_moc_inrate=contract_address_moc_inrate,
+                         contract_address_moc_exchange=contract_address_moc_exchange,
+                         contract_address_moc_connector=contract_address_moc_connector,
+                         contract_address_moc_settlement=contract_address_moc_settlement,
+                         contract_address_moc_bpro_token=contract_address_moc_bpro_token,
+                         contract_address_moc_doc_token=contract_address_moc_doc_token,
+                         contracts_discovery=contracts_discovery)
 
         contract_addresses = dict()
-        contract_addresses['MoCState'] = contract_address_moc_state
-        contract_addresses['MoCInrate'] = contract_address_moc_inrate
-        contract_addresses['MoCExchange'] = contract_address_moc_exchange
-        contract_addresses['MoCConnector'] = contract_address_moc_connector
-        contract_addresses['MoCSettlement'] = contract_address_moc_settlement
-        contract_addresses['BProToken'] = contract_address_moc_bpro_token
-        contract_addresses['DoCToken'] = contract_address_moc_doc_token
         contract_addresses['ReserveToken'] = contract_address_reserve_token
 
         if contracts_discovery:
-            contract_addresses['MoCConnector'] = self.connector()
-
-        # load contract moc connector
-        self.sc_moc_connector = self.load_moc_connector_contract(contract_addresses['MoCConnector'])
-
-        if contracts_discovery:
             connector_addresses = self.connector_addresses()
-            contract_addresses['MoCState'] = connector_addresses['MoCState']
-            contract_addresses['MoCInrate'] = connector_addresses['MoCInrate']
-            contract_addresses['MoCExchange'] = connector_addresses['MoCExchange']
-            contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
-            contract_addresses['BProToken'] = connector_addresses['BProToken']
-            contract_addresses['DoCToken'] = connector_addresses['DoCToken']
             contract_addresses['ReserveToken'] = connector_addresses['ReserveToken']
-
-        # load contract moc state
-        self.sc_moc_state = self.load_moc_state_contract(contract_addresses['MoCState'])
-
-        # load contract moc inrate
-        self.sc_moc_inrate = self.load_moc_inrate_contract(contract_addresses['MoCInrate'])
-
-        # load contract moc exchange
-        self.sc_moc_exchange = self.load_moc_exchange_contract(contract_addresses['MoCExchange'])
-
-        # load contract moc settlement
-        self.sc_moc_settlement = self.load_moc_settlement_contract(contract_addresses['MoCSettlement'])
-
-        # load contract moc bpro_token
-        self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_addresses['BProToken'])
-
-        # load contract moc doc_token
-        self.sc_moc_doc_token = self.load_moc_bpro_token_contract(contract_addresses['DoCToken'])
 
         # load_reserve_token_contract
         self.sc_reserve_token = self.load_reserve_token_contract(contract_addresses['ReserveToken'])
