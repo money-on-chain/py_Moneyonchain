@@ -1335,7 +1335,8 @@ class MoC(Contract):
                  contract_address_moc_connector=None,
                  contract_address_moc_settlement=None,
                  contract_address_moc_bpro_token=None,
-                 contract_address_moc_doc_token=None):
+                 contract_address_moc_doc_token=None,
+                 contracts_discovery=False):
 
         network = connection_manager.network
         if not contract_address:
@@ -1350,26 +1351,47 @@ class MoC(Contract):
         # load main contract
         self.load_contract()
 
-        # load contract moc state
-        self.sc_moc_state = self.load_moc_state_contract(contract_address_moc_state)
+        contract_addresses = dict()
+        contract_addresses['MoCState'] = contract_address_moc_state
+        contract_addresses['MoCInrate'] = contract_address_moc_inrate
+        contract_addresses['MoCExchange'] = contract_address_moc_exchange
+        contract_addresses['MoCConnector'] = contract_address_moc_connector
+        contract_addresses['MoCSettlement'] = contract_address_moc_settlement
+        contract_addresses['BProToken'] = contract_address_moc_bpro_token
+        contract_addresses['DoCToken'] = contract_address_moc_doc_token
 
-        # load contract moc inrate
-        self.sc_moc_inrate = self.load_moc_inrate_contract(contract_address_moc_inrate)
-
-        # load contract moc exchange
-        self.sc_moc_exchange = self.load_moc_exchange_contract(contract_address_moc_exchange)
+        if contracts_discovery:
+            contract_addresses['MoCConnector'] = self.connector()
 
         # load contract moc connector
-        self.sc_moc_connector = self.load_moc_connector_contract(contract_address_moc_connector)
+        self.sc_moc_connector = self.load_moc_connector_contract(contract_addresses['MoCConnector'])
+
+        if contracts_discovery:
+            connector_addresses = self.connector_addresses()
+            contract_addresses['MoCState'] = connector_addresses['MoCState']
+            contract_addresses['MoCInrate'] = connector_addresses['MoCInrate']
+            contract_addresses['MoCExchange'] = connector_addresses['MoCExchange']
+            contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
+            contract_addresses['BProToken'] = connector_addresses['BProToken']
+            contract_addresses['DoCToken'] = connector_addresses['DoCToken']
+
+        # load contract moc state
+        self.sc_moc_state = self.load_moc_state_contract(contract_addresses['MoCState'])
+
+        # load contract moc inrate
+        self.sc_moc_inrate = self.load_moc_inrate_contract(contract_addresses['MoCInrate'])
+
+        # load contract moc exchange
+        self.sc_moc_exchange = self.load_moc_exchange_contract(contract_addresses['MoCExchange'])
 
         # load contract moc settlement
-        self.sc_moc_settlement = self.load_moc_settlement_contract(contract_address_moc_settlement)
+        self.sc_moc_settlement = self.load_moc_settlement_contract(contract_addresses['MoCSettlement'])
 
         # load contract moc bpro_token
-        self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_address_moc_bpro_token)
+        self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_addresses['BProToken'])
 
         # load contract moc doc_token
-        self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_address_moc_doc_token)
+        self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
 
     def implementation(self, block_identifier: BlockIdentifier = 'latest'):
         """Implementation of contract"""
