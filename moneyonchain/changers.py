@@ -294,7 +294,7 @@ class RDOCCommissionSplitterAddressChanger(BaseChanger):
         tx_hash, tx_receipt = self.fnx_constructor(contract_address, commission_address)
 
         self.log.info("Deployed contract done!")
-        self.log.info(tx_hash)
+        self.log.info(Web3.toHex(tx_hash))
         self.log.info(tx_receipt)
 
         self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
@@ -304,7 +304,7 @@ class RDOCCommissionSplitterAddressChanger(BaseChanger):
             governor = self.load_governor()
             tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
             self.log.info(tx_receipt)
             self.log.info("Change successfull!")
 
@@ -354,7 +354,7 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
                                                    Web3.toChecksumAddress(account_owner))
 
         self.log.info("Deployed contract done!")
-        self.log.info(tx_hash)
+        self.log.info(Web3.toHex(tx_hash))
         self.log.info(tx_receipt)
 
         self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
@@ -364,7 +364,7 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
             governor = self.load_governor()
             tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
             tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
             self.log.info(tx_receipt)
             self.log.info("Change successfull!")
 
@@ -394,6 +394,136 @@ class MoCPriceProviderChanger(BaseChanger):
         self.log.info("Deploying new contract...")
 
         tx_hash, tx_receipt = self.fnx_constructor(contract_address, Web3.toChecksumAddress(price_provider))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class MoCSetCommissionMocProportionChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionMocProportionChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionMocProportionChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, moc_proportion, commission_splitter=None, execute_change=False):
+
+        network = self.connection_manager.network
+        if not commission_splitter:
+            commission_splitter = self.connection_manager.options['networks'][network]['addresses']['CommissionSplitter']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(commission_splitter), moc_proportion)
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class MoCSetCommissionFinalAddressChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionFinalAddressChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionFinalAddressChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, commission_address, commission_splitter=None, execute_change=False):
+
+        network = self.connection_manager.network
+        if not commission_splitter:
+            commission_splitter = self.connection_manager.options['networks'][network]['addresses']['CommissionSplitter']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(commission_splitter),
+                                                   Web3.toChecksumAddress(commission_address))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class MoCInrateCommissionsAddressChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionsAddressChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionsAddressChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, commission_address, execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCInrate']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address),
+                                                   Web3.toChecksumAddress(commission_address))
 
         self.log.info("Deployed contract done!")
         self.log.info(Web3.toHex(tx_hash))

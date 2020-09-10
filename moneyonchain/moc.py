@@ -932,6 +932,14 @@ class MoCInrate(Contract):
 
         return result
 
+    def commission_address(self, block_identifier: BlockIdentifier = 'latest'):
+        """Returns the address of the target receiver of commissions"""
+
+        result = self.sc.functions.commissionsAddress().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def last_daily_pay(self, formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
         """returns the amount of BTC to pay in concept of interest"""

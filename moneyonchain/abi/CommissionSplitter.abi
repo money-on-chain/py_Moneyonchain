@@ -70,27 +70,13 @@
       "type": "function"
     },
     {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_governor",
-          "type": "address"
-        }
-      ],
-      "name": "initialize",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "constant": true,
       "inputs": [],
-      "name": "reserveToken",
+      "name": "mocProportion",
       "outputs": [
         {
           "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -98,31 +84,9 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "name": "_mocAddress",
-          "type": "address"
-        },
-        {
-          "name": "_reserveToken",
-          "type": "address"
-        },
-        {
-          "name": "_commissionAddress",
-          "type": "address"
-        },
-        {
-          "name": "_mocProportion",
-          "type": "uint256"
-        },
-        {
-          "name": "_governor",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
     },
     {
       "anonymous": false,
@@ -144,6 +108,55 @@
     {
       "constant": false,
       "inputs": [],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_mocAddress",
+          "type": "address"
+        },
+        {
+          "name": "_commissionsAddress",
+          "type": "address"
+        },
+        {
+          "name": "_mocProportion",
+          "type": "uint256"
+        },
+        {
+          "name": "_governor",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_governor",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
       "name": "split",
       "outputs": [],
       "payable": false,
@@ -154,7 +167,7 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_commissionAddress",
+          "name": "_commissionsAddress",
           "type": "address"
         }
       ],

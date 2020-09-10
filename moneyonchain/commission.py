@@ -24,9 +24,9 @@ class CommissionSplitter(Contract):
     log = logging.getLogger()
 
     contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.abi'))
     contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/CommissionSplitter.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.bin'))
 
     mode = 'MoC'
     precision = 10 ** 18
@@ -51,7 +51,7 @@ class CommissionSplitter(Contract):
         self.load_contract()
 
     def commission_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """Contract address output"""
+        """Final receiver address"""
 
         result = self.sc.functions.commissionsAddress().call(
             block_identifier=block_identifier)
@@ -66,13 +66,58 @@ class CommissionSplitter(Contract):
 
         return result
 
-    def reserve_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """The reserve contract address"""
+    def moc_proportion(self, block_identifier: BlockIdentifier = 'latest'):
+        """ Proportion of the balance to send to moc """
 
-        result = self.sc.functions.reserveToken().call(
+        result = self.sc.functions.mocProportion().call(
             block_identifier=block_identifier)
 
         return result
+
+    def balance(self,
+                formatted: bool = True,
+                block_identifier: BlockIdentifier = 'latest'):
+
+        result = self.connection_manager.balance(self.address())
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def initialize(self, moc_address, commission_address, moc_proportion, governor_address,
+                   gas_limit=3500000,
+                   wait_timeout=240,
+                   default_account=None,
+                   wait_receipt=True):
+        """Init the contract"""
+
+        moc_address = Web3.toChecksumAddress(moc_address)
+        commission_address = Web3.toChecksumAddress(commission_address)
+        governor_address = Web3.toChecksumAddress(governor_address)
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'initialize',
+                                                          moc_address,
+                                                          commission_address,
+                                                          moc_proportion,
+                                                          governor_address,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
+                                                                          timeout=wait_timeout)
+
+            self.log.info("Successfully initialized executed in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                tx_receipt['blockNumber'],
+                Web3.toHex(tx_receipt['transactionHash']),
+                tx_receipt['gasUsed'],
+                tx_receipt['from']))
+
+        return tx_hash, tx_receipt
 
     def split(self,
               gas_limit=3500000,
@@ -111,3 +156,11 @@ class RDOCCommissionSplitter(CommissionSplitter):
 
     mode = 'RDoC'
     precision = 10 ** 18
+
+    def reserve_address(self, block_identifier: BlockIdentifier = 'latest'):
+        """The reserve contract address"""
+
+        result = self.sc.functions.reserveToken().call(
+            block_identifier=block_identifier)
+
+        return result
