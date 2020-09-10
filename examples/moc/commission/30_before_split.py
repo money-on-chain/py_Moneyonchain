@@ -24,7 +24,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'mocTestnet'
+network = 'mocMainnet2'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

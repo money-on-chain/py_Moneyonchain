@@ -116,7 +116,7 @@
         "DoCToken": "0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db",
         "MoCMedianizer": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
         "PriceFeed": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
-        "CommissionSplitter": ""
+        "CommissionSplitter": "0xa5467535851263122ef1476e24C529CFc6CFc086"
       }
     },
     "rdocTestnetAlpha": {
