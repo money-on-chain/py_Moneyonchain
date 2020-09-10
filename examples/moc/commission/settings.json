@@ -5,7 +5,7 @@
     "MocProportion": 200000000000000000
   },
   "mocTestnet": {
-    "CommissionSplitter": "",
+    "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40",
     "CommissionAddress": "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076",
     "MocProportion": 200000000000000000
   },
