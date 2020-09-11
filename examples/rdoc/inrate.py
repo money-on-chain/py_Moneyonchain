@@ -18,6 +18,8 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 
 moc_inrate = RDOCMoCInrate(connection_manager)
 
+print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
+
 print("RDOC Freestable reedeem")
 print("=======================")
 info = moc_inrate.stable_inrate()

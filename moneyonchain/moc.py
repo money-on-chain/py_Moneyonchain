@@ -880,10 +880,15 @@ class MoCInrate(Contract):
 
     def bitpro_rate(self, formatted: bool = True,
                     block_identifier: BlockIdentifier = 'latest'):
-        """Gets the rate for BitPro Holders"""
+        """Gets the rate for BitPro/RiskProHolder Holders"""
 
-        result = self.sc.functions.getBitProRate().call(
-            block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBitProRate().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getRiskProRate().call(
+                block_identifier=block_identifier)
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
