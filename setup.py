@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='0.0.43',
+    version='0.0.45',
     packages=['moneyonchain'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',

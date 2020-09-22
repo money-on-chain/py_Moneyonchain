@@ -80,7 +80,8 @@ class PriceFeed(Contract):
              gas_limit=3500000,
              wait_timeout=240,
              default_account=None,
-             wait_receipt=True):
+             wait_receipt=True,
+             poll_latency=0.5):
         """Post price """
 
         address_moc_medianizer = Web3.toChecksumAddress(self.contract_address_moc_medianizer)
@@ -98,8 +99,10 @@ class PriceFeed(Contract):
 
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
-                                                                          timeout=wait_timeout)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
 
             self.log.info("Successfully post price [{4}] in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
                 tx_receipt['blockNumber'],
