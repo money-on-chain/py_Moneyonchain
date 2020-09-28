@@ -260,11 +260,11 @@
           "type": "address"
         },
         {
-          "name": "_EMAPrice",
+          "name": "_emaPrice",
           "type": "uint256"
         }
       ],
-      "name": "setTokenPairEMAPrice",
+      "name": "setTokenPairEmaPrice",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -279,6 +279,32 @@
         },
         {
           "name": "_secondaryToken",
+          "type": "address"
+        },
+        {
+          "name": "_priceProvider",
+          "type": "address"
+        }
+      ],
+      "name": "setPriceProvider",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_baseToken",
+          "type": "address"
+        },
+        {
+          "name": "_secondaryToken",
+          "type": "address"
+        },
+        {
+          "name": "_priceProvider",
           "type": "address"
         },
         {

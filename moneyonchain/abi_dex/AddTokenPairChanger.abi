@@ -78,6 +78,25 @@
           "type": "uint256"
         }
       ],
+      "name": "priceProviders",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "name": "secondaryTokens",
       "outputs": [
         {
@@ -101,6 +120,10 @@
         },
         {
           "name": "_secondaryTokens",
+          "type": "address[]"
+        },
+        {
+          "name": "_priceProviders",
           "type": "address[]"
         },
         {

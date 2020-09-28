@@ -2,11 +2,11 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "EMAPrice",
+      "name": "tokenPairListing",
       "outputs": [
         {
           "name": "",
-          "type": "uint256"
+          "type": "address"
         }
       ],
       "payable": false,
@@ -16,11 +16,11 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "tokenPairListing",
+      "name": "emaPrice",
       "outputs": [
         {
           "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -70,7 +70,7 @@
           "type": "address"
         },
         {
-          "name": "_EMAPrice",
+          "name": "_emaPrice",
           "type": "uint256"
         }
       ],
