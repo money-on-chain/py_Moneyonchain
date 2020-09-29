@@ -150,7 +150,7 @@ class MoCDecentralizedExchange(Contract):
 
         return tx_hash, tx_receipt
 
-    def run_orders_expiration_for_pair(self, pair, is_buy_order,
+    def run_orders_expiration_for_pair(self, pair, is_buy_order, order_type,
                                        hint=0,
                                        order_id=0,
                                        gas_limit=3500000,
@@ -176,6 +176,7 @@ class MoCDecentralizedExchange(Contract):
                                                           hint,
                                                           order_id,
                                                           matching_steps,
+                                                          order_type,
                                                           default_account=default_account,
                                                           gas_limit=gas_limit)
 
@@ -185,8 +186,9 @@ class MoCDecentralizedExchange(Contract):
 
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
-                                                                          timeout=wait_timeout)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout,
+                                                                              poll_latency=0.5)
 
             self.log.info(
                 "Orders expiration job finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
