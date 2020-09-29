@@ -196,3 +196,63 @@ class MoCDecentralizedExchange(Contract):
                     tx_receipt['from']))
 
         return tx_hash, tx_receipt
+
+
+class BaseConstructor(Contract):
+    log = logging.getLogger()
+
+    contract_abi = None
+    contract_bin = None
+
+    mode = 'DEX'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+    def fnx_constructor(self, *tx_parameters, wait_receipt=True):
+        """ Constructor deploy """
+
+        sc, content_abi, content_bin = self.connection_manager.load_bytecode_contract(self.contract_abi,
+                                                                                      self.contract_bin)
+        tx_hash = self.connection_manager.fnx_constructor(sc, *tx_parameters)
+
+        tx_receipt = None
+        if wait_receipt:
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash)
+
+        return tx_hash, tx_receipt
+
+
+class TokenPriceProviderLastClosingPrice(BaseConstructor):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPriceProviderLastClosingPrice.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPriceProviderLastClosingPrice.bin'))
+
+    mode = 'DEX'
+
+    def constructor(self, base_token, secondary_token):
+
+        network = self.connection_manager.network
+        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address),
+                                                   Web3.toChecksumAddress(base_token),
+                                                   Web3.toChecksumAddress(secondary_token)
+                                                   )
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        return tx_hash, tx_receipt

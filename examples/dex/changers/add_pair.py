@@ -28,6 +28,7 @@ ADD PAIRS
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.changers import DexAddTokenPairChanger
+from moneyonchain.dex import TokenPriceProviderLastClosingPrice
 
 import logging
 import logging.config
@@ -106,13 +107,26 @@ ERBTC / BPRO
         
 """
 
-base_token = '0xA274d994F698Dd09256674960d86aBa22C086669'
-secondary_address = '0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf'
+base_token = '0xC3De9F38581f83e281f260d0DdbaAc0e102ff9F8'
+secondary_address = '0xA274d994F698Dd09256674960d86aBa22C086669'
 init_price = int(1.0 * 10 ** 18)
 price_precision = int(1.0 * 10 ** 18)
 
+print("Deploying Price provider ...")
+price_provider = TokenPriceProviderLastClosingPrice(connection_manager)
+tx_hash, tx_receipt = price_provider.constructor(base_token,
+                                                 secondary_address)
+
+price_provider_address = None
+if tx_receipt:
+    price_provider_address = tx_receipt.contractAddress
+    print("Price provider deployed Contract Address: {address}".format(address=tx_receipt.contractAddress))
+else:
+    print("Error deploying price provider")
+
 tx_hash, tx_receipt = contract.constructor(base_token,
                                            secondary_address,
+                                           price_provider_address,
                                            init_price,
                                            price_precision,
                                            execute_change=False)
@@ -151,5 +165,25 @@ Connected: True
 2020-06-10 11:53:23 root         INFO     AttributeDict({'transactionHash': HexBytes('0xf83fdcae5060d08a15c2af3a1ebb0d477f4249a8c1cafe53a48b8e4657fdfebf'), 'transactionIndex': 5, 'blockHash': HexBytes('0xdddfca81c35c6d3196470fc74228c8c6b68d0e5140c7f39420772a415d5246b4'), 'blockNumber': 921351, 'cumulativeGasUsed': 647274, 'gasUsed': 497400, 'contractAddress': '0x27Ad13D6668e80Fb29652e659bbdf094d63837d3', 'logs': [], 'from': '0xA8342cC05241E0d940E1c74043faCd931562f19a', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')})
 2020-06-10 11:53:23 root         INFO     Changer Contract Address: 0x27Ad13D6668e80Fb29652e659bbdf094d63837d3
 Changer Contract Address: 0x27Ad13D6668e80Fb29652e659bbdf094d63837d3
+
+NEW TESTNET 2
+
+
+Connecting to dexTestnet...
+Connected: True
+Deploying Price provider ...
+2020-09-29 10:47:28 root         INFO     Deploying new contract...
+2020-09-29 10:48:32 root         INFO     Deployed contract done!
+2020-09-29 10:48:32 root         INFO     b'W.2\xbdP\\c\x17\xe2\\\x9b\xce\xe5\xd3\xfc\xef\x00H\x0b#s\xd5\x89\\\xc3\xad_\x1fF\xee\xcc\xd6'
+2020-09-29 10:48:32 root         INFO     AttributeDict({'transactionHash': HexBytes('0x572e32bd505c6317e25c9bcee5d3fcef00480b2373d5895cc3ad5f1f46eeccd6'), 'transactionIndex': 15, 'blockHash': HexBytes('0xeb8d7c36cc55aa4cc1e7ca519a7f63165f3283f8df3d38401a6faa78457017db'), 'blockNumber': 1216353, 'cumulativeGasUsed': 883947, 'gasUsed': 244081, 'contractAddress': '0xD9EFCBEF06d8970af7ca2BE31c238319C659C7b6', 'logs': [], 'from': '0xA8342cC05241E0d940E1c74043faCd931562f19a', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')})
+2020-09-29 10:48:32 root         INFO     Contract Address: 0xD9EFCBEF06d8970af7ca2BE31c238319C659C7b6
+2020-09-29 10:48:32 root         INFO     Deploying new contract...
+Price provider deployed Contract Address: 0xD9EFCBEF06d8970af7ca2BE31c238319C659C7b6
+Changer Contract Address: 0xa74bc0D5e61875Fe7618E070Eda504ad3ab2B41f
+2020-09-29 10:49:12 root         INFO     Deployed contract done!
+2020-09-29 10:49:12 root         INFO     0xb3ff8f5cce352dc2422c49e77005939d07708f15ce52529fc82df26052c9c4ea
+2020-09-29 10:49:12 root         INFO     AttributeDict({'transactionHash': HexBytes('0xb3ff8f5cce352dc2422c49e77005939d07708f15ce52529fc82df26052c9c4ea'), 'transactionIndex': 8, 'blockHash': HexBytes('0x82e5477aa80607adcd9e349d51e4e68a90d71863064e231a1f2e77266216029f'), 'blockNumber': 1216354, 'cumulativeGasUsed': 910442, 'gasUsed': 567190, 'contractAddress': '0xa74bc0D5e61875Fe7618E070Eda504ad3ab2B41f', 'logs': [], 'from': '0xA8342cC05241E0d940E1c74043faCd931562f19a', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')})
+2020-09-29 10:49:12 root         INFO     Changer Contract Address: 0xa74bc0D5e61875Fe7618E070Eda504ad3ab2B41f
+
 
 """

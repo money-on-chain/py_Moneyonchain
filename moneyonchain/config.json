@@ -243,8 +243,14 @@
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
-        "dex": "0x441DB123bA000107EBa57f41Ee3Ce7F9EFD5A3D0",
-        "commissionManager": "0x97d218D689FC197ea2d650D431ee6FE37db6f6bD"
+        "dex": "0xE5254b84a32DFE4Fa9F96f2ddF663A0cf81D9484",
+        "commissionManager": "0x99f33E050802118d298440B7473d1dd1B8732A6C",
+        "docBproPriceProvider": "0xfC10c841c379C317b384b4F55FE9c849EFc6EbCC",
+        "docTestTokenPriceProvider": "0xe9Ea00805097f58aEBbaF89135F7B585bB0E68CA",
+        "docWrbtcPriceProvider": "0x502dEB6E1a832BDaa52baCdbda0B23f27B13849B",
+        "wrbtcBproPriceProvider": "0x201e43Ff39736328436961d7318ee4173d9bf4df",
+        "wrbtcTestTokenPriceProvider": "0x57eD5FF2367Eb2232CC8cE6b5e98de91E7f042a7"
+
       }
 
     }

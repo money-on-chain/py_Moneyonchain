@@ -620,6 +620,7 @@ class DexAddTokenPairChanger(BaseChanger):
     def constructor(self,
                     base_token,
                     secondary_address,
+                    price_provider,
                     init_price,
                     price_precision,
                     execute_change=False):
@@ -632,6 +633,7 @@ class DexAddTokenPairChanger(BaseChanger):
         tx_hash, tx_receipt = self.fnx_constructor(contract_address,
                                                    [Web3.toChecksumAddress(base_token)],
                                                    [Web3.toChecksumAddress(secondary_address)],
+                                                   [Web3.toChecksumAddress(price_provider)],
                                                    [init_price],
                                                    [price_precision])
 
