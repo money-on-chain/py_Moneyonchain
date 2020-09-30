@@ -135,8 +135,9 @@ class MoCDecentralizedExchange(Contract):
 
             if wait_receipt:
                 # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
-                                                                              timeout=wait_timeout)
+                tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                                  timeout=wait_timeout,
+                                                                                  poll_latency=0.5)
 
                 self.log.info(
                     "Tick runned correctly in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
