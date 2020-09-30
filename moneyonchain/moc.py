@@ -266,8 +266,8 @@ class MoCMedianizer(Contract):
 
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash,
-                                                                          timeout=wait_timeout)
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
 
             self.log.info("Successfully poke in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
                 tx_receipt['blockNumber'],
