@@ -36,6 +36,81 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnetAlpha  | RIF     |                                  | Testnet    |
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
+| dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
+
+#### Price provider
+
+Get the last price from MOC or RDOC contract.
+
+See example in source/example/price_provider.py
+
+
+```
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.price_provider import PriceProvider
+
+import logging
+import logging.config
+
+# logging module
+# Initialize you log configuration using the base class
+logging.basicConfig(level=logging.INFO)
+# Retrieve the logger instance
+log = logging.getLogger()
+
+# Connect to MoC enviroment network
+network = 'mocTestnet'
+connection_manager = ConnectionManager(network=network)
+log.info("Connecting to %s..." % network)
+log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+price_provider = PriceProvider(connection_manager)
+
+log.info("Last price: {0}".format(price_provider.price()))
+
+```
+
+result:
+
+```
+INFO:root:Connecting to mocTestnet...
+INFO:root:Connected: True
+INFO:root:Last price: 10725.4
+```
+
+RDOC Contract:
+
+```
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.price_provider import PriceProvider
+
+import logging
+import logging.config
+
+# logging module
+# Initialize you log configuration using the base class
+logging.basicConfig(level=logging.INFO)
+# Retrieve the logger instance
+log = logging.getLogger()
+
+# Connect to MoC enviroment network
+network = 'rdocTestnet'
+connection_manager = ConnectionManager(network=network)
+log.info("Connecting to %s..." % network)
+log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+price_provider = PriceProvider(connection_manager)
+
+log.info("Last price: {0}".format(price_provider.price()))
+```
+
+Result:
+
+```
+INFO:root:Connecting to rdocTestnet...
+INFO:root:Connected: True
+INFO:root:Last price: 0.092123288999999996
+```
 
 #### Token Prices
 
