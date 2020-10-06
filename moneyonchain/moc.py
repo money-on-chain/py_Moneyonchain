@@ -397,6 +397,22 @@ class MoCState(Contract):
 
         return result
 
+    def max_mint_bpro(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMaxMintBPro().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getMaxMintBPro().call(
+                block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def absolute_max_doc(self, formatted: bool = True,
                          block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
