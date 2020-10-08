@@ -86,6 +86,122 @@ class Governed(Contract):
         return tx_hash, tx_receipt
 
 
+class MoCStopper(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Stopper.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Stopper.bin'))
+
+    mode = 'MoC'
+    project = 'MoC'
+    precision = 10 ** 18
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['stopper']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def address_stopper(self, block_identifier: BlockIdentifier = 'latest'):
+        """Contract address output"""
+
+        result = self.sc.functions.stopper().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def owner(self, block_identifier: BlockIdentifier = 'latest'):
+        """Contract address output"""
+
+        result = self.sc.functions.owner().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def pause(self, contract_to_pause,
+              gas_limit=3500000,
+              wait_timeout=240,
+              default_account=None,
+              wait_receipt=True):
+        """Initialize"""
+
+        contract_to_pause = Web3.toChecksumAddress(contract_to_pause)
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'pause',
+                                                          contract_to_pause,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+            self.log.info("Successfully paused contract {0} in Block [{1}] Hash: [{2}] Gas used: [{3}] From: [{4}]"
+                          .format(contract_to_pause,
+                                  tx_receipt['blockNumber'],
+                                  Web3.toHex(tx_receipt['transactionHash']),
+                                  tx_receipt['gasUsed'],
+                                  tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def unpause(self, contract_to_pause,
+                gas_limit=3500000,
+                wait_timeout=240,
+                default_account=None,
+                wait_receipt=True):
+        """Initialize"""
+
+        contract_to_pause = Web3.toChecksumAddress(contract_to_pause)
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'unpause',
+                                                          contract_to_pause,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+            self.log.info("Successfully paused contract {0} in Block [{1}] Hash: [{2}] Gas used: [{3}] From: [{4}]"
+                          .format(contract_to_pause,
+                                  tx_receipt['blockNumber'],
+                                  Web3.toHex(tx_receipt['transactionHash']),
+                                  tx_receipt['gasUsed'],
+                                  tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+
+class RDOCStopper(MoCStopper):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Stopper.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Stopper.bin'))
+
+    mode = 'RDoC'
+    precision = 10 ** 18
+
+
 class RDOCGoverned(Governed):
     log = logging.getLogger()
 

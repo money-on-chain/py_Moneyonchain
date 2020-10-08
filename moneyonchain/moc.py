@@ -1978,6 +1978,24 @@ class MoC(Contract):
 
         return result
 
+    def stoppable(self,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """is Paused"""
+
+        result = self.sc.functions.stoppable().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def stopper(self,
+                block_identifier: BlockIdentifier = 'latest'):
+        """is Paused"""
+
+        result = self.sc.functions.stopper().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def amount_mint_bpro(self, amount: Decimal):
         """Final amount need it to mint bitpro in RBTC"""
 
