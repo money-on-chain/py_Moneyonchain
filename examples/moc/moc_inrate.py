@@ -23,7 +23,8 @@ print("Commission rate: {0}".format(moc_inrate.commision_rate()))
 print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
 print("Bitpro holders interest: {0}".format(moc_inrate.calc_bitpro_holders_interest()))
 print("Bitpro interest address: {0}".format(moc_inrate.bitpro_interest_address()))
-
+print("Bitpro interest block span: {0}".format(moc_inrate.bitpro_interest_blockspan()))
+print("Bitpro interest last payed block: {0}".format(moc_inrate.last_bitpro_interest_block()))
 
 print("Daily inrate: {0}".format(moc_inrate.daily_inrate()))
 print("Calc commission value: {0}".format(moc_inrate.calc_commission_value(10.0)))

@@ -916,6 +916,32 @@ class MoCInrate(Contract):
 
         return result
 
+    def bitpro_interest_blockspan(self,
+                                  block_identifier: BlockIdentifier = 'latest'):
+        """Gets the blockspan of BPRO that represents the frecuency of BitPro holders intereset payment"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getBitProInterestBlockSpan().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getRiskProInterestBlockSpan().call(
+                block_identifier=block_identifier)
+
+        return result
+
+    def last_bitpro_interest_block(self,
+                                   block_identifier: BlockIdentifier = 'latest'):
+        """ Last block when an BitPro holders instereste was calculated"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.lastBitProInterestBlock().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.lastRiskProInterestBlock().call(
+                block_identifier=block_identifier)
+
+        return result
+
     def daily_enabled(self, formatted: bool = True,
                       block_identifier: BlockIdentifier = 'latest'):
         """"""

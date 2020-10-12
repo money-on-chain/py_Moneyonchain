@@ -586,6 +586,49 @@ class MoCInrateRiskProRateChangerChanger(BaseChanger):
         return tx_hash, tx_receipt
 
 
+class MocInrateBitProInterestChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateBitProInterestChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateBitProInterestChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, bitpro_blockspan, execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCInrate']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address),
+                                                   bitpro_blockspan)
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
 class MocStateMaxMintBProChanger(BaseChanger):
     log = logging.getLogger()
 
