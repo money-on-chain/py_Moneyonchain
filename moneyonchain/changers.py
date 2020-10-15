@@ -748,8 +748,8 @@ class DexAddTokenPairChanger(BaseChanger):
                     base_token,
                     secondary_address,
                     price_provider,
-                    init_price,
                     price_precision,
+                    init_price,
                     execute_change=False):
 
         network = self.connection_manager.network
@@ -761,8 +761,9 @@ class DexAddTokenPairChanger(BaseChanger):
                                                    [Web3.toChecksumAddress(base_token)],
                                                    [Web3.toChecksumAddress(secondary_address)],
                                                    [Web3.toChecksumAddress(price_provider)],
+                                                   [price_precision],
                                                    [init_price],
-                                                   [price_precision])
+                                                   )
 
         self.log.info("Deployed contract done!")
         self.log.info(Web3.toHex(tx_hash))
@@ -904,6 +905,55 @@ class DexMaxOrderLifespanChanger(BaseChanger):
 
         tx_hash, tx_receipt = self.fnx_constructor(contract_address,
                                                    order_lifespan)
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class DexPriceProviderChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/PriceProviderChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/PriceProviderChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+
+    mode = 'DEX'
+
+    def constructor(self,
+                    base_token,
+                    secondary_token,
+                    price_provider,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
+                                                   Web3.toChecksumAddress(base_token),
+                                                   Web3.toChecksumAddress(secondary_token),
+                                                   Web3.toChecksumAddress(price_provider))
 
         self.log.info("Deployed contract done!")
         self.log.info(Web3.toHex(tx_hash))
