@@ -1,9 +1,9 @@
 """
-Changer Max Order lifespan
+Changer to change the max blocks for ticks in the MoC Decentralized Exchange
 """
 
 from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import DexMaxOrderLifespanChanger
+from moneyonchain.changers import DexMaxBlocksForTickChanger
 
 import logging
 import logging.config
@@ -18,11 +18,11 @@ connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-contract = DexMaxOrderLifespanChanger(connection_manager)
+contract = DexMaxBlocksForTickChanger(connection_manager)
 
-max_order_life_span = 4800
+max_blocks_for_ticks = 240
 
-tx_hash, tx_receipt = contract.constructor(max_order_life_span,
+tx_hash, tx_receipt = contract.constructor(max_blocks_for_ticks,
                                            execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
