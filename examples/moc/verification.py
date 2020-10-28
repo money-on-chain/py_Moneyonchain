@@ -5,7 +5,7 @@ This script list all of the proxy and implementation addresses of the contracts
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCInrate, MoCBurnout, MoCBProxManager, \
     MoCState, MoCConnector, MoCMedianizer
-from moneyonchain.token import DoCToken, BProToken
+from moneyonchain.token import DoCToken, BProToken, MoCToken
 
 
 network = 'mocMainnet2'
@@ -99,6 +99,13 @@ lines.append(line)
 contract = BProToken(connection_manager)
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'BProToken', '',
+                                            contract.address())
+lines.append(line)
+
+# MoCToken
+contract = MoCState(connection_manager).moc_token
+count += 1
+line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCToken', '',
                                             contract.address())
 lines.append(line)
 

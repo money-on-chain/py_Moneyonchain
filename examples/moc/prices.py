@@ -16,4 +16,4 @@ contract = MoC(connection_manager)
 print("Bitcoin price in usd: {0}".format(contract.bitcoin_price()))
 print("BPRO price in usd: {0}".format(contract.bpro_price()))
 print("BTC2X price in usd: {0}".format(contract.btc2x_tec_price() * contract.bitcoin_price()))
-
+print("MoC price in usd: {0}".format(contract.moc_price()))
