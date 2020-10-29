@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# python copy_abis.py --src /here --dest /there
+# python copy_abis.py --config <config_file.json>
 
 import os
 import json
@@ -69,7 +69,6 @@ for f_name in input_files:
         # read json and extract abi
         json.dump(data['abi'], abi_file, indent=2)
 
-
     if not len(data['bytecode']):
         print(" -- [warning: empty bytecode] ", end="")
 
@@ -82,4 +81,3 @@ for f_name in input_files:
 
 print()
 print("Done!")
-
