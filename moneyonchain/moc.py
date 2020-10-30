@@ -2178,7 +2178,7 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if ((moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0))
+        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
             moc_commission_in_btc = 0;
             tx_type = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
@@ -2196,7 +2196,7 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if ((moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0))
+        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
             moc_commission_in_btc = 0;
             tx_type = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
@@ -2214,7 +2214,7 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if ((moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0))
+        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
             moc_commission_in_btc = 0;
             tx_type = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
