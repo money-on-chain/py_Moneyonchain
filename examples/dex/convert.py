@@ -10,9 +10,9 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(connection_manager)
 
-token_address = '0x23A1aA7b11e68beBE560a36beC04D1f79357f28d'
+token_address = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'
 amount = int(1 * 10 ** 18)
-base_address = '0xC3De9F38581f83e281f260d0DdbaAc0e102ff9F8'
+base_address = '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0'
 
 print(dex.convert_token_to_common_base(token_address, amount, base_address))
 

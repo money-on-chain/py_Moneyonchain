@@ -20,7 +20,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 contract = DexMaxBlocksForTickChanger(connection_manager)
 
-max_blocks_for_ticks = 240
+max_blocks_for_ticks = 20
 
 tx_hash, tx_receipt = contract.constructor(max_blocks_for_ticks,
                                            execute_change=False)

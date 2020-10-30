@@ -142,6 +142,47 @@ class MoCDecentralizedExchange(Contract):
 
         return result
 
+    def are_orders_to_expire(self,
+                             pair,
+                             is_buy_order,
+                             block_identifier: BlockIdentifier = 'latest'):
+        """ Are orders to expire """
+
+        result = self.sc.functions.areOrdersToExpire(pair[0],
+                                                     pair[1],
+                                                     is_buy_order).call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def emergent_price(self,
+                       pair,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """ Calculates closing price as if the tick closes at this moment.
+            emergentPrice: AVG price of the last matched Orders
+
+            return (emergentPrice, lastBuyMatch.id, lastBuyMatch.exchangeableAmount, lastSellMatch.id);
+            """
+
+        result = self.sc.functions.getEmergentPrice(pair[0], pair[1]).call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def market_price(self,
+                     pair,
+                     formatted: bool = True,
+                     block_identifier: BlockIdentifier = 'latest'):
+        """ Get the current market price """
+
+        result = self.sc.functions.getMarketPrice(pair[0], pair[1]).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def run_tick_for_pair(self, pair,
                           gas_limit=3500000,
                           wait_timeout=240,
@@ -241,6 +282,106 @@ class MoCDecentralizedExchange(Contract):
                     tx_receipt['from']))
 
         return tx_hash, tx_receipt
+
+
+class CommissionManager(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CommissionManager.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CommissionManager.bin'))
+
+    mode = 'DEX'
+    precision = 10 ** 18
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['commissionManager']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+    def beneficiary_address(self, block_identifier: BlockIdentifier = 'latest'):
+        """Gets beneficiary destination address """
+
+        result = self.sc.functions.beneficiaryAddress().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def commision_rate(self, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """Gets commision rate"""
+
+        result = self.sc.functions.commissionRate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def cancelation_penalty_rate(self, formatted: bool = True,
+                                 block_identifier: BlockIdentifier = 'latest'):
+        """Gets cancelationPenaltyRate"""
+
+        result = self.sc.functions.cancelationPenaltyRate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def expiration_penalty_rate(self, formatted: bool = True,
+                                block_identifier: BlockIdentifier = 'latest'):
+        """Gets expirationPenaltyRate"""
+
+        result = self.sc.functions.expirationPenaltyRate().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calculate_initial_fee(self,
+                              amount: int,
+                              formatted: bool = True,
+                              block_identifier: BlockIdentifier = 'latest'):
+        """Calculate initial fee. Initial fee is the commission at insertion order"""
+
+        result = self.sc.functions.calculateInitialFee(amount).call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def exchange_commissions(self, formatted: bool = True,
+                             block_identifier: BlockIdentifier = 'latest'):
+        """Gets exchangeCommissions"""
+
+        result = self.sc.functions.exchangeCommissions().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
 
 
 class BaseConstructor(Contract):
