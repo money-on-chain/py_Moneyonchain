@@ -1068,62 +1068,62 @@ class MoCInrate(Contract):
     # Start: Transaction type constants
 
     def tx_type_mint_bpro_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_BPRO_FEES_RBTC()
+        result = self.sc.functions.MINT_BPRO_FEES_RBTC().call()
 
         return result
 
     def tx_type_redeem_bpro_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_BPRO_FEES_RBTC()
+        result = self.sc.functions.REDEEM_BPRO_FEES_RBTC().call()
 
         return result
 
     def tx_type_mint_doc_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_DOC_FEES_RBTC()
+        result = self.sc.functions.MINT_DOC_FEES_RBTC().call()
 
         return result
 
     def tx_type_redeem_doc_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_DOC_FEES_RBTC()
+        result = self.sc.functions.REDEEM_DOC_FEES_RBTC().call()
 
         return result
 
     def tx_type_mint_btcx_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_BTCX_FEES_RBTC()
+        result = self.sc.functions.MINT_BTCX_FEES_RBTC().call()
 
         return result
 
     def tx_type_redeem_btcx_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_BTCX_FEES_RBTC()
+        result = self.sc.functions.REDEEM_BTCX_FEES_RBTC().call()
 
         return result
 
     def tx_type_mint_bpro_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_BPRO_FEES_MOC()
+        result = self.sc.functions.MINT_BPRO_FEES_MOC().call()
 
         return result
 
     def tx_type_redeem_bpro_fees_moc (self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_BPRO_FEES_MOC()
+        result = self.sc.functions.REDEEM_BPRO_FEES_MOC().call()
 
         return result
 
     def tx_type_mint_doc_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_DOC_FEES_MOC()
+        result = self.sc.functions.MINT_DOC_FEES_MOC().call()
 
         return result
 
     def tx_type_redeem_doc_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_DOC_FEES_MOC()
+        result = self.sc.functions.REDEEM_DOC_FEES_MOC().call()
 
         return result
 
     def tx_type_mint_btcx_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.MINT_BTCX_FEES_MOC()
+        result = self.sc.functions.MINT_BTCX_FEES_MOC().call()
 
         return result
 
     def tx_type_redeem_btcx_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
-        result = self.sc.functions.REDEEM_BTCX_FEES_MOC()
+        result = self.sc.functions.REDEEM_BTCX_FEES_MOC().call()
 
         return result
 
