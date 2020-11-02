@@ -372,11 +372,13 @@ class CommissionManager(Contract):
 
         return result
 
-    def exchange_commissions(self, formatted: bool = True,
+    def exchange_commissions(self,
+                             address: str,
+                             formatted: bool = True,
                              block_identifier: BlockIdentifier = 'latest'):
         """Gets exchangeCommissions"""
 
-        result = self.sc.functions.exchangeCommissions().call(
+        result = self.sc.functions.exchangeCommissions(address).call(
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
