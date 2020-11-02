@@ -10,7 +10,7 @@ import os
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.dex import MoCDecentralizedExchange
-from moneyonchain.events import DEXTickEnd
+from moneyonchain.events import DEXNewOrderInserted
 
 network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
@@ -23,28 +23,28 @@ start_time = time.time()
 # MoCDecentralizedExchange.sol
 dex = MoCDecentralizedExchange(connection_manager)
 
-events_functions = ['TickEnd']
+events_functions = ['NewOrderInserted']
 hours_delta = 0
 from_block = 1291650  # from block start
 to_block = 1299999  # block end or 0 to last block
 l_events = dex.logs_from(events_functions, from_block, to_block, block_steps=2880)
 
-# TickStart
+# SellerMatch
 
 l_historic_data = list()
-if 'TickEnd' in l_events:
-    if l_events['TickEnd']:
+if 'NewOrderInserted' in l_events:
+    if l_events['NewOrderInserted']:
         count = 0
-        for e_event_block in l_events['TickEnd']:
+        for e_event_block in l_events['NewOrderInserted']:
             for e_event in e_event_block:
-                tx_event = DEXTickEnd(connection_manager, e_event)
+                tx_event = DEXNewOrderInserted(connection_manager, e_event)
                 l_historic_data.append(tx_event.row())
 
 # Write list to CSV File
 
 if l_historic_data:
-    columns = DEXTickEnd.columns()
-    path_file = '{0}_tick_end_{1}_{2}.csv'.format(network, from_block, to_block)
+    columns = DEXNewOrderInserted.columns()
+    path_file = '{0}_new_order_inserted_{1}_{2}.csv'.format(network, from_block, to_block)
     with open(os.path.join('csv', path_file), 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(columns)
@@ -53,7 +53,6 @@ if l_historic_data:
         for historic_data in l_historic_data:
             count += 1
             writer.writerow(historic_data)
-
 
 duration = time.time() - start_time
 print("Getting events from DEX done! Succesfull!! Done in {0} seconds".format(duration))
