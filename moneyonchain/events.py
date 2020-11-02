@@ -1011,11 +1011,11 @@ class DEXBuyerMatch(BaseEvent):
         d_event['orderId'] = self.orderId
         d_event['amountSent'] = Web3.fromWei(self.amountSent, 'ether')
         d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['change'] = Web3.fromWei(self.commission, 'change')
-        d_event['received'] = Web3.fromWei(self.commission, 'received')
-        d_event['remainingAmount'] = Web3.fromWei(self.commission, 'remainingAmount')
-        d_event['matchPrice'] = Web3.fromWei(self.commission, 'matchPrice')
-        d_event['tickNumber'] = self.commission
+        d_event['change'] = Web3.fromWei(self.change, 'ether')
+        d_event['received'] = Web3.fromWei(self.received, 'ether')
+        d_event['remainingAmount'] = Web3.fromWei(self.remainingAmount, 'ether')
+        d_event['matchPrice'] = Web3.fromWei(self.matchPrice, 'ether')
+        d_event['tickNumber'] = self.tickNumber
 
         return d_event
 
@@ -1056,7 +1056,7 @@ class DEXSellerMatch(BaseEvent):
 
     @staticmethod
     def columns():
-        columns = ['Block Nº', 'Timestamp',  'orderId', 'amountSent', 'commission', 'received', 'surplus' 
+        columns = ['Block Nº', 'Timestamp',  'orderId', 'amountSent', 'commission', 'received', 'surplus',
                    'remainingAmount', 'matchPrice', 'tickNumber']
         return columns
 
@@ -1070,11 +1070,11 @@ class DEXSellerMatch(BaseEvent):
         d_event['orderId'] = self.orderId
         d_event['amountSent'] = Web3.fromWei(self.amountSent, 'ether')
         d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['received'] = Web3.fromWei(self.commission, 'received')
-        d_event['surplus'] = Web3.fromWei(self.commission, 'surplus')
-        d_event['remainingAmount'] = Web3.fromWei(self.commission, 'remainingAmount')
-        d_event['matchPrice'] = Web3.fromWei(self.commission, 'matchPrice')
-        d_event['tickNumber'] = self.commission
+        d_event['received'] = Web3.fromWei(self.received, 'ether')
+        d_event['surplus'] = Web3.fromWei(self.surplus, 'ether')
+        d_event['remainingAmount'] = Web3.fromWei(self.remainingAmount, 'ether')
+        d_event['matchPrice'] = Web3.fromWei(self.matchPrice, 'ether')
+        d_event['tickNumber'] = self.tickNumber
 
         return d_event
 
@@ -1125,8 +1125,8 @@ class DEXExpiredOrderProcessed(BaseEvent):
         d_event['orderId'] = self.orderId
         d_event['owner'] = self.owner
         d_event['returnedAmount'] = Web3.fromWei(self.returnedAmount, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'received')
-        d_event['returnedCommission'] = Web3.fromWei(self.returnedCommission, 'surplus')
+        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
+        d_event['returnedCommission'] = Web3.fromWei(self.returnedCommission, 'ether')
 
         return d_event
 
