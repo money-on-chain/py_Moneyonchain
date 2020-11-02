@@ -1402,3 +1402,126 @@ class DEXTransferFailed(BaseEvent):
                 format(float(d_event['_amount']), '.18f'),
                 d_event['_isRevert']
                 ]
+
+
+class DEXCommissionWithdrawn(BaseEvent):
+    name = "CommissionWithdrawn"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
+        except BlockNotFound:
+            self.timestamp = None
+
+        self.token = event['args']['token']
+        self.commissionBeneficiary = event['args']['commissionBeneficiary']
+        self.withdrawnAmount = event['args']['withdrawnAmount']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'token', 'commissionBeneficiary', 'withdrawnAmount']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        if self.timestamp:
+            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            d_event['timestamp'] = ''
+        d_event['token'] = self.token
+        d_event['commissionBeneficiary'] = self.commissionBeneficiary
+        d_event['withdrawnAmount'] = Web3.fromWei(self.withdrawnAmount, 'ether')
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['token'],
+                d_event['commissionBeneficiary'],
+                format(float(d_event['withdrawnAmount']), '.18f')
+                ]
+
+
+class DEXTokenPairDisabled(BaseEvent):
+    name = "TokenPairDisabled"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
+        except BlockNotFound:
+            self.timestamp = None
+
+        self.baseToken = event['args']['baseToken']
+        self.secondaryToken = event['args']['secondaryToken']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'baseToken', 'secondaryToken']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        if self.timestamp:
+            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            d_event['timestamp'] = ''
+        d_event['baseToken'] = self.baseToken
+        d_event['secondaryToken'] = self.secondaryToken
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['baseToken'],
+                d_event['secondaryToken']
+                ]
+
+
+class DEXTokenPairEnabled(BaseEvent):
+    name = "TokenPairEnabled"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
+        except BlockNotFound:
+            self.timestamp = None
+
+        self.baseToken = event['args']['baseToken']
+        self.secondaryToken = event['args']['secondaryToken']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'baseToken', 'secondaryToken']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        if self.timestamp:
+            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            d_event['timestamp'] = ''
+        d_event['baseToken'] = self.baseToken
+        d_event['secondaryToken'] = self.secondaryToken
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['baseToken'],
+                d_event['secondaryToken']
+                ]
