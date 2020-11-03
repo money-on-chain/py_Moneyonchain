@@ -244,7 +244,8 @@
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "dex": "0x6216241A097eb707CeaD488D6EE32627e218F5C7",
-        "commissionManager": "0xE480745080351e2a70329a80a4fF1B1A4B4ec785"
+        "commissionManager": "0xE480745080351e2a70329a80a4fF1B1A4B4ec785",
+        "WRBTCToken": "0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E"
       }
 
     }
