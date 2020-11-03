@@ -55,6 +55,17 @@ class MoCDecentralizedExchange(Contract):
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
+    def min_order_amount(self, formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+        """Gets min order amount"""
+
+        result = self.sc.functions.minOrderAmount().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def token_pairs(self, block_identifier: BlockIdentifier = 'latest'):
         """ Get the token pairs"""
 

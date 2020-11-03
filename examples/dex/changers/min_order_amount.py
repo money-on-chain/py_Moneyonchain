@@ -3,7 +3,7 @@ Changer to change the commission rate in the MoC Decentralized Exchange
 """
 
 from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import DexCommissionRateChanger
+from moneyonchain.changers import DexMinOrderAmountChanger
 
 import logging
 import logging.config
@@ -18,11 +18,12 @@ connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-contract = DexCommissionRateChanger(connection_manager)
+contract = DexMinOrderAmountChanger(connection_manager)
 
-commission_rate = int(0.001 * 10 ** 18)
+# Min Order 10 DOC
+min_order_amount = int(10 * 10 ** 18)
 
-tx_hash, tx_receipt = contract.constructor(commission_rate,
+tx_hash, tx_receipt = contract.constructor(min_order_amount,
                                            execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
