@@ -232,6 +232,7 @@
       "app_mode": "DEX",
       "uri": ["https://public-node.testnet.rsk.co"],
       "chain_id": 31,
+      "gas_price": 68000000,
       "accounts": [
         {
           "address": "0xE2929d888015EB568AFfa06aaB946923a7236Ad9",

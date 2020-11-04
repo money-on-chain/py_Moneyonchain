@@ -14,11 +14,14 @@
 
 import os
 import logging
+from decimal import Decimal
 from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import Contract
 from moneyonchain.admin import ProxyAdmin
+
+from moneyonchain.events import DEXNewOrderInserted
 
 
 class MoCDecentralizedExchange(Contract):
@@ -54,6 +57,15 @@ class MoCDecentralizedExchange(Contract):
         contract_address = Web3.toChecksumAddress(self.contract_address)
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+    def paused(self,
+               block_identifier: BlockIdentifier = 'latest'):
+        """is Paused"""
+
+        result = self.sc.functions.paused().call(
+            block_identifier=block_identifier)
+
+        return result
 
     def min_order_amount(self, formatted: bool = True,
                          block_identifier: BlockIdentifier = 'latest'):
@@ -293,6 +305,190 @@ class MoCDecentralizedExchange(Contract):
                     tx_receipt['from']))
 
         return tx_hash, tx_receipt
+
+    def _insert_sell_limit_order(self,
+                                 base_token,
+                                 secondary_token,
+                                 amount,
+                                 price,
+                                 lifespan,
+                                 gas_limit=3500000,
+                                 wait_timeout=240,
+                                 default_account=None,
+                                 wait_receipt=True,
+                                 poll_latency=0.5):
+        """ Inserts an order in the sell orderbook of a given pair without a hint
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        tx_hash = None
+        tx_receipt = None
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'insertSellLimitOrder',
+                                                          base_token,
+                                                          secondary_token,
+                                                          amount,
+                                                          price,
+                                                          lifespan,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
+
+            self.log.info(
+                "Successfully inserted sell limit order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def insert_sell_limit_order(self,
+                                base_token,
+                                secondary_token,
+                                amount,
+                                price,
+                                lifespan,
+                                gas_limit=3500000,
+                                wait_timeout=240,
+                                default_account=None,
+                                wait_receipt=True,
+                                poll_latency=0.5):
+        """ Inserts an order in the sell orderbook of a given pair without a hint
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        base_token = Web3.toChecksumAddress(base_token)
+        secondary_token = Web3.toChecksumAddress(secondary_token)
+        amount_sc = int(Decimal(amount) * self.precision)
+        price_sc = int(Decimal(price) * self.precision)
+        lifespan_sc = int(lifespan)
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        tx_hash, tx_receipt = self._insert_sell_limit_order(
+            base_token,
+            secondary_token,
+            amount_sc,
+            price_sc,
+            lifespan_sc,
+            gas_limit=gas_limit,
+            wait_timeout=wait_timeout,
+            default_account=default_account,
+            wait_receipt=wait_receipt,
+            poll_latency=poll_latency)
+
+        tx_logs = None
+        tx_logs_formatted = None
+
+        if tx_receipt:
+            # receipt to logs
+            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
+                self.connection_manager,
+                tx_logs["NewOrderInserted"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def _insert_buy_limit_order(self,
+                                base_token,
+                                secondary_token,
+                                amount,
+                                price,
+                                lifespan,
+                                gas_limit=3500000,
+                                wait_timeout=240,
+                                default_account=None,
+                                wait_receipt=True,
+                                poll_latency=0.5):
+        """ @notice Inserts an order in the buy orderbook of a given pair without a hint
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        tx_hash = None
+        tx_receipt = None
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'insertBuyLimitOrder',
+                                                          base_token,
+                                                          secondary_token,
+                                                          amount,
+                                                          price,
+                                                          lifespan,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
+
+            self.log.info(
+                "Successfully inserted buy limit order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def insert_buy_limit_order(self,
+                               base_token,
+                               secondary_token,
+                               amount,
+                               price,
+                               lifespan,
+                               gas_limit=3500000,
+                               wait_timeout=240,
+                               default_account=None,
+                               wait_receipt=True,
+                               poll_latency=0.5):
+        """ Inserts an order in the buy orderbook of a given pair without a hint
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        base_token = Web3.toChecksumAddress(base_token)
+        secondary_token = Web3.toChecksumAddress(secondary_token)
+        amount_sc = int(Decimal(amount) * self.precision)
+        price_sc = int(Decimal(price) * self.precision)
+        lifespan_sc = int(lifespan)
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        tx_hash, tx_receipt = self._insert_buy_limit_order(
+            base_token,
+            secondary_token,
+            amount_sc,
+            price_sc,
+            lifespan_sc,
+            gas_limit=gas_limit,
+            wait_timeout=wait_timeout,
+            default_account=default_account,
+            wait_receipt=wait_receipt,
+            poll_latency=poll_latency)
+
+        tx_logs = None
+        tx_logs_formatted = None
+
+        if tx_receipt:
+            # receipt to logs
+            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
+                self.connection_manager,
+                tx_logs["NewOrderInserted"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
 
 class CommissionManager(Contract):

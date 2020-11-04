@@ -220,7 +220,11 @@ class ConnectionManager(BaseConnectionManager):
             if 'value' in tx_params:
                 tx_value = tx_params['value']
 
-        gas_price = self.options['gas_price']
+        if 'gas_price' in self.options['networks'][network]:
+            gas_price = self.options['networks'][network]['gas_price']
+        else:
+            gas_price = self.options['gas_price']
+
         if gas_price <= 0:
             gas_price = self.minimum_gas_price
 
