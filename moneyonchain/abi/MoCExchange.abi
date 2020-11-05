@@ -449,6 +449,76 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "name": "btcAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "txTypeFeesMOC",
+        "type": "uint8"
+      },
+      {
+        "name": "txTypeFeesRBTC",
+        "type": "uint8"
+      }
+    ],
+    "name": "calculateCommissionsWithPrices",
+    "outputs": [
+      {
+        "name": "btcCommission",
+        "type": "uint256"
+      },
+      {
+        "name": "mocCommission",
+        "type": "uint256"
+      },
+      {
+        "name": "btcPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "mocPrice",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "btcAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "convertToMoCPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -457,14 +527,6 @@
       },
       {
         "name": "bproAmount",
-        "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
         "type": "uint256"
       }
     ],
@@ -497,14 +559,6 @@
       {
         "name": "docAmount",
         "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
-        "type": "uint256"
       }
     ],
     "name": "redeemFreeDoc",
@@ -535,14 +589,6 @@
       },
       {
         "name": "btcToMint",
-        "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
         "type": "uint256"
       }
     ],
@@ -639,17 +685,20 @@
         "type": "uint256"
       },
       {
-        "name": "mocCommissionInBtc",
+        "name": "mocCommission",
+        "type": "uint256"
+      },
+      {
+        "name": "btcPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "mocPrice",
         "type": "uint256"
       }
     ],
     "name": "mintBPro",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -663,14 +712,6 @@
       },
       {
         "name": "btcAmount",
-        "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
         "type": "uint256"
       }
     ],
@@ -707,14 +748,6 @@
       {
         "name": "btcToMint",
         "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
-        "type": "uint256"
       }
     ],
     "name": "mintBProx",
@@ -749,14 +782,6 @@
       },
       {
         "name": "bproxAmount",
-        "type": "uint256"
-      },
-      {
-        "name": "mocBalance",
-        "type": "uint256"
-      },
-      {
-        "name": "mocAllowance",
         "type": "uint256"
       }
     ],
