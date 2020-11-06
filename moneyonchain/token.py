@@ -15,6 +15,7 @@ import os
 import logging
 from web3 import Web3
 from web3.types import BlockIdentifier
+from decimal import Decimal
 
 from moneyonchain.contract import Contract
 
@@ -22,6 +23,7 @@ from moneyonchain.contract import Contract
 class ERC20Token(Contract):
 
     log = logging.getLogger()
+    precision = 10 ** 18
 
     def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
 
@@ -69,6 +71,41 @@ class ERC20Token(Contract):
         if formatted:
             balance = Web3.fromWei(balance, 'ether')
         return balance
+
+    def approve(self,
+                contract_address,
+                amount,
+                gas_limit=3500000,
+                wait_timeout=240,
+                default_account=None,
+                wait_receipt=True,
+                poll_latency=0.5):
+        """Set allowance """
+
+        tx_receipt = None
+        sc_amount = int(Decimal(amount) * self.precision)
+        sc_address = Web3.toChecksumAddress(contract_address)
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'approve',
+                                                          sc_address,
+                                                          sc_amount,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
+
+            self.log.info("Successfully aprove in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                            tx_receipt['blockNumber'],
+                            Web3.toHex(tx_receipt['transactionHash']),
+                            tx_receipt['gasUsed'],
+                            tx_receipt['from']))
+
+        return tx_hash, tx_receipt
 
 
 class DoCToken(ERC20Token):

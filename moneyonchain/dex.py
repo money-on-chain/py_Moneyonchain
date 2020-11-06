@@ -544,6 +544,17 @@ class CommissionManager(Contract):
 
         return result
 
+    def minimum_commission(self, formatted: bool = True,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """Get minimum commission"""
+
+        result = self.sc.functions.minimumCommission().call(
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def cancelation_penalty_rate(self, formatted: bool = True,
                                  block_identifier: BlockIdentifier = 'latest'):
         """Gets cancelationPenaltyRate"""
@@ -567,12 +578,16 @@ class CommissionManager(Contract):
         return result
 
     def calculate_initial_fee(self,
-                              amount: int,
+                              amount: float,
+                              price: float,
                               formatted: bool = True,
                               block_identifier: BlockIdentifier = 'latest'):
         """Calculate initial fee. Initial fee is the commission at insertion order"""
 
-        result = self.sc.functions.calculateInitialFee(amount).call(
+        amount_sc = int(Decimal(amount) * self.precision)
+        price_sc = int(Decimal(price) * self.precision)
+
+        result = self.sc.functions.calculateInitialFee(amount_sc, price_sc).call(
             block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')

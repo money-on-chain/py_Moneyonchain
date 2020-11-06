@@ -246,7 +246,33 @@
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "dex": "0x6216241A097eb707CeaD488D6EE32627e218F5C7",
         "commissionManager": "0xE480745080351e2a70329a80a4fF1B1A4B4ec785",
+        "BProToken": "0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61",
+        "DoCToken": "0x2d919F19D4892381D58edeBeca66D5642Cef1a1f",
         "WRBTCToken": "0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E"
+      }
+
+    },
+    "dexDevelopment": {
+      "app_mode": "DEX",
+      "uri": ["http://192.168.56.2:8545"],
+      "chain_id": 123456,
+      "gas_price": 60000000,
+      "accounts": [
+        {
+          "address": "0x0e424e9a8598a55918e12de47172f3180c4b4e13",
+          "private_key": ""
+        }
+      ],
+      "addresses": {
+        "governor": "0xEE8830f1685DE9fc3f36A54Fc4e0eef4B4e21a65",
+        "stopper": "0x7f9ABfc16165d9c6Ff42Cf2820058863cc4FB4e0",
+        "admin": "0x9c0A3ef7866EdF152245AD8FffE8598BC6c9A2Cd",
+        "upgradeDelegator": "0xa66A97e28480161450eB4282CB4DEB128A8dD915",
+        "dex": "0x641918Af8dEFC564Ed6C56Dd6cfd1336aBAb7FEB",
+        "commissionManager": "0xfC49331bEe95bB5482155F1ac6d8E0ACb1C545B0",
+        "BProToken": "0xA7398f961A4649bDc7DAe94f706A017Bbb86a648",
+        "DoCToken": "0x2F70e2ffC24E04236578Ae64B4C5520620ff7b69",
+        "WRBTCToken": "0xBA72b421976c66a7eF31a760CdE26a5153D002C8"
       }
 
     }

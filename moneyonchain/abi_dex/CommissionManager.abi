@@ -70,6 +70,20 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "minimumCommission",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [],
       "name": "renounceOwnership",
@@ -248,6 +262,10 @@
         {
           "name": "_amount",
           "type": "uint256"
+        },
+        {
+          "name": "_priceOneDoc",
+          "type": "uint256"
         }
       ],
       "name": "calculateInitialFee",
@@ -321,11 +339,39 @@
       "constant": false,
       "inputs": [
         {
+          "name": "_minimumCommission",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMinimumCommission",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
           "name": "_tokenAddress",
           "type": "address"
         }
       ],
       "name": "clearExchangeCommissions",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -357,20 +403,10 @@
         {
           "name": "_owner",
           "type": "address"
-        }
-      ],
-      "name": "initialize",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
+        },
         {
-          "name": "sender",
-          "type": "address"
+          "name": "_minimumCommission",
+          "type": "uint256"
         }
       ],
       "name": "initialize",
