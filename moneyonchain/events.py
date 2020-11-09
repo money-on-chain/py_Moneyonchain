@@ -21,6 +21,14 @@ class BaseEvent(object):
     name = "BaseEvent"
     hours_delta = 0
 
+    @staticmethod
+    def columns():
+        raise NotImplementedError("Subclass must implement 'columns()' method")
+
+    @staticmethod
+    def row():
+        raise NotImplementedError("Subclass must implement 'row()' method")
+
     def print_row(self):
         print('\t'.join(self.columns()))
         print('\t'.join(str(v) for v in self.row()))
