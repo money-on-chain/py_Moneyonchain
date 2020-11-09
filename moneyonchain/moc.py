@@ -1572,6 +1572,9 @@ class MoC(Contract):
         # load contract moc doc_token
         self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
 
+        # load contract moc moc_token
+        self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
+
     def implementation(self, block_identifier: BlockIdentifier = 'latest'):
         """Implementation of contract"""
 
@@ -1653,6 +1656,17 @@ class MoC(Contract):
             contract_address = self.connection_manager.options['networks'][network]['addresses']['DoCToken']
 
         sc = DoCToken(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
+
+    def load_moc_moc_token_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCToken']
+
+        sc = MoCToken(self.connection_manager,
                       contract_address=contract_address)
 
         return sc
@@ -2073,7 +2087,7 @@ class MoC(Contract):
                        formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
 
-        return self.sc_moc_state.moc_token.balance_of(account_address,
+        return self.sc_moc_moc_token.balance_of(account_address,
                                                 formatted=formatted,
                                                 block_identifier=block_identifier)
 
@@ -2083,7 +2097,7 @@ class MoC(Contract):
                        formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
 
-        return self.sc_moc_state.moc_token.allowance(account_address,
+        return self.sc_moc_moc_token.allowance(account_address,
                                                 contract_address,
                                                 formatted=formatted,
                                                 block_identifier=block_identifier)
@@ -2178,8 +2192,8 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0;
+        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
+            moc_commission_in_btc = 0
             tx_type = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
 
@@ -2196,8 +2210,8 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0;
+        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
+            moc_commission_in_btc = 0
             tx_type = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
 
@@ -2214,8 +2228,8 @@ class MoC(Contract):
         total_amount = amount
         commission_value = 0
 
-        if (moc_balance < moc_commission_in_btc or moc_allowance < moc_commission_in_btc) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0;
+        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
+            moc_commission_in_btc = 0
             tx_type = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
             commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
 
