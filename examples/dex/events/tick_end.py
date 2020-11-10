@@ -25,8 +25,8 @@ dex = MoCDecentralizedExchange(connection_manager)
 
 events_functions = ['TickEnd']
 hours_delta = 0
-from_block = 1291650  # from block start
-to_block = 1299999  # block end or 0 to last block
+from_block = 1332673  # from block start
+to_block = 1332700  # block end or 0 to last block
 l_events = dex.logs_from(events_functions, from_block, to_block, block_steps=2880)
 
 # TickStart

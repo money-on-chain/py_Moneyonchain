@@ -125,6 +125,13 @@ if price_provider_address:
 
 """
 1. DOC / WRBTC  <--
+2. DOC / RDOC
+....
+
+
+-----------------------------------------------------------------------------------
+
+1. DOC / WRBTC  <--
 2020-10-15 11:47:43 default      INFO     Connecting to dexTestnet...
 2020-10-15 11:47:44 default      INFO     Connected: True
 2020-10-15 11:47:44 default      INFO     Deploying Price provider ...

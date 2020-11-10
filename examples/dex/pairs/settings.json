@@ -3,7 +3,7 @@
     "DOC/WRBTC":{
       "baseToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
       "secondaryToken": "0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E",
-      "price": "11400000000000000000000",
+      "price": "15530000000000000000000",
       "precision": "1000000000000000000",
       "provider": {
         "type": "external",

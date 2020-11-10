@@ -244,11 +244,8 @@
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
-        "dex": "0x6216241A097eb707CeaD488D6EE32627e218F5C7",
-        "commissionManager": "0xE480745080351e2a70329a80a4fF1B1A4B4ec785",
-        "BProToken": "0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61",
-        "DoCToken": "0x2d919F19D4892381D58edeBeca66D5642Cef1a1f",
-        "WRBTCToken": "0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E"
+        "dex": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
+        "commissionManager": "0x17264Fce635B6974A1b726F2f10f74e723Dee016"
       }
 
     },
@@ -264,15 +261,15 @@
         }
       ],
       "addresses": {
-        "governor": "0xEE8830f1685DE9fc3f36A54Fc4e0eef4B4e21a65",
-        "stopper": "0x7f9ABfc16165d9c6Ff42Cf2820058863cc4FB4e0",
-        "admin": "0x9c0A3ef7866EdF152245AD8FffE8598BC6c9A2Cd",
-        "upgradeDelegator": "0xa66A97e28480161450eB4282CB4DEB128A8dD915",
-        "dex": "0x641918Af8dEFC564Ed6C56Dd6cfd1336aBAb7FEB",
-        "commissionManager": "0xfC49331bEe95bB5482155F1ac6d8E0ACb1C545B0",
-        "BProToken": "0xA7398f961A4649bDc7DAe94f706A017Bbb86a648",
-        "DoCToken": "0x2F70e2ffC24E04236578Ae64B4C5520620ff7b69",
-        "WRBTCToken": "0xBA72b421976c66a7eF31a760CdE26a5153D002C8"
+        "governor": "0xa7A02e22Fd58FbB6bb36628FC37dbEB370aDd90F",
+        "stopper": "0x07D703a9F07df44293b432C4044e920f63D4DAC6",
+        "admin": "0xAE771163e5Aac737493D5a1391a5cfa3d056f1E6",
+        "upgradeDelegator": "0x1b1b62b7A043aA17Bb48b86081c07F02cBAeeCAF",
+        "dex": "0xA5d834c2835DD51D152E7e77aD07003D4Eb9C363",
+        "commissionManager": "0xcD792A1Ad995A860cB395e888D8557A23622Bfc4",
+        "BProToken": "0xbBF7a53dFd8Fd2F661a46f87342B704BB844A713",
+        "DoCToken": "0x5952E1AF349cd3133885C2b154ACA4FcBAa7459E",
+        "WRBTCToken": "0x5307a44E600556CdcE8A28d963361816f6aF9ab3"
       }
 
     }

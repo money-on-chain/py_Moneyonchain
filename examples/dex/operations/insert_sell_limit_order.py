@@ -29,7 +29,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexDevelopment'
+network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -42,9 +42,9 @@ settings = options_from_settings(
 dex = MoCDecentralizedExchange(connection_manager)
 
 base_token = settings[network]['DOC']
-secondary_token = settings[network]['BPRO']
-amount = 1
-price = 1
+secondary_token = settings[network]['WRBTC']
+amount = 0.002
+price = 10000
 lifespan = 5
 
 print("Insert sell limit order. Please wait to the transaction be mined!...")

@@ -1462,6 +1462,14 @@ class MoC(Contract):
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
+    def governor(self, block_identifier: BlockIdentifier = 'latest'):
+        """Contract address output"""
+
+        result = self.sc.functions.governor().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def load_moc_inrate_contract(self, contract_address):
 
         network = self.connection_manager.network

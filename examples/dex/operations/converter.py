@@ -17,7 +17,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexDevelopment'
+network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -30,10 +30,11 @@ print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(connection_manager)
 
 base_token = settings[network]['DOC']
-secondary_token = settings[network]['BPRO']
+secondary_token = settings[network]['WRBTC']
 
-amount = int(1 * 10 ** 18)
+amount = int(10 * 10 ** 18)
 
-print(dex.convert_token_to_common_base(secondary_token, amount, base_token))
+#print(dex.convert_token_to_common_base(secondary_token, amount, base_token))
+print(dex.convert_token_to_common_base(base_token, amount, secondary_token))
 
 print(dex.token_pairs_status(base_token, secondary_token))
