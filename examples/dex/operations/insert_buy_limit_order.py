@@ -42,9 +42,9 @@ settings = options_from_settings(
 dex = MoCDecentralizedExchange(connection_manager)
 
 base_token = settings[network]['DOC']
-secondary_token = settings[network]['WRBTC']
-amount = 0.001
-price = 10000.0
+secondary_token = settings[network]['RDOC']
+amount = 10
+price = 1
 lifespan = 5
 amount_buy = amount * price
 
