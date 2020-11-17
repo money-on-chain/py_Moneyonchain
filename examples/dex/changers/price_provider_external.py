@@ -37,8 +37,8 @@ settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 base_token = settings[network]['DOC']
-secondary_token = settings[network]['WRBTC']
-external_price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
+secondary_token = settings[network]['RIF']
+external_price_provider = '0x987ccC60c378a61d167B6DD1EEF7613c6f63938f'
 
 price_provider = ExternalOraclePriceProviderFallback(connection_manager)
 tx_hash, tx_receipt = price_provider.constructor(external_price_provider, base_token, secondary_token)

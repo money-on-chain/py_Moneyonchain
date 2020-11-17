@@ -39,9 +39,9 @@ settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 
-base_token = settings[network]['WRBTC']
-secondary_token = settings[network]['BPRO']
-ema_price = int(Decimal(1.2) * 10 ** 18)
+base_token = settings[network]['DOC']
+secondary_token = settings[network]['RIF']
+ema_price = int(Decimal(0.1033) * 10 ** 18)
 
 tx_hash, tx_receipt = contract.constructor(base_token,
                                            secondary_token,
