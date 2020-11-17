@@ -56,7 +56,7 @@
         "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
-        "oracle": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
+        "oracle": "0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "MoC": "0x2820f6d4D199B8D8838A4B26F9917754B86a0c1F",
         "MoCInrate": "0x76790f846FAAf44cf1B2D717d0A6c5f6f5152B60",
@@ -75,7 +75,7 @@
         "PriceFeed_3": "0x02baf7348859aAC6CfEEc53498A077790244bBe6",
         "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
         "DoCToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
-        "MoCMedianizer": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
+        "MoCMedianizer": "0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d",
         "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40"
       }
