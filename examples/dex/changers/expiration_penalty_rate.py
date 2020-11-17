@@ -22,7 +22,7 @@ contract = DexExpirationPenaltyRateChanger(connection_manager)
 
 # expirationPenaltyRate wad from 0 to 1 that represents the rate of the commission to charge when the order expire,
 # 1 represents the full commission
-expiration_penalty_rate = int(1 * 10 ** 18)
+expiration_penalty_rate = int(0.2 * 10 ** 18)
 
 tx_hash, tx_receipt = contract.constructor(expiration_penalty_rate,
                                            execute_change=False)

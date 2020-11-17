@@ -25,7 +25,7 @@ settings = options_from_settings(
 print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(connection_manager)
 
-base_token = settings[network]['DOC']
-secondary_token = settings[network]['WRBTC']
+base_token = settings[network]['WRBTC']
+secondary_token = settings[network]['BPRO']
 
 print(dex.token_pairs_status(base_token, secondary_token))

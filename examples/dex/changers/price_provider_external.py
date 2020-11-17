@@ -1,6 +1,8 @@
 """
 Price Provider Changer
 """
+import json
+import os
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.changers import DexPriceProviderChanger
@@ -14,24 +16,29 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 log = logging.getLogger('default')
 
+
+def options_from_settings(filename='settings.json'):
+    """ Options from file settings.json """
+
+    with open(filename) as f:
+        config_options = json.load(f)
+
+    return config_options
+
+
 network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-"""
 
+# load settings from file
+settings = options_from_settings(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
-DOC / WRBTC
-
-1/11400
-
-"""
-
-base_token = '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0'
-secondary_token = '0xA274d994F698Dd09256674960d86aBa22C086669'
-external_price_provider = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
-
+base_token = settings[network]['DOC']
+secondary_token = settings[network]['WRBTC']
+external_price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
 
 price_provider = ExternalOraclePriceProviderFallback(connection_manager)
 tx_hash, tx_receipt = price_provider.constructor(external_price_provider, base_token, secondary_token)
