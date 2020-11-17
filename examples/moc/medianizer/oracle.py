@@ -21,7 +21,8 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 #oracle_address = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
 #oracle_address = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
 #oracle_address = '0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849'
-oracle_address = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
+#oracle_address = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
+oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
 
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
 

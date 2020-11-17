@@ -12,7 +12,7 @@ from moneyonchain.rdoc import RDOCMoCMedianizer
 # rdocMainnet: Production Mainnet
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnetAlpha'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -20,8 +20,10 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Connecting to RDOC Main Contract")
 moc_contract = RDOCMoC(connection_manager)
 
-oracle_provider = moc_contract.sc_moc_state.price_provider()
-print("Oracle address: {0}".format(oracle_provider))
+#oracle_provider = moc_contract.sc_moc_state.price_provider()
+#print("Oracle address: {0}".format(oracle_provider))
+
+oracle_provider = '0x987ccC60c378a61d167B6DD1EEF7613c6f63938f'
 
 oracle = RDOCMoCMedianizer(connection_manager, contract_address=oracle_provider)
 
