@@ -249,6 +249,27 @@
       }
 
     },
+    "dexMainnet": {
+      "app_mode": "DEX",
+      "uri": ["https://public-node.rsk.co"],
+      "chain_id": 30,
+      "gas_price": 60000000,
+      "accounts": [
+        {
+          "address": "0xE2929d888015EB568AFfa06aaB946923a7236Ad9",
+          "private_key": ""
+        }
+      ],
+      "addresses": {
+        "governor": "0x036CaF1d8B11d46F5D819241cFFAC06cDF9Fd230",
+        "stopper": "0xEdA04b62fD4ce63836673F7DB9d0a9B59dd437eb",
+        "admin": "0x6891b67fBF7DAFA462C3378B0b6f40F2B41880A4",
+        "upgradeDelegator": "0xA824640ce0608C56Defd70EE180fFAe5f394D488",
+        "dex": "0x4ebd075534d9E24cE134f8BC962311c913730a84",
+        "commissionManager": "0xfBBEA67566844601fFB8ABe8FC2E7E6547A408f0"
+      }
+
+    },
     "dexDevelopment": {
       "app_mode": "DEX",
       "uri": ["http://192.168.56.2:8545"],
