@@ -21,7 +21,7 @@ from web3.types import BlockIdentifier
 from moneyonchain.contract import Contract
 from moneyonchain.admin import ProxyAdmin
 
-from moneyonchain.events import DEXNewOrderInserted
+from moneyonchain.events import DEXNewOrderInserted, DEXCommissionWithdrawn
 
 
 class MoCDecentralizedExchange(Contract):
@@ -487,6 +487,50 @@ class MoCDecentralizedExchange(Contract):
             tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
                 self.connection_manager,
                 tx_logs["NewOrderInserted"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def withdraw_commissions(self,
+                             token,
+                             gas_limit=3500000,
+                             wait_timeout=240,
+                             default_account=None,
+                             wait_receipt=True,
+                             poll_latency=0.5):
+        """
+        Withdraws all the already charged(because of a matching, a cancellation or an expiration)
+        commissions of a given token
+        token Address of the token to withdraw the commissions from
+        """
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'withdrawCommissions',
+                                                          Web3.toChecksumAddress(token),
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout,
+                                                                              poll_latency=poll_latency)
+
+            self.log.info(
+                "Withdraw commission finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        tx_logs = None
+        tx_logs_formatted = None
+        # if tx_receipt:
+        #     # receipt to logs
+        #     tx_logs = {"CommissionWithdrawn": self.events.CommissionWithdrawn().processReceipt(tx_receipt)}
+        #     tx_logs_formatted = {"CommissionWithdrawn": DEXCommissionWithdrawn(
+        #         self.connection_manager,
+        #         tx_logs["CommissionWithdrawn"][0])}
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
