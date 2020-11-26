@@ -22,7 +22,7 @@ def options_from_settings(filename='settings.json'):
 
 console = Console()
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

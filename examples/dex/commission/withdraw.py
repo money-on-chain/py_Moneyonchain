@@ -30,7 +30,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -42,7 +42,7 @@ settings = options_from_settings(
 # instantiate DEX Contract
 dex = MoCDecentralizedExchange(connection_manager)
 
-token_name = 'WRBTC'
+token_name = 'DOC'
 token = settings[network][token_name]
 
 print("Withdraw commission from token: {0}. Please wait to the transaction be mined!...".format(

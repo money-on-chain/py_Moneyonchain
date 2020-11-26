@@ -245,7 +245,8 @@
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
         "dex": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
-        "commissionManager": "0x17264Fce635B6974A1b726F2f10f74e723Dee016"
+        "commissionManager": "0x17264Fce635B6974A1b726F2f10f74e723Dee016",
+        "MoCExchangeLib": "0x643ef47e91c15d503899dF27D8F1DC3B2829bE97"
       }
 
     },
@@ -266,7 +267,8 @@
         "admin": "0x6891b67fBF7DAFA462C3378B0b6f40F2B41880A4",
         "upgradeDelegator": "0xA824640ce0608C56Defd70EE180fFAe5f394D488",
         "dex": "0x4ebd075534d9E24cE134f8BC962311c913730a84",
-        "commissionManager": "0xfBBEA67566844601fFB8ABe8FC2E7E6547A408f0"
+        "commissionManager": "0xfBBEA67566844601fFB8ABe8FC2E7E6547A408f0",
+        "MoCExchangeLib": "0x12ede3eEBF9e3FD6317cFBCb3ebfc762Db954d68"
       }
 
     },

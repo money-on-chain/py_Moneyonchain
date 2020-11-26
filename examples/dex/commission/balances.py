@@ -19,7 +19,7 @@ def options_from_settings(filename='settings.json'):
 
 console = Console()
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -28,7 +28,9 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
-account = '0xf69287F5Ca3cC3C6d3981f2412109110cB8af076' #'0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
+account = '0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128'
+#'0xf69287F5Ca3cC3C6d3981f2412109110cB8af076'
+#'0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
 block_identifier = connection_manager.block_number
 
 table = Table(show_header=True, header_style="bold magenta", title="Account Balances: {0}".format(account))
