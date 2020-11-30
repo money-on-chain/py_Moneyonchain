@@ -89,6 +89,30 @@ class MoCDecentralizedExchange(Contract):
 
         return result
 
+    def min_multiply_factor(self, formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """ Minimum range avalaible price to be paid   """
+
+        result = self.sc.functions.minMultiplyFactor().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def max_multiply_factor(self, formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """ Maximum range avalaible price to be paid   """
+
+        result = self.sc.functions.maxMultiplyFactor().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def token_pairs(self, block_identifier: BlockIdentifier = 'latest'):
         """ Get the token pairs"""
 
@@ -482,6 +506,194 @@ class MoCDecentralizedExchange(Contract):
             secondary_token,
             amount_sc,
             price_sc,
+            lifespan_sc,
+            gas_limit=gas_limit,
+            wait_timeout=wait_timeout,
+            default_account=default_account,
+            wait_receipt=wait_receipt,
+            poll_latency=poll_latency)
+
+        tx_logs = None
+        tx_logs_formatted = None
+
+        if tx_receipt:
+            # receipt to logs
+            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
+                self.connection_manager,
+                tx_logs["NewOrderInserted"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def _insert_sell_market_order(self,
+                                  base_token,
+                                  secondary_token,
+                                  amount,
+                                  multiply_factor,
+                                  lifespan,
+                                  gas_limit=3500000,
+                                  wait_timeout=240,
+                                  default_account=None,
+                                  wait_receipt=True,
+                                  poll_latency=0.5):
+        """ Inserts a market order at start in the buy orderbook of a given pair with a hint;
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        tx_hash = None
+        tx_receipt = None
+        is_buy = False
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'insertMarketOrder',
+                                                          base_token,
+                                                          secondary_token,
+                                                          amount,
+                                                          multiply_factor,
+                                                          lifespan,
+                                                          is_buy,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
+
+            self.log.info(
+                "Successfully inserted sell market order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def insert_sell_market_order(self,
+                                 base_token,
+                                 secondary_token,
+                                 amount,
+                                 multiply_factor,
+                                 lifespan,
+                                 gas_limit=3500000,
+                                 wait_timeout=240,
+                                 default_account=None,
+                                 wait_receipt=True,
+                                 poll_latency=0.5):
+        """  Inserts a market order at start in the buy orderbook of a given pair with a hint;
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        base_token = Web3.toChecksumAddress(base_token)
+        secondary_token = Web3.toChecksumAddress(secondary_token)
+        amount_sc = int(Decimal(amount) * self.precision)
+        multiply_factor_sc = int(Decimal(multiply_factor) * self.precision)
+        lifespan_sc = int(lifespan)
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        tx_hash, tx_receipt = self._insert_sell_market_order(
+            base_token,
+            secondary_token,
+            amount_sc,
+            multiply_factor_sc,
+            lifespan_sc,
+            gas_limit=gas_limit,
+            wait_timeout=wait_timeout,
+            default_account=default_account,
+            wait_receipt=wait_receipt,
+            poll_latency=poll_latency)
+
+        tx_logs = None
+        tx_logs_formatted = None
+
+        if tx_receipt:
+            # receipt to logs
+            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
+            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
+                self.connection_manager,
+                tx_logs["NewOrderInserted"][0])}
+
+        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+
+    def _insert_buy_market_order(self,
+                                 base_token,
+                                 secondary_token,
+                                 amount,
+                                 multiply_factor,
+                                 lifespan,
+                                 gas_limit=3500000,
+                                 wait_timeout=240,
+                                 default_account=None,
+                                 wait_receipt=True,
+                                 poll_latency=0.5):
+        """ Inserts a market order at start in the buy orderbook of a given pair with a hint;
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        tx_hash = None
+        tx_receipt = None
+        is_buy = True
+
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'insertMarketOrder',
+                                                          base_token,
+                                                          secondary_token,
+                                                          amount,
+                                                          multiply_factor,
+                                                          lifespan,
+                                                          is_buy,
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
+                tx_hash,
+                timeout=wait_timeout,
+                poll_latency=poll_latency)
+
+            self.log.info(
+                "Successfully inserted buy market order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                    tx_receipt['blockNumber'],
+                    Web3.toHex(tx_receipt['transactionHash']),
+                    tx_receipt['gasUsed'],
+                    tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
+    def insert_buy_market_order(self,
+                                base_token,
+                                secondary_token,
+                                amount,
+                                multiply_factor,
+                                lifespan,
+                                gas_limit=3500000,
+                                wait_timeout=240,
+                                default_account=None,
+                                wait_receipt=True,
+                                poll_latency=0.5):
+        """  Inserts a market order at start in the buy orderbook of a given pair with a hint;
+    the pair should not be disabled; the contract should not be paused. Takes the funds
+    with a transferFrom """
+
+        base_token = Web3.toChecksumAddress(base_token)
+        secondary_token = Web3.toChecksumAddress(secondary_token)
+        amount_sc = int(Decimal(amount) * self.precision)
+        multiply_factor_sc = int(Decimal(multiply_factor) * self.precision)
+        lifespan_sc = int(lifespan)
+
+        if self.paused():
+            raise Exception("Contract is paused you cannot operate!")
+
+        tx_hash, tx_receipt = self._insert_buy_market_order(
+            base_token,
+            secondary_token,
+            amount_sc,
+            multiply_factor_sc,
             lifespan_sc,
             gas_limit=gas_limit,
             wait_timeout=wait_timeout,
