@@ -64,7 +64,7 @@ table.add_row(
 )
 
 table.add_row(
-    "Fee 10 DOC", str(dex_commission.calculate_initial_fee(10, 10000))
+    "Fee 10 DOC", str(dex_commission.calculate_initial_fee(10, 1))
 )
 
 console.print(table)

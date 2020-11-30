@@ -78,6 +78,17 @@ class MoCDecentralizedExchange(Contract):
 
         return result
 
+    def max_order_lifespan(self, block_identifier: BlockIdentifier = 'latest'):
+        """Is the maximum lifespan in ticks for an order
+
+        @:return Integer number of max order lifespan in ticks
+        """
+
+        result = self.sc.functions.maxOrderLifespan().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def token_pairs(self, block_identifier: BlockIdentifier = 'latest'):
         """ Get the token pairs"""
 
