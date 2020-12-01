@@ -39,6 +39,8 @@ if 'NewOrderInserted' in l_events:
             for e_event in e_event_block:
                 tx_event = DEXNewOrderInserted(connection_manager, e_event)
                 l_historic_data.append(tx_event.row())
+                tx_event.print_table()
+                break
 
 # Write list to CSV File
 

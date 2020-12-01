@@ -2,6 +2,22 @@
 Inserts an order in the buy orderbook of a given pair without a hint
 the pair should not be disabled; the contract should not be paused. Takes the funds
 with a transferFrom
+
+
+(100 + priceDifference) / 100 = Multiply Factor
+
+Examples:
+
+     1% Multiply Factor:
+       (100 + 1) / 100 = 1.01
+    -1% Multiply Factor:
+       (100 - 1 ) / 100 = 0.99
+
+     10% Multiply Factor:
+       (100 + 10) / 100 = 1.1
+    -10% Multiply Factor:
+       (100 - 10 ) / 100 = 0.9
+
 """
 from decimal import Decimal
 from web3 import Web3
