@@ -1,8 +1,14 @@
 """
-Inserts an order in the buy orderbook of a given pair without a hint
-the pair should not be disabled; the contract should not be paused. Takes the funds
-with a transferFrom
+
+cancels the buy _orderId order.
+the contract must not be paused; the caller should be the order owner
+_baseToken Base Token involved in the canceled Order pair
+_secondaryToken Secondary Token involved in the canceled Order pair
+_orderId Order id to cancel
+_previousOrderIdHint previous order in the orderbook, used as on optimization to search for.
+
 """
+
 from decimal import Decimal
 from web3 import Web3
 import json
@@ -43,17 +49,25 @@ dex = MoCDecentralizedExchange(connection_manager)
 
 base_token = settings[network]['DOC']
 secondary_token = settings[network]['WRBTC']
-amount = 0.001
-multiply_factor = 1.01
-lifespan = 2
+order_id = 107
+previous_order_id = 0
 
-print("Insert sell market order. Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.insert_sell_market_order(
+print("Order cancel. Please wait to the transaction be mined!...")
+tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.cancel_buy_order(
     base_token,
     secondary_token,
-    amount,
-    multiply_factor,
-    lifespan)
+    order_id,
+    previous_order_id)
 print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
 if tx_logs:
-    print(tx_logs_formatted['NewOrderInserted'].print_row())
+    print(tx_logs_formatted['OrderCancelled'].print_row())
+
+
+"""
+
+Tx hash: [0xf5962de6b7f36425943be54522f804c358b171bd6414084dfc979655278952ee]
+Block Nº	Timestamp	id	sender	returnedAmount	commission	returnedCommission	isBuy
+1408435	2020-12-01 09:49:19	107	0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3	0.000969604920060969	0.000000000000000000	0.000030395079939031	True
+None
+
+"""
