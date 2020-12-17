@@ -1,8 +1,12 @@
+from decimal import Decimal
+import math
+from web3 import Web3
+
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoCInrate
 
 
-network = 'mocTestnetAlpha'
+network = 'mocMainnet2'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -26,6 +30,28 @@ print("Bitpro interest address: {0}".format(moc_inrate.bitpro_interest_address()
 print("Bitpro interest block span: {0}".format(moc_inrate.bitpro_interest_blockspan()))
 print("Bitpro interest last payed block: {0}".format(moc_inrate.last_bitpro_interest_block()))
 
+
+amount = Decimal(0.00001)
 print("Daily inrate: {0}".format(moc_inrate.daily_inrate()))
-print("Calc commission value: {0}".format(moc_inrate.calc_commission_value(10.0)))
+
+commission = moc_inrate.calc_commission_value(amount)
+mint_interest = moc_inrate.calc_mint_interest_value(amount)
+mint_interest2 = moc_inrate.calc_mint_interest_value(amount, formatted=False)
+print("Interest: {:.22f}".format(mint_interest2))
+
+print("Amount to mint: {:.18f}".format(amount))
+print("Calc commission value: {:.18f}".format(commission))
+print("Calc mint interest value: {:.18f}".format(mint_interest))
+print("RBTC Need it: {:.18f}".format(amount + commission + mint_interest))
+print("RBTC Need it: {0}".format((amount + commission + mint_interest) * 10 ** 18))
+print("RBTC Need it: {0}".format(int(math.ceil((amount + commission + mint_interest) * 10 ** 18))))
+print("RBTC Need it: {0}".format(int(math.ceil((amount + commission + mint_interest + mint_interest*Decimal(0.01)) * 10 ** 18))))
+
+print("To wei {0}".format(Web3.toWei(amount + commission + mint_interest, 'ether')))
+#print("To wei {0}".format(moc_inrate.calc_mint_interest_value2(amount, formatted=False)))
+
+#price = Web3.fromWei(price, 'ether')
+#price = Web3.toInt(result[0])
+
+
 

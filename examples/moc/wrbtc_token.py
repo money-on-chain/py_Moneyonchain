@@ -2,7 +2,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.token import WRBTC
 
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

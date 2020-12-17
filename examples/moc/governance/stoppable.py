@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'mocTestnetAlpha'
+network = 'mocMainnet2'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -22,3 +22,4 @@ contract_stopper = MoCStopper(connection_manager)
 print("Paused: {0}".format(contract_moc.paused()))
 print("Stoppable: {0}".format(contract_moc.stoppable()))
 print("Stopper: {0}".format(contract_moc.stopper()))
+print("Owner: {0}".format(contract_stopper.owner()))
