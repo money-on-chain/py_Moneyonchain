@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'rdocMainnet'
+network = 'rdocTestnetAlpha'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))

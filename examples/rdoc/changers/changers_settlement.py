@@ -10,7 +10,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 
 contract = RDOCMoCSettlementChanger(connection_manager)
 
-tx_hash, tx_receipt = contract.constructor(10000, execute_change=False)
+tx_hash, tx_receipt = contract.constructor(12000, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
 else:

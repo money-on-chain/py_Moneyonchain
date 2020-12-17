@@ -21,5 +21,7 @@ contract_stopper = RDOCStopper(connection_manager)
 
 print("Paused: {0}".format(contract_moc.paused()))
 print("Stoppable: {0}".format(contract_moc.stoppable()))
-print("Stopper: {0}".format(contract_moc.stopper()))
+print("Stopper Address: {0}".format(contract_moc.stopper()))
 print("Owner: {0}".format(contract_stopper.owner()))
+print("MoC Address: {0}".format(contract_moc.address()))
+

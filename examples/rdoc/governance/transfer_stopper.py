@@ -1,12 +1,9 @@
 """
-
-This unpause MOC Contract
-
+Transfer ownership stopper control
 """
 
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.governance import RDOCStopper
-from moneyonchain.rdoc import RDOCMoC
 
 import logging
 import logging.config
@@ -16,23 +13,27 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 log = logging.getLogger('default')
 
-
-network = 'rdocTestnetAlpha'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
+contract = RDOCStopper(connection_manager)
 
-contract_moc = RDOCMoC(connection_manager)
-contract_stopper = RDOCStopper(connection_manager)
-
-contract_to_pause = contract_moc.address()
-tx_hash, tx_receipt = contract_stopper.unpause(contract_to_pause)
-if tx_receipt:
-    print("Stop Contract Address: {address} successfully!".format(address=contract_to_pause))
+# New owner
+if network in ['rdocTestnetAlpha', 'rdocTestnet']:
+    new_owner = '0xf69287F5Ca3cC3C6d3981f2412109110cB8af076'
 else:
-    print("Error Stopping contract")
+    new_owner = '0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128'
 
+
+new_owner = '0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128'
+tx_hash, tx_receipt = contract.transfer_ownership(new_owner)
+
+if tx_receipt:
+    print("Successfully transfer ownership to : {new_owner}".format(new_owner=new_owner))
+else:
+    print("Error changing governance")
 
 """
 

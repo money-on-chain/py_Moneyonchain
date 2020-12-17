@@ -1,9 +1,8 @@
 from moneyonchain.manager import ConnectionManager
-from moneyonchain.token import RIF
-from moneyonchain.token import RIFDoC
+from moneyonchain.token import RIF, RIFPro, RIFDoC
 
 
-network = 'rdocTestnetAlpha'
+network = 'rdocTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -15,11 +14,21 @@ rif_token = RIF(connection_manager)
 print("Token Name: {0}".format(rif_token.name()))
 print("Token Symbol: {0}".format(rif_token.symbol()))
 print("Total Supply: {0}".format(rif_token.total_supply()))
-print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account)))
+print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account, block_identifier=1442600)))
+print(rif_token.address())
 
 
 doc_token = RIFDoC(connection_manager)
 print("Token Name: {0}".format(doc_token.name()))
 print("Token Symbol: {0}".format(doc_token.symbol()))
 print("Total Supply: {0}".format(doc_token.total_supply()))
-print("Account: {0} Balance DOC: {1}".format(account, doc_token.balance_of(account)))
+print("Account: {0} Balance DOC: {1}".format(account, doc_token.balance_of(account, block_identifier=1442000)))
+print(doc_token.address())
+
+
+rifp_token = RIFPro(connection_manager)
+print("Token Name: {0}".format(rifp_token.name()))
+print("Token Symbol: {0}".format(rifp_token.symbol()))
+print("Total Supply: {0}".format(rifp_token.total_supply()))
+print("Account: {0} Balance DOC: {1}".format(account, rifp_token.balance_of(account)))
+print(rifp_token.address())
