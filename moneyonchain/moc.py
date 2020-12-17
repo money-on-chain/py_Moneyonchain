@@ -18,6 +18,7 @@ import datetime
 from decimal import Decimal
 from web3 import Web3
 from web3.types import BlockIdentifier
+import math
 
 from moneyonchain.contract import Contract
 from moneyonchain.token import BProToken, DoCToken
@@ -27,7 +28,8 @@ from moneyonchain.events import MoCExchangeRiskProMint, \
     MoCExchangeRiskProRedeem, \
     MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxRedeem, \
-    MoCSettlementRedeemRequestAlter
+    MoCSettlementRedeemRequestAlter, \
+    MoCExchangeStableTokenRedeem
 from moneyonchain.admin import ProxyAdmin
 
 
@@ -212,6 +214,42 @@ class MoCMedianizer(Contract):
 
         return price
 
+    def min(self, block_identifier: BlockIdentifier = 'latest'):
+        """ Min """
+
+        result = self.sc.functions.min().call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def set_min(self,
+                minimum,
+                gas_limit=3500000,
+                wait_timeout=240,
+                default_account=None,
+                wait_receipt=True):
+        """ Minimum price feeder """
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'setMin',
+                                                          int(minimum),
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+            self.log.info("Successfully Set Min in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                tx_receipt['blockNumber'],
+                Web3.toHex(tx_receipt['transactionHash']),
+                tx_receipt['gasUsed'],
+                tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
     def peek(self, formatted: bool = True,
              block_identifier: BlockIdentifier = 'latest'):
         """Get price"""
@@ -357,6 +395,18 @@ class MoCState(Contract):
 
         return result
 
+    def liq(self, formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """liq"""
+
+        result = self.sc.functions.liq().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def cobj(self, formatted: bool = True,
              block_identifier: BlockIdentifier = 'latest'):
         """cobj"""
@@ -405,7 +455,7 @@ class MoCState(Contract):
             result = self.sc.functions.getMaxMintBPro().call(
                 block_identifier=block_identifier)
         else:
-            result = self.sc.functions.getMaxMintBPro().call(
+            result = self.sc.functions.getMaxMintRiskPro().call(
                 block_identifier=block_identifier)
 
         if formatted:
@@ -659,6 +709,38 @@ class MoCState(Contract):
 
         return result
 
+    def global_locked_reserve_tokens(self,
+                                     formatted: bool = True,
+                                     block_identifier: BlockIdentifier = 'latest'):
+        """ lockedReserveTokens amount """
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.globalLockedBitcoin().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.globalLockedReserveTokens().call(
+                block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def reserves_remainder(self,
+                           formatted: bool = True,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """ Reserves remainder """
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getRbtcRemainder().call(
+                block_identifier=block_identifier)
+        else:
+            result = self.sc.functions.getReservesRemainder().call(
+                block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
     def get_inrate_bag(self, bucket,
                        formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):
@@ -810,6 +892,42 @@ class MoCState(Contract):
         else:
             result = self.sc.functions.getPriceProvider().call(
                 block_identifier=block_identifier)
+
+        return result
+
+    def liquidation_price(self, formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Liquidation price """
+
+        result = self.sc.functions.getLiquidationPrice().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def current_abundance_ratio(self, formatted: bool = True,
+                                block_identifier: BlockIdentifier = 'latest'):
+        """ relation between stableTokens in bucket 0 and StableToken total supply """
+
+        result = self.sc.functions.currentAbundanceRatio().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def abundance_ratio(self, amount, formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """ Abundance ratio, receives tha amount of stableToken to use the value of stableToken0 and StableToken total supply """
+
+        result = self.sc.functions.abundanceRatio(amount).call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
 
         return result
 
@@ -1011,14 +1129,17 @@ class MoCInrate(Contract):
 
         return result
 
-    def calc_mint_interest_value(self, amount, formatted: bool = True, precision: bool = True):
+    def calc_mint_interest_value(self, amount,
+                                 formatted: bool = True,
+                                 precision: bool = True,
+                                 block_identifier: BlockIdentifier = 'latest'):
         """ Calc interest value amount in ether float"""
 
         bucket = str.encode('X2')
 
         if precision:
             amount = int(amount * self.precision)
-        result = self.sc.functions.calcMintInterestValues(bucket, int(amount)).call()
+        result = self.sc.functions.calcMintInterestValues(bucket, int(amount)).call(block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -1249,6 +1370,34 @@ class MoCBProxManager(Contract):
         contract_address = Web3.toChecksumAddress(self.contract_address)
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+    def available_bucket(self,
+                         bucket=None,
+                         formatted: bool = True,
+                         block_identifier: BlockIdentifier = 'latest'):
+        """ available_bucket """
+
+        if not bucket:
+            bucket = str.encode('X2')
+
+        result = self.sc.functions.isAvailableBucket(bucket).call(
+            block_identifier=block_identifier)
+
+        return result
+
+    def active_address_count(self,
+                             bucket=None,
+                             formatted: bool = True,
+                             block_identifier: BlockIdentifier = 'latest'):
+        """ Returns all the address that currently have riskProx position for this bucket """
+
+        if not bucket:
+            bucket = str.encode('X2')
+
+        result = self.sc.functions.getActiveAddressesCount(bucket).call(
+            block_identifier=block_identifier)
+
+        return result
 
 
 class MoCConverter(Contract):
@@ -2051,7 +2200,8 @@ class MoC(Contract):
 
         commission_value = self.sc_moc_inrate.calc_commission_value(amount)
         interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-        total_amount = amount + commission_value + interest_value
+        interest_value_margin = interest_value + interest_value * Decimal(0.01)
+        total_amount = amount + commission_value + interest_value_margin
 
         return total_amount, commission_value, interest_value
 
@@ -2212,7 +2362,8 @@ class MoC(Contract):
             raise Exception("You don't have suficient funds")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
-                                                          tx_params={'value': int(total_amount * self.precision)},
+                                                          tx_params={'value': int(math.ceil(total_amount *
+                                                                                            self.precision))},
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -2431,15 +2582,17 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_all_doc(self, default_account=None, wait_receipt=True):
+    def redeem_all_doc(self, default_account=None, wait_receipt=True):
         """
-        Reedem All doc only on liquidation
+        Redeem All doc only on liquidation
         """
 
-        if self.paused():
-            raise Exception("Contract is paused you cannot operate!")
+        if self.mode == 'MoC':
+            fnc_to_call = 'redeemAllDoc'
+        else:
+            fnc_to_call = 'redeemAllStableToken'
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemAllDoc',
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, fnc_to_call,
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -2447,11 +2600,15 @@ class MoC(Contract):
         tx_logs_formatted = None
         if wait_receipt:
             # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            #tx_logs = {"FreeStableTokenRedeem": self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)}
-            #tx_logs_formatted = {"FreeStableTokenRedeem": MoCExchangeFreeStableTokenRedeem(
-            #    self.connection_manager,
-            #    tx_logs["FreeStableTokenRedeem"][0])}
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=self.receipt_timeout,
+                                                                              poll_latency=self.poll_latency
+                                                                              )
+            tx_logs = {"StableTokenRedeem": self.sc_moc_exchange.events.StableTokenRedeem().processReceipt(tx_receipt)}
+            if tx_logs["StableTokenRedeem"]:
+                tx_logs_formatted = {"StableTokenRedeem": MoCExchangeStableTokenRedeem(
+                    self.connection_manager,
+                    tx_logs["StableTokenRedeem"][0])}
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 

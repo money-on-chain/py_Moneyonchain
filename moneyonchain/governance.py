@@ -279,6 +279,46 @@ class MoCStopper(Contract):
 
         return tx_hash, tx_receipt
 
+    def transfer_ownership(self, new_owner,
+                           gas_limit=3500000,
+                           wait_timeout=240,
+                           default_account=None,
+                           wait_receipt=True):
+        """
+
+        :param new_owner:
+        :param gas_limit:
+        :param wait_timeout:
+        :param default_account:
+        :param wait_receipt:
+        :return:
+
+        function transferOwnership(address newOwner) public onlyOwner {
+            _transferOwnership(newOwner);
+        }
+        """
+
+        tx_receipt = None
+        tx_hash = self.connection_manager.fnx_transaction(self.sc,
+                                                          'transferOwnership',
+                                                          Web3.toChecksumAddress(new_owner),
+                                                          default_account=default_account,
+                                                          gas_limit=gas_limit)
+
+        if wait_receipt:
+            # wait to transaction be mined
+            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
+                                                                              timeout=wait_timeout)
+
+            self.log.info("Successfully transfer ownership to: {0} in Block [{1}] Hash: [{2}] Gas used: [{3}] From: [{4}]"
+                          .format(new_owner,
+                                  tx_receipt['blockNumber'],
+                                  Web3.toHex(tx_receipt['transactionHash']),
+                                  tx_receipt['gasUsed'],
+                                  tx_receipt['from']))
+
+        return tx_hash, tx_receipt
+
 
 class RDOCStopper(MoCStopper):
     log = logging.getLogger()
