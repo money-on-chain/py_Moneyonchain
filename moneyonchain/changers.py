@@ -371,6 +371,57 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
         return tx_hash, tx_receipt
 
 
+class RDOCPriceFeederRemoverChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederRemover.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederRemover.bin'))
+
+    contract_medianizer_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.abi'))
+    contract_medianizer_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.bin'))
+
+    mode = 'RDoC'
+
+    def constructor(self, contract_address_price_feed,
+                    contract_address_medianizer=None,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.connection_manager.options['networks'][network]['addresses']['oracle']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address_medianizer),
+                                                   Web3.toChecksumAddress(contract_address_price_feed))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
 class MoCPriceProviderChanger(BaseChanger):
     log = logging.getLogger()
 
@@ -790,6 +841,53 @@ class DexTokenPairDisabler(BaseChanger):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairDisabler.abi'))
     contract_bin = Contract.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairDisabler.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+
+    mode = 'DEX'
+
+    def constructor(self,
+                    base_address,
+                    secondary_address,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
+                                                   Web3.toChecksumAddress(base_address),
+                                                   Web3.toChecksumAddress(secondary_address))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class DexTokenPairEnabler(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairEnabler.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairEnabler.bin'))
 
     contract_governor_abi = Contract.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
@@ -1274,6 +1372,48 @@ class DexMinimumCommissionChanger(BaseChanger):
 
         tx_hash, tx_receipt = self.fnx_constructor(contract_address,
                                                    minimum_commission)
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class RDOCMocMakeStoppableChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MocMakeStoppableChanger.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MocMakeStoppableChanger.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/Governor.bin'))
+
+    mode = 'RDOC'
+
+    def constructor(self, stoppable=True, execute_change=False):
+
+        network = self.connection_manager.network
+        contract_address = self.connection_manager.options['networks'][network]['addresses']['MoC']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(contract_address, stoppable)
 
         self.log.info("Deployed contract done!")
         self.log.info(Web3.toHex(tx_hash))

@@ -26,7 +26,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexMainnet'
+network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -38,12 +38,12 @@ settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 
-base_address = settings[network]['RDOC']
-secondary_address = settings[network]['RIFP']
+base_address = settings[network]['DOC']
+secondary_address = settings[network]['BPRO']
 
 tx_hash, tx_receipt = contract.constructor(base_address,
                                            secondary_address,
-                                           execute_change=True)
+                                           execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
 else:
