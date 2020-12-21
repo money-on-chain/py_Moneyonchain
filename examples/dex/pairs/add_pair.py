@@ -17,6 +17,11 @@ RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 6. RDOC / RIFP
 7. RIF / RIFP <--
 
+8. DOC/ADOC
+9. ADOC/ABPRO
+
+
+
 
 Mainnet
 
@@ -66,7 +71,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexMainnet'
+network = 'dexTestnet'
 connection_manager = ConnectionManager(network=network)
 log.info("Connecting to %s..." % network)
 log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -74,7 +79,7 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[network]['RIF/RIFP']
+settings_pair = settings[network]['ADOC/ABPRO']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
@@ -138,7 +143,7 @@ if price_provider_address:
                                                price_provider_address,
                                                price_precision,
                                                init_price,
-                                               execute_change=True)
+                                               execute_change=False)
     if tx_receipt:
         log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
     else:
