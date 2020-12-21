@@ -34,11 +34,11 @@ from moneyonchain.rdoc import RDOCMoC, \
     RDOCMoCBProxManager, \
     RDOCMoCState, \
     RDOCMoCConnector, \
-    MoCMedianizer
+    RDOCMoCMedianizer
 from moneyonchain.token import RIFDoC, RIFPro
 
 
-network = 'rdocTestnet'
+network = 'rdocMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -134,7 +134,7 @@ lines.append(line)
 
 
 # Oracle
-contract = MoCMedianizer(connection_manager)
+contract = RDOCMoCMedianizer(connection_manager)
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCMedianizer', '',
                                             contract.address())

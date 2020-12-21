@@ -20,6 +20,26 @@
         "address": ""
       }
     },
+    "DOC/ADOC":{
+      "baseToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
+      "secondaryToken": "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963",
+      "price": "1000000000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "unity",
+        "address": ""
+      }
+    },
+    "ADOC/ABPRO":{
+      "baseToken": "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963",
+      "secondaryToken": "0x5639809FAFfF9082fa5B9a8843D12695871f68bd",
+      "price": "24430000000000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "bpro_usd",
+        "address": "0xfb526c0Ace90f52049691389B040a33D03343eb7"
+      }
+    },
     "DOC/BPRO":{
       "baseToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
       "secondaryToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
