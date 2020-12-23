@@ -13,7 +13,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -25,7 +25,7 @@ settings = options_from_settings(
 print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(connection_manager)
 
-base_token = settings[network]['ADOC']
-secondary_token = settings[network]['AMOC']
+base_token = settings[network]['RDOC']
+secondary_token = settings[network]['RIFP']
 
 print(dex.token_pairs_status(base_token, secondary_token))
