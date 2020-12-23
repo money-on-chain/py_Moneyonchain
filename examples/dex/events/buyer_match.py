@@ -12,7 +12,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.dex import MoCDecentralizedExchange
 from moneyonchain.events import DEXBuyerMatch, DEXSellerMatch, DEXExpiredOrderProcessed
 
-network = 'dexTestnet'
+network = 'dexMainnet'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -25,8 +25,8 @@ dex = MoCDecentralizedExchange(connection_manager)
 
 events_functions = ['BuyerMatch']
 hours_delta = 0
-from_block = 1333853  # from block start
-to_block = 1333953  # block end or 0 to last block
+from_block = 2903818  # from block start
+to_block = 2961352  # block end or 0 to last block
 l_events = dex.logs_from(events_functions, from_block, to_block, block_steps=2880)
 
 # BuyerMatch

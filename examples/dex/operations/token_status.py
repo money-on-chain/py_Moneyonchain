@@ -26,6 +26,6 @@ print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(connection_manager)
 
 base_token = settings[network]['ADOC']
-secondary_token = settings[network]['ABPRO']
+secondary_token = settings[network]['AMOC']
 
 print(dex.token_pairs_status(base_token, secondary_token))
