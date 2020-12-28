@@ -20,6 +20,7 @@ RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 8. DOC/ADOC
 9. ADOC/ABPRO
 10. ADOC/AMOC
+11. WRBTC/AMOC
 
 
 
@@ -79,7 +80,7 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[network]['ADOC/AMOC']
+settings_pair = settings[network]['WRBTC/AMOC']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']

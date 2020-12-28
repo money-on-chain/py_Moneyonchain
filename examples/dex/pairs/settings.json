@@ -93,7 +93,17 @@
     "ADOC/AMOC":{
       "baseToken": "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963",
       "secondaryToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
-      "price": "20000000000000000",
+      "price": "200000000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "last_closing_price",
+        "address": ""
+      }
+    },
+    "WRBTC/AMOC":{
+      "baseToken": "0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E",
+      "secondaryToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
+      "price": "7407000000000",
       "precision": "1000000000000000000",
       "provider": {
         "type": "last_closing_price",
