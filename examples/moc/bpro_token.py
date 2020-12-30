@@ -7,7 +7,7 @@ connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
+account = '0x4ebd075534d9E24cE134f8BC962311c913730a84'
 
 print("Connecting to BProToken")
 bpro_token = BProToken(connection_manager)
