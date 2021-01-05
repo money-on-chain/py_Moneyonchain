@@ -84,7 +84,10 @@ class NetworkManager(object):
 
         return networks
 
-    def install(self, network_group='live', network_id='rskTesnetPublic', force=False):
+    def install(self,
+                network_group='live',
+                network_group_name="RskNetwork",
+                force=False):
 
         if network_group not in TYPE_NETWORK_GROUP:
             raise Exception("Not valid type: Network group")
@@ -92,29 +95,30 @@ class NetworkManager(object):
         current_networks = self.load_networks()
 
         u_networks = USED_NETWORKS[network_group]
-        d_used_networks = dict()
-        for u_network in u_networks:
-            d_used_networks[u_network['id']] = u_network
+        #d_used_networks = dict()
+        #for u_network in u_networks:
+        #    d_used_networks[u_network['id']] = u_network
 
         # check if already exist the networks
         exist = False
+        n_networks = list()
         for c_networks in current_networks[network_group]:
-            for c_network in c_networks['networks']:
-                if network_id == c_network['id']:
-                    exist = True
-                    break
+            if c_networks['name'] == network_group_name and not force:
+                self.log.info("Already exist! Exitting....")
+                return
+            elif c_networks['name'] == network_group_name and force:
+                self.log.info("Already exist! Deleting....")
+                pass
 
-        if exist and force:
-            # delete first
-            pass
-        elif exist:
-            return
+            n_networks.append(c_networks)
 
-        # install the new network
-        current_networks[network_group].append(d_used_networks[network_id])
+        # install the network group name
+        n_networks.append({"name": network_group_name, "networks": []})
+        target = n_networks[-1]["networks"]
+
+        # install all the networks id
+        target.append(u_networks)
 
         # save to yaml
         with _get_data_folder().joinpath("network-config.yaml").open("w") as fp:
             yaml.dump(current_networks, fp)
-
-
