@@ -33,6 +33,8 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=[
         'web3>=5.7.0',
-        'rich==9.2.0'
+        'rich==9.2.0',
+        'eth-brownie==1.12.2',
+        'PyYAML==5.3.1'
     ],
 )
