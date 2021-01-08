@@ -78,6 +78,9 @@
         "UpgradeabilityProxy.json",
         "UpgraderTemplate.json",
         "ZOSLibAddress.json",
-        "ZOSLibOwnable.json"
+        "ZOSLibOwnable.json",
+        "MoCVendorsChanger.json",
+        "MoCVendorsChangerHarness.json",
+        "UpgraderChanger.json"
     ]
 }

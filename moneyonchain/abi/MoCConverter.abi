@@ -325,5 +325,97 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "mocAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "mocToBtc",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "btcAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "btcToMoC",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "mocAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "btcPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "mocPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "mocToBtcWithPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "btcAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "btcPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "mocPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "btcToMoCWithPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

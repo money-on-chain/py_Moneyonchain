@@ -40,7 +40,8 @@
         "EternalStorageGobernanza": "0xf83733316eb5f1AcE72B21a4df2FB5e3070aA5A8",
         "CommissionSplitter": "0x247c8eFEF0Dd5175456dd571c6C6EDa77e9c4c5F",
         "MoCToken": "0x1dc4Bec7ce1ca27bA16F419c514b62c88B9Cb567",
-        "mocOracle": "0xEeae0B52Ac1F0D7D139898997b8367Dd67E3527c"
+        "mocOracle": "0xEeae0B52Ac1F0D7D139898997b8367Dd67E3527c",
+        "MoCVendors": "0x748C0ccbDFeb85DF79fE978e9BADe1c4aaE8c757"
       }
 
     },
@@ -80,7 +81,9 @@
         "MoCMedianizer": "0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4",
         "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40",
-        "MoCToken": ""
+        "MoCToken": "",
+        "mocOracle": "",
+        "MoCVendors": ""
       }
 
     },
@@ -120,7 +123,9 @@
         "MoCMedianizer": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
         "PriceFeed": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "CommissionSplitter": "0xa5467535851263122ef1476e24C529CFc6CFc086",
-        "MoCToken": ""
+        "MoCToken": "",
+        "mocOracle": "",
+        "MoCVendors": ""
       }
     },
     "rdocTestnetAlpha": {
@@ -157,7 +162,9 @@
         "FeedFactory": "0xABAAff5aFAf29c85023C8C24024C3818A0320E62",
         "CoinPairPrice": "0xEE9339E9A4Ca067e6AA57834B073ACd0D2b4D699",
         "CommissionSplitter": "0xE79fE1d8D321d01aA973E319112Fb98eA319B7a1",
-        "MoCToken": ""
+        "MoCToken": "",
+        "mocOracle": "",
+        "MoCVendors": ""
       }
 
     },
@@ -194,7 +201,9 @@
         "FeedFactory": "0xABAAff5aFAf29c85023C8C24024C3818A0320E62",
         "PriceFeed": "0x462D7082F3671a3BE160638Be3f8C23Ca354F48A",
         "CommissionSplitter": "0x5aF95c49461ef2bE429CD84aDe50867ff5A20fB6",
-        "MoCToken": ""
+        "MoCToken": "",
+        "mocOracle": "",
+        "MoCVendors": ""
       }
 
     },
@@ -231,7 +240,9 @@
         "FeedFactory": "0x54878866F5324B56AEE9B6619a1e1A213B2fCC30",
         "PriceFeed": "0x461750b4824b14c3d9b7702bC6fBB82469082b23",
         "CommissionSplitter": "0xaC7dE98a426F6FF51e1Bd6588b41544C8Addb2D1",
-        "MoCToken": ""
+        "MoCToken": "",
+        "mocOracle": "",
+        "MoCVendors": ""
       }
 
     },

@@ -482,6 +482,18 @@
     "inputs": [
       {
         "indexed": false,
+        "name": "mocVendorsAddress",
+        "type": "address"
+      }
+    ],
+    "name": "MoCVendorsChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "name": "price",
         "type": "uint256"
       },
@@ -493,20 +505,6 @@
     ],
     "name": "MovingAverageCalculation",
     "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_governor",
-        "type": "address"
-      }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
   },
   {
     "constant": false,
@@ -561,6 +559,24 @@
       },
       {
         "name": "_mocTokenAddress",
+        "type": "address"
+      },
+      {
+        "name": "_mocVendorsAddress",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_governor",
         "type": "address"
       }
     ],
@@ -1545,6 +1561,34 @@
     "constant": true,
     "inputs": [],
     "name": "getMoCToken",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "mocVendorsAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setMoCVendors",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getMoCVendors",
     "outputs": [
       {
         "name": "",

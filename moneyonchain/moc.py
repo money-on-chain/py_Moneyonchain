@@ -892,6 +892,17 @@ class MoCState(Contract):
 
         return result
 
+    def moc_vendors(self, block_identifier: BlockIdentifier = 'latest'):
+        """MoC Vendor address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCVendors().call(
+                block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
 
 class MoCInrate(Contract):
     log = logging.getLogger()
@@ -1487,6 +1498,89 @@ class MoCConnector(Contract):
             d_addresses['ReserveToken'] = self.sc.functions.reserveToken().call()
 
         return d_addresses
+
+class MoCVendors(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCVendors.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCVendors.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+    project = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCVendors']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+    def get_vendor(self, vendor_account,
+                     block_identifier: BlockIdentifier = 'latest'):
+        """Gets vendor from mapping"""
+
+        result = {}
+
+        vendor_details = self.sc.functions.vendors(vendor_account).call(
+            block_identifier=block_identifier)
+
+        result["isActive"] = vendor_details[0]
+        result["markup"] = vendor_details[1]
+        result["totalPaidInMoC"] = vendor_details[2]
+        result["staking"] = vendor_details[3]
+        result["paidMoC"] = vendor_details[4]
+        result["paidRBTC"] = vendor_details[5]
+
+        return result
+
+
+    def get_vendors_addresses(self, block_identifier: BlockIdentifier = 'latest'):
+        """Gets all active vendors addresses"""
+
+        vendor_count =  self.sc.functions.getVendorsCount().call(
+            block_identifier=block_identifier)
+
+        result = []
+
+        for i in range(0, vendor_count):
+            result.append(self.sc.functions.vendorsList(i).call(
+            block_identifier=block_identifier))
+
+        return result
+
+
+    def get_vendors(self, block_identifier: BlockIdentifier = 'latest'):
+        """Gets all active vendors from mapping"""
+
+        vendors_list = self.get_vendors_addresses()
+
+        result = {}
+
+        for vendor in vendors_list:
+            result[vendor] = self.get_vendor(vendor)
+
+        return result
+
 
 
 class MoC(Contract):

@@ -584,20 +584,6 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_governor",
-        "type": "address"
-      }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "name": "connectorAddress",
         "type": "address"
       },
@@ -644,6 +630,20 @@
       {
         "name": "_docTmax",
         "type": "uint256"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_governor",
+        "type": "address"
       }
     ],
     "name": "initialize",
@@ -974,6 +974,29 @@
     "outputs": [
       {
         "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "vendorAccount",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateVendorMarkup",
+    "outputs": [
+      {
+        "name": "markup",
         "type": "uint256"
       }
     ],
