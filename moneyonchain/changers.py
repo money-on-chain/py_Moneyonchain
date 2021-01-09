@@ -371,6 +371,168 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
         return tx_hash, tx_receipt
 
 
+class PriceFeederAdderChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederAdder.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederAdder.bin'))
+
+    contract_medianizer_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
+    contract_medianizer_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
+
+    contract_feedfactory_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/FeedFactory.abi'))
+    contract_feedfactory_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/FeedFactory.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, account_owner,
+                    contract_address_medianizer=None,
+                    contract_address_feedfactory=None,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.connection_manager.options['networks'][network]['addresses']['oracle']
+        if not contract_address_feedfactory:
+            contract_address_feedfactory = self.connection_manager.options['networks'][network]['addresses']['FeedFactory']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address_feedfactory),
+                                                   Web3.toChecksumAddress(contract_address_medianizer),
+                                                   Web3.toChecksumAddress(account_owner))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class PriceFeederRemoverChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederRemover.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederRemover.bin'))
+
+    contract_medianizer_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
+    contract_medianizer_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, contract_address_price_feed,
+                    contract_address_medianizer=None,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.connection_manager.options['networks'][network]['addresses']['oracle']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address_medianizer),
+                                                   Web3.toChecksumAddress(contract_address_price_feed))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
+class PriceFeederWhitelistChanger(BaseChanger):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederWhitelist.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederWhitelist.bin'))
+
+    contract_medianizer_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
+    contract_medianizer_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
+
+    contract_governor_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_governor_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, contract_address_price_feed,
+                    contract_address_medianizer=None,
+                    execute_change=False):
+
+        network = self.connection_manager.network
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.connection_manager.options['networks'][network]['addresses']['oracle']
+
+        self.log.info("Deploying new contract...")
+
+        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address_medianizer),
+                                                   Web3.toChecksumAddress(contract_address_price_feed))
+
+        self.log.info("Deployed contract done!")
+        self.log.info(Web3.toHex(tx_hash))
+        self.log.info(tx_receipt)
+
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = self.load_governor()
+            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
+            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
+            self.log.info(Web3.toHex(tx_hash))
+            self.log.info(tx_receipt)
+            self.log.info("Change successfull!")
+
+        return tx_hash, tx_receipt
+
+
 class RDOCPriceFeederRemoverChanger(BaseChanger):
     log = logging.getLogger()
 
