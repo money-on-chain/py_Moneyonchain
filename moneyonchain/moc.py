@@ -29,6 +29,7 @@ from moneyonchain.events import MoCExchangeRiskProMint, \
     MoCExchangeRiskProxRedeem, \
     MoCSettlementRedeemRequestAlter
 from moneyonchain.admin import ProxyAdmin
+from moneyonchain.utils import *
 
 
 STATE_LIQUIDATED = 0
@@ -1070,7 +1071,24 @@ class MoCInrate(Contract):
     def calc_commission_value(self, amount, tx_type, formatted: bool = True):
         """ Calc commission value amount in ether float"""
 
-        result = self.sc.functions.calcCommissionValue(int(amount * self.precision), tx_type).call()
+        if self.mode == 'MoC':
+            result = self.sc.functions.calcCommissionValue(int(amount * self.precision), tx_type).call()
+        else:
+            result = self.sc.functions.calcCommissionValue(int(amount * self.precision)).call()
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calculate_vendor_markup(self, vendor_account, amount, formatted: bool = True):
+        """ Calc vendor markup in ether float"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calculateVendorMarkup(vendor_account, int(amount * self.precision)).call()
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -1254,6 +1272,36 @@ class MoCExchange(Contract):
         contract_address = Web3.toChecksumAddress(self.contract_address)
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+    def calculate_commissions_with_prices(self, account, amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, formatted: bool = True):
+        """ Calc commission value and vendor markup amount in ether float """
+
+        params = [account, int(amount * self.precision), tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account]
+
+        names_array = ["btcCommission", "mocCommission", "btcPrice", "mocPrice", "btcMarkup", "mocMarkup"]
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calculateCommissionsWithPrices(params).call()
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in result]
+
+        return array_to_dictionary(result, names_array)
+
+    def get_moc_token_balance(self, owner, spender, formatted: bool = True):
+        """ Gets MoC balance and allowance according to owner and spender """
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCTokenBalance(owner, spender).call()
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in result]
+
+        return array_to_dictionary(result, ["mocBalance", "mocAllowance"])
 
 
 class MoCSettlement(Contract):
@@ -1535,23 +1583,19 @@ class MoCVendors(Contract):
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
 
-    def get_vendor(self, vendor_account,
+    def get_vendor(self, vendor_account, formatted: bool = True,
                      block_identifier: BlockIdentifier = 'latest'):
         """Gets vendor from mapping"""
-
-        result = {}
 
         vendor_details = self.sc.functions.vendors(vendor_account).call(
             block_identifier=block_identifier)
 
-        result["isActive"] = vendor_details[0]
-        result["markup"] = vendor_details[1]
-        result["totalPaidInMoC"] = vendor_details[2]
-        result["staking"] = vendor_details[3]
-        result["paidMoC"] = vendor_details[4]
-        result["paidRBTC"] = vendor_details[5]
+        names_array = ["isActive", "markup", "totalPaidInMoC", "staking", "paidMoC", "paidRBTC"]
 
-        return result
+        if formatted:
+            vendor_details[1:] = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in vendor_details[1:]]
+
+        return array_to_dictionary(vendor_details, names_array)
 
 
     def get_vendors_addresses(self, block_identifier: BlockIdentifier = 'latest'):
@@ -1569,7 +1613,7 @@ class MoCVendors(Contract):
         return result
 
 
-    def get_vendors(self, block_identifier: BlockIdentifier = 'latest'):
+    def get_vendors(self, formatted: bool = True, block_identifier: BlockIdentifier = 'latest'):
         """Gets all active vendors from mapping"""
 
         vendors_list = self.get_vendors_addresses()

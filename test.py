@@ -1,5 +1,5 @@
 from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoCState, MoCVendors
+from moneyonchain.moc import MoCState, MoCVendors, MoCInrate, MoCExchange
 from web3 import Web3
 
 network = 'mocTestnetAlpha'
@@ -33,3 +33,23 @@ moc_vendors = MoCVendors(connection_manager, moc_vendors_address)
 
 print("Vendors: ", moc_vendors.get_vendors())
 #print("Vendors: ", moc_vendors.get_vendor(Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')))
+
+
+moc_inrate = MoCInrate(connection_manager)
+vendor_address = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
+amount = 3
+result = moc_inrate.calculate_vendor_markup(vendor_address, amount)
+print("Vendor markup: ", result)
+print("Is expected: ", result == 0.03)
+
+
+
+moc_exchange = MoCExchange(connection_manager)
+balance = moc_exchange.get_moc_token_balance(vendor_address, moc_vendors_address)
+print("Balance and allowance: ", balance)
+
+tx_type_mint_bpro_fees_rbtc = moc_inrate.tx_type_mint_bpro_fees_rbtc()
+tx_type_mint_bpro_fees_moc = moc_inrate.tx_type_mint_bpro_fees_moc()
+commissions = moc_exchange.calculate_commissions_with_prices(
+    vendor_address, amount, tx_type_mint_bpro_fees_moc, tx_type_mint_bpro_fees_rbtc, vendor_address)
+print("Commissions: ", commissions)
