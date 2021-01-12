@@ -2321,62 +2321,6 @@ class MoC(Contract):
 
         return result
 
-    def amount_mint_bpro(self, amount: Decimal, moc_balance, moc_allowance):
-        """Final amount need it to mint bitpro in RBTC"""
-
-        tx_type = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
-        moc_commission_in_btc = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        total_amount = amount
-        commission_value = 0
-
-        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0
-            tx_type = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
-            commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        total_amount = total_amount + commission_value
-
-        return total_amount, commission_value
-
-    def amount_mint_doc(self, amount: Decimal, moc_balance, moc_allowance):
-        """Final amount need it to mint doc"""
-
-        tx_type = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
-        moc_commission_in_btc = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        total_amount = amount
-        commission_value = 0
-
-        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0
-            tx_type = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
-            commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        total_amount = total_amount + commission_value
-
-        return total_amount, commission_value
-
-    def amount_mint_btc2x(self, amount: Decimal, moc_balance, moc_allowance):
-        """Final amount need it to mint btc2x"""
-
-        tx_type = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
-        moc_commission_in_btc = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        total_amount = amount
-        commission_value = 0
-
-        if (not (moc_balance >= moc_commission_in_btc and moc_allowance >= moc_commission_in_btc)) or (moc_commission_in_btc == 0):
-            moc_commission_in_btc = 0
-            tx_type = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
-            commission_value = self.sc_moc_inrate.calc_commission_value(amount, tx_type)
-
-        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-
-        total_amount = total_amount + commission_value + interest_value
-
-        return total_amount, commission_value, interest_value
-
     def mint_bpro_gas_estimated(self, amount, precision=False):
 
         if precision:
@@ -2424,7 +2368,7 @@ class MoC(Contract):
 
         return gas_estimate
 
-    def mint_bpro(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_bpro(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
         """
@@ -2435,10 +2379,12 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        moc_balance = self.moc_balance_of(default_account)
-        moc_allowance = self.moc_allowance(default_account, self.address())
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
 
-        total_amount, commission_value = self.amount_mint_bpro(amount, moc_balance, moc_allowance)
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(default_account, amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account)
+
+        total_amount = amount + commissions.btcCommission + commissions.btcMarkup
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2450,7 +2396,8 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
@@ -2467,7 +2414,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def mint_doc(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_doc(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
         """
@@ -2487,17 +2434,20 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        moc_balance = self.moc_balance_of(default_account)
-        moc_allowance = self.moc_allowance(default_account, self.address())
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
 
-        total_amount, commission_value = self.amount_mint_doc(amount, moc_balance, moc_allowance)
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(default_account, amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account)
+
+        total_amount = amount + commissions.btcCommission + commissions.btcMarkup
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
@@ -2514,7 +2464,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def mint_btc2x(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_btc2x(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
@@ -2533,10 +2483,15 @@ class MoC(Contract):
             raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        moc_balance = self.moc_balance_of(default_account)
-        moc_allowance = self.moc_allowance(default_account, self.address())
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
 
-        total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount, moc_balance, moc_allowance)
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(default_account, amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account)
+
+        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
+
+        total_amount = amount + commissions.btcCommission + commissions.btcMarkup + interest_value
+
         bucket = str.encode('X2')
 
         if total_amount > self.balance_of(default_account):
@@ -2544,7 +2499,8 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
                                                           tx_params={'value': int(total_amount * self.precision)},
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
@@ -2561,7 +2517,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_bpro(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Reedem BitPro amount of token """
 
         if self.paused():
@@ -2583,7 +2539,8 @@ class MoC(Contract):
                 absolute_max_bpro))
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
@@ -2601,7 +2558,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """
         Reedem Free DOC amount of token
         Free Doc is Doc you can reedeem outside of settlement.
@@ -2625,7 +2582,8 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc',
                                                           int(amount_token * self.precision),
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
@@ -2723,7 +2681,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Reedem BTC2X amount of token """
 
         if self.paused():
@@ -2744,7 +2702,8 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBProx', bucket,
                                                           int(amount_token * self.precision),
-                                                          default_account=default_account)
+                                                          default_account=default_account,
+                                                          vendor_account=vendor_account)
 
         tx_receipt = None
         tx_logs = None
