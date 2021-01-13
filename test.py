@@ -52,7 +52,7 @@ print("Balance and allowance: ", balance)
 tx_type_mint_bpro_fees_rbtc = moc_inrate.tx_type_mint_bpro_fees_rbtc()
 tx_type_mint_bpro_fees_moc = moc_inrate.tx_type_mint_bpro_fees_moc()
 commissions = moc_exchange.calculate_commissions_with_prices(
-    vendor_address, amount, tx_type_mint_bpro_fees_moc, tx_type_mint_bpro_fees_rbtc, vendor_address)
+    amount, tx_type_mint_bpro_fees_moc, tx_type_mint_bpro_fees_rbtc, vendor_address)
 print("Commissions: ", commissions)
 
 

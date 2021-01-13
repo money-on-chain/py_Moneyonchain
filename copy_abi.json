@@ -1,5 +1,5 @@
 {
-    "src": "/home/shanshi/projects/main-RBTC-contract/build/contracts",
+    "src": "/Users/shanshi/projects/main-RBTC-contract/build/contracts",
     "dest": "moneyonchain/abi",
     "ignore": [
         "AdminUpgradeabilityProxy.json",
