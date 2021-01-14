@@ -19,7 +19,7 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.admin import ProxyAdmin
+from moneyonchain.governance import ProxyAdmin
 
 
 class CommissionManager(ContractBase):

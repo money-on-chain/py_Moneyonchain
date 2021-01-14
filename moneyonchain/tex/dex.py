@@ -19,9 +19,7 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.admin import ProxyAdmin
-
-from moneyonchain.events import DEXNewOrderInserted, DEXCommissionWithdrawn, DEXOrderCancelled
+from moneyonchain.governance import ProxyAdmin
 
 
 class MoCDecentralizedExchange(ContractBase):
@@ -263,12 +261,7 @@ class MoCDecentralizedExchange(ContractBase):
                 matching_steps,
                 tx_args)
 
-            self.log.info(
-                "Tick runned correctly in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
+            self.log.info(tx_receipt.info())
 
         else:
             self.log.info('Block of next tick has not been reached\n\n')
@@ -286,8 +279,6 @@ class MoCDecentralizedExchange(ContractBase):
         """Run order expiration """
 
         tx_hash = None
-        tx_receipt = None
-
         block_number = self.network_manager.block_number
 
         self.log.info('About to expire {0} orders for pair {1} in blockNumber {2}'.format('buy' if is_buy_order else 'sell',
@@ -304,12 +295,7 @@ class MoCDecentralizedExchange(ContractBase):
                                             order_type,
                                             tx_args)
 
-        self.log.info(
-            "Orders expiration job finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                tx_receipt['blockNumber'],
-                Web3.toHex(tx_receipt['transactionHash']),
-                tx_receipt['gasUsed'],
-                tx_receipt['from']))
+        self.log.info(tx_receipt.info())
 
         return tx_hash, tx_receipt
 
@@ -324,8 +310,6 @@ class MoCDecentralizedExchange(ContractBase):
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
 
-        tx_hash = None
-
         tx_args = self.tx_arguments(**tx_arguments)
 
         tx_receipt = self.sc.insertSellLimitOrder(
@@ -336,7 +320,7 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan,
             tx_args)
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def insert_sell_limit_order(self,
                                 base_token,
@@ -358,7 +342,7 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._insert_sell_limit_order(
+        tx_receipt = self._insert_sell_limit_order(
             base_token,
             secondary_token,
             amount_sc,
@@ -366,17 +350,9 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan_sc,
             **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
-                self.connection_manager,
-                tx_logs["NewOrderInserted"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def _insert_buy_limit_order(self,
                                 base_token,
@@ -384,43 +360,22 @@ class MoCDecentralizedExchange(ContractBase):
                                 amount,
                                 price,
                                 lifespan,
-                                gas_limit=3500000,
-                                wait_timeout=240,
-                                default_account=None,
-                                wait_receipt=True,
-                                poll_latency=0.5):
+                                **tx_arguments):
         """ @notice Inserts an order in the buy orderbook of a given pair without a hint
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
 
-        tx_hash = None
-        tx_receipt = None
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'insertBuyLimitOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          amount,
-                                                          price,
-                                                          lifespan,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.insertBuyLimitOrder(
+            base_token,
+            secondary_token,
+            amount,
+            price,
+            lifespan,
+            tx_args)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully inserted buy limit order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def insert_buy_limit_order(self,
                                base_token,
@@ -428,11 +383,7 @@ class MoCDecentralizedExchange(ContractBase):
                                amount,
                                price,
                                lifespan,
-                               gas_limit=3500000,
-                               wait_timeout=240,
-                               default_account=None,
-                               wait_receipt=True,
-                               poll_latency=0.5):
+                               **tx_arguments):
         """ Inserts an order in the buy orderbook of a given pair without a hint
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
@@ -446,29 +397,17 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._insert_buy_limit_order(
+        tx_receipt = self._insert_buy_limit_order(
             base_token,
             secondary_token,
             amount_sc,
             price_sc,
             lifespan_sc,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
-                self.connection_manager,
-                tx_logs["NewOrderInserted"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def _insert_sell_market_order(self,
                                   base_token,
@@ -476,45 +415,23 @@ class MoCDecentralizedExchange(ContractBase):
                                   amount,
                                   multiply_factor,
                                   lifespan,
-                                  gas_limit=3500000,
-                                  wait_timeout=240,
-                                  default_account=None,
-                                  wait_receipt=True,
-                                  poll_latency=0.5):
+                                  **tx_arguments):
         """ Inserts a market order at start in the buy orderbook of a given pair with a hint;
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
 
-        tx_hash = None
-        tx_receipt = None
         is_buy = False
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'insertMarketOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          amount,
-                                                          multiply_factor,
-                                                          lifespan,
-                                                          is_buy,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.insertMarketOrder(
+            base_token,
+            secondary_token,
+            amount,
+            multiply_factor,
+            lifespan,
+            is_buy,
+            **tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully inserted sell market order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def insert_sell_market_order(self,
                                  base_token,
@@ -522,11 +439,7 @@ class MoCDecentralizedExchange(ContractBase):
                                  amount,
                                  multiply_factor,
                                  lifespan,
-                                 gas_limit=3500000,
-                                 wait_timeout=240,
-                                 default_account=None,
-                                 wait_receipt=True,
-                                 poll_latency=0.5):
+                                 **tx_arguments):
         """  Inserts a market order at start in the buy orderbook of a given pair with a hint;
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
@@ -540,29 +453,17 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._insert_sell_market_order(
+        tx_receipt = self._insert_sell_market_order(
             base_token,
             secondary_token,
             amount_sc,
             multiply_factor_sc,
             lifespan_sc,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
-                self.connection_manager,
-                tx_logs["NewOrderInserted"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def _insert_buy_market_order(self,
                                  base_token,
@@ -570,45 +471,23 @@ class MoCDecentralizedExchange(ContractBase):
                                  amount,
                                  multiply_factor,
                                  lifespan,
-                                 gas_limit=3500000,
-                                 wait_timeout=240,
-                                 default_account=None,
-                                 wait_receipt=True,
-                                 poll_latency=0.5):
+                                 **tx_arguments):
         """ Inserts a market order at start in the buy orderbook of a given pair with a hint;
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
 
-        tx_hash = None
-        tx_receipt = None
         is_buy = True
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'insertMarketOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          amount,
-                                                          multiply_factor,
-                                                          lifespan,
-                                                          is_buy,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.insertMarketOrder(
+            base_token,
+            secondary_token,
+            amount,
+            multiply_factor,
+            lifespan,
+            is_buy,
+            **tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully inserted buy market order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def insert_buy_market_order(self,
                                 base_token,
@@ -616,11 +495,7 @@ class MoCDecentralizedExchange(ContractBase):
                                 amount,
                                 multiply_factor,
                                 lifespan,
-                                gas_limit=3500000,
-                                wait_timeout=240,
-                                default_account=None,
-                                wait_receipt=True,
-                                poll_latency=0.5):
+                                **tx_arguments):
         """  Inserts a market order at start in the buy orderbook of a given pair with a hint;
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
@@ -634,79 +509,42 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._insert_buy_market_order(
+        tx_receipt = self._insert_buy_market_order(
             base_token,
             secondary_token,
             amount_sc,
             multiply_factor_sc,
             lifespan_sc,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"NewOrderInserted": self.events.NewOrderInserted().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"NewOrderInserted": DEXNewOrderInserted(
-                self.connection_manager,
-                tx_logs["NewOrderInserted"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def _cancel_sell_order(self,
                            base_token,
                            secondary_token,
                            order_id,
                            previous_order_id,
-                           gas_limit=3500000,
-                           wait_timeout=240,
-                           default_account=None,
-                           wait_receipt=True,
-                           poll_latency=0.5):
+                           **tx_arguments):
         """ cancels the sell _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
-        tx_receipt = None
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'cancelSellOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          order_id,
-                                                          previous_order_id,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.cancelSellOrder(
+            base_token,
+            secondary_token,
+            order_id,
+            previous_order_id,
+            **tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully cancell sell order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def cancel_sell_order(self,
                           base_token,
                           secondary_token,
                           order_id,
                           previous_order_id,
-                          gas_limit=3500000,
-                          wait_timeout=240,
-                          default_account=None,
-                          wait_receipt=True,
-                          poll_latency=0.5):
+                          **tx_arguments):
         """  cancels the sell _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
@@ -716,78 +554,41 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._cancel_sell_order(
+        tx_receipt = self._cancel_sell_order(
             base_token,
             secondary_token,
             order_id,
             previous_order_id,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"OrderCancelled": self.events.OrderCancelled().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"OrderCancelled": DEXOrderCancelled(
-                self.connection_manager,
-                tx_logs["OrderCancelled"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def _cancel_buy_order(self,
                           base_token,
                           secondary_token,
                           order_id,
                           previous_order_id,
-                          gas_limit=3500000,
-                          wait_timeout=240,
-                          default_account=None,
-                          wait_receipt=True,
-                          poll_latency=0.5):
+                          **tx_arguments):
         """ cancels the buy _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
-        tx_receipt = None
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'cancelBuyOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          order_id,
-                                                          previous_order_id,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.cancelBuyOrder(
+            base_token,
+            secondary_token,
+            order_id,
+            previous_order_id,
+            **tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully cancel buy order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def cancel_buy_order(self,
                          base_token,
                          secondary_token,
                          order_id,
                          previous_order_id,
-                         gas_limit=3500000,
-                         wait_timeout=240,
-                         default_account=None,
-                         wait_receipt=True,
-                         poll_latency=0.5):
+                         **tx_arguments):
         """  cancels the buy _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
@@ -797,71 +598,32 @@ class MoCDecentralizedExchange(ContractBase):
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
-        tx_hash, tx_receipt = self._cancel_buy_order(
+        tx_receipt = self._cancel_buy_order(
             base_token,
             secondary_token,
             order_id,
             previous_order_id,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
-        tx_logs = None
-        tx_logs_formatted = None
+        self.log.info(tx_receipt.info())
 
-        if tx_receipt:
-            # receipt to logs
-            tx_logs = {"OrderCancelled": self.events.OrderCancelled().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"OrderCancelled": DEXOrderCancelled(
-                self.connection_manager,
-                tx_logs["OrderCancelled"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
     def withdraw_commissions(self,
                              token,
-                             gas_limit=3500000,
-                             wait_timeout=240,
-                             default_account=None,
-                             wait_receipt=True,
-                             poll_latency=0.5):
+                             **tx_arguments):
         """
         Withdraws all the already charged(because of a matching, a cancellation or an expiration)
         commissions of a given token
         token Address of the token to withdraw the commissions from
         """
 
-        tx_receipt = None
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'withdrawCommissions',
-                                                          Web3.toChecksumAddress(token),
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_receipt = self.sc.withdrawCommissions(
+            Web3.toChecksumAddress(token),
+            **tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
-                                                                              timeout=wait_timeout,
-                                                                              poll_latency=poll_latency)
+        self.log.info(tx_receipt.info())
 
-            self.log.info(
-                "Withdraw commission finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        tx_logs = None
-        tx_logs_formatted = None
-        # if tx_receipt:
-        #     # receipt to logs
-        #     tx_logs = {"CommissionWithdrawn": self.events.CommissionWithdrawn().processReceipt(tx_receipt)}
-        #     tx_logs_formatted = {"CommissionWithdrawn": DEXCommissionWithdrawn(
-        #         self.connection_manager,
-        #         tx_logs["CommissionWithdrawn"][0])}
-
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        return tx_receipt
 
 

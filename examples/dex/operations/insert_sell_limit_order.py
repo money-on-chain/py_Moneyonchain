@@ -3,13 +3,14 @@ Inserts an order in the sell orderbook of a given pair without a hint
 the pair should not be disabled; the contract should not be paused. Takes the funds
 with a transferFrom
 """
+
 from decimal import Decimal
 from web3 import Web3
 import json
 import os
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex.dex import MoCDecentralizedExchange
 
 import logging
 import logging.config
@@ -29,31 +30,43 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 # instantiate DEX Contract
-dex = MoCDecentralizedExchange(connection_manager)
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[network]['DOC']
-secondary_token = settings[network]['RDOC']
+base_token = settings[config_network]['DOC']
+secondary_token = settings[config_network]['RDOC']
 amount = 10
 price = 1
 lifespan = 5
 
 print("Insert sell limit order. Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.insert_sell_limit_order(
+tx_receipt = dex.insert_sell_limit_order(
     base_token,
     secondary_token,
     amount,
     price,
     lifespan)
-print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
-if tx_logs:
-    print(tx_logs_formatted['NewOrderInserted'].print_row())
+
+# finally disconnect from network
+network_manager.disconnect()

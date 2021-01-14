@@ -16,39 +16,42 @@ import os
 import logging
 from web3.types import BlockIdentifier
 
-from moneyonchain.contract import Contract
+from moneyonchain.contract import ContractBase
 
 
-class ProxyAdmin(Contract):
+class ProxyAdmin(ContractBase):
     log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
+    contract_name = 'ProxyAdmin'
+    contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyAdmin.abi'))
-    contract_bin = Contract.content_bin_file(
+    contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyAdmin.bin'))
 
     mode = 'MoC'
     precision = 10 ** 18
 
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
 
         if not contract_address:
-            # load from connection manager
-            network = connection_manager.network
-            contract_address = connection_manager.options['networks'][network]['addresses']['admin']
+            config_network = network_manager.config_network
+            contract_address = network_manager.options['networks'][config_network]['addresses']['admin']
 
-        super().__init__(connection_manager,
+        super().__init__(network_manager,
+                         contract_name=contract_name,
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-        # finally load the contract
-        self.load_contract()
-
-    def implementation(self, contract_address, block_identifier: BlockIdentifier = 'latest'):
+    def implementation(self,
+                       contract_address,
+                       block_identifier: BlockIdentifier = 'latest'):
         """Get proxy implementation"""
 
-        result = self.sc.functions.getProxyImplementation(contract_address).call(
-            block_identifier=block_identifier)
+        result = self.sc.getProxyImplementation(contract_address, block_identifier=block_identifier)
 
         return result
