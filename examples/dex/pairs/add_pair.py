@@ -22,6 +22,7 @@ RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 10. ADOC/AMOC
 11. WRBTC/AMOC
 
+12. WRBTC / RIF
 
 
 Mainnet
@@ -41,6 +42,8 @@ RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
 5. DOC / RIF
 6. RDOC / RIFP
 7. RIF / RIFP <--
+8. WRBTC / RIF
+
 """
 
 import json
@@ -80,7 +83,7 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[network]['WRBTC/AMOC']
+settings_pair = settings[network]['WRBTC/RIF']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
