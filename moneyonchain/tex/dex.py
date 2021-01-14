@@ -288,38 +288,28 @@ class MoCDecentralizedExchange(ContractBase):
         tx_hash = None
         tx_receipt = None
 
-        block_number = self.connection_manager.block_number
+        block_number = self.network_manager.block_number
 
         self.log.info('About to expire {0} orders for pair {1} in blockNumber {2}'.format('buy' if is_buy_order else 'sell',
                                                                                           pair, block_number))
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_hash = self.sc.processExpired(pair[0],
-                                         pair[1],
-                                         is_buy_order,
-                                         hint,
-                                         order_id,
-                                         matching_steps,
-                                         order_type,
-                                         tx_args)
+        tx_receipt = self.sc.processExpired(pair[0],
+                                            pair[1],
+                                            is_buy_order,
+                                            hint,
+                                            order_id,
+                                            matching_steps,
+                                            order_type,
+                                            tx_args)
 
         self.log.info(
-            'Transaction hash of {0} orders expiration {1}'.format('buy' if is_buy_order else 'sell',
-                                                                   tx_hash.hex()))
-
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
-                                                                              timeout=wait_timeout,
-                                                                              poll_latency=0.5)
-
-            self.log.info(
-                "Orders expiration job finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
+            "Orders expiration job finished in block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
+                tx_receipt['blockNumber'],
+                Web3.toHex(tx_receipt['transactionHash']),
+                tx_receipt['gasUsed'],
+                tx_receipt['from']))
 
         return tx_hash, tx_receipt
 
@@ -329,41 +319,22 @@ class MoCDecentralizedExchange(ContractBase):
                                  amount,
                                  price,
                                  lifespan,
-                                 gas_limit=3500000,
-                                 wait_timeout=240,
-                                 default_account=None,
-                                 wait_receipt=True,
-                                 poll_latency=0.5):
+                                 **tx_arguments):
         """ Inserts an order in the sell orderbook of a given pair without a hint
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
 
         tx_hash = None
-        tx_receipt = None
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                          'insertSellLimitOrder',
-                                                          base_token,
-                                                          secondary_token,
-                                                          amount,
-                                                          price,
-                                                          lifespan,
-                                                          default_account=default_account,
-                                                          gas_limit=gas_limit)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=wait_timeout,
-                poll_latency=poll_latency)
-
-            self.log.info(
-                "Successfully inserted sell limit order in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
+        tx_receipt = self.sc.insertSellLimitOrder(
+            base_token,
+            secondary_token,
+            amount,
+            price,
+            lifespan,
+            tx_args)
 
         return tx_hash, tx_receipt
 
@@ -373,11 +344,7 @@ class MoCDecentralizedExchange(ContractBase):
                                 amount,
                                 price,
                                 lifespan,
-                                gas_limit=3500000,
-                                wait_timeout=240,
-                                default_account=None,
-                                wait_receipt=True,
-                                poll_latency=0.5):
+                                **tx_arguments):
         """ Inserts an order in the sell orderbook of a given pair without a hint
     the pair should not be disabled; the contract should not be paused. Takes the funds
     with a transferFrom """
@@ -397,11 +364,7 @@ class MoCDecentralizedExchange(ContractBase):
             amount_sc,
             price_sc,
             lifespan_sc,
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+            **tx_arguments)
 
         tx_logs = None
         tx_logs_formatted = None
