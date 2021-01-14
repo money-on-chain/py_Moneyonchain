@@ -19,7 +19,7 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 from typing import Optional, Tuple, Union
 
-from brownie import network, Contract
+from brownie import network, web3
 from brownie.network import accounts
 from brownie._config import _get_data_folder
 
@@ -199,3 +199,8 @@ class NetworkManager(BaseNetworkManager):
         """ Default index account """
 
         self.default_account = index
+
+    @property
+    def block_number(self):
+        """ Last block number """
+        return web3.eth.blockNumber
