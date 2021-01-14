@@ -221,6 +221,23 @@
         "indexed": false,
         "name": "account",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "markup",
+        "type": "uint256"
+      }
+    ],
+    "name": "VendorUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "account",
+        "type": "address"
       }
     ],
     "name": "VendorUnregistered",
