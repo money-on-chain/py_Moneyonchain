@@ -1293,20 +1293,6 @@ class MoCExchange(Contract):
 
         return array_to_dictionary(result, names_array)
 
-    def get_moc_token_balance(self, owner, spender, formatted: bool = True):
-        """ Gets MoC balance and allowance according to owner and spender """
-
-        if self.mode == 'MoC':
-            result = self.sc.functions.getMoCTokenBalance(owner, spender).call()
-        else:
-            raise NotImplementedError('Only supported in MoC mode')
-
-        if formatted:
-            result = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in result]
-
-        return array_to_dictionary(result, ["mocBalance", "mocAllowance"])
-
-
 class MoCSettlement(Contract):
     log = logging.getLogger()
 
@@ -1716,6 +1702,9 @@ class MoC(Contract):
         # load contract moc moc_token
         self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
 
+        # load contract moc vendors
+        self.sc_moc_vendors = self.load_moc_vendors_contract(self.sc_moc_state.moc_vendors())
+
     def implementation(self, block_identifier: BlockIdentifier = 'latest'):
         """Implementation of contract"""
 
@@ -1808,6 +1797,17 @@ class MoC(Contract):
             contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCToken']
 
         sc = MoCToken(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
+
+    def load_moc_vendors_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCVendors']
+
+        sc = MoCVendors(self.connection_manager,
                       contract_address=contract_address)
 
         return sc

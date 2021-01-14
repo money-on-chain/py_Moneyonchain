@@ -1229,6 +1229,46 @@ class MoCVendorsVendorRegistered(BaseEvent):
                 format(float(d_event['markup']), '.18f')
                 ]
 
+class MoCVendorsVendorUpdated(BaseEvent):
+    name = "VendorUpdated"
+
+    def __init__(self, connection_manager, event):
+        self.blockNumber = event['blockNumber']
+        try:
+            ts = connection_manager.block_timestamp(self.blockNumber)
+            dt = ts - datetime.timedelta(hours=self.hours_delta)
+            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
+        except BlockNotFound:
+            self.timestamp = None
+
+        self.account = event['args']['account']
+        self.markup = event['args']['markup']
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'account', 'markup']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        if self.timestamp:
+            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            d_event['timestamp'] = ''
+        d_event['account'] = self.account
+        d_event['markup'] = Web3.fromWei(self.markup, 'ether')
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['account'],
+                format(float(d_event['markup']), '.18f')
+                ]
+
 class MoCVendorsVendorUnregistered(BaseEvent):
     name = "VendorUnregistered"
 
