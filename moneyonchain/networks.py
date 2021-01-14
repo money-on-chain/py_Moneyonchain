@@ -20,6 +20,7 @@ from web3.types import BlockIdentifier
 from typing import Optional, Tuple, Union
 
 from brownie import network, Contract
+from brownie.network import accounts
 from brownie._config import _get_data_folder
 
 
@@ -83,22 +84,54 @@ class BitPROToken:
         return total
 
 
-class NetworkManager(object):
+class BaseNetworkManager(object):
 
     log = logging.getLogger()
 
-    def __init__(self, network_env='rskTesnetPublic'):
+    @staticmethod
+    def options_from_config(filename=None):
+        """ Options from file config.json """
 
-        # network enviroment
-        self.network_env = network_env
+        if not filename:
+            filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config.json')
 
-    def connect(self, network_env=None):
+        with open(filename) as f:
+            options = json.load(f)
 
-        conn_network = network_env
-        if not conn_network:
-            conn_network = self.network_env
+        return options
 
-        network.connect(conn_network)
+
+class NetworkManager(BaseNetworkManager):
+
+    log = logging.getLogger()
+    options = BaseNetworkManager.options_from_config()
+    default_account = 0
+
+    def __init__(self,
+                 connection_network='rskTesnetPublic',
+                 config_network='mocTestnet',
+                 options=None):
+
+        self.connection_network = connection_network
+        self.config_network = config_network
+
+        # options values
+        if options:
+            if isinstance(options, dict):
+                self.options = options
+            elif isinstance(options, str):
+                self.options = self.options_from_config(filename=options)
+            else:
+                raise Exception("Not valid option value")
+
+        self.scan_accounts()
+
+    def connect(self, connection_network=None):
+
+        if not connection_network:
+            connection_network = self.connection_network
+
+        network.connect(connection_network)
 
     @staticmethod
     def disconnect():
@@ -180,3 +213,33 @@ class NetworkManager(object):
         # save to yaml
         with _get_data_folder().joinpath("network-config.yaml").open("w") as fp:
             yaml.dump(current_networks, fp)
+
+    def scan_accounts(self):
+        """ Scan accounts from enviroment"""
+
+        accounts.clear()
+
+        if 'ACCOUNT_PK_SECRET' in os.environ:
+            # obtain from enviroment if exist instead
+            private_key = os.environ['ACCOUNT_PK_SECRET']
+
+            l_priv = private_key.split(',')
+            if len(l_priv) > 1:
+                # this is a method:
+                # ACCOUNT_PK_SECRET=PK1,PK2,PK3
+                for a_priv in l_priv:
+                    accounts.add(a_priv)
+            else:
+                # Simple PK: ACCOUNT_PK_SECRET=PK
+                accounts.add(private_key)
+
+        if accounts:
+            for acc in accounts:
+                self.log.info("Added account address: {0}".format(acc.address))
+        else:
+            self.log.info("No address account added!")
+
+    def set_default_account(self, index):
+        """ Default index account """
+
+        self.default_account = index

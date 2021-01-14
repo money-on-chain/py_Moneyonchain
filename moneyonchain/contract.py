@@ -14,18 +14,32 @@
 import json
 import logging
 
+from brownie import Contract
+from brownie.network import accounts
 
-class Contract(object):
+
+class ContractBase(object):
 
     log = logging.getLogger()
+    contract_name = 'Contract Name'
     contract_address = None
     contract_abi = None
     contract_bin = None
     sc = None
+    precision = 10 ** 18
 
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
 
-        self.connection_manager = connection_manager
+        self.network_manager = network_manager
+
+        # Contract Name
+        if contract_name:
+            self.contract_name = contract_name
 
         # Contract address
         if contract_address:
@@ -39,8 +53,34 @@ class Contract(object):
         if contract_bin:
             self.contract_bin = contract_bin
 
+    def from_abi(self):
+        self.sc = Contract.from_abi(self.contract_name, self.contract_address, self.contract_abi)
+        return self
+
     def address(self):
         return self.sc.address
+
+    def tx_arguments(self,
+                     gas_limit=None,
+                     gas_buffer=None,
+                     gas_price=None,
+                     amount=None,
+                     nonce=None,
+                     required_confs=None,
+                     allow_revert=None,
+                     default_account=None):
+
+        tx_account = accounts[self.network_manager.default_account]
+        if default_account:
+            tx_account = accounts[default_account]
+
+        d_tx = dict(
+            gas_limit=gas_limit,
+
+        )
+
+        return d_tx
+
 
     @staticmethod
     def content_abi_file(abi_file):
@@ -65,41 +105,3 @@ class Contract(object):
     def load_bin_file(self, bin_file):
 
         self.contract_bin = self.content_bin_file(bin_file)
-
-    def load_contract_from_address(self, contract_address):
-
-        if not self.contract_abi:
-            raise Exception("Error. First you need to load data abi")
-
-        self.sc = self.connection_manager.load_contract(self.contract_abi, contract_address)
-
-        return self.sc
-
-    def load_contract(self):
-
-        if not self.contract_abi:
-            raise Exception("Error. First you need to load data abi")
-
-        if not self.contract_address:
-            raise Exception("Error. You need contract address")
-
-        self.sc = self.connection_manager.load_contract(self.contract_abi, self.contract_address)
-
-        return self.sc
-
-    def logs_from(self, events_functions, from_block, to_block, block_steps=2880):
-
-        logs = self.connection_manager.logs_from(self.sc,
-                                                 events_functions,
-                                                 from_block,
-                                                 to_block,
-                                                 block_steps=block_steps)
-
-        return logs
-
-    @property
-    def events(self):
-
-        return self.sc.events
-
-
