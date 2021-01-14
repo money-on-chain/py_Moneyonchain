@@ -14,29 +14,31 @@
 import os
 import logging
 
-from moneyonchain.contract import Contract
+from moneyonchain.contract import ContractBase
 from .erc20 import ERC20Token
 
 
 class RiskProToken(ERC20Token):
     log = logging.getLogger()
+    contract_name = 'RiskPro'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/RiskProToken.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/RiskProToken.bin'))
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/RiskProToken.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/RiskProToken.bin'))
-
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
 
         if not contract_address:
-            # load from connection manager
-            network = connection_manager.network
-            contract_address = connection_manager.options['networks'][network]['addresses']['BProToken']
+            config_network = network_manager.config_network
+            contract_address = network_manager.options['networks'][config_network]['addresses']['BProToken']
 
-        super().__init__(connection_manager,
+        super().__init__(network_manager,
+                         contract_name=contract_name,
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
-
-        # finally load the contract
-        self.load_contract()

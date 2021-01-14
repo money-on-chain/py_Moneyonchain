@@ -39,51 +39,6 @@ def networks_from_config(filename=None):
     return options
 
 
-def content_abi_file(abi_file):
-
-    with open(abi_file) as f:
-        abi = json.load(f)
-
-    return abi
-
-
-def content_bin_file(bin_file):
-
-    with open(bin_file) as f:
-        content_bin = f.read()
-
-    return content_bin
-
-
-class BitPROToken:
-
-    log = logging.getLogger()
-    precision = 10 ** 18
-
-    contract_abi = content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BProToken.abi'))
-    contract_bin = content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BProToken.bin'))
-
-    def __init__(self, contract_name="BitPRO", contract_address=None, contract_abi=None, contract_bin=None):
-        self.sc = Contract.from_abi(contract_name, contract_address, self.contract_abi)
-        print(self.sc)
-
-    def name(self):
-        return self.sc.name()
-
-    def symbol(self):
-        return self.sc.symbol()
-
-    def total_supply(self, formatted=True, block_identifier: BlockIdentifier = 'latest'):
-
-        total = self.sc.totalSupply(block_identifier=block_identifier)
-        if formatted:
-            total = Web3.fromWei(total, 'ether')
-
-        return total
-
-
 class BaseNetworkManager(object):
 
     log = logging.getLogger()
@@ -114,6 +69,7 @@ class NetworkManager(BaseNetworkManager):
 
         self.connection_network = connection_network
         self.config_network = config_network
+        self.accounts = accounts
 
         # options values
         if options:
@@ -124,14 +80,14 @@ class NetworkManager(BaseNetworkManager):
             else:
                 raise Exception("Not valid option value")
 
-        self.scan_accounts()
-
     def connect(self, connection_network=None):
 
         if not connection_network:
             connection_network = self.connection_network
 
         network.connect(connection_network)
+
+        self.scan_accounts()
 
     @staticmethod
     def disconnect():
@@ -215,9 +171,9 @@ class NetworkManager(BaseNetworkManager):
             yaml.dump(current_networks, fp)
 
     def scan_accounts(self):
-        """ Scan accounts from enviroment"""
+        """ Scan accounts from enviroment """
 
-        accounts.clear()
+        self.accounts.clear()
 
         if 'ACCOUNT_PK_SECRET' in os.environ:
             # obtain from enviroment if exist instead
@@ -228,13 +184,13 @@ class NetworkManager(BaseNetworkManager):
                 # this is a method:
                 # ACCOUNT_PK_SECRET=PK1,PK2,PK3
                 for a_priv in l_priv:
-                    accounts.add(a_priv)
+                    self.accounts.add(a_priv)
             else:
                 # Simple PK: ACCOUNT_PK_SECRET=PK
-                accounts.add(private_key)
+                self.accounts.add(private_key)
 
-        if accounts:
-            for acc in accounts:
+        if self.accounts:
+            for acc in self.accounts:
                 self.log.info("Added account address: {0}".format(acc.address))
         else:
             self.log.info("No address account added!")

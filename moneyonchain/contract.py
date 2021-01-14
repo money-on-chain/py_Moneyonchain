@@ -15,7 +15,6 @@ import json
 import logging
 
 from brownie import Contract
-from brownie.network import accounts
 
 
 class ContractBase(object):
@@ -66,21 +65,26 @@ class ContractBase(object):
                      gas_price=None,
                      amount=None,
                      nonce=None,
-                     required_confs=None,
-                     allow_revert=None,
+                     required_confs=1,
+                     allow_revert=True,
                      default_account=None):
 
-        tx_account = accounts[self.network_manager.default_account]
+        tx_account = self.network_manager.accounts[self.network_manager.default_account]
         if default_account:
-            tx_account = accounts[default_account]
+            tx_account = self.network_manager.accounts[default_account]
 
-        d_tx = dict(
-            gas_limit=gas_limit,
-
-        )
+        d_tx = {
+            "gas_limit": gas_limit,
+            "gas_buffer": gas_buffer,
+            "gas_price": gas_price,
+            "amount": amount,
+            "nonce": nonce,
+            "required_confs": required_confs,
+            "allow_revert": allow_revert,
+            "from": tx_account
+        }
 
         return d_tx
-
 
     @staticmethod
     def content_abi_file(abi_file):
