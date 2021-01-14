@@ -2324,37 +2324,39 @@ class MoC(Contract):
 
         return result
 
-    def mint_bpro_gas_estimated(self, amount, precision=False):
+    def mint_bpro_gas_estimated(self, amount, vendor_account, precision=False):
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+            built_fxn = fxn_to_call(int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
+            built_fxn = fxn_to_call(int(amount))
 
-        built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
 
-    def mint_doc_gas_estimated(self, amount, precision=False):
+    def mint_doc_gas_estimated(self, amount, vendor_account, precision=False):
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+            built_fxn = fxn_to_call(int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
+            built_fxn = fxn_to_call(int(amount))
 
-        built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
 
-    def mint_bprox_gas_estimated(self, amount, precision=False):
+    def mint_bprox_gas_estimated(self, amount, vendor_account, precision=False):
 
         bucket = str.encode('X2')
 
@@ -2363,10 +2365,11 @@ class MoC(Contract):
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+            built_fxn = fxn_to_call(bucket, int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
+            built_fxn = fxn_to_call(bucket, int(amount))
 
-        built_fxn = fxn_to_call(bucket, int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
