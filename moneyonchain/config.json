@@ -267,7 +267,7 @@
     },
     "mocTestTyD": {
       "app_mode": "MoC",
-      "uri": ["https://public-node.testnet.rsk.co"],
+      "uri": ["http://18.218.165.234:4444"],
       "chain_id": 31,
       "accounts": [
         {
