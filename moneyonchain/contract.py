@@ -13,8 +13,56 @@
 
 import json
 import logging
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from brownie import Contract
+from brownie.convert import EthAddress, Wei, to_address
+from brownie.network.account import Account
+
+
+class AccountBase(Account):
+
+    log = logging.getLogger()
+
+    def __init__(self,
+                 network_manager,
+                 default_account=None
+                 ):
+
+        self.network_manager = network_manager
+
+        try:
+            tx_account = self.network_manager.accounts[self.network_manager.default_account]
+            if default_account:
+                tx_account = self.network_manager.accounts[default_account]
+        except ValueError:
+            raise Exception("You need an account to deploy a contract!")
+
+        self.tx_account = tx_account
+        super().__init__(tx_account.address)
+
+    def deploy(self,
+               *args: Tuple,
+               amount: int = 0,
+               gas_limit: Optional[int] = None,
+               gas_buffer: Optional[float] = None,
+               gas_price: Optional[int] = None,
+               nonce: Optional[int] = None,
+               required_confs: int = 1,
+               allow_revert: bool = None,
+               silent: bool = None):
+        """ Deploy contract """
+
+        if gas_limit and gas_buffer:
+            raise ValueError("Cannot set gas_limit and gas_buffer together")
+
+        gas_price, gas_strategy, gas_iter = self._gas_price(gas_price)
+        gas_limit = Wei(gas_limit) or self._gas_limit(
+            None, amount, gas_price, gas_buffer
+        )
+
+        self.log.info("DEBUGG")
+        self.log.info(gas_price)
 
 
 class ContractBase(object):
@@ -85,6 +133,16 @@ class ContractBase(object):
         }
 
         return d_tx
+
+    def deploy(self,
+               *args,
+               default_account=None,
+               **tx_arguments):
+        """ Deploy contract """
+
+        account_base = AccountBase(self.network_manager,
+                                   default_account=default_account)
+        account_base.deploy(*args, **tx_arguments)
 
     @staticmethod
     def content_abi_file(abi_file):
