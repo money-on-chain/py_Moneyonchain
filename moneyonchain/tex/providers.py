@@ -251,6 +251,9 @@ class MocRiskProUsdPriceProviderFallback(ContractBase):
             **tx_arguments
             )
 
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
         self.log.info("Deployed contract done!")
         self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 

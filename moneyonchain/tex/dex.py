@@ -23,7 +23,7 @@ from moneyonchain.governance import ProxyAdmin
 
 
 class MoCDecentralizedExchange(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'MoCDecentralizedExchange'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCDecentralizedExchange.abi'))
@@ -261,7 +261,8 @@ class MoCDecentralizedExchange(ContractBase):
                 matching_steps,
                 tx_args)
 
-            self.log.info(tx_receipt.info())
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
         else:
             self.log.info('Block of next tick has not been reached\n\n')
@@ -295,7 +296,8 @@ class MoCDecentralizedExchange(ContractBase):
                                             order_type,
                                             tx_args)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_hash, tx_receipt
 
@@ -350,7 +352,8 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan_sc,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -405,7 +408,8 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan_sc,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -461,7 +465,8 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan_sc,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -517,7 +522,8 @@ class MoCDecentralizedExchange(ContractBase):
             lifespan_sc,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -561,7 +567,8 @@ class MoCDecentralizedExchange(ContractBase):
             previous_order_id,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -605,7 +612,8 @@ class MoCDecentralizedExchange(ContractBase):
             previous_order_id,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -622,7 +630,8 @@ class MoCDecentralizedExchange(ContractBase):
             Web3.toChecksumAddress(token),
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 

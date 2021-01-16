@@ -1,7 +1,6 @@
 """
 Changer Max Order lifespan
 """
-import sys
 
 from moneyonchain.networks import NetworkManager
 from moneyonchain.tex import DexMaxOrderLifespanChanger

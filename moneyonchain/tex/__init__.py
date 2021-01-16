@@ -5,3 +5,5 @@ from .changers import DexMaxOrderLifespanChanger, DexAddTokenPairChanger, DexTok
 from providers import TokenPriceProviderLastClosingPrice, MocBproBtcPriceProviderFallback, \
     MocBproUsdPriceProviderFallback, UnityPriceProvider, ExternalOraclePriceProviderFallback, \
     MocRiskProReservePriceProviderFallback, MocRiskProUsdPriceProviderFallback
+from dex import MoCDecentralizedExchange
+from commission import CommissionManager

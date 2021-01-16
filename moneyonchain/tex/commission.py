@@ -13,7 +13,6 @@
 """
 
 import os
-import logging
 from decimal import Decimal
 from web3 import Web3
 from web3.types import BlockIdentifier
@@ -23,7 +22,7 @@ from moneyonchain.governance import ProxyAdmin
 
 
 class CommissionManager(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'CommissionManager'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionManager.abi'))

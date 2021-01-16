@@ -43,9 +43,9 @@ RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
 """
 
 import json
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import DexAddTokenPairChanger
-from moneyonchain.dex import ExternalOraclePriceProviderFallback, \
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex import DexAddTokenPairChanger
+from moneyonchain.tex import ExternalOraclePriceProviderFallback, \
     TokenPriceProviderLastClosingPrice, \
     UnityPriceProvider, \
     MocBproUsdPriceProviderFallback, \
@@ -57,9 +57,20 @@ import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/add_pair.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
 def options_from_settings(filename='settings.json'):
@@ -71,15 +82,27 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[network]['ADOC/ABPRO']
+settings_pair = settings[config_network]['ADOC/ABPRO']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
@@ -91,35 +114,35 @@ provider_external = settings_pair['provider']['address']
 log.info("Deploying Price provider ...")
 
 if provider_type in ['external']:
-    price_provider = ExternalOraclePriceProviderFallback(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor(
+    price_provider = ExternalOraclePriceProviderFallback(network_manager)
+    tx_receipt = price_provider.constructor(
         provider_external,
         base_token,
         secondary_token)
 elif provider_type in ['unity']:
-    price_provider = UnityPriceProvider(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor()
+    price_provider = UnityPriceProvider(network_manager)
+    tx_receipt = price_provider.constructor()
 elif provider_type in ['bpro_usd']:
-    price_provider = MocBproUsdPriceProviderFallback(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor(
+    price_provider = MocBproUsdPriceProviderFallback(network_manager)
+    tx_receipt = price_provider.constructor(
         provider_external,
         base_token,
         secondary_token)
 elif provider_type in ['bpro_btc']:
-    price_provider = MocBproBtcPriceProviderFallback(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor(
+    price_provider = MocBproBtcPriceProviderFallback(network_manager)
+    tx_receipt = price_provider.constructor(
         provider_external,
         base_token,
         secondary_token)
 elif provider_type in ['riskpro_reserve']:
-    price_provider = MocRiskProReservePriceProviderFallback(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor(
+    price_provider = MocRiskProReservePriceProviderFallback(network_manager)
+    tx_receipt = price_provider.constructor(
         provider_external,
         base_token,
         secondary_token)
 elif provider_type in ['riskpro_usd']:
-    price_provider = MocRiskProUsdPriceProviderFallback(connection_manager)
-    tx_hash, tx_receipt = price_provider.constructor(
+    price_provider = MocRiskProUsdPriceProviderFallback(network_manager)
+    tx_receipt = price_provider.constructor(
         provider_external,
         base_token,
         secondary_token)
@@ -128,24 +151,28 @@ else:
 
 price_provider_address = None
 if tx_receipt:
-    price_provider_address = tx_receipt.contractAddress
-    log.info("Price provider deployed Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    price_provider_address = tx_receipt.contract_address
+    log.info("Price provider deployed Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     log.info("Error deploying price provider")
 
 if price_provider_address:
     log.info("Deploying add pair changer....")
 
-    contract = DexAddTokenPairChanger(connection_manager)
+    contract = DexAddTokenPairChanger(network_manager)
 
-    tx_hash, tx_receipt = contract.constructor(base_token,
-                                               secondary_token,
-                                               price_provider_address,
-                                               price_precision,
-                                               init_price,
-                                               execute_change=False)
+    tx_receipt = contract.deploy(
+        base_token,
+        secondary_token,
+        price_provider_address,
+        price_precision,
+        init_price,
+        execute_change=False)
+
     if tx_receipt:
-        log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+        tx_receipt.info()
+        tx_receipt.info_to_log()
     else:
         log.info("Error deploying changer")
 

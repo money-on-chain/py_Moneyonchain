@@ -55,9 +55,10 @@ class DexAddTokenPairChanger(BaseChanger):
             **tx_arguments
             )
 
-        self.log.info("Deployed contract done!")
-        self.log.info(tx_receipt)
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
+        self.log.info("Deployed contract done!")
         self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
