@@ -14,257 +14,244 @@
 
 import os
 import logging
-from decimal import Decimal
+
 from web3 import Web3
-from web3.types import BlockIdentifier
+
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.admin import ProxyAdmin
 
 
-class BaseConstructor(Contract):
-    log = logging.getLogger()
+class TokenPriceProviderLastClosingPrice(ContractBase):
 
-    contract_abi = None
-    contract_bin = None
+    contract_name = 'TokenPriceProviderLastClosingPrice'
 
-    mode = 'DEX'
-
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
-
-        super().__init__(connection_manager,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-    def fnx_constructor(self, *tx_parameters, wait_receipt=True):
-        """ Constructor deploy """
-
-        sc, content_abi, content_bin = self.connection_manager.load_bytecode_contract(self.contract_abi,
-                                                                                      self.contract_bin)
-        tx_hash = self.connection_manager.fnx_constructor(sc, *tx_parameters)
-
-        tx_receipt = None
-        if wait_receipt:
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash)
-
-        return tx_hash, tx_receipt
-
-
-class TokenPriceProviderLastClosingPrice(BaseConstructor):
-    log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPriceProviderLastClosingPrice.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPriceProviderLastClosingPrice.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPriceProviderLastClosingPrice.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPriceProviderLastClosingPrice.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, base_token, secondary_token):
+    def constructor(self, base_token, secondary_token, **tx_arguments):
 
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class MocBproBtcPriceProviderFallback(BaseConstructor):
-    log = logging.getLogger()
+class MocBproBtcPriceProviderFallback(ContractBase):
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocBproBtcPriceProviderFallback.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocBproBtcPriceProviderFallback.bin'))
+    contract_name = 'MocBproBtcPriceProviderFallback'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocBproBtcPriceProviderFallback.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocBproBtcPriceProviderFallback.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, moc_state, base_token, secondary_token):
-
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+    def constructor(self, moc_state, base_token, secondary_token, **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(moc_state),
-                                                   Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(moc_state),
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class MocBproUsdPriceProviderFallback(BaseConstructor):
+class MocBproUsdPriceProviderFallback(ContractBase):
     log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocBproUsdPriceProviderFallback.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocBproUsdPriceProviderFallback.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocBproUsdPriceProviderFallback.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocBproUsdPriceProviderFallback.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, moc_state, base_token, secondary_token):
-
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+    def constructor(self, moc_state, base_token, secondary_token, **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(moc_state),
-                                                   Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(moc_state),
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class UnityPriceProvider(BaseConstructor):
-    log = logging.getLogger()
+class UnityPriceProvider(ContractBase):
+    contract_name = 'UnityPriceProvider'
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/UnityPriceProvider.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/UnityPriceProvider.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UnityPriceProvider.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UnityPriceProvider.bin'))
 
     mode = 'DEX'
 
-    def constructor(self):
+    def constructor(self, **tx_arguments):
 
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor()
+        tx_receipt = self.deploy(**tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class ExternalOraclePriceProviderFallback(BaseConstructor):
-    log = logging.getLogger()
+class ExternalOraclePriceProviderFallback(ContractBase):
+    contract_name = 'ExternalOraclePriceProviderFallback'
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/ExternalOraclePriceProviderFallback.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/ExternalOraclePriceProviderFallback.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ExternalOraclePriceProviderFallback.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ExternalOraclePriceProviderFallback.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, external_price_provider, base_token, secondary_token):
-
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+    def constructor(self, external_price_provider, base_token, secondary_token, **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(external_price_provider),
-                                                   Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(external_price_provider),
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class MocRiskProReservePriceProviderFallback(BaseConstructor):
-    log = logging.getLogger()
+class MocRiskProReservePriceProviderFallback(ContractBase):
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocRiskProReservePriceProviderFallback.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocRiskProReservePriceProviderFallback.bin'))
+    contract_name = 'MocRiskProReservePriceProviderFallback'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocRiskProReservePriceProviderFallback.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocRiskProReservePriceProviderFallback.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, moc_state, base_token, secondary_token):
+    def constructor(self, moc_state, base_token, secondary_token, **tx_arguments):
 
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(moc_state),
-                                                   Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(moc_state),
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
-class MocRiskProUsdPriceProviderFallback(BaseConstructor):
-    log = logging.getLogger()
+class MocRiskProUsdPriceProviderFallback(ContractBase):
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocRiskProUsdPriceProviderFallback.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MocRiskProUsdPriceProviderFallback.bin'))
+    contract_name = 'MocRiskProUsdPriceProviderFallback'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocRiskProUsdPriceProviderFallback.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocRiskProUsdPriceProviderFallback.bin'))
 
     mode = 'DEX'
 
-    def constructor(self, moc_state, base_token, secondary_token):
+    def constructor(self, moc_state, base_token, secondary_token, **tx_arguments):
 
-        network = self.connection_manager.network
-        contract_address = self.connection_manager.options['networks'][network]['addresses']['dex']
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(Web3.toChecksumAddress(moc_state),
-                                                   Web3.toChecksumAddress(contract_address),
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token)
-                                                   )
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(moc_state),
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(base_token),
+            Web3.toChecksumAddress(secondary_token),
+            **tx_arguments
+            )
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
+        self.log.info("Contract Address: {address}".format(address=tx_receipt.contract_address))
 
-        self.log.info("Contract Address: {address}".format(address=tx_receipt.contractAddress))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
