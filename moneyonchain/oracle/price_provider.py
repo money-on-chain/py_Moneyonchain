@@ -19,35 +19,36 @@ from moneyonchain.oracle import CoinPairPrice
 
 
 class PriceProvider:
+
     log = logging.getLogger()
     precision = 10 ** 18
 
-    def __init__(self, connection_manager, contract_address=None):
+    def __init__(self, network_manager, contract_address=None):
 
-        network = connection_manager.network
-        app_mode = connection_manager.options['networks'][network]['app_mode']
+        config_network = network_manager.config_network
+        app_mode = network_manager.options['networks'][config_network]['app_mode']
 
         if app_mode == "RRC20":
-            self.contract_MoC = RDOCMoC(connection_manager,
+            self.contract_MoC = RDOCMoC(network_manager,
                                         contract_address=contract_address,
                                         contracts_discovery=True)
         else:
-            self.contract_MoC = MoC(connection_manager,
+            self.contract_MoC = MoC(network_manager,
                                     contract_address=contract_address,
                                     contracts_discovery=True)
 
-        if network in ['mocTestnetAlpha', 'mocTestnet', 'rdocTestnetAlpha', 'rdocTestnet']:
+        if config_network in ['mocTestnetAlpha', 'mocTestnet', 'rdocTestnetAlpha', 'rdocTestnet']:
             self.sc_Price_Provider = CoinPairPrice(
-                connection_manager,
+                network_manager,
                 contract_address=self.contract_MoC.sc_moc_state.price_provider())
         else:
             if app_mode == "RRC20":
                 self.sc_Price_Provider = MoCMedianizer(
-                    connection_manager,
+                    network_manager,
                     contract_address=self.contract_MoC.sc_moc_state.price_provider())
             else:
                 self.sc_Price_Provider = RDOCMoCMedianizer(
-                    connection_manager,
+                    network_manager,
                     contract_address=self.contract_MoC.sc_moc_state.price_provider())
 
     def price(self, formatted: bool = True,

@@ -21,7 +21,7 @@ from moneyonchain.contract import ContractBase
 
 
 class Governor(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'Governor'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
@@ -66,13 +66,14 @@ class Governor(ContractBase):
 
         tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner), **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
 
 class DEXGovernor(Governor):
-    log = logging.getLogger()
+
     contract_name = 'Governor'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))

@@ -21,7 +21,7 @@ from moneyonchain.contract import ContractBase
 
 
 class Governed(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'Governed'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governed.abi'))
@@ -64,7 +64,8 @@ class Governed(ContractBase):
 
         tx_receipt = self.sc.initialize(governor_address, **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 

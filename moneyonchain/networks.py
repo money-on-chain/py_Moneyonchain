@@ -15,8 +15,6 @@ import yaml
 import logging
 import os
 import json
-from web3 import Web3
-from web3.types import BlockIdentifier
 from typing import Optional, Tuple, Union
 
 from brownie import network, web3

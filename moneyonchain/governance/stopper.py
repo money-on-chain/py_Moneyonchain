@@ -21,7 +21,7 @@ from moneyonchain.contract import ContractBase
 
 
 class MoCStopper(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'Stopper'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Stopper.abi'))
@@ -73,7 +73,8 @@ class MoCStopper(ContractBase):
         tx_receipt = self.sc.pause(contract_to_pause,
                                    **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -88,7 +89,8 @@ class MoCStopper(ContractBase):
             contract_to_pause,
             **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 
@@ -104,7 +106,8 @@ class MoCStopper(ContractBase):
         tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner),
                                                **tx_arguments)
 
-        self.log.info(tx_receipt.info())
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         return tx_receipt
 

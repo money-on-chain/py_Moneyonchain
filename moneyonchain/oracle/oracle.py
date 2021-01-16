@@ -11,45 +11,46 @@
 
 """
 
-import logging
 import os
 from web3 import Web3
 from web3.types import BlockIdentifier
-from moneyonchain.contract import Contract
+from moneyonchain.contract import ContractBase
 
 
-class CoinPairPrice(Contract):
-    log = logging.getLogger()
+class CoinPairPrice(ContractBase):
 
-    contract_abi = Contract.content_abi_file(
+    contract_name = 'CoinPairPrice'
+
+    contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CoinPairPrice.abi'))
-    contract_bin = Contract.content_bin_file(
+    contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CoinPairPrice.bin'))
 
     mode = 'MoC'
     precision = 10 ** 18
 
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
 
         if not contract_address:
-            # load from connection manager
-            network = connection_manager.network
-            contract_address = connection_manager.options['networks'][network]['addresses']['CoinPairPrice']
+            config_network = network_manager.config_network
+            contract_address = network_manager.options['networks'][config_network]['addresses']['CoinPairPrice']
 
-        super().__init__(connection_manager,
+        super().__init__(network_manager,
+                         contract_name=contract_name,
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
-
-        # finally load the contract
-        self.load_contract()
 
     def price(self, formatted: bool = True,
               block_identifier: BlockIdentifier = 'latest'):
         """Get price"""
 
-        result = self.sc.functions.peek().call(
-            block_identifier=block_identifier)
+        result = self.sc.peek(block_identifier=block_identifier)
 
         if not result[1]:
             raise Exception("No source value price")

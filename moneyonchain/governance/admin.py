@@ -20,7 +20,7 @@ from moneyonchain.contract import ContractBase
 
 
 class ProxyAdmin(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'ProxyAdmin'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyAdmin.abi'))
