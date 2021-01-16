@@ -13,56 +13,10 @@
 
 import json
 import logging
-from typing import Any, Dict, List, Optional, Tuple, Union
 
 from brownie import Contract
-from brownie.convert import EthAddress, Wei, to_address
-from brownie.network.account import Account
 
-
-class AccountBase(Account):
-
-    log = logging.getLogger()
-
-    def __init__(self,
-                 network_manager,
-                 default_account=None
-                 ):
-
-        self.network_manager = network_manager
-
-        try:
-            tx_account = self.network_manager.accounts[self.network_manager.default_account]
-            if default_account:
-                tx_account = self.network_manager.accounts[default_account]
-        except ValueError:
-            raise Exception("You need an account to deploy a contract!")
-
-        self.tx_account = tx_account
-        super().__init__(tx_account.address)
-
-    def deploy(self,
-               *args: Tuple,
-               amount: int = 0,
-               gas_limit: Optional[int] = None,
-               gas_buffer: Optional[float] = None,
-               gas_price: Optional[int] = None,
-               nonce: Optional[int] = None,
-               required_confs: int = 1,
-               allow_revert: bool = None,
-               silent: bool = None):
-        """ Deploy contract """
-
-        if gas_limit and gas_buffer:
-            raise ValueError("Cannot set gas_limit and gas_buffer together")
-
-        gas_price, gas_strategy, gas_iter = self._gas_price(gas_price)
-        gas_limit = Wei(gas_limit) or self._gas_limit(
-            None, amount, gas_price, gas_buffer
-        )
-
-        self.log.info("DEBUGG")
-        self.log.info(gas_price)
+from moneyonchain.account import AccountBase
 
 
 class ContractBase(object):
@@ -80,7 +34,8 @@ class ContractBase(object):
                  contract_name=None,
                  contract_address=None,
                  contract_abi=None,
-                 contract_bin=None):
+                 contract_bin=None,
+                 logger=None):
 
         self.network_manager = network_manager
 
@@ -99,6 +54,9 @@ class ContractBase(object):
         # Contract bin
         if contract_bin:
             self.contract_bin = contract_bin
+
+        if logger:
+            self.log = logger
 
     def from_abi(self):
         self.sc = Contract.from_abi(self.contract_name, self.contract_address, self.contract_abi)
@@ -142,7 +100,9 @@ class ContractBase(object):
 
         account_base = AccountBase(self.network_manager,
                                    default_account=default_account)
-        account_base.deploy(*args, **tx_arguments)
+        receipt = account_base.deploy(self, *args, **tx_arguments)
+
+        return receipt
 
     @staticmethod
     def content_abi_file(abi_file):
