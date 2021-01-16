@@ -19,21 +19,29 @@ Examples:
        (100 - 10 ) / 100 = 0.9
 
 """
-from decimal import Decimal
-from web3 import Web3
+
 import json
 import os
-
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
-
 import logging
-import logging.config
+
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex import MoCDecentralizedExchange
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/insert_sell_market_order.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
 def options_from_settings(filename='settings.json'):
@@ -45,31 +53,43 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
-# instantiate DEX Contract
-dex = MoCDecentralizedExchange(connection_manager)
+# instantiate TEX Contract
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[network]['DOC']
-secondary_token = settings[network]['WRBTC']
+base_token = settings[config_network]['DOC']
+secondary_token = settings[config_network]['WRBTC']
 amount = 0.001
 multiply_factor = 1.01
 lifespan = 2
 
 print("Insert sell market order. Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.insert_sell_market_order(
+tx_receipt = dex.insert_sell_market_order(
     base_token,
     secondary_token,
     amount,
     multiply_factor,
     lifespan)
-print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
-if tx_logs:
-    print(tx_logs_formatted['NewOrderInserted'].print_row())
+
+# finally disconnect from network
+network_manager.disconnect()

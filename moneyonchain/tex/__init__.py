@@ -2,8 +2,8 @@ from .changers import DexMaxOrderLifespanChanger, DexAddTokenPairChanger, DexTok
     DexTokenPairEnabler, DexEMAPriceChanger, DexPriceProviderChanger, DexMaxBlocksForTickChanger, \
     DexMinBlocksForTickChanger, DexCommissionRateChanger, DexMinOrderAmountChanger, \
     DexCancelationPenaltyRateChanger, DexExpirationPenaltyRateChanger, DexMinimumCommissionChanger
-from providers import TokenPriceProviderLastClosingPrice, MocBproBtcPriceProviderFallback, \
+from .providers import TokenPriceProviderLastClosingPrice, MocBproBtcPriceProviderFallback, \
     MocBproUsdPriceProviderFallback, UnityPriceProvider, ExternalOraclePriceProviderFallback, \
     MocRiskProReservePriceProviderFallback, MocRiskProUsdPriceProviderFallback
-from dex import MoCDecentralizedExchange
-from commission import CommissionManager
+from .dex import MoCDecentralizedExchange
+from .commission import CommissionManager

@@ -8,7 +8,7 @@ import json
 import os
 
 from moneyonchain.networks import NetworkManager
-from moneyonchain.tex.dex import MoCDecentralizedExchange
+from moneyonchain.tex import MoCDecentralizedExchange
 
 import logging
 import logging.config
