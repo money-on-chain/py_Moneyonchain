@@ -13,8 +13,6 @@
 """
 
 import os
-import logging
-import sys
 
 from web3 import Web3
 from moneyonchain.contract import ContractBase
@@ -29,11 +27,6 @@ class DexAddTokenPairChanger(BaseChanger):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/AddTokenPairChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/AddTokenPairChanger.bin'))
-
-    contract_governor_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
-    contract_governor_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
 
     mode = 'DEX'
 
@@ -84,11 +77,6 @@ class DexMaxOrderLifespanChanger(BaseChanger):
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MaxOrderLifespanChanger.bin'))
 
-    contract_governor_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
-    contract_governor_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
-
     mode = 'DEX'
 
     def constructor(self,
@@ -120,113 +108,96 @@ class DexMaxOrderLifespanChanger(BaseChanger):
 
         return tx_receipt
 
-"""
+
 class DexTokenPairDisabler(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairDisabler.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairDisabler.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_name = 'DexTokenPairDisabler'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPairDisabler.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPairDisabler.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     base_address,
                     secondary_address,
-                    execute_change=False):
-
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   Web3.toChecksumAddress(base_address),
-                                                   Web3.toChecksumAddress(secondary_address))
+        tx_receipt = self.deploy(contract_address,
+                                 Web3.toChecksumAddress(base_address),
+                                 Web3.toChecksumAddress(secondary_address),
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexTokenPairEnabler(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairEnabler.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/TokenPairEnabler.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_name = 'DexTokenPairEnabler'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPairEnabler.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/TokenPairEnabler.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     base_address,
                     secondary_address,
-                    execute_change=False):
-
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   Web3.toChecksumAddress(base_address),
-                                                   Web3.toChecksumAddress(secondary_address))
+        tx_receipt = self.deploy(contract_address,
+                                 Web3.toChecksumAddress(base_address),
+                                 Web3.toChecksumAddress(secondary_address),
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexEMAPriceChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/EMAPriceChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/EMAPriceChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_name = 'DexMaxOrderLifespanChanger'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/EMAPriceChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/EMAPriceChanger.bin'))
 
     mode = 'DEX'
 
@@ -234,49 +205,42 @@ class DexEMAPriceChanger(BaseChanger):
                     base_token,
                     secondary_token,
                     ema_price,
-                    execute_change=False):
-
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token),
-                                                   ema_price)
+        tx_receipt = self.deploy(contract_address,
+                                 Web3.toChecksumAddress(base_token),
+                                 Web3.toChecksumAddress(secondary_token),
+                                 ema_price,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
-
+        return tx_receipt
 
 
 class DexPriceProviderChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/PriceProviderChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/PriceProviderChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_name = 'DexPriceProviderChanger'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.bin'))
 
     mode = 'DEX'
 
@@ -284,352 +248,308 @@ class DexPriceProviderChanger(BaseChanger):
                     base_token,
                     secondary_token,
                     price_provider,
-                    execute_change=False):
-
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   Web3.toChecksumAddress(base_token),
-                                                   Web3.toChecksumAddress(secondary_token),
-                                                   Web3.toChecksumAddress(price_provider))
+        tx_receipt = self.deploy(contract_address,
+                                 Web3.toChecksumAddress(base_token),
+                                 Web3.toChecksumAddress(secondary_token),
+                                 Web3.toChecksumAddress(price_provider),
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexMaxBlocksForTickChanger(BaseChanger):
-    log = logging.getLogger()
+    contract_name = 'DexMaxBlocksForTickChanger'
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MaxBlocksForTickChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MaxBlocksForTickChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MaxBlocksForTickChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MaxBlocksForTickChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     max_blocks_for_ticks,
-                    execute_change=False):
+                    execute_change=False,
+                    **tx_arguments):
 
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   max_blocks_for_ticks)
+        tx_receipt = self.deploy(contract_address,
+                                 max_blocks_for_ticks,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexMinBlocksForTickChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinBlocksForTickChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinBlocksForTickChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_name = 'DexMinBlocksForTickChanger'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinBlocksForTickChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinBlocksForTickChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     min_blocks_for_ticks,
-                    execute_change=False):
-
-        network = self.connection_manager.network
-        contract_address = Web3.toChecksumAddress(self.connection_manager.options['networks'][network]['addresses']['dex'])
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
+        contract_address = Web3.toChecksumAddress(
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   min_blocks_for_ticks)
+        tx_receipt = self.deploy(contract_address,
+                                 min_blocks_for_ticks,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexCommissionRateChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CommissionRateChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CommissionRateChanger.bin'))
+    contract_name = 'DexCommissionRateChanger'
 
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionRateChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionRateChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     commission_rate,
-                    execute_change=False):
+                    execute_change=False,
+                    **tx_arguments):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         contract_address = Web3.toChecksumAddress(
-            self.connection_manager.options['networks'][network]['addresses']['commissionManager'])
+            self.network_manager.options['networks'][config_network]['addresses']['commissionManager'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   commission_rate)
+        tx_receipt = self.deploy(contract_address,
+                                 commission_rate,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexMinOrderAmountChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinOrderAmountChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinOrderAmountChanger.bin'))
+    contract_name = 'DexMinOrderAmountChanger'
 
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinOrderAmountChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinOrderAmountChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     min_order_amount,
-                    execute_change=False):
-
-        network = self.connection_manager.network
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
         contract_address = Web3.toChecksumAddress(
-            self.connection_manager.options['networks'][network]['addresses']['dex'])
+            self.network_manager.options['networks'][config_network]['addresses']['dex'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   min_order_amount)
+        tx_receipt = self.deploy(contract_address,
+                                 min_order_amount,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexCancelationPenaltyRateChanger(BaseChanger):
-    log = logging.getLogger()
+    contract_name = 'DexCancelationPenaltyRateChanger'
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CancelationPenaltyRateChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/CancelationPenaltyRateChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CancelationPenaltyRateChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CancelationPenaltyRateChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     cancelation_penalty_rate,
-                    execute_change=False):
-
-        network = self.connection_manager.network
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
         contract_address = Web3.toChecksumAddress(
-            self.connection_manager.options['networks'][network]['addresses']['commissionManager'])
+            self.network_manager.options['networks'][config_network]['addresses']['commissionManager'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   cancelation_penalty_rate)
+        tx_receipt = self.deploy(contract_address,
+                                 cancelation_penalty_rate,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexExpirationPenaltyRateChanger(BaseChanger):
-    log = logging.getLogger()
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/ExpirationPenaltyRateChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/ExpirationPenaltyRateChanger.bin'))
+    contract_name = 'DexExpirationPenaltyRateChanger'
 
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ExpirationPenaltyRateChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ExpirationPenaltyRateChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     expiration_penalty_rate,
-                    execute_change=False):
-
-        network = self.connection_manager.network
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
         contract_address = Web3.toChecksumAddress(
-            self.connection_manager.options['networks'][network]['addresses']['commissionManager'])
+            self.network_manager.options['networks'][config_network]['addresses']['commissionManager'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   expiration_penalty_rate)
+        tx_receipt = self.deploy(contract_address,
+                                 expiration_penalty_rate,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
 
 class DexMinimumCommissionChanger(BaseChanger):
-    log = logging.getLogger()
+    contract_name = 'DexTokenPairEnabler'
 
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinimumCommissionChanger.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/MinimumCommissionChanger.bin'))
-
-    contract_governor_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.abi'))
-    contract_governor_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_dex/Governor.bin'))
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinimumCommissionChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MinimumCommissionChanger.bin'))
 
     mode = 'DEX'
 
     def constructor(self,
                     minimum_commission,
-                    execute_change=False):
-
-        network = self.connection_manager.network
+                    execute_change=False,
+                    **tx_arguments):
+        config_network = self.network_manager.config_network
         contract_address = Web3.toChecksumAddress(
-            self.connection_manager.options['networks'][network]['addresses']['commissionManager'])
+            self.network_manager.options['networks'][config_network]['addresses']['commissionManager'])
 
         self.log.info("Deploying new contract...")
 
-        tx_hash, tx_receipt = self.fnx_constructor(contract_address,
-                                                   minimum_commission)
+        tx_receipt = self.deploy(contract_address,
+                                 minimum_commission,
+                                 **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
         self.log.info("Deployed contract done!")
-        self.log.info(Web3.toHex(tx_hash))
-        self.log.info(tx_receipt)
-
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = self.load_governor()
-            tx_hash = self.connection_manager.fnx_transaction(governor, 'executeChange', tx_receipt.contractAddress)
-            tx_receipt = self.connection_manager.wait_transaction_receipt(tx_hash)
-            self.log.info(Web3.toHex(tx_hash))
-            self.log.info(tx_receipt)
+            governor = DEXGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
-        return tx_hash, tx_receipt
-"""
+        return tx_receipt

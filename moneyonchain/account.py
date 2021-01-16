@@ -17,7 +17,6 @@ from typing import Optional, Tuple
 from brownie import web3
 from brownie.convert import Wei
 from brownie.network.account import Account
-#from brownie.network.transaction import TransactionReceipt
 from brownie.network.state import Chain
 
 
