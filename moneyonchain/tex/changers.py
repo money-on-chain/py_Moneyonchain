@@ -64,7 +64,7 @@ class DexAddTokenPairChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -104,7 +104,7 @@ class DexMaxOrderLifespanChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -145,7 +145,7 @@ class DexTokenPairDisabler(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -186,7 +186,7 @@ class DexTokenPairEnabler(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -229,7 +229,7 @@ class DexEMAPriceChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -272,7 +272,7 @@ class DexPriceProviderChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -312,7 +312,7 @@ class DexMaxBlocksForTickChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -351,7 +351,7 @@ class DexMinBlocksForTickChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -392,7 +392,7 @@ class DexCommissionRateChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -432,7 +432,7 @@ class DexMinOrderAmountChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -471,7 +471,7 @@ class DexCancelationPenaltyRateChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -511,7 +511,7 @@ class DexExpirationPenaltyRateChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -550,7 +550,7 @@ class DexMinimumCommissionChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = DEXGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt

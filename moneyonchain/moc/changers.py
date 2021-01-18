@@ -49,7 +49,7 @@ class MoCSettlementChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -83,7 +83,7 @@ class MoCPriceProviderChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -119,7 +119,7 @@ class MoCSetCommissionMocProportionChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -157,7 +157,7 @@ class MoCSetCommissionFinalAddressChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -194,7 +194,7 @@ class MoCInrateCommissionsAddressChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -231,7 +231,7 @@ class MoCInrateRiskProRateChangerChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -268,7 +268,7 @@ class MocInrateBitProInterestChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -303,7 +303,7 @@ class MocStateMaxMintBProChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -338,7 +338,7 @@ class MocMakeStoppableChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt

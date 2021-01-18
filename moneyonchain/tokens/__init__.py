@@ -7,4 +7,4 @@ from .rifdoc import RIFDoC
 from .rifpro import RIFPro
 from .riskpro import RiskProToken
 from .stable import StableToken
-from .wrbtc import WRBTC
+from .wrbtc import WRBTCToken

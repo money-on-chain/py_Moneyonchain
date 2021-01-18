@@ -18,13 +18,13 @@ from moneyonchain.contract import ContractBase
 from .erc20 import ERC20Token
 
 
-class WRBTC(ERC20Token):
+class WRBTCToken(ERC20Token):
     log = logging.getLogger()
     contract_name = 'WRBTC'
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/WRBTC.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/WRBTCToken.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/WRBTC.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/WRBTCToken.bin'))
 
     def __init__(self,
                  network_manager,

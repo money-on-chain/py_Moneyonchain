@@ -64,10 +64,29 @@ class Governor(ContractBase):
         }
         """
 
-        tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner), **tx_arguments)
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner), tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
+
+        return tx_receipt
+
+    def execute_change(self,
+                       contract_address,
+                       **tx_arguments):
+        """
+        function transferOwnership(address newOwner) public onlyOwner {
+            _transferOwnership(newOwner);
+        }
+        """
+
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.executeChange(Web3.toChecksumAddress(contract_address), tx_args)
+
+        tx_receipt.info()
 
         return tx_receipt
 

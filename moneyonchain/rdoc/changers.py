@@ -52,7 +52,7 @@ class RDOCMoCSettlementChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -86,7 +86,7 @@ class RDOCMoCInrateStableChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -120,7 +120,7 @@ class RDOCMoCInrateRiskproxChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -154,7 +154,7 @@ class RDOCMoCBucketContainerChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -189,7 +189,7 @@ class RDOCCommissionSplitterAddressChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -243,7 +243,7 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -288,7 +288,7 @@ class RDOCPriceFeederRemoverChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -322,7 +322,7 @@ class RDOCMoCStateMaxMintRiskProChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
@@ -368,7 +368,7 @@ class RDOCMocMakeStoppableChanger(BaseChanger):
         if execute_change:
             self.log.info("Executing change....")
             governor = RDOCGovernor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
             self.log.info("Change successfull!")
 
         return tx_receipt
