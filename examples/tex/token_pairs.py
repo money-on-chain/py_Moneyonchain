@@ -1,29 +1,28 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex import MoCDecentralizedExchange
 
 
-network = 'dexMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 print("Connecting to MoCDecentralizedExchange")
-dex = MoCDecentralizedExchange(connection_manager)
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 print(dex.token_pairs())
 
-"""
 
-[
-['0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db', '0x967F8799aF07dF1534d48A95a5C9FEBE92c53AE0'], 
-['0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db', '0x2d919F19D4892381D58edeBeca66D5642Cef1a1f'], 
-['0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db', '0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8'], 
-['0x967F8799aF07dF1534d48A95a5C9FEBE92c53AE0', '0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8'], 
-['0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db', '0x2AcC95758f8b5F583470ba265EB685a8F45fC9D5'], 
-['0x2d919F19D4892381D58edeBeca66D5642Cef1a1f', '0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61'], 
-['0x2AcC95758f8b5F583470ba265EB685a8F45fC9D5', '0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61']
-]
-
-
-
-
-"""
+# finally disconnect from network
+network_manager.disconnect()
