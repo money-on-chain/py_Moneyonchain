@@ -7,3 +7,6 @@ from .providers import TokenPriceProviderLastClosingPrice, MocBproBtcPriceProvid
     MocRiskProReservePriceProviderFallback, MocRiskProUsdPriceProviderFallback
 from .dex import MoCDecentralizedExchange
 from .commission import CommissionManager
+from .events import DEXNewOrderAddedToPendingQueue, DEXBuyerMatch, \
+    DEXSellerMatch, DEXExpiredOrderProcessed, DEXTickStart, DEXTickEnd, DEXNewOrderInserted, \
+    DEXOrderCancelled, DEXTransferFailed, DEXCommissionWithdrawn, DEXTokenPairDisabled, DEXTokenPairEnabled

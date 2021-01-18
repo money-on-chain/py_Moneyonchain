@@ -13,3 +13,10 @@ from .changers import MoCSettlementChanger, MoCPriceProviderChanger, MoCSetCommi
     MoCSetCommissionFinalAddressChanger, MoCInrateCommissionsAddressChanger, \
     MoCInrateRiskProRateChangerChanger, MocInrateBitProInterestChanger, \
     MocStateMaxMintBProChanger, MocMakeStoppableChanger
+from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, MoCExchangeRiskProRedeem, \
+    MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
+    MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, MoCSettlementRedeemRequestProcessed, \
+    MoCSettlementSettlementRedeemStableToken, MoCSettlementSettlementCompleted, \
+    MoCSettlementSettlementDeleveraging, MoCSettlementSettlementStarted, \
+    MoCSettlementRedeemRequestAlter, MoCInrateDailyPay, MoCInrateRiskProHoldersInterestPay, ERC20Transfer, \
+    ERC20Approval, MoCBucketLiquidation, MoCStateStateTransition

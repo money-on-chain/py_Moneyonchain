@@ -12,13 +12,12 @@
 
 """
 
-import logging
 
 from moneyonchain.contract import ContractBase
 
 
 class BaseChanger(ContractBase):
-    log = logging.getLogger()
+
     contract_name = 'BaseChanger'
 
     contract_abi = None
