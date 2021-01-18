@@ -17,12 +17,12 @@ import os
 from web3 import Web3
 from moneyonchain.contract import ContractBase
 from moneyonchain.changers import BaseChanger
-from moneyonchain.governance import Governor
+from moneyonchain.governance import RDOCGovernor
+from moneyonchain.moc import MoCPriceProviderChanger
 
 
-class MoCSettlementChanger(BaseChanger):
-
-    contract_name = 'MoCSettlementChanger'
+class RDOCMoCSettlementChanger(BaseChanger):
+    contract_name = 'RDOCMoCSettlementChanger'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlementChanger.abi'))
@@ -31,7 +31,10 @@ class MoCSettlementChanger(BaseChanger):
 
     mode = 'RDoC'
 
-    def constructor(self, input_block_span, execute_change=False, **tx_arguments):
+    def constructor(self,
+                    input_block_span,
+                    execute_change=False,
+                    **tx_arguments):
 
         config_network = self.network_manager.config_network
         contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCSettlement']
@@ -48,31 +51,31 @@ class MoCSettlementChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MoCPriceProviderChanger(BaseChanger):
-    contract_name = 'MoCPriceProviderChanger'
+class RDOCMoCInrateStableChanger(BaseChanger):
+    contract_name = 'RDOCMoCInrateStableChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateStableChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateStableChanger.bin'))
 
-    mode = 'MoC'
+    mode = 'RDoC'
 
-    def constructor(self, price_provider, execute_change=False, **tx_arguments):
+    def constructor(self, t_min, t_max, t_power, execute_change=False, **tx_arguments):
 
         config_network = self.network_manager.config_network
-        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(contract_address, Web3.toChecksumAddress(price_provider), **tx_arguments)
+        tx_receipt = self.deploy(contract_address, t_min, t_max, t_power, **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -82,108 +85,100 @@ class MoCPriceProviderChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MoCSetCommissionMocProportionChanger(BaseChanger):
+class RDOCMoCInrateRiskproxChanger(BaseChanger):
+    contract_name = 'RDOCMoCInrateRiskproxChanger'
 
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCInrateRiskproxChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCInrateRiskproxChanger.bin'))
+
+    mode = 'RDoC'
+
+    def constructor(self, t_min, t_max, t_power, execute_change=False, **tx_arguments):
+
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(contract_address, t_min, t_max, t_power, **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = RDOCGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
+
+
+class RDOCMoCBucketContainerChanger(BaseChanger):
+    contract_name = 'RDOCMoCBucketContainerChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBucketContainerChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBucketContainerChanger.bin'))
+
+    mode = 'RDoC'
+
+    def constructor(self, cobj_c0, cobj_x2, execute_change=False, **tx_arguments):
+
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCBProxManager']
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(contract_address, cobj_c0, cobj_x2, **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = RDOCGovernor(self.network_manager).from_abi()
+            tx_receipt = governor.executeChange(tx_receipt.contract_address)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
+
+
+class RDOCCommissionSplitterAddressChanger(BaseChanger):
     contract_name = 'DexAddTokenPairChanger'
-
-    contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionMocProportionChanger.abi'))
-    contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionMocProportionChanger.bin'))
-
-    mode = 'MoC'
-
-    def constructor(self, moc_proportion, commission_splitter=None, execute_change=False, **tx_arguments):
-
-        config_network = self.network_manager.config_network
-        if not commission_splitter:
-            commission_splitter = self.network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
-
-        self.log.info("Deploying new contract...")
-
-        tx_receipt = self.deploy(Web3.toChecksumAddress(commission_splitter), moc_proportion, **tx_arguments)
-
-        tx_receipt.info()
-        tx_receipt.info_to_log()
-
-        self.log.info("Deployed contract done!")
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
-
-        if execute_change:
-            self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
-            self.log.info("Change successfull!")
-
-        return tx_receipt
-
-
-class MoCSetCommissionFinalAddressChanger(BaseChanger):
-    contract_name = 'MoCSetCommissionFinalAddressChanger'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionFinalAddressChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionFinalAddressChanger.bin'))
 
-    mode = 'MoC'
-
-    def constructor(self, commission_address, commission_splitter=None, execute_change=False, **tx_arguments):
-
-        config_network = self.network_manager.config_network
-        if not commission_splitter:
-            commission_splitter = self.network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
-
-        self.log.info("Deploying new contract...")
-
-        tx_receipt = self.deploy(
-            Web3.toChecksumAddress(commission_splitter),
-            Web3.toChecksumAddress(commission_address),
-            **tx_arguments)
-
-        tx_receipt.info()
-        tx_receipt.info_to_log()
-
-        self.log.info("Deployed contract done!")
-        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
-
-        if execute_change:
-            self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
-            tx_receipt = governor.executeChange(tx_receipt.contract_address)
-            self.log.info("Change successfull!")
-
-        return tx_receipt
-
-
-class MoCInrateCommissionsAddressChanger(BaseChanger):
-    contract_name = 'MoCInrateCommissionsAddressChanger'
-
-    contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionsAddressChanger.abi'))
-    contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionsAddressChanger.bin'))
-
-    mode = 'MoC'
+    mode = 'RDoC'
 
     def constructor(self, commission_address, execute_change=False, **tx_arguments):
 
         config_network = self.network_manager.config_network
-        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
+        commission_address = Web3.toChecksumAddress(commission_address)
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(
-            Web3.toChecksumAddress(contract_address),
-            Web3.toChecksumAddress(commission_address),
-            **tx_arguments)
+        tx_receipt = self.deploy(contract_address, commission_address, **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -193,34 +188,51 @@ class MoCInrateCommissionsAddressChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MoCInrateRiskProRateChangerChanger(BaseChanger):
-    contract_name = 'MoCInrateRiskProRateChangerChanger'
+class RDOCPriceFeederAdderChanger(BaseChanger):
+    contract_name = 'DexAddTokenPairChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCInrateRiskProRateChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederAdder.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCInrateRiskProRateChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederAdder.bin'))
 
-    mode = 'MoC'
+    contract_medianizer_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.abi'))
+    contract_medianizer_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
 
-    def constructor(self, bitpro_rate, execute_change=False, **tx_arguments):
+    contract_feedfactory_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.abi'))
+    contract_feedfactory_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.bin'))
+
+    mode = 'RDoC'
+
+    def constructor(self, account_owner,
+                    contract_address_medianizer=None,
+                    contract_address_feedfactory=None,
+                    execute_change=False,
+                    **tx_arguments):
 
         config_network = self.network_manager.config_network
-        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.network_manager.options['networks'][config_network]['addresses']['oracle']
+        if not contract_address_feedfactory:
+            contract_address_feedfactory = self.network_manager.options['networks'][config_network]['addresses']['FeedFactory']
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(
-            Web3.toChecksumAddress(contract_address),
-            bitpro_rate,
-            **tx_arguments)
+        tx_receipt = self.deploy(Web3.toChecksumAddress(contract_address_feedfactory),
+                                 Web3.toChecksumAddress(contract_address_medianizer),
+                                 Web3.toChecksumAddress(account_owner),
+                                 **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -230,34 +242,42 @@ class MoCInrateRiskProRateChangerChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MocInrateBitProInterestChanger(BaseChanger):
-    contract_name = 'MocInrateBitProInterestChanger'
+class RDOCPriceFeederRemoverChanger(BaseChanger):
+    contract_name = 'RDOCPriceFeederRemoverChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateBitProInterestChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederRemover.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocInrateBitProInterestChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederRemover.bin'))
 
-    mode = 'MoC'
+    contract_medianizer_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
+    contract_medianizer_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
 
-    def constructor(self, bitpro_blockspan, execute_change=False, **tx_arguments):
+    mode = 'RDoC'
+
+    def constructor(self, contract_address_price_feed,
+                    contract_address_medianizer=None,
+                    execute_change=False,
+                    **tx_arguments):
 
         config_network = self.network_manager.config_network
-        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
+        if not contract_address_medianizer:
+            contract_address_medianizer = self.network_manager.options['networks'][config_network]['addresses']['oracle']
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(
-            Web3.toChecksumAddress(contract_address),
-            bitpro_blockspan,
-            **tx_arguments)
+        tx_receipt = self.deploy(Web3.toChecksumAddress(contract_address_medianizer),
+                                 Web3.toChecksumAddress(contract_address_price_feed),
+                                 **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -267,32 +287,31 @@ class MocInrateBitProInterestChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MocStateMaxMintBProChanger(BaseChanger):
-
-    contract_name = 'DexTokenPairDisabler'
+class RDOCMoCStateMaxMintRiskProChanger(BaseChanger):
+    contract_name = 'RDOCMoCStateMaxMintRiskProChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocStateMaxMintBProChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCStateMaxMintRiskProChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocStateMaxMintBProChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCStateMaxMintRiskProChanger.bin'))
 
     mode = 'MoC'
 
-    def constructor(self, max_mint_bpro, execute_change=False, **tx_arguments):
+    def constructor(self, max_mint_riskpro, execute_change=False, **tx_arguments):
 
         config_network = self.network_manager.config_network
         contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(contract_address, max_mint_bpro, **tx_arguments)
+        tx_receipt = self.deploy(contract_address, max_mint_riskpro, **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -302,23 +321,34 @@ class MocStateMaxMintBProChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 
         return tx_receipt
 
 
-class MocMakeStoppableChanger(BaseChanger):
+class RDOCPriceProviderChanger(MoCPriceProviderChanger):
+    contract_name = 'RDOCPriceProviderChanger'
 
-    contract_name = 'MocMakeStoppableChanger'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceProviderChanger.bin'))
+
+    mode = 'RDoC'
+
+
+class RDOCMocMakeStoppableChanger(BaseChanger):
+
+    contract_name = 'RDOCMocMakeStoppableChanger'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocMakeStoppableChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MocMakeStoppableChanger.bin'))
 
-    mode = 'MoC'
+    mode = 'RDOC'
 
     def constructor(self, stoppable=True, execute_change=False, **tx_arguments):
 
@@ -337,7 +367,7 @@ class MocMakeStoppableChanger(BaseChanger):
 
         if execute_change:
             self.log.info("Executing change....")
-            governor = Governor(self.network_manager).from_abi()
+            governor = RDOCGovernor(self.network_manager).from_abi()
             tx_receipt = governor.executeChange(tx_receipt.contract_address)
             self.log.info("Change successfull!")
 

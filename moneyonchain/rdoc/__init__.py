@@ -8,3 +8,7 @@ from .mochelperlib import RDOCMoCHelperLib
 from .mocinrate import RDOCMoCInrate
 from .mocsettlement import RDOCMoCSettlement
 from .mocstate import RDOCMoCState
+from .changers import RDOCMoCSettlementChanger, RDOCMoCInrateStableChanger, \
+    RDOCMoCInrateRiskproxChanger, RDOCMoCBucketContainerChanger, RDOCCommissionSplitterAddressChanger, \
+    RDOCPriceFeederAdderChanger, RDOCPriceFeederRemoverChanger, RDOCMoCStateMaxMintRiskProChanger, \
+    RDOCPriceProviderChanger, RDOCMocMakeStoppableChanger

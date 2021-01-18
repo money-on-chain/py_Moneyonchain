@@ -82,3 +82,15 @@ class DEXGovernor(Governor):
 
     mode = 'DEX'
     precision = 10 ** 18
+
+
+class RDOCGovernor(Governor):
+
+    contract_name = 'Governor'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/Governor.bin'))
+
+    mode = 'RDoC'
+    precision = 10 ** 18

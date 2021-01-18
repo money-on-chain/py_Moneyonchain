@@ -9,4 +9,7 @@ from .mochelperlib import MoCHelperLib
 from .mocinrate import MoCInrate
 from .mocsettlement import MoCSettlement
 from .mocstate import MoCState
-
+from .changers import MoCSettlementChanger, MoCPriceProviderChanger, MoCSetCommissionMocProportionChanger, \
+    MoCSetCommissionFinalAddressChanger, MoCInrateCommissionsAddressChanger, \
+    MoCInrateRiskProRateChangerChanger, MocInrateBitProInterestChanger, \
+    MocStateMaxMintBProChanger, MocMakeStoppableChanger
