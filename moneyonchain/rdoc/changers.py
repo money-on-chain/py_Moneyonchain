@@ -199,19 +199,9 @@ class RDOCPriceFeederAdderChanger(BaseChanger):
     contract_name = 'DexAddTokenPairChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederAdder.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederAdder.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/PriceFeederAdder.bin'))
-
-    contract_medianizer_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.abi'))
-    contract_medianizer_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
-
-    contract_feedfactory_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.abi'))
-    contract_feedfactory_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/FeedFactory.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederAdder.bin'))
 
     mode = 'RDoC'
 
@@ -257,11 +247,6 @@ class RDOCPriceFeederRemoverChanger(BaseChanger):
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/PriceFeederRemover.bin'))
 
-    contract_medianizer_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
-    contract_medianizer_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.bin'))
-
     mode = 'RDoC'
 
     def constructor(self, contract_address_price_feed,
@@ -298,9 +283,9 @@ class RDOCMoCStateMaxMintRiskProChanger(BaseChanger):
     contract_name = 'RDOCMoCStateMaxMintRiskProChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCStateMaxMintRiskProChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateMaxMintRiskProChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCStateMaxMintRiskProChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateMaxMintRiskProChanger.bin'))
 
     mode = 'MoC'
 

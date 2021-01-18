@@ -13,9 +13,10 @@
 
 import logging
 from web3.types import BlockIdentifier
-from moneyonchain.moc import MoC, MoCMedianizer
-from moneyonchain.rdoc import RDOCMoC, RDOCMoCMedianizer
-from moneyonchain.oracle import CoinPairPrice
+from moneyonchain.moc import MoC
+from moneyonchain.medianizer import MoCMedianizer, RDOCMoCMedianizer
+from moneyonchain.rdoc import RDOCMoC
+from .oracle import CoinPairPrice
 
 
 class PriceProvider:

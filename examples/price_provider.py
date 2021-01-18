@@ -1,5 +1,5 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.price_provider import PriceProvider
+from moneyonchain.networks import NetworkManager
+from moneyonchain.oracle import PriceProvider
 
 import logging
 import logging.config
@@ -10,12 +10,26 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-# Connect to MoC enviroment network
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'mocTestnet'
 
-price_provider = PriceProvider(connection_manager)
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
+price_provider = PriceProvider(network_manager)
 
 log.info("Last price: {0}".format(price_provider.price()))
+
+# finally disconnect from network
+network_manager.disconnect()
