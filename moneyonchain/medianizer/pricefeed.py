@@ -64,11 +64,13 @@ class PriceFeed(ContractBase):
         last_block = self.network_manager.get_block('latest')
         expiration = last_block.timestamp + block_expiration
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.post(
             int(p_price),
             int(expiration),
             address_moc_medianizer,
-            **tx_arguments)
+            tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -94,3 +96,17 @@ class PriceFeed(ContractBase):
             price = Web3.fromWei(price, 'ether')
 
         return price, result[1]
+
+
+class RRC20PriceFeed(PriceFeed):
+
+    contract_name = 'PriceFeed'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/PriceFeed.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/PriceFeed.bin'))
+
+    mode = 'RRC20'
+    project = 'RRC20'
+    precision = 10 ** 18

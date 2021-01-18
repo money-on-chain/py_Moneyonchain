@@ -426,6 +426,8 @@ class MoCDecentralizedExchange(ContractBase):
 
         is_buy = False
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.insertMarketOrder(
             base_token,
             secondary_token,
@@ -433,7 +435,7 @@ class MoCDecentralizedExchange(ContractBase):
             multiply_factor,
             lifespan,
             is_buy,
-            **tx_arguments)
+            tx_args)
 
         return tx_receipt
 
@@ -483,6 +485,8 @@ class MoCDecentralizedExchange(ContractBase):
 
         is_buy = True
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.insertMarketOrder(
             base_token,
             secondary_token,
@@ -490,7 +494,7 @@ class MoCDecentralizedExchange(ContractBase):
             multiply_factor,
             lifespan,
             is_buy,
-            **tx_arguments)
+            tx_args)
 
         return tx_receipt
 
@@ -536,12 +540,14 @@ class MoCDecentralizedExchange(ContractBase):
         """ cancels the sell _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.cancelSellOrder(
             base_token,
             secondary_token,
             order_id,
             previous_order_id,
-            **tx_arguments)
+            tx_args)
 
         return tx_receipt
 
@@ -581,12 +587,14 @@ class MoCDecentralizedExchange(ContractBase):
         """ cancels the buy _orderId order.
     the contract must not be paused; the caller should be the order owner """
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.cancelBuyOrder(
             base_token,
             secondary_token,
             order_id,
             previous_order_id,
-            **tx_arguments)
+            tx_args)
 
         return tx_receipt
 
@@ -626,9 +634,11 @@ class MoCDecentralizedExchange(ContractBase):
         token Address of the token to withdraw the commissions from
         """
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.withdrawCommissions(
             Web3.toChecksumAddress(token),
-            **tx_arguments)
+            tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()

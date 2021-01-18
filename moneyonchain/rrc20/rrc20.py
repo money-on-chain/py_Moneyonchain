@@ -42,43 +42,10 @@ STATE_BELOW_COBJ = 2
 STATE_ABOVE_COBJ = 3
 
 
-class RRC20PriceFeed(PriceFeed):
-    log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/PriceFeed.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/PriceFeed.bin'))
-
-    mode = 'RRC20'
-    project = 'RRC20'
-    precision = 10 ** 18
 
 
-class RRC20FeedFactory(FeedFactory):
-    log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/FeedFactory.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/FeedFactory.bin'))
-
-    mode = 'RRC20'
-    project = 'RRC20'
-    precision = 10 ** 18
 
 
-class RRC20MoCMedianizer(MoCMedianizer):
-    log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/MoCMedianizer.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/MoCMedianizer.bin'))
-
-    mode = 'RRC20'
-    project = 'RRC20'
-    precision = 10 ** 18
 
 
 class RRC20MoCState(MoCState):

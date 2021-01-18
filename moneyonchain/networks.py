@@ -15,7 +15,9 @@ import yaml
 import logging
 import os
 import json
-from typing import Optional, Tuple, Union
+from typing import Tuple, Union
+from web3 import Web3
+from web3.types import BlockIdentifier
 
 from brownie import network, web3
 from brownie.network import accounts
@@ -202,3 +204,8 @@ class NetworkManager(BaseNetworkManager):
     def block_number(self):
         """ Last block number """
         return web3.eth.blockNumber
+
+    @staticmethod
+    def network_balance(address, block_identifier: BlockIdentifier = 'latest'):
+        """ Balance of the address """
+        return web3.eth.getBalance(Web3.toChecksumAddress(address), block_identifier=block_identifier)

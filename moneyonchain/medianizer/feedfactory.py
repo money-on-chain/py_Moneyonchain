@@ -45,3 +45,15 @@ class FeedFactory(ContractBase):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
+
+class RRC20FeedFactory(FeedFactory):
+    contract_name = 'FeedFactory'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/FeedFactory.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/FeedFactory.bin'))
+
+    mode = 'RRC20'
+    project = 'RRC20'
+    precision = 10 ** 18

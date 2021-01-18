@@ -13,7 +13,6 @@
 """
 
 import os
-import logging
 import datetime
 from decimal import Decimal
 from web3 import Web3
@@ -25,16 +24,10 @@ from moneyonchain.contract import ContractBase
 from .mocinrate import MoCInrate
 from .mocstate import MoCState
 from .mocexchange import MoCExchange
+from .mocconnector import MoCConnector
+from .mocsettlement import MoCSettlement
 
-from moneyonchain.token import BProToken, DoCToken
-from moneyonchain.events import MoCExchangeRiskProMint, \
-    MoCExchangeStableTokenMint, \
-    MoCExchangeRiskProxMint, \
-    MoCExchangeRiskProRedeem, \
-    MoCExchangeFreeStableTokenRedeem, \
-    MoCExchangeRiskProxRedeem, \
-    MoCSettlementRedeemRequestAlter, \
-    MoCExchangeStableTokenRedeem
+from moneyonchain.tokens import BProToken, DoCToken
 from moneyonchain.governance import ProxyAdmin
 
 
@@ -137,91 +130,90 @@ class MoC(ContractBase):
     def governor(self, block_identifier: BlockIdentifier = 'latest'):
         """Contract address output"""
 
-        result = self.sc.functions.governor().call(
-            block_identifier=block_identifier)
+        result = self.sc.governor(block_identifier=block_identifier)
 
         return result
 
     def load_moc_inrate_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCInrate']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
 
-        sc = MoCInrate(self.connection_manager,
-                       contract_address=contract_address)
+        sc = MoCInrate(self.network_manager,
+                       contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_state_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCState']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
 
-        sc = MoCState(self.connection_manager,
-                      contract_address=contract_address)
+        sc = MoCState(self.network_manager,
+                      contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_exchange_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCExchange']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCExchange']
 
-        sc = MoCExchange(self.connection_manager,
-                         contract_address=contract_address)
+        sc = MoCExchange(self.network_manager,
+                         contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_connector_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCConnector']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCConnector']
 
-        sc = MoCConnector(self.connection_manager,
-                          contract_address=contract_address)
+        sc = MoCConnector(self.network_manager,
+                          contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_settlement_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCSettlement']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCSettlement']
 
-        sc = MoCSettlement(self.connection_manager,
-                           contract_address=contract_address)
+        sc = MoCSettlement(self.network_manager,
+                           contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_bpro_token_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['BProToken']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['BProToken']
 
-        sc = BProToken(self.connection_manager,
-                       contract_address=contract_address)
+        sc = BProToken(self.network_manager,
+                       contract_address=contract_address).from_abi()
 
         return sc
 
     def load_moc_doc_token_contract(self, contract_address):
 
-        network = self.connection_manager.network
+        config_network = self.network_manager.config_network
         if not contract_address:
-            contract_address = self.connection_manager.options['networks'][network]['addresses']['DoCToken']
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['DoCToken']
 
-        sc = DoCToken(self.connection_manager,
-                      contract_address=contract_address)
+        sc = DoCToken(self.network_manager,
+                      contract_address=contract_address).from_abi()
 
         return sc
 
     def connector(self):
 
-        return self.sc.functions.connector().call()
+        return self.sc.connector()
 
     def connector_addresses(self):
 
@@ -236,8 +228,7 @@ class MoC(ContractBase):
                           block_identifier: BlockIdentifier = 'latest'):
         """ Precision """
 
-        result = self.sc.functions.getReservePrecision().call(
-            block_identifier=block_identifier)
+        result = self.sc.getReservePrecision(block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -249,8 +240,7 @@ class MoC(ContractBase):
                      block_identifier: BlockIdentifier = 'latest'):
         """ Precision """
 
-        result = self.sc.functions.getMocPrecision().call(
-            block_identifier=block_identifier)
+        result = self.sc.getMocPrecision(block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -260,24 +250,21 @@ class MoC(ContractBase):
     def is_bucket_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
         """Is bucket liquidation reached"""
 
-        result = self.sc.functions.isBucketLiquidationReached(str.encode('X2')).call(
-            block_identifier=block_identifier)
+        result = self.sc.isBucketLiquidationReached(str.encode('X2'), block_identifier=block_identifier)
 
         return result
 
     def is_settlement_enabled(self, block_identifier: BlockIdentifier = 'latest'):
         """Is settlement enabled"""
 
-        result = self.sc.functions.isSettlementEnabled().call(
-            block_identifier=block_identifier)
+        result = self.sc.isSettlementEnabled(block_identifier=block_identifier)
 
         return result
 
     def is_daily_enabled(self, block_identifier: BlockIdentifier = 'latest'):
         """Is settlement enabled"""
 
-        result = self.sc.functions.isDailyEnabled().call(
-            block_identifier=block_identifier)
+        result = self.sc.isDailyEnabled(block_identifier=block_identifier)
 
         return result
 
@@ -285,211 +272,123 @@ class MoC(ContractBase):
         """Is bitpro_interest enabled"""
 
         if self.mode == 'MoC':
-            result = self.sc.functions.isBitProInterestEnabled().call(
-                block_identifier=block_identifier)
+            result = self.sc.isBitProInterestEnabled(block_identifier=block_identifier)
         else:
-            result = self.sc.functions.isRiskProInterestEnabled().call(
-                block_identifier=block_identifier)
+            result = self.sc.isRiskProInterestEnabled(block_identifier=block_identifier)
 
         return result
 
-    def execute_liquidation(self, execution_steps,
-                            gas_limit=3500000,
-                            wait_timeout=240,
-                            default_account=None,
-                            wait_receipt=True,
-                            poll_latency=0.5):
+    def execute_liquidation(self,
+                            execution_steps,
+                            **tx_arguments):
         """Execute liquidation """
 
-        tx_hash = None
         tx_receipt = None
         if self.sc_moc_state.is_liquidation():
 
             self.log.info("Calling evalLiquidation steps [{0}] ...".format(execution_steps))
 
+            tx_args = self.tx_arguments(**tx_arguments)
+
             # Only if is liquidation reach
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                              'evalLiquidation',
-                                                              execution_steps,
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
+            tx_receipt = self.sc.evalLiquidation(
+                execution_steps,
+                tx_args)
 
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                    tx_hash,
-                    timeout=wait_timeout,
-                    poll_latency=poll_latency)
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
-                self.log.info("Successfully forced Liquidation in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def execute_bucket_liquidation(self,
-                                   gas_limit=3500000,
-                                   wait_timeout=240,
-                                   default_account=None,
-                                   wait_receipt=True,
-                                   poll_latency=0.5):
+                                   **tx_arguments):
         """Execute bucket liquidation """
 
-        tx_hash = None
         tx_receipt = None
         if self.is_bucket_liquidation() and not self.is_settlement_enabled():
 
             self.log.info("Calling evalBucketLiquidation...")
 
+            tx_args = self.tx_arguments(**tx_arguments)
+
             # Only if is liquidation reach
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                              'evalBucketLiquidation',
-                                                              str.encode('X2'),
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
+            tx_receipt = self.sc.evalBucketLiquidation(
+                str.encode('X2'),
+                tx_args)
 
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                    tx_hash,
-                    timeout=wait_timeout,
-                    poll_latency=poll_latency)
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
-                self.log.info(
-                    "Successfully Bucket X2 Liquidation [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                        tx_receipt['blockNumber'],
-                        Web3.toHex(tx_receipt['transactionHash']),
-                        tx_receipt['gasUsed'],
-                        tx_receipt['from']))
+        return tx_receipt
 
-        return tx_hash, tx_receipt
-
-    def execute_run_settlement(self, execution_steps,
-                               gas_limit=3500000,
-                               wait_timeout=240,
-                               default_account=None,
-                               wait_receipt=True,
-                               poll_latency=0.5):
+    def execute_run_settlement(self,
+                               execution_steps,
+                               **tx_arguments):
         """Execute run settlement """
 
-        tx_hash = None
         tx_receipt = None
         if self.is_settlement_enabled():
 
             self.log.info("Calling runSettlement steps [{0}] ...".format(execution_steps))
 
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                              'runSettlement',
-                                                              execution_steps,
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
+            tx_args = self.tx_arguments(**tx_arguments)
 
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                    tx_hash,
-                    timeout=wait_timeout,
-                    poll_latency=poll_latency)
+            tx_receipt = self.sc.runSettlement(
+                execution_steps,
+                tx_args)
 
-                self.log.info("Successfully runSettlement in Block [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                    tx_receipt['blockNumber'],
-                    Web3.toHex(tx_receipt['transactionHash']),
-                    tx_receipt['gasUsed'],
-                    tx_receipt['from']))
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def execute_daily_inrate_payment(self,
-                                     gas_limit=3500000,
-                                     wait_timeout=240,
-                                     default_account=None,
-                                     wait_receipt=True,
-                                     poll_latency=0.5):
+                                     **tx_arguments):
         """Execute daily inrate """
 
-        tx_hash = None
         tx_receipt = None
         if self.is_daily_enabled():
 
             self.log.info("Calling dailyInratePayment ...")
 
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                              'dailyInratePayment',
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
+            tx_args = self.tx_arguments(**tx_arguments)
 
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                    tx_hash,
-                    timeout=wait_timeout,
-                    poll_latency=poll_latency)
+            tx_receipt = self.sc.dailyInratePayment(tx_args)
 
-                self.log.info("Successfully dailyInratePayment in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                                tx_receipt['blockNumber'],
-                                Web3.toHex(tx_receipt['transactionHash']),
-                                tx_receipt['gasUsed'],
-                                tx_receipt['from']))
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def execute_pay_bitpro_holders(self,
-                                   gas_limit=3500000,
-                                   wait_timeout=240,
-                                   default_account=None,
-                                   wait_receipt=True,
-                                   poll_latency=0.5):
+                                   **tx_arguments):
         """Execute pay bitpro holders """
 
-        tx_hash = None
         tx_receipt = None
         if self.is_bitpro_interest_enabled():
 
             self.log.info("Calling payBitProHoldersInterestPayment ...")
 
+            tx_args = self.tx_arguments(**tx_arguments)
+
             if self.mode == 'MoC':
-                contract_function = 'payBitProHoldersInterestPayment'
+                tx_receipt = self.sc.payBitProHoldersInterestPayment(tx_args)
             else:
-                contract_function = 'payRiskProHoldersInterestPayment'
+                tx_receipt = self.sc.payRiskProHoldersInterestPayment(tx_args)
 
-            tx_hash = self.connection_manager.fnx_transaction(self.sc,
-                                                              contract_function,
-                                                              default_account=default_account,
-                                                              gas_limit=gas_limit)
+            tx_receipt.info()
+            tx_receipt.info_to_log()
 
-            if wait_receipt:
-                # wait to transaction be mined
-                tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                    tx_hash,
-                    timeout=wait_timeout,
-                    poll_latency=poll_latency)
-
-                self.log.info("Successfully payBitProHoldersInterestPayment in Block  [{0}] Hash: [{1}] Gas used: [{2}] From: [{3}]".format(
-                                tx_receipt['blockNumber'],
-                                Web3.toHex(tx_receipt['transactionHash']),
-                                tx_receipt['gasUsed'],
-                                tx_receipt['from']))
-
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def execute_calculate_ema(self,
-                              gas_limit=3500000,
-                              wait_timeout=240,
-                              default_account=None,
-                              wait_receipt=True,
-                              poll_latency=0.5):
+                              **tx_arguments):
         """Execute calculate ema """
 
-        tx_hash, tx_receipt = self.sc_moc_state.execute_calculate_ema(
-            gas_limit=gas_limit,
-            wait_timeout=wait_timeout,
-            default_account=default_account,
-            wait_receipt=wait_receipt,
-            poll_latency=poll_latency)
+        tx_receipt = self.sc_moc_state.execute_calculate_ema(
+            **tx_arguments)
 
-        return tx_hash, tx_receipt
+        return tx_receipt
 
     def max_mint_bpro_available(self):
 
@@ -521,7 +420,7 @@ class MoC(ContractBase):
         blocks_to_settlement = self.sc_moc_state.blocks_to_settlement()
 
         l_sett = list()
-        l_sett.append(('Current Block', int(self.connection_manager.block_number)))
+        l_sett.append(('Current Block', int(self.network_manager.block_number)))
         l_sett.append(('Current avg block time (seconds)', 30.0))
         l_sett.append(('Blocks to settlement', blocks_to_settlement))
         l_sett.append(('Days to settlement', self.sc_moc_state.days_to_settlement()))
@@ -549,7 +448,8 @@ class MoC(ContractBase):
 
         return result
 
-    def bpro_price(self, formatted: bool = True,
+    def bpro_price(self,
+                   formatted: bool = True,
                    block_identifier: BlockIdentifier = 'latest'):
         """BPro price in USD"""
 
@@ -558,7 +458,8 @@ class MoC(ContractBase):
 
         return result
 
-    def btc2x_tec_price(self, formatted: bool = True,
+    def btc2x_tec_price(self,
+                        formatted: bool = True,
                         block_identifier: BlockIdentifier = 'latest'):
         """BTC2x price in USD"""
 
@@ -580,15 +481,14 @@ class MoC(ContractBase):
         if not default_account:
             default_account = 0
 
-        return self.connection_manager.balance(
-            self.connection_manager.accounts[default_account].address)
+        return self.network_manager.accounts[default_account].balance()
 
     def rbtc_balance_of(self,
                         account_address,
                         formatted: bool = True,
                         block_identifier: BlockIdentifier = 'latest'):
 
-        result = self.connection_manager.balance(account_address)
+        result = self.network_manager.network_balance(account_address, block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -601,7 +501,7 @@ class MoC(ContractBase):
                           block_identifier: BlockIdentifier = 'latest'):
         """ Compatibility function see RRC20 """
 
-        result = self.connection_manager.balance(account_address)
+        result = self.network_manager.network_balance(account_address, block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -614,7 +514,7 @@ class MoC(ContractBase):
                           block_identifier: BlockIdentifier = 'latest'):
         """ Compatibility function see RRC20 """
 
-        result = self.connection_manager.balance(account_address)
+        result = self.network_manager.network_balance(account_address, block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -647,11 +547,9 @@ class MoC(ContractBase):
         bucket = str.encode('X2')
 
         if self.mode == 'MoC':
-            result = self.sc.functions.bproxBalanceOf(bucket, account_address).call(
-                block_identifier=block_identifier)
+            result = self.sc.bproxBalanceOf(bucket, account_address, block_identifier=block_identifier)
         else:
-            result = self.sc.functions.riskProxBalanceOf(bucket, account_address).call(
-                block_identifier=block_identifier)
+            result = self.sc.riskProxBalanceOf(bucket, account_address, block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -664,11 +562,9 @@ class MoC(ContractBase):
                              block_identifier: BlockIdentifier = 'latest'):
 
         if self.mode == 'MoC':
-            result = self.sc.functions.docAmountToRedeem(account_address).call(
-                block_identifier=block_identifier)
+            result = self.sc.docAmountToRedeem(account_address, block_identifier=block_identifier)
         else:
-            result = self.sc.functions.stableTokenAmountToRedeem(account_address).call(
-                block_identifier=block_identifier)
+            result = self.sc.stableTokenAmountToRedeem(account_address, block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -679,8 +575,7 @@ class MoC(ContractBase):
                block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
 
-        result = self.sc.functions.paused().call(
-            block_identifier=block_identifier)
+        result = self.sc.paused(block_identifier=block_identifier)
 
         return result
 
@@ -688,8 +583,7 @@ class MoC(ContractBase):
                   block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
 
-        result = self.sc.functions.stoppable().call(
-            block_identifier=block_identifier)
+        result = self.sc.stoppable(block_identifier=block_identifier)
 
         return result
 
@@ -697,8 +591,7 @@ class MoC(ContractBase):
                 block_identifier: BlockIdentifier = 'latest'):
         """is Paused"""
 
-        result = self.sc.functions.stopper().call(
-            block_identifier=block_identifier)
+        result = self.sc.stopper(block_identifier=block_identifier)
 
         return result
 
@@ -775,10 +668,66 @@ class MoC(ContractBase):
 
         return gas_estimate
 
-    def mint_bpro(self, amount: Decimal, default_account=None, wait_receipt=True):
+    """
+        def mint_bpro_gas_estimated(self, amount, precision=False):
+
+        if precision:
+            amount = amount * self.precision
+
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
+
+        built_fxn = fxn_to_call(int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
+
+    def mint_doc_gas_estimated(self, amount, precision=False):
+
+        if precision:
+            amount = amount * self.precision
+
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
+
+        built_fxn = fxn_to_call(int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
+
+    def mint_bprox_gas_estimated(self, amount, precision=False):
+
+        bucket = str.encode('X2')
+
+        if precision:
+            amount = amount * self.precision
+
+        if self.mode == 'MoC':
+            fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+        else:
+            fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
+
+        built_fxn = fxn_to_call(bucket, int(amount))
+        gas_estimate = built_fxn.estimateGas()
+
+        return gas_estimate
+    """
+
+    def mint_bpro(self,
+                  amount: Decimal,
+                  **tx_arguments):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
         """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -796,29 +745,29 @@ class MoC(ContractBase):
             raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
                 max_mint_bpro_available))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision),
-                                                          tx_params={'value': int(total_amount * self.precision)},
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
+        tx_args['value'] = int(total_amount * self.precision)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"RiskProMint": self.sc_moc_exchange.events.RiskProMint().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RiskProMint": MoCExchangeRiskProMint(self.connection_manager,
-                                                                       tx_logs["RiskProMint"][0])}
+        tx_receipt = self.sc.mintBPro(
+            int(amount * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def mint_doc(self, amount: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def mint_doc(self,
+                 amount: Decimal,
+                 **tx_arguments):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
         """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -840,29 +789,29 @@ class MoC(ContractBase):
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
-                                                          tx_params={'value': int(total_amount * self.precision)},
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
+        tx_args['value'] = int(total_amount * self.precision)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"StableTokenMint": self.sc_moc_exchange.events.StableTokenMint().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"StableTokenMint": MoCExchangeStableTokenMint(self.connection_manager,
-                                                                               tx_logs["StableTokenMint"][0])}
+        tx_receipt = self.sc.mintDoc(
+            int(amount * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def mint_btc2x(self, amount: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def mint_btc2x(self,
+                   amount: Decimal,
+                   **tx_arguments):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -884,28 +833,27 @@ class MoC(ContractBase):
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
-                                                          tx_params={'value': int(math.ceil(total_amount *
-                                                                                            self.precision))},
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
+        tx_args['value'] = int(math.ceil(total_amount * self.precision))
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"RiskProxMint": self.sc_moc_exchange.events.RiskProxMint().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RiskProxMint": MoCExchangeRiskProxMint(self.connection_manager,
-                                                                         tx_logs["RiskProxMint"][0])}
+        tx_receipt = self.sc.mintBProx(
+            bucket, int(amount * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def reedeem_bpro(self,
+                     amount_token: Decimal,
+                     **tx_arguments):
         """ Reedem BitPro amount of token """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -916,7 +864,7 @@ class MoC(ContractBase):
         # get bpro balance
         if not default_account:
             default_account = 0
-        account_address = self.connection_manager.accounts[default_account].address
+        account_address = self.network_manager.accounts[default_account].address
         if amount_token > self.bpro_balance_of(account_address):
             raise Exception("You are trying to redeem more than you have!")
 
@@ -925,30 +873,29 @@ class MoC(ContractBase):
             raise Exception("You are trying to redeem more than availables. Available: {0}".format(
                 absolute_max_bpro))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"RiskProRedeem": self.sc_moc_exchange.events.RiskProRedeem().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RiskProRedeem": MoCExchangeRiskProRedeem(
-                self.connection_manager,
-                tx_logs["RiskProRedeem"][0])}
+        tx_receipt = self.sc.redeemBPro(
+            int(amount_token * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def reedeem_free_doc(self,
+                         amount_token: Decimal,
+                         **tx_arguments):
         """
         Reedem Free DOC amount of token
         Free Doc is Doc you can reedeem outside of settlement.
         """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -956,7 +903,7 @@ class MoC(ContractBase):
         # get doc balance
         if not default_account:
             default_account = 0
-        account_address = self.connection_manager.accounts[default_account].address
+        account_address = self.network_manager.accounts[default_account].address
         account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
@@ -966,31 +913,29 @@ class MoC(ContractBase):
             raise Exception("You are trying to redeem more than availables. Available: {0}".format(
                 free_doc))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc',
-                                                          int(amount_token * self.precision),
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"FreeStableTokenRedeem": self.sc_moc_exchange.events.FreeStableTokenRedeem().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"FreeStableTokenRedeem": MoCExchangeFreeStableTokenRedeem(
-                self.connection_manager,
-                tx_logs["FreeStableTokenRedeem"][0])}
+        tx_receipt = self.sc.redeemFreeDoc(
+            int(amount_token * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def reedeem_doc_request(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def reedeem_doc_request(self,
+                            amount_token: Decimal,
+                            **tx_arguments):
         """
         Reedem DOC request amount of token
         This is the amount of doc you want to reedem on settlement.
         """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -1001,31 +946,25 @@ class MoC(ContractBase):
         # get doc balance
         if not default_account:
             default_account = 0
-        account_address = self.connection_manager.accounts[default_account].address
+        account_address = self.network_manager.accounts[default_account].address
         account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemDocRequest',
-                                                          int(amount_token * self.precision),
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
-                                                                                       tx_logs["RedeemRequestAlter"][0])}
+        tx_receipt = self.sc.redeemDocRequest(
+            int(amount_token * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def reedeem_doc_request_alter(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def reedeem_doc_request_alter(self,
+                                  amount_token: Decimal,
+                                  **tx_arguments):
         """
         Redeeming DOCs on Settlement: alterRedeemRequestAmount
 
@@ -1033,6 +972,11 @@ class MoC(ContractBase):
         if the user invokes it for the first time or updates its value if it already exists.
         """
 
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
+
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
 
@@ -1042,32 +986,31 @@ class MoC(ContractBase):
         # get doc balance
         if not default_account:
             default_account = 0
-        account_address = self.connection_manager.accounts[default_account].address
+        account_address = self.network_manager.accounts[default_account].address
         account_balance = self.doc_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! Doc Balance: {0}".format(account_balance))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'alterRedeemRequestAmount',
-                                                          int(amount_token * self.precision),
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {"RedeemRequestAlter": self.sc_moc_settlement.events.RedeemRequestAlter().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RedeemRequestAlter": MoCSettlementRedeemRequestAlter(self.connection_manager,
-                                                                                       tx_logs["RedeemRequestAlter"][0])}
+        tx_receipt = self.sc.alterRedeemRequestAmount(
+            int(amount_token * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def reedeem_btc2x(self,
+                      amount_token: Decimal,
+                      **tx_arguments):
         """ Reedem BTC2X amount of token """
+
+        if 'default_account' in tx_arguments:
+            default_account = tx_arguments['default_account']
+        else:
+            default_account = None
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -1078,63 +1021,44 @@ class MoC(ContractBase):
         # get bprox balance of
         if not default_account:
             default_account = 0
-        account_address = self.connection_manager.accounts[default_account].address
+        account_address = self.network_manager.accounts[default_account].address
         account_balance = self.bprox_balance_of(account_address)
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! BTC2X Balance: {0}".format(account_balance))
 
         bucket = str.encode('X2')
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBProx', bucket,
-                                                          int(amount_token * self.precision),
-                                                          default_account=default_account)
+        tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(
-                tx_hash,
-                timeout=self.receipt_timeout,
-                poll_latency=self.poll_latency)
-            tx_logs = {
-                "RiskProxRedeem": self.sc_moc_exchange.events.RiskProxRedeem().processReceipt(tx_receipt)}
-            tx_logs_formatted = {"RiskProxRedeem": MoCExchangeRiskProxRedeem(self.connection_manager,
-                                                                             tx_logs["RiskProxRedeem"][0])}
+        tx_receipt = self.sc.redeemBProx(
+            bucket,
+            int(amount_token * self.precision),
+            tx_args)
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-    def redeem_all_doc(self, default_account=None, wait_receipt=True):
+        return tx_receipt
+
+    def redeem_all_doc(self,
+                       **tx_arguments):
         """
         Redeem All doc only on liquidation
         """
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         if self.mode == 'MoC':
-            fnc_to_call = 'redeemAllDoc'
+            tx_receipt = self.sc.redeemAllDoc(tx_args)
         else:
-            fnc_to_call = 'redeemAllStableToken'
+            tx_receipt = self.sc.redeemAllStableToken(tx_args)
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, fnc_to_call,
-                                                          default_account=default_account)
+        tx_receipt.info()
+        tx_receipt.info_to_log()
 
-        tx_receipt = None
-        tx_logs = None
-        tx_logs_formatted = None
-        if wait_receipt:
-            # wait to transaction be mined
-            tx_receipt = self.connection_manager.wait_for_transaction_receipt(tx_hash,
-                                                                              timeout=self.receipt_timeout,
-                                                                              poll_latency=self.poll_latency
-                                                                              )
-            tx_logs = {"StableTokenRedeem": self.sc_moc_exchange.events.StableTokenRedeem().processReceipt(tx_receipt)}
-            if tx_logs["StableTokenRedeem"]:
-                tx_logs_formatted = {"StableTokenRedeem": MoCExchangeStableTokenRedeem(
-                    self.connection_manager,
-                    tx_logs["StableTokenRedeem"][0])}
+        return tx_receipt
 
-        return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
-
+"""
     def search_block_transaction(self, block):
 
         network = self.connection_manager.network
@@ -1158,4 +1082,4 @@ class MoC(ContractBase):
         #transaction_receipt = node_manager.web3.eth.getTransactionReceipt(transaction)
 
         return l_transactions
-
+"""

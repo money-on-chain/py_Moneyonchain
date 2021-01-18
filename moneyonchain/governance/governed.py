@@ -62,7 +62,9 @@ class Governed(ContractBase):
 
         governor_address = Web3.toChecksumAddress(governor)
 
-        tx_receipt = self.sc.initialize(governor_address, **tx_arguments)
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.initialize(governor_address, tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()

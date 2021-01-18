@@ -70,8 +70,10 @@ class MoCStopper(ContractBase):
 
         contract_to_pause = Web3.toChecksumAddress(contract_to_pause)
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.pause(contract_to_pause,
-                                   **tx_arguments)
+                                   tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -85,9 +87,11 @@ class MoCStopper(ContractBase):
 
         contract_to_pause = Web3.toChecksumAddress(contract_to_pause)
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.unpause(
             contract_to_pause,
-            **tx_arguments)
+            tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
@@ -103,8 +107,10 @@ class MoCStopper(ContractBase):
         }
         """
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner),
-                                               **tx_arguments)
+                                               tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()

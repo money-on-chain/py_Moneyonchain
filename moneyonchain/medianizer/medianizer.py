@@ -124,9 +124,25 @@ class MoCMedianizer(ContractBase):
              **tx_arguments):
         """ Poke """
 
-        tx_receipt = self.sc.poke(**tx_arguments)
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.poke(tx_args)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
 
         return None, tx_receipt
+
+
+class RRC20MoCMedianizer(MoCMedianizer):
+
+    contract_name = 'MoCDecentralizedExchange'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/MoCMedianizer.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/MoCMedianizer.bin'))
+
+    mode = 'RRC20'
+    project = 'RRC20'
+    precision = 10 ** 18

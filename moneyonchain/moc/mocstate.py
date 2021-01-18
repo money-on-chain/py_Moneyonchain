@@ -585,12 +585,14 @@ class MoCState(ContractBase):
 
             self.log.info("Calling calculateBitcoinMovingAverage ...")
 
+            tx_args = self.tx_arguments(**tx_arguments)
+
             if self.mode == 'MoC':
-                tx_receipt = self.sc.calculateBitcoinMovingAverage(**tx_arguments)
+                tx_receipt = self.sc.calculateBitcoinMovingAverage(tx_args)
             else:
-                tx_receipt = self.sc.calculateReserveTokenMovingAverage(**tx_arguments)
+                tx_receipt = self.sc.calculateReserveTokenMovingAverage(tx_args)
 
             tx_receipt.info()
             tx_receipt.info_to_log()
 
-        return None, tx_receipt
+        return tx_receipt
