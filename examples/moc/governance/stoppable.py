@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.governance import MoCStopper
 from moneyonchain.moc import MoC
 
@@ -11,15 +11,31 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'mocTestnetAlpha'
 
-contract_moc = MoC(connection_manager)
-contract_stopper = MoCStopper(connection_manager)
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
+
+contract_moc = MoC(network_manager).from_abi()
+contract_stopper = MoCStopper(network_manager).from_abi()
 
 print("Paused: {0}".format(contract_moc.paused()))
 print("Stoppable: {0}".format(contract_moc.stoppable()))
 print("Stopper: {0}".format(contract_moc.stopper()))
 print("Owner: {0}".format(contract_stopper.owner()))
+
+# finally disconnect from network
+network_manager.disconnect()
