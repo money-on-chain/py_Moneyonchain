@@ -1,13 +1,6 @@
 """
-Inserts an order in the sell orderbook of a given pair without a hint
-the pair should not be disabled; the contract should not be paused. Takes the funds
-with a transferFrom
+Deploy Bpro token
 """
-
-from decimal import Decimal
-from web3 import Web3
-import json
-import os
 
 from moneyonchain.networks import NetworkManager
 from moneyonchain.tokens.bpro import BProToken

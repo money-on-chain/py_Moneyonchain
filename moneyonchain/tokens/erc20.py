@@ -22,7 +22,7 @@ from moneyonchain.contract import ContractBase
 
 class ERC20Token(ContractBase):
 
-    log = logging.getLogger()
+    contract_name = 'ERC20Token'
     precision = 10 ** 18
 
     def __init__(self,

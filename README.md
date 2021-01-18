@@ -26,7 +26,7 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 ```
 
-#### Connections table
+#### Enviroment table
 
 | Network Name      | Project | Enviroment                       | Network    |
 |-------------------|---------|----------------------------------|------------|
@@ -37,6 +37,7 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
 | dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
+| dexMainnet        | TEX     | xxx.moneyonchain.com             | Mainnet    |
 
 #### Price provider
 

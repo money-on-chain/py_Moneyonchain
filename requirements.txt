@@ -1,6 +1,5 @@
 web3==5.11.1
 eth-brownie==1.12.2
-rich==9.2.0
 moneyonchain==0.1.0
 setuptools==40.8.0
 PyYAML==5.3.1

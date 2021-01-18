@@ -19,7 +19,7 @@ from .erc20 import ERC20Token
 
 
 class RiskProToken(ERC20Token):
-    log = logging.getLogger()
+
     contract_name = 'RiskPro'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/RiskProToken.abi'))
