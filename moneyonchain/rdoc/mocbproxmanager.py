@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCBProxManager
+from moneyonchain.rrc20 import RRC20MoCBProxManager
 
 
-class RRC20MoCBProxManager(MoCBProxManager):
+class RDOCMoCBProxManager(RRC20MoCBProxManager):
     contract_name = 'MoCBProxManager'
 
     contract_abi = ContractBase.content_abi_file(
@@ -28,4 +28,4 @@ class RRC20MoCBProxManager(MoCBProxManager):
 
     precision = 10 ** 18
     mode = 'RRC20'
-    project = 'RRC20'
+    project = 'RDoC'

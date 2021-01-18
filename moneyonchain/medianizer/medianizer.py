@@ -136,7 +136,7 @@ class MoCMedianizer(ContractBase):
 
 class RRC20MoCMedianizer(MoCMedianizer):
 
-    contract_name = 'MoCDecentralizedExchange'
+    contract_name = 'MoCMedianizer'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rrc20/MoCMedianizer.abi'))
@@ -145,4 +145,18 @@ class RRC20MoCMedianizer(MoCMedianizer):
 
     mode = 'RRC20'
     project = 'RRC20'
+    precision = 10 ** 18
+
+
+class RDOCMoCMedianizer(RRC20MoCMedianizer):
+
+    contract_name = 'MoCMedianizer'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_rdoc/MoCMedianizer.bin'))
+
+    mode = 'RRC20'
+    project = 'RDoC'
     precision = 10 ** 18

@@ -15,17 +15,17 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCBProxManager
+from moneyonchain.rrc20 import RRC20MoCSettlement
 
 
-class RRC20MoCBProxManager(MoCBProxManager):
-    contract_name = 'MoCBProxManager'
+class RDOCMoCSettlement(RRC20MoCSettlement):
+    contract_name = 'MoCSettlement'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCRiskProxManager.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCRiskProxManager.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCSettlement.bin'))
 
     precision = 10 ** 18
     mode = 'RRC20'
-    project = 'RRC20'
+    project = 'RDoC'
