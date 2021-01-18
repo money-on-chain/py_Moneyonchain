@@ -18,6 +18,7 @@ import logging
 from web3.types import BlockIdentifier
 from web3 import Web3
 from moneyonchain.contract import ContractBase
+from moneyonchain.transaction import receipt_to_log
 
 
 class MoCStopper(ContractBase):
@@ -76,7 +77,7 @@ class MoCStopper(ContractBase):
                                    tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -94,7 +95,7 @@ class MoCStopper(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -113,7 +114,7 @@ class MoCStopper(ContractBase):
                                                tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 

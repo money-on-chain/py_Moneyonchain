@@ -68,3 +68,44 @@ class TransactionReceiptBase(TransactionReceipt):
                     result += f"\n      {key}: {value}"
 
         self.log.info(result)
+
+
+def receipt_to_log(receipt, log):
+    """ Receipt to logging """
+
+    status = ""
+    if not receipt.status:
+        status = ""
+
+    result = (
+        f"Transaction was Mined {status}\n---------------------\n"
+        f"Tx Hash: {receipt.txid}\n"
+        f"From: {receipt.sender}\n"
+    )
+
+    if receipt.contract_address and receipt.status:
+        result += (
+            f"New {receipt.contract_name} address: {receipt.contract_address}\n"
+        )
+    else:
+        result += (
+            f"To: {receipt.receiver}\n"
+            f"Value: {receipt.value}\n"
+        )
+        if receipt.input != "0x" and int(receipt.input, 16):
+            result += f"Function: {receipt._full_name()}\n"
+
+    result += (
+        f"Block: {receipt.block_number}\nGas Used: "
+        f"{receipt.gas_used} / {receipt.gas_limit}"
+        f"({receipt.gas_used / receipt.gas_limit:.1%})\n"
+    )
+
+    if receipt.events:
+        result += "\n   Events In This Transaction\n   --------------------------"
+        for event in receipt.events:  # type: ignore
+            result += f"\n   {event.name}"  # type: ignore
+            for key, value in event.items():  # type: ignore
+                result += f"\n      {key}: {value}"
+
+    log.info(result)

@@ -18,6 +18,7 @@ import logging
 from web3.types import BlockIdentifier
 from web3 import Web3
 from moneyonchain.contract import ContractBase
+from moneyonchain.transaction import receipt_to_log
 
 
 class Governor(ContractBase):
@@ -69,7 +70,7 @@ class Governor(ContractBase):
         tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner), tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -87,6 +88,7 @@ class Governor(ContractBase):
         tx_receipt = self.sc.executeChange(Web3.toChecksumAddress(contract_address), tx_args)
 
         tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 

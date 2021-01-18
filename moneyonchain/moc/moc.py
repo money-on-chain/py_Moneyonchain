@@ -20,6 +20,7 @@ from web3.types import BlockIdentifier
 import math
 
 from moneyonchain.contract import ContractBase
+from moneyonchain.transaction import receipt_to_log
 
 from .mocinrate import MoCInrate
 from .mocstate import MoCState
@@ -296,7 +297,7 @@ class MoC(ContractBase):
                 tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -317,7 +318,7 @@ class MoC(ContractBase):
                 tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -338,7 +339,7 @@ class MoC(ContractBase):
                 tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -356,7 +357,7 @@ class MoC(ContractBase):
             tx_receipt = self.sc.dailyInratePayment(tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -377,7 +378,7 @@ class MoC(ContractBase):
                 tx_receipt = self.sc.payRiskProHoldersInterestPayment(tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -753,7 +754,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -797,7 +798,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -841,7 +842,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -880,7 +881,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -920,7 +921,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -958,7 +959,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -998,7 +999,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -1036,7 +1037,7 @@ class MoC(ContractBase):
             tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 
@@ -1054,7 +1055,7 @@ class MoC(ContractBase):
             tx_receipt = self.sc.redeemAllStableToken(tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
 

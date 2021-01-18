@@ -18,6 +18,7 @@ from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
 from moneyonchain.governance import ProxyAdmin
+from moneyonchain.transaction import receipt_to_log
 
 
 class MoCState(ContractBase):
@@ -593,6 +594,6 @@ class MoCState(ContractBase):
                 tx_receipt = self.sc.calculateReserveTokenMovingAverage(tx_args)
 
             tx_receipt.info()
-            tx_receipt.info_to_log()
+            receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt

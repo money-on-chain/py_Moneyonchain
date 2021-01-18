@@ -17,6 +17,7 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
+from moneyonchain.transaction import receipt_to_log
 
 
 class MoCMedianizer(ContractBase):
@@ -80,7 +81,7 @@ class MoCMedianizer(ContractBase):
         tx_receipt = self.sc.setMin(int(minimum), **tx_arguments)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return None, tx_receipt
 
@@ -129,7 +130,7 @@ class MoCMedianizer(ContractBase):
         tx_receipt = self.sc.poke(tx_args)
 
         tx_receipt.info()
-        tx_receipt.info_to_log()
+        receipt_to_log(tx_receipt, self.log)
 
         return None, tx_receipt
 
