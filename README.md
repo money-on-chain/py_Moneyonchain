@@ -2,6 +2,14 @@
 
 Python API to Money On Chain projects.
 
+### Versions
+
+There are 3 versions not compatible with each others
+
+* Release 0.X.X: This is current master, this will deprecated in our future.
+* Release 1.X.X: This is will introduced breaking changes in contract not compatible with older versions
+* Release 2.X.X: This is will introduced breaking changes, rework of the api, make support using brownie lib
+
 ### Requirements
 
 * Python 3.6+ support
@@ -12,18 +20,79 @@ Python API to Money On Chain projects.
 pip3 install moneyonchain
 ```
 
-### Usage
-
-#### Connection manager 
-
-Connect by default to RSK Testnet public node 
+or with specific version
 
 ```
-from moneyonchain.manager import ConnectionManager
+pip3 install moneyonchain==2.0.0
+```
 
-connection_manager = ConnectionManager()
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
+
+### Usage
+
+#### Network manager 
+
+Network manager manage connection to node and other specific to current connected network. By default if you run the
+first time .install(), this will install current used networks of our enviroments by brownie.
+
+First time you are going to interect with our api you will need to install predefined connections networks
+
+```
+from moneyonchain.networks import NetworkManager
+
+connection_network='rskTesnetPublic'
+config_network = 'mocTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+network_manager.install()
+
+```
+
+#### Connection table
+
+| Network Name      | Network node          | Host                               | Chain    |
+|-------------------|-----------------------|------------------------------------|----------|
+| rskTesnetPublic   | RSK Testnet Public    | https://public-node.testnet.rsk.co | 31       |    
+| rskTesnetLocal    | RSK Testnet Local     | http://localhost:4444              | 31       |
+| rskMainnetPublic  | RSK Mainnet Public    | https://public-node.rsk.co         | 30       |
+| rskMainnetLocal   | RSK Mainnet Local     | http://localhost:4444              | 30       |
+
+
+Example 1. Connect by default to RSK Testnet public node and to mocTestnet enviroment and print is connected
+
+```
+from moneyonchain.networks import NetworkManager
+
+
+connection_network='rskTesnetPublic'
+config_network = 'mocTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
+print(network_manager.is_connected())
+
+# finally disconnect from network
+network_manager.disconnect()
+
 ```
 
 #### Enviroment table
@@ -36,8 +105,8 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnetAlpha  | RIF     |                                  | Testnet    |
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
-| dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
-| dexMainnet        | TEX     | xxx.moneyonchain.com             | Mainnet    |
+| dexTestnet        | TEX     | tex-testnet.moneyonchain.com     | Testnet    |
+| dexMainnet        | TEX     | tex.moneyonchain.com             | Mainnet    |
 
 #### Price provider
 
