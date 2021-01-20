@@ -19,8 +19,6 @@ from typing import (
     Optional
 )
 from web3.types import BlockIdentifier
-
-
 from brownie import Contract
 
 from moneyonchain.account import AccountBase
@@ -134,17 +132,6 @@ class ContractBase(object):
     def load_bin_file(self, bin_file):
 
         self.contract_bin = self.content_bin_file(bin_file)
-
-    def logs_from(self, events_functions, from_block, to_block, block_steps=2880):
-
-        logs = self.network_manager.logs_from(
-            self.sc,
-            events_functions,
-            from_block,
-            to_block,
-            block_steps=block_steps)
-
-        return logs
 
     def filter_events(self,
                       from_block: Optional[BlockIdentifier] = None,
