@@ -18,10 +18,12 @@ import json
 from typing import Tuple, Union
 from web3 import Web3
 from web3.types import BlockIdentifier
+import datetime
 
 from brownie import network, web3
 from brownie.network import accounts
 from brownie._config import _get_data_folder
+from brownie.network.event import _decode_logs
 
 
 TYPE_NETWORK_GROUP = ('live', 'development', 'both')
@@ -206,6 +208,13 @@ class NetworkManager(BaseNetworkManager):
         return web3.eth.blockNumber
 
     @staticmethod
+    def block_timestamp(block):
+        """ Block timestamp """
+        block_timestamp = web3.eth.getBlock(block).timestamp
+        dt_object = datetime.datetime.fromtimestamp(block_timestamp)
+        return dt_object
+
+    @staticmethod
     def network_balance(address, block_identifier: BlockIdentifier = 'latest'):
         """ Balance of the address """
         return web3.eth.getBalance(Web3.toChecksumAddress(address), block_identifier=block_identifier)
@@ -235,7 +244,33 @@ class NetworkManager(BaseNetworkManager):
                         l_event.append(event_entry)
                 r_events[fn_events.__name__] = l_event
         return r_events
+    """
+    @staticmethod
+    def all_events_from(sc, events_functions=None, from_block=0, to_block='latest'):
 
+        if events_functions:
+            if not isinstance(events_functions, list):
+                raise Exception(
+                    'events_functions must be a list of event functions like ["Event Name 1", "Event Name 2"]'
+                )
+        else:
+            events_functions = list()
+            for fn_events in sc.events:
+                events_functions.append(fn_events.__name__)
+
+        r_events = dict()
+        for fn_events in sc.events:
+
+            if fn_events.__name__ in events_functions:
+                l_event = list()
+                event_filter = fn_events.createFilter(fromBlock=from_block, toBlock=to_block)
+                event_entries = event_filter.get_all_entries()
+                for event_entry in event_entries:
+                    if event_entry['event'] == fn_events.__name__:
+                        l_event.append(event_entry)
+                r_events[fn_events.__name__] = l_event
+        return r_events
+    """
     def logs_from(self, sc, events_functions, from_block, to_block, block_steps=2880):
 
         last_block_number = int(self.block_number)
@@ -271,3 +306,22 @@ class NetworkManager(BaseNetworkManager):
                         l_events[fnx_name].append(events[fnx_name])
 
         return l_events
+
+    def filter_events(self, filter_params):
+        """ Event from """
+
+        event_filter = web3.eth.filter(filter_params)
+        event_entries = event_filter.get_all_entries()
+        list_event_decoded = list()
+        for event_entry in event_entries:
+            event_decoded = _decode_logs([event_entry])
+            list_event_decoded.append(
+                {
+                    'event': event_decoded,
+                    'blockNumber': event_entry['blockNumber'],
+                    'timestamp': self.block_timestamp(event_entry['blockNumber']),
+                    'transactionHash': Web3.toHex(event_entry['transactionHash'])
+                }
+            )
+
+        return list_event_decoded

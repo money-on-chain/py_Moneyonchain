@@ -13,6 +13,13 @@
 
 import json
 import logging
+from typing import (
+    Any,
+    Dict,
+    Optional
+)
+from web3.types import BlockIdentifier
+
 
 from brownie import Contract
 
@@ -138,3 +145,18 @@ class ContractBase(object):
             block_steps=block_steps)
 
         return logs
+
+    def filter_events(self,
+                      from_block: Optional[BlockIdentifier] = None,
+                      to_block: BlockIdentifier = "latest"
+                      ):
+        """ filter events """
+
+        filter_params = {
+            'fromBlock': from_block,
+            'toBlock': to_block,
+            'address': self.address()
+        }
+
+        return self.network_manager.filter_events(filter_params)
+

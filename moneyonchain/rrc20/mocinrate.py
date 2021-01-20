@@ -61,15 +61,15 @@ class RRC20MoCInrate(MoCInrate):
 
         info = dict()
 
-        result = self.sc.functions.getRiskProxTmax(block_identifier=block_identifier)
+        result = self.sc.getRiskProxTmax(block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
         info['RiskProxTmax'] = result
 
-        result = self.sc.functions.getRiskProxPower(block_identifier=block_identifier)
+        result = self.sc.getRiskProxPower(block_identifier=block_identifier)
         info['RiskProxPower'] = result
 
-        result = self.sc.functions.getRiskProxTmin(block_identifier=block_identifier)
+        result = self.sc.getRiskProxTmin(block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
         info['RiskProxTmin'] = result

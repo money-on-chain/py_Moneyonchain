@@ -215,9 +215,10 @@ class MoCDecentralizedExchange(ContractBase):
             return (emergentPrice, lastBuyMatch.id, lastBuyMatch.exchangeableAmount, lastSellMatch.id);
             """
 
-        result = self.sc.functions.getEmergentPrice(pair[0],
-                                                    pair[1],
-                                                    block_identifier=block_identifier)
+        result = self.sc.getEmergentPrice(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
         return result
 
     def market_price(self,

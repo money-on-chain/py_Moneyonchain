@@ -12,8 +12,6 @@
 """
 
 from web3 import Web3
-from web3.exceptions import BlockNotFound
-import datetime
 
 from moneyonchain.events import BaseEvent
 
@@ -22,20 +20,12 @@ class MoCExchangeRiskProMint(BaseEvent):
 
     name = "RiskProMint"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
 
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.commission = event['args']['commission']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -45,15 +35,12 @@ class MoCExchangeRiskProMint(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -71,17 +58,11 @@ class MoCExchangeRiskProMint(BaseEvent):
 class MoCExchangeRiskProWithDiscountMint(BaseEvent):
     name = "RiskProWithDiscountMint"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  # dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.riskProTecPrice = event['args']['riskProTecPrice']
-        self.riskProDiscountPrice = event['args']['riskProDiscountPrice']
-        self.amount = event['args']['amount']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -91,13 +72,10 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['riskProTecPrice'] = Web3.fromWei(self.riskProTecPrice, 'ether')
-        d_event['riskProDiscountPrice'] = Web3.fromWei(self.riskProDiscountPrice, 'ether')
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['riskProTecPrice'] = Web3.fromWei(self.event['riskProTecPrice'], 'ether')
+        d_event['riskProDiscountPrice'] = Web3.fromWei(self.event['riskProDiscountPrice'], 'ether')
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
 
         return d_event
 
@@ -113,19 +91,11 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
 class MoCExchangeRiskProRedeem(BaseEvent):
     name = "RiskProRedeem"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.commission = event['args']['commission']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -135,15 +105,12 @@ class MoCExchangeRiskProRedeem(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -161,19 +128,11 @@ class MoCExchangeRiskProRedeem(BaseEvent):
 class MoCExchangeStableTokenMint(BaseEvent):
     name = "StableTokenMint"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.commission = event['args']['commission']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -183,15 +142,12 @@ class MoCExchangeStableTokenMint(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -209,19 +165,11 @@ class MoCExchangeStableTokenMint(BaseEvent):
 class MoCExchangeStableTokenRedeem(BaseEvent):
     name = "StableTokenRedeem"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt #  dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.commission = event['args']['commission']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -231,15 +179,12 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -257,20 +202,11 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
 class MoCExchangeFreeStableTokenRedeem(BaseEvent):
     name = "FreeStableTokenRedeem"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  # dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.commission = event['args']['commission']
-        self.interests = event['args']['interests']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -280,16 +216,13 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['interests'] = Web3.fromWei(self.interests, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['interests'] = Web3.fromWei(self.event['interests'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -308,22 +241,11 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
 class MoCExchangeRiskProxMint(BaseEvent):
     name = "RiskProxMint"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.bucket = 'X2'
-        self.account = event['args']['account']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.interests = event['args']['interests']
-        self.leverage = event['args']['leverage']
-        self.commission = event['args']['commission']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -333,18 +255,15 @@ class MoCExchangeRiskProxMint(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['bucket'] = self.bucket
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['interests'] = Web3.fromWei(self.interests, 'ether')
-        d_event['leverage'] = Web3.fromWei(self.leverage, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['bucket'] = self.event['bucket']
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['interests'] = Web3.fromWei(self.event['interests'], 'ether')
+        d_event['leverage'] = Web3.fromWei(self.event['leverage'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -365,22 +284,11 @@ class MoCExchangeRiskProxMint(BaseEvent):
 class MoCExchangeRiskProxRedeem(BaseEvent):
     name = "RiskProxRedeem"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.bucket = 'X2'
-        self.account = event['args']['account']
-        self.commission = event['args']['commission']
-        self.amount = event['args']['amount']
-        self.reserveTotal = event['args']['reserveTotal']
-        self.interests = event['args']['interests']
-        self.leverage = event['args']['leverage']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -390,18 +298,15 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['bucket'] = self.bucket
-        d_event['account'] = self.account
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['reserveTotal'] = Web3.fromWei(self.reserveTotal, 'ether')
-        d_event['interests'] = Web3.fromWei(self.interests, 'ether')
-        d_event['leverage'] = Web3.fromWei(self.leverage, 'ether')
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['bucket'] = self.event['bucket']
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['interests'] = Web3.fromWei(self.event['interests'], 'ether')
+        d_event['leverage'] = Web3.fromWei(self.event['leverage'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -424,18 +329,11 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
 class MoCSettlementRedeemRequestProcessed(BaseEvent):
     name = "RedeemRequestProcessed"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.redeemer = event['args']['redeemer']
-        self.commission = event['args']['commission']
-        self.amount = event['args']['amount']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -445,13 +343,10 @@ class MoCSettlementRedeemRequestProcessed(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['redeemer'] = self.redeemer
-        d_event['commission'] = Web3.fromWei(self.commission, 'ether')
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['redeemer'] = self.event['redeemer']
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
 
         return d_event
 
@@ -467,18 +362,11 @@ class MoCSettlementRedeemRequestProcessed(BaseEvent):
 class MoCSettlementSettlementRedeemStableToken(BaseEvent):
     name = "SettlementRedeemStableToken"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.queueSize = event['args']['queueSize']
-        self.accumCommissions = event['args']['accumCommissions']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -488,13 +376,10 @@ class MoCSettlementSettlementRedeemStableToken(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['queueSize'] = self.queueSize
-        d_event['accumCommissions'] = Web3.fromWei(self.accumCommissions, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['queueSize'] = self.event['queueSize']
+        d_event['accumCommissions'] = Web3.fromWei(self.event['accumCommissions'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -510,15 +395,11 @@ class MoCSettlementSettlementRedeemStableToken(BaseEvent):
 class MoCSettlementSettlementCompleted(BaseEvent):
     name = "SettlementCompleted"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-        self.commissionsPayed = event['args']['commissionsPayed']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -528,11 +409,8 @@ class MoCSettlementSettlementCompleted(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['commissionsPayed'] = Web3.fromWei(self.commissionsPayed, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['commissionsPayed'] = Web3.fromWei(self.event['commissionsPayed'], 'ether')
 
         return d_event
 
@@ -546,19 +424,11 @@ class MoCSettlementSettlementCompleted(BaseEvent):
 class MoCSettlementSettlementDeleveraging(BaseEvent):
     name = "SettlementDeleveraging"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.leverage = event['args']['leverage']
-        self.riskProxPrice = event['args']['riskProxPrice']
-        self.reservePrice = event['args']['reservePrice']
-        self.startBlockNumber = event['args']['startBlockNumber']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -568,14 +438,11 @@ class MoCSettlementSettlementDeleveraging(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['leverage'] = Web3.fromWei(self.leverage, 'ether')
-        d_event['riskProxPrice'] = Web3.fromWei(self.riskProxPrice, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
-        d_event['startBlockNumber'] = self.startBlockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['leverage'] = Web3.fromWei(self.event['leverage'], 'ether')
+        d_event['riskProxPrice'] = Web3.fromWei(self.event['riskProxPrice'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
+        d_event['startBlockNumber'] = self.event['startBlockNumber']
 
         return d_event
 
@@ -592,19 +459,11 @@ class MoCSettlementSettlementDeleveraging(BaseEvent):
 class MoCSettlementSettlementStarted(BaseEvent):
     name = "SettlementStarted"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.stableTokenRedeemCount = event['args']['stableTokenRedeemCount']
-        self.deleveragingCount = event['args']['deleveragingCount']
-        self.riskProxPrice = event['args']['riskProxPrice']
-        self.reservePrice = event['args']['reservePrice']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -614,14 +473,11 @@ class MoCSettlementSettlementStarted(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['stableTokenRedeemCount'] = self.stableTokenRedeemCount
-        d_event['deleveragingCount'] = self.deleveragingCount
-        d_event['riskProxPrice'] = Web3.fromWei(self.riskProxPrice, 'ether')
-        d_event['reservePrice'] = Web3.fromWei(self.reservePrice, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['stableTokenRedeemCount'] = self.event['stableTokenRedeemCount']
+        d_event['deleveragingCount'] = self.event['deleveragingCount']
+        d_event['riskProxPrice'] = Web3.fromWei(self.event['riskProxPrice'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
 
         return d_event
 
@@ -638,18 +494,11 @@ class MoCSettlementSettlementStarted(BaseEvent):
 class MoCSettlementRedeemRequestAlter(BaseEvent):
     name = "RedeemRequestAlter"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.redeemer = event['args']['redeemer']
-        self.isAddition = event['args']['isAddition']
-        self.delta = event['args']['delta']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -659,13 +508,10 @@ class MoCSettlementRedeemRequestAlter(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['redeemer'] = self.redeemer
-        d_event['isAddition'] = self.isAddition
-        d_event['delta'] = Web3.fromWei(self.delta, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['redeemer'] = self.event['redeemer']
+        d_event['isAddition'] = self.event['isAddition']
+        d_event['delta'] = Web3.fromWei(self.event['delta'], 'ether')
 
         return d_event
 
@@ -681,18 +527,11 @@ class MoCSettlementRedeemRequestAlter(BaseEvent):
 class MoCInrateDailyPay(BaseEvent):
     name = "InrateDailyPay"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
-            #self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.amount = event['args']['amount']
-        self.daysToSettlement = event['args']['daysToSettlement']
-        self.nReserveBucketC0 = event['args']['nReserveBucketC0']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -702,13 +541,10 @@ class MoCInrateDailyPay(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['daysToSettlement'] = self.daysToSettlement
-        d_event['nReserveBucketC0'] = Web3.fromWei(self.nReserveBucketC0, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['daysToSettlement'] = self.event['daysToSettlement']
+        d_event['nReserveBucketC0'] = Web3.fromWei(self.event['nReserveBucketC0'], 'ether')
 
         return d_event
 
@@ -724,17 +560,11 @@ class MoCInrateDailyPay(BaseEvent):
 class MoCInrateRiskProHoldersInterestPay(BaseEvent):
     name = "RiskProHoldersInterestPay"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
-            # self.timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.amount = event['args']['amount']
-        self.nReserveBucketC0BeforePay = event['args']['nReserveBucketC0BeforePay']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -744,12 +574,9 @@ class MoCInrateRiskProHoldersInterestPay(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['amount'] = Web3.fromWei(self.amount, 'ether')
-        d_event['nReserveBucketC0BeforePay'] = Web3.fromWei(self.nReserveBucketC0BeforePay, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['nReserveBucketC0BeforePay'] = Web3.fromWei(self.event['nReserveBucketC0BeforePay'], 'ether')
 
         return d_event
 
@@ -766,16 +593,9 @@ class ERC20Transfer(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.value = event['args']['value']
-        self.e_from = event['args']['from']
-        self.e_to = event['args']['to']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -785,13 +605,10 @@ class ERC20Transfer(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['value'] = Web3.fromWei(self.value, 'ether')
-        d_event['e_from'] = Web3.fromWei(self.e_from, 'ether')
-        d_event['e_to'] = Web3.fromWei(self.e_to, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['value'] = Web3.fromWei(self.event['value'], 'ether')
+        d_event['e_from'] = Web3.fromWei(self.event['e_from'], 'ether')
+        d_event['e_to'] = Web3.fromWei(self.event['e_to'], 'ether')
 
         return d_event
 
@@ -809,15 +626,9 @@ class ERC20Approval(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            self.timestamp = ts - datetime.timedelta(hours=self.hours_delta)
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.owner = event['args']['owner']
-        self.spender = event['args']['spender']
-        self.value = event['args']['value']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -827,13 +638,10 @@ class ERC20Approval(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['owner'] = self.owner
-        d_event['spender'] = self.spender
-        d_event['value'] = Web3.fromWei(self.value, 'ether')
+        d_event['timestamp'] = self.timestamp
+        d_event['owner'] = self.event['owner']
+        d_event['spender'] = self.event['spender']
+        d_event['value'] = Web3.fromWei(self.event['value'], 'ether')
 
         return d_event
 
@@ -851,14 +659,9 @@ class MoCBucketLiquidation(BaseEvent):
 
     def __init__(self, connection_manager, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.bucket = event['args']['bucket']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -868,11 +671,8 @@ class MoCBucketLiquidation(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['bucket'] = self.bucket
+        d_event['timestamp'] = self.timestamp
+        d_event['bucket'] = self.event['bucket']
 
         return d_event
 
@@ -887,16 +687,11 @@ class MoCBucketLiquidation(BaseEvent):
 class MoCStateStateTransition(BaseEvent):
     name = "StateTransition"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
-        try:
-            ts = connection_manager.block_timestamp(self.blockNumber)
-            dt = ts - datetime.timedelta(hours=self.hours_delta)
-            self.timestamp = dt  #dt.strftime("%Y-%m-%d %H:%M:%S")
-        except BlockNotFound:
-            self.timestamp = None
-
-        self.newState = event['args']['newState']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -906,11 +701,8 @@ class MoCStateStateTransition(BaseEvent):
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
-        if self.timestamp:
-            d_event['timestamp'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            d_event['timestamp'] = ''
-        d_event['newState'] = self.newState
+        d_event['timestamp'] = self.timestamp
+        d_event['newState'] = self.event['newState']
 
         return d_event
 
@@ -920,4 +712,3 @@ class MoCStateStateTransition(BaseEvent):
                 d_event['timestamp'],
                 d_event['newState']
                 ]
-

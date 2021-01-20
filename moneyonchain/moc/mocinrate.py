@@ -259,3 +259,47 @@ class MoCInrate(ContractBase):
             result = Web3.fromWei(result, 'ether')
 
         return result
+
+    def doc_inrate(self,
+                   formatted: bool = True,
+                   block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate Doc"""
+
+        info = dict()
+
+        result = self.sc.getDoCTmax(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['DoCTmax'] = result
+
+        result = self.sc.getDoCPower(block_identifier=block_identifier)
+        info['DoCPower'] = result
+
+        result = self.sc.getDoCTmin(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['DoCTmin'] = result
+
+        return info
+
+    def btcx_inrate(self,
+                    formatted: bool = True,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate btcx"""
+
+        info = dict()
+
+        result = self.sc.getBtcxTmax(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['BtcxTmax'] = result
+
+        result = self.sc.getBtcxPower(block_identifier=block_identifier)
+        info['BtcxPower'] = result
+
+        result = self.sc.getBtcxTmin(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['BtcxTmin'] = result
+
+        return info
