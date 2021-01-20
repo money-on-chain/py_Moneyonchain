@@ -2,6 +2,14 @@
 
 Python API to Money On Chain projects.
 
+### Versions
+
+There are 3 versions not compatible with each others
+
+* Release 0.X.X: This is current master, this will deprecated in our future.
+* Release 1.X.X: This is will introduced breaking changes in contract not compatible with older versions
+* Release 2.X.X: This is will introduced breaking changes, rework of the api, make support using brownie lib
+
 ### Requirements
 
 * Python 3.6+ support
@@ -11,6 +19,13 @@ Python API to Money On Chain projects.
 ```
 pip3 install moneyonchain
 ```
+
+or with specific version
+
+```
+pip3 install moneyonchain==0.0.53
+```
+
 
 ### Usage
 
@@ -36,7 +51,8 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnetAlpha  | RIF     |                                  | Testnet    |
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
-| dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
+| dexTestnet        | TEX     | tex-testnet.moneyonchain.com     | Testnet    |
+| dexMainnet        | TEX     | tex.moneyonchain.com             | Mainnet    |
 
 #### Price provider
 
