@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 connection_network='rskTesnetPublic'
-config_network = 'mocTestnet'
+config_network = 'rdocTestnet'
 
 # init network manager
 # connection network is the brownie connection network
