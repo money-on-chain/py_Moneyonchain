@@ -9,21 +9,30 @@ _previousOrderIdHint previous order in the orderbook, used as on optimization to
 
 """
 
-from decimal import Decimal
-from web3 import Web3
 import json
 import os
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex import MoCDecentralizedExchange
 
 import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/cancel_buy_order.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
 def options_from_settings(filename='settings.json'):
@@ -35,39 +44,42 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
 
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 # instantiate DEX Contract
-dex = MoCDecentralizedExchange(connection_manager)
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[network]['DOC']
-secondary_token = settings[network]['WRBTC']
-order_id = 107
+base_token = settings[config_network]['DOC']
+secondary_token = settings[config_network]['ADOC']
+order_id = 140
 previous_order_id = 0
 
 print("Order cancel. Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.cancel_buy_order(
+tx_receipt = dex.cancel_buy_order(
     base_token,
     secondary_token,
     order_id,
     previous_order_id)
-print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
-if tx_logs:
-    print(tx_logs_formatted['OrderCancelled'].print_row())
 
-
-"""
-
-Tx hash: [0xf5962de6b7f36425943be54522f804c358b171bd6414084dfc979655278952ee]
-Block Nº	Timestamp	id	sender	returnedAmount	commission	returnedCommission	isBuy
-1408435	2020-12-01 09:49:19	107	0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3	0.000969604920060969	0.000000000000000000	0.000030395079939031	True
-None
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

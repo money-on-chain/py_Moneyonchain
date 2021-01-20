@@ -9,7 +9,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/allowance.log',
+                    filename='logs/allowance_info.log',
                     filemode='a')
 
 # set up logging to console
@@ -56,26 +56,44 @@ settings = options_from_settings(
 
 #account = '0xB5E2Bed9235b6366Fa0254c2e6754E167e0a2383'
 account = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
-token = 'BPRO'
-amount_allow = 0.001  # 0 if you dont want to allow anything
-
 dex_address = network_manager.options['networks'][config_network]['addresses']['dex']
 
-if token in ['DOC']:
-    token_sc = DoCToken(network_manager, contract_address=settings[config_network]['DOC']).from_abi()
-elif token in ['BPRO']:
-    token_sc = BProToken(network_manager, contract_address=settings[config_network]['BPRO']).from_abi()
-elif token in ['WRBTC']:
-    token_sc = WRBTCToken(network_manager, contract_address=settings[config_network]['WRBTC']).from_abi()
-elif token in ['RDOC']:
-    token_sc = RIFDoC(network_manager, contract_address=settings[config_network]['RDOC']).from_abi()
-elif token in ['RIF']:
-    token_sc = RIF(network_manager, contract_address=settings[config_network]['RIF']).from_abi()
-elif token in ['RIFP']:
-    token_sc = RIFPro(network_manager, contract_address=settings[config_network]['RIFP']).from_abi()
-else:
-    raise Exception("Token not recognize")
 
-if amount_allow > 0:
-    print("Allowing ... {0} {1}".format(amount_allow, token))
-    token_sc.approve(dex_address, amount_allow)
+def print_info(contract_token):
+    print("TOKEN INFO")
+    print("==========")
+    print("Token Name: {0}".format(contract_token.name()))
+    print("Token Symbol: {0}".format(contract_token.symbol()))
+    print("Total Supply: {0}".format(contract_token.total_supply()))
+    print("")
+    print("BALANCES")
+    print("==========")
+    print("Balance: {0} {1}".format(contract_token.balance_of(account), contract_token.symbol()))
+    print("Allowance: {0} {1}".format(contract_token.allowance(account, dex_address), contract_token.symbol()))
+    print()
+    print()
+
+
+# DOC
+token_sc = DoCToken(network_manager, contract_address=settings[config_network]['DOC']).from_abi()
+print_info(token_sc)
+
+# BPRO
+token_sc = BProToken(network_manager, contract_address=settings[config_network]['BPRO']).from_abi()
+print_info(token_sc)
+
+# WRBTC
+token_sc = WRBTCToken(network_manager, contract_address=settings[config_network]['WRBTC']).from_abi()
+print_info(token_sc)
+
+# RDOC
+token_sc = RIFDoC(network_manager, contract_address=settings[config_network]['RDOC']).from_abi()
+print_info(token_sc)
+
+# RIF
+token_sc = RIF(network_manager, contract_address=settings[config_network]['RIF']).from_abi()
+print_info(token_sc)
+
+# RIFP
+token_sc = RIFPro(network_manager, contract_address=settings[config_network]['RIFP']).from_abi()
+print_info(token_sc)
