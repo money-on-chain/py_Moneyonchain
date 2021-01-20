@@ -20,6 +20,10 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.governance import ProxyAdmin
 
 
+BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
+BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
+
+
 class MoCInrate(ContractBase):
     contract_name = 'MoCInrate'
 
@@ -178,7 +182,7 @@ class MoCInrate(ContractBase):
                                  block_identifier: BlockIdentifier = 'latest'):
         """ Calc interest value amount in ether float"""
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if precision:
             amount = int(amount * self.precision)
@@ -246,7 +250,7 @@ class MoCInrate(ContractBase):
                          block_identifier: BlockIdentifier = 'latest'):
         """ Calculates an average interest rate between after and before mint/redeem """
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if self.mode == 'MoC':
             result = self.sc.btcxInrateAvg(bucket, int(amount * self.precision), on_minting,

@@ -37,6 +37,9 @@ STATE_BPRO_DISCOUNT = 1
 STATE_BELOW_COBJ = 2
 STATE_ABOVE_COBJ = 3
 
+BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
+BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
+
 
 class MoC(ContractBase):
     contract_name = 'MoC'
@@ -261,7 +264,7 @@ class MoC(ContractBase):
     def is_bucket_liquidation(self, block_identifier: BlockIdentifier = 'latest'):
         """Is bucket liquidation reached"""
 
-        result = self.sc.isBucketLiquidationReached(str.encode('X2'), block_identifier=block_identifier)
+        result = self.sc.isBucketLiquidationReached(BUCKET_X2, block_identifier=block_identifier)
 
         return result
 
@@ -324,7 +327,7 @@ class MoC(ContractBase):
 
             # Only if is liquidation reach
             tx_receipt = self.sc.evalBucketLiquidation(
-                str.encode('X2'),
+                BUCKET_X2,
                 tx_args)
 
             tx_receipt.info()
@@ -555,7 +558,7 @@ class MoC(ContractBase):
                          formatted: bool = True,
                          block_identifier: BlockIdentifier = 'latest'):
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if self.mode == 'MoC':
             result = self.sc.bproxBalanceOf(bucket, account_address, block_identifier=block_identifier)
@@ -632,18 +635,23 @@ class MoC(ContractBase):
 
         return total_amount, commission_value, interest_value
 
-    def mint_bpro_gas_estimated(self, amount, precision=False):
+    def mint_bpro_gas_estimated(self,
+                                amount,
+                                precision=False,
+                                **tx_arguments):
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+            fxn_to_call = getattr(self.sc, 'mintBPro')
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
+            fxn_to_call = getattr(self.sc, 'mintRiskPro')
 
-        built_fxn = fxn_to_call(int(amount))
-        gas_estimate = built_fxn.estimateGas()
+        tx_args = self.tx_arguments(**tx_arguments)
+        built_fxn = fxn_to_call(int(amount), tx_args)
+        #gas_estimate = built_fxn.estimateGas()
+        gas_estimate = built_fxn.estimate_gas()
 
         return gas_estimate
 
@@ -653,9 +661,9 @@ class MoC(ContractBase):
             amount = amount * self.precision
 
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+            fxn_to_call = getattr(self.sc, 'mintDoc')
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
+            fxn_to_call = getattr(self.sc, 'mintStableToken')
 
         built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
@@ -664,15 +672,15 @@ class MoC(ContractBase):
 
     def mint_bprox_gas_estimated(self, amount, precision=False):
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+            fxn_to_call = getattr(self.sc, 'mintBProx')
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
+            fxn_to_call = getattr(self.sc, 'mintRiskProx')
 
         built_fxn = fxn_to_call(bucket, int(amount))
         gas_estimate = built_fxn.estimateGas()
@@ -757,7 +765,7 @@ class MoC(ContractBase):
                 max_mint_bpro_available))
 
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['value'] = int(total_amount * self.precision)
+        tx_args['amount'] = int(total_amount * self.precision)
 
         tx_receipt = self.sc.mintBPro(
             int(amount * self.precision),
@@ -801,7 +809,7 @@ class MoC(ContractBase):
             raise Exception("You don't have suficient funds")
 
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['value'] = int(total_amount * self.precision)
+        tx_args['amount'] = int(total_amount * self.precision)
 
         tx_receipt = self.sc.mintDoc(
             int(amount * self.precision),
@@ -812,7 +820,7 @@ class MoC(ContractBase):
 
         return tx_receipt
 
-    def mint_btc2x(self,
+    def mint_btcx(self,
                    amount: Decimal,
                    **tx_arguments):
         """ Mint amount BTC2X
@@ -834,18 +842,20 @@ class MoC(ContractBase):
             raise Exception("Amount value to mint too low")
 
         max_bprox_btc_value = self.max_bprox_btc_value()
+        print(max_bprox_btc_value)
+        print(amount)
         if amount > max_bprox_btc_value:
-            raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
+            raise Exception("You are trying to mint more than availables. BTCx available: {0}".format(
                 max_bprox_btc_value))
 
         total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['value'] = int(math.ceil(total_amount * self.precision))
+        tx_args['amount'] = int(math.ceil(total_amount * self.precision))
 
         tx_receipt = self.sc.mintBProx(
             bucket, int(amount * self.precision),
@@ -1037,7 +1047,7 @@ class MoC(ContractBase):
         if amount_token > account_balance:
             raise Exception("You are trying to redeem more than you have! BTC2X Balance: {0}".format(account_balance))
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         tx_args = self.tx_arguments(**tx_arguments)
 

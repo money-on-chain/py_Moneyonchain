@@ -58,6 +58,18 @@ class MoCState(ContractBase):
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
+    def bucket_x2(self):
+
+        result = self.sc.BUCKET_X2()
+
+        return result
+
+    def bucket_c0(self):
+
+        result = self.sc.BUCKET_C0()
+
+        return result
+
     def state(self, block_identifier: BlockIdentifier = 'latest'):
         """State of contract"""
 
@@ -123,7 +135,7 @@ class MoCState(ContractBase):
                 block_identifier: BlockIdentifier = 'latest'):
         """cobj_X2"""
 
-        result = self.sc.getBucketCobj(str.encode('X2'), block_identifier=block_identifier)
+        result = self.sc.getBucketCobj(self.bucket_x2(), block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -187,11 +199,12 @@ class MoCState(ContractBase):
 
         return result
 
-    def max_bprox_btc_value(self, formatted: bool = True,
+    def max_bprox_btc_value(self,
+                            formatted: bool = True,
                             block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
-        result = self.sc.maxBProxBtcValue(str.encode('X2'), block_identifier=block_identifier)
+        result = self.sc.maxBProxBtcValue(self.bucket_x2(), block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -332,10 +345,13 @@ class MoCState(ContractBase):
         return result
 
     def bprox_price(self,
-                    bucket=str.encode('X2'),
+                    bucket=None,
                     formatted: bool = True,
                     block_identifier: BlockIdentifier = 'latest'):
         """BProX price in RBTC"""
+
+        if not bucket:
+            bucket = self.bucket_x2()
 
         if self.mode == "MoC":
             result = self.sc.bproxBProPrice(bucket, block_identifier=block_identifier)
@@ -347,10 +363,13 @@ class MoCState(ContractBase):
         return result
 
     def btc2x_tec_price(self,
-                        bucket=str.encode('X2'),
+                        bucket=None,
                         formatted: bool = True,
                         block_identifier: BlockIdentifier = 'latest'):
         """BTC2X Technical price in RBTC"""
+
+        if not bucket:
+            bucket = self.bucket_x2()
 
         if self.mode == 'MoC':
             result = self.sc.bucketBProTecPrice(bucket, block_identifier=block_identifier)

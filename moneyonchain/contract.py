@@ -77,7 +77,7 @@ class ContractBase(object):
                      amount=None,
                      nonce=None,
                      required_confs=1,
-                     allow_revert=True,
+                     allow_revert=False,
                      default_account=None):
 
         tx_account = self.network_manager.accounts[self.network_manager.default_account]

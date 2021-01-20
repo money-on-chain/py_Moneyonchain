@@ -20,6 +20,10 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.governance import ProxyAdmin
 
 
+BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
+BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
+
+
 class MoCBProxManager(ContractBase):
     contract_name = 'MoCBProxManager'
 
@@ -63,7 +67,7 @@ class MoCBProxManager(ContractBase):
         """ available_bucket """
 
         if not bucket:
-            bucket = str.encode('X2')
+            bucket = BUCKET_X2
 
         result = self.sc.isAvailableBucket(bucket, block_identifier=block_identifier)
 
@@ -76,7 +80,7 @@ class MoCBProxManager(ContractBase):
         """ Returns all the address that currently have riskProx position for this bucket """
 
         if not bucket:
-            bucket = str.encode('X2')
+            bucket = BUCKET_X2
 
         result = self.sc.getActiveAddressesCount(bucket, block_identifier=block_identifier)
 
