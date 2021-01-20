@@ -24,5 +24,7 @@ class BaseEvent(object):
         return columns
 
     def print_table(self):
+        return tabulate([self.row()], headers=self.columns(), tablefmt="pipe")
 
-        print(tabulate([self.row()], headers=self.columns(), tablefmt="pipe"))
+    def print_row(self):
+        return tabulate([self.row()], tablefmt="pipe")

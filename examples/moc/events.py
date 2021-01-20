@@ -21,11 +21,9 @@ network_manager.connect()
 print(network_manager.is_connected())
 
 moc_contract = MoC(network_manager).from_abi()
-#print(moc_contract.sc.topics)
+
 
 moc_exchange = MoCExchange(network_manager).from_abi()
-#print(moc_exchange.sc.topics)
-#print(moc_exchange.address())
 
 events = moc_exchange.filter_events(from_block=1435736, to_block=1445760)
 for event in events:
