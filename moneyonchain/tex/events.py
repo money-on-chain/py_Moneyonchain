@@ -102,7 +102,7 @@ class DEXBuyerMatch(BaseEvent):
 class DEXSellerMatch(BaseEvent):
     name = "SellerMatch"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
         self.transactionHash = event['transactionHash']
         self.timestamp = event['timestamp']
@@ -147,7 +147,7 @@ class DEXSellerMatch(BaseEvent):
 class DEXExpiredOrderProcessed(BaseEvent):
     name = "ExpiredOrderProcessed"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
         self.transactionHash = event['transactionHash']
         self.timestamp = event['timestamp']
@@ -388,7 +388,7 @@ class DEXTransferFailed(BaseEvent):
 class DEXCommissionWithdrawn(BaseEvent):
     name = "CommissionWithdrawn"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
         self.transactionHash = event['transactionHash']
         self.timestamp = event['timestamp']
@@ -454,7 +454,7 @@ class DEXTokenPairDisabled(BaseEvent):
 class DEXTokenPairEnabled(BaseEvent):
     name = "TokenPairEnabled"
 
-    def __init__(self, connection_manager, event):
+    def __init__(self, event):
         self.blockNumber = event['blockNumber']
         self.transactionHash = event['transactionHash']
         self.timestamp = event['timestamp']
