@@ -842,8 +842,6 @@ class MoC(ContractBase):
             raise Exception("Amount value to mint too low")
 
         max_bprox_btc_value = self.max_bprox_btc_value()
-        print(max_bprox_btc_value)
-        print(amount)
         if amount > max_bprox_btc_value:
             raise Exception("You are trying to mint more than availables. BTCx available: {0}".format(
                 max_bprox_btc_value))

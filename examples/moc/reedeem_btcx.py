@@ -2,7 +2,7 @@
 To run this script need private key, run this scripts with:
 
 user> export ACCOUNT_PK_SECRET=PK
-user> python ./reedeem_bpro.py
+user> python ./reedeem_btcx.py
 
 Where replace with your PK, and also you need to have funds in this account
 """
@@ -32,12 +32,11 @@ network_manager.connect()
 moc_main = MoC(network_manager).from_abi()
 
 amount = Decimal(0.001)
-print("Reedem BPro: {0}".format(amount))
+print("Reedem BTC2x: {0}".format(amount))
 
-# Reedeem BPro
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.reedeem_bpro(amount)
+tx_receipt = moc_main.reedeem_btc2x(amount)
 
 # finally disconnect from network
 network_manager.disconnect()
