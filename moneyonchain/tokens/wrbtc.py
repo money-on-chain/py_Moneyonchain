@@ -12,6 +12,7 @@
 """
 
 import os
+from decimal import Decimal
 
 from moneyonchain.contract import ContractBase
 from .erc20 import ERC20Token
@@ -41,3 +42,33 @@ class WRBTCToken(ERC20Token):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
+
+    def deposit(self,
+                amount,
+                **tx_arguments):
+        """ Wrap """
+
+        sc_amount = int(Decimal(amount) * self.precision)
+
+        tx_args = self.tx_arguments(**tx_arguments)
+        tx_args['amount'] = sc_amount
+
+        tx_receipt = self.sc.deposit(tx_args)
+
+        tx_receipt.info()
+
+        return tx_receipt
+
+    def withdraw(self,
+                 amount,
+                 **tx_arguments):
+        """ withdraw """
+
+        sc_amount = int(Decimal(amount) * self.precision)
+
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.withdraw(sc_amount, tx_args)
+        tx_receipt.info()
+
+        return tx_receipt

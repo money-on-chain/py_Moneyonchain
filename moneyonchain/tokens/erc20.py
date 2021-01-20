@@ -94,4 +94,6 @@ class ERC20Token(ContractBase):
 
         tx_receipt = self.sc.approve(sc_address, sc_amount, tx_args)
 
+        tx_receipt.info()
+
         return tx_receipt
