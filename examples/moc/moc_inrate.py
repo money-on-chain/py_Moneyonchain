@@ -1,12 +1,8 @@
-from decimal import Decimal
-import math
-from web3 import Web3
-
 from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoCInrate
 
 
-network = 'mocMainnet2'
+network = 'mocTestnetAlpha'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -15,9 +11,32 @@ print("Connecting to MoCInrate")
 moc_inrate = MoCInrate(connection_manager)
 
 """
-Commissions
+Commissions for different transaction types
 """
-print("Commission rate: {0}".format(moc_inrate.commision_rate()))
+tx_type_mint_bpro_fees_rbtc = moc_inrate.tx_type_mint_bpro_fees_rbtc()
+tx_type_redeem_bpro_fees_rbtc = moc_inrate.tx_type_redeem_bpro_fees_rbtc()
+tx_type_mint_doc_fees_rbtc = moc_inrate.tx_type_mint_doc_fees_rbtc()
+tx_type_redeem_doc_fees_rbtc = moc_inrate.tx_type_redeem_doc_fees_rbtc()
+tx_type_mint_btcx_fees_rbtc = moc_inrate.tx_type_mint_btcx_fees_rbtc()
+tx_type_redeem_btcx_fees_rbtc = moc_inrate.tx_type_redeem_btcx_fees_rbtc()
+tx_type_mint_bpro_fees_moc = moc_inrate.tx_type_mint_bpro_fees_moc()
+tx_type_redeem_bpro_fees_moc = moc_inrate.tx_type_redeem_bpro_fees_moc()
+tx_type_mint_doc_fees_moc = moc_inrate.tx_type_mint_doc_fees_moc()
+tx_type_redeem_doc_fees_moc = moc_inrate.tx_type_redeem_doc_fees_moc()
+tx_type_mint_btcx_fees_moc = moc_inrate.tx_type_mint_btcx_fees_moc()
+tx_type_redeem_btcx_fees_moc = moc_inrate.tx_type_redeem_btcx_fees_moc()
+print("Commission rate - Mint BPRO with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_bpro_fees_rbtc)))
+print("Commission rate - Redeem BPRO with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_bpro_fees_rbtc)))
+print("Commission rate - Mint DOC with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_doc_fees_rbtc)))
+print("Commission rate - Redeem DOC with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_doc_fees_rbtc)))
+print("Commission rate - Mint BTCx with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_btcx_fees_rbtc)))
+print("Commission rate - Redeem BTCx with fees in RBTC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_btcx_fees_rbtc)))
+print("Commission rate - Mint BPRO with fees in MoC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_bpro_fees_moc)))
+print("Commission rate - Redeem BPRO with fees in MoC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_bpro_fees_moc)))
+print("Commission rate - Mint DOC with fees in MoC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_doc_fees_moc)))
+print("Commission rate - Redeem DOC with fees in MoC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_doc_fees_moc)))
+print("Commission rate - Mint BTCx with fees in MoC: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_mint_btcx_fees_moc)))
+print("Commission rate - Redeem BTCx with fees in MoC	: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type_redeem_btcx_fees_moc)))
 
 
 """
@@ -30,28 +49,17 @@ print("Bitpro interest address: {0}".format(moc_inrate.bitpro_interest_address()
 print("Bitpro interest block span: {0}".format(moc_inrate.bitpro_interest_blockspan()))
 print("Bitpro interest last payed block: {0}".format(moc_inrate.last_bitpro_interest_block()))
 
-
-amount = Decimal(0.00001)
 print("Daily inrate: {0}".format(moc_inrate.daily_inrate()))
 
-commission = moc_inrate.calc_commission_value(amount)
-mint_interest = moc_inrate.calc_mint_interest_value(amount)
-mint_interest2 = moc_inrate.calc_mint_interest_value(amount, formatted=False)
-print("Interest: {:.22f}".format(mint_interest2))
-
-print("Amount to mint: {:.18f}".format(amount))
-print("Calc commission value: {:.18f}".format(commission))
-print("Calc mint interest value: {:.18f}".format(mint_interest))
-print("RBTC Need it: {:.18f}".format(amount + commission + mint_interest))
-print("RBTC Need it: {0}".format((amount + commission + mint_interest) * 10 ** 18))
-print("RBTC Need it: {0}".format(int(math.ceil((amount + commission + mint_interest) * 10 ** 18))))
-print("RBTC Need it: {0}".format(int(math.ceil((amount + commission + mint_interest + mint_interest*Decimal(0.01)) * 10 ** 18))))
-
-print("To wei {0}".format(Web3.toWei(amount + commission + mint_interest, 'ether')))
-#print("To wei {0}".format(moc_inrate.calc_mint_interest_value2(amount, formatted=False)))
-
-#price = Web3.fromWei(price, 'ether')
-#price = Web3.toInt(result[0])
-
-
-
+print("Calc commission value - Mint BPRO with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_bpro_fees_rbtc)))
+print("Calc commission value - Redeem BPRO with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_bpro_fees_rbtc)))
+print("Calc commission value - Mint DOC with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_doc_fees_rbtc)))
+print("Calc commission value - Redeem DOC with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_doc_fees_rbtc)))
+print("Calc commission value - Mint BTCx with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_btcx_fees_rbtc)))
+print("Calc commission value - Redeem BTCx with fees in RBTC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_btcx_fees_rbtc)))
+print("Calc commission value - Mint BPRO with fees in MoC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_bpro_fees_moc)))
+print("Calc commission value - Redeem BPRO with fees in MoC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_bpro_fees_moc)))
+print("Calc commission value - Mint DOC with fees in MoC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_doc_fees_moc)))
+print("Calc commission value - Redeem DOC with fees in MoC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_doc_fees_moc)))
+print("Calc commission value - Mint BTCx with fees in MoC: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_mint_btcx_fees_moc)))
+print("Calc commission value - Redeem BTCx with fees in MoC	: {0}".format(moc_inrate.calc_commission_value(10.0, tx_type_redeem_btcx_fees_moc)))

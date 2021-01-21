@@ -386,3 +386,27 @@ class WRBTC(ERC20Token):
                             tx_receipt['from']))
 
         return tx_hash, tx_receipt
+
+
+class MoCToken(ERC20Token):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCToken.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCToken.bin'))
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCToken']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
