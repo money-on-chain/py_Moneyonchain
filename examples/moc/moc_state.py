@@ -18,6 +18,7 @@ print("DOC Total Supply: {0}".format(moc_state.doc_total_supply()))
 print("Implementation: {0}".format(moc_state.implementation()))
 print("BPro Discount: {0}".format(moc_state.bpro_discount_rate()))
 print("BPro Tec Price: {0}".format(moc_state.bpro_tec_price()))
+print("MoC Price in USD: {0}".format(moc_state.moc_price()))
 
 
 

@@ -21,7 +21,7 @@ from web3.types import BlockIdentifier
 import math
 
 from moneyonchain.contract import Contract
-from moneyonchain.token import BProToken, DoCToken
+from moneyonchain.token import BProToken, DoCToken, MoCToken
 from moneyonchain.events import MoCExchangeRiskProMint, \
     MoCExchangeStableTokenMint, \
     MoCExchangeRiskProxMint, \
@@ -31,6 +31,7 @@ from moneyonchain.events import MoCExchangeRiskProMint, \
     MoCSettlementRedeemRequestAlter, \
     MoCExchangeStableTokenRedeem
 from moneyonchain.admin import ProxyAdmin
+from moneyonchain.utils import *
 
 
 STATE_LIQUIDATED = 0
@@ -971,6 +972,56 @@ class MoCState(Contract):
 
         return tx_hash, tx_receipt
 
+    def moc_price(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """MoC price in USD.
+        NOTE: This call have a required if the price is valid, so it can fail.
+        """
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCPrice().call(
+                block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def moc_price_provider(self, block_identifier: BlockIdentifier = 'latest'):
+        """MoC Price provider address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCPriceProvider().call(
+                block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
+    def moc_token(self, block_identifier: BlockIdentifier = 'latest'):
+        """MoC token address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCToken().call(
+                block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
+    def moc_vendors(self, block_identifier: BlockIdentifier = 'latest'):
+        """MoC Vendor address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.getMoCVendors().call(
+                block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
 
 class MoCInrate(Contract):
     log = logging.getLogger()
@@ -1011,12 +1062,14 @@ class MoCInrate(Contract):
                        block_identifier: BlockIdentifier = 'latest'):
         """Gets commision rate"""
 
-        result = self.sc.functions.getCommissionRate().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
+        raise Exception('DEPRECATED')
 
-        return result
+        # result = self.sc.functions.getCommissionRate().call(
+        #     block_identifier=block_identifier)
+        # if formatted:
+        #     result = Web3.fromWei(result, 'ether')
+
+        # return result
 
     def bitpro_rate(self, formatted: bool = True,
                     block_identifier: BlockIdentifier = 'latest'):
@@ -1096,12 +1149,14 @@ class MoCInrate(Contract):
                         block_identifier: BlockIdentifier = 'latest'):
         """"""
 
-        result = self.sc.functions.getCommissionRate().call(
-            block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
+        raise Exception('DEPRECATED')
 
-        return result
+        # result = self.sc.functions.getCommissionRate().call(
+        #     block_identifier=block_identifier)
+        # if formatted:
+        #     result = Web3.fromWei(result, 'ether')
+
+        # return result
 
     def commission_address(self, block_identifier: BlockIdentifier = 'latest'):
         """Returns the address of the target receiver of commissions"""
@@ -1120,16 +1175,107 @@ class MoCInrate(Contract):
 
         return result
 
-    def calc_commission_value(self, amount, formatted: bool = True):
-        """ Calc commission value amount in ether float"""
+    def commission_rate_by_transaction_type(self, tx_type, formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """Gets commision rate by transaction type from mapping"""
 
-        result = self.sc.functions.calcCommissionValue(int(amount * self.precision)).call()
+        result = self.sc.functions.commissionRatesByTxType(tx_type).call(
+            block_identifier=block_identifier)
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
         return result
 
-    def calc_mint_interest_value(self, amount,
+    def calc_commission_value(self, amount, tx_type, formatted: bool = True):
+        """ Calc commission value amount in ether float"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calcCommissionValue(int(amount * self.precision), tx_type).call()
+        else:
+            result = self.sc.functions.calcCommissionValue(int(amount * self.precision)).call()
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calculate_vendor_markup(self, vendor_account, amount, formatted: bool = True):
+        """ Calc vendor markup in ether float"""
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calculateVendorMarkup(vendor_account, int(amount * self.precision)).call()
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def tx_type_mint_bpro_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_BPRO_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_redeem_bpro_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_BPRO_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_mint_doc_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_DOC_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_redeem_doc_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_DOC_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_mint_btcx_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_BTCX_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_redeem_btcx_fees_rbtc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_BTCX_FEES_RBTC().call()
+
+        return result
+
+    def tx_type_mint_bpro_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_BPRO_FEES_MOC().call()
+
+        return result
+
+    def tx_type_redeem_bpro_fees_moc (self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_BPRO_FEES_MOC().call()
+
+        return result
+
+    def tx_type_mint_doc_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_DOC_FEES_MOC().call()
+
+        return result
+
+    def tx_type_redeem_doc_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_DOC_FEES_MOC().call()
+
+        return result
+
+    def tx_type_mint_btcx_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.MINT_BTCX_FEES_MOC().call()
+
+        return result
+
+    def tx_type_redeem_btcx_fees_moc(self, block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.functions.REDEEM_BTCX_FEES_MOC().call()
+
+        return result
+
+    # End: Transaction type constants
+
+    def calc_mint_interest_value(self,
+                                 amount,
                                  formatted: bool = True,
                                  precision: bool = True,
                                  block_identifier: BlockIdentifier = 'latest'):
@@ -1247,6 +1393,35 @@ class MoCExchange(Contract):
 
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
+    def calculate_commissions_with_prices(self,
+                                          amount,
+                                          tx_type_fees_MOC,
+                                          tx_type_fees_RBTC,
+                                          vendor_account,
+                                          default_account=None,
+                                          formatted: bool = True):
+        """ Calc commission value and vendor markup amount in ether float """
+
+        if not default_account:
+            default_account = 0
+
+        params = [self.connection_manager.accounts[default_account].address,
+                  int(amount * self.precision),
+                  tx_type_fees_MOC,
+                  tx_type_fees_RBTC,
+                  vendor_account]
+
+        names_array = ["btcCommission", "mocCommission", "btcPrice", "mocPrice", "btcMarkup", "mocMarkup"]
+
+        if self.mode == 'MoC':
+            result = self.sc.functions.calculateCommissionsWithPrices(params).call()
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in result]
+
+        return array_to_dictionary(result, names_array)
 
 class MoCSettlement(Contract):
     log = logging.getLogger()
@@ -1519,6 +1694,85 @@ class MoCConnector(Contract):
 
         return d_addresses
 
+class MoCVendors(Contract):
+    log = logging.getLogger()
+
+    contract_abi = Contract.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCVendors.abi'))
+    contract_bin = Contract.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCVendors.bin'))
+
+    precision = 10 ** 18
+    mode = 'MoC'
+    project = 'MoC'
+
+    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
+
+        if not contract_address:
+            # load from connection manager
+            network = connection_manager.network
+            contract_address = connection_manager.options['networks'][network]['addresses']['MoCVendors']
+
+        super().__init__(connection_manager,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+        # finally load the contract
+        self.load_contract()
+
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        contract_admin = ProxyAdmin(self.connection_manager)
+        contract_address = Web3.toChecksumAddress(self.contract_address)
+
+        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+    def get_vendor(self, vendor_account, formatted: bool = True,
+                     block_identifier: BlockIdentifier = 'latest'):
+        """Gets vendor from mapping"""
+
+        vendor_details = self.sc.functions.vendors(vendor_account).call(
+            block_identifier=block_identifier)
+
+        names_array = ["isActive", "markup", "totalPaidInMoC", "staking", "paidMoC", "paidRBTC"]
+
+        if formatted:
+            vendor_details[1:] = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in vendor_details[1:]]
+
+        return array_to_dictionary(vendor_details, names_array)
+
+
+    def get_vendors_addresses(self, block_identifier: BlockIdentifier = 'latest'):
+        """Gets all active vendors addresses"""
+
+        vendor_count =  self.sc.functions.getVendorsCount().call(
+            block_identifier=block_identifier)
+
+        result = []
+
+        for i in range(0, vendor_count):
+            result.append(self.sc.functions.vendorsList(i).call(
+            block_identifier=block_identifier))
+
+        return result
+
+
+    def get_vendors(self, formatted: bool = True, block_identifier: BlockIdentifier = 'latest'):
+        """Gets all active vendors from mapping"""
+
+        vendors_list = self.get_vendors_addresses()
+
+        result = {}
+
+        for vendor in vendors_list:
+            result[vendor] = self.get_vendor(vendor)
+
+        return result
+
+
 
 class MoC(Contract):
     log = logging.getLogger()
@@ -1602,6 +1856,12 @@ class MoC(Contract):
 
         # load contract moc doc_token
         self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
+
+        # load contract moc moc_token
+        self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
+
+        # load contract moc vendors
+        self.sc_moc_vendors = self.load_moc_vendors_contract(self.sc_moc_state.moc_vendors())
 
     def implementation(self, block_identifier: BlockIdentifier = 'latest'):
         """Implementation of contract"""
@@ -1692,6 +1952,28 @@ class MoC(Contract):
             contract_address = self.connection_manager.options['networks'][network]['addresses']['DoCToken']
 
         sc = DoCToken(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
+
+    def load_moc_moc_token_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCToken']
+
+        sc = MoCToken(self.connection_manager,
+                      contract_address=contract_address)
+
+        return sc
+
+    def load_moc_vendors_contract(self, contract_address):
+
+        network = self.connection_manager.network
+        if not contract_address:
+            contract_address = self.connection_manager.options['networks'][network]['addresses']['MoCVendors']
+
+        sc = MoCVendors(self.connection_manager,
                       contract_address=contract_address)
 
         return sc
@@ -2026,6 +2308,15 @@ class MoC(Contract):
 
         return result
 
+    def moc_price(self, formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """MoC price in USD"""
+
+        result = self.sc_moc_state.moc_price(formatted=formatted,
+                                                 block_identifier=block_identifier)
+
+        return result
+
     def bpro_price(self, formatted: bool = True,
                    block_identifier: BlockIdentifier = 'latest'):
         """BPro price in USD"""
@@ -2097,6 +2388,26 @@ class MoC(Contract):
             result = Web3.fromWei(result, 'ether')
 
         return result
+
+    def moc_balance_of(self,
+                       account_address,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.balance_of(account_address,
+                                                formatted=formatted,
+                                                block_identifier=block_identifier)
+
+    def moc_allowance(self,
+                       account_address,
+                       contract_address,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.allowance(account_address,
+                                                contract_address,
+                                                formatted=formatted,
+                                                block_identifier=block_identifier)
 
     def doc_balance_of(self,
                        account_address,
@@ -2205,37 +2516,40 @@ class MoC(Contract):
 
         return total_amount, commission_value, interest_value
 
-    def mint_bpro_gas_estimated(self, amount, precision=False):
+
+    def mint_bpro_gas_estimated(self, amount, vendor_account, precision=False):
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+            built_fxn = fxn_to_call(int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
+            built_fxn = fxn_to_call(int(amount))
 
-        built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
 
-    def mint_doc_gas_estimated(self, amount, precision=False):
+    def mint_doc_gas_estimated(self, amount, vendor_account, precision=False):
 
         if precision:
             amount = amount * self.precision
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintDoc')
+            built_fxn = fxn_to_call(int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
+            built_fxn = fxn_to_call(int(amount))
 
-        built_fxn = fxn_to_call(int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
 
-    def mint_bprox_gas_estimated(self, amount, precision=False):
+    def mint_bprox_gas_estimated(self, amount, vendor_account, precision=False):
 
         bucket = str.encode('X2')
 
@@ -2244,15 +2558,16 @@ class MoC(Contract):
 
         if self.mode == 'MoC':
             fxn_to_call = getattr(self.sc.functions, 'mintBProx')
+            built_fxn = fxn_to_call(bucket, int(amount), vendor_account)
         else:
             fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
+            built_fxn = fxn_to_call(bucket, int(amount))
 
-        built_fxn = fxn_to_call(bucket, int(amount))
         gas_estimate = built_fxn.estimateGas()
 
         return gas_estimate
 
-    def mint_bpro(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_bpro(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
         """
@@ -2263,7 +2578,17 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value = self.amount_mint_bpro(amount)
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2273,7 +2598,7 @@ class MoC(Contract):
             raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
                 max_mint_bpro_available))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision),
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision), vendor_account,
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
 
@@ -2292,7 +2617,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def mint_doc(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_doc(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
         """
@@ -2312,12 +2637,18 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value = self.amount_mint_doc(amount)
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
+
+        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision),
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintDoc', int(amount * self.precision), vendor_account,
                                                           tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
 
@@ -2336,7 +2667,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def mint_btc2x(self, amount: Decimal, default_account=None, wait_receipt=True):
+    def mint_btc2x(self, amount: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
@@ -2355,15 +2686,23 @@ class MoC(Contract):
             raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
+
+        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
+
+        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"] + interest_value
+
         bucket = str.encode('X2')
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision),
-                                                          tx_params={'value': int(math.ceil(total_amount *
-                                                                                            self.precision))},
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBProx', bucket, int(amount * self.precision), vendor_account,
+                                                          tx_params={'value': int(total_amount * self.precision)},
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -2381,7 +2720,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_bpro(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_bpro(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Reedem BitPro amount of token """
 
         if self.paused():
@@ -2402,7 +2741,7 @@ class MoC(Contract):
             raise Exception("You are trying to redeem more than availables. Available: {0}".format(
                 absolute_max_bpro))
 
-        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision),
+        tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBPro', int(amount_token * self.precision), vendor_account,
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -2421,7 +2760,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_free_doc(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """
         Reedem Free DOC amount of token
         Free Doc is Doc you can reedeem outside of settlement.
@@ -2444,7 +2783,7 @@ class MoC(Contract):
                 free_doc))
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemFreeDoc',
-                                                          int(amount_token * self.precision),
+                                                          int(amount_token * self.precision), vendor_account,
                                                           default_account=default_account)
 
         tx_receipt = None
@@ -2543,7 +2882,7 @@ class MoC(Contract):
 
         return tx_hash, tx_receipt, tx_logs, tx_logs_formatted
 
-    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, wait_receipt=True):
+    def reedeem_btc2x(self, amount_token: Decimal, default_account=None, vendor_account=None, wait_receipt=True):
         """ Reedem BTC2X amount of token """
 
         if self.paused():
@@ -2564,6 +2903,7 @@ class MoC(Contract):
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'redeemBProx', bucket,
                                                           int(amount_token * self.precision),
+                                                          vendor_account,
                                                           default_account=default_account)
 
         tx_receipt = None
