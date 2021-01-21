@@ -38,12 +38,46 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
 | dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
 
+
+#### Token Prices
+
+Get token prices in US Dollars
+
+```
+from moneyonchain.manager import ConnectionManager
+from moneyonchain.moc import MoC
+
+# Connect to MoC Mainnet enviroment network
+network = 'mocMainnet2'
+connection_manager = ConnectionManager(network=network)
+print("Connecting to %s..." % network)
+print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+
+contract = MoC(connection_manager)
+print()
+print("Bitcoin price in USD : {:.2f}".format(contract.bitcoin_price()))
+print("BPRO price in USD    : {:.2f}".format(contract.bpro_price()))
+print("Delta BPRO/BTC       : {:.2%}".format(-1+contract.bpro_price()/contract.bitcoin_price()))
+print("BTC2X price in USD   : {:.2f}".format(contract.btc2x_tec_price() * contract.bitcoin_price()))
+```
+
+result:
+
+```
+Connecting to mocMainnet2...
+Connected: True
+
+Bitcoin price in USD : 26466.56
+BPRO price in USD    : 31953.54
+Delta BPRO/BTC       : 20.73%
+BTC2X price in USD   : 30005.24
+```
+
 #### Price provider
 
 Get the last price from MOC or RDOC contract.
 
 See example in source/example/price_provider.py
-
 
 ```
 from moneyonchain.manager import ConnectionManager
@@ -111,37 +145,6 @@ INFO:root:Connecting to rdocTestnet...
 INFO:root:Connected: True
 INFO:root:Last price: 0.092123288999999996
 ```
-
-#### Token Prices
-
-Get token prices in Dollar
-
-```
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoC
-
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-contract = MoC(connection_manager)
-print("Bitcoin price in usd: {0}".format(contract.bitcoin_price()))
-print("BPRO price in usd: {0}".format(contract.bpro_price()))
-print("BTC2X price in usd: {0}".format(contract.btc2x_tec_price() * contract.bitcoin_price()))
-
-```
-
-result:
-
-```
-Connecting to mocMainnet2...
-Connected: True
-Bitcoin price in usd: 9405.100000000000247435
-BPRO price in usd: 9702.108188434730668324
-BTC2X price in usd: 11869.45000000000341040779478
-```
-
 
 #### DOC Token example
 
