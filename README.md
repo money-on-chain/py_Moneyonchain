@@ -6,9 +6,9 @@ Python API to Money On Chain projects.
 
 There are 3 versions not compatible with each others
 
-* Release 0.X.X: This is current master, this will deprecated in our future.
-* Release 1.X.X: This is will introduced breaking changes in contract not compatible with older versions
-* Release 2.X.X: This is will introduced breaking changes, rework of the api, make support using brownie lib
+* Release 0.X.X: (STABLE) This is current master, this will deprecated in our future.
+* Release 1.X.X: (ALPHA) This is will introduced breaking changes in contract not compatible with older versions
+* Release 2.X.X: (ALPHA) This is will introduced breaking changes, rework of the api, make support using brownie lib
 
 ### Requirements
 
