@@ -68,7 +68,8 @@ class MoC(ContractBase):
                  contract_address_moc_connector=None,
                  contract_address_moc_settlement=None,
                  contract_address_moc_bpro_token=None,
-                 contract_address_moc_doc_token=None
+                 contract_address_moc_doc_token=None,
+                 load_sub_contract=True
                  ):
 
         config_network = network_manager.config_network
@@ -81,17 +82,18 @@ class MoC(ContractBase):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-        contract_addresses = dict()
-        contract_addresses['MoCState'] = contract_address_moc_state
-        contract_addresses['MoCInrate'] = contract_address_moc_inrate
-        contract_addresses['MoCExchange'] = contract_address_moc_exchange
-        contract_addresses['MoCConnector'] = contract_address_moc_connector
-        contract_addresses['MoCSettlement'] = contract_address_moc_settlement
-        contract_addresses['BProToken'] = contract_address_moc_bpro_token
-        contract_addresses['DoCToken'] = contract_address_moc_doc_token
+        if load_sub_contract:
+            contract_addresses = dict()
+            contract_addresses['MoCState'] = contract_address_moc_state
+            contract_addresses['MoCInrate'] = contract_address_moc_inrate
+            contract_addresses['MoCExchange'] = contract_address_moc_exchange
+            contract_addresses['MoCConnector'] = contract_address_moc_connector
+            contract_addresses['MoCSettlement'] = contract_address_moc_settlement
+            contract_addresses['BProToken'] = contract_address_moc_bpro_token
+            contract_addresses['DoCToken'] = contract_address_moc_doc_token
 
-        # load contract addresses
-        self.load_sub_contracts(contract_addresses)
+            # load contract addresses
+            self.load_sub_contracts(contract_addresses)
 
     def load_sub_contracts(self, contract_addresses):
 
@@ -121,6 +123,7 @@ class MoC(ContractBase):
 
         contract_addresses = dict()
         contract_addresses['MoCConnector'] = self.connector()
+        self.sc_moc_connector = self.load_moc_connector_contract(contract_addresses['MoCConnector'])
         connector_addresses = self.connector_addresses()
         contract_addresses['MoCState'] = connector_addresses['MoCState']
         contract_addresses['MoCInrate'] = connector_addresses['MoCInrate']

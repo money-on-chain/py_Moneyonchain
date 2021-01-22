@@ -30,11 +30,17 @@ class PriceProvider:
         app_mode = network_manager.options['networks'][config_network]['app_mode']
 
         if app_mode == "RRC20":
-            self.contract_MoC = RDOCMoC(network_manager,
-                                        contract_address=contract_address).from_abi().contracts_discovery()
+            self.contract_MoC = RDOCMoC(
+                network_manager,
+                contract_address=contract_address,
+                load_sub_contract=False
+            ).from_abi().contracts_discovery()
         else:
-            self.contract_MoC = MoC(network_manager,
-                                    contract_address=contract_address).from_abi().contracts_discovery()
+            self.contract_MoC = MoC(
+                network_manager,
+                contract_address=contract_address,
+                load_sub_contract=False
+            ).from_abi().contracts_discovery()
 
         if config_network in ['mocTestnetAlpha', 'mocTestnet', 'rdocTestnetAlpha', 'rdocTestnet']:
             self.sc_Price_Provider = CoinPairPrice(

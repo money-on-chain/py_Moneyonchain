@@ -56,7 +56,7 @@ class RRC20MoC(MoC):
                  contract_address_moc_bpro_token=None,
                  contract_address_moc_doc_token=None,
                  contract_address_reserve_token=None,
-                 contracts_discovery=False):
+                 load_sub_contract=True):
 
         config_network = network_manager.config_network
         if not contract_address:
@@ -74,17 +74,67 @@ class RRC20MoC(MoC):
                          contract_address_moc_settlement=contract_address_moc_settlement,
                          contract_address_moc_bpro_token=contract_address_moc_bpro_token,
                          contract_address_moc_doc_token=contract_address_moc_doc_token,
-                         contracts_discovery=contracts_discovery)
+                         load_sub_contract=False
+                         )
 
-        contract_addresses = dict()
-        contract_addresses['ReserveToken'] = contract_address_reserve_token
+        if load_sub_contract:
+            contract_addresses = dict()
+            contract_addresses['MoCState'] = contract_address_moc_state
+            contract_addresses['MoCInrate'] = contract_address_moc_inrate
+            contract_addresses['MoCExchange'] = contract_address_moc_exchange
+            contract_addresses['MoCConnector'] = contract_address_moc_connector
+            contract_addresses['MoCSettlement'] = contract_address_moc_settlement
+            contract_addresses['BProToken'] = contract_address_moc_bpro_token
+            contract_addresses['DoCToken'] = contract_address_moc_doc_token
+            contract_addresses['ReserveToken'] = contract_address_reserve_token
 
-        if contracts_discovery:
-            connector_addresses = self.connector_addresses()
-            contract_addresses['ReserveToken'] = connector_addresses['ReserveToken']
+            # load contract addresses
+            self.load_sub_contracts(contract_addresses)
+
+    def load_sub_contracts(self, contract_addresses):
+
+        # load contract moc connector
+        self.sc_moc_connector = self.load_moc_connector_contract(contract_addresses['MoCConnector'])
+
+        # load contract moc state
+        self.sc_moc_state = self.load_moc_state_contract(contract_addresses['MoCState'])
+
+        # load contract moc inrate
+        self.sc_moc_inrate = self.load_moc_inrate_contract(contract_addresses['MoCInrate'])
+
+        # load contract moc exchange
+        self.sc_moc_exchange = self.load_moc_exchange_contract(contract_addresses['MoCExchange'])
+
+        # load contract moc settlement
+        self.sc_moc_settlement = self.load_moc_settlement_contract(contract_addresses['MoCSettlement'])
+
+        # load contract moc bpro_token
+        self.sc_moc_bpro_token = self.load_moc_bpro_token_contract(contract_addresses['BProToken'])
+
+        # load contract moc doc_token
+        self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
 
         # load_reserve_token_contract
         self.sc_reserve_token = self.load_reserve_token_contract(contract_addresses['ReserveToken'])
+
+    def contracts_discovery(self):
+        """ This implementation get sub contracts only with MoC Contract address"""
+
+        contract_addresses = dict()
+        contract_addresses['MoCConnector'] = self.connector()
+        self.sc_moc_connector = self.load_moc_connector_contract(contract_addresses['MoCConnector'])
+        connector_addresses = self.connector_addresses()
+        contract_addresses['MoCState'] = connector_addresses['MoCState']
+        contract_addresses['MoCInrate'] = connector_addresses['MoCInrate']
+        contract_addresses['MoCExchange'] = connector_addresses['MoCExchange']
+        contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
+        contract_addresses['BProToken'] = connector_addresses['BProToken']
+        contract_addresses['DoCToken'] = connector_addresses['DoCToken']
+        contract_addresses['ReserveToken'] = connector_addresses['ReserveToken']
+
+        self.load_sub_contracts(contract_addresses)
+
+        return self
 
     def load_moc_inrate_contract(self, contract_address):
 
