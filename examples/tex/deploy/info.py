@@ -1,25 +1,38 @@
 from rich.console import Console
 from rich.table import Table
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange, CommissionManager
+from moneyonchain.networks import NetworkManager
+from moneyonchain.tex import MoCDecentralizedExchange, CommissionManager
 
 console = Console()
 
-network = 'dexMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTesnetPublic'
+config_network = 'dexTestnet'
 
-dex = MoCDecentralizedExchange(connection_manager)
-dex_commission = CommissionManager(connection_manager)
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
 
-table = Table(show_header=True, header_style="bold magenta", title="Contracts network: {0}".format(network))
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
+
+dex = MoCDecentralizedExchange(network_manager).from_abi()
+dex_commission = CommissionManager(network_manager).from_abi()
+
+table = Table(show_header=True, header_style="bold magenta", title="Contracts network: {0}".format(config_network))
 table.add_column("Contract")
 table.add_column("Proxy")
 table.add_column("Implementation")
 
-lib_address = connection_manager.options['networks'][network]['addresses']['MoCExchangeLib']
+lib_address = network_manager.options['networks'][config_network]['addresses']['MoCExchangeLib']
 rows = list()
 rows.append(('MoCDecentralizedExchange', dex.address(), dex.implementation()))
 rows.append(('CommissionManager', dex_commission.address(), dex_commission.implementation()))
@@ -33,9 +46,9 @@ for row in rows:
 console.print(table)
 
 
-if network in 'dexMainnet':
+if config_network in 'dexMainnet':
     link_explorer = 'https://explorer.rsk.co/address/{0}'
-elif network in 'dexTestnet':
+elif config_network in 'dexTestnet':
     link_explorer = 'https://explorer.testnet.rsk.co/address/{0}'
 else:
     link_explorer = 'https://explorer.rsk.co/address/{0}'
@@ -53,3 +66,7 @@ for row in rows:
 
 print(md_header)
 print('\n'.join(md_lines))
+
+
+# finally disconnect from network
+network_manager.disconnect()

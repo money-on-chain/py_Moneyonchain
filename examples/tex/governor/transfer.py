@@ -2,23 +2,51 @@
 Transfer ownership governor control
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.governance import DEXGovernor
 
 import logging
 import logging.config
 
+import logging
+import logging.config
+
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/insert_buy_limit_order.log',
+                    filemode='a')
 
-network = 'dexMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
 
-contract = DEXGovernor(connection_manager)
+log = logging.getLogger()
+log.addHandler(console)
+
+
+connection_network='rskTesnetPublic'
+config_network = 'dexTestnet'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
+
+contract = DEXGovernor(network_manager).from_abi()
 
 # New owner
 new_owner = '0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128'
@@ -30,10 +58,5 @@ if tx_receipt:
 else:
     print("Error changing governance")
 
-"""
-Connecting to dexMainnet...
-Connected: True
-Successfully transfer ownership to : 0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128
-2020-11-24 09:07:03 root         INFO     Successfully transfer ownership to: 0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128 in Block [2888710] Hash: [0x6dde90fa93bcd4d1753b4457b0f085a499310474cb25de0c22918f7b4485afec] Gas used: [32475] From: [0xB1ef062C364750DeECdCaCBf7190ed591B7a0Bfe]
-
-"""
+# finally disconnect from network
+network_manager.disconnect()
