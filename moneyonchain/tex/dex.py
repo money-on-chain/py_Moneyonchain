@@ -235,6 +235,152 @@ class MoCDecentralizedExchange(ContractBase):
 
         return result
 
+    def last_closing_price(self,
+                           pair,
+                           formatted: bool = True,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Getter for every value related to a pair
+        _baseToken Address of the base token of the pair
+        _secondaryToken Address of the secondary token of the pair
+        lastClosingPrice - the last price from a successful matching
+        """
+
+        result = self.sc.getLastClosingPrice(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def tick_is_running(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        notice Returns true if the pair is running a tick
+        param _baseToken Address of the base token of the pair
+        param _secondaryToken Address of the secondary token of the pair
+        """
+
+        result = self.sc.tickIsRunning(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def tick_stage(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        notice Returns the tick stage for a given pair
+        param _baseToken Address of the base token of the pair
+        param _secondaryToken Address of the secondary token of the pair
+        return Enum representing the tick stage
+        """
+
+        result = self.sc.getTickStage(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def sell_orders_length(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Returns the amount of sell orders(not including the pending ones) that are in the orderbook of this pair
+        param _baseToken the base token of the pair
+        param _secondaryToken the secondary token of the pair
+        """
+
+        result = self.sc.sellOrdersLength(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def buy_orders_length(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Returns the amount of buy orders(not including the pending ones)
+        that are in the orderbook of this pair
+        param _baseToken the base token of the pair
+        param _secondaryToken the secondary token of the pair
+        """
+
+        result = self.sc.buyOrdersLength(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def pending_sell_orders_length(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Returns the amount of pending sell orders that are in the orderbook of this pair
+        that are in the orderbook of this pair
+        param _baseToken the base token of the pair
+        param _secondaryToken the secondary token of the pair
+        """
+
+        result = self.sc.pendingSellOrdersLength(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def pending_buy_orders_length(
+            self,
+            pair,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Returns the amount of pending buy orders that are in the orderbook of this pair
+        that are in the orderbook of this pair
+        param _baseToken the base token of the pair
+        param _secondaryToken the secondary token of the pair
+        """
+
+        result = self.sc.pendingBuyOrdersLength(
+            pair[0],
+            pair[1],
+            block_identifier=block_identifier)
+
+        return result
+
+    def pending_market_orders_length(
+            self,
+            pair,
+            is_buy=False,
+            block_identifier: BlockIdentifier = 'latest'):
+        """
+        @notice Returns the amount of pending market orders that are in the orderbook of this pair
+        param _baseToken the base token of the pair
+        param _secondaryToken the secondary token of the pair
+        param _isBuy true to get buy market orders amount, false to get sell market orders amount.
+        """
+
+        result = self.sc.pendingMarketOrdersLength(
+            pair[0],
+            pair[1],
+            is_buy,
+            block_identifier=block_identifier)
+
+        return result
+
     def run_tick_for_pair(self,
                           pair,
                           matching_steps=70,
