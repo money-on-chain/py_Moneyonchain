@@ -267,7 +267,7 @@
         "type": "address"
       }
     ],
-    "name": "SetMoCContract",
+    "name": "ContractLiquidated",
     "type": "event"
   },
   {
