@@ -81,6 +81,7 @@
         "ZOSLibOwnable.json",
         "MoCVendorsChanger.json",
         "MoCVendorsChangerHarness.json",
-        "UpgraderChanger.json"
+        "UpgraderChanger.json",
+        "MoCHelperLibHarness.json"
     ]
 }

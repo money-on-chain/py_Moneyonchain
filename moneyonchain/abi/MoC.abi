@@ -51,6 +51,20 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "DEPRECATED_mocBurnout",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [],
     "name": "makeUnstoppable",
@@ -81,20 +95,6 @@
       {
         "name": "",
         "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "mocBurnout",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
       }
     ],
     "payable": false,
@@ -741,40 +741,7 @@
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "name": "burnoutAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setBurnoutAddress",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [],
-    "name": "getBurnoutAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "steps",
-        "type": "uint256"
-      }
-    ],
     "name": "evalLiquidation",
     "outputs": [],
     "payable": false,

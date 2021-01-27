@@ -156,6 +156,20 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "protected",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "connector",
     "outputs": [
       {
@@ -255,6 +269,20 @@
     "constant": true,
     "inputs": [],
     "name": "shouldCalculateEma",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "liquidationEnabled",
     "outputs": [
       {
         "name": "",
@@ -510,60 +538,74 @@
     "constant": false,
     "inputs": [
       {
-        "name": "connectorAddress",
-        "type": "address"
-      },
-      {
-        "name": "_governor",
-        "type": "address"
-      },
-      {
-        "name": "_btcPriceProvider",
-        "type": "address"
-      },
-      {
-        "name": "_liq",
-        "type": "uint256"
-      },
-      {
-        "name": "_utpdu",
-        "type": "uint256"
-      },
-      {
-        "name": "_maxDiscRate",
-        "type": "uint256"
-      },
-      {
-        "name": "_dayBlockSpan",
-        "type": "uint256"
-      },
-      {
-        "name": "_ema",
-        "type": "uint256"
-      },
-      {
-        "name": "_smoothFactor",
-        "type": "uint256"
-      },
-      {
-        "name": "_emaBlockSpan",
-        "type": "uint256"
-      },
-      {
-        "name": "_maxMintBPro",
-        "type": "uint256"
-      },
-      {
-        "name": "_mocPriceProvider",
-        "type": "address"
-      },
-      {
-        "name": "_mocTokenAddress",
-        "type": "address"
-      },
-      {
-        "name": "_mocVendorsAddress",
-        "type": "address"
+        "components": [
+          {
+            "name": "connectorAddress",
+            "type": "address"
+          },
+          {
+            "name": "governor",
+            "type": "address"
+          },
+          {
+            "name": "btcPriceProvider",
+            "type": "address"
+          },
+          {
+            "name": "liq",
+            "type": "uint256"
+          },
+          {
+            "name": "utpdu",
+            "type": "uint256"
+          },
+          {
+            "name": "maxDiscRate",
+            "type": "uint256"
+          },
+          {
+            "name": "dayBlockSpan",
+            "type": "uint256"
+          },
+          {
+            "name": "ema",
+            "type": "uint256"
+          },
+          {
+            "name": "smoothFactor",
+            "type": "uint256"
+          },
+          {
+            "name": "emaBlockSpan",
+            "type": "uint256"
+          },
+          {
+            "name": "maxMintBPro",
+            "type": "uint256"
+          },
+          {
+            "name": "mocPriceProvider",
+            "type": "address"
+          },
+          {
+            "name": "mocTokenAddress",
+            "type": "address"
+          },
+          {
+            "name": "mocVendorsAddress",
+            "type": "address"
+          },
+          {
+            "name": "liquidationEnabled",
+            "type": "bool"
+          },
+          {
+            "name": "protected",
+            "type": "uint256"
+          }
+        ],
+        "name": "params",
+        "type": "tuple"
       }
     ],
     "name": "initialize",
@@ -1100,6 +1142,25 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "name": "bucket",
+        "type": "bytes32"
+      }
+    ],
+    "name": "bucketBProTecPriceHelper",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "bproDiscountPrice",
     "outputs": [
@@ -1451,6 +1512,62 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getProtected",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_protected",
+        "type": "uint256"
+      }
+    ],
+    "name": "setProtected",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getLiquidationEnabled",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_liquidationEnabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setLiquidationEnabled",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [],
     "name": "nextState",
@@ -1477,20 +1594,6 @@
     "constant": true,
     "inputs": [],
     "name": "getMaxMintBPro",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "maxMintBProAvalaible",
     "outputs": [
       {
         "name": "",

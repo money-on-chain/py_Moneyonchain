@@ -432,13 +432,33 @@ class MoCState(Contract):
 
         return result
 
+    def protected(self, formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """protected"""
+
+        result = self.sc.functions.getProtected().call(
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def liquidation_enabled(self,
+            block_identifier: BlockIdentifier = 'latest'):
+        """liquidation enabled"""
+
+        result = self.sc.functions.getLiquidationEnabled().call(
+            block_identifier=block_identifier)
+
+        return result
+
     def max_mint_bpro_available(self, formatted: bool = True,
                                 block_identifier: BlockIdentifier = 'latest'):
         """Max mint BPRo available"""
 
         if self.mode == 'MoC':
-            result = self.sc.functions.maxMintBProAvalaible().call(
-                block_identifier=block_identifier)
+            raise Exception('DEPRECATED')
         else:
             result = self.sc.functions.maxMintRiskProAvalaible().call(
                 block_identifier=block_identifier)
@@ -2052,7 +2072,7 @@ class MoC(Contract):
 
         return result
 
-    def execute_liquidation(self, execution_steps,
+    def execute_liquidation(self,
                             gas_limit=3500000,
                             wait_timeout=240,
                             default_account=None,
@@ -2064,12 +2084,11 @@ class MoC(Contract):
         tx_receipt = None
         if self.sc_moc_state.is_liquidation():
 
-            self.log.info("Calling evalLiquidation steps [{0}] ...".format(execution_steps))
+            self.log.info("Calling evalLiquidation...")
 
             # Only if is liquidation reach
             tx_hash = self.connection_manager.fnx_transaction(self.sc,
                                                               'evalLiquidation',
-                                                              execution_steps,
                                                               default_account=default_account,
                                                               gas_limit=gas_limit)
 
@@ -2593,10 +2612,11 @@ class MoC(Contract):
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        max_mint_bpro_available = self.max_mint_bpro_available()
-        if total_amount >= max_mint_bpro_available:
-            raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
-                max_mint_bpro_available))
+        if self.mode != 'MoC':
+            max_mint_bpro_available = self.max_mint_bpro_available()
+            if total_amount >= max_mint_bpro_available:
+                raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
+                    max_mint_bpro_available))
 
         tx_hash = self.connection_manager.fnx_transaction(self.sc, 'mintBPro', int(amount * self.precision), vendor_account,
                                                           tx_params={'value': int(total_amount * self.precision)},
