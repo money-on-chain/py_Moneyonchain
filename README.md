@@ -23,7 +23,7 @@ pip3 install moneyonchain
 or with specific version
 
 ```
-pip3 install moneyonchain==2.0.0
+pip3 install moneyonchain==2.0.5
 ```
 
 
@@ -54,6 +54,22 @@ network_manager = NetworkManager(
 network_manager.install()
 
 ```
+
+If there are a problems with the installation nodes please install manually:
+
+**Brownie and node connection**
+
+`pip install eth-brownie==1.12.2`
+
+and to install connection nodes required to connect:
+
+```
+console> brownie networks add RskNetwork rskTesnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTesnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+```
+
 
 #### Connection table
 
