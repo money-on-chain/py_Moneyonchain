@@ -12,3 +12,4 @@ from .changers import RDOCMoCSettlementChanger, RDOCMoCInrateStableChanger, \
     RDOCMoCInrateRiskproxChanger, RDOCMoCBucketContainerChanger, RDOCCommissionSplitterAddressChanger, \
     RDOCPriceFeederAdderChanger, RDOCPriceFeederRemoverChanger, RDOCMoCStateMaxMintRiskProChanger, \
     RDOCPriceProviderChanger, RDOCMocMakeStoppableChanger
+from .commission import RDOCCommissionSplitter

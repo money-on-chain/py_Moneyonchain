@@ -117,23 +117,3 @@ class CommissionSplitter(ContractBase):
         receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
-
-
-class RDOCCommissionSplitter(CommissionSplitter):
-
-    contract_name = 'RDOCCommissionSplitter'
-
-    contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.abi'))
-    contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.bin'))
-
-    mode = 'RDoC'
-    precision = 10 ** 18
-
-    def reserve_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """The reserve contract address"""
-
-        result = self.sc.reserveToken(block_identifier=block_identifier)
-
-        return result

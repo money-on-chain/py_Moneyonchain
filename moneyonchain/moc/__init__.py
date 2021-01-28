@@ -1,4 +1,4 @@
-from .commission import CommissionSplitter, RDOCCommissionSplitter
+from .commission import CommissionSplitter
 from .moc import MoC
 from .mocbproxmanager import MoCBProxManager
 from .mocburnout import MoCBurnout
