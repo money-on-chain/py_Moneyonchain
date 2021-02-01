@@ -214,6 +214,11 @@ class NetworkManager(BaseNetworkManager):
         dt_object = datetime.datetime.fromtimestamp(block_timestamp)
         return dt_object
 
+    @property
+    def get_block(self, *args, **kargs):
+        """ Get last block """
+        return web3.eth.getBlock(*args, **kargs)
+
     @staticmethod
     def network_balance(address, block_identifier: BlockIdentifier = 'latest'):
         """ Balance of the address """
