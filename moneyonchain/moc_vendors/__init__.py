@@ -5,6 +5,7 @@ from .mochelperlib import VENDORSMoCHelperLib
 from .mocinrate import VENDORSMoCInrate
 from .mocsettlement import VENDORSMoCSettlement
 from .mocstate import VENDORSMoCState
+from .mocvendors import VENDORSMoCVendors
 from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, \
     MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, \
