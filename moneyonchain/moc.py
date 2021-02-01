@@ -2509,31 +2509,65 @@ class MoC(Contract):
 
         return result
 
-    def amount_mint_bpro(self, amount: Decimal):
+    def amount_mint_bpro(self, amount: Decimal, default_account, vendor_account):
         """Final amount need it to mint bitpro in RBTC"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        total_amount = amount + commission_value
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
 
-        return total_amount, commission_value
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
 
-    def amount_mint_doc(self, amount: Decimal):
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
+
+    def amount_mint_doc(self, amount: Decimal, default_account, vendor_account):
         """Final amount need it to mint doc"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        total_amount = amount + commission_value
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
 
-        return total_amount, commission_value
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
 
-    def amount_mint_btc2x(self, amount: Decimal):
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
+
+    def amount_mint_btc2x(self, amount: Decimal, default_account, vendor_account):
         """Final amount need it to mint btc2x"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-        interest_value_margin = interest_value + interest_value * Decimal(0.01)
-        total_amount = amount + commission_value + interest_value_margin
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
 
-        return total_amount, commission_value, interest_value
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
+
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        interest_value_margin = interest_value + interest_value * Decimal(0.01)
+        total_amount = amount + commission_value + markup_value + interest_value_margin
+
+        return total_amount, commission_value, markup_value, interest_value
 
 
     def mint_bpro_gas_estimated(self, amount, vendor_account, precision=False):
@@ -2597,17 +2631,7 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount,
-            tx_type_fees_MOC,
-            tx_type_fees_RBTC,
-            vendor_account,
-            default_account=default_account)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
+        total_amount, commission_value, markup_value = self.amount_mint_bpro(amount, default_account, vendor_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2657,13 +2681,7 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
+        total_amount, commission_value, markup_value = self.amount_mint_doc(amount, default_account, vendor_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2706,16 +2724,7 @@ class MoC(Contract):
             raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
-
-        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"] + interest_value
-
+        total_amount, commission_value, markup_value, interest_value = self.amount_mint_btc2x(amount, default_account, vendor_account)
         bucket = str.encode('X2')
 
         if total_amount > self.balance_of(default_account):
