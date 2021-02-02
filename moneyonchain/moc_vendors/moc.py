@@ -350,6 +350,7 @@ class VENDORSMoC(MoC):
 
     def mint_bpro(self,
                   amount: Decimal,
+                  vendor_account,
                   **tx_arguments):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
@@ -359,11 +360,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -406,6 +402,7 @@ class VENDORSMoC(MoC):
 
     def mint_doc(self,
                  amount: Decimal,
+                 vendor_account,
                  **tx_arguments):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
@@ -415,11 +412,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -462,6 +454,7 @@ class VENDORSMoC(MoC):
 
     def mint_btc2x(self,
                    amount: Decimal,
+                   vendor_account,
                    **tx_arguments):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
@@ -471,11 +464,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -520,6 +508,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_bpro(self,
                      amount_token: Decimal,
+                     vendor_account,
                      **tx_arguments):
         """ Reedem BitPro amount of token """
 
@@ -527,11 +516,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -565,6 +549,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_free_doc(self,
                          amount_token: Decimal,
+                         vendor_account,
                          **tx_arguments):
         """
         Reedem Free DOC amount of token
@@ -575,11 +560,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
@@ -611,6 +591,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_btc2x(self,
                       amount_token: Decimal,
+                      vendor_account,
                       **tx_arguments):
         """ Reedem BTC2X amount of token """
 
@@ -618,11 +599,6 @@ class VENDORSMoC(MoC):
             default_account = tx_arguments['default_account']
         else:
             default_account = None
-
-        if 'vendor_account' in tx_arguments:
-            vendor_account = tx_arguments['vendor_account']
-        else:
-            raise Exception("You need to pass vendor_account")
 
         if self.paused():
             raise Exception("Contract is paused you cannot operate!")
