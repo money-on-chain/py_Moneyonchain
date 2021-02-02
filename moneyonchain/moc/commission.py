@@ -72,7 +72,8 @@ class CommissionSplitter(ContractBase):
                 formatted: bool = True,
                 block_identifier: BlockIdentifier = 'latest'):
 
-        result = self.sc.balance(self.address(), block_identifier=block_identifier)
+        #result = self.sc.balance(self.address(), block_identifier=block_identifier)
+        result = self.network_manager.network_balance(self.address(), block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
