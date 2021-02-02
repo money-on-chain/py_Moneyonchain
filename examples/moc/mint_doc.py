@@ -14,7 +14,7 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC
 
 
-network = 'mocTestnet'
+network = 'mocTestTyD'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
@@ -22,20 +22,23 @@ print("Connected: {conectado}".format(conectado=connection_manager.is_connected)
 print("Connecting to MoC Main Contract")
 moc_main = MoC(connection_manager)
 
+vendor_account = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
 amount_want_to_mint = Decimal(0.001)
-# Set MoC balance and MoC allowance if commissions should be paid in MoC instead of RBTC
-moc_balance = 0
-moc_allowance = 0
 
-total_amount, commission_value = moc_main.amount_mint_doc(amount_want_to_mint, moc_balance, moc_allowance)
-print("To mint {0} RBTC in DOC need {1} RBTC. Commision {2}".format(format(amount_want_to_mint, '.18f'),
-                                                                    format(total_amount, '.18f'),
-                                                                    format(commission_value, '.18f')))
+total_amount, commission_value, markup_value = moc_main.amount_mint_doc(
+    amount=amount_want_to_mint,
+    vendor_account=vendor_account)
 
+print("To mint {0} RBTC in DOC need {1} RBTC. Commission {2}. Markup {3}".format(format(amount_want_to_mint, '.18f'),
+                                                               format(total_amount, '.18f'),
+                                                               format(commission_value, '.18f'),
+                                                               format(markup_value, '.18f')))
 # Mint DOC
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.mint_doc(amount_want_to_mint)
+tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.mint_doc(
+    amount=amount_want_to_mint,
+    vendor_account=vendor_account)
 print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
 print("Transaction done!")
 if tx_logs:
@@ -47,8 +50,8 @@ if tx_logs:
 Connecting to mocTestnet...
 Connected: True
 Connecting to MoC Main Contract
-To mint 0.001000000000000000 RBTC in DOC need 0.001001000000000000 RBTC. Commision 0.000001000000000000
+To mint 0.001000000000000000 RBTC in DOC need 0.001013000000000000 RBTC. Commission 0.000003000000000000. Markup 0.000010000000000000
 Please wait to the transaction be mined!...
 Transaction done!
-You mint 6.833970000000000254 DOC
+You mint 10.000000000000000000 DOC
 """

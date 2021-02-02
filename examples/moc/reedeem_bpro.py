@@ -14,20 +14,23 @@ from moneyonchain.manager import ConnectionManager
 from moneyonchain.moc import MoC
 
 
-network = 'mocTestnet'
+network = 'mocTestTyD'
 connection_manager = ConnectionManager(network=network)
 print("Connecting to %s..." % network)
 print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
 moc_main = MoC(connection_manager)
 
+vendor_account = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
 amount = Decimal(0.001)
 print("Reedem BPro: {0}".format(amount))
 
 # Reedeem BPro
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.reedeem_bpro(amount)
+tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.reedeem_bpro(
+    amount_token=amount,
+    vendor_account=vendor_account)
 print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
 print("Transaction done!")
 if tx_logs:
