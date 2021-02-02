@@ -646,98 +646,44 @@ class MoC(ContractBase):
         if precision:
             amount = amount * self.precision
 
-        if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc, 'mintBPro')
-        else:
-            fxn_to_call = getattr(self.sc, 'mintRiskPro')
-
         tx_args = self.tx_arguments(**tx_arguments)
-        built_fxn = fxn_to_call(int(amount), tx_args)
-        #gas_estimate = built_fxn.estimateGas()
-        gas_estimate = built_fxn.estimate_gas()
 
-        return gas_estimate
+        if self.mode == 'MoC':
+            return self.sc.mintBPro.estimate_gas(int(amount), tx_args)
+        else:
+            return self.sc.mintRiskPro.estimate_gas(int(amount), tx_args)
 
-    def mint_doc_gas_estimated(self, amount, precision=False):
+    def mint_doc_gas_estimated(self,
+                               amount,
+                               precision=False,
+                               **tx_arguments):
 
         if precision:
             amount = amount * self.precision
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc, 'mintDoc')
+            return self.sc.mintDoc.estimate_gas(int(amount), tx_args)
         else:
-            fxn_to_call = getattr(self.sc, 'mintStableToken')
+            return self.sc.mintStableToken.estimate_gas(int(amount), tx_args)
 
-        built_fxn = fxn_to_call(int(amount))
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
-
-    def mint_bprox_gas_estimated(self, amount, precision=False):
+    def mint_bprox_gas_estimated(self,
+                                 amount,
+                                 precision=False,
+                                 **tx_arguments):
 
         bucket = BUCKET_X2
 
         if precision:
             amount = amount * self.precision
 
-        if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc, 'mintBProx')
-        else:
-            fxn_to_call = getattr(self.sc, 'mintRiskProx')
-
-        built_fxn = fxn_to_call(bucket, int(amount))
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
-
-    """
-        def mint_bpro_gas_estimated(self, amount, precision=False):
-
-        if precision:
-            amount = amount * self.precision
+        tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBPro')
+            return self.sc.mintBProx.estimate_gas(bucket, int(amount), tx_args)
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
-
-        built_fxn = fxn_to_call(int(amount))
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
-
-    def mint_doc_gas_estimated(self, amount, precision=False):
-
-        if precision:
-            amount = amount * self.precision
-
-        if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintDoc')
-        else:
-            fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
-
-        built_fxn = fxn_to_call(int(amount))
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
-
-    def mint_bprox_gas_estimated(self, amount, precision=False):
-
-        bucket = str.encode('X2')
-
-        if precision:
-            amount = amount * self.precision
-
-        if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBProx')
-        else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
-
-        built_fxn = fxn_to_call(bucket, int(amount))
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
-    """
+            return self.sc.mintRiskProx.estimate_gas(bucket, int(amount), tx_args)
 
     def mint_bpro(self,
                   amount: Decimal,

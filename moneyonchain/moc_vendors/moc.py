@@ -292,61 +292,52 @@ class VENDORSMoC(MoC):
     def mint_bpro_gas_estimated(self,
                                 amount,
                                 vendor_account,
-                                precision=False):
+                                precision=False,
+                                **tx_arguments):
 
         if precision:
             amount = amount * self.precision
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBPro')
-            built_fxn = fxn_to_call(int(amount), vendor_account)
+            return self.sc.mintBPro.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskPro')
-            built_fxn = fxn_to_call(int(amount))
-
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
+            return self.sc.mintRiskPro.estimate_gas(int(amount), tx_args)
 
     def mint_doc_gas_estimated(self,
                                amount,
                                vendor_account,
-                               precision=False):
+                               precision=False,
+                               **tx_arguments):
 
         if precision:
             amount = amount * self.precision
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintDoc')
-            built_fxn = fxn_to_call(int(amount), vendor_account)
+            return self.sc.mintDoc.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintStableToken')
-            built_fxn = fxn_to_call(int(amount))
-
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
+            return self.sc.mintStableToken.estimate_gas(int(amount), tx_args)
 
     def mint_bprox_gas_estimated(self,
                                  amount,
                                  vendor_account,
-                                 precision=False):
+                                 precision=False,
+                                 **tx_arguments):
 
-        bucket = str.encode('X2')
+        bucket = BUCKET_X2
 
         if precision:
             amount = amount * self.precision
 
+        tx_args = self.tx_arguments(**tx_arguments)
+
         if self.mode == 'MoC':
-            fxn_to_call = getattr(self.sc.functions, 'mintBProx')
-            built_fxn = fxn_to_call(bucket, int(amount), vendor_account)
+            return self.sc.mintBProx.estimate_gas(bucket, int(amount), vendor_account, tx_args)
         else:
-            fxn_to_call = getattr(self.sc.functions, 'mintRiskProx')
-            built_fxn = fxn_to_call(bucket, int(amount))
-
-        gas_estimate = built_fxn.estimateGas()
-
-        return gas_estimate
+            return self.sc.mintRiskProx.estimate_gas(bucket, int(amount), tx_args)
 
     def mint_bpro(self,
                   amount: Decimal,
