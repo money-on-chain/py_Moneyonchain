@@ -1701,12 +1701,13 @@ class MoCConnector(Contract):
         d_addresses['MoCSettlement'] = self.sc.functions.mocSettlement().call()
         d_addresses['MoCExchange'] = self.sc.functions.mocExchange().call()
         d_addresses['MoCInrate'] = self.sc.functions.mocInrate().call()
-        d_addresses['MoCBurnout'] = self.sc.functions.mocBurnout().call()
         if self.mode == 'MoC':
             d_addresses['DoCToken'] = self.sc.functions.docToken().call()
             d_addresses['BProToken'] = self.sc.functions.bproToken().call()
             d_addresses['MoCBProxManager'] = self.sc.functions.bproxManager().call()
         else:
+            # MoCBurnout is deprecated in MoC mode
+            d_addresses['MoCBurnout'] = self.sc.functions.mocBurnout().call()
             d_addresses['DoCToken'] = self.sc.functions.stableToken().call()
             d_addresses['BProToken'] = self.sc.functions.riskProToken().call()
             d_addresses['MoCBProxManager'] = self.sc.functions.riskProxManager().call()
@@ -2004,7 +2005,12 @@ class MoC(Contract):
 
     def connector_addresses(self):
 
-        return self.sc_moc_connector.contracts_addresses()
+        d_addresses = dict()
+        d_addresses.update(self.sc_moc_connector.contracts_addresses())
+        d_addresses["MoCToken"] = self.sc_moc_state.moc_token()
+        d_addresses["MoCVendors"] = self.sc_moc_state.moc_vendors()
+
+        return d_addresses
 
     def state(self):
 
@@ -2509,8 +2515,11 @@ class MoC(Contract):
 
         return result
 
-    def amount_mint_bpro(self, amount: Decimal, default_account, vendor_account):
+    def amount_mint_bpro(self, amount: Decimal, vendor_account, default_account=None):
         """Final amount need it to mint bitpro in RBTC"""
+
+        if not default_account:
+            default_account = 0
 
         tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
         tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
@@ -2528,8 +2537,11 @@ class MoC(Contract):
 
         return total_amount, commission_value, markup_value
 
-    def amount_mint_doc(self, amount: Decimal, default_account, vendor_account):
+    def amount_mint_doc(self, amount: Decimal, vendor_account, default_account=None):
         """Final amount need it to mint doc"""
+
+        if not default_account:
+            default_account = 0
 
         tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
         tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
@@ -2547,8 +2559,11 @@ class MoC(Contract):
 
         return total_amount, commission_value, markup_value
 
-    def amount_mint_btc2x(self, amount: Decimal, default_account, vendor_account):
+    def amount_mint_btc2x(self, amount: Decimal, vendor_account, default_account=None):
         """Final amount need it to mint btc2x"""
+
+        if not default_account:
+            default_account = 0
 
         tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
         tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
@@ -2631,7 +2646,7 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value, markup_value = self.amount_mint_bpro(amount, default_account, vendor_account)
+        total_amount, commission_value, markup_value = self.amount_mint_bpro(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2681,7 +2696,7 @@ class MoC(Contract):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value, markup_value = self.amount_mint_doc(amount, default_account, vendor_account)
+        total_amount, commission_value, markup_value = self.amount_mint_doc(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -2724,7 +2739,7 @@ class MoC(Contract):
             raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        total_amount, commission_value, markup_value, interest_value = self.amount_mint_btc2x(amount, default_account, vendor_account)
+        total_amount, commission_value, markup_value, interest_value = self.amount_mint_btc2x(amount, vendor_account, default_account)
         bucket = str.encode('X2')
 
         if total_amount > self.balance_of(default_account):
