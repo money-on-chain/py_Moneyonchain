@@ -2,8 +2,8 @@ import json
 import logging
 import logging.config
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import MoCSetCommissionFinalAddressChanger
+from moneyonchain.networks import NetworkManager
+from moneyonchain.moc import MoCSetCommissionFinalAddressChanger
 
 
 def options_from_settings(filename='settings.json'):
@@ -15,24 +15,51 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
+import logging
+import logging.config
+
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/11_changer_commission.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-network = 'mocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTesnetPublic'
+config_network = 'mocTestnetAlpha'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
 
 # load settings from file, take a look on settings.json
 settings = options_from_settings()
 
-contract_splitter = settings[network]['CommissionSplitter']
-contract = MoCSetCommissionFinalAddressChanger(connection_manager)
+contract_splitter = settings[config_network]['CommissionSplitter']
+contract = MoCSetCommissionFinalAddressChanger(network_manager)
 
-if network in ['mocTestnetAlpha']:
+if config_network in ['mocTestnetAlpha']:
     execute_change = True
 else:
     execute_change = False
@@ -42,6 +69,9 @@ tx_hash, tx_receipt = contract.constructor(beneficiary_address,
                                            commission_splitter=contract_splitter,
                                            execute_change=execute_change)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     print("Error deploying changer")
+
+# finally disconnect from network
+network_manager.disconnect()
