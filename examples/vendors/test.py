@@ -36,7 +36,7 @@ result = moc_inrate.calculate_vendor_markup(vendor_address, amount)
 print("Vendor markup: ", result)
 print("Is expected: ", result == 0.003)
 
-balance = moc_exchange.get_moc_token_balance(vendor_address, moc_vendors.address())
+balance = moc_exchange.moc_token_balance(vendor_address, moc_vendors.address())
 print("Balance and allowance: ", balance)
 
 tx_type_mint_bpro_fees_rbtc = moc_inrate.tx_type_mint_bpro_fees_rbtc()

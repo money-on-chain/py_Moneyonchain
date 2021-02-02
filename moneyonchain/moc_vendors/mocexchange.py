@@ -14,6 +14,7 @@
 
 import os
 from web3 import Web3
+from web3.types import BlockIdentifier
 
 
 from moneyonchain.contract import ContractBase
@@ -62,4 +63,23 @@ class VENDORSMoCExchange(MoCExchange):
             result = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in result]
 
         return array_to_dictionary(result, names_array)
+
+    def moc_token_balance(self,
+                          owner_address,
+                          spender_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+
+        owner_address = Web3.toChecksumAddress(owner_address)
+        spender_address = Web3.toChecksumAddress(spender_address)
+
+        result = self.sc.getMoCTokenBalance(
+            owner_address,
+            spender_address,
+            block_identifier=block_identifier)
+
+        if formatted:
+            result = (Web3.fromWei(result[0], 'ether'), Web3.fromWei(result[0], 'ether'))
+
+        return result
 
