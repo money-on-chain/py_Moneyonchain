@@ -91,7 +91,7 @@ print("MoC balance (proportion: {0}): [{1}]".format(info_dict['proportion']['moc
                                                     info_dict['before']['moc']))
 
 
-tx_hash, tx_receipt = splitter.split()
+tx_receipt = splitter.split()
 if tx_receipt:
     print("Sucessfully splited!")
 else:
