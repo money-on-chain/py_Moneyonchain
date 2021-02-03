@@ -1497,41 +1497,6 @@ class MoCSettlement(Contract):
         return self.sc.functions.getBlockSpan().call(block_identifier=block_identifier)
 
 
-class MoCBurnout(Contract):
-    log = logging.getLogger()
-
-    contract_abi = Contract.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBurnout.abi'))
-    contract_bin = Contract.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCBurnout.bin'))
-
-    precision = 10 ** 18
-    mode = 'MoC'
-    project = 'MoC'
-
-    def __init__(self, connection_manager, contract_address=None, contract_abi=None, contract_bin=None):
-        if not contract_address:
-            # load from connection manager
-            network = connection_manager.network
-            contract_address = connection_manager.options['networks'][network]['addresses']['MoCBurnout']
-
-        super().__init__(connection_manager,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-        # finally load the contract
-        self.load_contract()
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.connection_manager)
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
-
 class MoCBProxManager(Contract):
     log = logging.getLogger()
 

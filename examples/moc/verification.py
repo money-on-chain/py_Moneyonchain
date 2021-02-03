@@ -3,7 +3,7 @@ This script list all of the proxy and implementation addresses of the contracts
 """
 
 from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCInrate, MoCBurnout, MoCBProxManager, \
+from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCInrate, MoCBProxManager, \
     MoCState, MoCConnector, MoCMedianizer, MoCVendors
 from moneyonchain.token import DoCToken, BProToken, MoCToken
 
@@ -79,13 +79,6 @@ line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCVendors', addresses['MoCV
                                             contract.implementation())
 lines.append(line)
 
-# # MoCBurnout
-# contract = MoCBurnout(connection_manager)
-# count += 1
-# line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBurnout', addresses['MoCBurnout'],
-#                                             contract.implementation())
-# lines.append(line)
-
 # MoCBProxManager
 contract = MoCBProxManager(connection_manager)
 count += 1
@@ -142,7 +135,6 @@ print('\n'.join(lines))
 # | 5 | MoCSettlement  | 0x609dF03D8a85eAffE376189CA7834D4C35e32F22  | 0xe3abCE2B0eE0D7eA48a5bcD0442D5505aE5B6334 |
 # | 6 | MoCExchange  | 0x6aCb83bB0281FB847b43cf7dd5e2766BFDF49038  | 0x785814724324C63ec52e6675C899508E74850046 |
 # | 7 | MoCInrate  | 0xc0f9B54c41E3d0587Ce0F7540738d8d649b0A3F3  | 0x56e327FA971572828f846BE9E37FB850e5852822 |
-# | 8 | MoCBurnout  | 0xE69fB8C8fE9dCa08350AF5C47508f3E688D0CDd1  | 0x1d1BeE3A56C01Cae266BfB62dD6FeF53e3f5E508 |
 # | 9 | MoCBProxManager  | 0xC4fBFa2270Be87FEe5BC38f7a1Bb6A9415103b6c  | 0xee35b51EdF623533A83D3aEf8f1518ff67da4e89 |
 # | 10 | DoCToken  |   | 0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db |
 # | 11 | BProToken  |   | 0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8 |

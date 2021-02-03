@@ -28,6 +28,7 @@
         "MoCBase.json",
         "MoCBucketContainer.json",
         "MoCBucketContainerChanger.json",
+        "MoCBurnout.json",
         "MoCBurnoutEvents.json",
         "MoCConstants.json",
         "MoCEMACalculator.json",
