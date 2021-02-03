@@ -35,7 +35,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "moc",
+    "name": "DEPRECATED_mocBurnout",
     "outputs": [
       {
         "name": "",
@@ -49,7 +49,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "mocBurnout",
+    "name": "moc",
     "outputs": [
       {
         "name": "",
