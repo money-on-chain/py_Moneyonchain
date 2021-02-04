@@ -81,3 +81,18 @@ class VENDORSMoCState(MoCState):
             raise NotImplementedError('Only supported in MoC mode')
 
         return result
+
+    def max_mint_bpro_available(self,
+                                formatted: bool = True,
+                                block_identifier: BlockIdentifier = 'latest'):
+        """Max mint BPRo available"""
+
+        if self.mode == 'MoC':
+            raise Exception('DEPRECATED')
+        else:
+            result = self.sc.maxMintRiskProAvalaible(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result

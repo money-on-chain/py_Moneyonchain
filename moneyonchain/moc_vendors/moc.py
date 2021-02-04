@@ -289,6 +289,26 @@ class VENDORSMoC(MoC):
             formatted=formatted,
             block_identifier=block_identifier)
 
+    def protected(self,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """protected"""
+
+        result = self.sc.getProtected(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def liquidation_enabled(self,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """liquidation enabled"""
+
+        result = self.sc.getLiquidationEnabled(block_identifier=block_identifier)
+
+        return result
+
     def mint_bpro_gas_estimated(self,
                                 amount,
                                 vendor_account,
@@ -358,25 +378,16 @@ class VENDORSMoC(MoC):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount,
-            tx_type_fees_MOC,
-            tx_type_fees_RBTC,
-            vendor_account,
-            default_account=default_account)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
+        total_amount, commission_value, markup_value = self.amount_mint_bpro(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        max_mint_bpro_available = self.max_mint_bpro_available()
-        if total_amount >= max_mint_bpro_available:
-            raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
-                max_mint_bpro_available))
+        if self.mode != 'MoC':
+            max_mint_bpro_available = self.max_mint_bpro_available()
+            if total_amount >= max_mint_bpro_available:
+                raise Exception("You are trying to mint more than the limit. Mint RiskPro limit: {0}".format(
+                    max_mint_bpro_available))
 
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(total_amount * self.precision)
@@ -419,13 +430,7 @@ class VENDORSMoC(MoC):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"]
+        total_amount, commission_value, markup_value = self.amount_mint_doc(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
@@ -443,10 +448,10 @@ class VENDORSMoC(MoC):
 
         return tx_receipt
 
-    def mint_btc2x(self,
-                   amount: Decimal,
-                   vendor_account,
-                   **tx_arguments):
+    def mint_btcx(self,
+                  amount: Decimal,
+                  vendor_account,
+                  **tx_arguments):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
@@ -470,15 +475,8 @@ class VENDORSMoC(MoC):
             raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
-        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
-
-        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
-            amount, tx_type_fees_MOC, tx_type_fees_RBTC, vendor_account, default_account=default_account)
-
-        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-
-        total_amount = amount + commissions["btcCommission"] + commissions["btcMarkup"] + interest_value
+        total_amount, commission_value, markup_value, interest_value = self.amount_mint_btc2x(amount, vendor_account,
+                                                                                              default_account)
         bucket = BUCKET_X2
 
         if total_amount > self.balance_of(default_account):
@@ -619,4 +617,102 @@ class VENDORSMoC(MoC):
         receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
+
+    def execute_liquidation(self,
+                            **tx_arguments):
+        """Execute liquidation """
+
+        tx_receipt = None
+        if self.sc_moc_state.is_liquidation():
+
+            self.log.info("Calling evalLiquidation ...")
+
+            tx_args = self.tx_arguments(**tx_arguments)
+
+            # Only if is liquidation reach
+            tx_receipt = self.sc.evalLiquidation(
+                tx_args)
+
+            tx_receipt.info()
+            receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
+
+    def amount_mint_bpro(self,
+                         amount: Decimal,
+                         vendor_account,
+                         default_account=None):
+        """Final amount need it to mint bitpro in RBTC"""
+
+        if not default_account:
+            default_account = 0
+
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
+
+    def amount_mint_doc(self,
+                        amount: Decimal,
+                        vendor_account,
+                        default_account=None):
+        """Final amount need it to mint doc"""
+
+        if not default_account:
+            default_account = 0
+
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
+
+    def amount_mint_btc2x(self,
+                          amount: Decimal,
+                          vendor_account,
+                          default_account=None):
+        """Final amount need it to mint btc2x"""
+
+        if not default_account:
+            default_account = 0
+
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
+
+        commission_value = commissions["btcCommission"]
+        markup_value = commissions["btcMarkup"]
+        interest_value_margin = interest_value + interest_value * Decimal(0.01)
+        total_amount = amount + commission_value + markup_value + interest_value_margin
+
+        return total_amount, commission_value, markup_value, interest_value
 

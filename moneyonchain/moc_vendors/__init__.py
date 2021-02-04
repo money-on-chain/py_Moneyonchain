@@ -1,5 +1,6 @@
 from .moc import VENDORSMoC
 from .mocconverter import VENDORSMoCConverter
+from .mocconnector import VENDORSMoCConnector
 from .mocexchange import VENDORSMoCExchange
 from .mochelperlib import VENDORSMoCHelperLib
 from .mocinrate import VENDORSMoCInrate

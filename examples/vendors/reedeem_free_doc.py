@@ -2,13 +2,14 @@
 To run this script need private key, run this scripts with:
 
 user> export ACCOUNT_PK_SECRET=PK
-user> python ./mint_bpro.py
+user> python ./reedeem_free_doc.py
 
 Where replace with your PK, and also you need to have funds in this account
 """
 
-from web3 import Web3
+
 from decimal import Decimal
+from web3 import Web3
 from moneyonchain.networks import NetworkManager
 from moneyonchain.moc_vendors import VENDORSMoC
 
@@ -29,25 +30,15 @@ network_manager = NetworkManager(
 # Connect to network
 network_manager.connect()
 
-
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-amount_want_to_mint = Decimal(0.001)
-
+amount = Decimal(10.0)
 vendor_account = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
+print("Reedem Free Doc: {0}".format(amount))
 
-total_amount, commission_value, markup_value = moc_main.amount_mint_bpro(
-    amount=amount_want_to_mint,
-    vendor_account=vendor_account)
-
-print("To mint {0} bitpro need {1} RBTC. Commission {2}. Markup {3}".format(
-    format(amount_want_to_mint, '.18f'),
-    format(total_amount, '.18f'),
-    format(commission_value, '.18f'),
-    format(markup_value, '.18f')))
-
+# This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.mint_bpro(amount_want_to_mint, vendor_account)
+tx_receipt = moc_main.reedeem_free_doc(amount, vendor_account)
 
 # finally disconnect from network
 network_manager.disconnect()

@@ -60,16 +60,19 @@ class VENDORSMoCVendors(ContractBase):
         return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
     def get_vendor(self,
-                   vendor_account, formatted: bool = True,
+                   vendor_account,
+                   formatted: bool = True,
                    block_identifier: BlockIdentifier = 'latest'):
         """Gets vendor from mapping"""
 
         vendor_details = self.sc.vendors(vendor_account, block_identifier=block_identifier)
 
+        print(vendor_details)
+
         names_array = ["isActive", "markup", "totalPaidInMoC", "staking", "paidMoC", "paidRBTC"]
 
         if formatted:
-            vendor_details[1:] = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in vendor_details[1:]]
+            vendor_details = [Web3.fromWei(unformatted_value, 'ether') for unformatted_value in vendor_details[1:]]
 
         return array_to_dictionary(vendor_details, names_array)
 

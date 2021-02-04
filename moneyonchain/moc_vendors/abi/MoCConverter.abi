@@ -261,6 +261,29 @@
     "constant": true,
     "inputs": [
       {
+        "name": "bproxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "bucket",
+        "type": "bytes32"
+      }
+    ],
+    "name": "bproxToBtcHelper",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "btcAmount",
         "type": "uint256"
       },

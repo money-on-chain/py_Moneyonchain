@@ -682,3 +682,32 @@ class MoCVendorsTotalPaidInMoCReset(BaseEvent):
                 d_event['account']
                 ]
 
+
+class MoCContractLiquidated(BaseEvent):
+    name = "ContractLiquidated"
+
+    def __init__(self, event):
+        self.blockNumber = event['blockNumber']
+        self.transactionHash = event['transactionHash']
+        self.timestamp = event['timestamp']
+        self.event = event['event'][self.name]
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp',  'address']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['address'] = self.event['address']
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['address']
+                ]
