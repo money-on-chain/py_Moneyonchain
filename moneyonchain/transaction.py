@@ -12,8 +12,13 @@
 """
 
 import logging
+import requests
+from hexbytes import HexBytes
 
 from brownie.network.transaction import TransactionReceipt
+from brownie._config import CONFIG
+from brownie.exceptions import RPCRequestError
+from brownie.network.web3 import web3
 
 
 class TransactionReceiptBase(TransactionReceipt):
@@ -23,10 +28,13 @@ class TransactionReceiptBase(TransactionReceipt):
     def __init__(self,
                  *args,
                  logger=None,
+                 trace_enabled=False,
                  **parameters):
 
         if logger:
             self.log = logger
+
+        self.trace_enabled = trace_enabled
 
         super().__init__(*args, **parameters)
 
@@ -68,6 +76,55 @@ class TransactionReceiptBase(TransactionReceipt):
                     result += f"\n      {key}: {value}"
 
         self.log.info(result)
+
+    def _get_trace(self) -> None:
+        """Retrieves the stack trace via debug_traceTransaction and finds the
+        return value, revert message and event logs in the trace.
+        """
+
+        # check if trace has already been retrieved, or the tx warrants it
+        if self._raw_trace is not None:
+            return
+        self._raw_trace = []
+        if self.input == "0x" and self.gas_used == 21000:
+            self._modified_state = False
+            self._trace = []
+            return
+
+        if not self.trace_enabled:
+            raise RPCRequestError("Node client does not support `debug_traceTransaction`")
+        try:
+            trace = web3.provider.make_request(  # type: ignore
+                "debug_traceTransaction", [self.txid]
+            )
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            msg = f"Encountered a {type(e).__name__} while requesting "
+            msg += "`debug_traceTransaction`. The local RPC client has likely crashed."
+            if CONFIG.argv["coverage"]:
+                msg += " If the error persists, add the `skip_coverage` marker to this test."
+            raise RPCRequestError(msg) from None
+
+        if "error" in trace:
+            self._modified_state = None
+            self._trace_exc = RPCRequestError(trace["error"]["message"])
+            raise self._trace_exc
+
+        self._raw_trace = trace = trace["result"]["structLogs"]
+        if not trace:
+            self._modified_state = False
+            return
+
+        if isinstance(trace[0]["gas"], str):
+            # handle traces where numeric values are returned as hex (Nethermind)
+            for step in trace:
+                step["gas"] = int(step["gas"], 16)
+                step["gasCost"] = int.from_bytes(HexBytes(step["gasCost"]), "big", signed=True)
+                step["pc"] = int(step["pc"], 16)
+
+        if self.status:
+            self._confirmed_trace(trace)
+        else:
+            self._reverted_trace(trace)
 
 
 def receipt_to_log(receipt, log):

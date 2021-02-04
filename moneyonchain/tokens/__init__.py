@@ -8,3 +8,4 @@ from .rifpro import RIFPro
 from .riskpro import RiskProToken
 from .stable import StableToken
 from .wrbtc import WRBTCToken
+from .moc import MoCToken
