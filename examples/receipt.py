@@ -4,12 +4,12 @@
 from web3 import Web3
 
 from moneyonchain.networks import NetworkManager
-from moneyonchain.transaction import TransactionReceiptBase
+from moneyonchain.transaction import TransactionReceipt
 
 from brownie import web3
 
-connection_network = 'rskTesnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 # init network manager
 # connection network is the brownie connection network
@@ -25,11 +25,11 @@ network_manager = NetworkManager(
 # Connect to network
 network_manager.connect()
 
-tx_id = '0xaa84039451ee87e08dff15374d7068b836908e75d38530b66cb36e607fdc3232'
+tx_id = '0x80253cd80bd7211e9fc2247aa612786d900ef89fb1b83752dce73212b1bfe5c2'
 tx_receipt = web3.eth.getTransactionReceipt(tx_id)
 print(tx_receipt)
 
-tx_receipt = TransactionReceiptBase(tx_id)
+tx_receipt = TransactionReceipt(tx_id)
 tx_receipt.info()
 
 # tx_id = '0x73a0ce47ab64a31e542670578c73dbfb8f21c1c59a176bd462918db63566f42a'
