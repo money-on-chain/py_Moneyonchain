@@ -16,14 +16,15 @@ from typing import Optional, Tuple
 
 from brownie import web3
 from brownie.convert import Wei
-from brownie.network.account import Account
-from brownie.network.state import Chain
+from brownie.network.account import Account as _Account
+#from brownie.network.state import Chain
 
 
-from moneyonchain.transaction import TransactionReceiptBase
+from moneyonchain.transaction import TransactionReceipt
+from moneyonchain.main import chain, accounts
 
 
-class AccountBase(Account):
+class Account(_Account):
 
     log = logging.getLogger()
 
@@ -35,9 +36,9 @@ class AccountBase(Account):
         self.network_manager = network_manager
 
         try:
-            account = self.network_manager.accounts[self.network_manager.default_account]
+            account = accounts[self.network_manager.default_account]
             if default_account:
-                account = self.network_manager.accounts[default_account]
+                account = accounts[default_account]
         except ValueError:
             raise Exception("You need an account to deploy a contract!")
 
@@ -57,7 +58,7 @@ class AccountBase(Account):
                silent: bool = None):
         """ Deploy contract """
 
-        chain = Chain()
+        #chain = Chain()
 
         if gas_limit and gas_buffer:
             raise ValueError("Cannot set gas_limit and gas_buffer together")
@@ -83,7 +84,7 @@ class AccountBase(Account):
         txid = web3.eth.sendRawTransaction(
             signed.rawTransaction)
 
-        receipt = TransactionReceiptBase(
+        receipt = TransactionReceipt(
             txid,
             self,
             silent=silent,

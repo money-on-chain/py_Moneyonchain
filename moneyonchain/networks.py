@@ -21,9 +21,13 @@ from web3.types import BlockIdentifier
 import datetime
 
 from brownie import network, web3
-from brownie.network import accounts
 from brownie._config import _get_data_folder
 from brownie.network.event import _decode_logs
+
+from moneyonchain.main import accounts, rpc, history, chain
+
+
+__all__ = ["accounts", "chain", "history", "rpc", "web3", "NetworkManager"]
 
 
 TYPE_NETWORK_GROUP = ('live', 'development', 'both')
@@ -82,10 +86,15 @@ class NetworkManager(BaseNetworkManager):
             else:
                 raise Exception("Not valid option value")
 
-    def connect(self, connection_network=None):
+    def connect(self, connection_network=None, config_network=None):
 
-        if not connection_network:
+        if connection_network:
+            self.connection_network = connection_network
+        else:
             connection_network = self.connection_network
+
+        if config_network:
+            self.config_network = config_network
 
         network.connect(connection_network)
 
@@ -115,11 +124,6 @@ class NetworkManager(BaseNetworkManager):
     def gas_price(*args: Tuple[Union[int, str, bool, None]]) -> Union[int, bool]:
 
         return network.gas_price(*args)
-
-    @staticmethod
-    def gas_buffer(*args: Tuple[float, None]) -> Union[float, None]:
-
-        return network.gas_buffer(*args)
 
     @staticmethod
     def load_networks():

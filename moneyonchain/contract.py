@@ -14,14 +14,12 @@
 import json
 import logging
 from typing import (
-    Any,
-    Dict,
     Optional
 )
 from web3.types import BlockIdentifier
 from brownie import Contract
 
-from moneyonchain.account import AccountBase
+from moneyonchain.account import Account
 
 
 class ContractBase(object):
@@ -103,8 +101,8 @@ class ContractBase(object):
                **tx_arguments):
         """ Deploy contract """
 
-        account_base = AccountBase(self.network_manager,
-                                   default_account=default_account)
+        account_base = Account(self.network_manager,
+                               default_account=default_account)
         receipt = account_base.deploy(self, *args, **tx_arguments)
 
         return receipt

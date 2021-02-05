@@ -15,13 +15,13 @@ import logging
 import requests
 from hexbytes import HexBytes
 
-from brownie.network.transaction import TransactionReceipt
+from brownie.network.transaction import TransactionReceipt as _TransactionReceipt
 from brownie._config import CONFIG
 from brownie.exceptions import RPCRequestError
 from brownie.network.web3 import web3
 
 
-class TransactionReceiptBase(TransactionReceipt):
+class TransactionReceipt(_TransactionReceipt):
 
     log = logging.getLogger()
 

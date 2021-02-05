@@ -47,7 +47,7 @@ network_manager.connect()
 # instantiate Changer
 changer = DexMaxOrderLifespanChanger(network_manager, logger=log)
 
-max_order_life_span = 6000
+max_order_life_span = 7000
 
 tx_receipt = changer.constructor(max_order_life_span, execute_change=False)
 
