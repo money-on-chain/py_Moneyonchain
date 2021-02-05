@@ -3,27 +3,14 @@
 
 from web3 import Web3
 
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager, web3
 from moneyonchain.transaction import TransactionReceipt
-
-from brownie import web3
 
 connection_network = 'rskMainnetPublic'
 config_network = 'rdocMainnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 tx_id = '0x80253cd80bd7211e9fc2247aa612786d900ef89fb1b83752dce73212b1bfe5c2'
 tx_receipt = web3.eth.getTransactionReceipt(tx_id)

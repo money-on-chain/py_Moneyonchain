@@ -11,12 +11,14 @@
 
 """
 
+from typing import Any, Dict, Tuple
 
-from brownie import web3
-from moneyonchain.main import accounts, rpc, history, chain
-from moneyonchain.network_manager import NetworkManager
 
-network_manager = NetworkManager()
+class _Singleton(type):
 
-__all__ = ["accounts", "chain", "history", "rpc", "web3", "network_manager", "NetworkManager"]
+    _instances: Dict = {}
 
+    def __call__(cls, *args: Tuple, **kwargs: Dict) -> Any:
+        if cls not in cls._instances:
+            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]

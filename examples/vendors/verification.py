@@ -1,8 +1,22 @@
 """
+If is the first time to py_Moneyonchain we need brownie framework installed
+
+`pip install eth-brownie==1.12.2`
+
+and to install connection nodes required to connect, also run :
+
+```
+console> brownie networks add RskNetwork rskTesnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTesnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+```
+
+
 This script list all of the proxy and implementation addresses of the contracts
 """
 
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCBProxManager
 from moneyonchain.moc_vendors import VENDORSMoC, VENDORSMoCConverter, VENDORSMoCSettlement, VENDORSMoCExchange, \
     VENDORSMoCInrate, VENDORSMoCState, VENDORSMoCConnector
@@ -13,19 +27,9 @@ from moneyonchain.tokens import DoCToken, BProToken
 connection_network = 'rskTesnetPublic'
 config_network = 'mocTestTyD'
 
-# init network manager
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
-# Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
 moc_main = VENDORSMoC(network_manager).from_abi()
