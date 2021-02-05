@@ -3,7 +3,7 @@ This is script getting historic data from MOC State contract
 16/03/2020
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCState
 from moneyonchain.rdoc import RDOCMoCState
 
@@ -11,22 +11,24 @@ import datetime
 import csv
 import time
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
-if connection_manager.options['networks'][network]['app_mode'] == 'MoC':
-    moc_state = MoCState(connection_manager)
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+if network_manager.options['networks'][config_network]['app_mode'] == 'MoC':
+    moc_state = MoCState(network_manager).from_abi()
 else:
-    moc_state = RDOCMoCState(connection_manager)
+    moc_state = RDOCMoCState(network_manager).from_abi()
 
-from_block = 2243000  # can be manually setting
-to_block = 2244000  # can be manually setting
+from_block = 3082500  # can be manually setting
+to_block = 3082510  # can be manually setting
 block_steps = 2880
-block_skip = 120
+block_skip = 2
 hours_delta = 0
-last_block_number = int(connection_manager.block_number)
+last_block_number = int(network_manager.block_number)
 
 if to_block <= 0:
     to_block = last_block_number  # last block number in the node
@@ -51,7 +53,7 @@ while current_block <= to_block:
 
         print("Get info from block: {0}".format(n_block))
 
-        ts = connection_manager.block_timestamp(n_block)
+        ts = network_manager.block_timestamp(n_block)
         dt = ts - datetime.timedelta(hours=hours_delta)
         d_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -160,7 +162,7 @@ if l_historic_data:
                'BPro Tec. Price',
                'BTC2X Tec. Price'
                ]
-    path_file = '{0}_historic_data_{1}_{2}.csv'.format(network, from_block, to_block)
+    path_file = '{0}_historic_data_{1}_{2}.csv'.format(config_network, from_block, to_block)
     with open(path_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(columns)
@@ -196,3 +198,6 @@ if l_historic_data:
 
 duration = time.time() - start_time
 print("Getting historic data from MOC/RDOC done! Succesfull!! Done in {0} seconds".format(duration))
+
+# finally disconnect from network
+network_manager.disconnect()
