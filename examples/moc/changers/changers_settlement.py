@@ -22,7 +22,7 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network='rskTesnetPublic'
+connection_network = 'rskTesnetPublic'
 config_network = 'mocTestnetAlpha'
 
 # init network manager
