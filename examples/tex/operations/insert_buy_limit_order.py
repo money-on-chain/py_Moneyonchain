@@ -65,10 +65,10 @@ settings = options_from_settings(
 # instantiate DEX Contract
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[config_network]['DOC']
-secondary_token = settings[config_network]['RDOC']
-amount = 10
-price = 1
+base_token = settings[config_network]['WRBTC']
+secondary_token = settings[config_network]['AMOC']
+amount = 100
+price = 0.00000717
 lifespan = 5
 amount_buy = amount * price
 

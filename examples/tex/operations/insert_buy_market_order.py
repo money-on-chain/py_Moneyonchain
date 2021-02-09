@@ -79,11 +79,11 @@ settings = options_from_settings(
 # instantiate DEX Contract
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[config_network]['DOC']
-secondary_token = settings[config_network]['WRBTC']
-amount = 20
+base_token = settings[config_network]['WRBTC']
+secondary_token = settings[config_network]['AMOC']
+amount = 0.0007
 multiply_factor = 1.01
-lifespan = 15
+lifespan = 2
 
 print("Insert buy market order. Please wait to the transaction be mined!...")
 tx_receipt = dex.insert_buy_market_order(
