@@ -1,24 +1,12 @@
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
 
 
-connection_network='rskTesnetPublic'
-config_network = 'mocTestnetAlpha'
-
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # Connect to network
-network_manager.connect()
-
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_main = MoC(network_manager).from_abi()
 l_info = moc_main.settlement_info()

@@ -20,13 +20,6 @@ class MoCExchangeRiskProMint(BaseEvent):
 
     name = "RiskProMint"
 
-    def __init__(self, event):
-
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'Amount', 'reserveTotal', 'commission', 'reservePrice',
@@ -70,12 +63,6 @@ class MoCExchangeRiskProMint(BaseEvent):
 class MoCExchangeRiskProWithDiscountMint(BaseEvent):
     name = "RiskProWithDiscountMint"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'riskProTecPrice', 'riskProDiscountPrice', 'amount',
@@ -115,12 +102,6 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
 
 class MoCExchangeStableTokenMint(BaseEvent):
     name = "StableTokenMint"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -166,12 +147,6 @@ class MoCExchangeStableTokenMint(BaseEvent):
 class MoCExchangeStableTokenRedeem(BaseEvent):
     name = "StableTokenRedeem"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'amount', 'reserveTotal', 'commission', 'reservePrice',
@@ -216,12 +191,6 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
 class MoCExchangeFreeStableTokenRedeem(BaseEvent):
     name = "FreeStableTokenRedeem"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'Amount', 'ReserveTotal', 'Commission', 'Interests',
@@ -260,12 +229,6 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
 
 class MoCExchangeRiskProxMint(BaseEvent):
     name = "RiskProxMint"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -316,12 +279,6 @@ class MoCExchangeRiskProxMint(BaseEvent):
 
 class MoCExchangeRiskProxRedeem(BaseEvent):
     name = "RiskProxRedeem"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -374,12 +331,6 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
 class MoCStateBtcPriceProviderUpdated(BaseEvent):
     name = "BtcPriceProviderUpdated"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'oldAddress', 'newAddress']
@@ -405,12 +356,6 @@ class MoCStateBtcPriceProviderUpdated(BaseEvent):
 
 class MoCStateMoCPriceProviderUpdated(BaseEvent):
     name = "MoCPriceProviderUpdated"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -438,12 +383,6 @@ class MoCStateMoCPriceProviderUpdated(BaseEvent):
 class MoCStateMoCTokenChanged(BaseEvent):
     name = "MoCTokenChanged"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'mocTokenAddress']
@@ -468,12 +407,6 @@ class MoCStateMoCTokenChanged(BaseEvent):
 class MoCStateMoCVendorsChanged(BaseEvent):
     name = "MoCVendorsChanged"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'mocVendorsAddress']
@@ -497,12 +430,6 @@ class MoCStateMoCVendorsChanged(BaseEvent):
 
 class MoCVendorsVendorRegistered(BaseEvent):
     name = "VendorRegistered"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -530,12 +457,6 @@ class MoCVendorsVendorRegistered(BaseEvent):
 class MoCVendorsVendorUpdated(BaseEvent):
     name = "VendorUpdated"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'account', 'markup']
@@ -562,12 +483,6 @@ class MoCVendorsVendorUpdated(BaseEvent):
 class MoCVendorsVendorUnregistered(BaseEvent):
     name = "VendorUnregistered"
 
-    def __init__(self, connection_manager, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'account']
@@ -591,12 +506,6 @@ class MoCVendorsVendorUnregistered(BaseEvent):
 
 class MoCVendorsVendorStakeAdded(BaseEvent):
     name = "VendorStakeAdded"
-
-    def __init__(self, connection_manager, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
@@ -624,12 +533,6 @@ class MoCVendorsVendorStakeAdded(BaseEvent):
 class MoCVendorsVendorStakeRemoved(BaseEvent):
     name = "VendorStakeRemoved"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'account', 'staking']
@@ -656,12 +559,6 @@ class MoCVendorsVendorStakeRemoved(BaseEvent):
 class MoCVendorsTotalPaidInMoCReset(BaseEvent):
     name = "TotalPaidInMoCReset"
 
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
-
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'account']
@@ -685,12 +582,6 @@ class MoCVendorsTotalPaidInMoCReset(BaseEvent):
 
 class MoCContractLiquidated(BaseEvent):
     name = "ContractLiquidated"
-
-    def __init__(self, event):
-        self.blockNumber = event['blockNumber']
-        self.transactionHash = event['transactionHash']
-        self.timestamp = event['timestamp']
-        self.event = event['event'][self.name]
 
     @staticmethod
     def columns():
