@@ -152,6 +152,8 @@ class VENDORSMoC(MoC):
         contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
         contract_addresses['BProToken'] = connector_addresses['BProToken']
         contract_addresses['DoCToken'] = connector_addresses['DoCToken']
+        contract_addresses['MoCToken'] = None
+        contract_addresses['MoCVendors'] = None
 
         self.load_sub_contracts(contract_addresses)
 
@@ -252,7 +254,7 @@ class VENDORSMoC(MoC):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCVendors']
 
         sc = VENDORSMoCVendors(self.network_manager,
-                               contract_address=contract_address)
+                               contract_address=contract_address).from_abi()
 
         return sc
 
