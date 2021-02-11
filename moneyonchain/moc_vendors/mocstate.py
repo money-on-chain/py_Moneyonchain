@@ -96,3 +96,23 @@ class VENDORSMoCState(MoCState):
             result = Web3.fromWei(result, 'ether')
 
         return result
+
+    def protected(self,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """protected"""
+
+        result = self.sc.getProtected(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def liquidation_enabled(self,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """liquidation enabled"""
+
+        result = self.sc.getLiquidationEnabled(block_identifier=block_identifier)
+
+        return result
