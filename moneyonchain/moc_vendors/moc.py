@@ -303,7 +303,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintBPro.estimate_gas(int(amount), vendor_account, tx_args)
+            return self.sc.mintBProVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
             return self.sc.mintRiskPro.estimate_gas(int(amount), tx_args)
 
@@ -319,7 +319,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintDoc.estimate_gas(int(amount), vendor_account, tx_args)
+            return self.sc.mintDocVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
             return self.sc.mintStableToken.estimate_gas(int(amount), tx_args)
 
@@ -337,7 +337,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintBProx.estimate_gas(bucket, int(amount), vendor_account, tx_args)
+            return self.sc.mintBProxVendors.estimate_gas(bucket, int(amount), vendor_account, tx_args)
         else:
             return self.sc.mintRiskProx.estimate_gas(bucket, int(amount), tx_args)
 
@@ -374,7 +374,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(total_amount * self.precision)
 
-        tx_receipt = self.sc.mintBPro(
+        tx_receipt = self.sc.mintBProVendors(
             int(amount * self.precision),
             vendor_account,
             tx_args)
@@ -420,7 +420,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(total_amount * self.precision)
 
-        tx_receipt = self.sc.mintDoc(
+        tx_receipt = self.sc.mintDocVendors(
             int(amount * self.precision),
             vendor_account,
             tx_args)
@@ -467,7 +467,7 @@ class VENDORSMoC(MoC):
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(math.ceil(total_amount * self.precision))
 
-        tx_receipt = self.sc.mintBProx(
+        tx_receipt = self.sc.mintBProxVendors(
             bucket, int(amount * self.precision),
             vendor_account,
             tx_args)
@@ -508,7 +508,7 @@ class VENDORSMoC(MoC):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemBPro(
+        tx_receipt = self.sc.redeemBProVendors(
             int(amount_token * self.precision),
             vendor_account,
             tx_args)
@@ -550,7 +550,7 @@ class VENDORSMoC(MoC):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemFreeDoc(
+        tx_receipt = self.sc.redeemFreeDocVendors(
             int(amount_token * self.precision),
             vendor_account,
             tx_args)
@@ -589,7 +589,7 @@ class VENDORSMoC(MoC):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemBProx(
+        tx_receipt = self.sc.redeemBProxVendors(
             bucket,
             int(amount_token * self.precision),
             vendor_account,
