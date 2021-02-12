@@ -1,4 +1,4 @@
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCInrate
 
 import logging
@@ -21,24 +21,13 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network='rskMainnetPublic'
-config_network = 'mocMainnet2'
+connection_network = 'rskTesnetPublic'
+config_network = 'mocTestnetAlpha'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_inrate = MoCInrate(network_manager).from_abi()
 
@@ -50,7 +39,7 @@ info = moc_inrate.doc_inrate()
 print(info)
 
 print("Interest of reedeeming 1000 DOC")
-interest_no_days = moc_inrate.doc_inrate_avg(1000)
+interest_no_days = moc_inrate.doc_inrate_avg(0.020849)
 
 for day_to_sett in reversed(range(0, 30)):
     print("Days to settlement: {0} Interest: {1}".format(day_to_sett, interest_no_days * day_to_sett))

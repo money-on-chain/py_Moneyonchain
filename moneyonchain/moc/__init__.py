@@ -12,7 +12,8 @@ from .mocstate import MoCState
 from .changers import MoCSettlementChanger, MoCPriceProviderChanger, MoCSetCommissionMocProportionChanger, \
     MoCSetCommissionFinalAddressChanger, MoCInrateCommissionsAddressChanger, \
     MoCInrateRiskProRateChangerChanger, MocInrateBitProInterestChanger, \
-    MocStateMaxMintBProChanger, MocMakeStoppableChanger
+    MocStateMaxMintBProChanger, MocMakeStoppableChanger, MocInrateBtcxInterestChanger, \
+    MocInrateDocInterestChanger
 from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, MoCExchangeRiskProRedeem, \
     MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, MoCSettlementRedeemRequestProcessed, \

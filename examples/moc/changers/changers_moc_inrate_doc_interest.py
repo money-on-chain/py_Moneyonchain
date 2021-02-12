@@ -1,6 +1,5 @@
-from moneyonchain.networks import NetworkManager
-from moneyonchain.moc import MoCSettlementChanger
-
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MocInrateDocInterestChanger
 
 import logging
 import logging.config
@@ -8,7 +7,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/changers_settlement.log',
+                    filename='logs/changers_inrate_doc_interest.log',
                     filemode='a')
 
 # set up logging to console
@@ -25,23 +24,16 @@ log.addHandler(console)
 connection_network = 'rskTesnetPublic'
 config_network = 'mocTestnetAlpha'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-contract = MoCSettlementChanger(network_manager)
+contract = MocInrateDocInterestChanger(network_manager)
 
-tx_receipt = contract.constructor(90000, execute_change=True)
+doc_tmin = int(0.00027378507871321 * 10 ** 18)
+doc_tmax = int(0.004 * 10 ** 18)
+doc_power = int(3)
+
+tx_receipt = contract.constructor(doc_tmin, doc_tmax, doc_power, execute_change=True)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
