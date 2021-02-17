@@ -1,6 +1,6 @@
 # Money On Chain
 
-Python API to Money On Chain projects.
+Python API to Money On Chain projects. We want to provide easy to use access to our contracts. 
 
 ### Versions
 
@@ -8,60 +8,40 @@ There are 3 versions not compatible with each others
 
 * Release 0.X.X: (STABLE) This is current master, this will deprecated in our future.
 * Release 1.X.X: (ALPHA) This is will introduced breaking changes in contract not compatible with older versions
-* Release 2.X.X: (ALPHA) This is will introduced breaking changes, rework of the api, make support using brownie lib
+* Release 2.X.X: (BETA) This is will introduced breaking changes, rework of the api, make support using brownie lib
 
 ### Requirements
 
 * Python 3.6+ support
+* Brownie
+
+### Brownie
+
+[Brownie](https://github.com/eth-brownie/brownie) is a Python-based development and testing framework for smart contracts.
+Brownie is easy so we integrated it with Money on Chain.
+
 
 ### Installation
 
 ```
-pip3 install moneyonchain
+pip install moneyonchain
 ```
 
 or with specific version
 
 ```
-pip3 install moneyonchain==2.0.5
+pip install moneyonchain==2.0.5
 ```
 
-
-### Usage
-
-#### Network manager 
-
-Network manager manage connection to node and other specific to current connected network. By default if you run the
-first time .install(), this will install current used networks of our enviroments by brownie.
-
-First time you are going to interect with our api you will need to install predefined connections networks
-
-```
-from moneyonchain.networks import NetworkManager
-
-connection_network='rskTesnetPublic'
-config_network = 'mocTestnet'
-
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-network_manager.install()
-
-```
-
-If there are a problems with the installation nodes please install manually:
-
-**Brownie and node connection**
+**Also we need brownie installed**
 
 `pip install eth-brownie==1.12.2`
 
-and to install connection nodes required to connect:
+
+
+#### Network connection 
+
+First we need to install custom networks (RSK Nodes) in brownie:
 
 ```
 console> brownie networks add RskNetwork rskTesnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
@@ -84,25 +64,16 @@ console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4
 Example 1. Connect by default to RSK Testnet public node and to mocTestnet enviroment and print is connected
 
 ```
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 
-
+# this is our connection node, in this case RSK Public node
 connection_network='rskTesnetPublic'
+
+# this is our enviroment we want to use.
 config_network = 'mocTestnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 print(network_manager.is_connected())
 
@@ -112,6 +83,8 @@ network_manager.disconnect()
 ```
 
 #### Enviroment table
+
+Enviroment is our already deployed contracts. For example **mocMainnet2** is our MOC current production enviroment.
 
 | Network Name      | Project | Enviroment                       | Network    |
 |-------------------|---------|----------------------------------|------------|
@@ -132,7 +105,7 @@ See example in source/example/price_provider.py
 
 
 ```
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.oracle import PriceProvider
 
 import logging
@@ -144,22 +117,14 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
+# this is our connection node, in this case RSK Public node
 connection_network='rskTesnetPublic'
+
+# this is our enviroment we want to use.
 config_network = 'mocTestnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 price_provider = PriceProvider(network_manager)
 
@@ -181,7 +146,7 @@ INFO:root:Last price: 10725.4
 RDOC Contract:
 
 ```
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.oracle import PriceProvider
 
 import logging
@@ -194,21 +159,12 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 connection_network='rskTesnetPublic'
+
+# connect to RDOC Enviroment
 config_network = 'rdocTestnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network,  config_network=config_network)
 
 price_provider = PriceProvider(network_manager)
 
@@ -247,19 +203,8 @@ from moneyonchain.moc import MoC
 connection_network = 'rskTesnetPublic'
 config_network = 'mocTestnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
 moc_main = MoC(network_manager).from_abi()
@@ -290,3 +235,5 @@ Please wait to the transaction be mined!...
 Transaction done!
 You mint 0.000965723337947316 BPro equivalent to 7.107 USD
 ```
+
+More examples in folder 'examples/'
