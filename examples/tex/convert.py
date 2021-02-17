@@ -2,7 +2,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.tex import MoCDecentralizedExchange
 
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'dexTestnet'
 
 # Connect to network

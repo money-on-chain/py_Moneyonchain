@@ -12,7 +12,7 @@ from decimal import Decimal
 from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'mocTestnet'
 
 # init network manager

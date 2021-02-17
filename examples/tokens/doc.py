@@ -14,7 +14,7 @@ log = logging.getLogger()
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
 network_manager = NetworkManager(
-    connection_network='rskTesnetPublic',
+    connection_network='rskTestnetPublic',
     config_network='mocTestnet')
 
 # run install() if is the first time and you want to install

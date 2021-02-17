@@ -44,8 +44,8 @@ pip install moneyonchain==2.0.5
 First we need to install custom networks (RSK Nodes) in brownie:
 
 ```
-console> brownie networks add RskNetwork rskTesnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
-console> brownie networks add RskNetwork rskTesnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTestnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTestnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
 console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
 console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
 ```
@@ -55,8 +55,8 @@ console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4
 
 | Network Name      | Network node          | Host                               | Chain    |
 |-------------------|-----------------------|------------------------------------|----------|
-| rskTesnetPublic   | RSK Testnet Public    | https://public-node.testnet.rsk.co | 31       |    
-| rskTesnetLocal    | RSK Testnet Local     | http://localhost:4444              | 31       |
+| rskTestnetPublic   | RSK Testnet Public    | https://public-node.testnet.rsk.co | 31       |    
+| rskTestnetLocal    | RSK Testnet Local     | http://localhost:4444              | 31       |
 | rskMainnetPublic  | RSK Mainnet Public    | https://public-node.rsk.co         | 30       |
 | rskMainnetLocal   | RSK Mainnet Local     | http://localhost:4444              | 30       |
 
@@ -67,7 +67,7 @@ Example 1. Connect by default to RSK Testnet public node and to mocTestnet envir
 from moneyonchain.networks import network_manager
 
 # this is our connection node, in this case RSK Public node
-connection_network='rskTesnetPublic'
+connection_network='rskTestnetPublic'
 
 # this is our enviroment we want to use.
 config_network = 'mocTestnet'
@@ -118,7 +118,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 # this is our connection node, in this case RSK Public node
-connection_network='rskTesnetPublic'
+connection_network='rskTestnetPublic'
 
 # this is our enviroment we want to use.
 config_network = 'mocTestnet'
@@ -158,7 +158,7 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-connection_network='rskTesnetPublic'
+connection_network='rskTestnetPublic'
 
 # connect to RDOC Enviroment
 config_network = 'rdocTestnet'
@@ -200,7 +200,7 @@ from decimal import Decimal
 from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'mocTestnet'
 
 # Connect to network

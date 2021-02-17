@@ -37,7 +37,7 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'mocTestnetAlpha'
 
 # init network manager

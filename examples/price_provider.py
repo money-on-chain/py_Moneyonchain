@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-connection_network='rskTesnetPublic'
+connection_network='rskTestnetPublic'
 config_network = 'rdocTestnet'
 
 # init network manager

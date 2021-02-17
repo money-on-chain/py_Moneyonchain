@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-connection_network='rskTesnetPublic'
+connection_network='rskTestnetPublic'
 config_network = 'mocTestnet'
 
 # init network manager

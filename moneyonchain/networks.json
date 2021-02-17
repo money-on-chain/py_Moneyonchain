@@ -5,29 +5,29 @@
             "chainid": 31,
             "explorer": "https://blockscout.com/rsk/mainnet/api",
             "host": "https://public-node.testnet.rsk.co",
-            "id": "rskTesnetPublic",
-            "name": "RSK Tesnet Public"
+            "id": "rskTestnetPublic",
+            "name": "RSK Testnet Public"
         },
         {
             "chainid": 31,
             "explorer": "https://blockscout.com/rsk/mainnet/api",
             "host": "http://moc-rsk-node-testnet.moneyonchain.com:4454/",
-            "id": "rskTesnetPrivate",
-            "name": "RSK Tesnet Private"
+            "id": "rskTestnetPrivate",
+            "name": "RSK Testnet Private"
         },
         {
             "chainid": 31,
             "explorer": "https://blockscout.com/rsk/mainnet/api",
             "host": "http://localhost:4444",
-            "id": "rskTesnetLocal",
-            "name": "RSK Tesnet Local"
+            "id": "rskTestnetLocal",
+            "name": "RSK Testnet Local"
         },
         {
             "chainid": 31,
             "explorer": "https://blockscout.com/rsk/mainnet/api",
             "host": "$BROWNIE_CUSTOM_HOST_TESTNET",
-            "id": "rskTesnetCustom",
-            "name": "RSK Tesnet Custom"
+            "id": "rskTestnetCustom",
+            "name": "RSK Testnet Custom"
         },
         {
             "chainid": 30,

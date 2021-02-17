@@ -3,7 +3,7 @@
 
 from moneyonchain.networks import NetworkManager
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'mocTestnetAlpha'
 
 # init network manager

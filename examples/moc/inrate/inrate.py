@@ -21,7 +21,7 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTesnetPublic'
+connection_network = 'rskTestnetPublic'
 config_network = 'mocTestnetAlpha'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
