@@ -21,8 +21,9 @@ log = logging.getLogger()
 log.addHandler(console)
 
 connection_network = 'rskMainnetPublic'
-config_network = 'mocMainnet2'
+config_network = 'rdocMainnet'
 
+log.info("Connecting to ... {0}".format(config_network))
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -30,8 +31,8 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = RDOCPriceFeederWhitelistChanger(network_manager)
 
-contract_address_medianizer = '0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF'
-contract_address_pricefeed = '0xE94007E81412eDfdB87680F768e331E8c691f0e1'
+contract_address_medianizer = '0x504EfCadFB020d6bBaeC8a5c5BB21453719d0E00'
+contract_address_pricefeed = '0xBEd51D83CC4676660e3fc3819dfAD8238549B975'
 tx_receipt = contract.constructor(contract_address_pricefeed,
                                   contract_address_medianizer=contract_address_medianizer,
                                   execute_change=False)
