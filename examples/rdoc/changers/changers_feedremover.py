@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.rdoc import RDOCPriceFeederRemoverChanger
+from moneyonchain.medianizer import RDOCPriceFeederRemoverChanger
 
 import logging
 import logging.config

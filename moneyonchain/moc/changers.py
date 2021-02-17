@@ -420,3 +420,4 @@ class MocMakeStoppableChanger(BaseChanger):
             self.log.info("Change successfull!")
 
         return tx_receipt
+
