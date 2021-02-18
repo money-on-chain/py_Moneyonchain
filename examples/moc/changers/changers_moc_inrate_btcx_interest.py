@@ -21,8 +21,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -33,7 +33,7 @@ btxc_tmin = int(0.00027378507871321 * 10 ** 18)
 btxc_tmax = int(0.004 * 10 ** 18)
 btxc_power = int(3)
 
-tx_receipt = contract.constructor(btxc_tmin, btxc_tmax, btxc_power, execute_change=True)
+tx_receipt = contract.constructor(btxc_tmin, btxc_tmax, btxc_power, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
