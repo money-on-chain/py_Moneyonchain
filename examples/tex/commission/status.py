@@ -4,11 +4,10 @@ Commission Manager
 
 import json
 import os
-from rich.console import Console
-from rich.table import Table
+from tabulate import tabulate
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import CommissionManager
+from moneyonchain.networks import network_manager
+from moneyonchain.tex import CommissionManager
 
 
 def options_from_settings(filename='settings.json'):
@@ -20,105 +19,60 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-console = Console()
-
-network = 'dexMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 
-dex_commission = CommissionManager(connection_manager)
+connection_network = 'rskTestnetPublic'
+config_network = 'dexTestnet'
 
-table = Table(show_header=True, header_style="bold magenta", title="Commission Manager: {0}".format(network))
-table.add_column("Storage")
-table.add_column("Value")
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-table.add_row(
-    "Beneficiary", dex_commission.beneficiary_address()
-)
 
-table.add_row(
-    "Commission Rate", str(dex_commission.commision_rate())
-)
+dex_commission = CommissionManager(network_manager).from_abi()
 
-table.add_row(
-    "Cancelation Rate", str(dex_commission.cancelation_penalty_rate())
-)
+titles = ['Storage', 'Value']
+display_table = list()
+display_table.append(["Beneficiary", dex_commission.beneficiary_address()])
+display_table.append(["Commission Rate", str(dex_commission.commision_rate())])
+display_table.append(["Cancelation Rate", str(dex_commission.cancelation_penalty_rate())])
+display_table.append(["Expiration Rate", str(dex_commission.expiration_penalty_rate())])
+display_table.append(["Minimum Fix Commision", str(dex_commission.minimum_commission())])
+display_table.append(["Fee 0.001 WRBTC", str(dex_commission.calculate_initial_fee(0.001, 10000))])
+display_table.append(["Fee 10 DOC", str(dex_commission.calculate_initial_fee(10, 1))])
 
-table.add_row(
-    "Expiration Rate", str(dex_commission.expiration_penalty_rate())
-)
+print(tabulate(display_table, headers=titles, tablefmt="pipe"))
+print()
 
-table.add_row(
-    "Minimum Fix Commision", str(dex_commission.minimum_commission())
-)
+block_identifier = network_manager.block_number
 
-table.add_row(
-    "Fee 0.001 WRBTC", str(dex_commission.calculate_initial_fee(0.001, 10000))
-)
-
-table.add_row(
-    "Fee 10 DOC", str(dex_commission.calculate_initial_fee(10, 1))
-)
-
-console.print(table)
-print("")
-print("")
-
-block_identifier = connection_manager.block_number
-
-table = Table(show_header=True, header_style="bold magenta", title="Commission Balances: {0}".format(network))
-table.add_column("Token")
-table.add_column("Balance")
-table.add_column("Address")
-table.add_column("Block N")
+titles = ['Token', 'Balance', 'Address', 'Block N']
+display_table = list()
 
 token_name = 'WRBTC'
-token = settings[network][token_name]
-
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
 token_name = 'DOC'
-token = settings[network][token_name]
-
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
 token_name = 'BPRO'
-token = settings[network][token_name]
-
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
 token_name = 'RDOC'
-token = settings[network][token_name]
-
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
 token_name = 'RIF'
-token = settings[network][token_name]
-
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
 token_name = 'RIFP'
-token = settings[network][token_name]
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
-table.add_row(
-    token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)
-)
-
-console.print(table)
+print(tabulate(display_table, headers=titles, tablefmt="pipe"))

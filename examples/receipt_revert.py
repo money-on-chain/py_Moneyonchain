@@ -13,7 +13,7 @@ config_network = 'dexTestnet'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-tx_id = '0xe570b02b60cbcc5decf0c10624797fd92a25cb07b303e91ee9e9146b69c94796'
+tx_id = '0x3d7f5b0c181fbe7abf92966a63811c30350bf48e6e3e342ea805ea1dbd02b7b7'
 tx_receipt = TransactionReceipt(tx_id, trace_enabled=True)
 print(tx_receipt.status)
 #tx_receipt.info()

@@ -77,8 +77,8 @@ settings = options_from_settings(
 # instantiate TEX Contract
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[config_network]['DOC']
-secondary_token = settings[config_network]['WRBTC']
+base_token = settings[config_network]['WRBTC']
+secondary_token = settings[config_network]['AMOC']
 amount = 0.001
 multiply_factor = 1.01
 lifespan = 2
