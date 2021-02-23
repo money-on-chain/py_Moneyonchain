@@ -1,0 +1,1330 @@
+{
+  "contractName": "MockGovernor",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_changer",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "changer",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ChangeContract",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "executeChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_changer",
+          "type": "address"
+        }
+      ],
+      "name": "isAuthorizedChanger",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_changer\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"changer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ChangeContract\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"executeChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_changer\",\"type\":\"address\"}],\"name\":\"isAuthorizedChanger\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"isAuthorizedChanger(address)\":{\"params\":{\"_changer\":\"Address of the contract that will be tested\"}}},\"title\":\"MockGovernor\"},\"userdoc\":{\"methods\":{\"executeChange(address)\":{\"notice\":\"Function to be called to make the changes in changeContract\"},\"isAuthorizedChanger(address)\":{\"notice\":\"Returns true if the _changer address is currently authorized to make changes within the system\"}},\"notice\":\"This contract is not intended to be used in a production system It was designed to be using in a testing environment only A mock governor that let any address do anything.\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockGovernor.sol\":\"MockGovernor\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockGovernor.sol\":{\"keccak256\":\"0xa61c099a6fe0b1f05b75354c24a4a9efa0bdc53e19ccc552a877d50455635704\",\"urls\":[\"bzz-raw://3419ba1a23e1b79669e9e7dca2d150aa09db6db2dadd3abd7bbd1c5aed585d51\",\"dweb:/ipfs/QmTdKepWDVAY6qqX5LCEwU77ny7HGL9XFq2XqiByg5tAn1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516102103803806102108339818101604052602081101561003357600080fd5b5051600080546001600160a01b039092166001600160a01b03199092169190911790556101ab806100656000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806311b0ea16146100465780638c777e821461006a578063d994d6d514610092575b600080fd5b61004e6100cc565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b03166100db565b005b6100b8600480360360208110156100a857600080fd5b50356001600160a01b0316610118565b604080519115158252519081900360200190f35b6000546001600160a01b031681565b6040805162461bcd60e51b815260206004820152600d60248201526c155b9a5b5c1b195b595b9d1959609a1b604482015290519081900360640190fd5b600080546001600160a01b0383811691161461016d576040805162461bcd60e51b815260206004820152600f60248201526e24b73b30b634b21031b430b733b2b960891b604482015290519081900360640190fd5b50600191905056fea26469706673582212207ab4318043ace59a4eb625ecc6c10b090d5eb6122a214b0ab75db0aee60eabdb64736f6c63430006000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806311b0ea16146100465780638c777e821461006a578063d994d6d514610092575b600080fd5b61004e6100cc565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b03166100db565b005b6100b8600480360360208110156100a857600080fd5b50356001600160a01b0316610118565b604080519115158252519081900360200190f35b6000546001600160a01b031681565b6040805162461bcd60e51b815260206004820152600d60248201526c155b9a5b5c1b195b595b9d1959609a1b604482015290519081900360640190fd5b600080546001600160a01b0383811691161461016d576040805162461bcd60e51b815260206004820152600f60248201526e24b73b30b634b21031b430b733b2b960891b604482015290519081900360640190fd5b50600191905056fea26469706673582212207ab4318043ace59a4eb625ecc6c10b090d5eb6122a214b0ab75db0aee60eabdb64736f6c63430006000033",
+  "sourceMap": "369:722:59:-:0;;;440:73;8:9:-1;5:2;;;30:1;27;20:12;5:2;440:73:59;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;440:73:59;488:7;:18;;-1:-1:-1;;;;;488:18:59;;;-1:-1:-1;;;;;;488:18:59;;;;;;;;;369:722;;;;;;",
+  "deployedSourceMap": "369:722:59:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;369:722:59;;;;;;;;;;;;;;;;;;;;;;;;;;;;;411:22;;;:::i;:::-;;;;-1:-1:-1;;;;;411:22:59;;;;;;;;;;;;;;610:105;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;610:105:59;-1:-1:-1;;;;;610:105:59;;:::i;:::-;;918:171;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;918:171:59;-1:-1:-1;;;;;918:171:59;;:::i;:::-;;;;;;;;;;;;;;;;;;411:22;;;-1:-1:-1;;;;;411:22:59;;:::o;610:105::-;677:31;;;-1:-1:-1;;;677:31:59;;;;;;;;;;;;-1:-1:-1;;;677:31:59;;;;;;;;;;;;;;918:171;997:4;1022:7;;-1:-1:-1;;;;;1022:19:59;;;:7;;:19;1014:47;;;;;-1:-1:-1;;;1014:47:59;;;;;;;;;;;;-1:-1:-1;;;1014:47:59;;;;;;;;;;;;;;;-1:-1:-1;1078:4:59;918:171;;;:::o",
+  "source": "pragma solidity 0.6.0;\n\nimport \"../moc-gobernanza/Governance/ChangeContract.sol\";\nimport \"../moc-gobernanza/Governance/IGovernor.sol\";\n\n/**\n  @title MockGovernor\n  @notice This contract is not intended to be used in a production system\n          It was designed to be using in a testing environment only\n          A mock governor that let any address do anything.\n  */\ncontract MockGovernor is IGovernor {\n\n    address public changer;\n\n    constructor (address _changer) public {\n        changer = _changer;\n    }\n\n\n    /**\n      @notice Function to be called to make the changes in changeContract\n     */\n    function executeChange(ChangeContract) external override {\n        require(false, \"Unimplemented\");\n    }\n\n    /**\n      @notice Returns true if the _changer address is currently authorized to make\n      changes within the system\n      @param _changer Address of the contract that will be tested\n     */\n    function isAuthorizedChanger(address _changer) external view override returns (bool)  {\n        require(changer == _changer, \"Invalid changer\");\n        return true;\n    }\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockGovernor.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockGovernor.sol",
+    "exportedSymbols": {
+      "MockGovernor": [
+        10359
+      ]
+    },
+    "id": 10360,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10312,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:59"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "file": "../moc-gobernanza/Governance/ChangeContract.sol",
+        "id": 10313,
+        "nodeType": "ImportDirective",
+        "scope": 10360,
+        "sourceUnit": 8877,
+        "src": "24:57:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "../moc-gobernanza/Governance/IGovernor.sol",
+        "id": 10314,
+        "nodeType": "ImportDirective",
+        "scope": 10360,
+        "sourceUnit": 9044,
+        "src": "82:52:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10315,
+              "name": "IGovernor",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9043,
+              "src": "394:9:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeString": "contract IGovernor"
+              }
+            },
+            "id": 10316,
+            "nodeType": "InheritanceSpecifier",
+            "src": "394:9:59"
+          }
+        ],
+        "contractDependencies": [
+          9043
+        ],
+        "contractKind": "contract",
+        "documentation": "@title MockGovernor\n@notice This contract is not intended to be used in a production system\nIt was designed to be using in a testing environment only\nA mock governor that let any address do anything.",
+        "fullyImplemented": true,
+        "id": 10359,
+        "linearizedBaseContracts": [
+          10359,
+          9043
+        ],
+        "name": "MockGovernor",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "11b0ea16",
+            "id": 10318,
+            "name": "changer",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10359,
+            "src": "411:22:59",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 10317,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "411:7:59",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10327,
+              "nodeType": "Block",
+              "src": "478:35:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10325,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10323,
+                      "name": "changer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10318,
+                      "src": "488:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 10324,
+                      "name": "_changer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10320,
+                      "src": "498:8:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "488:18:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 10326,
+                  "nodeType": "ExpressionStatement",
+                  "src": "488:18:59"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10328,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 10321,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10320,
+                  "name": "_changer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10328,
+                  "src": "453:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10319,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "453:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "452:18:59"
+            },
+            "returnParameters": {
+              "id": 10322,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "478:0:59"
+            },
+            "scope": 10359,
+            "src": "440:73:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              9035
+            ],
+            "body": {
+              "id": 10339,
+              "nodeType": "Block",
+              "src": "667:48:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "66616c7365",
+                        "id": 10335,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "bool",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "685:5:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "value": "false"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "556e696d706c656d656e746564",
+                        "id": 10336,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "692:15:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_e237df3e87464709ad112ae018f59b273a147ee5f5c5e36f4d0154a6c0b0b89b",
+                          "typeString": "literal_string \"Unimplemented\""
+                        },
+                        "value": "Unimplemented"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_e237df3e87464709ad112ae018f59b273a147ee5f5c5e36f4d0154a6c0b0b89b",
+                          "typeString": "literal_string \"Unimplemented\""
+                        }
+                      ],
+                      "id": 10334,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "677:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10337,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "677:31:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10338,
+                  "nodeType": "ExpressionStatement",
+                  "src": "677:31:59"
+                }
+              ]
+            },
+            "documentation": "@notice Function to be called to make the changes in changeContract",
+            "functionSelector": "8c777e82",
+            "id": 10340,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeChange",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10332,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "658:8:59"
+            },
+            "parameters": {
+              "id": 10331,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10330,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10340,
+                  "src": "633:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                    "typeString": "contract ChangeContract"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10329,
+                    "name": "ChangeContract",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 8876,
+                    "src": "633:14:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                      "typeString": "contract ChangeContract"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "632:16:59"
+            },
+            "returnParameters": {
+              "id": 10333,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "667:0:59"
+            },
+            "scope": 10359,
+            "src": "610:105:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              9042
+            ],
+            "body": {
+              "id": 10357,
+              "nodeType": "Block",
+              "src": "1004:85:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 10351,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 10349,
+                          "name": "changer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10318,
+                          "src": "1022:7:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 10350,
+                          "name": "_changer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10342,
+                          "src": "1033:8:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1022:19:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "496e76616c6964206368616e676572",
+                        "id": 10352,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1043:17:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_1ddb796cf3d764f1c258275cd45b15705def4afed2eae3918ae7a50539623ba0",
+                          "typeString": "literal_string \"Invalid changer\""
+                        },
+                        "value": "Invalid changer"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_1ddb796cf3d764f1c258275cd45b15705def4afed2eae3918ae7a50539623ba0",
+                          "typeString": "literal_string \"Invalid changer\""
+                        }
+                      ],
+                      "id": 10348,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "1014:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10353,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1014:47:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10354,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1014:47:59"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 10355,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1078:4:59",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 10347,
+                  "id": 10356,
+                  "nodeType": "Return",
+                  "src": "1071:11:59"
+                }
+              ]
+            },
+            "documentation": "@notice Returns true if the _changer address is currently authorized to make\nchanges within the system\n@param _changer Address of the contract that will be tested",
+            "functionSelector": "d994d6d5",
+            "id": 10358,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isAuthorizedChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10344,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "979:8:59"
+            },
+            "parameters": {
+              "id": 10343,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10342,
+                  "name": "_changer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10358,
+                  "src": "947:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10341,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "947:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "946:18:59"
+            },
+            "returnParameters": {
+              "id": 10347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10346,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10358,
+                  "src": "997:4:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10345,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "997:4:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "996:6:59"
+            },
+            "scope": 10359,
+            "src": "918:171:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10360,
+        "src": "369:722:59"
+      }
+    ],
+    "src": "0:1092:59"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockGovernor.sol",
+    "exportedSymbols": {
+      "MockGovernor": [
+        10359
+      ]
+    },
+    "id": 10360,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10312,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:59"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "file": "../moc-gobernanza/Governance/ChangeContract.sol",
+        "id": 10313,
+        "nodeType": "ImportDirective",
+        "scope": 10360,
+        "sourceUnit": 8877,
+        "src": "24:57:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "../moc-gobernanza/Governance/IGovernor.sol",
+        "id": 10314,
+        "nodeType": "ImportDirective",
+        "scope": 10360,
+        "sourceUnit": 9044,
+        "src": "82:52:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10315,
+              "name": "IGovernor",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9043,
+              "src": "394:9:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeString": "contract IGovernor"
+              }
+            },
+            "id": 10316,
+            "nodeType": "InheritanceSpecifier",
+            "src": "394:9:59"
+          }
+        ],
+        "contractDependencies": [
+          9043
+        ],
+        "contractKind": "contract",
+        "documentation": "@title MockGovernor\n@notice This contract is not intended to be used in a production system\nIt was designed to be using in a testing environment only\nA mock governor that let any address do anything.",
+        "fullyImplemented": true,
+        "id": 10359,
+        "linearizedBaseContracts": [
+          10359,
+          9043
+        ],
+        "name": "MockGovernor",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "11b0ea16",
+            "id": 10318,
+            "name": "changer",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10359,
+            "src": "411:22:59",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 10317,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "411:7:59",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10327,
+              "nodeType": "Block",
+              "src": "478:35:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10325,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10323,
+                      "name": "changer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10318,
+                      "src": "488:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 10324,
+                      "name": "_changer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10320,
+                      "src": "498:8:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "488:18:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 10326,
+                  "nodeType": "ExpressionStatement",
+                  "src": "488:18:59"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10328,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 10321,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10320,
+                  "name": "_changer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10328,
+                  "src": "453:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10319,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "453:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "452:18:59"
+            },
+            "returnParameters": {
+              "id": 10322,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "478:0:59"
+            },
+            "scope": 10359,
+            "src": "440:73:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              9035
+            ],
+            "body": {
+              "id": 10339,
+              "nodeType": "Block",
+              "src": "667:48:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "66616c7365",
+                        "id": 10335,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "bool",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "685:5:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "value": "false"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "556e696d706c656d656e746564",
+                        "id": 10336,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "692:15:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_e237df3e87464709ad112ae018f59b273a147ee5f5c5e36f4d0154a6c0b0b89b",
+                          "typeString": "literal_string \"Unimplemented\""
+                        },
+                        "value": "Unimplemented"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_e237df3e87464709ad112ae018f59b273a147ee5f5c5e36f4d0154a6c0b0b89b",
+                          "typeString": "literal_string \"Unimplemented\""
+                        }
+                      ],
+                      "id": 10334,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "677:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10337,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "677:31:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10338,
+                  "nodeType": "ExpressionStatement",
+                  "src": "677:31:59"
+                }
+              ]
+            },
+            "documentation": "@notice Function to be called to make the changes in changeContract",
+            "functionSelector": "8c777e82",
+            "id": 10340,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeChange",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10332,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "658:8:59"
+            },
+            "parameters": {
+              "id": 10331,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10330,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10340,
+                  "src": "633:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                    "typeString": "contract ChangeContract"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10329,
+                    "name": "ChangeContract",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 8876,
+                    "src": "633:14:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                      "typeString": "contract ChangeContract"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "632:16:59"
+            },
+            "returnParameters": {
+              "id": 10333,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "667:0:59"
+            },
+            "scope": 10359,
+            "src": "610:105:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              9042
+            ],
+            "body": {
+              "id": 10357,
+              "nodeType": "Block",
+              "src": "1004:85:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 10351,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 10349,
+                          "name": "changer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10318,
+                          "src": "1022:7:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 10350,
+                          "name": "_changer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10342,
+                          "src": "1033:8:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1022:19:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "496e76616c6964206368616e676572",
+                        "id": 10352,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1043:17:59",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_1ddb796cf3d764f1c258275cd45b15705def4afed2eae3918ae7a50539623ba0",
+                          "typeString": "literal_string \"Invalid changer\""
+                        },
+                        "value": "Invalid changer"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_1ddb796cf3d764f1c258275cd45b15705def4afed2eae3918ae7a50539623ba0",
+                          "typeString": "literal_string \"Invalid changer\""
+                        }
+                      ],
+                      "id": 10348,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "1014:7:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10353,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1014:47:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10354,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1014:47:59"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 10355,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1078:4:59",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 10347,
+                  "id": 10356,
+                  "nodeType": "Return",
+                  "src": "1071:11:59"
+                }
+              ]
+            },
+            "documentation": "@notice Returns true if the _changer address is currently authorized to make\nchanges within the system\n@param _changer Address of the contract that will be tested",
+            "functionSelector": "d994d6d5",
+            "id": 10358,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isAuthorizedChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10344,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "979:8:59"
+            },
+            "parameters": {
+              "id": 10343,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10342,
+                  "name": "_changer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10358,
+                  "src": "947:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10341,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "947:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "946:18:59"
+            },
+            "returnParameters": {
+              "id": 10347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10346,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10358,
+                  "src": "997:4:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10345,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "997:4:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "996:6:59"
+            },
+            "scope": 10359,
+            "src": "918:171:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10360,
+        "src": "369:722:59"
+      }
+    ],
+    "src": "0:1092:59"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.190Z",
+  "devdoc": {
+    "methods": {
+      "isAuthorizedChanger(address)": {
+        "params": {
+          "_changer": "Address of the contract that will be tested"
+        }
+      }
+    },
+    "title": "MockGovernor"
+  },
+  "userdoc": {
+    "methods": {
+      "executeChange(address)": {
+        "notice": "Function to be called to make the changes in changeContract"
+      },
+      "isAuthorizedChanger(address)": {
+        "notice": "Returns true if the _changer address is currently authorized to make changes within the system"
+      }
+    },
+    "notice": "This contract is not intended to be used in a production system It was designed to be using in a testing environment only A mock governor that let any address do anything."
+  }
+}

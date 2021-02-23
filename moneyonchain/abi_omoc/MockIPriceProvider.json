@@ -1,0 +1,1101 @@
+{
+  "contractName": "MockIPriceProvider",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_price",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_fail",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "fail",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "price",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "peek",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"_fail\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"fail\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peek\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{},\"title\":\"MockIPriceProvider\"},\"userdoc\":{\"methods\":{},\"notice\":\"This contract is not intended to be used in a production system It was designed to be using in a testing environment only A mock ipriceprovider that return a fixed price and fail status.\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockIPriceProvider.sol\":\"MockIPriceProvider\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProvider.sol\":{\"keccak256\":\"0xd8ba6a6f3aa4263e39bf9053b28283b1a40f6d5f7e48dd9f92534cc70fe13ec5\",\"urls\":[\"bzz-raw://250bb098ef15ac55e332272afc4c5e3d66f686b51071865082b528379cd6e6c2\",\"dweb:/ipfs/QmQ9HTGF9oAN7YrmamyP47YpgJm4g33aVeA2HFi3dnoGiH\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockIPriceProvider.sol\":{\"keccak256\":\"0x926edc22ec68f68ca9e3e224bbc6d9174e2b8f535a37672c1a965fd3ae023d85\",\"urls\":[\"bzz-raw://6d9380ced1223ff1c54c4b1217b665475e7fa4974f781f26ab0bd0d824cbf2ac\",\"dweb:/ipfs/QmThoHydzRXZdkZbsZuVi6kB8DowAUymNmkQWL7wpwV9dQ\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516101453803806101458339818101604052604081101561003357600080fd5b50805160209091015160009182556001805460ff191691151591909117905560e490819061006190396000f3fe6080604052348015600f57600080fd5b5060043610603c5760003560e01c806359e02dd7146041578063a035b1fe146060578063a9cc4718146078575b600080fd5b60476092565b6040805192835290151560208301528051918290030190f35b6066609f565b60408051918252519081900360200190f35b607e60a5565b604080519115158252519081900360200190f35b60005460015460ff169091565b60005481565b60015460ff168156fea26469706673582212209190adb7169681835e8266ffc0f5f1a979023488d685d7110fc2e6958f5a6b4a64736f6c63430006000033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610603c5760003560e01c806359e02dd7146041578063a035b1fe146060578063a9cc4718146078575b600080fd5b60476092565b6040805192835290151560208301528051918290030190f35b6066609f565b60408051918252519081900360200190f35b607e60a5565b604080519115158252519081900360200190f35b60005460015460ff169091565b60005481565b60015460ff168156fea26469706673582212209190adb7169681835e8266ffc0f5f1a979023488d685d7110fc2e6958f5a6b4a64736f6c63430006000033",
+  "sourceMap": "317:320:60:-:0;;;419:110;8:9:-1;5:2;;;30:1;27;20:12;5:2;419:110:60;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;419:110:60;;;;;;;485:15;477:23;;;510:4;:12;;-1:-1:-1;;510:12:60;;;;;;;;;;317:320;;;;;;;;",
+  "deployedSourceMap": "317:320:60:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;317:320:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;535:100;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;370:20;;;:::i;:::-;;;;;;;;;;;;;;;;396:16;;;:::i;:::-;;;;;;;;;;;;;;;;;;535:100;583:7;616:5;623:4;;;;535:100;;:::o;370:20::-;;;;:::o;396:16::-;;;;;;:::o",
+  "source": "pragma solidity ^0.6.0;\n\nimport \"../libs/IPriceProvider.sol\";\n\n/**\n  @title MockIPriceProvider\n  @notice This contract is not intended to be used in a production system\n          It was designed to be using in a testing environment only\n          A mock ipriceprovider that return a fixed price and fail status.\n  */\ncontract MockIPriceProvider is IPriceProvider {\n\n    bytes32 public price;\n    bool public fail;\n\n    constructor (uint256 _price, bool _fail) public {\n        price = bytes32(_price);\n        fail = _fail;\n    }\n\n    function peek() external override view returns (bytes32, bool) {\n        return (price, fail);\n    }\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockIPriceProvider.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockIPriceProvider.sol",
+    "exportedSymbols": {
+      "MockIPriceProvider": [
+        10401
+      ]
+    },
+    "id": 10402,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10361,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:60"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProvider.sol",
+        "file": "../libs/IPriceProvider.sol",
+        "id": 10362,
+        "nodeType": "ImportDirective",
+        "scope": 10402,
+        "sourceUnit": 6330,
+        "src": "25:36:60",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10363,
+              "name": "IPriceProvider",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6329,
+              "src": "348:14:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPriceProvider_$6329",
+                "typeString": "contract IPriceProvider"
+              }
+            },
+            "id": 10364,
+            "nodeType": "InheritanceSpecifier",
+            "src": "348:14:60"
+          }
+        ],
+        "contractDependencies": [
+          6329
+        ],
+        "contractKind": "contract",
+        "documentation": "@title MockIPriceProvider\n@notice This contract is not intended to be used in a production system\nIt was designed to be using in a testing environment only\nA mock ipriceprovider that return a fixed price and fail status.",
+        "fullyImplemented": true,
+        "id": 10401,
+        "linearizedBaseContracts": [
+          10401,
+          6329
+        ],
+        "name": "MockIPriceProvider",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "a035b1fe",
+            "id": 10366,
+            "name": "price",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10401,
+            "src": "370:20:60",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 10365,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "370:7:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "a9cc4718",
+            "id": 10368,
+            "name": "fail",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10401,
+            "src": "396:16:60",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 10367,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "396:4:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10386,
+              "nodeType": "Block",
+              "src": "467:62:60",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10380,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10375,
+                      "name": "price",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10366,
+                      "src": "477:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 10378,
+                          "name": "_price",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10370,
+                          "src": "493:6:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 10377,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "485:7:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_bytes32_$",
+                          "typeString": "type(bytes32)"
+                        },
+                        "typeName": {
+                          "id": 10376,
+                          "name": "bytes32",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "485:7:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": null,
+                            "typeString": null
+                          }
+                        }
+                      },
+                      "id": 10379,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "485:15:60",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "477:23:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 10381,
+                  "nodeType": "ExpressionStatement",
+                  "src": "477:23:60"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10384,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10382,
+                      "name": "fail",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10368,
+                      "src": "510:4:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 10383,
+                      "name": "_fail",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10372,
+                      "src": "517:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "510:12:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 10385,
+                  "nodeType": "ExpressionStatement",
+                  "src": "510:12:60"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10387,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 10373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10370,
+                  "name": "_price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10387,
+                  "src": "432:14:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10369,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "432:7:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10372,
+                  "name": "_fail",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10387,
+                  "src": "448:10:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10371,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "448:4:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "431:28:60"
+            },
+            "returnParameters": {
+              "id": 10374,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "467:0:60"
+            },
+            "scope": 10401,
+            "src": "419:110:60",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6328
+            ],
+            "body": {
+              "id": 10399,
+              "nodeType": "Block",
+              "src": "598:37:60",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10395,
+                        "name": "price",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10366,
+                        "src": "616:5:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10396,
+                        "name": "fail",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10368,
+                        "src": "623:4:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "id": 10397,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "615:13:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bytes32_$_t_bool_$",
+                      "typeString": "tuple(bytes32,bool)"
+                    }
+                  },
+                  "functionReturnParameters": 10394,
+                  "id": 10398,
+                  "nodeType": "Return",
+                  "src": "608:20:60"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "59e02dd7",
+            "id": 10400,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "peek",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10389,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "560:8:60"
+            },
+            "parameters": {
+              "id": 10388,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "548:2:60"
+            },
+            "returnParameters": {
+              "id": 10394,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10391,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10400,
+                  "src": "583:7:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10390,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "583:7:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10393,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10400,
+                  "src": "592:4:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10392,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "592:4:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "582:15:60"
+            },
+            "scope": 10401,
+            "src": "535:100:60",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10402,
+        "src": "317:320:60"
+      }
+    ],
+    "src": "0:638:60"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/testing_mocks/MockIPriceProvider.sol",
+    "exportedSymbols": {
+      "MockIPriceProvider": [
+        10401
+      ]
+    },
+    "id": 10402,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10361,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:60"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProvider.sol",
+        "file": "../libs/IPriceProvider.sol",
+        "id": 10362,
+        "nodeType": "ImportDirective",
+        "scope": 10402,
+        "sourceUnit": 6330,
+        "src": "25:36:60",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10363,
+              "name": "IPriceProvider",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6329,
+              "src": "348:14:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPriceProvider_$6329",
+                "typeString": "contract IPriceProvider"
+              }
+            },
+            "id": 10364,
+            "nodeType": "InheritanceSpecifier",
+            "src": "348:14:60"
+          }
+        ],
+        "contractDependencies": [
+          6329
+        ],
+        "contractKind": "contract",
+        "documentation": "@title MockIPriceProvider\n@notice This contract is not intended to be used in a production system\nIt was designed to be using in a testing environment only\nA mock ipriceprovider that return a fixed price and fail status.",
+        "fullyImplemented": true,
+        "id": 10401,
+        "linearizedBaseContracts": [
+          10401,
+          6329
+        ],
+        "name": "MockIPriceProvider",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "a035b1fe",
+            "id": 10366,
+            "name": "price",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10401,
+            "src": "370:20:60",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 10365,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "370:7:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "a9cc4718",
+            "id": 10368,
+            "name": "fail",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 10401,
+            "src": "396:16:60",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 10367,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "396:4:60",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10386,
+              "nodeType": "Block",
+              "src": "467:62:60",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10380,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10375,
+                      "name": "price",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10366,
+                      "src": "477:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 10378,
+                          "name": "_price",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 10370,
+                          "src": "493:6:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 10377,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "485:7:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_bytes32_$",
+                          "typeString": "type(bytes32)"
+                        },
+                        "typeName": {
+                          "id": 10376,
+                          "name": "bytes32",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "485:7:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": null,
+                            "typeString": null
+                          }
+                        }
+                      },
+                      "id": 10379,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "485:15:60",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "477:23:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 10381,
+                  "nodeType": "ExpressionStatement",
+                  "src": "477:23:60"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10384,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 10382,
+                      "name": "fail",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10368,
+                      "src": "510:4:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 10383,
+                      "name": "_fail",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10372,
+                      "src": "517:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "510:12:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 10385,
+                  "nodeType": "ExpressionStatement",
+                  "src": "510:12:60"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10387,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 10373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10370,
+                  "name": "_price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10387,
+                  "src": "432:14:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10369,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "432:7:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10372,
+                  "name": "_fail",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10387,
+                  "src": "448:10:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10371,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "448:4:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "431:28:60"
+            },
+            "returnParameters": {
+              "id": 10374,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "467:0:60"
+            },
+            "scope": 10401,
+            "src": "419:110:60",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6328
+            ],
+            "body": {
+              "id": 10399,
+              "nodeType": "Block",
+              "src": "598:37:60",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10395,
+                        "name": "price",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10366,
+                        "src": "616:5:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10396,
+                        "name": "fail",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10368,
+                        "src": "623:4:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "id": 10397,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "615:13:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bytes32_$_t_bool_$",
+                      "typeString": "tuple(bytes32,bool)"
+                    }
+                  },
+                  "functionReturnParameters": 10394,
+                  "id": 10398,
+                  "nodeType": "Return",
+                  "src": "608:20:60"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "59e02dd7",
+            "id": 10400,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "peek",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 10389,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "560:8:60"
+            },
+            "parameters": {
+              "id": 10388,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "548:2:60"
+            },
+            "returnParameters": {
+              "id": 10394,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10391,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10400,
+                  "src": "583:7:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10390,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "583:7:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10393,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 10400,
+                  "src": "592:4:60",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10392,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "592:4:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "582:15:60"
+            },
+            "scope": 10401,
+            "src": "535:100:60",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10402,
+        "src": "317:320:60"
+      }
+    ],
+    "src": "0:638:60"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.192Z",
+  "devdoc": {
+    "methods": {},
+    "title": "MockIPriceProvider"
+  },
+  "userdoc": {
+    "methods": {},
+    "notice": "This contract is not intended to be used in a production system It was designed to be using in a testing environment only A mock ipriceprovider that return a fixed price and fail status."
+  }
+}

@@ -1,0 +1,1474 @@
+{
+  "contractName": "PriceProviderRegisterPairChange",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract PriceProviderRegister",
+          "name": "_priceProviderRegister",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_coinPair",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "contract IPriceProviderRegisterEntry",
+          "name": "_contractAddr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "coinPair",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "contractAddr",
+      "outputs": [
+        {
+          "internalType": "contract IPriceProviderRegisterEntry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "priceProviderRegister",
+      "outputs": [
+        {
+          "internalType": "contract PriceProviderRegister",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "execute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract PriceProviderRegister\",\"name\":\"_priceProviderRegister\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_coinPair\",\"type\":\"bytes32\"},{\"internalType\":\"contract IPriceProviderRegisterEntry\",\"name\":\"_contractAddr\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"coinPair\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"contractAddr\",\"outputs\":[{\"internalType\":\"contract IPriceProviderRegisterEntry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"priceProviderRegister\",\"outputs\":[{\"internalType\":\"contract PriceProviderRegister\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"constructor\":{\"params\":{\"_coinPair\":\"Coinpair to register\",\"_contractAddr\":\"Address to register\",\"_priceProviderRegister\":\"Address of register contract used to register the coin pairs\"}},\"execute()\":{\"details\":\"Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in the current architecture IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template\"}},\"title\":\"UpgraderTemplate\"},\"userdoc\":{\"methods\":{\"constructor\":\"Constructor\",\"execute()\":{\"notice\":\"Execute the changes.\"}},\"notice\":\"This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/change/PriceProviderRegisterPairChange.sol\":\"PriceProviderRegisterPairChange\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CoinPairPrice.sol\":{\"keccak256\":\"0x14e1dce35216cbaad4599d78254017a34b25652932a776710e6b9d971d19831d\",\"urls\":[\"bzz-raw://eb9659736240e7d3bf1e0200ee0b74ea587a9fb41e1b2b7870d56a36a5b9052d\",\"dweb:/ipfs/QmRN7KQNyojqTmUx9XctDw1th3B1vd1h4oS7qGF5HGCsvs\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CoinPairPriceStorage.sol\":{\"keccak256\":\"0x4b917b84be6f507b4c93ebb2d1492033e30ed5fca5e3bea75a8c2f2093b75e12\",\"urls\":[\"bzz-raw://4768d9ed845aa0753cf3c5804d76d46afc0babe15e2d38424e6b75c1efb22cb9\",\"dweb:/ipfs/QmfQKqE3ArnPH1Yc159WWEJdrLh8VYAKe64Cnd7XExZ35G\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/OracleManager.sol\":{\"keccak256\":\"0x47aa5bd7853cb9e708e23c1b155eb9c482c8e597a33cf7f54ebbcb6cd0d236a1\",\"urls\":[\"bzz-raw://50f4ae3157c0e9629eb7ad0bccc074fd97d9154dfe051214d5da9d22c99d42f4\",\"dweb:/ipfs/QmYTcxWoc9maygCWQm1M7bG35AvvQSFF93pVUaZpCbWAW8\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/OracleManagerStorage.sol\":{\"keccak256\":\"0xef87e6300b2bcf623fc254088ba67e6813aba48e8eebadb8101396b3f72261ea\",\"urls\":[\"bzz-raw://7338b78602403f36cb1d1c37643cb3b15b947092be03f2686d417b31ff3f77d0\",\"dweb:/ipfs/QmVnucgfBghzmEDmRc35G48fYTM4JgsoDofRGUH4iSiUMj\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegister.sol\":{\"keccak256\":\"0xc955fa0ae845614ba3e203b633114b1f449f26089e4cb93e1187f94e0faeae39\",\"urls\":[\"bzz-raw://0bdd75240f30eeae467323c59395cfa7d2a57a24fa3ee16b24da9175a76493e9\",\"dweb:/ipfs/Qmdpzj9DsnR2L79GMiyUCC1gNJMTj2yWg19a7XQHhioL5t\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol\":{\"keccak256\":\"0x26cf21eb6573c8d903be4fb9986799bf6d1544390b85a994a44dac9494d23c91\",\"urls\":[\"bzz-raw://2b92d67d995e26579e03b456568a2068e5d2b449ccaadfd1e8df141cfb25604f\",\"dweb:/ipfs/Qmawcm8AdSFWT8DKLDn6WzgLRrbc4cpHL3PoYfjceuvmqS\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/SupportersWhitelisted.sol\":{\"keccak256\":\"0xd3a70f8d0601817b3da0627a04e82ace66d40fc5eee93ec1a81600c8654b933d\",\"urls\":[\"bzz-raw://b49413070e01c625fe4d56ed34ff4208964000c95bdb16f10ec472132e50f2cd\",\"dweb:/ipfs/QmbxdEdRuDdhVgUrHYcoM5xJXSa6r5mi9XfvnyuMAfPEuj\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/SupportersWhitelistedStorage.sol\":{\"keccak256\":\"0xdfdd02d51ea1f9566c7a2b6259ccbbd2ac3d1a619c22333b4c635f8169402c4e\",\"urls\":[\"bzz-raw://74d358536c302c85dc4e487aab5acbd7603609eab38242fdd7b596dd99cd221d\",\"dweb:/ipfs/QmempSAVktrxMdoG5aeSesQrs6regGVW3y3wdnKDHhL6FW\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/change/PriceProviderRegisterPairChange.sol\":{\"keccak256\":\"0x340f36bc2e22207b41f8406b9fb570908ff72e7efe8dc17bd9e81157916378a0\",\"urls\":[\"bzz-raw://671feacd57d3232d6f1a9c251ce5f6893c2f89a8c5ce631b49f86708ead99d1a\",\"dweb:/ipfs/QmRi6BWrwjjw92AVbbC7HETUk2zRbFmhsJB1aKWtzeteRk\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CoinPairRegisterLib.sol\":{\"keccak256\":\"0x6ca64dd6f3f84940b2079a039ad34237bc0b76180e54d4e4f65e5f83abdc4183\",\"urls\":[\"bzz-raw://5c6d383aa2d0bbbf93f60c13ccf0d00ea6b8551296208031001f1a21b8a01fd8\",\"dweb:/ipfs/QmNcB7RmWf4t8fn4TLbMR8xyi4NjJm943tytPSeErNmJw5\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol\":{\"keccak256\":\"0xb42a357d19c95f376760dde407ee253482c1016ec8a7b118396b2433b6b66e97\",\"urls\":[\"bzz-raw://c7b63520061d13392859b7c54242f9b7395c9c53b340cd04ab56c22c3740f1b4\",\"dweb:/ipfs/QmTyGyBfj8Kf4QLC6ANbBZk4fmrHwWUJEoP8MFMtZwpvdV\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProvider.sol\":{\"keccak256\":\"0xd8ba6a6f3aa4263e39bf9053b28283b1a40f6d5f7e48dd9f92534cc70fe13ec5\",\"urls\":[\"bzz-raw://250bb098ef15ac55e332272afc4c5e3d66f686b51071865082b528379cd6e6c2\",\"dweb:/ipfs/QmQ9HTGF9oAN7YrmamyP47YpgJm4g33aVeA2HFi3dnoGiH\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol\":{\"keccak256\":\"0xfeccb21c4e7860abdbd8e47f91c74148c2ff684aacd0e1a51a2d72c6f55c93d7\",\"urls\":[\"bzz-raw://4de97c4a682b8433fbf17554ce0fee4a8c558321f298a2b170148e8850b22349\",\"dweb:/ipfs/QmXzpT6i4twkV7AEyRQ1aCC7T67yY6hzZ8ghGEHVQtTQhq\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IterableWhitelistLib.sol\":{\"keccak256\":\"0xea060c3926721a343279203f0cc66444b38c9e0c56f5d1fc118082c241de8fd9\",\"urls\":[\"bzz-raw://3784ef314f3b019df4a0bd84dbd5323854902a22ca51982289ebe6fa3186abd6\",\"dweb:/ipfs/QmSsLEj8R1tHWDzevUjmH5uvL4T2X5uvvvEqJt1wKmYDjT\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/OracleInfoLib.sol\":{\"keccak256\":\"0xe908a8380cbfb1962a7e97f798483a6e3e49b9f4e132e5ad1b225044489dcfd0\",\"urls\":[\"bzz-raw://1c379813940594a5e5b32992b644f89482a5cba09af468adcae6cb63c2166806\",\"dweb:/ipfs/QmWZUhazr9jFfv48yU7pbYdPcUCZzao3fQcensVQr4ixkP\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/OracleRoundInfoLib.sol\":{\"keccak256\":\"0x2ef4db456bee00ef2e58a26b5228b9eeb72e7e6d10fa11ada58824dd7176176b\",\"urls\":[\"bzz-raw://fe30768b33f2e83ca337ea3e3395dccdfea6da336aa8485fa5cdc779488e93cd\",\"dweb:/ipfs/QmUwcFyzJ6UnPokcQo6WhVcT5iXs15u6wTK2n34coUg2o7\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/RegisteredOraclesLib.sol\":{\"keccak256\":\"0x936d58e2e5e4908a811d40e3832a44f37381c637fb20b491ab843b481222eb76\",\"urls\":[\"bzz-raw://8df2e9ec487e99a915390071d7033acd2b76d0fd10376181da18d0b253598356\",\"dweb:/ipfs/QmYK3VyqzREbv1peJWfMXzjLHbCZFqvneHPDq3mwid4Mye\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/RoundInfoLib.sol\":{\"keccak256\":\"0x46437632c68aa903f1b0c291704644f47a555c38c4e73bc1fab3a94d3e982343\",\"urls\":[\"bzz-raw://29bbe7647826063ee11a3c38935f7d205befb1d5a279fa9ce02d93c37830a537\",\"dweb:/ipfs/QmSr5nQziaLAN5qAuWFRkC4jAH6Y18PhZKtvcfahFnRQb8\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/SupportersLib.sol\":{\"keccak256\":\"0xabad7e38da377f266909388629e1b244a46a986a30b6d4ed79a829d7dd7aa72a\",\"urls\":[\"bzz-raw://21f852b4f2f47e61f3c98490e09bcb4338a7adbc4d68f1e9e675711ce7f6423c\",\"dweb:/ipfs/QmY2CkFqixqbWvrPJzrGsNaeSFEYTh7zBQpbzk3edQQFJ2\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/SupportersVestedLib.sol\":{\"keccak256\":\"0x7c27933d6625ef5a5df1815c35778cecbb3cb84d55fee6ddd09c3aee6e2627b3\",\"urls\":[\"bzz-raw://fc449c01abfa70eaab7aa0cb359b8e175eadd51b7fe1bd6b97c175365acf7733\",\"dweb:/ipfs/QmYTDQbryrbQzxUoN9NResuU82vazJYjpJ7SSTZibVzNKD\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol\":{\"keccak256\":\"0xee7d0fc67ce200dc66e79cae8d56e0aab1f83bf185d8be92feb4e78b6a09c68f\",\"urls\":[\"bzz-raw://f93c892f168339ddbca740122d79eed0e133561c52c93d00fd45ebee23711fd5\",\"dweb:/ipfs/Qmdmhv72FiaJVnS9MPqkU7HRSTjEF3woKbPiRTQJktXGs9\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol\":{\"keccak256\":\"0xbdba45ce90a83f9cd62e01fc25c5c4156533356bf70e80fd17f01bf38d8a1e4e\",\"urls\":[\"bzz-raw://b5e8878db86c6bdfd6effd4071a3dc93a0783f0623c8cc7e8bd678ca5a38e772\",\"dweb:/ipfs/Qma9FRmoSfMdoGNCyHq2ZY5CBdMW1LKwqBhPD9w5v3icqS\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x6c6f2bf2d4adb77920d806bfee395ca8c343942ece7363b3d66d6ae471d1ab36\",\"urls\":[\"bzz-raw://6f2ac17c4f4452af084e009cfe2e364679ba54d0f849566e4c1dc05fc1bc7d8d\",\"dweb:/ipfs/QmZVYM3ofFrNEvAnDwsB5R78eyGN6GAMdakc5PXRnpiNGF\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516101ee3803806101ee8339818101604052606081101561003357600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b03199182161790915560019390935560028054929091169190921617905561016a806100846000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806315a5d9d81461005157806334c1e5b514610075578063614619541461008f578063dafa637114610099575b600080fd5b6100596100a1565b604080516001600160a01b039092168252519081900360200190f35b61007d6100b0565b60408051918252519081900360200190f35b6100976100b6565b005b610059610125565b6002546001600160a01b031681565b60015481565b60008054600154600254604080516347020c8f60e11b815260048101939093526001600160a01b03918216602484015251921692638e04191e9260448084019382900301818387803b15801561010b57600080fd5b505af115801561011f573d6000803e3d6000fd5b50505050565b6000546001600160a01b03168156fea2646970667358221220f1c91dd65462dac4f84b135f0d0380327359161228fe0f81da428bbc6e3e48f664736f6c63430006000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806315a5d9d81461005157806334c1e5b514610075578063614619541461008f578063dafa637114610099575b600080fd5b6100596100a1565b604080516001600160a01b039092168252519081900360200190f35b61007d6100b0565b60408051918252519081900360200190f35b6100976100b6565b005b610059610125565b6002546001600160a01b031681565b60015481565b60008054600154600254604080516347020c8f60e11b815260048101939093526001600160a01b03918216602484015251921692638e04191e9260448084019382900301818387803b15801561010b57600080fd5b505af115801561011f573d6000803e3d6000fd5b50505050565b6000546001600160a01b03168156fea2646970667358221220f1c91dd65462dac4f84b135f0d0380327359161228fe0f81da428bbc6e3e48f664736f6c63430006000033",
+  "sourceMap": "659:1333:28:-:0;;;1092:266;8:9:-1;5:2;;;30:1;27;20:12;5:2;1092:266:28;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1092:266:28;;;;;;;;;;;1237:21;:46;;-1:-1:-1;;;;;1237:46:28;;;-1:-1:-1;;;;;;1237:46:28;;;;;;;;1293:20;;;;1323:12;:28;;;;;;;;;;;;;659:1333;;;;;;",
+  "deployedSourceMap": "659:1333:28:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;659:1333:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;809:47;;;:::i;:::-;;;;-1:-1:-1;;;;;809:47:28;;;;;;;;;;;;;;780:23;;;:::i;:::-;;;;;;;;;;;;;;;;1725:264;;;:::i;:::-;;724:50;;;:::i;809:47::-;;;-1:-1:-1;;;;;809:47:28;;:::o;780:23::-;;;;:::o;1725:264::-;1772:21;;;;1811:8;1821:12;;1772:62;;;-1:-1:-1;;;1772:62:28;;;;;;;;;-1:-1:-1;;;;;1821:12:28;;;1772:62;;;;;:21;;;:38;;:62;;;;;;;;;;:21;;:62;;;5:2:-1;;;;30:1;27;20:12;5:2;1772:62:28;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1772:62:28;;;;1725:264::o;724:50::-;;;-1:-1:-1;;;;;724:50:28;;:::o",
+  "source": "pragma solidity 0.6.0;\n\nimport {ChangeContract} from \"../moc-gobernanza/Governance/ChangeContract.sol\";\nimport {OracleManager} from \"../OracleManager.sol\";\nimport {CoinPairPrice} from \"../CoinPairPrice.sol\";\nimport {PriceProviderRegister} from \"../PriceProviderRegister.sol\";\nimport {IPriceProviderRegisterEntry} from \"../libs/IPriceProviderRegisterEntry.sol\";\n\n/**\n  @title UpgraderTemplate\n  @notice This contract is a ChangeContract intended to be used when\n  upgrading any contract upgradeable through the zos-lib upgradeability\n  system. This doesn't initialize the upgraded contract, that should be done extending\n  this one or taking it as a guide\n */\ncontract PriceProviderRegisterPairChange is ChangeContract {\n    PriceProviderRegister public priceProviderRegister;\n    bytes32 public coinPair;\n    IPriceProviderRegisterEntry public contractAddr;\n\n    /**\n      @notice Constructor\n      @param _priceProviderRegister Address of register contract used to register the coin pairs\n      @param _coinPair Coinpair to register\n      @param _contractAddr Address to register\n    */\n    constructor(PriceProviderRegister _priceProviderRegister, bytes32 _coinPair,\n        IPriceProviderRegisterEntry _contractAddr) public {\n        priceProviderRegister = _priceProviderRegister;\n        coinPair = _coinPair;\n        contractAddr = _contractAddr;\n    }\n\n    /**\n      @notice Execute the changes.\n      @dev Should be called by the governor, but this contract does not check that explicitly because\n      it is not its responsability in the current architecture\n      IMPORTANT: This function should not be overriden, you should only redefine\n      the _beforeUpgrade and _afterUpgrade to use this template\n     */\n    function execute() external override {\n        priceProviderRegister.registerCoinPair(coinPair, contractAddr);\n        // OVERRIDE THE OLD ONE !!!\n        // priceProviderRegister.setCoinPair(coinPair,contractAddr);\n        // TODO: Make it usable just once.\n    }\n\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/change/PriceProviderRegisterPairChange.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/change/PriceProviderRegisterPairChange.sol",
+    "exportedSymbols": {
+      "PriceProviderRegisterPairChange": [
+        5700
+      ]
+    },
+    "id": 5701,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5647,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:28"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "file": "../moc-gobernanza/Governance/ChangeContract.sol",
+        "id": 5649,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 8877,
+        "src": "24:79:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5648,
+              "name": "ChangeContract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:14:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/OracleManager.sol",
+        "file": "../OracleManager.sol",
+        "id": 5651,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 3561,
+        "src": "104:51:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5650,
+              "name": "OracleManager",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "112:13:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CoinPairPrice.sol",
+        "file": "../CoinPairPrice.sol",
+        "id": 5653,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 1171,
+        "src": "156:51:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5652,
+              "name": "CoinPairPrice",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "164:13:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegister.sol",
+        "file": "../PriceProviderRegister.sol",
+        "id": 5655,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 3759,
+        "src": "208:67:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5654,
+              "name": "PriceProviderRegister",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "216:21:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol",
+        "file": "../libs/IPriceProviderRegisterEntry.sol",
+        "id": 5657,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 6342,
+        "src": "276:84:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5656,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "284:27:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5658,
+              "name": "ChangeContract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8876,
+              "src": "703:14:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                "typeString": "contract ChangeContract"
+              }
+            },
+            "id": 5659,
+            "nodeType": "InheritanceSpecifier",
+            "src": "703:14:28"
+          }
+        ],
+        "contractDependencies": [
+          8876
+        ],
+        "contractKind": "contract",
+        "documentation": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide",
+        "fullyImplemented": true,
+        "id": 5700,
+        "linearizedBaseContracts": [
+          5700,
+          8876
+        ],
+        "name": "PriceProviderRegisterPairChange",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "dafa6371",
+            "id": 5661,
+            "name": "priceProviderRegister",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "724:50:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+              "typeString": "contract PriceProviderRegister"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 5660,
+              "name": "PriceProviderRegister",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3758,
+              "src": "724:21:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                "typeString": "contract PriceProviderRegister"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "34c1e5b5",
+            "id": 5663,
+            "name": "coinPair",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "780:23:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 5662,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "780:7:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "15a5d9d8",
+            "id": 5665,
+            "name": "contractAddr",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "809:47:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+              "typeString": "contract IPriceProviderRegisterEntry"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 5664,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6341,
+              "src": "809:27:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                "typeString": "contract IPriceProviderRegisterEntry"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5686,
+              "nodeType": "Block",
+              "src": "1227:131:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5676,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5674,
+                      "name": "priceProviderRegister",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5661,
+                      "src": "1237:21:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                        "typeString": "contract PriceProviderRegister"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5675,
+                      "name": "_priceProviderRegister",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5667,
+                      "src": "1261:22:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                        "typeString": "contract PriceProviderRegister"
+                      }
+                    },
+                    "src": "1237:46:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                      "typeString": "contract PriceProviderRegister"
+                    }
+                  },
+                  "id": 5677,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1237:46:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5680,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5678,
+                      "name": "coinPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5663,
+                      "src": "1293:8:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5679,
+                      "name": "_coinPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5669,
+                      "src": "1304:9:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "1293:20:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 5681,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1293:20:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5684,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5682,
+                      "name": "contractAddr",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5665,
+                      "src": "1323:12:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                        "typeString": "contract IPriceProviderRegisterEntry"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5683,
+                      "name": "_contractAddr",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5671,
+                      "src": "1338:13:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                        "typeString": "contract IPriceProviderRegisterEntry"
+                      }
+                    },
+                    "src": "1323:28:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                      "typeString": "contract IPriceProviderRegisterEntry"
+                    }
+                  },
+                  "id": 5685,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1323:28:28"
+                }
+              ]
+            },
+            "documentation": "@notice Constructor\n@param _priceProviderRegister Address of register contract used to register the coin pairs\n@param _coinPair Coinpair to register\n@param _contractAddr Address to register",
+            "id": 5687,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 5672,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5667,
+                  "name": "_priceProviderRegister",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1104:44:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                    "typeString": "contract PriceProviderRegister"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5666,
+                    "name": "PriceProviderRegister",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3758,
+                    "src": "1104:21:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                      "typeString": "contract PriceProviderRegister"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5669,
+                  "name": "_coinPair",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1150:17:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5668,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1150:7:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5671,
+                  "name": "_contractAddr",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1177:41:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                    "typeString": "contract IPriceProviderRegisterEntry"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5670,
+                    "name": "IPriceProviderRegisterEntry",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 6341,
+                    "src": "1177:27:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                      "typeString": "contract IPriceProviderRegisterEntry"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1103:116:28"
+            },
+            "returnParameters": {
+              "id": 5673,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1227:0:28"
+            },
+            "scope": 5700,
+            "src": "1092:266:28",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              8875
+            ],
+            "body": {
+              "id": 5698,
+              "nodeType": "Block",
+              "src": "1762:227:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5694,
+                        "name": "coinPair",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5663,
+                        "src": "1811:8:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5695,
+                        "name": "contractAddr",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5665,
+                        "src": "1821:12:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                          "typeString": "contract IPriceProviderRegisterEntry"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                          "typeString": "contract IPriceProviderRegisterEntry"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 5691,
+                        "name": "priceProviderRegister",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5661,
+                        "src": "1772:21:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                          "typeString": "contract PriceProviderRegister"
+                        }
+                      },
+                      "id": 5693,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "registerCoinPair",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3668,
+                      "src": "1772:38:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_bytes32_$_t_contract$_IPriceProviderRegisterEntry_$6341_$returns$__$",
+                        "typeString": "function (bytes32,contract IPriceProviderRegisterEntry) external"
+                      }
+                    },
+                    "id": 5696,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1772:62:28",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5697,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1772:62:28"
+                }
+              ]
+            },
+            "documentation": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because\nit is not its responsability in the current architecture\nIMPORTANT: This function should not be overriden, you should only redefine\nthe _beforeUpgrade and _afterUpgrade to use this template",
+            "functionSelector": "61461954",
+            "id": 5699,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "execute",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 5689,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1753:8:28"
+            },
+            "parameters": {
+              "id": 5688,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1741:2:28"
+            },
+            "returnParameters": {
+              "id": 5690,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1762:0:28"
+            },
+            "scope": 5700,
+            "src": "1725:264:28",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5701,
+        "src": "659:1333:28"
+      }
+    ],
+    "src": "0:1993:28"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/change/PriceProviderRegisterPairChange.sol",
+    "exportedSymbols": {
+      "PriceProviderRegisterPairChange": [
+        5700
+      ]
+    },
+    "id": 5701,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5647,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:28"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "file": "../moc-gobernanza/Governance/ChangeContract.sol",
+        "id": 5649,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 8877,
+        "src": "24:79:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5648,
+              "name": "ChangeContract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:14:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/OracleManager.sol",
+        "file": "../OracleManager.sol",
+        "id": 5651,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 3561,
+        "src": "104:51:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5650,
+              "name": "OracleManager",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "112:13:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CoinPairPrice.sol",
+        "file": "../CoinPairPrice.sol",
+        "id": 5653,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 1171,
+        "src": "156:51:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5652,
+              "name": "CoinPairPrice",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "164:13:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegister.sol",
+        "file": "../PriceProviderRegister.sol",
+        "id": 5655,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 3759,
+        "src": "208:67:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5654,
+              "name": "PriceProviderRegister",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "216:21:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol",
+        "file": "../libs/IPriceProviderRegisterEntry.sol",
+        "id": 5657,
+        "nodeType": "ImportDirective",
+        "scope": 5701,
+        "sourceUnit": 6342,
+        "src": "276:84:28",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 5656,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "284:27:28",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5658,
+              "name": "ChangeContract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8876,
+              "src": "703:14:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                "typeString": "contract ChangeContract"
+              }
+            },
+            "id": 5659,
+            "nodeType": "InheritanceSpecifier",
+            "src": "703:14:28"
+          }
+        ],
+        "contractDependencies": [
+          8876
+        ],
+        "contractKind": "contract",
+        "documentation": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide",
+        "fullyImplemented": true,
+        "id": 5700,
+        "linearizedBaseContracts": [
+          5700,
+          8876
+        ],
+        "name": "PriceProviderRegisterPairChange",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "dafa6371",
+            "id": 5661,
+            "name": "priceProviderRegister",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "724:50:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+              "typeString": "contract PriceProviderRegister"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 5660,
+              "name": "PriceProviderRegister",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3758,
+              "src": "724:21:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                "typeString": "contract PriceProviderRegister"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "34c1e5b5",
+            "id": 5663,
+            "name": "coinPair",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "780:23:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 5662,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "780:7:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "15a5d9d8",
+            "id": 5665,
+            "name": "contractAddr",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 5700,
+            "src": "809:47:28",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+              "typeString": "contract IPriceProviderRegisterEntry"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 5664,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6341,
+              "src": "809:27:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                "typeString": "contract IPriceProviderRegisterEntry"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5686,
+              "nodeType": "Block",
+              "src": "1227:131:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5676,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5674,
+                      "name": "priceProviderRegister",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5661,
+                      "src": "1237:21:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                        "typeString": "contract PriceProviderRegister"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5675,
+                      "name": "_priceProviderRegister",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5667,
+                      "src": "1261:22:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                        "typeString": "contract PriceProviderRegister"
+                      }
+                    },
+                    "src": "1237:46:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                      "typeString": "contract PriceProviderRegister"
+                    }
+                  },
+                  "id": 5677,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1237:46:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5680,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5678,
+                      "name": "coinPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5663,
+                      "src": "1293:8:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5679,
+                      "name": "_coinPair",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5669,
+                      "src": "1304:9:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "1293:20:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 5681,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1293:20:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5684,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 5682,
+                      "name": "contractAddr",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5665,
+                      "src": "1323:12:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                        "typeString": "contract IPriceProviderRegisterEntry"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 5683,
+                      "name": "_contractAddr",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5671,
+                      "src": "1338:13:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                        "typeString": "contract IPriceProviderRegisterEntry"
+                      }
+                    },
+                    "src": "1323:28:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                      "typeString": "contract IPriceProviderRegisterEntry"
+                    }
+                  },
+                  "id": 5685,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1323:28:28"
+                }
+              ]
+            },
+            "documentation": "@notice Constructor\n@param _priceProviderRegister Address of register contract used to register the coin pairs\n@param _coinPair Coinpair to register\n@param _contractAddr Address to register",
+            "id": 5687,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 5672,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5667,
+                  "name": "_priceProviderRegister",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1104:44:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                    "typeString": "contract PriceProviderRegister"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5666,
+                    "name": "PriceProviderRegister",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3758,
+                    "src": "1104:21:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                      "typeString": "contract PriceProviderRegister"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5669,
+                  "name": "_coinPair",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1150:17:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5668,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1150:7:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5671,
+                  "name": "_contractAddr",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 5687,
+                  "src": "1177:41:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                    "typeString": "contract IPriceProviderRegisterEntry"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5670,
+                    "name": "IPriceProviderRegisterEntry",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 6341,
+                    "src": "1177:27:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                      "typeString": "contract IPriceProviderRegisterEntry"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1103:116:28"
+            },
+            "returnParameters": {
+              "id": 5673,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1227:0:28"
+            },
+            "scope": 5700,
+            "src": "1092:266:28",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              8875
+            ],
+            "body": {
+              "id": 5698,
+              "nodeType": "Block",
+              "src": "1762:227:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5694,
+                        "name": "coinPair",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5663,
+                        "src": "1811:8:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5695,
+                        "name": "contractAddr",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5665,
+                        "src": "1821:12:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                          "typeString": "contract IPriceProviderRegisterEntry"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_contract$_IPriceProviderRegisterEntry_$6341",
+                          "typeString": "contract IPriceProviderRegisterEntry"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 5691,
+                        "name": "priceProviderRegister",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5661,
+                        "src": "1772:21:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PriceProviderRegister_$3758",
+                          "typeString": "contract PriceProviderRegister"
+                        }
+                      },
+                      "id": 5693,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "registerCoinPair",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3668,
+                      "src": "1772:38:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_bytes32_$_t_contract$_IPriceProviderRegisterEntry_$6341_$returns$__$",
+                        "typeString": "function (bytes32,contract IPriceProviderRegisterEntry) external"
+                      }
+                    },
+                    "id": 5696,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1772:62:28",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5697,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1772:62:28"
+                }
+              ]
+            },
+            "documentation": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because\nit is not its responsability in the current architecture\nIMPORTANT: This function should not be overriden, you should only redefine\nthe _beforeUpgrade and _afterUpgrade to use this template",
+            "functionSelector": "61461954",
+            "id": 5699,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "execute",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 5689,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1753:8:28"
+            },
+            "parameters": {
+              "id": 5688,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1741:2:28"
+            },
+            "returnParameters": {
+              "id": 5690,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1762:0:28"
+            },
+            "scope": 5700,
+            "src": "1725:264:28",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5701,
+        "src": "659:1333:28"
+      }
+    ],
+    "src": "0:1993:28"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T22:16:42.443Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {
+      "constructor": {
+        "params": {
+          "_coinPair": "Coinpair to register",
+          "_contractAddr": "Address to register",
+          "_priceProviderRegister": "Address of register contract used to register the coin pairs"
+        }
+      },
+      "execute()": {
+        "details": "Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in the current architecture IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template"
+      }
+    },
+    "title": "UpgraderTemplate"
+  },
+  "userdoc": {
+    "methods": {
+      "constructor": "Constructor",
+      "execute()": {
+        "notice": "Execute the changes."
+      }
+    },
+    "notice": "This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide"
+  }
+}

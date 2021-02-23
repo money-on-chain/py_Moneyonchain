@@ -1,0 +1,179 @@
+{
+  "contractName": "ChangeContract",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "execute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"If you plan to do some changes to a system governed by this project you should write a contract that does those changes, like a recipe. This contract MUST not have ANY kind of public or external function that modifies the state of this ChangeContract, otherwise you could run into front-running issues when the governance system is fully in place.\",\"methods\":{},\"title\":\"ChangeContract\"},\"userdoc\":{\"methods\":{\"execute()\":{\"notice\":\"Override this function with a recipe of the changes to be done when this ChangeContract is executed\"}},\"notice\":\"This interface is the one used by the governance system.\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":\"ChangeContract\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.6.0;\n\n/**\n  @title ChangeContract\n  @notice This interface is the one used by the governance system.\n  @dev If you plan to do some changes to a system governed by this project you should write a contract\n  that does those changes, like a recipe. This contract MUST not have ANY kind of public or external function\n  that modifies the state of this ChangeContract, otherwise you could run into front-running issues when the governance\n  system is fully in place.\n */\ninterface ChangeContract {\n\n    /**\n      @notice Override this function with a recipe of the changes to be done when this ChangeContract\n      is executed\n     */\n    function execute() external;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+    "exportedSymbols": {
+      "ChangeContract": [
+        8876
+      ]
+    },
+    "id": 8877,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8872,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:44"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title ChangeContract\n@notice This interface is the one used by the governance system.\n@dev If you plan to do some changes to a system governed by this project you should write a contract\nthat does those changes, like a recipe. This contract MUST not have ANY kind of public or external function\nthat modifies the state of this ChangeContract, otherwise you could run into front-running issues when the governance\nsystem is fully in place.",
+        "fullyImplemented": false,
+        "id": 8876,
+        "linearizedBaseContracts": [
+          8876
+        ],
+        "name": "ChangeContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@notice Override this function with a recipe of the changes to be done when this ChangeContract\nis executed",
+            "functionSelector": "61461954",
+            "id": 8875,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "execute",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8873,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "668:2:44"
+            },
+            "returnParameters": {
+              "id": 8874,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "679:0:44"
+            },
+            "scope": 8876,
+            "src": "652:28:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 8877,
+        "src": "484:198:44"
+      }
+    ],
+    "src": "0:683:44"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+    "exportedSymbols": {
+      "ChangeContract": [
+        8876
+      ]
+    },
+    "id": 8877,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8872,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:44"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title ChangeContract\n@notice This interface is the one used by the governance system.\n@dev If you plan to do some changes to a system governed by this project you should write a contract\nthat does those changes, like a recipe. This contract MUST not have ANY kind of public or external function\nthat modifies the state of this ChangeContract, otherwise you could run into front-running issues when the governance\nsystem is fully in place.",
+        "fullyImplemented": false,
+        "id": 8876,
+        "linearizedBaseContracts": [
+          8876
+        ],
+        "name": "ChangeContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@notice Override this function with a recipe of the changes to be done when this ChangeContract\nis executed",
+            "functionSelector": "61461954",
+            "id": 8875,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "execute",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8873,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "668:2:44"
+            },
+            "returnParameters": {
+              "id": 8874,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "679:0:44"
+            },
+            "scope": 8876,
+            "src": "652:28:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 8877,
+        "src": "484:198:44"
+      }
+    ],
+    "src": "0:683:44"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.174Z",
+  "devdoc": {
+    "details": "If you plan to do some changes to a system governed by this project you should write a contract that does those changes, like a recipe. This contract MUST not have ANY kind of public or external function that modifies the state of this ChangeContract, otherwise you could run into front-running issues when the governance system is fully in place.",
+    "methods": {},
+    "title": "ChangeContract"
+  },
+  "userdoc": {
+    "methods": {
+      "execute()": {
+        "notice": "Override this function with a recipe of the changes to be done when this ChangeContract is executed"
+      }
+    },
+    "notice": "This interface is the one used by the governance system."
+  }
+}

@@ -1,0 +1,874 @@
+{
+  "contractName": "PriceProviderRegisterStorage",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "newIGovernor",
+          "type": "address"
+        }
+      ],
+      "name": "changeIGovernor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "delegateCallToChanger",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "governor",
+      "outputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"delegateCallToChanger\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}}},\"title\":\"A registry for the coin pair prices, this is more general than OracleManager that stores only the coin pairs that are published by oracles.\"},\"userdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"}}}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol\":\"PriceProviderRegisterStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol\":{\"keccak256\":\"0x26cf21eb6573c8d903be4fb9986799bf6d1544390b85a994a44dac9494d23c91\",\"urls\":[\"bzz-raw://2b92d67d995e26579e03b456568a2068e5d2b449ccaadfd1e8df141cfb25604f\",\"dweb:/ipfs/Qmawcm8AdSFWT8DKLDn6WzgLRrbc4cpHL3PoYfjceuvmqS\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CoinPairRegisterLib.sol\":{\"keccak256\":\"0x6ca64dd6f3f84940b2079a039ad34237bc0b76180e54d4e4f65e5f83abdc4183\",\"urls\":[\"bzz-raw://5c6d383aa2d0bbbf93f60c13ccf0d00ea6b8551296208031001f1a21b8a01fd8\",\"dweb:/ipfs/QmNcB7RmWf4t8fn4TLbMR8xyi4NjJm943tytPSeErNmJw5\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol\":{\"keccak256\":\"0xb42a357d19c95f376760dde407ee253482c1016ec8a7b118396b2433b6b66e97\",\"urls\":[\"bzz-raw://c7b63520061d13392859b7c54242f9b7395c9c53b340cd04ab56c22c3740f1b4\",\"dweb:/ipfs/QmTyGyBfj8Kf4QLC6ANbBZk4fmrHwWUJEoP8MFMtZwpvdV\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol\":{\"keccak256\":\"0xfeccb21c4e7860abdbd8e47f91c74148c2ff684aacd0e1a51a2d72c6f55c93d7\",\"urls\":[\"bzz-raw://4de97c4a682b8433fbf17554ce0fee4a8c558321f298a2b170148e8850b22349\",\"dweb:/ipfs/QmXzpT6i4twkV7AEyRQ1aCC7T67yY6hzZ8ghGEHVQtTQhq\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol\":{\"keccak256\":\"0xee7d0fc67ce200dc66e79cae8d56e0aab1f83bf185d8be92feb4e78b6a09c68f\",\"urls\":[\"bzz-raw://f93c892f168339ddbca740122d79eed0e133561c52c93d00fd45ebee23711fd5\",\"dweb:/ipfs/Qmdmhv72FiaJVnS9MPqkU7HRSTjEF3woKbPiRTQJktXGs9\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol\":{\"keccak256\":\"0xbdba45ce90a83f9cd62e01fc25c5c4156533356bf70e80fd17f01bf38d8a1e4e\",\"urls\":[\"bzz-raw://b5e8878db86c6bdfd6effd4071a3dc93a0783f0623c8cc7e8bd678ca5a38e772\",\"dweb:/ipfs/Qma9FRmoSfMdoGNCyHq2ZY5CBdMW1LKwqBhPD9w5v3icqS\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.6.0;\n\nimport {SafeMath} from \"./openzeppelin/math/SafeMath.sol\";\nimport {Initializable} from \"./openzeppelin/Initializable.sol\";\nimport {GovernedAbstract} from \"./libs/GovernedAbstract.sol\";\nimport {CoinPairRegisterLib} from \"./libs/CoinPairRegisterLib.sol\";\nimport {IPriceProviderRegisterEntry} from \"./libs/IPriceProviderRegisterEntry.sol\";\n\n/// @title A registry for the coin pair prices, this is more general than OracleManager that stores\n/// only the coin pairs that are published by oracles.\ncontract PriceProviderRegisterStorage is Initializable, GovernedAbstract {\n    using SafeMath for uint;\n    using CoinPairRegisterLib for CoinPairRegisterLib.CoinPairRegisterData;\n\n    // Coin Pair register, has the same entries as OracleManage + calculated prices.\n    CoinPairRegisterLib.CoinPairRegisterData coinPairRegisterData;\n\n    // Empty internal constructor, to prevent people from mistakenly deploying\n    // an instance of this contract, which should be used via inheritance.\n    constructor () internal {}\n    // solhint-disable-previous-line no-empty-blocks\n\n    // Reserved storage space to allow for layout changes in the future.\n    uint256[50] private ______gap;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol",
+    "exportedSymbols": {
+      "PriceProviderRegisterStorage": [
+        3791
+      ]
+    },
+    "id": 3792,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3760,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:11"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol",
+        "file": "./openzeppelin/math/SafeMath.sol",
+        "id": 3762,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 9626,
+        "src": "24:58:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3761,
+              "name": "SafeMath",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol",
+        "file": "./openzeppelin/Initializable.sol",
+        "id": 3764,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 9370,
+        "src": "83:63:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3763,
+              "name": "Initializable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "91:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+        "file": "./libs/GovernedAbstract.sol",
+        "id": 3766,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6320,
+        "src": "147:61:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3765,
+              "name": "GovernedAbstract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "155:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CoinPairRegisterLib.sol",
+        "file": "./libs/CoinPairRegisterLib.sol",
+        "id": 3768,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6282,
+        "src": "209:67:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3767,
+              "name": "CoinPairRegisterLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:19:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol",
+        "file": "./libs/IPriceProviderRegisterEntry.sol",
+        "id": 3770,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6342,
+        "src": "277:83:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3769,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "285:27:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3771,
+              "name": "Initializable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9369,
+              "src": "558:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Initializable_$9369",
+                "typeString": "contract Initializable"
+              }
+            },
+            "id": 3772,
+            "nodeType": "InheritanceSpecifier",
+            "src": "558:13:11"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3773,
+              "name": "GovernedAbstract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6319,
+              "src": "573:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_GovernedAbstract_$6319",
+                "typeString": "contract GovernedAbstract"
+              }
+            },
+            "id": 3774,
+            "nodeType": "InheritanceSpecifier",
+            "src": "573:16:11"
+          }
+        ],
+        "contractDependencies": [
+          6319,
+          8925,
+          9369
+        ],
+        "contractKind": "contract",
+        "documentation": "@title A registry for the coin pair prices, this is more general than OracleManager that stores\n only the coin pairs that are published by oracles.",
+        "fullyImplemented": true,
+        "id": 3791,
+        "linearizedBaseContracts": [
+          3791,
+          6319,
+          8925,
+          9369
+        ],
+        "name": "PriceProviderRegisterStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 3777,
+            "libraryName": {
+              "contractScope": null,
+              "id": 3775,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9625,
+              "src": "602:8:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$9625",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "596:24:11",
+            "typeName": {
+              "id": 3776,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "615:4:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 3780,
+            "libraryName": {
+              "contractScope": null,
+              "id": 3778,
+              "name": "CoinPairRegisterLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6281,
+              "src": "631:19:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_CoinPairRegisterLib_$6281",
+                "typeString": "library CoinPairRegisterLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "625:71:11",
+            "typeName": {
+              "contractScope": null,
+              "id": 3779,
+              "name": "CoinPairRegisterLib.CoinPairRegisterData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6022,
+              "src": "655:40:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage_ptr",
+                "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 3782,
+            "name": "coinPairRegisterData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 3791,
+            "src": "787:61:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage",
+              "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 3781,
+              "name": "CoinPairRegisterLib.CoinPairRegisterData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6022,
+              "src": "787:40:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage_ptr",
+                "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 3785,
+              "nodeType": "Block",
+              "src": "1033:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3786,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3783,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1021:2:11"
+            },
+            "returnParameters": {
+              "id": 3784,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1033:0:11"
+            },
+            "scope": 3791,
+            "src": "1009:26:11",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 3790,
+            "name": "______gap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 3791,
+            "src": "1167:29:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 3787,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1167:7:11",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 3789,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 3788,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1175:2:11",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1167:11:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 3792,
+        "src": "517:682:11"
+      }
+    ],
+    "src": "0:1200:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/PriceProviderRegisterStorage.sol",
+    "exportedSymbols": {
+      "PriceProviderRegisterStorage": [
+        3791
+      ]
+    },
+    "id": 3792,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3760,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:11"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol",
+        "file": "./openzeppelin/math/SafeMath.sol",
+        "id": 3762,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 9626,
+        "src": "24:58:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3761,
+              "name": "SafeMath",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol",
+        "file": "./openzeppelin/Initializable.sol",
+        "id": 3764,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 9370,
+        "src": "83:63:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3763,
+              "name": "Initializable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "91:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+        "file": "./libs/GovernedAbstract.sol",
+        "id": 3766,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6320,
+        "src": "147:61:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3765,
+              "name": "GovernedAbstract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "155:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CoinPairRegisterLib.sol",
+        "file": "./libs/CoinPairRegisterLib.sol",
+        "id": 3768,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6282,
+        "src": "209:67:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3767,
+              "name": "CoinPairRegisterLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:19:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol",
+        "file": "./libs/IPriceProviderRegisterEntry.sol",
+        "id": 3770,
+        "nodeType": "ImportDirective",
+        "scope": 3792,
+        "sourceUnit": 6342,
+        "src": "277:83:11",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 3769,
+              "name": "IPriceProviderRegisterEntry",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "285:27:11",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3771,
+              "name": "Initializable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9369,
+              "src": "558:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Initializable_$9369",
+                "typeString": "contract Initializable"
+              }
+            },
+            "id": 3772,
+            "nodeType": "InheritanceSpecifier",
+            "src": "558:13:11"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3773,
+              "name": "GovernedAbstract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6319,
+              "src": "573:16:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_GovernedAbstract_$6319",
+                "typeString": "contract GovernedAbstract"
+              }
+            },
+            "id": 3774,
+            "nodeType": "InheritanceSpecifier",
+            "src": "573:16:11"
+          }
+        ],
+        "contractDependencies": [
+          6319,
+          8925,
+          9369
+        ],
+        "contractKind": "contract",
+        "documentation": "@title A registry for the coin pair prices, this is more general than OracleManager that stores\n only the coin pairs that are published by oracles.",
+        "fullyImplemented": true,
+        "id": 3791,
+        "linearizedBaseContracts": [
+          3791,
+          6319,
+          8925,
+          9369
+        ],
+        "name": "PriceProviderRegisterStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 3777,
+            "libraryName": {
+              "contractScope": null,
+              "id": 3775,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9625,
+              "src": "602:8:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$9625",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "596:24:11",
+            "typeName": {
+              "id": 3776,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "615:4:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 3780,
+            "libraryName": {
+              "contractScope": null,
+              "id": 3778,
+              "name": "CoinPairRegisterLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6281,
+              "src": "631:19:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_CoinPairRegisterLib_$6281",
+                "typeString": "library CoinPairRegisterLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "625:71:11",
+            "typeName": {
+              "contractScope": null,
+              "id": 3779,
+              "name": "CoinPairRegisterLib.CoinPairRegisterData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6022,
+              "src": "655:40:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage_ptr",
+                "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 3782,
+            "name": "coinPairRegisterData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 3791,
+            "src": "787:61:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage",
+              "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 3781,
+              "name": "CoinPairRegisterLib.CoinPairRegisterData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6022,
+              "src": "787:40:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CoinPairRegisterData_$6022_storage_ptr",
+                "typeString": "struct CoinPairRegisterLib.CoinPairRegisterData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 3785,
+              "nodeType": "Block",
+              "src": "1033:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3786,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3783,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1021:2:11"
+            },
+            "returnParameters": {
+              "id": 3784,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1033:0:11"
+            },
+            "scope": 3791,
+            "src": "1009:26:11",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 3790,
+            "name": "______gap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 3791,
+            "src": "1167:29:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 3787,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1167:7:11",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 3789,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 3788,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1175:2:11",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1167:11:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 3792,
+        "src": "517:682:11"
+      }
+    ],
+    "src": "0:1200:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.109Z",
+  "devdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "params": {
+          "newIGovernor": "New governor address"
+        }
+      }
+    },
+    "title": "A registry for the coin pair prices, this is more general than OracleManager that stores only the coin pairs that are published by oracles."
+  },
+  "userdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "notice": "Change the contract's governor. Should be called through the old governance system"
+      }
+    }
+  }
+}

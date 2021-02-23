@@ -1,0 +1,1284 @@
+{
+  "contractName": "Governed",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "governor",
+      "outputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "newIGovernor",
+          "type": "address"
+        }
+      ],
+      "name": "changeIGovernor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract\",\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}}},\"title\":\"Governed\"},\"userdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"}},\"notice\":\"Base contract to be inherited by governed contracts\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":\"Governed\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061021c806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80630c340a241461003b578063b6e083301461005f575b600080fd5b610043610087565b604080516001600160a01b039092168252519081900360200190f35b6100856004803603602081101561007557600080fd5b50356001600160a01b0316610096565b005b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156100e157600080fd5b505afa1580156100f5573d6000803e3d6000fd5b505050506040513d602081101561010b57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906101c35760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610188578181015183820152602001610170565b50505050905090810190601f1680156101b55780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b039290921691909117905556fea264697066735822122039aab2cb82f507f39dd20161cd6ae373862059d4cd9961a5de2e35ff895e429164736f6c63430006000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80630c340a241461003b578063b6e083301461005f575b600080fd5b610043610087565b604080516001600160a01b039092168252519081900360200190f35b6100856004803603602081101561007557600080fd5b50356001600160a01b0316610096565b005b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156100e157600080fd5b505afa1580156100f5573d6000803e3d6000fd5b505050506040513d602081101561010b57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906101c35760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610188578181015183820152602001610170565b50505050905090810190601f1680156101b55780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b039290921691909117905556fea264697066735822122039aab2cb82f507f39dd20161cd6ae373862059d4cd9961a5de2e35ff895e429164736f6c63430006000033",
+  "sourceMap": "405:1347:45:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;405:1347:45;;;;;;;",
+  "deployedSourceMap": "405:1347:45:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;405:1347:45;;;;;;;;;;;;;;;;;;;;;;;;511:25;;;:::i;:::-;;;;-1:-1:-1;;;;;511:25:45;;;;;;;;;;;;;;1472:120;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1472:120:45;-1:-1:-1;;;;;1472:120:45;;:::i;:::-;;511:25;;;-1:-1:-1;;;;;511:25:45;;:::o;1472:120::-;854:8;;:40;;;-1:-1:-1;;;854:40:45;;883:10;854:40;;;;;;-1:-1:-1;;;;;854:8:45;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;5:2:-1;;;;30:1;27;20:12;5:2;854:40:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;854:40:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;854:40:45;896:22;;;;;;;;;;;;-1:-1:-1;;;854:40:45;896:22;;;;846:73;;;;-1:-1:-1;;;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1562:8:45::1;:23:::0;;-1:-1:-1;;;;;;1562:23:45::1;-1:-1:-1::0;;;;;1562:23:45;;;::::1;::::0;;;::::1;::::0;;1472:120::o",
+  "source": "pragma solidity 0.6.0;\n\nimport {IGovernor} from \"./IGovernor.sol\";\n\n/**\n  @title Governed\n  @notice Base contract to be inherited by governed contracts\n  @dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\n  The only purpose of this contract is to define some useful modifiers and functions to be used on the\n  governance aspect of the child contract\n  */\ncontract Governed {\n\n    /**\n      @notice The address of the contract which governs this one\n     */\n    IGovernor public governor;\n\n    string constant private NOT_AUTHORIZED_CHANGER = \"not_authorized_changer\";\n\n    /**\n      @notice Modifier that protects the function\n      @dev You should use this modifier in any function that should be called through\n      the governance system\n     */\n    modifier onlyAuthorizedChanger() {\n        require(governor.isAuthorizedChanger(msg.sender), NOT_AUTHORIZED_CHANGER);\n        _;\n    }\n\n    /**\n      @notice Initialize the contract with the basic settings\n      @dev This initialize replaces the constructor but it is not called automatically.\n      It is necessary because of the upgradeability of the contracts\n      @param _governor Governor address\n     */\n    function _initialize(IGovernor _governor) internal {\n        governor = _governor;\n    }\n\n    /**\n      @notice Change the contract's governor. Should be called through the old governance system\n      @param newIGovernor New governor address\n     */\n    function changeIGovernor(IGovernor newIGovernor) external onlyAuthorizedChanger {\n        governor = newIGovernor;\n    }\n\n    // Leave a gap betweeen inherited contracts variables in order to be\n    // able to add more variables in them later\n    uint256[50] private upgradeGap;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+    "exportedSymbols": {
+      "Governed": [
+        8925
+      ]
+    },
+    "id": 8926,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8878,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:45"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "./IGovernor.sol",
+        "id": 8880,
+        "nodeType": "ImportDirective",
+        "scope": 8926,
+        "sourceUnit": 9044,
+        "src": "24:42:45",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 8879,
+              "name": "IGovernor",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract",
+        "fullyImplemented": true,
+        "id": 8925,
+        "linearizedBaseContracts": [
+          8925
+        ],
+        "name": "Governed",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "0c340a24",
+            "id": 8882,
+            "name": "governor",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "511:25:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IGovernor_$9043",
+              "typeString": "contract IGovernor"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 8881,
+              "name": "IGovernor",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9043,
+              "src": "511:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeString": "contract IGovernor"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 8885,
+            "name": "NOT_AUTHORIZED_CHANGER",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "543:73:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_memory",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 8883,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "543:6:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "6e6f745f617574686f72697a65645f6368616e676572",
+              "id": 8884,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "592:24:45",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_c54bce449fe5bf972c8fd56ba56c6ccf6290d0738600c636beadc1ff91f9ecc8",
+                "typeString": "literal_string \"not_authorized_changer\""
+              },
+              "value": "not_authorized_changer"
+            },
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 8897,
+              "nodeType": "Block",
+              "src": "836:101:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 8890,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 10697,
+                              "src": "883:3:45",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 8891,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": null,
+                            "src": "883:10:45",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 8888,
+                            "name": "governor",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8882,
+                            "src": "854:8:45",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IGovernor_$9043",
+                              "typeString": "contract IGovernor"
+                            }
+                          },
+                          "id": 8889,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isAuthorizedChanger",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 9042,
+                          "src": "854:28:45",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address) view external returns (bool)"
+                          }
+                        },
+                        "id": 8892,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "854:40:45",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 8893,
+                        "name": "NOT_AUTHORIZED_CHANGER",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8885,
+                        "src": "896:22:45",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 8887,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "846:7:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 8894,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "846:73:45",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 8895,
+                  "nodeType": "ExpressionStatement",
+                  "src": "846:73:45"
+                },
+                {
+                  "id": 8896,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "929:1:45"
+                }
+              ]
+            },
+            "documentation": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system",
+            "id": 8898,
+            "name": "onlyAuthorizedChanger",
+            "nodeType": "ModifierDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8886,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "833:2:45"
+            },
+            "src": "803:134:45",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 8907,
+              "nodeType": "Block",
+              "src": "1269:37:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 8905,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8903,
+                      "name": "governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8882,
+                      "src": "1279:8:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 8904,
+                      "name": "_governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8900,
+                      "src": "1290:9:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "src": "1279:20:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "id": 8906,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1279:20:45"
+                }
+              ]
+            },
+            "documentation": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address",
+            "id": 8908,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_initialize",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8901,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8900,
+                  "name": "_governor",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 8908,
+                  "src": "1239:19:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeString": "contract IGovernor"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 8899,
+                    "name": "IGovernor",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 9043,
+                    "src": "1239:9:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1238:21:45"
+            },
+            "returnParameters": {
+              "id": 8902,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1269:0:45"
+            },
+            "scope": 8925,
+            "src": "1218:88:45",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 8919,
+              "nodeType": "Block",
+              "src": "1552:40:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 8917,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8915,
+                      "name": "governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8882,
+                      "src": "1562:8:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 8916,
+                      "name": "newIGovernor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8910,
+                      "src": "1573:12:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "src": "1562:23:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "id": 8918,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1562:23:45"
+                }
+              ]
+            },
+            "documentation": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address",
+            "functionSelector": "b6e08330",
+            "id": 8920,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 8913,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 8912,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 8898,
+                  "src": "1530:21:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1530:21:45"
+              }
+            ],
+            "name": "changeIGovernor",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8911,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8910,
+                  "name": "newIGovernor",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 8920,
+                  "src": "1497:22:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeString": "contract IGovernor"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 8909,
+                    "name": "IGovernor",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 9043,
+                    "src": "1497:9:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1496:24:45"
+            },
+            "returnParameters": {
+              "id": 8914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1552:0:45"
+            },
+            "scope": 8925,
+            "src": "1472:120:45",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "constant": false,
+            "id": 8924,
+            "name": "upgradeGap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "1719:30:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 8921,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1719:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 8923,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 8922,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1727:2:45",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1719:11:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 8926,
+        "src": "405:1347:45"
+      }
+    ],
+    "src": "0:1753:45"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+    "exportedSymbols": {
+      "Governed": [
+        8925
+      ]
+    },
+    "id": 8926,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8878,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:45"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "./IGovernor.sol",
+        "id": 8880,
+        "nodeType": "ImportDirective",
+        "scope": 8926,
+        "sourceUnit": 9044,
+        "src": "24:42:45",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 8879,
+              "name": "IGovernor",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract",
+        "fullyImplemented": true,
+        "id": 8925,
+        "linearizedBaseContracts": [
+          8925
+        ],
+        "name": "Governed",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "0c340a24",
+            "id": 8882,
+            "name": "governor",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "511:25:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IGovernor_$9043",
+              "typeString": "contract IGovernor"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 8881,
+              "name": "IGovernor",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9043,
+              "src": "511:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeString": "contract IGovernor"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 8885,
+            "name": "NOT_AUTHORIZED_CHANGER",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "543:73:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_memory",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 8883,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "543:6:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "6e6f745f617574686f72697a65645f6368616e676572",
+              "id": 8884,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "592:24:45",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_c54bce449fe5bf972c8fd56ba56c6ccf6290d0738600c636beadc1ff91f9ecc8",
+                "typeString": "literal_string \"not_authorized_changer\""
+              },
+              "value": "not_authorized_changer"
+            },
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 8897,
+              "nodeType": "Block",
+              "src": "836:101:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 8890,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 10697,
+                              "src": "883:3:45",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 8891,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": null,
+                            "src": "883:10:45",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 8888,
+                            "name": "governor",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8882,
+                            "src": "854:8:45",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IGovernor_$9043",
+                              "typeString": "contract IGovernor"
+                            }
+                          },
+                          "id": 8889,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isAuthorizedChanger",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 9042,
+                          "src": "854:28:45",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address) view external returns (bool)"
+                          }
+                        },
+                        "id": 8892,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "854:40:45",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 8893,
+                        "name": "NOT_AUTHORIZED_CHANGER",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8885,
+                        "src": "896:22:45",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 8887,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "846:7:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 8894,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "846:73:45",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 8895,
+                  "nodeType": "ExpressionStatement",
+                  "src": "846:73:45"
+                },
+                {
+                  "id": 8896,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "929:1:45"
+                }
+              ]
+            },
+            "documentation": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system",
+            "id": 8898,
+            "name": "onlyAuthorizedChanger",
+            "nodeType": "ModifierDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8886,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "833:2:45"
+            },
+            "src": "803:134:45",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 8907,
+              "nodeType": "Block",
+              "src": "1269:37:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 8905,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8903,
+                      "name": "governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8882,
+                      "src": "1279:8:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 8904,
+                      "name": "_governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8900,
+                      "src": "1290:9:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "src": "1279:20:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "id": 8906,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1279:20:45"
+                }
+              ]
+            },
+            "documentation": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address",
+            "id": 8908,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_initialize",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8901,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8900,
+                  "name": "_governor",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 8908,
+                  "src": "1239:19:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeString": "contract IGovernor"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 8899,
+                    "name": "IGovernor",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 9043,
+                    "src": "1239:9:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1238:21:45"
+            },
+            "returnParameters": {
+              "id": 8902,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1269:0:45"
+            },
+            "scope": 8925,
+            "src": "1218:88:45",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 8919,
+              "nodeType": "Block",
+              "src": "1552:40:45",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 8917,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8915,
+                      "name": "governor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8882,
+                      "src": "1562:8:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 8916,
+                      "name": "newIGovernor",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8910,
+                      "src": "1573:12:45",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeString": "contract IGovernor"
+                      }
+                    },
+                    "src": "1562:23:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "id": 8918,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1562:23:45"
+                }
+              ]
+            },
+            "documentation": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address",
+            "functionSelector": "b6e08330",
+            "id": 8920,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 8913,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 8912,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 8898,
+                  "src": "1530:21:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1530:21:45"
+              }
+            ],
+            "name": "changeIGovernor",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 8911,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8910,
+                  "name": "newIGovernor",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 8920,
+                  "src": "1497:22:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeString": "contract IGovernor"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 8909,
+                    "name": "IGovernor",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 9043,
+                    "src": "1497:9:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeString": "contract IGovernor"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1496:24:45"
+            },
+            "returnParameters": {
+              "id": 8914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1552:0:45"
+            },
+            "scope": 8925,
+            "src": "1472:120:45",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "constant": false,
+            "id": 8924,
+            "name": "upgradeGap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 8925,
+            "src": "1719:30:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 8921,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1719:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 8923,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 8922,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1727:2:45",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1719:11:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 8926,
+        "src": "405:1347:45"
+      }
+    ],
+    "src": "0:1753:45"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.174Z",
+  "devdoc": {
+    "details": "This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract",
+    "methods": {
+      "changeIGovernor(address)": {
+        "params": {
+          "newIGovernor": "New governor address"
+        }
+      }
+    },
+    "title": "Governed"
+  },
+  "userdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "notice": "Change the contract's governor. Should be called through the old governance system"
+      }
+    },
+    "notice": "Base contract to be inherited by governed contracts"
+  }
+}

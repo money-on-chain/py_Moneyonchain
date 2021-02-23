@@ -1,0 +1,1062 @@
+{
+  "contractName": "CalculatedPriceProviderStorage",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "newIGovernor",
+          "type": "address"
+        }
+      ],
+      "name": "changeIGovernor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "delegateCallToChanger",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "governor",
+      "outputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"delegateCallToChanger\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}}},\"title\":\"This contract gets the price from some IPriceProviders and do the math to calculate a deduced price, for example RIFBTC and BTCUSD gives the price of RIFUSD\"},\"userdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"}}}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CalculatedPriceProviderStorage.sol\":\"CalculatedPriceProviderStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CalculatedPriceProviderStorage.sol\":{\"keccak256\":\"0xbd968ca7f9b449be7a4f474f2de8dbe5d6b6e60a9e3649f1f4053e3816925c84\",\"urls\":[\"bzz-raw://f8b77e0defe463b74f906186b065a71b79a1b04bc97eace4433cbe52acd3ac38\",\"dweb:/ipfs/QmNdjfvAEnn7pU8vskBNP3ru6HLc6cxMUw3PD3UqkaL7QN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CalculatedPriceProviderLib.sol\":{\"keccak256\":\"0x4bb551118c25d781ce28ff0f75527f8710e9a8fcbfe24056bc40241fec784550\",\"urls\":[\"bzz-raw://71dcb53abbcab367e03f3a505980f359f30d8400aa6ffa089d8e6d319b6f47fd\",\"dweb:/ipfs/QmbHNKnh6po6VEh7rZEDP6xPihqyN2aAY1b8X7nt8ofd6C\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol\":{\"keccak256\":\"0xb42a357d19c95f376760dde407ee253482c1016ec8a7b118396b2433b6b66e97\",\"urls\":[\"bzz-raw://c7b63520061d13392859b7c54242f9b7395c9c53b340cd04ab56c22c3740f1b4\",\"dweb:/ipfs/QmTyGyBfj8Kf4QLC6ANbBZk4fmrHwWUJEoP8MFMtZwpvdV\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProvider.sol\":{\"keccak256\":\"0xd8ba6a6f3aa4263e39bf9053b28283b1a40f6d5f7e48dd9f92534cc70fe13ec5\",\"urls\":[\"bzz-raw://250bb098ef15ac55e332272afc4c5e3d66f686b51071865082b528379cd6e6c2\",\"dweb:/ipfs/QmQ9HTGF9oAN7YrmamyP47YpgJm4g33aVeA2HFi3dnoGiH\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IPriceProviderRegisterEntry.sol\":{\"keccak256\":\"0xfeccb21c4e7860abdbd8e47f91c74148c2ff684aacd0e1a51a2d72c6f55c93d7\",\"urls\":[\"bzz-raw://4de97c4a682b8433fbf17554ce0fee4a8c558321f298a2b170148e8850b22349\",\"dweb:/ipfs/QmXzpT6i4twkV7AEyRQ1aCC7T67yY6hzZ8ghGEHVQtTQhq\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IterableWhitelistLib.sol\":{\"keccak256\":\"0xea060c3926721a343279203f0cc66444b38c9e0c56f5d1fc118082c241de8fd9\",\"urls\":[\"bzz-raw://3784ef314f3b019df4a0bd84dbd5323854902a22ca51982289ebe6fa3186abd6\",\"dweb:/ipfs/QmSsLEj8R1tHWDzevUjmH5uvL4T2X5uvvvEqJt1wKmYDjT\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol\":{\"keccak256\":\"0xee7d0fc67ce200dc66e79cae8d56e0aab1f83bf185d8be92feb4e78b6a09c68f\",\"urls\":[\"bzz-raw://f93c892f168339ddbca740122d79eed0e133561c52c93d00fd45ebee23711fd5\",\"dweb:/ipfs/Qmdmhv72FiaJVnS9MPqkU7HRSTjEF3woKbPiRTQJktXGs9\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol\":{\"keccak256\":\"0xbdba45ce90a83f9cd62e01fc25c5c4156533356bf70e80fd17f01bf38d8a1e4e\",\"urls\":[\"bzz-raw://b5e8878db86c6bdfd6effd4071a3dc93a0783f0623c8cc7e8bd678ca5a38e772\",\"dweb:/ipfs/Qma9FRmoSfMdoGNCyHq2ZY5CBdMW1LKwqBhPD9w5v3icqS\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.6.0;\n\nimport {SafeMath} from \"./openzeppelin/math/SafeMath.sol\";\nimport {Initializable} from \"./openzeppelin/Initializable.sol\";\nimport {GovernedAbstract} from \"./libs/GovernedAbstract.sol\";\nimport {IterableWhitelistLib, IIterableWhitelist} from \"./libs/IterableWhitelistLib.sol\";\nimport {CalculatedPriceProviderLib} from \"./libs/CalculatedPriceProviderLib.sol\";\n\n/// @title This contract gets the price from some IPriceProviders and do the math to calculate\n/// a deduced price, for example RIFBTC and BTCUSD gives the price of RIFUSD\ncontract CalculatedPriceProviderStorage is Initializable, GovernedAbstract, IIterableWhitelist {\n    using SafeMath for uint;\n    using IterableWhitelistLib for IterableWhitelistLib.IterableWhitelistData;\n    using CalculatedPriceProviderLib for CalculatedPriceProviderLib.CalculatedPriceProviderData;\n\n    IterableWhitelistLib.IterableWhitelistData internal iterableWhitelistData;\n\n    CalculatedPriceProviderLib.CalculatedPriceProviderData internal calculatedPriceProviderData;\n\n    // Empty internal constructor, to prevent people from mistakenly deploying\n    // an instance of this contract, which should be used via inheritance.\n    constructor () internal {}\n    // solhint-disable-previous-line no-empty-blocks\n\n    // Reserved storage space to allow for layout changes in the future.\n    uint256[50] private ______gap;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CalculatedPriceProviderStorage.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CalculatedPriceProviderStorage.sol",
+    "exportedSymbols": {
+      "CalculatedPriceProviderStorage": [
+        208
+      ]
+    },
+    "id": 209,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 169,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:1"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol",
+        "file": "./openzeppelin/math/SafeMath.sol",
+        "id": 171,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 9626,
+        "src": "24:58:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 170,
+              "name": "SafeMath",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol",
+        "file": "./openzeppelin/Initializable.sol",
+        "id": 173,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 9370,
+        "src": "83:63:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 172,
+              "name": "Initializable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "91:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+        "file": "./libs/GovernedAbstract.sol",
+        "id": 175,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6320,
+        "src": "147:61:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 174,
+              "name": "GovernedAbstract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "155:16:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IterableWhitelistLib.sol",
+        "file": "./libs/IterableWhitelistLib.sol",
+        "id": 178,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6595,
+        "src": "209:89:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 176,
+              "name": "IterableWhitelistLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:20:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          },
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 177,
+              "name": "IIterableWhitelist",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "239:18:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CalculatedPriceProviderLib.sol",
+        "file": "./libs/CalculatedPriceProviderLib.sol",
+        "id": 180,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6013,
+        "src": "299:81:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 179,
+              "name": "CalculatedPriceProviderLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "307:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 181,
+              "name": "Initializable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9369,
+              "src": "597:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Initializable_$9369",
+                "typeString": "contract Initializable"
+              }
+            },
+            "id": 182,
+            "nodeType": "InheritanceSpecifier",
+            "src": "597:13:1"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 183,
+              "name": "GovernedAbstract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6319,
+              "src": "612:16:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_GovernedAbstract_$6319",
+                "typeString": "contract GovernedAbstract"
+              }
+            },
+            "id": 184,
+            "nodeType": "InheritanceSpecifier",
+            "src": "612:16:1"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 185,
+              "name": "IIterableWhitelist",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6384,
+              "src": "630:18:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IIterableWhitelist_$6384",
+                "typeString": "contract IIterableWhitelist"
+              }
+            },
+            "id": 186,
+            "nodeType": "InheritanceSpecifier",
+            "src": "630:18:1"
+          }
+        ],
+        "contractDependencies": [
+          6319,
+          6384,
+          8925,
+          9369
+        ],
+        "contractKind": "contract",
+        "documentation": "@title This contract gets the price from some IPriceProviders and do the math to calculate\n a deduced price, for example RIFBTC and BTCUSD gives the price of RIFUSD",
+        "fullyImplemented": true,
+        "id": 208,
+        "linearizedBaseContracts": [
+          208,
+          6384,
+          6319,
+          8925,
+          9369
+        ],
+        "name": "CalculatedPriceProviderStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 189,
+            "libraryName": {
+              "contractScope": null,
+              "id": 187,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9625,
+              "src": "661:8:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$9625",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "655:24:1",
+            "typeName": {
+              "id": 188,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "674:4:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 192,
+            "libraryName": {
+              "contractScope": null,
+              "id": 190,
+              "name": "IterableWhitelistLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6594,
+              "src": "690:20:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IterableWhitelistLib_$6594",
+                "typeString": "library IterableWhitelistLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "684:74:1",
+            "typeName": {
+              "contractScope": null,
+              "id": 191,
+              "name": "IterableWhitelistLib.IterableWhitelistData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6392,
+              "src": "715:42:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage_ptr",
+                "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+              }
+            }
+          },
+          {
+            "id": 195,
+            "libraryName": {
+              "contractScope": null,
+              "id": 193,
+              "name": "CalculatedPriceProviderLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6012,
+              "src": "769:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_CalculatedPriceProviderLib_$6012",
+                "typeString": "library CalculatedPriceProviderLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "763:92:1",
+            "typeName": {
+              "contractScope": null,
+              "id": 194,
+              "name": "CalculatedPriceProviderLib.CalculatedPriceProviderData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5838,
+              "src": "800:54:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage_ptr",
+                "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 197,
+            "name": "iterableWhitelistData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "861:73:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage",
+              "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 196,
+              "name": "IterableWhitelistLib.IterableWhitelistData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6392,
+              "src": "861:42:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage_ptr",
+                "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 199,
+            "name": "calculatedPriceProviderData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "941:91:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage",
+              "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 198,
+              "name": "CalculatedPriceProviderLib.CalculatedPriceProviderData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5838,
+              "src": "941:54:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage_ptr",
+                "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 202,
+              "nodeType": "Block",
+              "src": "1217:2:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 203,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 200,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:2:1"
+            },
+            "returnParameters": {
+              "id": 201,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1217:0:1"
+            },
+            "scope": 208,
+            "src": "1193:26:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 207,
+            "name": "______gap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "1351:29:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 204,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1351:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 206,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 205,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1359:2:1",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1351:11:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 209,
+        "src": "554:829:1"
+      }
+    ],
+    "src": "0:1384:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/CalculatedPriceProviderStorage.sol",
+    "exportedSymbols": {
+      "CalculatedPriceProviderStorage": [
+        208
+      ]
+    },
+    "id": 209,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 169,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:1"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/math/SafeMath.sol",
+        "file": "./openzeppelin/math/SafeMath.sol",
+        "id": 171,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 9626,
+        "src": "24:58:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 170,
+              "name": "SafeMath",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol",
+        "file": "./openzeppelin/Initializable.sol",
+        "id": 173,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 9370,
+        "src": "83:63:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 172,
+              "name": "Initializable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "91:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+        "file": "./libs/GovernedAbstract.sol",
+        "id": 175,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6320,
+        "src": "147:61:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 174,
+              "name": "GovernedAbstract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "155:16:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/IterableWhitelistLib.sol",
+        "file": "./libs/IterableWhitelistLib.sol",
+        "id": 178,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6595,
+        "src": "209:89:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 176,
+              "name": "IterableWhitelistLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:20:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          },
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 177,
+              "name": "IIterableWhitelist",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "239:18:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/CalculatedPriceProviderLib.sol",
+        "file": "./libs/CalculatedPriceProviderLib.sol",
+        "id": 180,
+        "nodeType": "ImportDirective",
+        "scope": 209,
+        "sourceUnit": 6013,
+        "src": "299:81:1",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 179,
+              "name": "CalculatedPriceProviderLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "307:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 181,
+              "name": "Initializable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9369,
+              "src": "597:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Initializable_$9369",
+                "typeString": "contract Initializable"
+              }
+            },
+            "id": 182,
+            "nodeType": "InheritanceSpecifier",
+            "src": "597:13:1"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 183,
+              "name": "GovernedAbstract",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6319,
+              "src": "612:16:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_GovernedAbstract_$6319",
+                "typeString": "contract GovernedAbstract"
+              }
+            },
+            "id": 184,
+            "nodeType": "InheritanceSpecifier",
+            "src": "612:16:1"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 185,
+              "name": "IIterableWhitelist",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6384,
+              "src": "630:18:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IIterableWhitelist_$6384",
+                "typeString": "contract IIterableWhitelist"
+              }
+            },
+            "id": 186,
+            "nodeType": "InheritanceSpecifier",
+            "src": "630:18:1"
+          }
+        ],
+        "contractDependencies": [
+          6319,
+          6384,
+          8925,
+          9369
+        ],
+        "contractKind": "contract",
+        "documentation": "@title This contract gets the price from some IPriceProviders and do the math to calculate\n a deduced price, for example RIFBTC and BTCUSD gives the price of RIFUSD",
+        "fullyImplemented": true,
+        "id": 208,
+        "linearizedBaseContracts": [
+          208,
+          6384,
+          6319,
+          8925,
+          9369
+        ],
+        "name": "CalculatedPriceProviderStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 189,
+            "libraryName": {
+              "contractScope": null,
+              "id": 187,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 9625,
+              "src": "661:8:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$9625",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "655:24:1",
+            "typeName": {
+              "id": 188,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "674:4:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 192,
+            "libraryName": {
+              "contractScope": null,
+              "id": 190,
+              "name": "IterableWhitelistLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6594,
+              "src": "690:20:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IterableWhitelistLib_$6594",
+                "typeString": "library IterableWhitelistLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "684:74:1",
+            "typeName": {
+              "contractScope": null,
+              "id": 191,
+              "name": "IterableWhitelistLib.IterableWhitelistData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6392,
+              "src": "715:42:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage_ptr",
+                "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+              }
+            }
+          },
+          {
+            "id": 195,
+            "libraryName": {
+              "contractScope": null,
+              "id": 193,
+              "name": "CalculatedPriceProviderLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6012,
+              "src": "769:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_CalculatedPriceProviderLib_$6012",
+                "typeString": "library CalculatedPriceProviderLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "763:92:1",
+            "typeName": {
+              "contractScope": null,
+              "id": 194,
+              "name": "CalculatedPriceProviderLib.CalculatedPriceProviderData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5838,
+              "src": "800:54:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage_ptr",
+                "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 197,
+            "name": "iterableWhitelistData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "861:73:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage",
+              "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 196,
+              "name": "IterableWhitelistLib.IterableWhitelistData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6392,
+              "src": "861:42:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_IterableWhitelistData_$6392_storage_ptr",
+                "typeString": "struct IterableWhitelistLib.IterableWhitelistData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 199,
+            "name": "calculatedPriceProviderData",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "941:91:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage",
+              "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 198,
+              "name": "CalculatedPriceProviderLib.CalculatedPriceProviderData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5838,
+              "src": "941:54:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CalculatedPriceProviderData_$5838_storage_ptr",
+                "typeString": "struct CalculatedPriceProviderLib.CalculatedPriceProviderData"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 202,
+              "nodeType": "Block",
+              "src": "1217:2:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 203,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 200,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:2:1"
+            },
+            "returnParameters": {
+              "id": 201,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1217:0:1"
+            },
+            "scope": 208,
+            "src": "1193:26:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 207,
+            "name": "______gap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 208,
+            "src": "1351:29:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$50_storage",
+              "typeString": "uint256[50]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 204,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1351:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 206,
+              "length": {
+                "argumentTypes": null,
+                "hexValue": "3530",
+                "id": 205,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "1359:2:1",
+                "subdenomination": null,
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_50_by_1",
+                  "typeString": "int_const 50"
+                },
+                "value": "50"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "1351:11:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
+                "typeString": "uint256[50]"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          }
+        ],
+        "scope": 209,
+        "src": "554:829:1"
+      }
+    ],
+    "src": "0:1384:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.065Z",
+  "devdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "params": {
+          "newIGovernor": "New governor address"
+        }
+      }
+    },
+    "title": "This contract gets the price from some IPriceProviders and do the math to calculate a deduced price, for example RIFBTC and BTCUSD gives the price of RIFUSD"
+  },
+  "userdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "notice": "Change the contract's governor. Should be called through the old governance system"
+      }
+    }
+  }
+}

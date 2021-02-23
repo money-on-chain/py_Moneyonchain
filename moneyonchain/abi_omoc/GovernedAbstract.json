@@ -1,0 +1,1135 @@
+{
+  "contractName": "GovernedAbstract",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "newIGovernor",
+          "type": "address"
+        }
+      ],
+      "name": "changeIGovernor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "governor",
+      "outputs": [
+        {
+          "internalType": "contract IGovernor",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "delegateCallToChanger",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"delegateCallToChanger\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract. This contract add the posibility to do a delegate call to any change contract so it can change anything in the storage.\",\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}}},\"title\":\"GovernedAbstract\"},\"userdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"}},\"notice\":\"Base contract to be inherited by governed contracts\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol\":\"GovernedAbstract\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol\":{\"keccak256\":\"0xb42a357d19c95f376760dde407ee253482c1016ec8a7b118396b2433b6b66e97\",\"urls\":[\"bzz-raw://c7b63520061d13392859b7c54242f9b7395c9c53b340cd04ab56c22c3740f1b4\",\"dweb:/ipfs/QmTyGyBfj8Kf4QLC6ANbBZk4fmrHwWUJEoP8MFMtZwpvdV\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610551806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80630c340a2414610046578063b6e083301461006a578063dc8990e114610092575b600080fd5b61004e610138565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b0316610147565b005b610090600480360360208110156100a857600080fd5b8101906020810181356401000000008111156100c357600080fd5b8201836020820111156100d557600080fd5b803590602001918460018302840111640100000000831117156100f757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610297945050505050565b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b15801561019257600080fd5b505afa1580156101a6573d6000803e3d6000fd5b505050506040513d60208110156101bc57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906102745760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610239578181015183820152602001610221565b50505050905090810190601f1680156102665780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156102e257600080fd5b505afa1580156102f6573d6000803e3d6000fd5b505050506040513d602081101561030c57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906103875760405162461bcd60e51b8152602060048201818152835160248401528351909283926044909101919085019080838360008315610239578181015183820152602001610221565b5060003390506000816001600160a01b0316836040516024018080602001828103825283818151815260200191508051906020019080838360005b838110156103da5781810151838201526020016103c2565b50505050905090810190601f1680156104075780820380516001836020036101000a031916815260200191505b5060408051601f198184030181529181526020820180516001600160e01b03166350b113e560e11b178152905182519295509350839250908083835b602083106104625780518252601f199092019160209182019101610443565b6001836020036101000a038019825116818451168082178552505050505050905001915050600060405180830381855af49150503d80600081146104c2576040519150601f19603f3d011682016040523d82523d6000602084013e6104c7565b606091505b5050905080610516576040805162461bcd60e51b8152602060048201526016602482015275115c9c9bdc881a5b8819195b1959d85d194818d85b1b60521b604482015290519081900360640190fd5b50505056fea2646970667358221220c41fa9351c967596b3e3c6fa000499ff9d96984b62fd544845f21947e827efad64736f6c63430006000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80630c340a2414610046578063b6e083301461006a578063dc8990e114610092575b600080fd5b61004e610138565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b0316610147565b005b610090600480360360208110156100a857600080fd5b8101906020810181356401000000008111156100c357600080fd5b8201836020820111156100d557600080fd5b803590602001918460018302840111640100000000831117156100f757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610297945050505050565b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b15801561019257600080fd5b505afa1580156101a6573d6000803e3d6000fd5b505050506040513d60208110156101bc57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906102745760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610239578181015183820152602001610221565b50505050905090810190601f1680156102665780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156102e257600080fd5b505afa1580156102f6573d6000803e3d6000fd5b505050506040513d602081101561030c57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906103875760405162461bcd60e51b8152602060048201818152835160248401528351909283926044909101919085019080838360008315610239578181015183820152602001610221565b5060003390506000816001600160a01b0316836040516024018080602001828103825283818151815260200191508051906020019080838360005b838110156103da5781810151838201526020016103c2565b50505050905090810190601f1680156104075780820380516001836020036101000a031916815260200191505b5060408051601f198184030181529181526020820180516001600160e01b03166350b113e560e11b178152905182519295509350839250908083835b602083106104625780518252601f199092019160209182019101610443565b6001836020036101000a038019825116818451168082178552505050505050905001915050600060405180830381855af49150503d80600081146104c2576040519150601f19603f3d011682016040523d82523d6000602084013e6104c7565b606091505b5050905080610516576040805162461bcd60e51b8152602060048201526016602482015275115c9c9bdc881a5b8819195b1959d85d194818d85b1b60521b604482015290519081900360640190fd5b50505056fea2646970667358221220c41fa9351c967596b3e3c6fa000499ff9d96984b62fd544845f21947e827efad64736f6c63430006000033",
+  "sourceMap": "633:340:33:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;633:340:33;;;;;;;",
+  "deployedSourceMap": "633:340:33:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;633:340:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;511:25:45;;;:::i;:::-;;;;-1:-1:-1;;;;;511:25:45;;;;;;;;;;;;;;1472:120;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1472:120:45;-1:-1:-1;;;;;1472:120:45;;:::i;:::-;;678:293:33;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;678:293:33;;;;;;;;21:11:-1;5:28;;2:2;;;46:1;43;36:12;2:2;678:293:33;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;678:293:33;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;678:293:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;81:16;;74:27;;;;-1:-1;678:293:33;;-1:-1:-1;678:293:33;;-1:-1:-1;;;;;678:293:33:i;511:25:45:-;;;-1:-1:-1;;;;;511:25:45;;:::o;1472:120::-;854:8;;:40;;;-1:-1:-1;;;854:40:45;;883:10;854:40;;;;;;-1:-1:-1;;;;;854:8:45;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;5:2:-1;;;;30:1;27;20:12;5:2;854:40:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;854:40:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;854:40:45;896:22;;;;;;;;;;;;-1:-1:-1;;;854:40:45;896:22;;;;846:73;;;;-1:-1:-1;;;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1562:8:45::1;:23:::0;;-1:-1:-1;;;;;;1562:23:45::1;-1:-1:-1::0;;;;;1562:23:45;;;::::1;::::0;;;::::1;::::0;;1472:120::o;678:293:33:-;854:8:45;;:40;;;-1:-1:-1;;;854:40:45;;883:10;854:40;;;;;;-1:-1:-1;;;;;854:8:45;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;5:2:-1;;;;30:1;27;20:12;5:2;854:40:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;854:40:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;854:40:45;896:22;;;;;;;;;;;;-1:-1:-1;;;854:40:45;896:22;;;;846:73;;;;-1:-1:-1;;;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;27:10:-1;;8:100;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;846:73:45;;769:22:33::1;794:10;769:35;;815:12;832:14;-1:-1:-1::0;;;;;832:27:33::1;906:4;860:51;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11:::0;;::::1;84:18:::0;71:11;;::::1;64:39:::0;52:2:::1;45:10;8:100;;;12:14;860:51:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1::0;860:51:33::1;::::0;;-1:-1:-1;;26:21;;::::1;22:32:::0;6:49;;860:51:33;;;49:4:-1::1;25:18:::0;::::1;61:17:::0;;-1:-1;;;;;182:15:::1;-1:-1:::0;;;179:29:::1;160:49:::0;;832:80:33;;;;860:51;;-1:-1:-1;832:80:33;-1:-1:-1;832:80:33;;-1:-1:-1;25:18;832:80:33;;25:18:-1;36:153:::1;66:2;61:3;58:11;36:153;;176:10:::0;;164:23;;-1:-1;;139:12;;;;98:2:::1;89:12:::0;;::::1;::::0;114::::1;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;832:80:33;;;;;;;;;;;;;;;;;;;;;;;12:1:-1;19;14:27;;;;67:4;61:11;56:16;;134:4;130:9;123:4;105:16;101:27;97:43;94:1;90:51;84:4;77:65;157:16;154:1;147:27;211:16;208:1;201:4;198:1;194:12;179:49;5:228;;14:27;32:4;27:9;;5:228;;814:98:33;;;930:7;922:42;;;::::0;;-1:-1:-1;;;922:42:33;;::::1;;::::0;::::1;::::0;::::1;::::0;;;;-1:-1:-1;;;922:42:33;;;;;;;;;;;;;::::1;;929:1:45;;678:293:33::0;:::o",
+  "source": "pragma solidity 0.6.0;\n\nimport {Governed} from \"../moc-gobernanza/Governance/Governed.sol\";\nimport {IGovernor} from \"../moc-gobernanza/Governance/IGovernor.sol\";\n\n/**\n  @title GovernedAbstract\n  @notice Base contract to be inherited by governed contracts\n  @dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\n  The only purpose of this contract is to define some useful modifiers and functions to be used on the\n  governance aspect of the child contract.\n  This contract add the posibility to do a delegate call to any change contract so it can change anything in the\n  storage.\n  */\ncontract GovernedAbstract is Governed {\n\n    function delegateCallToChanger(bytes memory data) public onlyAuthorizedChanger() {\n        address changerContrat = msg.sender;\n        (bool success,) = changerContrat.delegatecall(abi.encodeWithSignature(\"impersonate(bytes)\", data));\n        require(success, \"Error in delegate call\");\n    }\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+    "exportedSymbols": {
+      "GovernedAbstract": [
+        6319
+      ]
+    },
+    "id": 6320,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6283,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:33"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+        "file": "../moc-gobernanza/Governance/Governed.sol",
+        "id": 6285,
+        "nodeType": "ImportDirective",
+        "scope": 6320,
+        "sourceUnit": 8926,
+        "src": "24:67:33",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 6284,
+              "name": "Governed",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:33",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "../moc-gobernanza/Governance/IGovernor.sol",
+        "id": 6287,
+        "nodeType": "ImportDirective",
+        "scope": 6320,
+        "sourceUnit": 9044,
+        "src": "92:69:33",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 6286,
+              "name": "IGovernor",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "100:9:33",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6288,
+              "name": "Governed",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8925,
+              "src": "662:8:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Governed_$8925",
+                "typeString": "contract Governed"
+              }
+            },
+            "id": 6289,
+            "nodeType": "InheritanceSpecifier",
+            "src": "662:8:33"
+          }
+        ],
+        "contractDependencies": [
+          8925
+        ],
+        "contractKind": "contract",
+        "documentation": "@title GovernedAbstract\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract.\nThis contract add the posibility to do a delegate call to any change contract so it can change anything in the\nstorage.",
+        "fullyImplemented": true,
+        "id": 6319,
+        "linearizedBaseContracts": [
+          6319,
+          8925
+        ],
+        "name": "GovernedAbstract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6317,
+              "nodeType": "Block",
+              "src": "759:212:33",
+              "statements": [
+                {
+                  "assignments": [
+                    6297
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 6297,
+                      "name": "changerContrat",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 6317,
+                      "src": "769:22:33",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 6296,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "769:7:33",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 6300,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 6298,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10697,
+                      "src": "794:3:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 6299,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "794:10:33",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "769:35:33"
+                },
+                {
+                  "assignments": [
+                    6302,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 6302,
+                      "name": "success",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 6317,
+                      "src": "815:12:33",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 6301,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "815:4:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 6311,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "696d706572736f6e61746528627974657329",
+                            "id": 6307,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "884:20:33",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            "value": "impersonate(bytes)"
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 6308,
+                            "name": "data",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6291,
+                            "src": "906:4:33",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 6305,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 10684,
+                            "src": "860:3:33",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 6306,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "encodeWithSignature",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "860:23:33",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodewithsignature_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 6309,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "860:51:33",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6303,
+                        "name": "changerContrat",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6297,
+                        "src": "832:14:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 6304,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "delegatecall",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "832:27:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_baredelegatecall_nonpayable$_t_bytes_memory_ptr_$returns$_t_bool_$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes memory) returns (bool,bytes memory)"
+                      }
+                    },
+                    "id": 6310,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "832:80:33",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_bytes_memory_ptr_$",
+                      "typeString": "tuple(bool,bytes memory)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "814:98:33"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 6313,
+                        "name": "success",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6302,
+                        "src": "930:7:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4572726f7220696e2064656c65676174652063616c6c",
+                        "id": 6314,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "939:24:33",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        },
+                        "value": "Error in delegate call"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        }
+                      ],
+                      "id": 6312,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "922:7:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 6315,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "922:42:33",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6316,
+                  "nodeType": "ExpressionStatement",
+                  "src": "922:42:33"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "dc8990e1",
+            "id": 6318,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 6294,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 6293,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 8898,
+                  "src": "735:21:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "735:23:33"
+              }
+            ],
+            "name": "delegateCallToChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 6292,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6291,
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 6318,
+                  "src": "709:17:33",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 6290,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "709:5:33",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "708:19:33"
+            },
+            "returnParameters": {
+              "id": 6295,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "759:0:33"
+            },
+            "scope": 6319,
+            "src": "678:293:33",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6320,
+        "src": "633:340:33"
+      }
+    ],
+    "src": "0:974:33"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/libs/GovernedAbstract.sol",
+    "exportedSymbols": {
+      "GovernedAbstract": [
+        6319
+      ]
+    },
+    "id": 6320,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6283,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:33"
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+        "file": "../moc-gobernanza/Governance/Governed.sol",
+        "id": 6285,
+        "nodeType": "ImportDirective",
+        "scope": 6320,
+        "sourceUnit": 8926,
+        "src": "24:67:33",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 6284,
+              "name": "Governed",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "32:8:33",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "file": "../moc-gobernanza/Governance/IGovernor.sol",
+        "id": 6287,
+        "nodeType": "ImportDirective",
+        "scope": 6320,
+        "sourceUnit": 9044,
+        "src": "92:69:33",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 6286,
+              "name": "IGovernor",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "100:9:33",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6288,
+              "name": "Governed",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8925,
+              "src": "662:8:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Governed_$8925",
+                "typeString": "contract Governed"
+              }
+            },
+            "id": 6289,
+            "nodeType": "InheritanceSpecifier",
+            "src": "662:8:33"
+          }
+        ],
+        "contractDependencies": [
+          8925
+        ],
+        "contractKind": "contract",
+        "documentation": "@title GovernedAbstract\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract.\nThis contract add the posibility to do a delegate call to any change contract so it can change anything in the\nstorage.",
+        "fullyImplemented": true,
+        "id": 6319,
+        "linearizedBaseContracts": [
+          6319,
+          8925
+        ],
+        "name": "GovernedAbstract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6317,
+              "nodeType": "Block",
+              "src": "759:212:33",
+              "statements": [
+                {
+                  "assignments": [
+                    6297
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 6297,
+                      "name": "changerContrat",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 6317,
+                      "src": "769:22:33",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 6296,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "769:7:33",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 6300,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 6298,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 10697,
+                      "src": "794:3:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 6299,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "794:10:33",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "769:35:33"
+                },
+                {
+                  "assignments": [
+                    6302,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 6302,
+                      "name": "success",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 6317,
+                      "src": "815:12:33",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 6301,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "815:4:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 6311,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "696d706572736f6e61746528627974657329",
+                            "id": 6307,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "884:20:33",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            "value": "impersonate(bytes)"
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 6308,
+                            "name": "data",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6291,
+                            "src": "906:4:33",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 6305,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 10684,
+                            "src": "860:3:33",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 6306,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "encodeWithSignature",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "860:23:33",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodewithsignature_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 6309,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "860:51:33",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6303,
+                        "name": "changerContrat",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6297,
+                        "src": "832:14:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 6304,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "delegatecall",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "832:27:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_baredelegatecall_nonpayable$_t_bytes_memory_ptr_$returns$_t_bool_$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes memory) returns (bool,bytes memory)"
+                      }
+                    },
+                    "id": 6310,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "832:80:33",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_bytes_memory_ptr_$",
+                      "typeString": "tuple(bool,bytes memory)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "814:98:33"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 6313,
+                        "name": "success",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6302,
+                        "src": "930:7:33",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4572726f7220696e2064656c65676174652063616c6c",
+                        "id": 6314,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "939:24:33",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        },
+                        "value": "Error in delegate call"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        }
+                      ],
+                      "id": 6312,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        10700,
+                        10701
+                      ],
+                      "referencedDeclaration": 10701,
+                      "src": "922:7:33",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 6315,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "922:42:33",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6316,
+                  "nodeType": "ExpressionStatement",
+                  "src": "922:42:33"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "dc8990e1",
+            "id": 6318,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 6294,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 6293,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 8898,
+                  "src": "735:21:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "735:23:33"
+              }
+            ],
+            "name": "delegateCallToChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 6292,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6291,
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 6318,
+                  "src": "709:17:33",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 6290,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "709:5:33",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "708:19:33"
+            },
+            "returnParameters": {
+              "id": 6295,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "759:0:33"
+            },
+            "scope": 6319,
+            "src": "678:293:33",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6320,
+        "src": "633:340:33"
+      }
+    ],
+    "src": "0:974:33"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-29T21:30:43.145Z",
+  "devdoc": {
+    "details": "This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract. This contract add the posibility to do a delegate call to any change contract so it can change anything in the storage.",
+    "methods": {
+      "changeIGovernor(address)": {
+        "params": {
+          "newIGovernor": "New governor address"
+        }
+      }
+    },
+    "title": "GovernedAbstract"
+  },
+  "userdoc": {
+    "methods": {
+      "changeIGovernor(address)": {
+        "notice": "Change the contract's governor. Should be called through the old governance system"
+      }
+    },
+    "notice": "Base contract to be inherited by governed contracts"
+  }
+}
