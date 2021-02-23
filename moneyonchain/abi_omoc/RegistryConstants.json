@@ -1,0 +1,3896 @@
+{
+  "contractName": "RegistryConstants",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "INFO_ADDR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MESSAGE_VERSION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_DELAY_MACHINE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_STAKING_MACHINE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_TOKEN",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VESTING_MACHINE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_MIN_STAKE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_PCT_PRECISION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MOC_VOTING_MACHINE_VOTING_TIME_DELTA",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_BLOCKCHAIN_INFO_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_CONFIGURATION_TASK_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_ENTERING_FALLBACKS_AMOUNTS",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_GATHER_SIGNATURE_TIMEOUT",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_MAIN_EXECUTOR_TASK_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_MAIN_LOOP_TASK_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_MANAGER_ADDR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_PRICE_DELTA_PCT",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_PRICE_DIGITS",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_PRICE_FETCH_RATE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_PRICE_PUBLISH_BLOCKS",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_PRICE_REJECT_DELTA_PCT",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_QUEUE_LEN",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_STAKE_LIMIT_MULTIPLICATOR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ORACLE_WITHDRAW_LOCK_TIME",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SCHEDULER_POOL_DELAY",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SCHEDULER_ROUND_DELAY",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SUPPORTERS_ADDR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"INFO_ADDR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MESSAGE_VERSION\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_DELAY_MACHINE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_STAKING_MACHINE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_TOKEN\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VESTING_MACHINE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_MIN_STAKE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_PCT_PRECISION\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MOC_VOTING_MACHINE_VOTING_TIME_DELTA\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_BLOCKCHAIN_INFO_INTERVAL\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_CONFIGURATION_TASK_INTERVAL\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_ENTERING_FALLBACKS_AMOUNTS\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_GATHER_SIGNATURE_TIMEOUT\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_MAIN_EXECUTOR_TASK_INTERVAL\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_MAIN_LOOP_TASK_INTERVAL\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_MANAGER_ADDR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_PRICE_DELTA_PCT\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_PRICE_DIGITS\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_PRICE_FETCH_RATE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_PRICE_PUBLISH_BLOCKS\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_PRICE_REJECT_DELTA_PCT\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_QUEUE_LEN\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_STAKE_LIMIT_MULTIPLICATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORACLE_WITHDRAW_LOCK_TIME\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SCHEDULER_POOL_DELAY\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SCHEDULER_ROUND_DELAY\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SUPPORTERS_ADDR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/RegistryConstants.sol\":\"RegistryConstants\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/RegistryConstants.sol\":{\"keccak256\":\"0x2a34abef22ea1b8b1326d5b7d4db2357a62deefce7ce69615d14e42aeb9f9503\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://8ec70747468ecc9676e695b0d819bfafa934e71c47606a990df4ecffa8ed56d5\",\"dweb:/ipfs/QmaFnUFwTrDCSnvxnykQFkmd3zjNApmF7B2n6sB3zUyoPM\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610899806100206000396000f3fe608060405234801561001057600080fd5b506004361061021c5760003560e01c8063915e4e1011610125578063ba6fc287116100ad578063e873e2081161007c578063e873e2081461032b578063ea0e066114610333578063f13eb2d51461033b578063fa8ab4c114610343578063faf620bc1461034b5761021c565b8063ba6fc2871461030b578063d274eaff14610313578063d3f055d71461031b578063d51673fb146103235761021c565b8063a68d751e116100f4578063a68d751e146102e3578063a6c456f1146102eb578063b01f02bf146102f3578063b74ab6fc146102fb578063b90163d1146103035761021c565b8063915e4e10146102c357806394ff8ee6146102cb5780639b09d9c9146102d35780639d81ac84146102db5761021c565b8063484cae4e116101a8578063793caa6711610177578063793caa671461029b5780637c197e21146102a35780637ccc00cc146102ab5780638bc7b6f2146102b35780638da1b81d146102bb5761021c565b8063484cae4e1461027b5780634b903654146102835780634eb836f51461028b578063586dec23146102935761021c565b806328f134a4116101ef57806328f134a414610253578063296e9cc41461025b57806339e94f13146102635780633bdc39501461026b5780633f827a5a146102735761021c565b80630358faeb146102215780630fc67cec1461023b578063213fe5c014610243578063264006931461024b575b600080fd5b610229610353565b60408051918252519081900360200190f35b610229610377565b61022961039b565b6102296103bf565b6102296103e3565b610229610407565b61022961042b565b61022961044f565b610229610473565b610229610497565b6102296104bb565b6102296104df565b610229610503565b610229610527565b61022961054b565b61022961056f565b610229610593565b6102296105b7565b6102296105db565b6102296105ff565b610229610623565b610229610647565b61022961066b565b61022961068f565b6102296106b3565b6102296106d7565b6102296106fb565b61022961071f565b610229610743565b610229610767565b61022961078b565b6102296107af565b6102296107d3565b6102296107f7565b61022961081b565b61022961083f565b7fda9f12e01fc92de345bb741448d36ecb967052dd7aa1670439af833c9a3d78f181565b7f275d8a46b817572476d2d55b41c7709dee307740bad676a9693805003a48d23181565b7fb43ee0a5ee6dcc7115ce824e4e353526ad6e479afa4daeb78451070de942de3681565b7fc32b9cbc59039d297e670e7c196424308c90ba4a437fa7ccd008498c934e7dbf81565b7f4cd7e3f12ee4a2db0a6ba16e03fbc31bba1048c149bbf4fc9f3c02021ec550b881565b7f2f271dc1fa81985bda14a2d6d0d60b45191d2a2d97e636b192696a8796d654a781565b7f7dfea4fb968e2599cdb7b3028c07d0188d0f92d1d00bd95c2805523c224649dd81565b7f7a3ee46ca1bd3e19089870d8d6530b083a86da93aab52efccb32d5950e2709cf81565b7feafac1a2b4d4fdcc942cbdce334a88ec83387087978d039f1320d3639a0b59df81565b7fb324a91be1ac0d0c4888c835aee124ca1a7caf4b73ce10aa3504e2683865d7e581565b7ff646c455329c7af0436f9e95c59c90ce0e11bb4e3a1deff805807798696adf8881565b7f16986f74674f2ed21d50b6e74e6b12bb323ff4f72364542fd5de5104f3cc3ca981565b7fc0ded27704f62d8726fdbd83648113d9fd8cf32c09f80523d2ba523e0bbd5ba481565b7f5e92c359b77ace8f4933558289f577781c0713b4ff91b2d2f76c8e523e56007081565b7f51a2be29a473202678b6cf57b717ba5d7ff671f01fdbdbfcad4e1882601b889681565b7fa1e0b5b458fe661fe687da135d3340a172e262c3cb31d646a4cb5cea9b6f179081565b7fb027f2006a45346de89db4c5efc53f4e05e96532d27366aff00367a394d0abc481565b7f7d32d87d65898c3cbc7e72c59d223bf61c7811e99dafafd24fb08e0a38f1091481565b7f41a2ac05b365409628009a8091d8dda06fe52fe2f1c792e651e5df7599a7a7de81565b7ff75b08b2b912abdbb87cc459ca0b4fdc019329386ec84ab68399b0c86fed5a9581565b7f66b60892ff6e7f0da16db27046f5960fdfd6bce5c3c8c21d56ccca3236a6281b81565b7fa82bea7140872d1398fa0ab5075330ab0228f4c7e381b4b6502379ffc7cdcd9f81565b7f4bd5e7ff929fdd1ba62a33f76e0f40e97bb35e8bf126c0d9d91ce5c69a4bc52181565b7f11cfbdf601b80a575e4366f0234cc06de0c9f401fe250dd9dccfccefeedb6fc281565b7f3c557531fea67120f21bc7711270a96f1b8cff3dfe3dd798a8a9f09ce9b7797281565b7fde1ede48948567c43c504b761af8cd6af5363fafeceb1239b3083955d809714f81565b7f73ee596441ef88c207a7a9147d62f59186b4991555e37b7ce9c801f9539d105081565b7f0a1b21dfd7e4f3741529cf579e2731e847d81bbf13a82d0eba6910d7ac4c1c0a81565b7f945f72e5d44fb0ce3b1de393d19415723b79f97ad801089d8470d1c20e15ffef81565b7ffb2d33acd65c36f68a15f8fe41cb8c0dd1eda164ffa87c6882e685ccb1c1adfb81565b7f62f5dbf0c17b0df83487409f747ad2eeca5fd54c140ca59b32cf39d6f6eaf91681565b7fef9006fe6663199909dfaa4ab45e3f86d6454adb7773682f356824b6b3bc6b0e81565b7fe4f979504d2a7a24557a15195eb83131e7c4a66d33900454705435aa5a6ee08681565b7f99f83ee0c57b325f3deafb536d55596743ff112c6ac0d853d5f4f89b75dec04581565b7f6c2abc911c0fa4c73b90c7143a9f4429749be45ebfe7b81e69b86e7ca440d81181565b7f580be8e098dd1016787d59c2a534bf9df9ec679a29de4c8f92dc3807f7d7d54d8156fea2646970667358221220a078e94731cb70f67f7e020351579f49d07d7122f91f8b2d9abd3ce323ba7ffd64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061021c5760003560e01c8063915e4e1011610125578063ba6fc287116100ad578063e873e2081161007c578063e873e2081461032b578063ea0e066114610333578063f13eb2d51461033b578063fa8ab4c114610343578063faf620bc1461034b5761021c565b8063ba6fc2871461030b578063d274eaff14610313578063d3f055d71461031b578063d51673fb146103235761021c565b8063a68d751e116100f4578063a68d751e146102e3578063a6c456f1146102eb578063b01f02bf146102f3578063b74ab6fc146102fb578063b90163d1146103035761021c565b8063915e4e10146102c357806394ff8ee6146102cb5780639b09d9c9146102d35780639d81ac84146102db5761021c565b8063484cae4e116101a8578063793caa6711610177578063793caa671461029b5780637c197e21146102a35780637ccc00cc146102ab5780638bc7b6f2146102b35780638da1b81d146102bb5761021c565b8063484cae4e1461027b5780634b903654146102835780634eb836f51461028b578063586dec23146102935761021c565b806328f134a4116101ef57806328f134a414610253578063296e9cc41461025b57806339e94f13146102635780633bdc39501461026b5780633f827a5a146102735761021c565b80630358faeb146102215780630fc67cec1461023b578063213fe5c014610243578063264006931461024b575b600080fd5b610229610353565b60408051918252519081900360200190f35b610229610377565b61022961039b565b6102296103bf565b6102296103e3565b610229610407565b61022961042b565b61022961044f565b610229610473565b610229610497565b6102296104bb565b6102296104df565b610229610503565b610229610527565b61022961054b565b61022961056f565b610229610593565b6102296105b7565b6102296105db565b6102296105ff565b610229610623565b610229610647565b61022961066b565b61022961068f565b6102296106b3565b6102296106d7565b6102296106fb565b61022961071f565b610229610743565b610229610767565b61022961078b565b6102296107af565b6102296107d3565b6102296107f7565b61022961081b565b61022961083f565b7fda9f12e01fc92de345bb741448d36ecb967052dd7aa1670439af833c9a3d78f181565b7f275d8a46b817572476d2d55b41c7709dee307740bad676a9693805003a48d23181565b7fb43ee0a5ee6dcc7115ce824e4e353526ad6e479afa4daeb78451070de942de3681565b7fc32b9cbc59039d297e670e7c196424308c90ba4a437fa7ccd008498c934e7dbf81565b7f4cd7e3f12ee4a2db0a6ba16e03fbc31bba1048c149bbf4fc9f3c02021ec550b881565b7f2f271dc1fa81985bda14a2d6d0d60b45191d2a2d97e636b192696a8796d654a781565b7f7dfea4fb968e2599cdb7b3028c07d0188d0f92d1d00bd95c2805523c224649dd81565b7f7a3ee46ca1bd3e19089870d8d6530b083a86da93aab52efccb32d5950e2709cf81565b7feafac1a2b4d4fdcc942cbdce334a88ec83387087978d039f1320d3639a0b59df81565b7fb324a91be1ac0d0c4888c835aee124ca1a7caf4b73ce10aa3504e2683865d7e581565b7ff646c455329c7af0436f9e95c59c90ce0e11bb4e3a1deff805807798696adf8881565b7f16986f74674f2ed21d50b6e74e6b12bb323ff4f72364542fd5de5104f3cc3ca981565b7fc0ded27704f62d8726fdbd83648113d9fd8cf32c09f80523d2ba523e0bbd5ba481565b7f5e92c359b77ace8f4933558289f577781c0713b4ff91b2d2f76c8e523e56007081565b7f51a2be29a473202678b6cf57b717ba5d7ff671f01fdbdbfcad4e1882601b889681565b7fa1e0b5b458fe661fe687da135d3340a172e262c3cb31d646a4cb5cea9b6f179081565b7fb027f2006a45346de89db4c5efc53f4e05e96532d27366aff00367a394d0abc481565b7f7d32d87d65898c3cbc7e72c59d223bf61c7811e99dafafd24fb08e0a38f1091481565b7f41a2ac05b365409628009a8091d8dda06fe52fe2f1c792e651e5df7599a7a7de81565b7ff75b08b2b912abdbb87cc459ca0b4fdc019329386ec84ab68399b0c86fed5a9581565b7f66b60892ff6e7f0da16db27046f5960fdfd6bce5c3c8c21d56ccca3236a6281b81565b7fa82bea7140872d1398fa0ab5075330ab0228f4c7e381b4b6502379ffc7cdcd9f81565b7f4bd5e7ff929fdd1ba62a33f76e0f40e97bb35e8bf126c0d9d91ce5c69a4bc52181565b7f11cfbdf601b80a575e4366f0234cc06de0c9f401fe250dd9dccfccefeedb6fc281565b7f3c557531fea67120f21bc7711270a96f1b8cff3dfe3dd798a8a9f09ce9b7797281565b7fde1ede48948567c43c504b761af8cd6af5363fafeceb1239b3083955d809714f81565b7f73ee596441ef88c207a7a9147d62f59186b4991555e37b7ce9c801f9539d105081565b7f0a1b21dfd7e4f3741529cf579e2731e847d81bbf13a82d0eba6910d7ac4c1c0a81565b7f945f72e5d44fb0ce3b1de393d19415723b79f97ad801089d8470d1c20e15ffef81565b7ffb2d33acd65c36f68a15f8fe41cb8c0dd1eda164ffa87c6882e685ccb1c1adfb81565b7f62f5dbf0c17b0df83487409f747ad2eeca5fd54c140ca59b32cf39d6f6eaf91681565b7fef9006fe6663199909dfaa4ab45e3f86d6454adb7773682f356824b6b3bc6b0e81565b7fe4f979504d2a7a24557a15195eb83131e7c4a66d33900454705435aa5a6ee08681565b7f99f83ee0c57b325f3deafb536d55596743ff112c6ac0d853d5f4f89b75dec04581565b7f6c2abc911c0fa4c73b90c7143a9f4429749be45ebfe7b81e69b86e7ca440d81181565b7f580be8e098dd1016787d59c2a534bf9df9ec679a29de4c8f92dc3807f7d7d54d8156fea2646970667358221220a078e94731cb70f67f7e020351579f49d07d7122f91f8b2d9abd3ce323ba7ffd64736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "105:7925:16:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "105:7925:16:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3652:110;;;:::i;:::-;;;;;;;;;;;;;;;;4560:131;;;:::i;3067:137::-;;;:::i;1612:::-;;;:::i;6136:120::-;;;:::i;4322:136::-;;;:::i;723:120::-;;;:::i;4791:130::-;;;:::i;6519:116::-;;;:::i;5512:135::-;;;:::i;7633:134::-;;;:::i;3284:120::-;;;:::i;908:119::-;;;:::i;6966:126::-;;;:::i;7397:128::-;;;:::i;6741:133::-;;;:::i;5031:135::-;;;:::i;6330:117::-;;;:::i;7178:123::-;;;:::i;5270:132::-;;;:::i;351:118::-;;;:::i;5934:122::-;;;:::i;178:110::-;;;:::i;4078:132::-;;;:::i;536:120::-;;;:::i;2351:143::-;;;:::i;2835:133::-;;;:::i;1856:143::-;;;:::i;3850:124::-;;;:::i;2102:140::-;;;:::i;1363:150::-;;;:::i;7887:140::-;;;:::i;3476:116::-;;;:::i;2601:142::-;;;:::i;5729:121::-;;;:::i;1111:129::-;;;:::i;3652:110::-;3696:66;3652:110;:::o;4560:131::-;4625:66;4560:131;:::o;3067:137::-;3138:66;3067:137;:::o;1612:::-;1683:66;1612:137;:::o;6136:120::-;6190:66;6136:120;:::o;4322:136::-;4392:66;4322:136;:::o;723:120::-;777:66;723:120;:::o;4791:130::-;4855:66;4791:130;:::o;6519:116::-;6569:66;6519:116;:::o;5512:135::-;5581:66;5512:135;:::o;7633:134::-;7701:66;7633:134;:::o;3284:120::-;3338:66;3284:120;:::o;908:119::-;961:66;908:119;:::o;6966:126::-;7026:66;6966:126;:::o;7397:128::-;7459:66;7397:128;:::o;6741:133::-;6808:66;6741:133;:::o;5031:135::-;5100:66;5031:135;:::o;6330:117::-;6381:66;6330:117;:::o;7178:123::-;7235:66;7178:123;:::o;5270:132::-;5336:66;5270:132;:::o;351:118::-;403:66;351:118;:::o;5934:122::-;5990:66;5934:122;:::o;178:110::-;222:66;178:110;:::o;4078:132::-;4144:66;4078:132;:::o;536:120::-;590:66;536:120;:::o;2351:143::-;2428:66;2351:143;:::o;2835:133::-;2902:66;2835:133;:::o;1856:143::-;1933:66;1856:143;:::o;3850:124::-;3908:66;3850:124;:::o;2102:140::-;2176:66;2102:140;:::o;1363:150::-;1447:66;1363:150;:::o;7887:140::-;7961:66;7887:140;:::o;3476:116::-;3526:66;3476:116;:::o;2601:142::-;2677:66;2601:142;:::o;5729:121::-;5784:66;5729:121;:::o;1111:129::-;1174:66;1111:129;:::o",
+  "source": "// SPDX-License-Identifier: UNLICENSED\n// Autogenerated by registryConstants.js\npragma solidity ^0.6.0;\n\ncontract RegistryConstants {\n    // MOC_TOKEN = keccak256(moc.token)\n    bytes32\n        public constant MOC_TOKEN = 0x4bd5e7ff929fdd1ba62a33f76e0f40e97bb35e8bf126c0d9d91ce5c69a4bc521;\n\n    // MOC_DELAY_MACHINE = keccak256(moc.delay-machine)\n    bytes32\n        public constant MOC_DELAY_MACHINE = 0x66b60892ff6e7f0da16db27046f5960fdfd6bce5c3c8c21d56ccca3236a6281b;\n\n    // MOC_STAKING_MACHINE = keccak256(moc.staking-machine)\n    bytes32\n        public constant MOC_STAKING_MACHINE = 0x3c557531fea67120f21bc7711270a96f1b8cff3dfe3dd798a8a9f09ce9b77972;\n\n    // MOC_VESTING_MACHINE = keccak256(moc.vesting-machine)\n    bytes32\n        public constant MOC_VESTING_MACHINE = 0x7dfea4fb968e2599cdb7b3028c07d0188d0f92d1d00bd95c2805523c224649dd;\n\n    // MOC_VOTING_MACHINE = keccak256(moc.voting-machine)\n    bytes32\n        public constant MOC_VOTING_MACHINE = 0xc0ded27704f62d8726fdbd83648113d9fd8cf32c09f80523d2ba523e0bbd5ba4;\n\n    // MOC_VOTING_MACHINE_MIN_STAKE = keccak256(moc.voting-machine.minStake)\n    bytes32\n        public constant MOC_VOTING_MACHINE_MIN_STAKE = 0x580be8e098dd1016787d59c2a534bf9df9ec679a29de4c8f92dc3807f7d7d54d;\n\n    // MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA = keccak256(moc.voting-machine.preVoteExpirationTimeDelta)\n    bytes32\n        public constant MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA = 0x62f5dbf0c17b0df83487409f747ad2eeca5fd54c140ca59b32cf39d6f6eaf916;\n\n    // MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS = keccak256(moc.voting-machine.maxPreProposals)\n    bytes32\n        public constant MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS = 0xc32b9cbc59039d297e670e7c196424308c90ba4a437fa7ccd008498c934e7dbf;\n\n    // MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN = keccak256(moc.voting-machine.preVoteMinPCToWin)\n    bytes32\n        public constant MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN = 0x0a1b21dfd7e4f3741529cf579e2731e847d81bbf13a82d0eba6910d7ac4c1c0a;\n\n    // MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO = keccak256(moc.voting-machine.voteMinPctToVeto)\n    bytes32\n        public constant MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO = 0xfb2d33acd65c36f68a15f8fe41cb8c0dd1eda164ffa87c6882e685ccb1c1adfb;\n\n    // MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM = keccak256(moc.voting-machine.voteMinPctForQuorum)\n    bytes32\n        public constant MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM = 0xde1ede48948567c43c504b761af8cd6af5363fafeceb1239b3083955d809714f;\n\n    // MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT = keccak256(moc.voting-machine.voteMinPctToAccept)\n    bytes32\n        public constant MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT = 0x99f83ee0c57b325f3deafb536d55596743ff112c6ac0d853d5f4f89b75dec045;\n\n    // MOC_VOTING_MACHINE_PCT_PRECISION = keccak256(moc.voting-machine.PCTPrecision)\n    bytes32\n        public constant MOC_VOTING_MACHINE_PCT_PRECISION = 0x73ee596441ef88c207a7a9147d62f59186b4991555e37b7ce9c801f9539d1050;\n\n    // MOC_VOTING_MACHINE_VOTING_TIME_DELTA = keccak256(moc.voting-machine.votingTimeDelta)\n    bytes32\n        public constant MOC_VOTING_MACHINE_VOTING_TIME_DELTA = 0xb43ee0a5ee6dcc7115ce824e4e353526ad6e479afa4daeb78451070de942de36;\n\n    // ORACLE_MANAGER_ADDR = keccak256(MOC_ORACLE\\1\\ORACLE_MANAGER_ADDR)\n    bytes32\n        public constant ORACLE_MANAGER_ADDR = 0x16986f74674f2ed21d50b6e74e6b12bb323ff4f72364542fd5de5104f3cc3ca9;\n\n    // SUPPORTERS_ADDR = keccak256(MOC_ORACLE\\1\\SUPPORTERS_ADDR)\n    bytes32\n        public constant SUPPORTERS_ADDR = 0xe4f979504d2a7a24557a15195eb83131e7c4a66d33900454705435aa5a6ee086;\n\n    // INFO_ADDR = keccak256(MOC_ORACLE\\1\\INFO_ADDR)\n    bytes32\n        public constant INFO_ADDR = 0xda9f12e01fc92de345bb741448d36ecb967052dd7aa1670439af833c9a3d78f1;\n\n    // ORACLE_PRICE_FETCH_RATE = keccak256(MOC_ORACLE\\1\\ORACLE_PRICE_FETCH_RATE)\n    bytes32\n        public constant ORACLE_PRICE_FETCH_RATE = 0x945f72e5d44fb0ce3b1de393d19415723b79f97ad801089d8470d1c20e15ffef;\n\n    // ORACLE_BLOCKCHAIN_INFO_INTERVAL = keccak256(MOC_ORACLE\\1\\ORACLE_BLOCKCHAIN_INFO_INTERVAL)\n    bytes32\n        public constant ORACLE_BLOCKCHAIN_INFO_INTERVAL = 0x11cfbdf601b80a575e4366f0234cc06de0c9f401fe250dd9dccfccefeedb6fc2;\n\n    // ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL = keccak256(MOC_ORACLE\\1\\ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL)\n    bytes32\n        public constant ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL = 0x2f271dc1fa81985bda14a2d6d0d60b45191d2a2d97e636b192696a8796d654a7;\n\n    // ORACLE_MAIN_LOOP_TASK_INTERVAL = keccak256(MOC_ORACLE\\1\\ORACLE_MAIN_LOOP_TASK_INTERVAL)\n    bytes32\n        public constant ORACLE_MAIN_LOOP_TASK_INTERVAL = 0x275d8a46b817572476d2d55b41c7709dee307740bad676a9693805003a48d231;\n\n    // ORACLE_PRICE_REJECT_DELTA_PCT = keccak256(MOC_ORACLE\\1\\ORACLE_PRICE_REJECT_DELTA_PCT)\n    bytes32\n        public constant ORACLE_PRICE_REJECT_DELTA_PCT = 0x7a3ee46ca1bd3e19089870d8d6530b083a86da93aab52efccb32d5950e2709cf;\n\n    // ORACLE_CONFIGURATION_TASK_INTERVAL = keccak256(MOC_ORACLE\\1\\ORACLE_CONFIGURATION_TASK_INTERVAL)\n    bytes32\n        public constant ORACLE_CONFIGURATION_TASK_INTERVAL = 0xb027f2006a45346de89db4c5efc53f4e05e96532d27366aff00367a394d0abc4;\n\n    // ORACLE_GATHER_SIGNATURE_TIMEOUT = keccak256(MOC_ORACLE\\1\\ORACLE_GATHER_SIGNATURE_TIMEOUT)\n    bytes32\n        public constant ORACLE_GATHER_SIGNATURE_TIMEOUT = 0xf75b08b2b912abdbb87cc459ca0b4fdc019329386ec84ab68399b0c86fed5a95;\n\n    // ORACLE_MAIN_EXECUTOR_TASK_INTERVAL = keccak256(MOC_ORACLE\\1\\ORACLE_MAIN_EXECUTOR_TASK_INTERVAL)\n    bytes32\n        public constant ORACLE_MAIN_EXECUTOR_TASK_INTERVAL = 0xb324a91be1ac0d0c4888c835aee124ca1a7caf4b73ce10aa3504e2683865d7e5;\n\n    // SCHEDULER_POOL_DELAY = keccak256(MOC_ORACLE\\1\\SCHEDULER_POOL_DELAY)\n    bytes32\n        public constant SCHEDULER_POOL_DELAY = 0x6c2abc911c0fa4c73b90c7143a9f4429749be45ebfe7b81e69b86e7ca440d811;\n\n    // SCHEDULER_ROUND_DELAY = keccak256(MOC_ORACLE\\1\\SCHEDULER_ROUND_DELAY)\n    bytes32\n        public constant SCHEDULER_ROUND_DELAY = 0xa82bea7140872d1398fa0ab5075330ab0228f4c7e381b4b6502379ffc7cdcd9f;\n\n    // ORACLE_PRICE_DIGITS = keccak256(MOC_ORACLE\\1\\ORACLE_PRICE_DIGITS)\n    bytes32\n        public constant ORACLE_PRICE_DIGITS = 0x4cd7e3f12ee4a2db0a6ba16e03fbc31bba1048c149bbf4fc9f3c02021ec550b8;\n\n    // ORACLE_QUEUE_LEN = keccak256(MOC_ORACLE\\1\\ORACLE_QUEUE_LEN)\n    bytes32\n        public constant ORACLE_QUEUE_LEN = 0x7d32d87d65898c3cbc7e72c59d223bf61c7811e99dafafd24fb08e0a38f10914;\n\n    // MESSAGE_VERSION = keccak256(MOC_ORACLE\\1\\MESSAGE_VERSION)\n    bytes32\n        public constant MESSAGE_VERSION = 0xeafac1a2b4d4fdcc942cbdce334a88ec83387087978d039f1320d3639a0b59df;\n\n    // ORACLE_STAKE_LIMIT_MULTIPLICATOR = keccak256(MOC_ORACLE\\1\\ORACLE_STAKE_LIMIT_MULTIPLICATOR)\n    bytes32\n        public constant ORACLE_STAKE_LIMIT_MULTIPLICATOR = 0xa1e0b5b458fe661fe687da135d3340a172e262c3cb31d646a4cb5cea9b6f1790;\n\n    // ORACLE_WITHDRAW_LOCK_TIME = keccak256(MOC_ORACLE\\1\\ORACLE_WITHDRAW_LOCK_TIME)\n    bytes32\n        public constant ORACLE_WITHDRAW_LOCK_TIME = 0x5e92c359b77ace8f4933558289f577781c0713b4ff91b2d2f76c8e523e560070;\n\n    // ORACLE_PRICE_DELTA_PCT = keccak256(MOC_ORACLE\\1\\ORACLE_PRICE_DELTA_PCT)\n    bytes32\n        public constant ORACLE_PRICE_DELTA_PCT = 0x41a2ac05b365409628009a8091d8dda06fe52fe2f1c792e651e5df7599a7a7de;\n\n    // ORACLE_PRICE_PUBLISH_BLOCKS = keccak256(MOC_ORACLE\\1\\ORACLE_PRICE_PUBLISH_BLOCKS)\n    bytes32\n        public constant ORACLE_PRICE_PUBLISH_BLOCKS = 0x51a2be29a473202678b6cf57b717ba5d7ff671f01fdbdbfcad4e1882601b8896;\n\n    // ORACLE_ENTERING_FALLBACKS_AMOUNTS = keccak256(MOC_ORACLE\\1\\ORACLE_ENTERING_FALLBACKS_AMOUNTS)\n    bytes32\n        public constant ORACLE_ENTERING_FALLBACKS_AMOUNTS = 0xf646c455329c7af0436f9e95c59c90ce0e11bb4e3a1deff805807798696adf88;\n\n    // ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS = keccak256(MOC_ORACLE\\1\\ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS)\n    bytes32\n        public constant ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS = 0xef9006fe6663199909dfaa4ab45e3f86d6454adb7773682f356824b6b3bc6b0e;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/RegistryConstants.sol",
+  "ast": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/RegistryConstants.sol",
+    "exportedSymbols": {
+      "RegistryConstants": [
+        2243
+      ]
+    },
+    "id": 2244,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2134,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "80:23:16"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2243,
+        "linearizedBaseContracts": [
+          2243
+        ],
+        "name": "RegistryConstants",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "functionSelector": "a68d751e",
+            "id": 2137,
+            "mutability": "constant",
+            "name": "MOC_TOKEN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "178:110:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2135,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "178:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834626435653766663932396664643162613632613333663736653066343065393762623335653862663132366330643964393163653563363961346263353231",
+              "id": 2136,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "222:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_34301403262176642430475345141297462124315141541541797329671874839448889574689_by_1",
+                "typeString": "int_const 3430...(69 digits omitted)...4689"
+              },
+              "value": "0x4bd5e7ff929fdd1ba62a33f76e0f40e97bb35e8bf126c0d9d91ce5c69a4bc521"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "9b09d9c9",
+            "id": 2140,
+            "mutability": "constant",
+            "name": "MOC_DELAY_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "351:118:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2138,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "351:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836366236303839326666366537663064613136646232373034366635393630666466643662636535633363386332316435366363636133323336613632383162",
+              "id": 2139,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "403:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_46457535898305915208067508610828180798544775342384342591313150084114647754779_by_1",
+                "typeString": "int_const 4645...(69 digits omitted)...4779"
+              },
+              "value": "0x66b60892ff6e7f0da16db27046f5960fdfd6bce5c3c8c21d56ccca3236a6281b"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b01f02bf",
+            "id": 2143,
+            "mutability": "constant",
+            "name": "MOC_STAKING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "536:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2141,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "536:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307833633535373533316665613637313230663231626337373131323730613936663162386366663364666533646437393861386139663039636539623737393732",
+              "id": 2142,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "590:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_27289761767679899470503605414841837418129089640766460561458849890813292804466_by_1",
+                "typeString": "int_const 2728...(69 digits omitted)...4466"
+              },
+              "value": "0x3c557531fea67120f21bc7711270a96f1b8cff3dfe3dd798a8a9f09ce9b77972"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "39e94f13",
+            "id": 2146,
+            "mutability": "constant",
+            "name": "MOC_VESTING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "723:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2144,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "723:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837646665613466623936386532353939636462376233303238633037643031383864306639326431643030626439356332383035353233633232343634396464",
+              "id": 2145,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "777:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_56989023896564814857868269533693085887637177154110379114370372669955121760733_by_1",
+                "typeString": "int_const 5698...(69 digits omitted)...0733"
+              },
+              "value": "0x7dfea4fb968e2599cdb7b3028c07d0188d0f92d1d00bd95c2805523c224649dd"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "586dec23",
+            "id": 2149,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "908:119:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2147,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "908:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307863306465643237373034663632643837323666646264383336343831313364396664386366333263303966383035323364326261353233653062626435626134",
+              "id": 2148,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "961:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_87237759551856948155693497295847352557469411362074454275672985018336987143076_by_1",
+                "typeString": "int_const 8723...(69 digits omitted)...3076"
+              },
+              "value": "0xc0ded27704f62d8726fdbd83648113d9fd8cf32c09f80523d2ba523e0bbd5ba4"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "faf620bc",
+            "id": 2152,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_MIN_STAKE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1111:129:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2150,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1111:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835383062653865303938646431303136373837643539633261353334626639646639656336373961323964653463386639326463333830376637643764353464",
+              "id": 2151,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1174:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_39824573253318921569491974215483359683953555504280032590204137070177369445709_by_1",
+                "typeString": "int_const 3982...(69 digits omitted)...5709"
+              },
+              "value": "0x580be8e098dd1016787d59c2a534bf9df9ec679a29de4c8f92dc3807f7d7d54d"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d51673fb",
+            "id": 2155,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1363:150:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2153,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1363:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836326635646266306331376230646638333438373430396637343761643265656361356664353463313430636135396233326366333964366636656166393136",
+              "id": 2154,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1447:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_44761054665243851476329635278615714264527663271908890788619163456042567399702_by_1",
+                "typeString": "int_const 4476...(69 digits omitted)...9702"
+              },
+              "value": "0x62f5dbf0c17b0df83487409f747ad2eeca5fd54c140ca59b32cf39d6f6eaf916"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "26400693",
+            "id": 2158,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1612:137:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2156,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1612:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307863333262396362633539303339643239376536373065376331393634323433303863393062613461343337666137636364303038343938633933346537646266",
+              "id": 2157,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1683:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_88278061647796769647894496451728266795316447119231727810473424965807912156607_by_1",
+                "typeString": "int_const 8827...(69 digits omitted)...6607"
+              },
+              "value": "0xc32b9cbc59039d297e670e7c196424308c90ba4a437fa7ccd008498c934e7dbf"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "ba6fc287",
+            "id": 2161,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1856:143:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2159,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1856:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307830613162323164666437653466333734313532396366353739653237333165383437643831626266313361383264306562613639313064376163346331633061",
+              "id": 2160,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1933:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_4571067149015558806944233413559594246798065477238565263034493143869112982538_by_1",
+                "typeString": "int_const 4571...(68 digits omitted)...2538"
+              },
+              "value": "0x0a1b21dfd7e4f3741529cf579e2731e847d81bbf13a82d0eba6910d7ac4c1c0a"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d3f055d7",
+            "id": 2164,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2102:140:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2162,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2102:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866623264333361636436356333366636386131356638666534316362386330646431656461313634666661383763363838326536383563636231633161646662",
+              "id": 2163,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2176:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_113610389761064169189295713747510603443556301741493869983894002532882827030011_by_1",
+                "typeString": "int_const 1136...(70 digits omitted)...0011"
+              },
+              "value": "0xfb2d33acd65c36f68a15f8fe41cb8c0dd1eda164ffa87c6882e685ccb1c1adfb"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b74ab6fc",
+            "id": 2167,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2351:143:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2165,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2351:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307864653165646534383934383536376334336335303462373631616638636436616635333633666166656365623132333962333038333935356438303937313466",
+              "id": 2166,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2428:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_100467991941874736228659117193429870714423259569496063320107053703679340802383_by_1",
+                "typeString": "int_const 1004...(70 digits omitted)...2383"
+              },
+              "value": "0xde1ede48948567c43c504b761af8cd6af5363fafeceb1239b3083955d809714f"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "f13eb2d5",
+            "id": 2170,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2601:142:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2168,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2601:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839396638336565306335376233323566336465616662353336643535353936373433666631313263366163306438353364356634663839623735646563303435",
+              "id": 2169,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2677:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_69642477873403552860141882353440582035151433921447851004581004378150249873477_by_1",
+                "typeString": "int_const 6964...(69 digits omitted)...3477"
+              },
+              "value": "0x99f83ee0c57b325f3deafb536d55596743ff112c6ac0d853d5f4f89b75dec045"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b90163d1",
+            "id": 2173,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PCT_PRECISION",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2835:133:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2171,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2835:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837336565353936343431656638386332303761376139313437643632663539313836623439393135353565333762376365396338303166393533396431303530",
+              "id": 2172,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2902:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_52437104146856258825889777654236028378350137236283003655087359010734866239568_by_1",
+                "typeString": "int_const 5243...(69 digits omitted)...9568"
+              },
+              "value": "0x73ee596441ef88c207a7a9147d62f59186b4991555e37b7ce9c801f9539d1050"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "213fe5c0",
+            "id": 2176,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTING_TIME_DELTA",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3067:137:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2174,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3067:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862343365653061356565366463633731313563653832346534653335333532366164366534373961666134646165623738343531303730646539343264653336",
+              "id": 2175,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3138:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_81527407727686584843288301151152428851352974019044485350828936681504075079222_by_1",
+                "typeString": "int_const 8152...(69 digits omitted)...9222"
+              },
+              "value": "0xb43ee0a5ee6dcc7115ce824e4e353526ad6e479afa4daeb78451070de942de36"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "4eb836f5",
+            "id": 2179,
+            "mutability": "constant",
+            "name": "ORACLE_MANAGER_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3284:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2177,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3284:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307831363938366637343637346632656432316435306236653734653662313262623332336666346637323336343534326664356465353130346633636333636139",
+              "id": 2178,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3338:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_10220212654756222099293107418550212079212784778256776561969820134403113499817_by_1",
+                "typeString": "int_const 1022...(69 digits omitted)...9817"
+              },
+              "value": "0x16986f74674f2ed21d50b6e74e6b12bb323ff4f72364542fd5de5104f3cc3ca9"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "ea0e0661",
+            "id": 2182,
+            "mutability": "constant",
+            "name": "SUPPORTERS_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3476:116:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2180,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3476:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865346639373935303464326137613234353537613135313935656238333133316537633461363664333339303034353437303534333561613561366565303836",
+              "id": 2181,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3526:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_103568111672344769808297337997972443278609869873650744392311485896547426558086_by_1",
+                "typeString": "int_const 1035...(70 digits omitted)...8086"
+              },
+              "value": "0xe4f979504d2a7a24557a15195eb83131e7c4a66d33900454705435aa5a6ee086"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "0358faeb",
+            "id": 2185,
+            "mutability": "constant",
+            "name": "INFO_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3652:110:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2183,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3652:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307864613966313265303166633932646533343562623734313434386433366563623936373035326464376161313637303433396166383333633961336437386631",
+              "id": 2184,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3696:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_98885259948261572830234477582836728637943593399016532507544710304595529529585_by_1",
+                "typeString": "int_const 9888...(69 digits omitted)...9585"
+              },
+              "value": "0xda9f12e01fc92de345bb741448d36ecb967052dd7aa1670439af833c9a3d78f1"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d274eaff",
+            "id": 2188,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_FETCH_RATE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3850:124:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2186,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3850:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839343566373265356434346662306365336231646533393364313934313537323362373966393761643830313038396438343730643163323065313566666566",
+              "id": 2187,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3908:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_67110945056747681556700172568434532957406819988389009647003128432567048863727_by_1",
+                "typeString": "int_const 6711...(69 digits omitted)...3727"
+              },
+              "value": "0x945f72e5d44fb0ce3b1de393d19415723b79f97ad801089d8470d1c20e15ffef"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "a6c456f1",
+            "id": 2191,
+            "mutability": "constant",
+            "name": "ORACLE_BLOCKCHAIN_INFO_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4078:132:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2189,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4078:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307831316366626466363031623830613537356534333636663032333463633036646530633966343031666532353064643964636366636365666565646236666332",
+              "id": 2190,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4144:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_8056366830712099813288423328244021754794495131790065534803223878764880162754_by_1",
+                "typeString": "int_const 8056...(68 digits omitted)...2754"
+              },
+              "value": "0x11cfbdf601b80a575e4366f0234cc06de0c9f401fe250dd9dccfccefeedb6fc2"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "296e9cc4",
+            "id": 2194,
+            "mutability": "constant",
+            "name": "ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4322:136:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2192,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4322:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307832663237316463316661383139383562646131346132643664306436306234353139316432613264393765363336623139323639366138373936643635346137",
+              "id": 2193,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4392:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_21327816299235026199082511957486323694028120692004761470084394104900780709031_by_1",
+                "typeString": "int_const 2132...(69 digits omitted)...9031"
+              },
+              "value": "0x2f271dc1fa81985bda14a2d6d0d60b45191d2a2d97e636b192696a8796d654a7"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "0fc67cec",
+            "id": 2197,
+            "mutability": "constant",
+            "name": "ORACLE_MAIN_LOOP_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4560:131:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2195,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4560:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307832373564386134366238313735373234373664326435356234316337373039646565333037373430626164363736613936393338303530303361343864323331",
+              "id": 2196,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4625:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_17805472219350966038276518242482352411413680763006121218694373721449257554481_by_1",
+                "typeString": "int_const 1780...(69 digits omitted)...4481"
+              },
+              "value": "0x275d8a46b817572476d2d55b41c7709dee307740bad676a9693805003a48d231"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "3bdc3950",
+            "id": 2200,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_REJECT_DELTA_PCT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4791:130:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2198,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4791:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837613365653436636131626433653139303839383730643864363533306230383361383664613933616162353265666363623332643539353065323730396366",
+              "id": 2199,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4855:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_55293288572049196347060526780495782923710540915175143424351493742222857669071_by_1",
+                "typeString": "int_const 5529...(69 digits omitted)...9071"
+              },
+              "value": "0x7a3ee46ca1bd3e19089870d8d6530b083a86da93aab52efccb32d5950e2709cf"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "8bc7b6f2",
+            "id": 2203,
+            "mutability": "constant",
+            "name": "ORACLE_CONFIGURATION_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5031:135:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2201,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5031:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862303237663230303661343533343664653839646234633565666335336634653035653936353332643237333636616666303033363761333934643061626334",
+              "id": 2202,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5100:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_79677638619988736780162331921238641398895984144467184138714113141798513716164_by_1",
+                "typeString": "int_const 7967...(69 digits omitted)...6164"
+              },
+              "value": "0xb027f2006a45346de89db4c5efc53f4e05e96532d27366aff00367a394d0abc4"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "94ff8ee6",
+            "id": 2206,
+            "mutability": "constant",
+            "name": "ORACLE_GATHER_SIGNATURE_TIMEOUT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5270:132:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2204,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5270:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866373562303862326239313261626462623837636334353963613062346664633031393332393338366563383461623638333939623063383666656435613935",
+              "id": 2205,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5336:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_111882116715293366874332821047928306597930690825398781737350558973443145816725_by_1",
+                "typeString": "int_const 1118...(70 digits omitted)...6725"
+              },
+              "value": "0xf75b08b2b912abdbb87cc459ca0b4fdc019329386ec84ab68399b0c86fed5a95"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "484cae4e",
+            "id": 2209,
+            "mutability": "constant",
+            "name": "ORACLE_MAIN_EXECUTOR_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5512:135:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2207,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5512:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862333234613931626531616330643063343838386338333561656531323463613161376361663462373363653130616133353034653236383338363564376535",
+              "id": 2208,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5581:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_81028773537553916261725885354695013825392075668795590849726031007025360918501_by_1",
+                "typeString": "int_const 8102...(69 digits omitted)...8501"
+              },
+              "value": "0xb324a91be1ac0d0c4888c835aee124ca1a7caf4b73ce10aa3504e2683865d7e5"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "fa8ab4c1",
+            "id": 2212,
+            "mutability": "constant",
+            "name": "SCHEDULER_POOL_DELAY",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5729:121:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2210,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5729:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836633261626339313163306661346337336239306337313433613966343432393734396265343565626665376238316536396238366537636134343064383131",
+              "id": 2211,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5784:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_48925296664174105046248918057694466431665336328502463145669131318410264762385_by_1",
+                "typeString": "int_const 4892...(69 digits omitted)...2385"
+              },
+              "value": "0x6c2abc911c0fa4c73b90c7143a9f4429749be45ebfe7b81e69b86e7ca440d811"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "9d81ac84",
+            "id": 2215,
+            "mutability": "constant",
+            "name": "SCHEDULER_ROUND_DELAY",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5934:122:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2213,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5934:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307861383262656137313430383732643133393866613061623530373533333061623032323866346337653338316234623635303233373966666337636463643966",
+              "id": 2214,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5990:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_76066151047688941033664250918456357842675895003706574740889999976672986516895_by_1",
+                "typeString": "int_const 7606...(69 digits omitted)...6895"
+              },
+              "value": "0xa82bea7140872d1398fa0ab5075330ab0228f4c7e381b4b6502379ffc7cdcd9f"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "28f134a4",
+            "id": 2218,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_DIGITS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6136:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2216,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6136:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834636437653366313265653461326462306136626131366530336662633331626261313034386331343962626634666339663363303230323165633535306238",
+              "id": 2217,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6190:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_34757221809961887263941880928567599217762195220277783958089332479475818254520_by_1",
+                "typeString": "int_const 3475...(69 digits omitted)...4520"
+              },
+              "value": "0x4cd7e3f12ee4a2db0a6ba16e03fbc31bba1048c149bbf4fc9f3c02021ec550b8"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "8da1b81d",
+            "id": 2221,
+            "mutability": "constant",
+            "name": "ORACLE_QUEUE_LEN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6330:117:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2219,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6330:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837643332643837643635383938633363626337653732633539643232336266363163373831316539396461666166643234666230386530613338663130393134",
+              "id": 2220,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6381:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_56628942584044583260939430615312220322304405101955797845084957892015431944468_by_1",
+                "typeString": "int_const 5662...(69 digits omitted)...4468"
+              },
+              "value": "0x7d32d87d65898c3cbc7e72c59d223bf61c7811e99dafafd24fb08e0a38f10914"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "3f827a5a",
+            "id": 2224,
+            "mutability": "constant",
+            "name": "MESSAGE_VERSION",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6519:116:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2222,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6519:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865616661633161326234643466646363393432636264636533333461383865633833333837303837393738643033396631333230643336333961306235396466",
+              "id": 2223,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6569:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_106284254758279053700333803391074614884560081613263081988858477103134320318943_by_1",
+                "typeString": "int_const 1062...(70 digits omitted)...8943"
+              },
+              "value": "0xeafac1a2b4d4fdcc942cbdce334a88ec83387087978d039f1320d3639a0b59df"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "7ccc00cc",
+            "id": 2227,
+            "mutability": "constant",
+            "name": "ORACLE_STAKE_LIMIT_MULTIPLICATOR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6741:133:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2225,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6741:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307861316530623562343538666536363166653638376461313335643333343061313732653236326333636233316436343661346362356365613962366631373930",
+              "id": 2226,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6808:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_73219396442667551111238730002045680357464168779414577928558006907221878708112_by_1",
+                "typeString": "int_const 7321...(69 digits omitted)...8112"
+              },
+              "value": "0xa1e0b5b458fe661fe687da135d3340a172e262c3cb31d646a4cb5cea9b6f1790"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "793caa67",
+            "id": 2230,
+            "mutability": "constant",
+            "name": "ORACLE_WITHDRAW_LOCK_TIME",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6966:126:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2228,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6966:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835653932633335396237376163653866343933333535383238396635373737383163303731336234666639316232643266373663386535323365353630303730",
+              "id": 2229,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7026:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_42776715697580231348558923072366695737955458260925463135183232407860371914864_by_1",
+                "typeString": "int_const 4277...(69 digits omitted)...4864"
+              },
+              "value": "0x5e92c359b77ace8f4933558289f577781c0713b4ff91b2d2f76c8e523e560070"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "915e4e10",
+            "id": 2233,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_DELTA_PCT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7178:123:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2231,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7178:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834316132616330356233363534303936323830303961383039316438646461303666653532666532663163373932653635316535646637353939613761376465",
+              "id": 2232,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7235:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_29687751636470347803708247065996961684951269371384760649182061038135981615070_by_1",
+                "typeString": "int_const 2968...(69 digits omitted)...5070"
+              },
+              "value": "0x41a2ac05b365409628009a8091d8dda06fe52fe2f1c792e651e5df7599a7a7de"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "7c197e21",
+            "id": 2236,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_PUBLISH_BLOCKS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7397:128:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2234,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7397:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835316132626532396134373332303236373862366366353762373137626135643766663637316630316664626462666361643465313838323630316238383936",
+              "id": 2235,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7459:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_36924882414220955033101142031370699062780721195844498609476981937927591004310_by_1",
+                "typeString": "int_const 3692...(69 digits omitted)...4310"
+              },
+              "value": "0x51a2be29a473202678b6cf57b717ba5d7ff671f01fdbdbfcad4e1882601b8896"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "4b903654",
+            "id": 2239,
+            "mutability": "constant",
+            "name": "ORACLE_ENTERING_FALLBACKS_AMOUNTS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7633:134:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2237,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7633:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866363436633435353332396337616630343336663965393563353963393063653065313162623465336131646566663830353830373739383639366164663838",
+              "id": 2238,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7701:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_111393995085227442916978022692173397459954912459520575984486306936111044943752_by_1",
+                "typeString": "int_const 1113...(70 digits omitted)...3752"
+              },
+              "value": "0xf646c455329c7af0436f9e95c59c90ce0e11bb4e3a1deff805807798696adf88"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "e873e208",
+            "id": 2242,
+            "mutability": "constant",
+            "name": "ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7887:140:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2240,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7887:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865663930303666653636363331393939303964666161346162343565336638366436343534616462373737333638326633353638323462366233626336623065",
+              "id": 2241,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7961:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_108357245057815909486406008689386336498440013083583292856211389223055765826318_by_1",
+                "typeString": "int_const 1083...(70 digits omitted)...6318"
+              },
+              "value": "0xef9006fe6663199909dfaa4ab45e3f86d6454adb7773682f356824b6b3bc6b0e"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 2244,
+        "src": "105:7925:16"
+      }
+    ],
+    "src": "80:7951:16"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/RegistryConstants.sol",
+    "exportedSymbols": {
+      "RegistryConstants": [
+        2243
+      ]
+    },
+    "id": 2244,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2134,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "80:23:16"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2243,
+        "linearizedBaseContracts": [
+          2243
+        ],
+        "name": "RegistryConstants",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "functionSelector": "a68d751e",
+            "id": 2137,
+            "mutability": "constant",
+            "name": "MOC_TOKEN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "178:110:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2135,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "178:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834626435653766663932396664643162613632613333663736653066343065393762623335653862663132366330643964393163653563363961346263353231",
+              "id": 2136,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "222:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_34301403262176642430475345141297462124315141541541797329671874839448889574689_by_1",
+                "typeString": "int_const 3430...(69 digits omitted)...4689"
+              },
+              "value": "0x4bd5e7ff929fdd1ba62a33f76e0f40e97bb35e8bf126c0d9d91ce5c69a4bc521"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "9b09d9c9",
+            "id": 2140,
+            "mutability": "constant",
+            "name": "MOC_DELAY_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "351:118:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2138,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "351:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836366236303839326666366537663064613136646232373034366635393630666466643662636535633363386332316435366363636133323336613632383162",
+              "id": 2139,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "403:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_46457535898305915208067508610828180798544775342384342591313150084114647754779_by_1",
+                "typeString": "int_const 4645...(69 digits omitted)...4779"
+              },
+              "value": "0x66b60892ff6e7f0da16db27046f5960fdfd6bce5c3c8c21d56ccca3236a6281b"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b01f02bf",
+            "id": 2143,
+            "mutability": "constant",
+            "name": "MOC_STAKING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "536:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2141,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "536:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307833633535373533316665613637313230663231626337373131323730613936663162386366663364666533646437393861386139663039636539623737393732",
+              "id": 2142,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "590:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_27289761767679899470503605414841837418129089640766460561458849890813292804466_by_1",
+                "typeString": "int_const 2728...(69 digits omitted)...4466"
+              },
+              "value": "0x3c557531fea67120f21bc7711270a96f1b8cff3dfe3dd798a8a9f09ce9b77972"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "39e94f13",
+            "id": 2146,
+            "mutability": "constant",
+            "name": "MOC_VESTING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "723:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2144,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "723:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837646665613466623936386532353939636462376233303238633037643031383864306639326431643030626439356332383035353233633232343634396464",
+              "id": 2145,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "777:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_56989023896564814857868269533693085887637177154110379114370372669955121760733_by_1",
+                "typeString": "int_const 5698...(69 digits omitted)...0733"
+              },
+              "value": "0x7dfea4fb968e2599cdb7b3028c07d0188d0f92d1d00bd95c2805523c224649dd"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "586dec23",
+            "id": 2149,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "908:119:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2147,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "908:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307863306465643237373034663632643837323666646264383336343831313364396664386366333263303966383035323364326261353233653062626435626134",
+              "id": 2148,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "961:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_87237759551856948155693497295847352557469411362074454275672985018336987143076_by_1",
+                "typeString": "int_const 8723...(69 digits omitted)...3076"
+              },
+              "value": "0xc0ded27704f62d8726fdbd83648113d9fd8cf32c09f80523d2ba523e0bbd5ba4"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "faf620bc",
+            "id": 2152,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_MIN_STAKE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1111:129:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2150,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1111:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835383062653865303938646431303136373837643539633261353334626639646639656336373961323964653463386639326463333830376637643764353464",
+              "id": 2151,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1174:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_39824573253318921569491974215483359683953555504280032590204137070177369445709_by_1",
+                "typeString": "int_const 3982...(69 digits omitted)...5709"
+              },
+              "value": "0x580be8e098dd1016787d59c2a534bf9df9ec679a29de4c8f92dc3807f7d7d54d"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d51673fb",
+            "id": 2155,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PRE_VOTE_EXPIRATION_TIME_DELTA",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1363:150:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2153,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1363:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836326635646266306331376230646638333438373430396637343761643265656361356664353463313430636135396233326366333964366636656166393136",
+              "id": 2154,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1447:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_44761054665243851476329635278615714264527663271908890788619163456042567399702_by_1",
+                "typeString": "int_const 4476...(69 digits omitted)...9702"
+              },
+              "value": "0x62f5dbf0c17b0df83487409f747ad2eeca5fd54c140ca59b32cf39d6f6eaf916"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "26400693",
+            "id": 2158,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_MAX_PRE_PROPOSALS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1612:137:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2156,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1612:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307863333262396362633539303339643239376536373065376331393634323433303863393062613461343337666137636364303038343938633933346537646266",
+              "id": 2157,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1683:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_88278061647796769647894496451728266795316447119231727810473424965807912156607_by_1",
+                "typeString": "int_const 8827...(69 digits omitted)...6607"
+              },
+              "value": "0xc32b9cbc59039d297e670e7c196424308c90ba4a437fa7ccd008498c934e7dbf"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "ba6fc287",
+            "id": 2161,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PRE_VOTE_MIN_PCT_TO_WIN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "1856:143:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2159,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1856:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307830613162323164666437653466333734313532396366353739653237333165383437643831626266313361383264306562613639313064376163346331633061",
+              "id": 2160,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1933:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_4571067149015558806944233413559594246798065477238565263034493143869112982538_by_1",
+                "typeString": "int_const 4571...(68 digits omitted)...2538"
+              },
+              "value": "0x0a1b21dfd7e4f3741529cf579e2731e847d81bbf13a82d0eba6910d7ac4c1c0a"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d3f055d7",
+            "id": 2164,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_VETO",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2102:140:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2162,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2102:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866623264333361636436356333366636386131356638666534316362386330646431656461313634666661383763363838326536383563636231633161646662",
+              "id": 2163,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2176:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_113610389761064169189295713747510603443556301741493869983894002532882827030011_by_1",
+                "typeString": "int_const 1136...(70 digits omitted)...0011"
+              },
+              "value": "0xfb2d33acd65c36f68a15f8fe41cb8c0dd1eda164ffa87c6882e685ccb1c1adfb"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b74ab6fc",
+            "id": 2167,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_FOR_QUORUM",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2351:143:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2165,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2351:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307864653165646534383934383536376334336335303462373631616638636436616635333633666166656365623132333962333038333935356438303937313466",
+              "id": 2166,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2428:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_100467991941874736228659117193429870714423259569496063320107053703679340802383_by_1",
+                "typeString": "int_const 1004...(70 digits omitted)...2383"
+              },
+              "value": "0xde1ede48948567c43c504b761af8cd6af5363fafeceb1239b3083955d809714f"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "f13eb2d5",
+            "id": 2170,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTE_MIN_PCT_TO_ACCEPT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2601:142:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2168,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2601:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839396638336565306335376233323566336465616662353336643535353936373433666631313263366163306438353364356634663839623735646563303435",
+              "id": 2169,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2677:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_69642477873403552860141882353440582035151433921447851004581004378150249873477_by_1",
+                "typeString": "int_const 6964...(69 digits omitted)...3477"
+              },
+              "value": "0x99f83ee0c57b325f3deafb536d55596743ff112c6ac0d853d5f4f89b75dec045"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "b90163d1",
+            "id": 2173,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_PCT_PRECISION",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "2835:133:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2171,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "2835:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837336565353936343431656638386332303761376139313437643632663539313836623439393135353565333762376365396338303166393533396431303530",
+              "id": 2172,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "2902:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_52437104146856258825889777654236028378350137236283003655087359010734866239568_by_1",
+                "typeString": "int_const 5243...(69 digits omitted)...9568"
+              },
+              "value": "0x73ee596441ef88c207a7a9147d62f59186b4991555e37b7ce9c801f9539d1050"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "213fe5c0",
+            "id": 2176,
+            "mutability": "constant",
+            "name": "MOC_VOTING_MACHINE_VOTING_TIME_DELTA",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3067:137:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2174,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3067:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862343365653061356565366463633731313563653832346534653335333532366164366534373961666134646165623738343531303730646539343264653336",
+              "id": 2175,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3138:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_81527407727686584843288301151152428851352974019044485350828936681504075079222_by_1",
+                "typeString": "int_const 8152...(69 digits omitted)...9222"
+              },
+              "value": "0xb43ee0a5ee6dcc7115ce824e4e353526ad6e479afa4daeb78451070de942de36"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "4eb836f5",
+            "id": 2179,
+            "mutability": "constant",
+            "name": "ORACLE_MANAGER_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3284:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2177,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3284:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307831363938366637343637346632656432316435306236653734653662313262623332336666346637323336343534326664356465353130346633636333636139",
+              "id": 2178,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3338:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_10220212654756222099293107418550212079212784778256776561969820134403113499817_by_1",
+                "typeString": "int_const 1022...(69 digits omitted)...9817"
+              },
+              "value": "0x16986f74674f2ed21d50b6e74e6b12bb323ff4f72364542fd5de5104f3cc3ca9"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "ea0e0661",
+            "id": 2182,
+            "mutability": "constant",
+            "name": "SUPPORTERS_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3476:116:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2180,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3476:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865346639373935303464326137613234353537613135313935656238333133316537633461363664333339303034353437303534333561613561366565303836",
+              "id": 2181,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3526:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_103568111672344769808297337997972443278609869873650744392311485896547426558086_by_1",
+                "typeString": "int_const 1035...(70 digits omitted)...8086"
+              },
+              "value": "0xe4f979504d2a7a24557a15195eb83131e7c4a66d33900454705435aa5a6ee086"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "0358faeb",
+            "id": 2185,
+            "mutability": "constant",
+            "name": "INFO_ADDR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3652:110:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2183,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3652:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307864613966313265303166633932646533343562623734313434386433366563623936373035326464376161313637303433396166383333633961336437386631",
+              "id": 2184,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3696:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_98885259948261572830234477582836728637943593399016532507544710304595529529585_by_1",
+                "typeString": "int_const 9888...(69 digits omitted)...9585"
+              },
+              "value": "0xda9f12e01fc92de345bb741448d36ecb967052dd7aa1670439af833c9a3d78f1"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "d274eaff",
+            "id": 2188,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_FETCH_RATE",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "3850:124:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2186,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "3850:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839343566373265356434346662306365336231646533393364313934313537323362373966393761643830313038396438343730643163323065313566666566",
+              "id": 2187,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "3908:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_67110945056747681556700172568434532957406819988389009647003128432567048863727_by_1",
+                "typeString": "int_const 6711...(69 digits omitted)...3727"
+              },
+              "value": "0x945f72e5d44fb0ce3b1de393d19415723b79f97ad801089d8470d1c20e15ffef"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "a6c456f1",
+            "id": 2191,
+            "mutability": "constant",
+            "name": "ORACLE_BLOCKCHAIN_INFO_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4078:132:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2189,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4078:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307831316366626466363031623830613537356534333636663032333463633036646530633966343031666532353064643964636366636365666565646236666332",
+              "id": 2190,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4144:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_8056366830712099813288423328244021754794495131790065534803223878764880162754_by_1",
+                "typeString": "int_const 8056...(68 digits omitted)...2754"
+              },
+              "value": "0x11cfbdf601b80a575e4366f0234cc06de0c9f401fe250dd9dccfccefeedb6fc2"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "296e9cc4",
+            "id": 2194,
+            "mutability": "constant",
+            "name": "ORACLE_COIN_PAIR_LOOP_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4322:136:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2192,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4322:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307832663237316463316661383139383562646131346132643664306436306234353139316432613264393765363336623139323639366138373936643635346137",
+              "id": 2193,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4392:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_21327816299235026199082511957486323694028120692004761470084394104900780709031_by_1",
+                "typeString": "int_const 2132...(69 digits omitted)...9031"
+              },
+              "value": "0x2f271dc1fa81985bda14a2d6d0d60b45191d2a2d97e636b192696a8796d654a7"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "0fc67cec",
+            "id": 2197,
+            "mutability": "constant",
+            "name": "ORACLE_MAIN_LOOP_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4560:131:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2195,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4560:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307832373564386134366238313735373234373664326435356234316337373039646565333037373430626164363736613936393338303530303361343864323331",
+              "id": 2196,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4625:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_17805472219350966038276518242482352411413680763006121218694373721449257554481_by_1",
+                "typeString": "int_const 1780...(69 digits omitted)...4481"
+              },
+              "value": "0x275d8a46b817572476d2d55b41c7709dee307740bad676a9693805003a48d231"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "3bdc3950",
+            "id": 2200,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_REJECT_DELTA_PCT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "4791:130:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2198,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "4791:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837613365653436636131626433653139303839383730643864363533306230383361383664613933616162353265666363623332643539353065323730396366",
+              "id": 2199,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "4855:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_55293288572049196347060526780495782923710540915175143424351493742222857669071_by_1",
+                "typeString": "int_const 5529...(69 digits omitted)...9071"
+              },
+              "value": "0x7a3ee46ca1bd3e19089870d8d6530b083a86da93aab52efccb32d5950e2709cf"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "8bc7b6f2",
+            "id": 2203,
+            "mutability": "constant",
+            "name": "ORACLE_CONFIGURATION_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5031:135:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2201,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5031:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862303237663230303661343533343664653839646234633565666335336634653035653936353332643237333636616666303033363761333934643061626334",
+              "id": 2202,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5100:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_79677638619988736780162331921238641398895984144467184138714113141798513716164_by_1",
+                "typeString": "int_const 7967...(69 digits omitted)...6164"
+              },
+              "value": "0xb027f2006a45346de89db4c5efc53f4e05e96532d27366aff00367a394d0abc4"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "94ff8ee6",
+            "id": 2206,
+            "mutability": "constant",
+            "name": "ORACLE_GATHER_SIGNATURE_TIMEOUT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5270:132:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2204,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5270:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866373562303862326239313261626462623837636334353963613062346664633031393332393338366563383461623638333939623063383666656435613935",
+              "id": 2205,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5336:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_111882116715293366874332821047928306597930690825398781737350558973443145816725_by_1",
+                "typeString": "int_const 1118...(70 digits omitted)...6725"
+              },
+              "value": "0xf75b08b2b912abdbb87cc459ca0b4fdc019329386ec84ab68399b0c86fed5a95"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "484cae4e",
+            "id": 2209,
+            "mutability": "constant",
+            "name": "ORACLE_MAIN_EXECUTOR_TASK_INTERVAL",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5512:135:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2207,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5512:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307862333234613931626531616330643063343838386338333561656531323463613161376361663462373363653130616133353034653236383338363564376535",
+              "id": 2208,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5581:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_81028773537553916261725885354695013825392075668795590849726031007025360918501_by_1",
+                "typeString": "int_const 8102...(69 digits omitted)...8501"
+              },
+              "value": "0xb324a91be1ac0d0c4888c835aee124ca1a7caf4b73ce10aa3504e2683865d7e5"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "fa8ab4c1",
+            "id": 2212,
+            "mutability": "constant",
+            "name": "SCHEDULER_POOL_DELAY",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5729:121:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2210,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5729:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836633261626339313163306661346337336239306337313433613966343432393734396265343565626665376238316536396238366537636134343064383131",
+              "id": 2211,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5784:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_48925296664174105046248918057694466431665336328502463145669131318410264762385_by_1",
+                "typeString": "int_const 4892...(69 digits omitted)...2385"
+              },
+              "value": "0x6c2abc911c0fa4c73b90c7143a9f4429749be45ebfe7b81e69b86e7ca440d811"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "9d81ac84",
+            "id": 2215,
+            "mutability": "constant",
+            "name": "SCHEDULER_ROUND_DELAY",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "5934:122:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2213,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "5934:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307861383262656137313430383732643133393866613061623530373533333061623032323866346337653338316234623635303233373966666337636463643966",
+              "id": 2214,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "5990:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_76066151047688941033664250918456357842675895003706574740889999976672986516895_by_1",
+                "typeString": "int_const 7606...(69 digits omitted)...6895"
+              },
+              "value": "0xa82bea7140872d1398fa0ab5075330ab0228f4c7e381b4b6502379ffc7cdcd9f"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "28f134a4",
+            "id": 2218,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_DIGITS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6136:120:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2216,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6136:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834636437653366313265653461326462306136626131366530336662633331626261313034386331343962626634666339663363303230323165633535306238",
+              "id": 2217,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6190:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_34757221809961887263941880928567599217762195220277783958089332479475818254520_by_1",
+                "typeString": "int_const 3475...(69 digits omitted)...4520"
+              },
+              "value": "0x4cd7e3f12ee4a2db0a6ba16e03fbc31bba1048c149bbf4fc9f3c02021ec550b8"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "8da1b81d",
+            "id": 2221,
+            "mutability": "constant",
+            "name": "ORACLE_QUEUE_LEN",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6330:117:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2219,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6330:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307837643332643837643635383938633363626337653732633539643232336266363163373831316539396461666166643234666230386530613338663130393134",
+              "id": 2220,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6381:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_56628942584044583260939430615312220322304405101955797845084957892015431944468_by_1",
+                "typeString": "int_const 5662...(69 digits omitted)...4468"
+              },
+              "value": "0x7d32d87d65898c3cbc7e72c59d223bf61c7811e99dafafd24fb08e0a38f10914"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "3f827a5a",
+            "id": 2224,
+            "mutability": "constant",
+            "name": "MESSAGE_VERSION",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6519:116:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2222,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6519:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865616661633161326234643466646363393432636264636533333461383865633833333837303837393738643033396631333230643336333961306235396466",
+              "id": 2223,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6569:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_106284254758279053700333803391074614884560081613263081988858477103134320318943_by_1",
+                "typeString": "int_const 1062...(70 digits omitted)...8943"
+              },
+              "value": "0xeafac1a2b4d4fdcc942cbdce334a88ec83387087978d039f1320d3639a0b59df"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "7ccc00cc",
+            "id": 2227,
+            "mutability": "constant",
+            "name": "ORACLE_STAKE_LIMIT_MULTIPLICATOR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6741:133:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2225,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6741:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307861316530623562343538666536363166653638376461313335643333343061313732653236326333636233316436343661346362356365613962366631373930",
+              "id": 2226,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "6808:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_73219396442667551111238730002045680357464168779414577928558006907221878708112_by_1",
+                "typeString": "int_const 7321...(69 digits omitted)...8112"
+              },
+              "value": "0xa1e0b5b458fe661fe687da135d3340a172e262c3cb31d646a4cb5cea9b6f1790"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "793caa67",
+            "id": 2230,
+            "mutability": "constant",
+            "name": "ORACLE_WITHDRAW_LOCK_TIME",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "6966:126:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2228,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "6966:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835653932633335396237376163653866343933333535383238396635373737383163303731336234666639316232643266373663386535323365353630303730",
+              "id": 2229,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7026:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_42776715697580231348558923072366695737955458260925463135183232407860371914864_by_1",
+                "typeString": "int_const 4277...(69 digits omitted)...4864"
+              },
+              "value": "0x5e92c359b77ace8f4933558289f577781c0713b4ff91b2d2f76c8e523e560070"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "915e4e10",
+            "id": 2233,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_DELTA_PCT",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7178:123:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2231,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7178:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307834316132616330356233363534303936323830303961383039316438646461303666653532666532663163373932653635316535646637353939613761376465",
+              "id": 2232,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7235:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_29687751636470347803708247065996961684951269371384760649182061038135981615070_by_1",
+                "typeString": "int_const 2968...(69 digits omitted)...5070"
+              },
+              "value": "0x41a2ac05b365409628009a8091d8dda06fe52fe2f1c792e651e5df7599a7a7de"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "7c197e21",
+            "id": 2236,
+            "mutability": "constant",
+            "name": "ORACLE_PRICE_PUBLISH_BLOCKS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7397:128:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2234,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7397:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307835316132626532396134373332303236373862366366353762373137626135643766663637316630316664626462666361643465313838323630316238383936",
+              "id": 2235,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7459:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_36924882414220955033101142031370699062780721195844498609476981937927591004310_by_1",
+                "typeString": "int_const 3692...(69 digits omitted)...4310"
+              },
+              "value": "0x51a2be29a473202678b6cf57b717ba5d7ff671f01fdbdbfcad4e1882601b8896"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "4b903654",
+            "id": 2239,
+            "mutability": "constant",
+            "name": "ORACLE_ENTERING_FALLBACKS_AMOUNTS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7633:134:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2237,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7633:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307866363436633435353332396337616630343336663965393563353963393063653065313162623465336131646566663830353830373739383639366164663838",
+              "id": 2238,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7701:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_111393995085227442916978022692173397459954912459520575984486306936111044943752_by_1",
+                "typeString": "int_const 1113...(70 digits omitted)...3752"
+              },
+              "value": "0xf646c455329c7af0436f9e95c59c90ce0e11bb4e3a1deff805807798696adf88"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "functionSelector": "e873e208",
+            "id": 2242,
+            "mutability": "constant",
+            "name": "ORACLE_TRIGGER_VALID_PUBLICATION_BLOCKS",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 2243,
+            "src": "7887:140:16",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2240,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "7887:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307865663930303666653636363331393939303964666161346162343565336638366436343534616462373737333638326633353638323462366233626336623065",
+              "id": 2241,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "7961:66:16",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_108357245057815909486406008689386336498440013083583292856211389223055765826318_by_1",
+                "typeString": "int_const 1083...(70 digits omitted)...6318"
+              },
+              "value": "0xef9006fe6663199909dfaa4ab45e3f86d6454adb7773682f356824b6b3bc6b0e"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 2244,
+        "src": "105:7925:16"
+      }
+    ],
+    "src": "80:7951:16"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.5",
+  "updatedAt": "2020-10-01T22:39:15.379Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

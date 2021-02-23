@@ -69,64 +69,118 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IOZAdminUpgradeabilityProxy\",\"name\":\"_proxy\",\"type\":\"address\"},{\"internalType\":\"contract UpgradeDelegator\",\"name\":\"_upgradeDelegator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_newImplementation\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"newImplementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxy\",\"outputs\":[{\"internalType\":\"contract IOZAdminUpgradeabilityProxy\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeDelegator\",\"outputs\":[{\"internalType\":\"contract UpgradeDelegator\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"constructor\":{\"params\":{\"_newImplementation\":\"Address of the contract the proxy will delegate to\",\"_proxy\":\"Address of the proxy to be upgraded\",\"_upgradeDelegator\":\"Address of the upgradeDelegator in charge of that proxy\"}},\"execute()\":{\"details\":\"Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in the current architecture IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template\"}},\"title\":\"UpgraderTemplate\"},\"userdoc\":{\"methods\":{\"constructor\":\"Constructor\",\"execute()\":{\"notice\":\"Execute the changes.\"}},\"notice\":\"This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/ChangersTemplates/UpgraderTemplate.sol\":\"UpgraderTemplate\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/ChangersTemplates/UpgraderTemplate.sol\":{\"keccak256\":\"0x20f3b42f7672ad62e3543a7df414dc57c50e357ccaab2ef383e6dc8d33b4b51d\",\"urls\":[\"bzz-raw://a69f31629a645d4e5ccfa2a755e187516ce3dcefd876871892314246bd5e5427\",\"dweb:/ipfs/QmabYS4S1tcgE5PR8eUGsc9TTqv6LL9m3t8yV9VobWCE6v\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/IOZAdminUpgradeabilityProxy.sol\":{\"keccak256\":\"0x080889128cf29268f4855d4a3be3e8a8a84bf0f57508a613e3a6eddfde7345b5\",\"urls\":[\"bzz-raw://aba843cc822f827ea3727dd3196d7bbd770998a0cf36d52b16c5360f98ec4603\",\"dweb:/ipfs/QmPfSuSqrrBzYYkJx9Jy624x1EbtcdYomqee5W5jjWaF4H\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/IOZProxyAdmin.sol\":{\"keccak256\":\"0x17c04bae621954ce52c2a8b8c26bf96d492b929b833c50743e79a5c903726946\",\"urls\":[\"bzz-raw://ca26e5bbd3f73c95475d72c48a201a4beabe6328c5cab9a9439870335dc0bbff\",\"dweb:/ipfs/QmR4DyYjxSJafpbPDM5vAGZ8nNjAUG9wHmYR7RZ6jimbV3\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Upgradeability/UpgradeDelegator.sol\":{\"keccak256\":\"0x3b26a400f42aaf9ff23997831d7855eb9ec2ac5b4f825cc9b7c23b9261877003\",\"urls\":[\"bzz-raw://d52f4eddc1a7a40b963937e06c8acb8d35dcf6a0874268f9123b736cc22d005f\",\"dweb:/ipfs/QmaDQzYvXFmr9Vu2C3nnKKU3CMzow9w2vnd4rm8aXwRikD\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/openzeppelin/Initializable.sol\":{\"keccak256\":\"0xee7d0fc67ce200dc66e79cae8d56e0aab1f83bf185d8be92feb4e78b6a09c68f\",\"urls\":[\"bzz-raw://f93c892f168339ddbca740122d79eed0e133561c52c93d00fd45ebee23711fd5\",\"dweb:/ipfs/Qmdmhv72FiaJVnS9MPqkU7HRSTjEF3woKbPiRTQJktXGs9\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506040516102893803806102898339818101604052606081101561003357600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b03199182161790915560018054948416948216949094179093556002805492909116919092161790556101fa8061008f6000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806333d2e9561461005157806361461954146100755780638b677b031461007f578063ec55688914610087575b600080fd5b61005961008f565b604080516001600160a01b039092168252519081900360200190f35b61007d61009e565b005b6100596100fb565b61005961010a565b6001546001600160a01b031681565b6002546001600160a01b03166100e55760405162461bcd60e51b815260040180806020018281038252602881526020018061019d6028913960400191505060405180910390fd5b6100ed6100f9565b6100f5610119565b6100f95b565b6002546001600160a01b031681565b6000546001600160a01b031681565b600154600080546002546040805163266a23b160e21b81526001600160a01b03938416600482015291831660248301525191909316926399a88ec492604480830193919282900301818387803b15801561017257600080fd5b505af1158015610186573d6000803e3d6000fd5b5050600280546001600160a01b0319169055505056fe4e657720496d706c656d656e746174696f6e2061646472657373206d7573742062652076616c6964a2646970667358221220f80614d0a72a5bb0affe5ecdb3ff1e7b273ac9bf603745185ff75dcd7bb2e5a464736f6c63430006000033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806333d2e9561461005157806361461954146100755780638b677b031461007f578063ec55688914610087575b600080fd5b61005961008f565b604080516001600160a01b039092168252519081900360200190f35b61007d61009e565b005b6100596100fb565b61005961010a565b6001546001600160a01b031681565b6002546001600160a01b03166100e55760405162461bcd60e51b815260040180806020018281038252602881526020018061019d6028913960400191505060405180910390fd5b6100ed6100f9565b6100f5610119565b6100f95b565b6002546001600160a01b031681565b6000546001600160a01b031681565b600154600080546002546040805163266a23b160e21b81526001600160a01b03938416600482015291831660248301525191909316926399a88ec492604480830193919282900301818387803b15801561017257600080fd5b505af1158015610186573d6000803e3d6000fd5b5050600280546001600160a01b0319169055505056fe4e657720496d706c656d656e746174696f6e2061646472657373206d7573742062652076616c6964a2646970667358221220f80614d0a72a5bb0affe5ecdb3ff1e7b273ac9bf603745185ff75dcd7bb2e5a464736f6c63430006000033",
-  "sourceMap": "459:2112:43:-:0;;;908:244;8:9:-1;5:2;;;30:1;27;20:12;5:2;908:244:43;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;908:244:43;;;;;;;;;;;1037:5;:14;;-1:-1:-1;;;;;1037:14:43;;;-1:-1:-1;;;;;;1037:14:43;;;;;;;;1061:36;;;;;;;;;;;;;;;1107:17;:38;;;;;;;;;;;;;459:2112;;;;;;",
-  "deployedSourceMap": "459:2112:43:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;459:2112:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;556:40;;;:::i;:::-;;;;-1:-1:-1;;;;;556:40:43;;;;;;;;;;;;;;1512:209;;;:::i;:::-;;602:32;;;:::i;510:40::-;;;:::i;556:::-;;;-1:-1:-1;;;;;556:40:43;;:::o;1512:209::-;1567:17;;-1:-1:-1;;;;;1567:17:43;1559:84;;;;-1:-1:-1;;;1559:84:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1653:16;:14;:16::i;:::-;1679:10;:8;:10::i;:::-;1699:15;;1512:209::o;602:32::-;;;-1:-1:-1;;;;;602:32:43;;:::o;510:40::-;;;-1:-1:-1;;;;;510:40:43;;:::o;1860:165::-;1899:16;;;1924:5;;1931:17;;1899:50;;;-1:-1:-1;;;1899:50:43;;-1:-1:-1;;;;;1924:5:43;;;1899:50;;;;1931:17;;;1899:50;;;;;:16;;;;;:24;;:50;;;;;:16;;:50;;;;;:16;;:50;;;5:2:-1;;;;30:1;27;20:12;5:2;1899:50:43;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;-1:-1;;1988:17:43;:30;;-1:-1:-1;;;;;;1988:30:43;;;-1:-1:-1;;1860:165:43:o",
-  "source": "pragma solidity 0.6.0;\n\nimport \"../IOZAdminUpgradeabilityProxy.sol\";\nimport \"../Governance/ChangeContract.sol\";\nimport \"../Upgradeability/UpgradeDelegator.sol\";\n\n/**\n  @title UpgraderTemplate\n  @notice This contract is a ChangeContract intended to be used when\n  upgrading any contract upgradeable through the zos-lib upgradeability\n  system. This doesn't initialize the upgraded contract, that should be done extending\n  this one or taking it as a guide\n */\ncontract UpgraderTemplate is ChangeContract {\n\n    IOZAdminUpgradeabilityProxy public proxy;\n    UpgradeDelegator public upgradeDelegator;\n    address public newImplementation;\n\n    /**\n      @notice Constructor\n      @param _proxy Address of the proxy to be upgraded\n      @param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n      @param _newImplementation Address of the contract the proxy will delegate to\n    */\n    constructor(IOZAdminUpgradeabilityProxy _proxy, UpgradeDelegator _upgradeDelegator, address _newImplementation) public {\n        proxy = _proxy;\n        upgradeDelegator = _upgradeDelegator;\n        newImplementation = _newImplementation;\n    }\n    /**\n      @notice Execute the changes.\n      @dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\n      the current architecture\n      IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template\n     */\n    function execute() external override {\n        require(newImplementation != address(0), \"New Implementation address must be valid\");\n        _beforeUpgrade();\n        _upgrade();\n        _afterUpgrade();\n    }\n\n    /**\n      @notice Upgrade the proxy to the newImplementation\n      @dev IMPORTANT: This function should not be overriden\n     */\n    function _upgrade() internal {\n        upgradeDelegator.upgrade(proxy, newImplementation);\n        // Usable just once.\n        newImplementation = address(0);\n    }\n\n    /**\n      @notice Intended to prepare the system for the upgrade\n      @dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade\n     */\n    function _beforeUpgrade() internal {\n    }\n\n    /**\n      @notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n      @dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade\n     */\n    function _afterUpgrade() internal {\n    }\n}\n",
-  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/ChangersTemplates/UpgraderTemplate.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IOZAdminUpgradeabilityProxy\",\"name\":\"_proxy\",\"type\":\"address\"},{\"internalType\":\"contract UpgradeDelegator\",\"name\":\"_upgradeDelegator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_newImplementation\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"newImplementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxy\",\"outputs\":[{\"internalType\":\"contract IOZAdminUpgradeabilityProxy\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeDelegator\",\"outputs\":[{\"internalType\":\"contract UpgradeDelegator\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"constructor\":{\"params\":{\"_newImplementation\":\"Address of the contract the proxy will delegate to\",\"_proxy\":\"Address of the proxy to be upgraded\",\"_upgradeDelegator\":\"Address of the upgradeDelegator in charge of that proxy\"}},\"execute()\":{\"details\":\"Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in the current architecture IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template\"}},\"title\":\"UpgraderTemplate\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":\"Constructor\",\"execute()\":{\"notice\":\"Execute the changes.\"}},\"notice\":\"This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/ChangersTemplates/UpgraderTemplate.sol\":\"UpgraderTemplate\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/ChangersTemplates/UpgraderTemplate.sol\":{\"keccak256\":\"0x71a7f816f8a7fa7f8c0ea611407c3b1ceb85ecf46a05e450fcb7e7d6968112c5\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://52de3c75181ec65c9cf5559f408d1f48e32efbd79073a2f988648a73146a8365\",\"dweb:/ipfs/QmYakjzfH17buCWfkt8EG9ZQTL5i6aFE9bwhNTVDu7EQGJ\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/ChangeContract.sol\":{\"keccak256\":\"0x6c786977acab4c076087e4569b2fd423e2c3a7e45150353c18de328b7e114843\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://cbdaaed4b97fc67586f6f20f185d6227dd4a1d0896bd6db20ee06744cca2eaa6\",\"dweb:/ipfs/QmbZrRtxMdebQa1dHfTdC1pPA48ZvzSopcc2pLmmJ7XJ9X\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol\":{\"keccak256\":\"0xf948f3ef0d990c9b5199cb96ed42a7b4b96b1dce0abfc168289f9de8576286e2\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://5b770c1391989e9db75789bb15cc4413d520eecb327fed0c114a66407a3f4404\",\"dweb:/ipfs/QmPqRtG3cfB3tc5fFs9Q8yMNkxHB4oxMSY27jDXYhB754c\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/IGovernor.sol\":{\"keccak256\":\"0xed68469a6e1759efc5dece43aaf7fdf25e39163626df454bd9f9662ca8e9df61\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://a615e8209f9f332ed8d16452fd83c412f44162bd6fb8af6a1556bdc033a36735\",\"dweb:/ipfs/Qmda7FzLXHG9WZSTVBXwGCjLT7xU5Ugh287jQ4qafAr5WX\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/IOZAdminUpgradeabilityProxy.sol\":{\"keccak256\":\"0x3e3e138c6b913f1f21c083680bba50bef5377c7bcdb082ab025d8e285ee2c445\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://8fbec08a47400f965188c9aac17783d9771f1a751d1d19acfd63d39310d6a714\",\"dweb:/ipfs/QmceyPCbC6tpm5U1JezAkLunkn6jQMNwHZeKXZkUZeAQLB\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/IOZProxyAdmin.sol\":{\"keccak256\":\"0x47d62d98c45ba8880b07fac74b398c75ec278ccd7ea0f12424354892012498f9\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://599fcdffd749d1f64121a6308fb34f38043dcc571817babdf245ec870d7c5b73\",\"dweb:/ipfs/QmVbUcU67aAuGZRGKx8DfrKx4U2nqxxMCU9FRdTn6GZoJv\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Upgradeability/UpgradeDelegator.sol\":{\"keccak256\":\"0x1d6a9516ff2181cc1d47cac3d671ed7a05a903c687a2b0dd48688b1939651d05\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://5c0043729794e62e1abdf476151a5623ec68a696013cb6a2f13b6a91dbb63eeb\",\"dweb:/ipfs/QmWHTJ93ex35NB4X8fLjsVLUrhFpaMckq6MNtvk5t7QRtD\"]},\"@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol\":{\"keccak256\":\"0x9bfec92e36234ecc99b5d37230acb6cd1f99560233753162204104a4897e8721\",\"urls\":[\"bzz-raw://5cf7c208583d4d046d75bd99f5507412ab01cce9dd9f802ce9768a416d93ea2f\",\"dweb:/ipfs/QmcQS1BBMPpVEkXP3qzwSjxHNrqDek8YeR7xbVWDC9ApC7\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161026f38038061026f8339818101604052606081101561003357600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b03199182161790915560018054948416948216949094179093556002805492909116919092161790556101e08061008f6000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806333d2e9561461005157806361461954146100755780638b677b031461007f578063ec55688914610087575b600080fd5b61005961008f565b604080516001600160a01b039092168252519081900360200190f35b61007d61009e565b005b610059610109565b610059610118565b6001546001600160a01b031681565b6002546001600160a01b03166100f3576040805162461bcd60e51b81526020600482015260156024820152741059191c995cdcc81b5d5cdd081899481d985b1a59605a1b604482015290519081900360640190fd5b6100fb610107565b610103610127565b6101075b565b6002546001600160a01b031681565b6000546001600160a01b031681565b600154600080546002546040805163266a23b160e21b81526001600160a01b03938416600482015291831660248301525191909316926399a88ec492604480830193919282900301818387803b15801561018057600080fd5b505af1158015610194573d6000803e3d6000fd5b5050600280546001600160a01b0319169055505056fea2646970667358221220278af08171585c1686062f1bc5aa149ebe9a6094a8137c710e3cec7d5a12f03164736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806333d2e9561461005157806361461954146100755780638b677b031461007f578063ec55688914610087575b600080fd5b61005961008f565b604080516001600160a01b039092168252519081900360200190f35b61007d61009e565b005b610059610109565b610059610118565b6001546001600160a01b031681565b6002546001600160a01b03166100f3576040805162461bcd60e51b81526020600482015260156024820152741059191c995cdcc81b5d5cdd081899481d985b1a59605a1b604482015290519081900360640190fd5b6100fb610107565b610103610127565b6101075b565b6002546001600160a01b031681565b6000546001600160a01b031681565b600154600080546002546040805163266a23b160e21b81526001600160a01b03938416600482015291831660248301525191909316926399a88ec492604480830193919282900301818387803b15801561018057600080fd5b505af1158015610194573d6000803e3d6000fd5b5050600280546001600160a01b0319169055505056fea2646970667358221220278af08171585c1686062f1bc5aa149ebe9a6094a8137c710e3cec7d5a12f03164736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "580:2113:20:-:0;;;1028:274;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1028:274:20;;;;;;;;;;;1187:5;:14;;-1:-1:-1;;;;;1187:14:20;;;-1:-1:-1;;;;;;1187:14:20;;;;;;;;1211:36;;;;;;;;;;;;;;;1257:17;:38;;;;;;;;;;;;;580:2113;;;;;;",
+  "deployedSourceMap": "580:2113:20:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;676:40;;;:::i;:::-;;;;-1:-1:-1;;;;;676:40:20;;;;;;;;;;;;;;1663:190;;;:::i;:::-;;722:32;;;:::i;630:40::-;;;:::i;676:::-;;;-1:-1:-1;;;;;676:40:20;;:::o;1663:190::-;1718:17;;-1:-1:-1;;;;;1718:17:20;1710:65;;;;;-1:-1:-1;;;1710:65:20;;;;;;;;;;;;-1:-1:-1;;;1710:65:20;;;;;;;;;;;;;;;1785:16;:14;:16::i;:::-;1811:10;:8;:10::i;:::-;1831:15;;1663:190::o;722:32::-;;;-1:-1:-1;;;;;722:32:20;;:::o;630:40::-;;;-1:-1:-1;;;;;630:40:20;;:::o;1992:165::-;2031:16;;;2056:5;;2063:17;;2031:50;;;-1:-1:-1;;;2031:50:20;;-1:-1:-1;;;;;2056:5:20;;;2031:50;;;;2063:17;;;2031:50;;;;;:16;;;;;:24;;:50;;;;;:16;;:50;;;;;:16;;:50;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;2120:17:20;:30;;-1:-1:-1;;;;;;2120:30:20;;;-1:-1:-1;;1992:165:20:o",
+  "source": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.6.0;\n\nimport {IOZAdminUpgradeabilityProxy} from \"../IOZAdminUpgradeabilityProxy.sol\";\nimport {ChangeContract} from \"../Governance/ChangeContract.sol\";\nimport {UpgradeDelegator} from \"../Upgradeability/UpgradeDelegator.sol\";\n\n/**\n  @title UpgraderTemplate\n  @notice This contract is a ChangeContract intended to be used when\n  upgrading any contract upgradeable through the zos-lib upgradeability\n  system. This doesn't initialize the upgraded contract, that should be done extending\n  this one or taking it as a guide\n */\ncontract UpgraderTemplate is ChangeContract {\n    IOZAdminUpgradeabilityProxy public proxy;\n    UpgradeDelegator public upgradeDelegator;\n    address public newImplementation;\n\n    /**\n      @notice Constructor\n      @param _proxy Address of the proxy to be upgraded\n      @param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n      @param _newImplementation Address of the contract the proxy will delegate to\n    */\n    constructor(\n        IOZAdminUpgradeabilityProxy _proxy,\n        UpgradeDelegator _upgradeDelegator,\n        address _newImplementation\n    ) public {\n        proxy = _proxy;\n        upgradeDelegator = _upgradeDelegator;\n        newImplementation = _newImplementation;\n    }\n\n    /**\n      @notice Execute the changes.\n      @dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\n      the current architecture\n      IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template\n     */\n    function execute() external override {\n        require(newImplementation != address(0), \"Address must be valid\");\n        _beforeUpgrade();\n        _upgrade();\n        _afterUpgrade();\n    }\n\n    /**\n      @notice Upgrade the proxy to the newImplementation\n      @dev IMPORTANT: This function should not be overriden\n     */\n    function _upgrade() internal {\n        upgradeDelegator.upgrade(proxy, newImplementation);\n        // Usable just once.\n        newImplementation = address(0);\n    }\n\n    /**\n      @notice Intended to prepare the system for the upgrade\n      @dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade\n     */\n    function _beforeUpgrade() internal {}\n\n    /**\n      @notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n      @dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade\n     */\n    function _afterUpgrade() internal {}\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/ChangersTemplates/UpgraderTemplate.sol",
   "ast": {
-    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/ChangersTemplates/UpgraderTemplate.sol",
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/ChangersTemplates/UpgraderTemplate.sol",
     "exportedSymbols": {
       "UpgraderTemplate": [
-        8870
+        3025
       ]
     },
-    "id": 8871,
+    "id": 3026,
+    "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8786,
+        "id": 2932,
         "literals": [
           "solidity",
+          "^",
           "0.6",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:43"
+        "src": "39:23:20"
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/IOZAdminUpgradeabilityProxy.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/IOZAdminUpgradeabilityProxy.sol",
         "file": "../IOZAdminUpgradeabilityProxy.sol",
-        "id": 8787,
+        "id": 2934,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 9084,
-        "src": "24:44:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3474,
+        "src": "64:79:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2933,
+              "name": "IOZAdminUpgradeabilityProxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "72:27:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/ChangeContract.sol",
         "file": "../Governance/ChangeContract.sol",
-        "id": 8788,
+        "id": 2936,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 8877,
-        "src": "69:42:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3034,
+        "src": "144:64:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2935,
+              "name": "ChangeContract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "152:14:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Upgradeability/UpgradeDelegator.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Upgradeability/UpgradeDelegator.sol",
         "file": "../Upgradeability/UpgradeDelegator.sol",
-        "id": 8789,
+        "id": 2938,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 9273,
-        "src": "112:48:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3678,
+        "src": "209:72:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2937,
+              "name": "UpgradeDelegator",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:16:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
@@ -136,31 +190,36 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 8790,
+              "id": 2940,
               "name": "ChangeContract",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8876,
-              "src": "488:14:43",
+              "referencedDeclaration": 3033,
+              "src": "609:14:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                "typeIdentifier": "t_contract$_ChangeContract_$3033",
                 "typeString": "contract ChangeContract"
               }
             },
-            "id": 8791,
+            "id": 2941,
             "nodeType": "InheritanceSpecifier",
-            "src": "488:14:43"
+            "src": "609:14:20"
           }
         ],
         "contractDependencies": [
-          8876
+          3033
         ],
         "contractKind": "contract",
-        "documentation": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide",
+        "documentation": {
+          "id": 2939,
+          "nodeType": "StructuredDocumentation",
+          "src": "283:296:20",
+          "text": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide"
+        },
         "fullyImplemented": true,
-        "id": 8870,
+        "id": 3025,
         "linearizedBaseContracts": [
-          8870,
-          8876
+          3025,
+          3033
         ],
         "name": "UpgraderTemplate",
         "nodeType": "ContractDefinition",
@@ -168,27 +227,28 @@
           {
             "constant": false,
             "functionSelector": "ec556889",
-            "id": 8793,
+            "id": 2943,
+            "mutability": "mutable",
             "name": "proxy",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "510:40:43",
+            "scope": 3025,
+            "src": "630:40:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+              "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
               "typeString": "contract IOZAdminUpgradeabilityProxy"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8792,
+              "id": 2942,
               "name": "IOZAdminUpgradeabilityProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9083,
-              "src": "510:27:43",
+              "referencedDeclaration": 3473,
+              "src": "630:27:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                 "typeString": "contract IOZAdminUpgradeabilityProxy"
               }
             },
@@ -198,27 +258,28 @@
           {
             "constant": false,
             "functionSelector": "33d2e956",
-            "id": 8795,
+            "id": 2945,
+            "mutability": "mutable",
             "name": "upgradeDelegator",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "556:40:43",
+            "scope": 3025,
+            "src": "676:40:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+              "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
               "typeString": "contract UpgradeDelegator"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8794,
+              "id": 2944,
               "name": "UpgradeDelegator",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9272,
-              "src": "556:16:43",
+              "referencedDeclaration": 3677,
+              "src": "676:16:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                 "typeString": "contract UpgradeDelegator"
               }
             },
@@ -228,12 +289,13 @@
           {
             "constant": false,
             "functionSelector": "8b677b03",
-            "id": 8797,
+            "id": 2947,
+            "mutability": "mutable",
             "name": "newImplementation",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "602:32:43",
+            "scope": 3025,
+            "src": "722:32:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -241,10 +303,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 8796,
+              "id": 2946,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "602:7:43",
+              "src": "722:7:20",
               "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
@@ -256,28 +318,28 @@
           },
           {
             "body": {
-              "id": 8818,
+              "id": 2969,
               "nodeType": "Block",
-              "src": "1027:125:43",
+              "src": "1177:125:20",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8808,
+                    "id": 2959,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8806,
+                      "id": 2957,
                       "name": "proxy",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8793,
-                      "src": "1037:5:43",
+                      "referencedDeclaration": 2943,
+                      "src": "1187:5:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                         "typeString": "contract IOZAdminUpgradeabilityProxy"
                       }
                     },
@@ -285,45 +347,45 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8807,
+                      "id": 2958,
                       "name": "_proxy",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8799,
-                      "src": "1045:6:43",
+                      "referencedDeclaration": 2950,
+                      "src": "1195:6:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                         "typeString": "contract IOZAdminUpgradeabilityProxy"
                       }
                     },
-                    "src": "1037:14:43",
+                    "src": "1187:14:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                       "typeString": "contract IOZAdminUpgradeabilityProxy"
                     }
                   },
-                  "id": 8809,
+                  "id": 2960,
                   "nodeType": "ExpressionStatement",
-                  "src": "1037:14:43"
+                  "src": "1187:14:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8812,
+                    "id": 2963,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8810,
+                      "id": 2961,
                       "name": "upgradeDelegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8795,
-                      "src": "1061:16:43",
+                      "referencedDeclaration": 2945,
+                      "src": "1211:16:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                        "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                         "typeString": "contract UpgradeDelegator"
                       }
                     },
@@ -331,43 +393,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8811,
+                      "id": 2962,
                       "name": "_upgradeDelegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8801,
-                      "src": "1080:17:43",
+                      "referencedDeclaration": 2952,
+                      "src": "1230:17:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                        "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                         "typeString": "contract UpgradeDelegator"
                       }
                     },
-                    "src": "1061:36:43",
+                    "src": "1211:36:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                      "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                       "typeString": "contract UpgradeDelegator"
                     }
                   },
-                  "id": 8813,
+                  "id": 2964,
                   "nodeType": "ExpressionStatement",
-                  "src": "1061:36:43"
+                  "src": "1211:36:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8816,
+                    "id": 2967,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8814,
+                      "id": 2965,
                       "name": "newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8797,
-                      "src": "1107:17:43",
+                      "referencedDeclaration": 2947,
+                      "src": "1257:17:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -377,31 +439,36 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8815,
+                      "id": 2966,
                       "name": "_newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8803,
-                      "src": "1127:18:43",
+                      "referencedDeclaration": 2954,
+                      "src": "1277:18:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "1107:38:43",
+                    "src": "1257:38:20",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8817,
+                  "id": 2968,
                   "nodeType": "ExpressionStatement",
-                  "src": "1107:38:43"
+                  "src": "1257:38:20"
                 }
               ]
             },
-            "documentation": "@notice Constructor\n@param _proxy Address of the proxy to be upgraded\n@param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n@param _newImplementation Address of the contract the proxy will delegate to",
-            "id": 8819,
+            "documentation": {
+              "id": 2948,
+              "nodeType": "StructuredDocumentation",
+              "src": "761:262:20",
+              "text": "@notice Constructor\n@param _proxy Address of the proxy to be upgraded\n@param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n@param _newImplementation Address of the contract the proxy will delegate to"
+            },
+            "id": 2970,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -409,32 +476,33 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8804,
+              "id": 2955,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8799,
+                  "id": 2950,
+                  "mutability": "mutable",
                   "name": "_proxy",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "920:34:43",
+                  "scope": 2970,
+                  "src": "1049:34:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                    "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                     "typeString": "contract IOZAdminUpgradeabilityProxy"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8798,
+                    "id": 2949,
                     "name": "IOZAdminUpgradeabilityProxy",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9083,
-                    "src": "920:27:43",
+                    "referencedDeclaration": 3473,
+                    "src": "1049:27:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                       "typeString": "contract IOZAdminUpgradeabilityProxy"
                     }
                   },
@@ -443,27 +511,28 @@
                 },
                 {
                   "constant": false,
-                  "id": 8801,
+                  "id": 2952,
+                  "mutability": "mutable",
                   "name": "_upgradeDelegator",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "956:34:43",
+                  "scope": 2970,
+                  "src": "1093:34:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                    "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                     "typeString": "contract UpgradeDelegator"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8800,
+                    "id": 2951,
                     "name": "UpgradeDelegator",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9272,
-                    "src": "956:16:43",
+                    "referencedDeclaration": 3677,
+                    "src": "1093:16:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                      "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                       "typeString": "contract UpgradeDelegator"
                     }
                   },
@@ -472,12 +541,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8803,
+                  "id": 2954,
+                  "mutability": "mutable",
                   "name": "_newImplementation",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "992:26:43",
+                  "scope": 2970,
+                  "src": "1137:26:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -485,10 +555,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8802,
+                    "id": 2953,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "992:7:43",
+                    "src": "1137:7:20",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -499,28 +569,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "919:100:43"
+              "src": "1039:130:20"
             },
             "returnParameters": {
-              "id": 8805,
+              "id": 2956,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1027:0:43"
+              "src": "1177:0:20"
             },
-            "scope": 8870,
-            "src": "908:244:43",
+            "scope": 3025,
+            "src": "1028:274:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
             "baseFunctions": [
-              8875
+              3032
             ],
             "body": {
-              "id": 8842,
+              "id": 2994,
               "nodeType": "Block",
-              "src": "1549:172:43",
+              "src": "1700:153:20",
               "statements": [
                 {
                   "expression": {
@@ -532,19 +602,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8829,
+                        "id": 2981,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8824,
+                          "id": 2976,
                           "name": "newImplementation",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8797,
-                          "src": "1567:17:43",
+                          "referencedDeclaration": 2947,
+                          "src": "1718:17:20",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -558,14 +628,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 8827,
+                              "id": 2979,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "1596:1:43",
+                              "src": "1747:1:20",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -581,29 +651,29 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 8826,
+                            "id": 2978,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "1588:7:43",
+                            "src": "1739:7:20",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": {
-                              "id": 8825,
+                              "id": 2977,
                               "name": "address",
                               "nodeType": "ElementaryTypeName",
-                              "src": "1588:7:43",
+                              "src": "1739:7:20",
                               "typeDescriptions": {
                                 "typeIdentifier": null,
                                 "typeString": null
                               }
                             }
                           },
-                          "id": 8828,
+                          "id": 2980,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -611,14 +681,14 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1588:10:43",
+                          "src": "1739:10:20",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           }
                         },
-                        "src": "1567:31:43",
+                        "src": "1718:31:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -626,21 +696,21 @@
                       },
                       {
                         "argumentTypes": null,
-                        "hexValue": "4e657720496d706c656d656e746174696f6e2061646472657373206d7573742062652076616c6964",
-                        "id": 8830,
+                        "hexValue": "41646472657373206d7573742062652076616c6964",
+                        "id": 2982,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1600:42:43",
+                        "src": "1751:23:20",
                         "subdenomination": null,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_stringliteral_16883681bb9452a24670f58f4c6b57df5d7887dd4a472dca2a6bd0fb19545ace",
-                          "typeString": "literal_string \"New Implementation address must be valid\""
+                          "typeIdentifier": "t_stringliteral_7e665da7175b939c7746aa731e1ef543f098601c2ef9c0126933065af539a021",
+                          "typeString": "literal_string \"Address must be valid\""
                         },
-                        "value": "New Implementation address must be valid"
+                        "value": "Address must be valid"
                       }
                     ],
                     "expression": {
@@ -650,25 +720,25 @@
                           "typeString": "bool"
                         },
                         {
-                          "typeIdentifier": "t_stringliteral_16883681bb9452a24670f58f4c6b57df5d7887dd4a472dca2a6bd0fb19545ace",
-                          "typeString": "literal_string \"New Implementation address must be valid\""
+                          "typeIdentifier": "t_stringliteral_7e665da7175b939c7746aa731e1ef543f098601c2ef9c0126933065af539a021",
+                          "typeString": "literal_string \"Address must be valid\""
                         }
                       ],
-                      "id": 8823,
+                      "id": 2975,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10700,
-                        10701
+                        -18,
+                        -18
                       ],
-                      "referencedDeclaration": 10701,
-                      "src": "1559:7:43",
+                      "referencedDeclaration": -18,
+                      "src": "1710:7:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8831,
+                    "id": 2983,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -676,16 +746,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1559:84:43",
+                    "src": "1710:65:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8832,
+                  "id": 2984,
                   "nodeType": "ExpressionStatement",
-                  "src": "1559:84:43"
+                  "src": "1710:65:20"
                 },
                 {
                   "expression": {
@@ -693,18 +763,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8833,
+                      "id": 2985,
                       "name": "_beforeUpgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8865,
-                      "src": "1653:14:43",
+                      "referencedDeclaration": 3019,
+                      "src": "1785:14:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8834,
+                    "id": 2986,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -712,16 +782,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1653:16:43",
+                    "src": "1785:16:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8835,
+                  "id": 2987,
                   "nodeType": "ExpressionStatement",
-                  "src": "1653:16:43"
+                  "src": "1785:16:20"
                 },
                 {
                   "expression": {
@@ -729,18 +799,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8836,
+                      "id": 2988,
                       "name": "_upgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8861,
-                      "src": "1679:8:43",
+                      "referencedDeclaration": 3014,
+                      "src": "1811:8:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8837,
+                    "id": 2989,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -748,16 +818,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1679:10:43",
+                    "src": "1811:10:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8838,
+                  "id": 2990,
                   "nodeType": "ExpressionStatement",
-                  "src": "1679:10:43"
+                  "src": "1811:10:20"
                 },
                 {
                   "expression": {
@@ -765,18 +835,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8839,
+                      "id": 2991,
                       "name": "_afterUpgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8869,
-                      "src": "1699:13:43",
+                      "referencedDeclaration": 3024,
+                      "src": "1831:13:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8840,
+                    "id": 2992,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -784,56 +854,61 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1699:15:43",
+                    "src": "1831:15:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8841,
+                  "id": 2993,
                   "nodeType": "ExpressionStatement",
-                  "src": "1699:15:43"
+                  "src": "1831:15:20"
                 }
               ]
             },
-            "documentation": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\nthe current architecture\nIMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template",
+            "documentation": {
+              "id": 2971,
+              "nodeType": "StructuredDocumentation",
+              "src": "1308:350:20",
+              "text": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\nthe current architecture\nIMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template"
+            },
             "functionSelector": "61461954",
-            "id": 8843,
+            "id": 2995,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "execute",
             "nodeType": "FunctionDefinition",
             "overrides": {
-              "id": 8821,
+              "id": 2973,
               "nodeType": "OverrideSpecifier",
               "overrides": [],
-              "src": "1540:8:43"
+              "src": "1691:8:20"
             },
             "parameters": {
-              "id": 8820,
+              "id": 2972,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1528:2:43"
+              "src": "1679:2:20"
             },
             "returnParameters": {
-              "id": 8822,
+              "id": 2974,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1549:0:43"
+              "src": "1700:0:20"
             },
-            "scope": 8870,
-            "src": "1512:209:43",
+            "scope": 3025,
+            "src": "1663:190:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "body": {
-              "id": 8860,
+              "id": 3013,
               "nodeType": "Block",
-              "src": "1889:136:43",
+              "src": "2021:136:20",
               "statements": [
                 {
                   "expression": {
@@ -841,25 +916,25 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 8849,
+                        "id": 3002,
                         "name": "proxy",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8793,
-                        "src": "1924:5:43",
+                        "referencedDeclaration": 2943,
+                        "src": "2056:5:20",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                           "typeString": "contract IOZAdminUpgradeabilityProxy"
                         }
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8850,
+                        "id": 3003,
                         "name": "newImplementation",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8797,
-                        "src": "1931:17:43",
+                        "referencedDeclaration": 2947,
+                        "src": "2063:17:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -869,7 +944,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                           "typeString": "contract IOZAdminUpgradeabilityProxy"
                         },
                         {
@@ -879,32 +954,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 8846,
+                        "id": 2999,
                         "name": "upgradeDelegator",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8795,
-                        "src": "1899:16:43",
+                        "referencedDeclaration": 2945,
+                        "src": "2031:16:20",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                          "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                           "typeString": "contract UpgradeDelegator"
                         }
                       },
-                      "id": 8848,
+                      "id": 3001,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "upgrade",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9246,
-                      "src": "1899:24:43",
+                      "referencedDeclaration": 3652,
+                      "src": "2031:24:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_nonpayable$_t_contract$_IOZAdminUpgradeabilityProxy_$9083_$_t_address_$returns$__$",
+                        "typeIdentifier": "t_function_external_nonpayable$_t_contract$_IOZAdminUpgradeabilityProxy_$3473_$_t_address_$returns$__$",
                         "typeString": "function (contract IOZAdminUpgradeabilityProxy,address) external"
                       }
                     },
-                    "id": 8851,
+                    "id": 3004,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -912,33 +987,33 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1899:50:43",
+                    "src": "2031:50:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8852,
+                  "id": 3005,
                   "nodeType": "ExpressionStatement",
-                  "src": "1899:50:43"
+                  "src": "2031:50:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8858,
+                    "id": 3011,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8853,
+                      "id": 3006,
                       "name": "newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8797,
-                      "src": "1988:17:43",
+                      "referencedDeclaration": 2947,
+                      "src": "2120:17:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -952,14 +1027,14 @@
                         {
                           "argumentTypes": null,
                           "hexValue": "30",
-                          "id": 8856,
+                          "id": 3009,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
                           "kind": "number",
                           "lValueRequested": false,
                           "nodeType": "Literal",
-                          "src": "2016:1:43",
+                          "src": "2148:1:20",
                           "subdenomination": null,
                           "typeDescriptions": {
                             "typeIdentifier": "t_rational_0_by_1",
@@ -975,29 +1050,29 @@
                             "typeString": "int_const 0"
                           }
                         ],
-                        "id": 8855,
+                        "id": 3008,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "nodeType": "ElementaryTypeNameExpression",
-                        "src": "2008:7:43",
+                        "src": "2140:7:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_type$_t_address_$",
                           "typeString": "type(address)"
                         },
                         "typeName": {
-                          "id": 8854,
+                          "id": 3007,
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
-                          "src": "2008:7:43",
+                          "src": "2140:7:20",
                           "typeDescriptions": {
                             "typeIdentifier": null,
                             "typeString": null
                           }
                         }
                       },
-                      "id": 8857,
+                      "id": 3010,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1005,27 +1080,32 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "2008:10:43",
+                      "src": "2140:10:20",
                       "tryCall": false,
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
                       }
                     },
-                    "src": "1988:30:43",
+                    "src": "2120:30:20",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8859,
+                  "id": 3012,
                   "nodeType": "ExpressionStatement",
-                  "src": "1988:30:43"
+                  "src": "2120:30:20"
                 }
               ]
             },
-            "documentation": "@notice Upgrade the proxy to the newImplementation\n@dev IMPORTANT: This function should not be overriden",
-            "id": 8861,
+            "documentation": {
+              "id": 2996,
+              "nodeType": "StructuredDocumentation",
+              "src": "1859:128:20",
+              "text": "@notice Upgrade the proxy to the newImplementation\n@dev IMPORTANT: This function should not be overriden"
+            },
+            "id": 3014,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1033,32 +1113,37 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8844,
+              "id": 2997,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1877:2:43"
+              "src": "2009:2:20"
             },
             "returnParameters": {
-              "id": 8845,
+              "id": 2998,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1889:0:43"
+              "src": "2021:0:20"
             },
-            "scope": 8870,
-            "src": "1860:165:43",
+            "scope": 3025,
+            "src": "1992:165:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8864,
+              "id": 3018,
               "nodeType": "Block",
-              "src": "2273:7:43",
+              "src": "2405:2:20",
               "statements": []
             },
-            "documentation": "@notice Intended to prepare the system for the upgrade\n@dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade",
-            "id": 8865,
+            "documentation": {
+              "id": 3015,
+              "nodeType": "StructuredDocumentation",
+              "src": "2163:202:20",
+              "text": "@notice Intended to prepare the system for the upgrade\n@dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade"
+            },
+            "id": 3019,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1066,32 +1151,37 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8862,
+              "id": 3016,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2261:2:43"
+              "src": "2393:2:20"
             },
             "returnParameters": {
-              "id": 8863,
+              "id": 3017,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2273:0:43"
+              "src": "2405:0:20"
             },
-            "scope": 8870,
-            "src": "2238:42:43",
+            "scope": 3025,
+            "src": "2370:37:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8868,
+              "id": 3023,
               "nodeType": "Block",
-              "src": "2562:7:43",
+              "src": "2689:2:20",
               "statements": []
             },
-            "documentation": "@notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n@dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade",
-            "id": 8869,
+            "documentation": {
+              "id": 3020,
+              "nodeType": "StructuredDocumentation",
+              "src": "2413:237:20",
+              "text": "@notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n@dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade"
+            },
+            "id": 3024,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1099,81 +1189,134 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8866,
+              "id": 3021,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2550:2:43"
+              "src": "2677:2:20"
             },
             "returnParameters": {
-              "id": 8867,
+              "id": 3022,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2562:0:43"
+              "src": "2689:0:20"
             },
-            "scope": 8870,
-            "src": "2528:41:43",
+            "scope": 3025,
+            "src": "2655:36:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 8871,
-        "src": "459:2112:43"
+        "scope": 3026,
+        "src": "580:2113:20"
       }
     ],
-    "src": "0:2572:43"
+    "src": "39:2655:20"
   },
   "legacyAST": {
-    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/ChangersTemplates/UpgraderTemplate.sol",
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/ChangersTemplates/UpgraderTemplate.sol",
     "exportedSymbols": {
       "UpgraderTemplate": [
-        8870
+        3025
       ]
     },
-    "id": 8871,
+    "id": 3026,
+    "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8786,
+        "id": 2932,
         "literals": [
           "solidity",
+          "^",
           "0.6",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:43"
+        "src": "39:23:20"
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/IOZAdminUpgradeabilityProxy.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/IOZAdminUpgradeabilityProxy.sol",
         "file": "../IOZAdminUpgradeabilityProxy.sol",
-        "id": 8787,
+        "id": 2934,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 9084,
-        "src": "24:44:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3474,
+        "src": "64:79:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2933,
+              "name": "IOZAdminUpgradeabilityProxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "72:27:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/ChangeContract.sol",
         "file": "../Governance/ChangeContract.sol",
-        "id": 8788,
+        "id": 2936,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 8877,
-        "src": "69:42:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3034,
+        "src": "144:64:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2935,
+              "name": "ChangeContract",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "152:14:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Upgradeability/UpgradeDelegator.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Upgradeability/UpgradeDelegator.sol",
         "file": "../Upgradeability/UpgradeDelegator.sol",
-        "id": 8789,
+        "id": 2938,
         "nodeType": "ImportDirective",
-        "scope": 8871,
-        "sourceUnit": 9273,
-        "src": "112:48:43",
-        "symbolAliases": [],
+        "scope": 3026,
+        "sourceUnit": 3678,
+        "src": "209:72:20",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 2937,
+              "name": "UpgradeDelegator",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "217:16:20",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
         "unitAlias": ""
       },
       {
@@ -1183,31 +1326,36 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 8790,
+              "id": 2940,
               "name": "ChangeContract",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8876,
-              "src": "488:14:43",
+              "referencedDeclaration": 3033,
+              "src": "609:14:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ChangeContract_$8876",
+                "typeIdentifier": "t_contract$_ChangeContract_$3033",
                 "typeString": "contract ChangeContract"
               }
             },
-            "id": 8791,
+            "id": 2941,
             "nodeType": "InheritanceSpecifier",
-            "src": "488:14:43"
+            "src": "609:14:20"
           }
         ],
         "contractDependencies": [
-          8876
+          3033
         ],
         "contractKind": "contract",
-        "documentation": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide",
+        "documentation": {
+          "id": 2939,
+          "nodeType": "StructuredDocumentation",
+          "src": "283:296:20",
+          "text": "@title UpgraderTemplate\n@notice This contract is a ChangeContract intended to be used when\nupgrading any contract upgradeable through the zos-lib upgradeability\nsystem. This doesn't initialize the upgraded contract, that should be done extending\nthis one or taking it as a guide"
+        },
         "fullyImplemented": true,
-        "id": 8870,
+        "id": 3025,
         "linearizedBaseContracts": [
-          8870,
-          8876
+          3025,
+          3033
         ],
         "name": "UpgraderTemplate",
         "nodeType": "ContractDefinition",
@@ -1215,27 +1363,28 @@
           {
             "constant": false,
             "functionSelector": "ec556889",
-            "id": 8793,
+            "id": 2943,
+            "mutability": "mutable",
             "name": "proxy",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "510:40:43",
+            "scope": 3025,
+            "src": "630:40:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+              "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
               "typeString": "contract IOZAdminUpgradeabilityProxy"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8792,
+              "id": 2942,
               "name": "IOZAdminUpgradeabilityProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9083,
-              "src": "510:27:43",
+              "referencedDeclaration": 3473,
+              "src": "630:27:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                 "typeString": "contract IOZAdminUpgradeabilityProxy"
               }
             },
@@ -1245,27 +1394,28 @@
           {
             "constant": false,
             "functionSelector": "33d2e956",
-            "id": 8795,
+            "id": 2945,
+            "mutability": "mutable",
             "name": "upgradeDelegator",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "556:40:43",
+            "scope": 3025,
+            "src": "676:40:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+              "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
               "typeString": "contract UpgradeDelegator"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8794,
+              "id": 2944,
               "name": "UpgradeDelegator",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9272,
-              "src": "556:16:43",
+              "referencedDeclaration": 3677,
+              "src": "676:16:20",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                 "typeString": "contract UpgradeDelegator"
               }
             },
@@ -1275,12 +1425,13 @@
           {
             "constant": false,
             "functionSelector": "8b677b03",
-            "id": 8797,
+            "id": 2947,
+            "mutability": "mutable",
             "name": "newImplementation",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8870,
-            "src": "602:32:43",
+            "scope": 3025,
+            "src": "722:32:20",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1288,10 +1439,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 8796,
+              "id": 2946,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "602:7:43",
+              "src": "722:7:20",
               "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
@@ -1303,28 +1454,28 @@
           },
           {
             "body": {
-              "id": 8818,
+              "id": 2969,
               "nodeType": "Block",
-              "src": "1027:125:43",
+              "src": "1177:125:20",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8808,
+                    "id": 2959,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8806,
+                      "id": 2957,
                       "name": "proxy",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8793,
-                      "src": "1037:5:43",
+                      "referencedDeclaration": 2943,
+                      "src": "1187:5:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                         "typeString": "contract IOZAdminUpgradeabilityProxy"
                       }
                     },
@@ -1332,45 +1483,45 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8807,
+                      "id": 2958,
                       "name": "_proxy",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8799,
-                      "src": "1045:6:43",
+                      "referencedDeclaration": 2950,
+                      "src": "1195:6:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                        "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                         "typeString": "contract IOZAdminUpgradeabilityProxy"
                       }
                     },
-                    "src": "1037:14:43",
+                    "src": "1187:14:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                       "typeString": "contract IOZAdminUpgradeabilityProxy"
                     }
                   },
-                  "id": 8809,
+                  "id": 2960,
                   "nodeType": "ExpressionStatement",
-                  "src": "1037:14:43"
+                  "src": "1187:14:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8812,
+                    "id": 2963,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8810,
+                      "id": 2961,
                       "name": "upgradeDelegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8795,
-                      "src": "1061:16:43",
+                      "referencedDeclaration": 2945,
+                      "src": "1211:16:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                        "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                         "typeString": "contract UpgradeDelegator"
                       }
                     },
@@ -1378,43 +1529,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8811,
+                      "id": 2962,
                       "name": "_upgradeDelegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8801,
-                      "src": "1080:17:43",
+                      "referencedDeclaration": 2952,
+                      "src": "1230:17:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                        "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                         "typeString": "contract UpgradeDelegator"
                       }
                     },
-                    "src": "1061:36:43",
+                    "src": "1211:36:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                      "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                       "typeString": "contract UpgradeDelegator"
                     }
                   },
-                  "id": 8813,
+                  "id": 2964,
                   "nodeType": "ExpressionStatement",
-                  "src": "1061:36:43"
+                  "src": "1211:36:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8816,
+                    "id": 2967,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8814,
+                      "id": 2965,
                       "name": "newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8797,
-                      "src": "1107:17:43",
+                      "referencedDeclaration": 2947,
+                      "src": "1257:17:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -1424,31 +1575,36 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8815,
+                      "id": 2966,
                       "name": "_newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8803,
-                      "src": "1127:18:43",
+                      "referencedDeclaration": 2954,
+                      "src": "1277:18:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "1107:38:43",
+                    "src": "1257:38:20",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8817,
+                  "id": 2968,
                   "nodeType": "ExpressionStatement",
-                  "src": "1107:38:43"
+                  "src": "1257:38:20"
                 }
               ]
             },
-            "documentation": "@notice Constructor\n@param _proxy Address of the proxy to be upgraded\n@param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n@param _newImplementation Address of the contract the proxy will delegate to",
-            "id": 8819,
+            "documentation": {
+              "id": 2948,
+              "nodeType": "StructuredDocumentation",
+              "src": "761:262:20",
+              "text": "@notice Constructor\n@param _proxy Address of the proxy to be upgraded\n@param _upgradeDelegator Address of the upgradeDelegator in charge of that proxy\n@param _newImplementation Address of the contract the proxy will delegate to"
+            },
+            "id": 2970,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -1456,32 +1612,33 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8804,
+              "id": 2955,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8799,
+                  "id": 2950,
+                  "mutability": "mutable",
                   "name": "_proxy",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "920:34:43",
+                  "scope": 2970,
+                  "src": "1049:34:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                    "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                     "typeString": "contract IOZAdminUpgradeabilityProxy"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8798,
+                    "id": 2949,
                     "name": "IOZAdminUpgradeabilityProxy",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9083,
-                    "src": "920:27:43",
+                    "referencedDeclaration": 3473,
+                    "src": "1049:27:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                      "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                       "typeString": "contract IOZAdminUpgradeabilityProxy"
                     }
                   },
@@ -1490,27 +1647,28 @@
                 },
                 {
                   "constant": false,
-                  "id": 8801,
+                  "id": 2952,
+                  "mutability": "mutable",
                   "name": "_upgradeDelegator",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "956:34:43",
+                  "scope": 2970,
+                  "src": "1093:34:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                    "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                     "typeString": "contract UpgradeDelegator"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8800,
+                    "id": 2951,
                     "name": "UpgradeDelegator",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9272,
-                    "src": "956:16:43",
+                    "referencedDeclaration": 3677,
+                    "src": "1093:16:20",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                      "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                       "typeString": "contract UpgradeDelegator"
                     }
                   },
@@ -1519,12 +1677,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 8803,
+                  "id": 2954,
+                  "mutability": "mutable",
                   "name": "_newImplementation",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8819,
-                  "src": "992:26:43",
+                  "scope": 2970,
+                  "src": "1137:26:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1532,10 +1691,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8802,
+                    "id": 2953,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "992:7:43",
+                    "src": "1137:7:20",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1546,28 +1705,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "919:100:43"
+              "src": "1039:130:20"
             },
             "returnParameters": {
-              "id": 8805,
+              "id": 2956,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1027:0:43"
+              "src": "1177:0:20"
             },
-            "scope": 8870,
-            "src": "908:244:43",
+            "scope": 3025,
+            "src": "1028:274:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
             "baseFunctions": [
-              8875
+              3032
             ],
             "body": {
-              "id": 8842,
+              "id": 2994,
               "nodeType": "Block",
-              "src": "1549:172:43",
+              "src": "1700:153:20",
               "statements": [
                 {
                   "expression": {
@@ -1579,19 +1738,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8829,
+                        "id": 2981,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8824,
+                          "id": 2976,
                           "name": "newImplementation",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8797,
-                          "src": "1567:17:43",
+                          "referencedDeclaration": 2947,
+                          "src": "1718:17:20",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -1605,14 +1764,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 8827,
+                              "id": 2979,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "1596:1:43",
+                              "src": "1747:1:20",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -1628,29 +1787,29 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 8826,
+                            "id": 2978,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "1588:7:43",
+                            "src": "1739:7:20",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": {
-                              "id": 8825,
+                              "id": 2977,
                               "name": "address",
                               "nodeType": "ElementaryTypeName",
-                              "src": "1588:7:43",
+                              "src": "1739:7:20",
                               "typeDescriptions": {
                                 "typeIdentifier": null,
                                 "typeString": null
                               }
                             }
                           },
-                          "id": 8828,
+                          "id": 2980,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1658,14 +1817,14 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1588:10:43",
+                          "src": "1739:10:20",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           }
                         },
-                        "src": "1567:31:43",
+                        "src": "1718:31:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1673,21 +1832,21 @@
                       },
                       {
                         "argumentTypes": null,
-                        "hexValue": "4e657720496d706c656d656e746174696f6e2061646472657373206d7573742062652076616c6964",
-                        "id": 8830,
+                        "hexValue": "41646472657373206d7573742062652076616c6964",
+                        "id": 2982,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1600:42:43",
+                        "src": "1751:23:20",
                         "subdenomination": null,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_stringliteral_16883681bb9452a24670f58f4c6b57df5d7887dd4a472dca2a6bd0fb19545ace",
-                          "typeString": "literal_string \"New Implementation address must be valid\""
+                          "typeIdentifier": "t_stringliteral_7e665da7175b939c7746aa731e1ef543f098601c2ef9c0126933065af539a021",
+                          "typeString": "literal_string \"Address must be valid\""
                         },
-                        "value": "New Implementation address must be valid"
+                        "value": "Address must be valid"
                       }
                     ],
                     "expression": {
@@ -1697,25 +1856,25 @@
                           "typeString": "bool"
                         },
                         {
-                          "typeIdentifier": "t_stringliteral_16883681bb9452a24670f58f4c6b57df5d7887dd4a472dca2a6bd0fb19545ace",
-                          "typeString": "literal_string \"New Implementation address must be valid\""
+                          "typeIdentifier": "t_stringliteral_7e665da7175b939c7746aa731e1ef543f098601c2ef9c0126933065af539a021",
+                          "typeString": "literal_string \"Address must be valid\""
                         }
                       ],
-                      "id": 8823,
+                      "id": 2975,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10700,
-                        10701
+                        -18,
+                        -18
                       ],
-                      "referencedDeclaration": 10701,
-                      "src": "1559:7:43",
+                      "referencedDeclaration": -18,
+                      "src": "1710:7:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8831,
+                    "id": 2983,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1723,16 +1882,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1559:84:43",
+                    "src": "1710:65:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8832,
+                  "id": 2984,
                   "nodeType": "ExpressionStatement",
-                  "src": "1559:84:43"
+                  "src": "1710:65:20"
                 },
                 {
                   "expression": {
@@ -1740,18 +1899,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8833,
+                      "id": 2985,
                       "name": "_beforeUpgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8865,
-                      "src": "1653:14:43",
+                      "referencedDeclaration": 3019,
+                      "src": "1785:14:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8834,
+                    "id": 2986,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1759,16 +1918,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1653:16:43",
+                    "src": "1785:16:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8835,
+                  "id": 2987,
                   "nodeType": "ExpressionStatement",
-                  "src": "1653:16:43"
+                  "src": "1785:16:20"
                 },
                 {
                   "expression": {
@@ -1776,18 +1935,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8836,
+                      "id": 2988,
                       "name": "_upgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8861,
-                      "src": "1679:8:43",
+                      "referencedDeclaration": 3014,
+                      "src": "1811:8:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8837,
+                    "id": 2989,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1795,16 +1954,16 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1679:10:43",
+                    "src": "1811:10:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8838,
+                  "id": 2990,
                   "nodeType": "ExpressionStatement",
-                  "src": "1679:10:43"
+                  "src": "1811:10:20"
                 },
                 {
                   "expression": {
@@ -1812,18 +1971,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 8839,
+                      "id": 2991,
                       "name": "_afterUpgrade",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8869,
-                      "src": "1699:13:43",
+                      "referencedDeclaration": 3024,
+                      "src": "1831:13:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 8840,
+                    "id": 2992,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1831,56 +1990,61 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1699:15:43",
+                    "src": "1831:15:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8841,
+                  "id": 2993,
                   "nodeType": "ExpressionStatement",
-                  "src": "1699:15:43"
+                  "src": "1831:15:20"
                 }
               ]
             },
-            "documentation": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\nthe current architecture\nIMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template",
+            "documentation": {
+              "id": 2971,
+              "nodeType": "StructuredDocumentation",
+              "src": "1308:350:20",
+              "text": "@notice Execute the changes.\n@dev Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in\nthe current architecture\nIMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template"
+            },
             "functionSelector": "61461954",
-            "id": 8843,
+            "id": 2995,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "execute",
             "nodeType": "FunctionDefinition",
             "overrides": {
-              "id": 8821,
+              "id": 2973,
               "nodeType": "OverrideSpecifier",
               "overrides": [],
-              "src": "1540:8:43"
+              "src": "1691:8:20"
             },
             "parameters": {
-              "id": 8820,
+              "id": 2972,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1528:2:43"
+              "src": "1679:2:20"
             },
             "returnParameters": {
-              "id": 8822,
+              "id": 2974,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1549:0:43"
+              "src": "1700:0:20"
             },
-            "scope": 8870,
-            "src": "1512:209:43",
+            "scope": 3025,
+            "src": "1663:190:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "body": {
-              "id": 8860,
+              "id": 3013,
               "nodeType": "Block",
-              "src": "1889:136:43",
+              "src": "2021:136:20",
               "statements": [
                 {
                   "expression": {
@@ -1888,25 +2052,25 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 8849,
+                        "id": 3002,
                         "name": "proxy",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8793,
-                        "src": "1924:5:43",
+                        "referencedDeclaration": 2943,
+                        "src": "2056:5:20",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                           "typeString": "contract IOZAdminUpgradeabilityProxy"
                         }
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8850,
+                        "id": 3003,
                         "name": "newImplementation",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8797,
-                        "src": "1931:17:43",
+                        "referencedDeclaration": 2947,
+                        "src": "2063:17:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1916,7 +2080,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$9083",
+                          "typeIdentifier": "t_contract$_IOZAdminUpgradeabilityProxy_$3473",
                           "typeString": "contract IOZAdminUpgradeabilityProxy"
                         },
                         {
@@ -1926,32 +2090,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 8846,
+                        "id": 2999,
                         "name": "upgradeDelegator",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8795,
-                        "src": "1899:16:43",
+                        "referencedDeclaration": 2945,
+                        "src": "2031:16:20",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_UpgradeDelegator_$9272",
+                          "typeIdentifier": "t_contract$_UpgradeDelegator_$3677",
                           "typeString": "contract UpgradeDelegator"
                         }
                       },
-                      "id": 8848,
+                      "id": 3001,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "upgrade",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9246,
-                      "src": "1899:24:43",
+                      "referencedDeclaration": 3652,
+                      "src": "2031:24:20",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_nonpayable$_t_contract$_IOZAdminUpgradeabilityProxy_$9083_$_t_address_$returns$__$",
+                        "typeIdentifier": "t_function_external_nonpayable$_t_contract$_IOZAdminUpgradeabilityProxy_$3473_$_t_address_$returns$__$",
                         "typeString": "function (contract IOZAdminUpgradeabilityProxy,address) external"
                       }
                     },
-                    "id": 8851,
+                    "id": 3004,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1959,33 +2123,33 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1899:50:43",
+                    "src": "2031:50:20",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8852,
+                  "id": 3005,
                   "nodeType": "ExpressionStatement",
-                  "src": "1899:50:43"
+                  "src": "2031:50:20"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8858,
+                    "id": 3011,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8853,
+                      "id": 3006,
                       "name": "newImplementation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8797,
-                      "src": "1988:17:43",
+                      "referencedDeclaration": 2947,
+                      "src": "2120:17:20",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -1999,14 +2163,14 @@
                         {
                           "argumentTypes": null,
                           "hexValue": "30",
-                          "id": 8856,
+                          "id": 3009,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
                           "kind": "number",
                           "lValueRequested": false,
                           "nodeType": "Literal",
-                          "src": "2016:1:43",
+                          "src": "2148:1:20",
                           "subdenomination": null,
                           "typeDescriptions": {
                             "typeIdentifier": "t_rational_0_by_1",
@@ -2022,29 +2186,29 @@
                             "typeString": "int_const 0"
                           }
                         ],
-                        "id": 8855,
+                        "id": 3008,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "nodeType": "ElementaryTypeNameExpression",
-                        "src": "2008:7:43",
+                        "src": "2140:7:20",
                         "typeDescriptions": {
                           "typeIdentifier": "t_type$_t_address_$",
                           "typeString": "type(address)"
                         },
                         "typeName": {
-                          "id": 8854,
+                          "id": 3007,
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
-                          "src": "2008:7:43",
+                          "src": "2140:7:20",
                           "typeDescriptions": {
                             "typeIdentifier": null,
                             "typeString": null
                           }
                         }
                       },
-                      "id": 8857,
+                      "id": 3010,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2052,27 +2216,32 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "2008:10:43",
+                      "src": "2140:10:20",
                       "tryCall": false,
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
                       }
                     },
-                    "src": "1988:30:43",
+                    "src": "2120:30:20",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8859,
+                  "id": 3012,
                   "nodeType": "ExpressionStatement",
-                  "src": "1988:30:43"
+                  "src": "2120:30:20"
                 }
               ]
             },
-            "documentation": "@notice Upgrade the proxy to the newImplementation\n@dev IMPORTANT: This function should not be overriden",
-            "id": 8861,
+            "documentation": {
+              "id": 2996,
+              "nodeType": "StructuredDocumentation",
+              "src": "1859:128:20",
+              "text": "@notice Upgrade the proxy to the newImplementation\n@dev IMPORTANT: This function should not be overriden"
+            },
+            "id": 3014,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2080,32 +2249,37 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8844,
+              "id": 2997,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1877:2:43"
+              "src": "2009:2:20"
             },
             "returnParameters": {
-              "id": 8845,
+              "id": 2998,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1889:0:43"
+              "src": "2021:0:20"
             },
-            "scope": 8870,
-            "src": "1860:165:43",
+            "scope": 3025,
+            "src": "1992:165:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8864,
+              "id": 3018,
               "nodeType": "Block",
-              "src": "2273:7:43",
+              "src": "2405:2:20",
               "statements": []
             },
-            "documentation": "@notice Intended to prepare the system for the upgrade\n@dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade",
-            "id": 8865,
+            "documentation": {
+              "id": 3015,
+              "nodeType": "StructuredDocumentation",
+              "src": "2163:202:20",
+              "text": "@notice Intended to prepare the system for the upgrade\n@dev This function can be overriden by child changers to upgrade contracts that require some preparation before the upgrade"
+            },
+            "id": 3019,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2113,32 +2287,37 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8862,
+              "id": 3016,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2261:2:43"
+              "src": "2393:2:20"
             },
             "returnParameters": {
-              "id": 8863,
+              "id": 3017,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2273:0:43"
+              "src": "2405:0:20"
             },
-            "scope": 8870,
-            "src": "2238:42:43",
+            "scope": 3025,
+            "src": "2370:37:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8868,
+              "id": 3023,
               "nodeType": "Block",
-              "src": "2562:7:43",
+              "src": "2689:2:20",
               "statements": []
             },
-            "documentation": "@notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n@dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade",
-            "id": 8869,
+            "documentation": {
+              "id": 3020,
+              "nodeType": "StructuredDocumentation",
+              "src": "2413:237:20",
+              "text": "@notice Intended to do the final tweaks after the upgrade, for example initialize the contract\n@dev This function can be overriden by child changers to upgrade contracts that require some changes after the upgrade"
+            },
+            "id": 3024,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2146,38 +2325,39 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8866,
+              "id": 3021,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2550:2:43"
+              "src": "2677:2:20"
             },
             "returnParameters": {
-              "id": 8867,
+              "id": 3022,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2562:0:43"
+              "src": "2689:0:20"
             },
-            "scope": 8870,
-            "src": "2528:41:43",
+            "scope": 3025,
+            "src": "2655:36:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 8871,
-        "src": "459:2112:43"
+        "scope": 3026,
+        "src": "580:2113:20"
       }
     ],
-    "src": "0:2572:43"
+    "src": "39:2655:20"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.2.0",
-  "updatedAt": "2020-06-29T21:30:43.172Z",
+  "schemaVersion": "3.2.5",
+  "updatedAt": "2020-10-01T22:39:15.389Z",
   "devdoc": {
+    "kind": "dev",
     "methods": {
       "constructor": {
         "params": {
@@ -2190,15 +2370,18 @@
         "details": "Should be called by the governor, but this contract does not check that explicitly because it is not its responsability in the current architecture IMPORTANT: This function should not be overriden, you should only redefine the _beforeUpgrade and _afterUpgrade to use this template"
       }
     },
-    "title": "UpgraderTemplate"
+    "title": "UpgraderTemplate",
+    "version": 1
   },
   "userdoc": {
+    "kind": "user",
     "methods": {
       "constructor": "Constructor",
       "execute()": {
         "notice": "Execute the changes."
       }
     },
-    "notice": "This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide"
+    "notice": "This contract is a ChangeContract intended to be used when upgrading any contract upgradeable through the zos-lib upgradeability system. This doesn't initialize the upgraded contract, that should be done extending this one or taking it as a guide",
+    "version": 1
   }
 }

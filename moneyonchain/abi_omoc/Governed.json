@@ -26,53 +26,69 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "delegateCallToChanger",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract\",\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}}},\"title\":\"Governed\"},\"userdoc\":{\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"}},\"notice\":\"Base contract to be inherited by governed contracts\"}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":\"Governed\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/ChangeContract.sol\":{\"keccak256\":\"0x75d82d8e2143aa41764e6e88899c362ce9806e46d1f4ac32129260d831d884c2\",\"urls\":[\"bzz-raw://e904143d8077eff6ee9c30ad197d597ad924973c79b5d1b317cb27233e60e237\",\"dweb:/ipfs/Qme4FrR1fuaiVwGpHBXuqa7mmJCUErFS4794xyFusWVwzd\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol\":{\"keccak256\":\"0x9165ada482a33987cc6dbfd2a6f2cf4ee5c79fe89f2f287ec8178b59f6f89ed5\",\"urls\":[\"bzz-raw://ded9d3335df6773a2766200a122490e9880e229b809d5669a585b9f243ff5465\",\"dweb:/ipfs/Qmc7j5yGb96fEgb9TxrzGusvTs3uCNAL5LWKBbHXtVGreN\"]},\"/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol\":{\"keccak256\":\"0x16374df2d13479b18a9e03fde811dc2807c759d1f24bea11f94f2978300905cf\",\"urls\":[\"bzz-raw://a2f9013049483553450593c9a06c35cb4c6db3a2208899ffb202a1418804760b\",\"dweb:/ipfs/QmcSBCLJefT1cZwbMKE5nsfHb6vgiUw2Nu1Cn7TKzj4rBA\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5061021c806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80630c340a241461003b578063b6e083301461005f575b600080fd5b610043610087565b604080516001600160a01b039092168252519081900360200190f35b6100856004803603602081101561007557600080fd5b50356001600160a01b0316610096565b005b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156100e157600080fd5b505afa1580156100f5573d6000803e3d6000fd5b505050506040513d602081101561010b57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906101c35760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610188578181015183820152602001610170565b50505050905090810190601f1680156101b55780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b039290921691909117905556fea264697066735822122039aab2cb82f507f39dd20161cd6ae373862059d4cd9961a5de2e35ff895e429164736f6c63430006000033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80630c340a241461003b578063b6e083301461005f575b600080fd5b610043610087565b604080516001600160a01b039092168252519081900360200190f35b6100856004803603602081101561007557600080fd5b50356001600160a01b0316610096565b005b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156100e157600080fd5b505afa1580156100f5573d6000803e3d6000fd5b505050506040513d602081101561010b57600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906101c35760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b83811015610188578181015183820152602001610170565b50505050905090810190601f1680156101b55780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b039290921691909117905556fea264697066735822122039aab2cb82f507f39dd20161cd6ae373862059d4cd9961a5de2e35ff895e429164736f6c63430006000033",
-  "sourceMap": "405:1347:45:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;405:1347:45;;;;;;;",
-  "deployedSourceMap": "405:1347:45:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;405:1347:45;;;;;;;;;;;;;;;;;;;;;;;;511:25;;;:::i;:::-;;;;-1:-1:-1;;;;;511:25:45;;;;;;;;;;;;;;1472:120;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1472:120:45;-1:-1:-1;;;;;1472:120:45;;:::i;:::-;;511:25;;;-1:-1:-1;;;;;511:25:45;;:::o;1472:120::-;854:8;;:40;;;-1:-1:-1;;;854:40:45;;883:10;854:40;;;;;;-1:-1:-1;;;;;854:8:45;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;5:2:-1;;;;30:1;27;20:12;5:2;854:40:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;854:40:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;854:40:45;896:22;;;;;;;;;;;;-1:-1:-1;;;854:40:45;896:22;;;;846:73;;;;-1:-1:-1;;;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;846:73:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1562:8:45::1;:23:::0;;-1:-1:-1;;;;;;1562:23:45::1;-1:-1:-1::0;;;;;1562:23:45;;;::::1;::::0;;;::::1;::::0;;1472:120::o",
-  "source": "pragma solidity 0.6.0;\n\nimport {IGovernor} from \"./IGovernor.sol\";\n\n/**\n  @title Governed\n  @notice Base contract to be inherited by governed contracts\n  @dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\n  The only purpose of this contract is to define some useful modifiers and functions to be used on the\n  governance aspect of the child contract\n  */\ncontract Governed {\n\n    /**\n      @notice The address of the contract which governs this one\n     */\n    IGovernor public governor;\n\n    string constant private NOT_AUTHORIZED_CHANGER = \"not_authorized_changer\";\n\n    /**\n      @notice Modifier that protects the function\n      @dev You should use this modifier in any function that should be called through\n      the governance system\n     */\n    modifier onlyAuthorizedChanger() {\n        require(governor.isAuthorizedChanger(msg.sender), NOT_AUTHORIZED_CHANGER);\n        _;\n    }\n\n    /**\n      @notice Initialize the contract with the basic settings\n      @dev This initialize replaces the constructor but it is not called automatically.\n      It is necessary because of the upgradeability of the contracts\n      @param _governor Governor address\n     */\n    function _initialize(IGovernor _governor) internal {\n        governor = _governor;\n    }\n\n    /**\n      @notice Change the contract's governor. Should be called through the old governance system\n      @param newIGovernor New governor address\n     */\n    function changeIGovernor(IGovernor newIGovernor) external onlyAuthorizedChanger {\n        governor = newIGovernor;\n    }\n\n    // Leave a gap betweeen inherited contracts variables in order to be\n    // able to add more variables in them later\n    uint256[50] private upgradeGap;\n}\n",
-  "sourcePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"newIGovernor\",\"type\":\"address\"}],\"name\":\"changeIGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"delegateCallToChanger\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"contract IGovernor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract\",\"kind\":\"dev\",\"methods\":{\"changeIGovernor(address)\":{\"params\":{\"newIGovernor\":\"New governor address\"}},\"delegateCallToChanger(bytes)\":{\"params\":{\"data\":\"the serialized function arguments\"}}},\"title\":\"Governed\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"changeIGovernor(address)\":{\"notice\":\"Change the contract's governor. Should be called through the old governance system\"},\"delegateCallToChanger(bytes)\":{\"notice\":\"This method is used by a change contract to access the storage freely even without a setter.\"},\"governor()\":{\"notice\":\"The address of the contract which governs this one\"}},\"notice\":\"Base contract to be inherited by governed contracts\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol\":\"Governed\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/ChangeContract.sol\":{\"keccak256\":\"0x6c786977acab4c076087e4569b2fd423e2c3a7e45150353c18de328b7e114843\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://cbdaaed4b97fc67586f6f20f185d6227dd4a1d0896bd6db20ee06744cca2eaa6\",\"dweb:/ipfs/QmbZrRtxMdebQa1dHfTdC1pPA48ZvzSopcc2pLmmJ7XJ9X\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol\":{\"keccak256\":\"0xf948f3ef0d990c9b5199cb96ed42a7b4b96b1dce0abfc168289f9de8576286e2\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://5b770c1391989e9db75789bb15cc4413d520eecb327fed0c114a66407a3f4404\",\"dweb:/ipfs/QmPqRtG3cfB3tc5fFs9Q8yMNkxHB4oxMSY27jDXYhB754c\"]},\"/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/IGovernor.sol\":{\"keccak256\":\"0xed68469a6e1759efc5dece43aaf7fdf25e39163626df454bd9f9662ca8e9df61\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://a615e8209f9f332ed8d16452fd83c412f44162bd6fb8af6a1556bdc033a36735\",\"dweb:/ipfs/Qmda7FzLXHG9WZSTVBXwGCjLT7xU5Ugh287jQ4qafAr5WX\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506104dc806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80630c340a2414610046578063b6e083301461006a578063dc8990e114610092575b600080fd5b61004e610102565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b0316610111565b005b610090600480360360208110156100a857600080fd5b8101906020810181356401000000008111156100c357600080fd5b8201836020820111156100d557600080fd5b803590602001918460018302840111640100000000831117156100f757600080fd5b509092509050610261565b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b15801561015c57600080fd5b505afa158015610170573d6000803e3d6000fd5b505050506040513d602081101561018657600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b60208201529061023e5760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b838110156102035781810151838201526020016101eb565b50505050905090810190601f1680156102305780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156102ac57600080fd5b505afa1580156102c0573d6000803e3d6000fd5b505050506040513d60208110156102d657600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906103515760405162461bcd60e51b81526020600482018181528351602484015283519092839260449091019190850190808383600083156102035781810151838201526020016101eb565b50604051602060248201908152604482018390523391600091839186918691819060640184848082843760008382015260408051601f909201601f1990811690940182810390940182529283526020810180516001600160e01b03166350b113e560e11b17815292518151919750955085945091925081905083835b602083106103ec5780518252601f1990920191602091820191016103cd565b6001836020036101000a038019825116818451168082178552505050505050905001915050600060405180830381855af49150503d806000811461044c576040519150601f19603f3d011682016040523d82523d6000602084013e610451565b606091505b50509050806104a0576040805162461bcd60e51b8152602060048201526016602482015275115c9c9bdc881a5b8819195b1959d85d194818d85b1b60521b604482015290519081900360640190fd5b5050505056fea264697066735822122019e512de00112b89077a8deb767d7028e87b01fb181878c1a6a137de49f7645664736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80630c340a2414610046578063b6e083301461006a578063dc8990e114610092575b600080fd5b61004e610102565b604080516001600160a01b039092168252519081900360200190f35b6100906004803603602081101561008057600080fd5b50356001600160a01b0316610111565b005b610090600480360360208110156100a857600080fd5b8101906020810181356401000000008111156100c357600080fd5b8201836020820111156100d557600080fd5b803590602001918460018302840111640100000000831117156100f757600080fd5b509092509050610261565b6000546001600160a01b031681565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b15801561015c57600080fd5b505afa158015610170573d6000803e3d6000fd5b505050506040513d602081101561018657600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b60208201529061023e5760405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b838110156102035781810151838201526020016101eb565b50505050905090810190601f1680156102305780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b50600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546040805163d994d6d560e01b815233600482015290516001600160a01b039092169163d994d6d591602480820192602092909190829003018186803b1580156102ac57600080fd5b505afa1580156102c0573d6000803e3d6000fd5b505050506040513d60208110156102d657600080fd5b50516040805180820190915260168152753737ba2fb0baba3437b934bd32b22fb1b430b733b2b960511b6020820152906103515760405162461bcd60e51b81526020600482018181528351602484015283519092839260449091019190850190808383600083156102035781810151838201526020016101eb565b50604051602060248201908152604482018390523391600091839186918691819060640184848082843760008382015260408051601f909201601f1990811690940182810390940182529283526020810180516001600160e01b03166350b113e560e11b17815292518151919750955085945091925081905083835b602083106103ec5780518252601f1990920191602091820191016103cd565b6001836020036101000a038019825116818451168082178552505050505050905001915050600060405180830381855af49150503d806000811461044c576040519150601f19603f3d011682016040523d82523d6000602084013e610451565b606091505b50509050806104a0576040805162461bcd60e51b8152602060048201526016602482015275115c9c9bdc881a5b8819195b1959d85d194818d85b1b60521b604482015290519081900360640190fd5b5050505056fea264697066735822122019e512de00112b89077a8deb767d7028e87b01fb181878c1a6a137de49f7645664736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "445:1845:22:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "445:1845:22:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;550:25;;;:::i;:::-;;;;-1:-1:-1;;;;;550:25:22;;;;;;;;;;;;;;1511:120;;;;;;;;;;;;;;;;-1:-1:-1;1511:120:22;-1:-1:-1;;;;;1511:120:22;;:::i;:::-;;1812:318;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1812:318:22;;-1:-1:-1;1812:318:22;-1:-1:-1;1812:318:22;:::i;550:25::-;;;-1:-1:-1;;;;;550:25:22;;:::o;1511:120::-;893:8;;:40;;;-1:-1:-1;;;893:40:22;;922:10;893:40;;;;;;-1:-1:-1;;;;;893:8:22;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;893:40:22;935:22;;;;;;;;;;;;-1:-1:-1;;;893:40:22;935:22;;;;885:73;;;;-1:-1:-1;;;885:73:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1601:8:22::1;:23:::0;;-1:-1:-1;;;;;;1601:23:22::1;-1:-1:-1::0;;;;;1601:23:22;;;::::1;::::0;;;::::1;::::0;;1511:120::o;1812:318::-;893:8;;:40;;;-1:-1:-1;;;893:40:22;;922:10;893:40;;;;;;-1:-1:-1;;;;;893:8:22;;;;:28;;:40;;;;;;;;;;;;;;;:8;:40;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;893:40:22;935:22;;;;;;;;;;;;-1:-1:-1;;;893:40:22;935:22;;;;885:73;;;;-1:-1:-1;;;885:73:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;2010:51:22::1;::::0;::::1;;::::0;::::1;::::0;;;;;;;;;1930:10:::1;::::0;1905:22:::1;::::0;1930:10;;2056:4;;;;2010:51;;;;2056:4;;;;2010:51;::::1;;::::0;;::::1;::::0;::::1;::::0;;::::1;::::0;;::::1;-1:-1:-1::0;;2010:51:22;;::::1;::::0;;::::1;::::0;;::::1;::::0;;;;;;;;::::1;::::0;::::1;::::0;;-1:-1:-1;;;;;2010:51:22::1;-1:-1:-1::0;;;2010:51:22::1;::::0;;1969:102;;;;2010:51;;-1:-1:-1;1969:102:22;-1:-1:-1;1969:102:22;;-1:-1:-1;2010:51:22;;-1:-1:-1;1969:102:22;;-1:-1:-1;1969:102:22;2010:51;1969:102:::1;;;;;;::::0;;;;-1:-1:-1;;1969:102:22;;;;::::1;::::0;;::::1;::::0;::::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1950:121;;;2089:7;2081:42;;;::::0;;-1:-1:-1;;;2081:42:22;;::::1;;::::0;::::1;::::0;::::1;::::0;;;;-1:-1:-1;;;2081:42:22;;;;;;;;;;;;;::::1;;968:1;;1812:318:::0;;:::o",
+  "source": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.6.0;\n\nimport {IGovernor} from \"./IGovernor.sol\";\n\n/**\n  @title Governed\n  @notice Base contract to be inherited by governed contracts\n  @dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\n  The only purpose of this contract is to define some useful modifiers and functions to be used on the\n  governance aspect of the child contract\n  */\ncontract Governed {\n    /**\n      @notice The address of the contract which governs this one\n     */\n    IGovernor public governor;\n\n    string private constant NOT_AUTHORIZED_CHANGER = \"not_authorized_changer\";\n\n    /**\n      @notice Modifier that protects the function\n      @dev You should use this modifier in any function that should be called through\n      the governance system\n     */\n    modifier onlyAuthorizedChanger() {\n        require(governor.isAuthorizedChanger(msg.sender), NOT_AUTHORIZED_CHANGER);\n        _;\n    }\n\n    /**\n      @notice Initialize the contract with the basic settings\n      @dev This initialize replaces the constructor but it is not called automatically.\n      It is necessary because of the upgradeability of the contracts\n      @param _governor Governor address\n     */\n    function _initialize(IGovernor _governor) internal {\n        governor = _governor;\n    }\n\n    /**\n      @notice Change the contract's governor. Should be called through the old governance system\n      @param newIGovernor New governor address\n     */\n    function changeIGovernor(IGovernor newIGovernor) external onlyAuthorizedChanger {\n        governor = newIGovernor;\n    }\n\n    /**\n      @notice This method is used by a change contract to access the storage freely even without a setter.\n      @param data the serialized function arguments\n     */\n    function delegateCallToChanger(bytes calldata data) external onlyAuthorizedChanger {\n        address changerContrat = msg.sender;\n        (bool success, ) = changerContrat.delegatecall(\n            abi.encodeWithSignature(\"impersonate(bytes)\", data)\n        );\n        require(success, \"Error in delegate call\");\n    }\n\n    // Leave a gap betweeen inherited contracts variables in order to be\n    // able to add more variables in them later\n    uint256[50] private upgradeGap;\n}\n",
+  "sourcePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol",
   "ast": {
-    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol",
     "exportedSymbols": {
       "Governed": [
-        8925
+        3117
       ]
     },
-    "id": 8926,
+    "id": 3118,
+    "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8878,
+        "id": 3035,
         "literals": [
           "solidity",
+          "^",
           "0.6",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:45"
+        "src": "39:23:22"
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/IGovernor.sol",
         "file": "./IGovernor.sol",
-        "id": 8880,
+        "id": 3037,
         "nodeType": "ImportDirective",
-        "scope": 8926,
-        "sourceUnit": 9044,
-        "src": "24:42:45",
+        "scope": 3118,
+        "sourceUnit": 3250,
+        "src": "64:42:22",
         "symbolAliases": [
           {
             "foreign": {
               "argumentTypes": null,
-              "id": 8879,
+              "id": 3036,
               "name": "IGovernor",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
               "referencedDeclaration": null,
-              "src": "32:9:45",
+              "src": "72:9:22",
               "typeDescriptions": {
                 "typeIdentifier": null,
                 "typeString": null
@@ -88,39 +104,51 @@
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "contract",
-        "documentation": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract",
+        "documentation": {
+          "id": 3038,
+          "nodeType": "StructuredDocumentation",
+          "src": "108:336:22",
+          "text": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract"
+        },
         "fullyImplemented": true,
-        "id": 8925,
+        "id": 3117,
         "linearizedBaseContracts": [
-          8925
+          3117
         ],
         "name": "Governed",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
+            "documentation": {
+              "id": 3039,
+              "nodeType": "StructuredDocumentation",
+              "src": "469:76:22",
+              "text": "@notice The address of the contract which governs this one"
+            },
             "functionSelector": "0c340a24",
-            "id": 8882,
+            "id": 3041,
+            "mutability": "mutable",
             "name": "governor",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "511:25:45",
+            "scope": 3117,
+            "src": "550:25:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IGovernor_$9043",
+              "typeIdentifier": "t_contract$_IGovernor_$3249",
               "typeString": "contract IGovernor"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8881,
+              "id": 3040,
               "name": "IGovernor",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9043,
-              "src": "511:9:45",
+              "referencedDeclaration": 3249,
+              "src": "550:9:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeIdentifier": "t_contract$_IGovernor_$3249",
                 "typeString": "contract IGovernor"
               }
             },
@@ -129,23 +157,24 @@
           },
           {
             "constant": true,
-            "id": 8885,
+            "id": 3044,
+            "mutability": "constant",
             "name": "NOT_AUTHORIZED_CHANGER",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "543:73:45",
+            "scope": 3117,
+            "src": "582:73:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_string_memory",
+              "typeIdentifier": "t_string_memory_ptr",
               "typeString": "string"
             },
             "typeName": {
-              "id": 8883,
+              "id": 3042,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "543:6:45",
+              "src": "582:6:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string"
@@ -154,14 +183,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "6e6f745f617574686f72697a65645f6368616e676572",
-              "id": 8884,
+              "id": 3043,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "592:24:45",
+              "src": "631:24:22",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_c54bce449fe5bf972c8fd56ba56c6ccf6290d0738600c636beadc1ff91f9ecc8",
@@ -173,9 +202,9 @@
           },
           {
             "body": {
-              "id": 8897,
+              "id": 3057,
               "nodeType": "Block",
-              "src": "836:101:45",
+              "src": "875:101:22",
               "statements": [
                 {
                   "expression": {
@@ -188,18 +217,18 @@
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 8890,
+                              "id": 3050,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 10697,
-                              "src": "883:3:45",
+                              "referencedDeclaration": -15,
+                              "src": "922:3:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
                               }
                             },
-                            "id": 8891,
+                            "id": 3051,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -207,7 +236,7 @@
                             "memberName": "sender",
                             "nodeType": "MemberAccess",
                             "referencedDeclaration": null,
-                            "src": "883:10:45",
+                            "src": "922:10:22",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
@@ -223,32 +252,32 @@
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8888,
+                            "id": 3048,
                             "name": "governor",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8882,
-                            "src": "854:8:45",
+                            "referencedDeclaration": 3041,
+                            "src": "893:8:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IGovernor_$9043",
+                              "typeIdentifier": "t_contract$_IGovernor_$3249",
                               "typeString": "contract IGovernor"
                             }
                           },
-                          "id": 8889,
+                          "id": 3049,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "isAuthorizedChanger",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 9042,
-                          "src": "854:28:45",
+                          "referencedDeclaration": 3248,
+                          "src": "893:28:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view external returns (bool)"
                           }
                         },
-                        "id": 8892,
+                        "id": 3052,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -256,7 +285,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "854:40:45",
+                        "src": "893:40:22",
                         "tryCall": false,
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -265,14 +294,14 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8893,
+                        "id": 3053,
                         "name": "NOT_AUTHORIZED_CHANGER",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8885,
-                        "src": "896:22:45",
+                        "referencedDeclaration": 3044,
+                        "src": "935:22:22",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_memory",
+                          "typeIdentifier": "t_string_memory_ptr",
                           "typeString": "string memory"
                         }
                       }
@@ -284,25 +313,25 @@
                           "typeString": "bool"
                         },
                         {
-                          "typeIdentifier": "t_string_memory",
+                          "typeIdentifier": "t_string_memory_ptr",
                           "typeString": "string memory"
                         }
                       ],
-                      "id": 8887,
+                      "id": 3047,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10700,
-                        10701
+                        -18,
+                        -18
                       ],
-                      "referencedDeclaration": 10701,
-                      "src": "846:7:45",
+                      "referencedDeclaration": -18,
+                      "src": "885:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8894,
+                    "id": 3054,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -310,63 +339,68 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "846:73:45",
+                    "src": "885:73:22",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8895,
+                  "id": 3055,
                   "nodeType": "ExpressionStatement",
-                  "src": "846:73:45"
+                  "src": "885:73:22"
                 },
                 {
-                  "id": 8896,
+                  "id": 3056,
                   "nodeType": "PlaceholderStatement",
-                  "src": "929:1:45"
+                  "src": "968:1:22"
                 }
               ]
             },
-            "documentation": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system",
-            "id": 8898,
+            "documentation": {
+              "id": 3045,
+              "nodeType": "StructuredDocumentation",
+              "src": "662:175:22",
+              "text": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system"
+            },
+            "id": 3058,
             "name": "onlyAuthorizedChanger",
             "nodeType": "ModifierDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8886,
+              "id": 3046,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "833:2:45"
+              "src": "872:2:22"
             },
-            "src": "803:134:45",
+            "src": "842:134:22",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8907,
+              "id": 3068,
               "nodeType": "Block",
-              "src": "1269:37:45",
+              "src": "1308:37:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8905,
+                    "id": 3066,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8903,
+                      "id": 3064,
                       "name": "governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8882,
-                      "src": "1279:8:45",
+                      "referencedDeclaration": 3041,
+                      "src": "1318:8:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
@@ -374,31 +408,36 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8904,
+                      "id": 3065,
                       "name": "_governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8900,
-                      "src": "1290:9:45",
+                      "referencedDeclaration": 3061,
+                      "src": "1329:9:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
-                    "src": "1279:20:45",
+                    "src": "1318:20:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
-                  "id": 8906,
+                  "id": 3067,
                   "nodeType": "ExpressionStatement",
-                  "src": "1279:20:45"
+                  "src": "1318:20:22"
                 }
               ]
             },
-            "documentation": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address",
-            "id": 8908,
+            "documentation": {
+              "id": 3059,
+              "nodeType": "StructuredDocumentation",
+              "src": "982:270:22",
+              "text": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address"
+            },
+            "id": 3069,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -406,32 +445,33 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8901,
+              "id": 3062,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8900,
+                  "id": 3061,
+                  "mutability": "mutable",
                   "name": "_governor",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8908,
-                  "src": "1239:19:45",
+                  "scope": 3069,
+                  "src": "1278:19:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeIdentifier": "t_contract$_IGovernor_$3249",
                     "typeString": "contract IGovernor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8899,
+                    "id": 3060,
                     "name": "IGovernor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9043,
-                    "src": "1239:9:45",
+                    "referencedDeclaration": 3249,
+                    "src": "1278:9:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
@@ -439,44 +479,44 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1238:21:45"
+              "src": "1277:21:22"
             },
             "returnParameters": {
-              "id": 8902,
+              "id": 3063,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1269:0:45"
+              "src": "1308:0:22"
             },
-            "scope": 8925,
-            "src": "1218:88:45",
+            "scope": 3117,
+            "src": "1257:88:22",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8919,
+              "id": 3081,
               "nodeType": "Block",
-              "src": "1552:40:45",
+              "src": "1591:40:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8917,
+                    "id": 3079,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8915,
+                      "id": 3077,
                       "name": "governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8882,
-                      "src": "1562:8:45",
+                      "referencedDeclaration": 3041,
+                      "src": "1601:8:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
@@ -484,85 +524,91 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8916,
+                      "id": 3078,
                       "name": "newIGovernor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8910,
-                      "src": "1573:12:45",
+                      "referencedDeclaration": 3072,
+                      "src": "1612:12:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
-                    "src": "1562:23:45",
+                    "src": "1601:23:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
-                  "id": 8918,
+                  "id": 3080,
                   "nodeType": "ExpressionStatement",
-                  "src": "1562:23:45"
+                  "src": "1601:23:22"
                 }
               ]
             },
-            "documentation": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address",
+            "documentation": {
+              "id": 3070,
+              "nodeType": "StructuredDocumentation",
+              "src": "1351:155:22",
+              "text": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address"
+            },
             "functionSelector": "b6e08330",
-            "id": 8920,
+            "id": 3082,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8913,
+                "id": 3075,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8912,
+                  "id": 3074,
                   "name": "onlyAuthorizedChanger",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8898,
-                  "src": "1530:21:45",
+                  "referencedDeclaration": 3058,
+                  "src": "1569:21:22",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "1530:21:45"
+                "src": "1569:21:22"
               }
             ],
             "name": "changeIGovernor",
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8911,
+              "id": 3073,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8910,
+                  "id": 3072,
+                  "mutability": "mutable",
                   "name": "newIGovernor",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8920,
-                  "src": "1497:22:45",
+                  "scope": 3082,
+                  "src": "1536:22:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeIdentifier": "t_contract$_IGovernor_$3249",
                     "typeString": "contract IGovernor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8909,
+                    "id": 3071,
                     "name": "IGovernor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9043,
-                    "src": "1497:9:45",
+                    "referencedDeclaration": 3249,
+                    "src": "1536:9:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
@@ -570,28 +616,447 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1496:24:45"
+              "src": "1535:24:22"
             },
             "returnParameters": {
-              "id": 8914,
+              "id": 3076,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1552:0:45"
+              "src": "1591:0:22"
             },
-            "scope": 8925,
-            "src": "1472:120:45",
+            "scope": 3117,
+            "src": "1511:120:22",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3111,
+              "nodeType": "Block",
+              "src": "1895:235:22",
+              "statements": [
+                {
+                  "assignments": [
+                    3091
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3091,
+                      "mutability": "mutable",
+                      "name": "changerContrat",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 3111,
+                      "src": "1905:22:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 3090,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1905:7:22",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3094,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 3092,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -15,
+                      "src": "1930:3:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 3093,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "1930:10:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1905:35:22"
+                },
+                {
+                  "assignments": [
+                    3096,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3096,
+                      "mutability": "mutable",
+                      "name": "success",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 3111,
+                      "src": "1951:12:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 3095,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1951:4:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 3105,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "696d706572736f6e61746528627974657329",
+                            "id": 3101,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2034:20:22",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            "value": "impersonate(bytes)"
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 3102,
+                            "name": "data",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3085,
+                            "src": "2056:4:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_calldata_ptr",
+                              "typeString": "bytes calldata"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            {
+                              "typeIdentifier": "t_bytes_calldata_ptr",
+                              "typeString": "bytes calldata"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 3099,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -1,
+                            "src": "2010:3:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 3100,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "encodeWithSignature",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "2010:23:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodewithsignature_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 3103,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2010:51:22",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3097,
+                        "name": "changerContrat",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3091,
+                        "src": "1969:14:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 3098,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "delegatecall",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1969:27:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_baredelegatecall_nonpayable$_t_bytes_memory_ptr_$returns$_t_bool_$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes memory) returns (bool,bytes memory)"
+                      }
+                    },
+                    "id": 3104,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1969:102:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_bytes_memory_ptr_$",
+                      "typeString": "tuple(bool,bytes memory)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1950:121:22"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3107,
+                        "name": "success",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3096,
+                        "src": "2089:7:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4572726f7220696e2064656c65676174652063616c6c",
+                        "id": 3108,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2098:24:22",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        },
+                        "value": "Error in delegate call"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        }
+                      ],
+                      "id": 3106,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2081:7:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 3109,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2081:42:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3110,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2081:42:22"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 3083,
+              "nodeType": "StructuredDocumentation",
+              "src": "1637:170:22",
+              "text": "@notice This method is used by a change contract to access the storage freely even without a setter.\n@param data the serialized function arguments"
+            },
+            "functionSelector": "dc8990e1",
+            "id": 3112,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 3088,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 3087,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3058,
+                  "src": "1873:21:22",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1873:21:22"
+              }
+            ],
+            "name": "delegateCallToChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3085,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3112,
+                  "src": "1843:19:22",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3084,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1843:5:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1842:21:22"
+            },
+            "returnParameters": {
+              "id": 3089,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1895:0:22"
+            },
+            "scope": 3117,
+            "src": "1812:318:22",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "constant": false,
-            "id": 8924,
+            "id": 3116,
+            "mutability": "mutable",
             "name": "upgradeGap",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "1719:30:45",
+            "scope": 3117,
+            "src": "2257:30:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -600,27 +1065,27 @@
             },
             "typeName": {
               "baseType": {
-                "id": 8921,
+                "id": 3113,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "1719:7:45",
+                "src": "2257:7:22",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
                 }
               },
-              "id": 8923,
+              "id": 3115,
               "length": {
                 "argumentTypes": null,
                 "hexValue": "3530",
-                "id": 8922,
+                "id": 3114,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "kind": "number",
                 "lValueRequested": false,
                 "nodeType": "Literal",
-                "src": "1727:2:45",
+                "src": "2265:2:22",
                 "subdenomination": null,
                 "typeDescriptions": {
                   "typeIdentifier": "t_rational_50_by_1",
@@ -629,7 +1094,7 @@
                 "value": "50"
               },
               "nodeType": "ArrayTypeName",
-              "src": "1719:11:45",
+              "src": "2257:11:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
                 "typeString": "uint256[50]"
@@ -639,50 +1104,52 @@
             "visibility": "private"
           }
         ],
-        "scope": 8926,
-        "src": "405:1347:45"
+        "scope": 3118,
+        "src": "445:1845:22"
       }
     ],
-    "src": "0:1753:45"
+    "src": "39:2252:22"
   },
   "legacyAST": {
-    "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/Governed.sol",
+    "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/Governed.sol",
     "exportedSymbols": {
       "Governed": [
-        8925
+        3117
       ]
     },
-    "id": 8926,
+    "id": 3118,
+    "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8878,
+        "id": 3035,
         "literals": [
           "solidity",
+          "^",
           "0.6",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:45"
+        "src": "39:23:22"
       },
       {
-        "absolutePath": "/home/adji/Desktop/work/coinfabrik/OMoC-Decentralized-Oracle/contracts/contracts/moc-gobernanza/Governance/IGovernor.sol",
+        "absolutePath": "/home/adji/Desktop/work/coinfabrik/moc-shared/contracts/moc-governance/Governance/IGovernor.sol",
         "file": "./IGovernor.sol",
-        "id": 8880,
+        "id": 3037,
         "nodeType": "ImportDirective",
-        "scope": 8926,
-        "sourceUnit": 9044,
-        "src": "24:42:45",
+        "scope": 3118,
+        "sourceUnit": 3250,
+        "src": "64:42:22",
         "symbolAliases": [
           {
             "foreign": {
               "argumentTypes": null,
-              "id": 8879,
+              "id": 3036,
               "name": "IGovernor",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
               "referencedDeclaration": null,
-              "src": "32:9:45",
+              "src": "72:9:22",
               "typeDescriptions": {
                 "typeIdentifier": null,
                 "typeString": null
@@ -698,39 +1165,51 @@
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "contract",
-        "documentation": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract",
+        "documentation": {
+          "id": 3038,
+          "nodeType": "StructuredDocumentation",
+          "src": "108:336:22",
+          "text": "@title Governed\n@notice Base contract to be inherited by governed contracts\n@dev This contract is not usable on its own since it does not have any _productive useful_ behaviour\nThe only purpose of this contract is to define some useful modifiers and functions to be used on the\ngovernance aspect of the child contract"
+        },
         "fullyImplemented": true,
-        "id": 8925,
+        "id": 3117,
         "linearizedBaseContracts": [
-          8925
+          3117
         ],
         "name": "Governed",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
+            "documentation": {
+              "id": 3039,
+              "nodeType": "StructuredDocumentation",
+              "src": "469:76:22",
+              "text": "@notice The address of the contract which governs this one"
+            },
             "functionSelector": "0c340a24",
-            "id": 8882,
+            "id": 3041,
+            "mutability": "mutable",
             "name": "governor",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "511:25:45",
+            "scope": 3117,
+            "src": "550:25:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IGovernor_$9043",
+              "typeIdentifier": "t_contract$_IGovernor_$3249",
               "typeString": "contract IGovernor"
             },
             "typeName": {
               "contractScope": null,
-              "id": 8881,
+              "id": 3040,
               "name": "IGovernor",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9043,
-              "src": "511:9:45",
+              "referencedDeclaration": 3249,
+              "src": "550:9:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IGovernor_$9043",
+                "typeIdentifier": "t_contract$_IGovernor_$3249",
                 "typeString": "contract IGovernor"
               }
             },
@@ -739,23 +1218,24 @@
           },
           {
             "constant": true,
-            "id": 8885,
+            "id": 3044,
+            "mutability": "constant",
             "name": "NOT_AUTHORIZED_CHANGER",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "543:73:45",
+            "scope": 3117,
+            "src": "582:73:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_string_memory",
+              "typeIdentifier": "t_string_memory_ptr",
               "typeString": "string"
             },
             "typeName": {
-              "id": 8883,
+              "id": 3042,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "543:6:45",
+              "src": "582:6:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string"
@@ -764,14 +1244,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "6e6f745f617574686f72697a65645f6368616e676572",
-              "id": 8884,
+              "id": 3043,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "592:24:45",
+              "src": "631:24:22",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_c54bce449fe5bf972c8fd56ba56c6ccf6290d0738600c636beadc1ff91f9ecc8",
@@ -783,9 +1263,9 @@
           },
           {
             "body": {
-              "id": 8897,
+              "id": 3057,
               "nodeType": "Block",
-              "src": "836:101:45",
+              "src": "875:101:22",
               "statements": [
                 {
                   "expression": {
@@ -798,18 +1278,18 @@
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 8890,
+                              "id": 3050,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 10697,
-                              "src": "883:3:45",
+                              "referencedDeclaration": -15,
+                              "src": "922:3:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
                               }
                             },
-                            "id": 8891,
+                            "id": 3051,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -817,7 +1297,7 @@
                             "memberName": "sender",
                             "nodeType": "MemberAccess",
                             "referencedDeclaration": null,
-                            "src": "883:10:45",
+                            "src": "922:10:22",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
@@ -833,32 +1313,32 @@
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8888,
+                            "id": 3048,
                             "name": "governor",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8882,
-                            "src": "854:8:45",
+                            "referencedDeclaration": 3041,
+                            "src": "893:8:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IGovernor_$9043",
+                              "typeIdentifier": "t_contract$_IGovernor_$3249",
                               "typeString": "contract IGovernor"
                             }
                           },
-                          "id": 8889,
+                          "id": 3049,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "isAuthorizedChanger",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 9042,
-                          "src": "854:28:45",
+                          "referencedDeclaration": 3248,
+                          "src": "893:28:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view external returns (bool)"
                           }
                         },
-                        "id": 8892,
+                        "id": 3052,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -866,7 +1346,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "854:40:45",
+                        "src": "893:40:22",
                         "tryCall": false,
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -875,14 +1355,14 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8893,
+                        "id": 3053,
                         "name": "NOT_AUTHORIZED_CHANGER",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8885,
-                        "src": "896:22:45",
+                        "referencedDeclaration": 3044,
+                        "src": "935:22:22",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_memory",
+                          "typeIdentifier": "t_string_memory_ptr",
                           "typeString": "string memory"
                         }
                       }
@@ -894,25 +1374,25 @@
                           "typeString": "bool"
                         },
                         {
-                          "typeIdentifier": "t_string_memory",
+                          "typeIdentifier": "t_string_memory_ptr",
                           "typeString": "string memory"
                         }
                       ],
-                      "id": 8887,
+                      "id": 3047,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10700,
-                        10701
+                        -18,
+                        -18
                       ],
-                      "referencedDeclaration": 10701,
-                      "src": "846:7:45",
+                      "referencedDeclaration": -18,
+                      "src": "885:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8894,
+                    "id": 3054,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -920,63 +1400,68 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "846:73:45",
+                    "src": "885:73:22",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8895,
+                  "id": 3055,
                   "nodeType": "ExpressionStatement",
-                  "src": "846:73:45"
+                  "src": "885:73:22"
                 },
                 {
-                  "id": 8896,
+                  "id": 3056,
                   "nodeType": "PlaceholderStatement",
-                  "src": "929:1:45"
+                  "src": "968:1:22"
                 }
               ]
             },
-            "documentation": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system",
-            "id": 8898,
+            "documentation": {
+              "id": 3045,
+              "nodeType": "StructuredDocumentation",
+              "src": "662:175:22",
+              "text": "@notice Modifier that protects the function\n@dev You should use this modifier in any function that should be called through\nthe governance system"
+            },
+            "id": 3058,
             "name": "onlyAuthorizedChanger",
             "nodeType": "ModifierDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8886,
+              "id": 3046,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "833:2:45"
+              "src": "872:2:22"
             },
-            "src": "803:134:45",
+            "src": "842:134:22",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8907,
+              "id": 3068,
               "nodeType": "Block",
-              "src": "1269:37:45",
+              "src": "1308:37:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8905,
+                    "id": 3066,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8903,
+                      "id": 3064,
                       "name": "governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8882,
-                      "src": "1279:8:45",
+                      "referencedDeclaration": 3041,
+                      "src": "1318:8:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
@@ -984,31 +1469,36 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8904,
+                      "id": 3065,
                       "name": "_governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8900,
-                      "src": "1290:9:45",
+                      "referencedDeclaration": 3061,
+                      "src": "1329:9:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
-                    "src": "1279:20:45",
+                    "src": "1318:20:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
-                  "id": 8906,
+                  "id": 3067,
                   "nodeType": "ExpressionStatement",
-                  "src": "1279:20:45"
+                  "src": "1318:20:22"
                 }
               ]
             },
-            "documentation": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address",
-            "id": 8908,
+            "documentation": {
+              "id": 3059,
+              "nodeType": "StructuredDocumentation",
+              "src": "982:270:22",
+              "text": "@notice Initialize the contract with the basic settings\n@dev This initialize replaces the constructor but it is not called automatically.\nIt is necessary because of the upgradeability of the contracts\n@param _governor Governor address"
+            },
+            "id": 3069,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1016,32 +1506,33 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8901,
+              "id": 3062,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8900,
+                  "id": 3061,
+                  "mutability": "mutable",
                   "name": "_governor",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8908,
-                  "src": "1239:19:45",
+                  "scope": 3069,
+                  "src": "1278:19:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeIdentifier": "t_contract$_IGovernor_$3249",
                     "typeString": "contract IGovernor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8899,
+                    "id": 3060,
                     "name": "IGovernor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9043,
-                    "src": "1239:9:45",
+                    "referencedDeclaration": 3249,
+                    "src": "1278:9:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
@@ -1049,44 +1540,44 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1238:21:45"
+              "src": "1277:21:22"
             },
             "returnParameters": {
-              "id": 8902,
+              "id": 3063,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1269:0:45"
+              "src": "1308:0:22"
             },
-            "scope": 8925,
-            "src": "1218:88:45",
+            "scope": 3117,
+            "src": "1257:88:22",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8919,
+              "id": 3081,
               "nodeType": "Block",
-              "src": "1552:40:45",
+              "src": "1591:40:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8917,
+                    "id": 3079,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8915,
+                      "id": 3077,
                       "name": "governor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8882,
-                      "src": "1562:8:45",
+                      "referencedDeclaration": 3041,
+                      "src": "1601:8:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
@@ -1094,85 +1585,91 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8916,
+                      "id": 3078,
                       "name": "newIGovernor",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8910,
-                      "src": "1573:12:45",
+                      "referencedDeclaration": 3072,
+                      "src": "1612:12:22",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IGovernor_$9043",
+                        "typeIdentifier": "t_contract$_IGovernor_$3249",
                         "typeString": "contract IGovernor"
                       }
                     },
-                    "src": "1562:23:45",
+                    "src": "1601:23:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
-                  "id": 8918,
+                  "id": 3080,
                   "nodeType": "ExpressionStatement",
-                  "src": "1562:23:45"
+                  "src": "1601:23:22"
                 }
               ]
             },
-            "documentation": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address",
+            "documentation": {
+              "id": 3070,
+              "nodeType": "StructuredDocumentation",
+              "src": "1351:155:22",
+              "text": "@notice Change the contract's governor. Should be called through the old governance system\n@param newIGovernor New governor address"
+            },
             "functionSelector": "b6e08330",
-            "id": 8920,
+            "id": 3082,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8913,
+                "id": 3075,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8912,
+                  "id": 3074,
                   "name": "onlyAuthorizedChanger",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8898,
-                  "src": "1530:21:45",
+                  "referencedDeclaration": 3058,
+                  "src": "1569:21:22",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "1530:21:45"
+                "src": "1569:21:22"
               }
             ],
             "name": "changeIGovernor",
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8911,
+              "id": 3073,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8910,
+                  "id": 3072,
+                  "mutability": "mutable",
                   "name": "newIGovernor",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8920,
-                  "src": "1497:22:45",
+                  "scope": 3082,
+                  "src": "1536:22:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IGovernor_$9043",
+                    "typeIdentifier": "t_contract$_IGovernor_$3249",
                     "typeString": "contract IGovernor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8909,
+                    "id": 3071,
                     "name": "IGovernor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9043,
-                    "src": "1497:9:45",
+                    "referencedDeclaration": 3249,
+                    "src": "1536:9:22",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IGovernor_$9043",
+                      "typeIdentifier": "t_contract$_IGovernor_$3249",
                       "typeString": "contract IGovernor"
                     }
                   },
@@ -1180,28 +1677,447 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1496:24:45"
+              "src": "1535:24:22"
             },
             "returnParameters": {
-              "id": 8914,
+              "id": 3076,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1552:0:45"
+              "src": "1591:0:22"
             },
-            "scope": 8925,
-            "src": "1472:120:45",
+            "scope": 3117,
+            "src": "1511:120:22",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3111,
+              "nodeType": "Block",
+              "src": "1895:235:22",
+              "statements": [
+                {
+                  "assignments": [
+                    3091
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3091,
+                      "mutability": "mutable",
+                      "name": "changerContrat",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 3111,
+                      "src": "1905:22:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 3090,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1905:7:22",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 3094,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 3092,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -15,
+                      "src": "1930:3:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 3093,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "1930:10:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1905:35:22"
+                },
+                {
+                  "assignments": [
+                    3096,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 3096,
+                      "mutability": "mutable",
+                      "name": "success",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 3111,
+                      "src": "1951:12:22",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 3095,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1951:4:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 3105,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "696d706572736f6e61746528627974657329",
+                            "id": 3101,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2034:20:22",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            "value": "impersonate(bytes)"
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 3102,
+                            "name": "data",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3085,
+                            "src": "2056:4:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_calldata_ptr",
+                              "typeString": "bytes calldata"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_a16227cabb43d99cc5286d0f718916cc50ff1ce4cc32528ab94d6bb41ded7be5",
+                              "typeString": "literal_string \"impersonate(bytes)\""
+                            },
+                            {
+                              "typeIdentifier": "t_bytes_calldata_ptr",
+                              "typeString": "bytes calldata"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 3099,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -1,
+                            "src": "2010:3:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 3100,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "encodeWithSignature",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "2010:23:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodewithsignature_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 3103,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2010:51:22",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3097,
+                        "name": "changerContrat",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3091,
+                        "src": "1969:14:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 3098,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "delegatecall",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1969:27:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_baredelegatecall_nonpayable$_t_bytes_memory_ptr_$returns$_t_bool_$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes memory) returns (bool,bytes memory)"
+                      }
+                    },
+                    "id": 3104,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1969:102:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_bytes_memory_ptr_$",
+                      "typeString": "tuple(bool,bytes memory)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1950:121:22"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3107,
+                        "name": "success",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3096,
+                        "src": "2089:7:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4572726f7220696e2064656c65676174652063616c6c",
+                        "id": 3108,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2098:24:22",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        },
+                        "value": "Error in delegate call"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a690c7b37a73978fcd3a172b0ee531a9c96cdbbc3431a43bb203f2d52e57828d",
+                          "typeString": "literal_string \"Error in delegate call\""
+                        }
+                      ],
+                      "id": 3106,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2081:7:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 3109,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2081:42:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3110,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2081:42:22"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 3083,
+              "nodeType": "StructuredDocumentation",
+              "src": "1637:170:22",
+              "text": "@notice This method is used by a change contract to access the storage freely even without a setter.\n@param data the serialized function arguments"
+            },
+            "functionSelector": "dc8990e1",
+            "id": 3112,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 3088,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 3087,
+                  "name": "onlyAuthorizedChanger",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3058,
+                  "src": "1873:21:22",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1873:21:22"
+              }
+            ],
+            "name": "delegateCallToChanger",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3085,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3112,
+                  "src": "1843:19:22",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3084,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1843:5:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1842:21:22"
+            },
+            "returnParameters": {
+              "id": 3089,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1895:0:22"
+            },
+            "scope": 3117,
+            "src": "1812:318:22",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "constant": false,
-            "id": 8924,
+            "id": 3116,
+            "mutability": "mutable",
             "name": "upgradeGap",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 8925,
-            "src": "1719:30:45",
+            "scope": 3117,
+            "src": "2257:30:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1210,27 +2126,27 @@
             },
             "typeName": {
               "baseType": {
-                "id": 8921,
+                "id": 3113,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "1719:7:45",
+                "src": "2257:7:22",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
                 }
               },
-              "id": 8923,
+              "id": 3115,
               "length": {
                 "argumentTypes": null,
                 "hexValue": "3530",
-                "id": 8922,
+                "id": 3114,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "kind": "number",
                 "lValueRequested": false,
                 "nodeType": "Literal",
-                "src": "1727:2:45",
+                "src": "2265:2:22",
                 "subdenomination": null,
                 "typeDescriptions": {
                   "typeIdentifier": "t_rational_50_by_1",
@@ -1239,7 +2155,7 @@
                 "value": "50"
               },
               "nodeType": "ArrayTypeName",
-              "src": "1719:11:45",
+              "src": "2257:11:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_uint256_$50_storage_ptr",
                 "typeString": "uint256[50]"
@@ -1249,36 +2165,51 @@
             "visibility": "private"
           }
         ],
-        "scope": 8926,
-        "src": "405:1347:45"
+        "scope": 3118,
+        "src": "445:1845:22"
       }
     ],
-    "src": "0:1753:45"
+    "src": "39:2252:22"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.2.0",
-  "updatedAt": "2020-06-29T21:30:43.174Z",
+  "schemaVersion": "3.2.5",
+  "updatedAt": "2020-10-01T22:39:15.390Z",
   "devdoc": {
     "details": "This contract is not usable on its own since it does not have any _productive useful_ behaviour The only purpose of this contract is to define some useful modifiers and functions to be used on the governance aspect of the child contract",
+    "kind": "dev",
     "methods": {
       "changeIGovernor(address)": {
         "params": {
           "newIGovernor": "New governor address"
         }
+      },
+      "delegateCallToChanger(bytes)": {
+        "params": {
+          "data": "the serialized function arguments"
+        }
       }
     },
-    "title": "Governed"
+    "title": "Governed",
+    "version": 1
   },
   "userdoc": {
+    "kind": "user",
     "methods": {
       "changeIGovernor(address)": {
         "notice": "Change the contract's governor. Should be called through the old governance system"
+      },
+      "delegateCallToChanger(bytes)": {
+        "notice": "This method is used by a change contract to access the storage freely even without a setter."
+      },
+      "governor()": {
+        "notice": "The address of the contract which governs this one"
       }
     },
-    "notice": "Base contract to be inherited by governed contracts"
+    "notice": "Base contract to be inherited by governed contracts",
+    "version": 1
   }
 }
