@@ -28,8 +28,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)

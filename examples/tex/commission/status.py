@@ -24,8 +24,8 @@ settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
