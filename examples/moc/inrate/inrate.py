@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoCInrate
+from moneyonchain.moc import MoCInrate, MoCState
 
 import logging
 import logging.config
@@ -30,6 +30,7 @@ log.info('Connecting enviroment {0}...'.format(config_network))
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_inrate = MoCInrate(network_manager).from_abi()
+moc_state = MoCState(network_manager).from_abi()
 
 print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
 
@@ -38,8 +39,14 @@ print("=======================")
 info = moc_inrate.doc_inrate()
 print(info)
 
+info = moc_inrate.spot_inrate()
+print("Spot Inrate: {0}".format(info))
+
+info = moc_state.current_abundance_ratio()
+print("Current Abundance ratio: {0}".format(info))
+
 print("Interest of reedeeming 1000 DOC")
-interest_no_days = moc_inrate.doc_inrate_avg(4000)
+interest_no_days = moc_inrate.doc_inrate_avg(1000)
 print(interest_no_days)
 
 for day_to_sett in reversed(range(0, 30)):

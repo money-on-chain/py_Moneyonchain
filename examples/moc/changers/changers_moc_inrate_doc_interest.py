@@ -29,9 +29,9 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = MocInrateDocInterestChanger(network_manager)
 
-doc_tmin = int(0.00027378507871321 * 10 ** 18)
-doc_tmax = int(0.004 * 10 ** 18)
-doc_power = int(3)
+doc_tmin = int(0.0 * 10 ** 18)
+doc_tmax = int(0.000000000000000001 * 10 ** 18)
+doc_power = int(0)
 
 tx_receipt = contract.constructor(doc_tmin, doc_tmax, doc_power, execute_change=False)
 if tx_receipt:
