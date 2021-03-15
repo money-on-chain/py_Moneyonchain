@@ -7,6 +7,7 @@ WRBTC: 0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E
 BPRO: 0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf
 RIF: 0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE
 RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
+MOC: 0x45a97b54021a3F99827641AFe1BFAE574431e6ab
 
 
 1. DOC / WRBTC  <--
@@ -16,9 +17,12 @@ RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 5. DOC / RIF
 6. RDOC / RIFP
 7. RIF / RIFP <--
-
 8. DOC/ADOC
 9. ADOC/ABPRO
+10. ADOC/AMOC
+11. WRBTC/AMOC
+12. WRBTC / RIF
+13. WRBTC/MOC
 
 
 
@@ -40,6 +44,8 @@ RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
 5. DOC / RIF
 6. RDOC / RIFP
 7. RIF / RIFP <--
+8. WRBTC / RIF
+
 """
 
 import json
@@ -102,7 +108,7 @@ network_manager.connect()
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['ADOC/ABPRO']
+settings_pair = settings[config_network]['WRBTC/MOC']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
@@ -146,6 +152,11 @@ elif provider_type in ['riskpro_usd']:
         provider_external,
         base_token,
         secondary_token)
+elif provider_type in ['last_closing_price']:
+    price_provider = TokenPriceProviderLastClosingPrice(network_manager)
+    tx_receipt = price_provider.constructor(
+        base_token,
+        secondary_token)
 else:
     raise Exception("Invalid provider type")
 
@@ -161,7 +172,7 @@ if price_provider_address:
 
     contract = DexAddTokenPairChanger(network_manager)
 
-    tx_receipt = contract.deploy(
+    tx_receipt = contract.constructor(
         base_token,
         secondary_token,
         price_provider_address,
