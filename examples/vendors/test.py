@@ -22,7 +22,7 @@ from moneyonchain.moc_vendors import VENDORSMoCState, \
 
 
 connection_network='rskTestnetPublic'
-config_network = 'mocTestTyD'
+config_network = 'mocTestnetAlpha3'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -47,9 +47,9 @@ print("Balance and allowance: ", balance)
 
 tx_type_mint_bpro_fees_rbtc = moc_inrate.tx_type_mint_bpro_fees_rbtc()
 tx_type_mint_bpro_fees_moc = moc_inrate.tx_type_mint_bpro_fees_moc()
-commissions = moc_exchange.calculate_commissions_with_prices(
-    amount, tx_type_mint_bpro_fees_moc, tx_type_mint_bpro_fees_rbtc, vendor_address)
-print("Commissions: ", commissions)
+#commissions = moc_exchange.calculate_commissions_with_prices(
+#    amount, tx_type_mint_bpro_fees_moc, tx_type_mint_bpro_fees_rbtc, vendor_address)
+#print("Commissions: ", commissions)
 
 
 # finally disconnect from network

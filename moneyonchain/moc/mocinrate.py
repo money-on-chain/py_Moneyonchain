@@ -307,3 +307,20 @@ class MoCInrate(ContractBase):
         info['BtcxTmin'] = result
 
         return info
+
+    def calc_final_redeem_interest(self, amount,
+                                   formatted: bool = True,
+                                   precision: bool = True,
+                                   block_identifier: BlockIdentifier = 'latest'):
+        """ Calc interest value amount in ether float"""
+
+        bucket = BUCKET_X2
+
+        if precision:
+            amount = int(amount * self.precision)
+        result = self.sc.calcFinalRedeemInterestValue(bucket, int(amount),
+                                                      block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result

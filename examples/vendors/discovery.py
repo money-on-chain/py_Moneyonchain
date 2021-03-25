@@ -19,7 +19,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestTyD'
+config_network = 'mocTestnetAlpha3'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)

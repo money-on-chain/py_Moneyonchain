@@ -21,7 +21,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoCVendors, VENDORSMoCInrate
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestTyD'
+config_network = 'mocTestnetAlpha3'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
