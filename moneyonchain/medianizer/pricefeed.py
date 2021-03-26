@@ -18,6 +18,7 @@ from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
 from moneyonchain.transaction import receipt_to_log
+from moneyonchain.networks import web3
 
 
 class PriceFeed(ContractBase):
@@ -62,7 +63,7 @@ class PriceFeed(ContractBase):
         """ Post price """
 
         address_moc_medianizer = Web3.toChecksumAddress(self.contract_address_moc_medianizer)
-        last_block = self.network_manager.get_block('latest')
+        last_block = web3.eth.getBlock(web3.eth.blockNumber)
         expiration = last_block.timestamp + block_expiration
 
         tx_args = self.tx_arguments(**tx_arguments)
