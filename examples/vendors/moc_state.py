@@ -29,7 +29,10 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_state = VENDORSMoCState(network_manager).from_abi()
 
+bucket_x2 = moc_state.bucket_x2()
+bucket_c0 = moc_state.bucket_c0()
 
+print("Price Provider: {0}".format(moc_state.price_provider()))
 print("Bitcoin Price in USD: {0}".format(moc_state.bitcoin_price()))
 print("Bitcoin Moving Average in USD: {0}".format(moc_state.bitcoin_moving_average()))
 print("Days to settlement: {0}".format(moc_state.days_to_settlement()))
@@ -39,7 +42,21 @@ print("DOC Total Supply: {0}".format(moc_state.doc_total_supply()))
 print("Implementation: {0}".format(moc_state.implementation()))
 print("BPro Discount: {0}".format(moc_state.bpro_discount_rate()))
 print("BPro Tec Price: {0}".format(moc_state.bpro_tec_price()))
+print("State: {0}".format(moc_state.state()))
+print("RBTC in System: {0}".format(moc_state.rbtc_in_system()))
+print("cobj: {0}".format(moc_state.cobj()))
+print("cobjX: {0}".format(moc_state.cobj_X2()))
+print("cobjX: {0}".format(moc_state.cobj_X2()))
+print("MaxBProX: {0}".format(moc_state.max_bprox(bucket_x2)))
+print("MaxBProX BTC Value: {0}".format(moc_state.max_bprox_btc_value()))
+print("BproX Price: {0}".format(moc_state.bprox_price()))
+print("BproX Tec Price: {0}".format(moc_state.btc2x_tec_price()))
+print("Days to settlement: {0}".format(moc_state.days_to_settlement()))
+print("coverage: {0}".format(moc_state.coverage(bucket_x2)))
+print("Is Liquidation: {0}".format(moc_state.is_liquidation()))
+print("Is calculated: {0}".format(moc_state.is_calculate_ema()))
 
+print()
 print("Vendors STATS:")
 print("==============")
 print("MoC Price: {0}".format(moc_state.moc_price()))
@@ -48,7 +65,6 @@ print("MoC Token: {0}".format(moc_state.moc_token()))
 print("MoC Vendors: {0}".format(moc_state.moc_vendors()))
 print("Protected: {0}".format(moc_state.protected()))
 print("Liquidation enabled: {0}".format(moc_state.liquidation_enabled()))
-
 
 # finally disconnect from network
 network_manager.disconnect()

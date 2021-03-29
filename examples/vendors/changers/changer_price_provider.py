@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc_vendors import MoCStateMoCPriceProviderChanger
+from moneyonchain.moc import MoCPriceProviderChanger
 
 import logging
 import logging.config
@@ -22,14 +22,14 @@ log.addHandler(console)
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnetAlpha3'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-contract = MoCStateMoCPriceProviderChanger(network_manager)
-price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
+contract = MoCPriceProviderChanger(network_manager)
+price_provider = '0x4A4D3130905Ec11C648D10EA494a0F0FD95a13Ad'
 
 tx_receipt = contract.constructor(price_provider, execute_change=True)
 if tx_receipt:
