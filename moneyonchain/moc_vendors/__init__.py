@@ -14,4 +14,4 @@ from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, 
     MoCStateMoCTokenChanged, MoCStateMoCVendorsChanged, \
     MoCVendorsVendorRegistered, MoCVendorsVendorUpdated, MoCVendorsVendorUnregistered, \
     MoCVendorsVendorStakeAdded, MoCVendorsVendorStakeRemoved, MoCVendorsTotalPaidInMoCReset, MoCContractLiquidated
-from .changers import MoCStateMoCPriceProviderChanger
+from .changers import MoCStateMoCPriceProviderChanger, MoCStateLiquidationEnabledChanger
