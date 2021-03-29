@@ -67,8 +67,6 @@ class VENDORSMoCVendors(ContractBase):
 
         vendor_details = self.sc.vendors(vendor_account, block_identifier=block_identifier)
 
-        print(vendor_details)
-
         names_array = ["isActive", "markup", "totalPaidInMoC", "staking", "paidMoC", "paidRBTC"]
 
         if formatted:

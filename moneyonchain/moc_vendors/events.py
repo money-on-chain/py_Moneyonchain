@@ -579,6 +579,29 @@ class MoCVendorsTotalPaidInMoCReset(BaseEvent):
                 d_event['account']
                 ]
 
+class MoCVendorsVendorGuardianAddressChanged(BaseEvent):
+    name = "VendorGuardianAddressChanged"
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'vendorGuardianAddress']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['vendorGuardianAddress'] = self.event['vendorGuardianAddress']
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['vendorGuardianAddress']
+                ]
+
 
 class MoCContractLiquidated(BaseEvent):
     name = "ContractLiquidated"
