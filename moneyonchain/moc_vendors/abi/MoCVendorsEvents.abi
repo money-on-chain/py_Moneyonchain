@@ -90,5 +90,17 @@
     ],
     "name": "TotalPaidInMoCReset",
     "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "vendorGuardianAddress",
+        "type": "address"
+      }
+    ],
+    "name": "VendorGuardianAddressChanged",
+    "type": "event"
   }
 ]

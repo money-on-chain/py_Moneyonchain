@@ -111,6 +111,20 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "vendorGuardianAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "VENDOR_MAX_MARKUP",
     "outputs": [
       {
@@ -290,12 +304,20 @@
     "type": "event"
   },
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "connectorAddress",
+        "indexed": false,
+        "name": "vendorGuardianAddress",
         "type": "address"
-      },
+      }
+    ],
+    "name": "VendorGuardianAddressChanged",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
         "name": "_governor",
         "type": "address"
@@ -311,7 +333,15 @@
     "constant": false,
     "inputs": [
       {
+        "name": "connectorAddress",
+        "type": "address"
+      },
+      {
         "name": "_governor",
+        "type": "address"
+      },
+      {
+        "name": "_vendorGuardianAddress",
         "type": "address"
       }
     ],
@@ -549,6 +579,34 @@
     "constant": false,
     "inputs": [],
     "name": "resetTotalPaidInMoC",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getVendorGuardianAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_vendorGuardianAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setVendorGuardianAddress",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
