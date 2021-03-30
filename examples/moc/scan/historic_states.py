@@ -12,7 +12,7 @@ import csv
 import time
 
 connection_network = 'rskMainnetPublic'
-config_network = 'rdocMainnet'
+config_network = 'mocMainnet2'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -23,12 +23,14 @@ if network_manager.options['networks'][config_network]['app_mode'] == 'MoC':
 else:
     moc_state = RDOCMoCState(network_manager).from_abi()
 
-from_block = 3082500  # can be manually setting
-to_block = 3082510  # can be manually setting
-block_steps = 2880
-block_skip = 2
+from_block = 2685121  # can be manually setting
+to_block = 3227045  # can be manually setting
+block_steps = 10000
+block_skip = 1440
 hours_delta = 0
 last_block_number = int(network_manager.block_number)
+bucket_x2 = moc_state.bucket_x2()
+bucket_c0 = moc_state.bucket_c0()
 
 if to_block <= 0:
     to_block = last_block_number  # last block number in the node
@@ -76,40 +78,40 @@ while current_block <= to_block:
         d_info_data['daysToSettlement'] = int(moc_state.days_to_settlement(block_identifier=n_block))
 
         # bkt_0 Storage DOC
-        d_info_data['C0_getBucketNDoc'] = moc_state.bucket_ndoc(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNDoc'] = moc_state.bucket_ndoc(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage BPro
-        d_info_data['C0_getBucketNBPro'] = moc_state.bucket_nbpro(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNBPro'] = moc_state.bucket_nbpro(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage BTC
-        d_info_data['C0_getBucketNBTC'] = moc_state.bucket_nbtc(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNBTC'] = moc_state.bucket_nbtc(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage InrateBag
-        d_info_data['C0_getInrateBag'] = moc_state.get_inrate_bag(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getInrateBag'] = moc_state.get_inrate_bag(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage Coverage
-        d_info_data['C0_coverage'] = moc_state.coverage(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_coverage'] = moc_state.coverage(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage Leverage
-        d_info_data['C0_leverage'] = moc_state.leverage(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_leverage'] = moc_state.leverage(bucket_c0, block_identifier=n_block)
 
         # bkt_2 Storage DOC
-        d_info_data['X2_getBucketNDoc'] = moc_state.bucket_ndoc(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNDoc'] = moc_state.bucket_ndoc(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage BPro
-        d_info_data['X2_getBucketNBPro'] = moc_state.bucket_nbpro(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNBPro'] = moc_state.bucket_nbpro(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage BTC
-        d_info_data['X2_getBucketNBTC'] = moc_state.bucket_nbtc(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNBTC'] = moc_state.bucket_nbtc(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Inrate Bag
-        d_info_data['X2_getInrateBag'] = moc_state.get_inrate_bag(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getInrateBag'] = moc_state.get_inrate_bag(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Coverage
-        d_info_data['X2_coverage'] = moc_state.coverage(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_coverage'] = moc_state.coverage(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage Leverage
-        d_info_data['X2_leverage'] = moc_state.leverage(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_leverage'] = moc_state.leverage(bucket_x2, block_identifier=n_block)
 
         # Global Coverage
         d_info_data['globalCoverage'] = moc_state.global_coverage(block_identifier=n_block)
@@ -127,7 +129,7 @@ while current_block <= to_block:
         d_info_data['bproTecPrice'] = moc_state.bpro_tec_price(block_identifier=n_block)
 
         # BTC2X Tec price
-        d_info_data['BTC2XTecPrice'] = moc_state.btc2x_tec_price(str.encode('X2'), block_identifier=n_block)
+        d_info_data['BTC2XTecPrice'] = moc_state.btc2x_tec_price(bucket_x2, block_identifier=n_block)
 
         l_historic_data.append(d_info_data)
 
