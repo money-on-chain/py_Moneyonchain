@@ -48,7 +48,7 @@ feeder = PriceFeed(network_manager,
                    contract_address=price_feeder,
                    contract_address_moc_medianizer=oracle_address).from_abi()
 
-feeder.post(54000 * 10 ** 18, block_expiration=1000000)
+feeder.post(2300 * 10 ** 18, block_expiration=1000000)
 print(feeder.zzz())
 print(feeder.peek())
 
