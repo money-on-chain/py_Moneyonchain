@@ -143,3 +143,41 @@ class VENDORSMoCVendors(ContractBase):
         receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
+
+    def add_stake(self,
+                  staking,
+                  **tx_arguments):
+        """
+        allows an active vendor (msg.sender) to add staking
+        @param staking Staking the vendor wants to add
+        """
+
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.addStake(
+            int(staking * self.precision),
+            tx_args)
+
+        tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
+
+    def remove_stake(self,
+                     staking,
+                     **tx_arguments):
+        """
+        Allows an active vendor (msg.sender) to remove staking
+        @param staking Staking the vendor wants to remove
+        """
+
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.removeStake(
+            int(staking * self.precision),
+            tx_args)
+
+        tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
