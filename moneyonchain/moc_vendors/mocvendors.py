@@ -123,3 +123,23 @@ class VENDORSMoCVendors(ContractBase):
         receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
+
+    def unregister(self,
+                   account,
+                   **tx_arguments):
+        """
+        Allows to unregister a vendor
+        @param account Vendor address
+        """
+
+        tx_args = self.tx_arguments(**tx_arguments)
+        account = Web3.toChecksumAddress(account)
+
+        tx_receipt = self.sc.unregisterVendor(
+            account,
+            tx_args)
+
+        tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
