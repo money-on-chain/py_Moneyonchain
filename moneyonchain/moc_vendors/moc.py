@@ -39,6 +39,7 @@ STATE_ABOVE_COBJ = 3
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
+ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 class VENDORSMoC(MoC):
     contract_name = 'MoC'
@@ -293,7 +294,7 @@ class VENDORSMoC(MoC):
 
     def mint_bpro_gas_estimated(self,
                                 amount,
-                                vendor_account,
+                                vendor_account=ZERO_ADDRESS,
                                 precision=False,
                                 **tx_arguments):
 
@@ -309,7 +310,7 @@ class VENDORSMoC(MoC):
 
     def mint_doc_gas_estimated(self,
                                amount,
-                               vendor_account,
+                               vendor_account=ZERO_ADDRESS,
                                precision=False,
                                **tx_arguments):
 
@@ -325,7 +326,7 @@ class VENDORSMoC(MoC):
 
     def mint_bprox_gas_estimated(self,
                                  amount,
-                                 vendor_account,
+                                 vendor_account=ZERO_ADDRESS,
                                  precision=False,
                                  **tx_arguments):
 
@@ -343,7 +344,7 @@ class VENDORSMoC(MoC):
 
     def mint_bpro(self,
                   amount: Decimal,
-                  vendor_account,
+                  vendor_account=ZERO_ADDRESS,
                   **tx_arguments):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
@@ -365,11 +366,6 @@ class VENDORSMoC(MoC):
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        if self.mode != 'MoC':
-            max_mint_bpro_available = self.max_mint_bpro_available()
-            if total_amount >= max_mint_bpro_available:
-                raise Exception("You are trying to mint more than the limit. Mint RiskPro limit: {0}".format(
-                    max_mint_bpro_available))
 
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(total_amount * self.precision)
@@ -386,7 +382,7 @@ class VENDORSMoC(MoC):
 
     def mint_doc(self,
                  amount: Decimal,
-                 vendor_account,
+                 vendor_account=ZERO_ADDRESS,
                  **tx_arguments):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
@@ -432,7 +428,7 @@ class VENDORSMoC(MoC):
 
     def mint_btcx(self,
                   amount: Decimal,
-                  vendor_account,
+                  vendor_account=ZERO_ADDRESS,
                   **tx_arguments):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
@@ -479,7 +475,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_bpro(self,
                      amount_token: Decimal,
-                     vendor_account,
+                     vendor_account=ZERO_ADDRESS,
                      **tx_arguments):
         """ Reedem BitPro amount of token """
 
@@ -520,7 +516,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_free_doc(self,
                          amount_token: Decimal,
-                         vendor_account,
+                         vendor_account=ZERO_ADDRESS,
                          **tx_arguments):
         """
         Reedem Free DOC amount of token
@@ -562,7 +558,7 @@ class VENDORSMoC(MoC):
 
     def reedeem_btc2x(self,
                       amount_token: Decimal,
-                      vendor_account,
+                      vendor_account=ZERO_ADDRESS,
                       **tx_arguments):
         """ Reedem BTC2X amount of token """
 
@@ -622,7 +618,7 @@ class VENDORSMoC(MoC):
 
     def amount_mint_bpro(self,
                          amount: Decimal,
-                         vendor_account,
+                         vendor_account=ZERO_ADDRESS,
                          default_account=None):
         """Final amount need it to mint bitpro in RBTC"""
 
@@ -647,7 +643,7 @@ class VENDORSMoC(MoC):
 
     def amount_mint_doc(self,
                         amount: Decimal,
-                        vendor_account,
+                        vendor_account=ZERO_ADDRESS,
                         default_account=None):
         """Final amount need it to mint doc"""
 
@@ -672,7 +668,7 @@ class VENDORSMoC(MoC):
 
     def amount_mint_btc2x(self,
                           amount: Decimal,
-                          vendor_account,
+                          vendor_account=ZERO_ADDRESS,
                           default_account=None):
         """Final amount need it to mint btc2x"""
 
