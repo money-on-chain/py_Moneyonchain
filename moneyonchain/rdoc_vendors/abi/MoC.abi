@@ -205,8 +205,13 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getMocPrecision",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getAllowance",
     "outputs": [
       {
         "name": "",
@@ -218,9 +223,32 @@
     "type": "function"
   },
   {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
+    "constant": true,
+    "inputs": [],
+    "name": "reserveToken",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getMocPrecision",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "anonymous": false,
@@ -244,6 +272,46 @@
       }
     ],
     "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "CallRevert",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "origin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositFailed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "destination",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "WithdrawFailed",
     "type": "event"
   },
   {
@@ -306,6 +374,24 @@
       {
         "name": "_governor",
         "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_stopper",
+        "type": "address"
+      },
+      {
+        "name": "_governor",
+        "type": "address"
       },
       {
         "name": "_stoppable",
@@ -333,24 +419,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_stopper",
-        "type": "address"
-      },
-      {
-        "name": "_governor",
-        "type": "address"
-      }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [
       {
@@ -362,7 +430,7 @@
         "type": "address"
       }
     ],
-    "name": "bproxBalanceOf",
+    "name": "riskProxBalanceOf",
     "outputs": [
       {
         "name": "",
@@ -418,7 +486,7 @@
         "type": "address"
       }
     ],
-    "name": "docAmountToRedeem",
+    "name": "stableTokenAmountToRedeem",
     "outputs": [
       {
         "name": "",
@@ -433,11 +501,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "docAmount",
+        "name": "stableTokenAmount",
         "type": "uint256"
       }
     ],
-    "name": "redeemDocRequest",
+    "name": "redeemStableTokenRequest",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -465,43 +533,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "btcToMint",
+        "name": "tokenAmount",
         "type": "uint256"
       }
     ],
-    "name": "mintBPro",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "btcToMint",
-        "type": "uint256"
-      },
-      {
-        "name": "vendorAccount",
-        "type": "address"
-      }
-    ],
-    "name": "mintBProVendors",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "bproAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "redeemBPro",
+    "name": "addReserves",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -511,15 +547,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "bproAmount",
+        "name": "resTokensToMint",
         "type": "uint256"
-      },
-      {
-        "name": "vendorAccount",
-        "type": "address"
       }
     ],
-    "name": "redeemBProVendors",
+    "name": "mintRiskPro",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -529,21 +561,7 @@
     "constant": false,
     "inputs": [
       {
-        "name": "btcToMint",
-        "type": "uint256"
-      }
-    ],
-    "name": "mintDoc",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "btcToMint",
+        "name": "resTokensToMint",
         "type": "uint256"
       },
       {
@@ -551,25 +569,7 @@
         "type": "address"
       }
     ],
-    "name": "mintDocVendors",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "bucket",
-        "type": "bytes32"
-      },
-      {
-        "name": "bproxAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "redeemBProx",
+    "name": "mintRiskProVendors",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -579,11 +579,21 @@
     "constant": false,
     "inputs": [
       {
-        "name": "bucket",
-        "type": "bytes32"
-      },
+        "name": "riskProAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "redeemRiskPro",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "bproxAmount",
+        "name": "riskProAmount",
         "type": "uint256"
       },
       {
@@ -591,7 +601,39 @@
         "type": "address"
       }
     ],
-    "name": "redeemBProxVendors",
+    "name": "redeemRiskProVendors",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "resTokensToMint",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintStableToken",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "resTokensToMint",
+        "type": "uint256"
+      },
+      {
+        "name": "vendorAccount",
+        "type": "address"
+      }
+    ],
+    "name": "mintStableTokenVendors",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -605,14 +647,14 @@
         "type": "bytes32"
       },
       {
-        "name": "btcToMint",
+        "name": "riskProxAmount",
         "type": "uint256"
       }
     ],
-    "name": "mintBProx",
+    "name": "redeemRiskProx",
     "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -623,7 +665,7 @@
         "type": "bytes32"
       },
       {
-        "name": "btcToMint",
+        "name": "riskProxAmount",
         "type": "uint256"
       },
       {
@@ -631,21 +673,7 @@
         "type": "address"
       }
     ],
-    "name": "mintBProxVendors",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "docAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "redeemFreeDoc",
+    "name": "redeemRiskProxVendors",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -655,7 +683,29 @@
     "constant": false,
     "inputs": [
       {
-        "name": "docAmount",
+        "name": "bucket",
+        "type": "bytes32"
+      },
+      {
+        "name": "resTokensToMint",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintRiskProx",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "bucket",
+        "type": "bytes32"
+      },
+      {
+        "name": "resTokensToMint",
         "type": "uint256"
       },
       {
@@ -663,7 +713,39 @@
         "type": "address"
       }
     ],
-    "name": "redeemFreeDocVendors",
+    "name": "mintRiskProxVendors",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "stableTokenAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "redeemFreeStableToken",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "stableTokenAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "vendorAccount",
+        "type": "address"
+      }
+    ],
+    "name": "redeemFreeStableTokenVendors",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -672,7 +754,7 @@
   {
     "constant": false,
     "inputs": [],
-    "name": "redeemAllDoc",
+    "name": "redeemAllStableToken",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -690,7 +772,7 @@
   {
     "constant": false,
     "inputs": [],
-    "name": "payBitProHoldersInterestPayment",
+    "name": "payRiskProHoldersInterestPayment",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -699,7 +781,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "calculateBitProHoldersInterest",
+    "name": "calculateRiskProHoldersInterest",
     "outputs": [
       {
         "name": "",
@@ -717,7 +799,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getBitProInterestAddress",
+    "name": "getRiskProInterestAddress",
     "outputs": [
       {
         "name": "",
@@ -731,7 +813,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getBitProRate",
+    "name": "getRiskProRate",
     "outputs": [
       {
         "name": "",
@@ -745,7 +827,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getBitProInterestBlockSpan",
+    "name": "getRiskProInterestBlockSpan",
     "outputs": [
       {
         "name": "",
@@ -773,7 +855,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "isBitProInterestEnabled",
+    "name": "isRiskProInterestEnabled",
     "outputs": [
       {
         "name": "",
@@ -862,7 +944,7 @@
         "type": "address"
       },
       {
-        "name": "btcAmount",
+        "name": "tokenAmount",
         "type": "uint256"
       }
     ],

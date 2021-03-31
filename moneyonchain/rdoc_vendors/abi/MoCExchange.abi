@@ -123,7 +123,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -202,7 +202,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -259,7 +259,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -316,7 +316,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -378,7 +378,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -450,7 +450,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -522,7 +522,7 @@
       },
       {
         "indexed": false,
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -557,7 +557,7 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "reserveTokenAmount",
         "type": "uint256"
       }
     ],
@@ -625,7 +625,7 @@
             "type": "uint8"
           },
           {
-            "name": "txTypeFeesRBTC",
+            "name": "txTypeFeesReserveToken",
             "type": "uint8"
           },
           {
@@ -642,7 +642,7 @@
       {
         "components": [
           {
-            "name": "btcCommission",
+            "name": "reserveTokenCommission",
             "type": "uint256"
           },
           {
@@ -650,7 +650,7 @@
             "type": "uint256"
           },
           {
-            "name": "btcPrice",
+            "name": "reserveTokenPrice",
             "type": "uint256"
           },
           {
@@ -658,7 +658,7 @@
             "type": "uint256"
           },
           {
-            "name": "btcMarkup",
+            "name": "reserveTokenMarkup",
             "type": "uint256"
           },
           {
@@ -682,7 +682,7 @@
         "type": "address"
       },
       {
-        "name": "bproAmount",
+        "name": "riskProAmount",
         "type": "uint256"
       },
       {
@@ -690,7 +690,7 @@
         "type": "address"
       }
     ],
-    "name": "redeemBPro",
+    "name": "redeemRiskPro",
     "outputs": [
       {
         "name": "",
@@ -725,7 +725,7 @@
         "type": "address"
       },
       {
-        "name": "docAmount",
+        "name": "stableTokenAmount",
         "type": "uint256"
       },
       {
@@ -733,7 +733,7 @@
         "type": "address"
       }
     ],
-    "name": "redeemFreeDoc",
+    "name": "redeemFreeStableToken",
     "outputs": [
       {
         "name": "",
@@ -768,7 +768,7 @@
         "type": "address"
       },
       {
-        "name": "btcToMint",
+        "name": "resTokensToMint",
         "type": "uint256"
       },
       {
@@ -776,7 +776,7 @@
         "type": "address"
       }
     ],
-    "name": "mintDoc",
+    "name": "mintStableToken",
     "outputs": [
       {
         "name": "",
@@ -815,11 +815,11 @@
         "type": "uint256"
       },
       {
-        "name": "btcPrice",
+        "name": "reservePrice",
         "type": "uint256"
       }
     ],
-    "name": "redeemDocWithPrice",
+    "name": "redeemStableTokenWithPrice",
     "outputs": [
       {
         "name": "",
@@ -846,7 +846,7 @@
         "type": "address"
       }
     ],
-    "name": "redeemAllDoc",
+    "name": "redeemAllStableToken",
     "outputs": [
       {
         "name": "",
@@ -865,58 +865,15 @@
         "type": "address"
       },
       {
-        "name": "btcAmount",
+        "name": "reserveTokenCommission",
         "type": "uint256"
       },
       {
-        "name": "vendorAccount",
-        "type": "address"
-      }
-    ],
-    "name": "mintBPro",
-    "outputs": [
-      {
-        "name": "",
+        "name": "riskProAmount",
         "type": "uint256"
       },
       {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "account",
-        "type": "address"
-      },
-      {
-        "name": "btcCommission",
-        "type": "uint256"
-      },
-      {
-        "name": "bproAmount",
-        "type": "uint256"
-      },
-      {
-        "name": "rbtcValue",
+        "name": "resTokenValue",
         "type": "uint256"
       },
       {
@@ -924,7 +881,7 @@
         "type": "uint256"
       },
       {
-        "name": "btcPrice",
+        "name": "reserveTokenPrice",
         "type": "uint256"
       },
       {
@@ -932,7 +889,7 @@
         "type": "uint256"
       },
       {
-        "name": "btcMarkup",
+        "name": "reserveTokenMarkup",
         "type": "uint256"
       },
       {
@@ -944,7 +901,7 @@
         "type": "address"
       }
     ],
-    "name": "mintBPro",
+    "name": "mintRiskPro",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -958,11 +915,7 @@
         "type": "address"
       },
       {
-        "name": "bucket",
-        "type": "bytes32"
-      },
-      {
-        "name": "btcToMint",
+        "name": "reserveTokenAmount",
         "type": "uint256"
       },
       {
@@ -970,7 +923,7 @@
         "type": "address"
       }
     ],
-    "name": "mintBProx",
+    "name": "mintRiskPro",
     "outputs": [
       {
         "name": "",
@@ -1009,7 +962,7 @@
         "type": "bytes32"
       },
       {
-        "name": "bproxAmount",
+        "name": "resTokensToMint",
         "type": "uint256"
       },
       {
@@ -1017,7 +970,54 @@
         "type": "address"
       }
     ],
-    "name": "redeemBProx",
+    "name": "mintRiskProx",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "name": "bucket",
+        "type": "bytes32"
+      },
+      {
+        "name": "riskProxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "vendorAccount",
+        "type": "address"
+      }
+    ],
+    "name": "redeemRiskProx",
     "outputs": [
       {
         "name": "",
@@ -1056,15 +1056,15 @@
         "type": "address"
       },
       {
-        "name": "bproxAmount",
+        "name": "riskProxAmount",
         "type": "uint256"
       },
       {
-        "name": "bproxPrice",
+        "name": "riskProxPrice",
         "type": "uint256"
       }
     ],
-    "name": "forceRedeemBProx",
+    "name": "forceRedeemRiskProx",
     "outputs": [
       {
         "name": "",
@@ -1087,15 +1087,15 @@
         "type": "address"
       },
       {
-        "name": "bproxAmount",
+        "name": "riskProxAmount",
         "type": "uint256"
       },
       {
-        "name": "bproxPrice",
+        "name": "riskProxPrice",
         "type": "uint256"
       }
     ],
-    "name": "burnBProxFor",
+    "name": "burnRiskProxFor",
     "outputs": [
       {
         "name": "",

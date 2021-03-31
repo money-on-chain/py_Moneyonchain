@@ -15,6 +15,20 @@
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "riskProxManager",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "account",
@@ -77,7 +91,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproxManager",
+    "name": "riskProToken",
     "outputs": [
       {
         "name": "",
@@ -91,7 +105,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "docToken",
+    "name": "stableToken",
     "outputs": [
       {
         "name": "",
@@ -133,7 +147,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproToken",
+    "name": "reserveToken",
     "outputs": [
       {
         "name": "",
@@ -166,15 +180,15 @@
         "type": "address"
       },
       {
-        "name": "docAddress",
+        "name": "stableTokenAddress",
         "type": "address"
       },
       {
-        "name": "bproAddress",
+        "name": "riskProAddress",
         "type": "address"
       },
       {
-        "name": "bproxAddress",
+        "name": "riskProxAddress",
         "type": "address"
       },
       {
@@ -199,6 +213,10 @@
       },
       {
         "name": "burnoutBookAddress",
+        "type": "address"
+      },
+      {
+        "name": "reserveTokenAddress",
         "type": "address"
       }
     ],

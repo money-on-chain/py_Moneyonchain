@@ -16,20 +16,6 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "DOC_REDEMPTION_TASK",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
     "name": "SETTLEMENT_TASK",
     "outputs": [
       {
@@ -63,6 +49,20 @@
       {
         "name": "",
         "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "StableToken_REDEMPTION_TASK",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
       }
     ],
     "payable": false,
@@ -426,7 +426,7 @@
         "type": "address"
       }
     ],
-    "name": "docAmountToRedeem",
+    "name": "stableTokenAmountToRedeem",
     "outputs": [
       {
         "name": "",

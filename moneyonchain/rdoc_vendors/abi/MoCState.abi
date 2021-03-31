@@ -86,11 +86,39 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "riskProMaxDiscountRate",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "BUCKET_X2",
     "outputs": [
       {
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "maxMintRiskPro",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -114,7 +142,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproMaxDiscountRate",
+    "name": "dayBlockSpan",
     "outputs": [
       {
         "name": "",
@@ -128,7 +156,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "dayBlockSpan",
+    "name": "reserves",
     "outputs": [
       {
         "name": "",
@@ -175,34 +203,6 @@
       {
         "name": "",
         "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "rbtcInSystem",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "maxMintBPro",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
       }
     ],
     "payable": false,
@@ -305,6 +305,20 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getExponentalMovingAverage",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -434,20 +448,6 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getBitcoinMovingAverage",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -473,7 +473,7 @@
         "type": "address"
       }
     ],
-    "name": "BtcPriceProviderUpdated",
+    "name": "PriceProviderUpdated",
     "type": "event"
   },
   {
@@ -548,7 +548,7 @@
             "type": "address"
           },
           {
-            "name": "btcPriceProvider",
+            "name": "priceProvider",
             "type": "address"
           },
           {
@@ -580,7 +580,7 @@
             "type": "uint256"
           },
           {
-            "name": "maxMintBPro",
+            "name": "maxMintRiskPro",
             "type": "uint256"
           },
           {
@@ -674,11 +674,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "btcProviderAddress",
+        "name": "priceProviderAddress",
         "type": "address"
       }
     ],
-    "name": "setBtcPriceProvider",
+    "name": "setPriceProvider",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -687,7 +687,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getBtcPriceProvider",
+    "name": "getPriceProvider",
     "outputs": [
       {
         "name": "",
@@ -716,11 +716,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "amount",
         "type": "uint256"
       }
     ],
-    "name": "subtractRbtcFromSystem",
+    "name": "substractFromReserves",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -730,11 +730,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "amount",
         "type": "uint256"
       }
     ],
-    "name": "addToRbtcInSystem",
+    "name": "addToReserves",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -743,7 +743,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproTotalSupply",
+    "name": "riskProTotalSupply",
     "outputs": [
       {
         "name": "",
@@ -757,7 +757,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "docTotalSupply",
+    "name": "stableTokenTotalSupply",
     "outputs": [
       {
         "name": "",
@@ -785,7 +785,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "collateralRbtcInSystem",
+    "name": "collateralReserves",
     "outputs": [
       {
         "name": "",
@@ -818,7 +818,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "lockedBitcoin",
+    "name": "lockedReserveTokens",
     "outputs": [
       {
         "name": "",
@@ -837,7 +837,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "getRbtcInBitPro",
+    "name": "getResTokensInRiskPro",
     "outputs": [
       {
         "name": "",
@@ -851,7 +851,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getRbtcRemainder",
+    "name": "getReservesRemainder",
     "outputs": [
       {
         "name": "",
@@ -885,7 +885,7 @@
     "constant": true,
     "inputs": [
       {
-        "name": "doc0",
+        "name": "stableToken0",
         "type": "uint256"
       }
     ],
@@ -936,7 +936,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "globalMaxDoc",
+    "name": "globalMaxStableToken",
     "outputs": [
       {
         "name": "",
@@ -950,7 +950,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "freeDoc",
+    "name": "freeStableToken",
     "outputs": [
       {
         "name": "",
@@ -969,7 +969,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "maxDoc",
+    "name": "maxStableToken",
     "outputs": [
       {
         "name": "",
@@ -983,7 +983,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "globalMaxBPro",
+    "name": "globalMaxRiskPro",
     "outputs": [
       {
         "name": "",
@@ -997,7 +997,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "absoluteMaxDoc",
+    "name": "absoluteMaxStableToken",
     "outputs": [
       {
         "name": "",
@@ -1016,7 +1016,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "maxBPro",
+    "name": "maxRiskPro",
     "outputs": [
       {
         "name": "",
@@ -1035,7 +1035,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "maxBProx",
+    "name": "maxRiskProx",
     "outputs": [
       {
         "name": "",
@@ -1054,7 +1054,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "maxBProxBtcValue",
+    "name": "maxRiskProxResTokenValue",
     "outputs": [
       {
         "name": "",
@@ -1068,7 +1068,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "absoluteMaxBPro",
+    "name": "absoluteMaxRiskPro",
     "outputs": [
       {
         "name": "",
@@ -1082,7 +1082,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "maxBProWithDiscount",
+    "name": "maxRiskProWithDiscount",
     "outputs": [
       {
         "name": "",
@@ -1096,7 +1096,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "globalLockedBitcoin",
+    "name": "globalLockedReserveTokens",
     "outputs": [
       {
         "name": "",
@@ -1110,7 +1110,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproTecPrice",
+    "name": "riskProTecPrice",
     "outputs": [
       {
         "name": "",
@@ -1129,7 +1129,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "bucketBProTecPrice",
+    "name": "bucketRiskProTecPrice",
     "outputs": [
       {
         "name": "",
@@ -1148,7 +1148,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "bucketBProTecPriceHelper",
+    "name": "bucketRiskProTecPriceHelper",
     "outputs": [
       {
         "name": "",
@@ -1162,7 +1162,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproDiscountPrice",
+    "name": "riskProDiscountPrice",
     "outputs": [
       {
         "name": "",
@@ -1176,7 +1176,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproUsdPrice",
+    "name": "riskProUsdPrice",
     "outputs": [
       {
         "name": "",
@@ -1195,7 +1195,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "maxBProxBProValue",
+    "name": "maxRiskProxRiskProValue",
     "outputs": [
       {
         "name": "",
@@ -1214,7 +1214,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "bproxBProPrice",
+    "name": "riskProxRiskProPrice",
     "outputs": [
       {
         "name": "",
@@ -1228,7 +1228,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "bproSpotDiscountRate",
+    "name": "riskProSpotDiscountRate",
     "outputs": [
       {
         "name": "",
@@ -1303,7 +1303,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "getBucketNBTC",
+    "name": "getBucketNReserve",
     "outputs": [
       {
         "name": "",
@@ -1322,7 +1322,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "getBucketNBPro",
+    "name": "getBucketNRiskPro",
     "outputs": [
       {
         "name": "",
@@ -1341,7 +1341,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "getBucketNDoc",
+    "name": "getBucketNStableToken",
     "outputs": [
       {
         "name": "",
@@ -1407,7 +1407,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getBitcoinPrice",
+    "name": "getReserveTokenPrice",
     "outputs": [
       {
         "name": "",
@@ -1421,7 +1421,7 @@
   {
     "constant": false,
     "inputs": [],
-    "name": "calculateBitcoinMovingAverage",
+    "name": "calculateReserveTokenMovingAverage",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1580,11 +1580,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_maxMintBPro",
+        "name": "_maxMintRiskPro",
         "type": "uint256"
       }
     ],
-    "name": "setMaxMintBPro",
+    "name": "setMaxMintRiskPro",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1593,7 +1593,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getMaxMintBPro",
+    "name": "getMaxMintRiskPro",
     "outputs": [
       {
         "name": "",

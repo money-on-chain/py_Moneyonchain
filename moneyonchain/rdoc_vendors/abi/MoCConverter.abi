@@ -105,7 +105,7 @@
         "type": "uint256"
       }
     ],
-    "name": "bproToBtc",
+    "name": "riskProToResToken",
     "outputs": [
       {
         "name": "",
@@ -120,11 +120,11 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "resTokensAmount",
         "type": "uint256"
       }
     ],
-    "name": "btcToBPro",
+    "name": "resTokenToRiskPro",
     "outputs": [
       {
         "name": "",
@@ -143,7 +143,7 @@
         "type": "uint256"
       }
     ],
-    "name": "bproDiscToBtc",
+    "name": "riskProDiscToResToken",
     "outputs": [
       {
         "name": "",
@@ -158,11 +158,11 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "resTokensAmount",
         "type": "uint256"
       }
     ],
-    "name": "btcToBProDisc",
+    "name": "resTokenToRiskProDisc",
     "outputs": [
       {
         "name": "",
@@ -177,11 +177,11 @@
     "constant": true,
     "inputs": [
       {
-        "name": "docAmount",
+        "name": "stableTokenAmount",
         "type": "uint256"
       }
     ],
-    "name": "docsToBtc",
+    "name": "stableTokensToResToken",
     "outputs": [
       {
         "name": "",
@@ -196,15 +196,15 @@
     "constant": true,
     "inputs": [
       {
-        "name": "docAmount",
+        "name": "stableTokenAmount",
         "type": "uint256"
       },
       {
-        "name": "btcPrice",
+        "name": "reservePrice",
         "type": "uint256"
       }
     ],
-    "name": "docsToBtcWithPrice",
+    "name": "stableTokensToResTokenWithPrice",
     "outputs": [
       {
         "name": "",
@@ -219,11 +219,11 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "resTokensAmount",
         "type": "uint256"
       }
     ],
-    "name": "btcToDoc",
+    "name": "resTokenToStableToken",
     "outputs": [
       {
         "name": "",
@@ -238,30 +238,7 @@
     "constant": true,
     "inputs": [
       {
-        "name": "bproxAmount",
-        "type": "uint256"
-      },
-      {
-        "name": "bucket",
-        "type": "bytes32"
-      }
-    ],
-    "name": "bproxToBtc",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "bproxAmount",
+        "name": "riskProxAmount",
         "type": "uint256"
       },
       {
@@ -269,7 +246,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "bproxToBtcHelper",
+    "name": "riskProxToResToken",
     "outputs": [
       {
         "name": "",
@@ -284,7 +261,7 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "riskProxAmount",
         "type": "uint256"
       },
       {
@@ -292,7 +269,7 @@
         "type": "bytes32"
       }
     ],
-    "name": "btcToBProx",
+    "name": "riskProxToResTokenHelper",
     "outputs": [
       {
         "name": "",
@@ -307,7 +284,30 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "resTokensAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "bucket",
+        "type": "bytes32"
+      }
+    ],
+    "name": "resTokenToRiskProx",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "resTokensAmount",
         "type": "uint256"
       },
       {
@@ -315,7 +315,7 @@
         "type": "uint256"
       }
     ],
-    "name": "btcToBProWithPrice",
+    "name": "resTokenToRiskProWithPrice",
     "outputs": [
       {
         "name": "",
@@ -330,53 +330,15 @@
     "constant": true,
     "inputs": [
       {
-        "name": "bproAmount",
+        "name": "riskProAmount",
         "type": "uint256"
       },
       {
-        "name": "bproPrice",
+        "name": "riskProPrice",
         "type": "uint256"
       }
     ],
-    "name": "bproToBtcWithPrice",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "mocAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "mocToBtc",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "btcAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "btcToMoC",
+    "name": "riskProToResTokenWithPrice",
     "outputs": [
       {
         "name": "",
@@ -393,17 +355,9 @@
       {
         "name": "mocAmount",
         "type": "uint256"
-      },
-      {
-        "name": "btcPrice",
-        "type": "uint256"
-      },
-      {
-        "name": "mocPrice",
-        "type": "uint256"
       }
     ],
-    "name": "mocToBtcWithPrice",
+    "name": "mocToResToken",
     "outputs": [
       {
         "name": "",
@@ -418,11 +372,30 @@
     "constant": true,
     "inputs": [
       {
-        "name": "btcAmount",
+        "name": "resTokensAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "resTokenToMoC",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "mocAmount",
         "type": "uint256"
       },
       {
-        "name": "btcPrice",
+        "name": "reservePrice",
         "type": "uint256"
       },
       {
@@ -430,7 +403,34 @@
         "type": "uint256"
       }
     ],
-    "name": "btcToMoCWithPrice",
+    "name": "mocToResTokenWithPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "resTokensAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "reservePrice",
+        "type": "uint256"
+      },
+      {
+        "name": "mocPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "resTokenToMoCWithPrice",
     "outputs": [
       {
         "name": "",

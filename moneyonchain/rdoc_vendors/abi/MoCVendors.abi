@@ -58,7 +58,7 @@
         "type": "uint256"
       },
       {
-        "name": "paidRBTC",
+        "name": "paidReserveToken",
         "type": "uint256"
       }
     ],
@@ -447,7 +447,7 @@
         "type": "uint256"
       },
       {
-        "name": "rbtcAmount",
+        "name": "resTokenAmount",
         "type": "uint256"
       },
       {
@@ -564,7 +564,7 @@
         "type": "address"
       }
     ],
-    "name": "getPaidRBTC",
+    "name": "getPaidReserveToken",
     "outputs": [
       {
         "name": "",
