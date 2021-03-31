@@ -18,6 +18,7 @@ from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
 from moneyonchain.governance import ProxyAdmin
+from moneyonchain.transaction import receipt_to_log
 
 from .utils import array_to_dictionary
 
@@ -99,3 +100,26 @@ class VENDORSMoCVendors(ContractBase):
             result[vendor] = self.get_vendor(vendor)
 
         return result
+
+    def register(self,
+                 account,
+                 markup=0.01,
+                 **tx_arguments):
+        """
+        Allows to register a vendor
+        @param account Vendor address
+        @param markup Markup which vendor will perceive from mint/redeem operations
+        """
+
+        tx_args = self.tx_arguments(**tx_arguments)
+        account = Web3.toChecksumAddress(account)
+
+        tx_receipt = self.sc.registerVendor(
+            account,
+            int(markup * self.precision),
+            tx_args)
+
+        tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
