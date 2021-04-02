@@ -154,3 +154,71 @@ class MoCInrateCommissionsChanger(BaseChanger):
             self.log.info("Change successfull!")
 
         return tx_receipt
+
+
+class MoCStateVendorChanger(BaseChanger):
+    contract_name = 'MoCStateVendorChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateVendorChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateVendorChanger.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, vendor_contract_address, execute_change=False, **tx_arguments):
+
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(contract_address, Web3.toChecksumAddress(vendor_contract_address), **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
+
+
+class MoCStateProtectedChanger(BaseChanger):
+    contract_name = 'MoCStateProtectedChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateProtectedChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCStateProtectedChanger.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, protected, execute_change=False, **tx_arguments):
+
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(contract_address, protected, **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
