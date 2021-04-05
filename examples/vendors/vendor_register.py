@@ -18,7 +18,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoCVendors
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -27,7 +27,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 
 account = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
-markup = 0.01
+markup = 0.001
 tx_receipt = moc_vendors.register(account, markup)
 if tx_receipt:
     print("Vendor registered!")

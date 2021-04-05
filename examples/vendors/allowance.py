@@ -44,11 +44,11 @@ moc_token = MoCToken(network_manager, contract_address=moc_token_address).from_a
 print("MoC Token address: {0}".format(moc_token_address))
 print("Account: {0}".format(account_address))
 print("Balance: {0} {1}".format(moc_token.balance_of(account_address), moc_token.symbol()))
-print("Allowance: {0} {1}".format(moc_token.allowance(account_address, moc_address), moc_token.symbol()))
+print("Allowance: {0} {1}".format(moc_token.allowance(account_address, moc_vendors_address), moc_token.symbol()))
 
 if amount_allow > 0:
     print("Allowing ... {0} MOC".format(amount_allow))
-    moc_token.approve(moc_address, amount_allow)
+    moc_token.approve(moc_vendors_address, amount_allow)
 
 # finally disconnect from network
 network_manager.disconnect()

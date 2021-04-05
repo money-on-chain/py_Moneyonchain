@@ -48,7 +48,7 @@ print("To mint {0} bitpro need {1} RBTC. Commission {2}. Markup {3}".format(
     format(markup_value, '.18f')))
 
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.mint_bpro(amount_want_to_mint)
+tx_receipt = moc_main.mint_bpro(amount_want_to_mint, vendor_account=vendor_account)
 
 # finally disconnect from network
 network_manager.disconnect()
