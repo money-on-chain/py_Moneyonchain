@@ -32,7 +32,10 @@ config_network = 'mocTestnetAlpha3'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_vendors_address = network_manager.options['networks'][config_network]['addresses']['MoCVendors']
-account_address = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
+moc_address = network_manager.options['networks'][config_network]['addresses']['MoC']
+#account_address = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
+account_address = '0xb5E2BeD9235b6366fA0254c2E6754E167E0A2383'
+
 moc_token_address = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635'
 amount_allow = 0
 
@@ -41,11 +44,11 @@ moc_token = MoCToken(network_manager, contract_address=moc_token_address).from_a
 print("MoC Token address: {0}".format(moc_token_address))
 print("Account: {0}".format(account_address))
 print("Balance: {0} {1}".format(moc_token.balance_of(account_address), moc_token.symbol()))
-print("Allowance: {0} {1}".format(moc_token.allowance(account_address, moc_vendors_address), moc_token.symbol()))
+print("Allowance: {0} {1}".format(moc_token.allowance(account_address, moc_address), moc_token.symbol()))
 
 if amount_allow > 0:
     print("Allowing ... {0} MOC".format(amount_allow))
-    moc_token.approve(moc_vendors_address, amount_allow)
+    moc_token.approve(moc_address, amount_allow)
 
 # finally disconnect from network
 network_manager.disconnect()
