@@ -107,7 +107,7 @@ lines.append(line)
 contract = RDOCMoCExchange(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCExchange', addresses['MoCExchange'],
-                                            contract.implementation())
+                                            contract.implementation()) # block_identifier=1757099
 lines.append(line)
 
 # MoCInrate
