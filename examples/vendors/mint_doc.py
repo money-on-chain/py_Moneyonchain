@@ -28,7 +28,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -36,7 +36,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-vendor_account = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
+vendor_account = Web3.toChecksumAddress('0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3')
 amount_want_to_mint = Decimal(0.00005)
 
 total_amount, commission_value, markup_value = moc_main.amount_mint_doc(
@@ -52,7 +52,7 @@ print("To mint {0} RBTC in DOC need {1} RBTC. Commission {2}. Markup {3}".format
 # Mint DOC
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.mint_doc(amount_want_to_mint, vendor_account)
+tx_receipt = moc_main.mint_doc(amount_want_to_mint)
 
 # finally disconnect from network
 network_manager.disconnect()

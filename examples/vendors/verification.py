@@ -25,7 +25,7 @@ from moneyonchain.tokens import DoCToken, BProToken
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
