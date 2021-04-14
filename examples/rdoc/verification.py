@@ -51,8 +51,8 @@ from moneyonchain.medianizer import RDOCMoCMedianizer
 from moneyonchain.tokens import RIFDoC, RIFPro
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
