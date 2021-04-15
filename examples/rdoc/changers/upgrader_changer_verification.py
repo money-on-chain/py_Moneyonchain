@@ -20,14 +20,14 @@ from web3 import Web3
 from moneyonchain.networks import network_manager
 from moneyonchain.governance import RDOCUpgraderChanger
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-upgrader_changer_address = Web3.toChecksumAddress('0xfcED26265566D7Fdd7CB57Fc2E0fA269fAC7B5fE')
+upgrader_changer_address = Web3.toChecksumAddress('0x9737C1711686FA62891Dffdd99c183a69F37B688')
 upgrader_changer = RDOCUpgraderChanger(network_manager,
                                        contract_address=upgrader_changer_address).from_abi()
 
