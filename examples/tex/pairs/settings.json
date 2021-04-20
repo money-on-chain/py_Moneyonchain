@@ -106,7 +106,7 @@
       "price": "7407000000000",
       "precision": "1000000000000000000",
       "provider": {
-        "type": "last_closing_price",
+        "type": "",
         "address": ""
       }
     },

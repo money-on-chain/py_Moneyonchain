@@ -4,7 +4,7 @@ from .changers import DexMaxOrderLifespanChanger, DexAddTokenPairChanger, DexTok
     DexCancelationPenaltyRateChanger, DexExpirationPenaltyRateChanger, DexMinimumCommissionChanger
 from .providers import TokenPriceProviderLastClosingPrice, MocBproBtcPriceProviderFallback, \
     MocBproUsdPriceProviderFallback, UnityPriceProvider, ExternalOraclePriceProviderFallback, \
-    MocRiskProReservePriceProviderFallback, MocRiskProUsdPriceProviderFallback
+    MocRiskProReservePriceProviderFallback, MocRiskProUsdPriceProviderFallback, TexMocBtcPriceProviderFallback
 from .dex import MoCDecentralizedExchange
 from .commission import CommissionManager
 from .events import DEXNewOrderAddedToPendingQueue, DEXBuyerMatch, \
