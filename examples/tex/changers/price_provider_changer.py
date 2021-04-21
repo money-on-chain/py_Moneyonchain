@@ -56,8 +56,8 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 base_token = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'  # WRBTC
-secondary_token = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635'  # AMOC
-price_provider_address = '0x7aBF17256c7A03E20E774673a9eCCe10919fd36F'  # WRBTC/MOC
+secondary_token = '0x45a97b54021a3F99827641AFe1BFAE574431e6ab'  # MOC
+price_provider_address = '0x6dD69901666e3876038ef10FE6B6aE5C4C218fb6'  # WRBTC/MOC
 
 
 contract = DexPriceProviderChanger(network_manager)

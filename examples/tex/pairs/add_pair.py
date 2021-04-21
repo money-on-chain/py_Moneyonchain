@@ -108,7 +108,7 @@ network_manager.connect()
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['WRBTC/MOC']
+settings_pair = settings[config_network]['DOC/MOC']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
@@ -186,6 +186,9 @@ if price_provider_address:
         tx_receipt.info_to_log()
     else:
         log.info("Error deploying changer")
+
+# finally disconnect from network
+network_manager.disconnect()
 
 """
 1.DOC/WRBTC
