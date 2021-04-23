@@ -55,9 +55,14 @@ config_network = 'dexTestnet'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
+# base_token = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'  # WRBTC
+# secondary_token = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635'  # AMOC
+# price_provider_address = '0x555B4d436e21a0E09B63d03A005F825402647c6d'  # WRBTC/AMOC
+
+
 base_token = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'  # WRBTC
 secondary_token = '0x45a97b54021a3F99827641AFe1BFAE574431e6ab'  # MOC
-price_provider_address = '0x6dD69901666e3876038ef10FE6B6aE5C4C218fb6'  # WRBTC/MOC
+price_provider_address = '0xfa8673e6c5B5c3F6899a42A887D47bc027D902da'  # WRBTC/MOC
 
 
 contract = DexPriceProviderChanger(network_manager)
