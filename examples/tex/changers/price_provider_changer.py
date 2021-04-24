@@ -48,8 +48,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -60,9 +60,14 @@ network_manager.connect(connection_network=connection_network, config_network=co
 # price_provider_address = '0x555B4d436e21a0E09B63d03A005F825402647c6d'  # WRBTC/AMOC
 
 
-base_token = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'  # WRBTC
-secondary_token = '0x45a97b54021a3F99827641AFe1BFAE574431e6ab'  # MOC
-price_provider_address = '0xfa8673e6c5B5c3F6899a42A887D47bc027D902da'  # WRBTC/MOC
+# base_token = '0x09b6ca5E4496238A1F176aEa6Bb607DB96c2286E'  # WRBTC
+# secondary_token = '0x45a97b54021a3F99827641AFe1BFAE574431e6ab'  # MOC
+# price_provider_address = '0xfa8673e6c5B5c3F6899a42A887D47bc027D902da'  # WRBTC/MOC
+
+
+base_token = '0x967f8799aF07DF1534d48A95a5C9FEBE92c53ae0'  # WRBTC
+secondary_token = '0x9AC7fE28967B30E3A4e6e03286d715b42B453D10'  # MOC
+price_provider_address = '0x3aa536E39B38F01318f59a587AF2741BF8ad244c'  # WRBTC/MOC
 
 
 contract = DexPriceProviderChanger(network_manager)

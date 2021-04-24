@@ -35,6 +35,7 @@ WRBTC: 0x967f8799aF07DF1534d48A95a5C9FEBE92c53ae0
 BPRO: 0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8
 RIF: 0x2acc95758f8b5f583470ba265eb685a8f45fc9d5
 RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
+MOC: 0x9AC7fE28967B30E3A4e6e03286d715b42B453D10
 
 
 1. DOC / WRBTC  <--
@@ -45,6 +46,8 @@ RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
 6. RDOC / RIFP
 7. RIF / RIFP <--
 8. WRBTC / RIF
+9. DOC / MOC
+10. WRBTC / MOC
 
 """
 
@@ -88,8 +91,8 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # init network manager
 # connection network is the brownie connection network
@@ -108,7 +111,7 @@ network_manager.connect()
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['DOC/MOC']
+settings_pair = settings[config_network]['WRBTC/MOC']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']

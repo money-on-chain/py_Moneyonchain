@@ -221,6 +221,26 @@
         "type": "last_closing_price",
         "address": ""
       }
+    },
+    "DOC/MOC":{
+      "baseToken": "0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db",
+      "secondaryToken": "0x9AC7fE28967B30E3A4e6e03286d715b42B453D10",
+      "price": "2000000000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "last_closing_price",
+        "address": ""
+      }
+    },
+    "WRBTC/MOC":{
+      "baseToken": "0x967f8799aF07DF1534d48A95a5C9FEBE92c53ae0",
+      "secondaryToken": "0x9AC7fE28967B30E3A4e6e03286d715b42B453D10",
+      "price": "39000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "last_closing_price",
+        "address": ""
+      }
     }
   }
 }

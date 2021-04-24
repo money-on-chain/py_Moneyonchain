@@ -2,8 +2,8 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.tex import MoCDecentralizedExchange
 
 
-connection_network='rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network='rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # init network manager
 # connection network is the brownie connection network
