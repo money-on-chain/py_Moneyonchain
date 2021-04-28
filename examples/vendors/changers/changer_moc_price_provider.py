@@ -22,14 +22,14 @@ log.addHandler(console)
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
 contract = MoCStateMoCPriceProviderChanger(network_manager)
-price_provider = '0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D'
+price_provider = '0x50E837429561884E94134715D2a93827f0861630'
 
 tx_receipt = contract.constructor(price_provider, execute_change=True)
 if tx_receipt:
