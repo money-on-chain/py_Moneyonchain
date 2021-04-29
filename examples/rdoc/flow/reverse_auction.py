@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCInrate, RDOCCommissionSplitter
+from moneyonchain.tokens import RIF
 
 import logging
 import logging.config
@@ -32,6 +33,7 @@ log.info('Connecting enviroment {0}...'.format(config_network))
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_inrate = RDOCMoCInrate(network_manager).from_abi()
+rif_token = RIF(network_manager).from_abi()
 
 # get splitter from commission address
 commission_address = moc_inrate.commission_address()
@@ -43,7 +45,7 @@ splitter = RDOCCommissionSplitter(network_manager, contract_address=commission_a
 log.info("Splitter address: [{0}]".format(commission_address))
 log.info("Multisig address: [{0}] <- ReverseAuction-BTC2MOC".format(splitter.commission_address()))
 log.info("MoC address: [{0}]".format(splitter.moc_address()))
-#log.info("Splitter balance: [{0}] RBTC".format(splitter.balance()))
+log.info("Splitter balance: [{0}] RIF".format(rif_token.balance_of(commission_address)))
 
 # finally disconnect from network
 network_manager.disconnect()
