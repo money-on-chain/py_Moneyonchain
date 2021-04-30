@@ -22,8 +22,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
@@ -39,7 +39,7 @@ log.info("Current commission address (splitter): {0}".format(contract_splitter))
 
 contract = RDOCCommissionSplitterAddressChanger(network_manager)
 
-beneficiary_address = '0x30d4433fF09757D33fFf99Cbe49C6384463bF551'
+beneficiary_address = '0x728967DD751F5f21bF390eeE66527dBC17bD7E25'
 tx_receipt = contract.constructor(beneficiary_address,
                                   commission_splitter=contract_splitter,
                                   execute_change=False)

@@ -23,8 +23,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
