@@ -28,9 +28,9 @@ from .mocexchange import MoCExchange
 from .mocconnector import MoCConnector
 from .mocsettlement import MoCSettlement
 
-from moneyonchain.tokens import BProToken, DoCToken
+from moneyonchain.tokens import BProToken, DoCToken, MoCToken
 from moneyonchain.governance import ProxyAdmin
-
+from moneyonchain.tex import TokenPriceProviderLastClosingPrice
 
 STATE_LIQUIDATED = 0
 STATE_BPRO_DISCOUNT = 1
@@ -69,6 +69,7 @@ class MoC(ContractBase):
                  contract_address_moc_settlement=None,
                  contract_address_moc_bpro_token=None,
                  contract_address_moc_doc_token=None,
+                 contract_address_moc_moc_token=None,
                  load_sub_contract=True
                  ):
 
@@ -91,6 +92,7 @@ class MoC(ContractBase):
             contract_addresses['MoCSettlement'] = contract_address_moc_settlement
             contract_addresses['BProToken'] = contract_address_moc_bpro_token
             contract_addresses['DoCToken'] = contract_address_moc_doc_token
+            contract_addresses['MoCToken'] = contract_address_moc_moc_token
 
             # load contract addresses
             self.load_sub_contracts(contract_addresses)
@@ -118,6 +120,12 @@ class MoC(ContractBase):
         # load contract moc doc_token
         self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
 
+        # load contract moc moc_token
+        self.sc_moc_moc_token = self.load_moc_moc_token_contract(None)
+
+        # load contract moc moc_token
+        self.sc_moc_token_oracle = self.load_moc_token_oracle(None)
+
     def contracts_discovery(self):
         """ This implementation get sub contracts only with MoC Contract address"""
 
@@ -131,7 +139,6 @@ class MoC(ContractBase):
         contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
         contract_addresses['BProToken'] = connector_addresses['BProToken']
         contract_addresses['DoCToken'] = connector_addresses['DoCToken']
-
         self.load_sub_contracts(contract_addresses)
 
         return self
@@ -228,6 +235,25 @@ class MoC(ContractBase):
 
         return sc
 
+    def load_moc_moc_token_contract(self, contract_address):
+
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCToken']
+
+        sc = MoCToken(self.network_manager,
+                      contract_address=contract_address).from_abi()
+
+        return sc
+
+    def load_moc_token_oracle(self, contract_adress):
+        config_network = self.network_manager.config_network
+        contract_address = self.network_manager.options['networks'][config_network]['addresses']['mocOracle']
+
+        sc = TokenPriceProviderLastClosingPrice(self.network_manager,
+                      contract_address=contract_address).from_abi()
+
+        return sc
+
     def connector(self):
 
         return self.sc.connector()
@@ -252,6 +278,17 @@ class MoC(ContractBase):
 
         return result
 
+    def moc_price(self,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """MoC price in USD"""
+
+        result = self.sc_moc_token_oracle.peek(
+            formatted=formatted,
+            block_identifier=block_identifier)
+
+        return result
+
     def sc_precision(self,
                      formatted: bool = True,
                      block_identifier: BlockIdentifier = 'latest'):
@@ -270,6 +307,28 @@ class MoC(ContractBase):
         result = self.sc.isBucketLiquidationReached(BUCKET_X2, block_identifier=block_identifier)
 
         return result
+
+    def moc_balance_of(self,
+                       account_address,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.balance_of(
+            account_address,
+            formatted=formatted,
+            block_identifier=block_identifier)
+
+    def moc_allowance(self,
+                      account_address,
+                      contract_address,
+                      formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.allowance(
+            account_address,
+            contract_address,
+            formatted=formatted,
+            block_identifier=block_identifier)
 
     def is_settlement_enabled(self, block_identifier: BlockIdentifier = 'latest'):
         """Is settlement enabled"""
