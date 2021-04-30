@@ -33,7 +33,7 @@ def options_from_settings(filename='settings.json'):
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 # init network manager
 # connection network is the brownie connection network

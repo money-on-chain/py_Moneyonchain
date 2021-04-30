@@ -2,8 +2,8 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.tex import MoCDecentralizedExchange
 
 
-connection_network='rskTestnetPublic'
-config_network = 'dexTestnet'
+connection_network='rskMainnetPublic'
+config_network = 'dexMainnet'
 
 # init network manager
 # connection network is the brownie connection network
@@ -23,8 +23,8 @@ network_manager.connect()
 print("Connecting to MoCDecentralizedExchange")
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_address = '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0'
-secondary_address = '0xA274d994F698Dd09256674960d86aBa22C086669'
+base_address = '0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db'
+secondary_address = '0x9AC7fE28967B30E3A4e6e03286d715b42B453D10'
 print(dex.get_price_provider(base_address, secondary_address))
 
 # finally disconnect from network

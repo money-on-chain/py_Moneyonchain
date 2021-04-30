@@ -161,7 +161,7 @@ class RDOCMoCBucketContainerChanger(BaseChanger):
 
 
 class RDOCCommissionSplitterAddressChanger(BaseChanger):
-    contract_name = 'DexAddTokenPairChanger'
+    contract_name = 'RDOCCommissionSplitterAddressChanger'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SetCommissionFinalAddressChanger.abi'))
@@ -170,15 +170,16 @@ class RDOCCommissionSplitterAddressChanger(BaseChanger):
 
     mode = 'RDoC'
 
-    def constructor(self, commission_address, execute_change=False, **tx_arguments):
+    def constructor(self, commission_address, commission_splitter=None, execute_change=False, **tx_arguments):
 
         config_network = self.network_manager.config_network
-        contract_address = self.network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
+        if not commission_splitter:
+            commission_splitter = self.network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
         commission_address = Web3.toChecksumAddress(commission_address)
 
         self.log.info("Deploying new contract...")
 
-        tx_receipt = self.deploy(contract_address, commission_address, **tx_arguments)
+        tx_receipt = self.deploy(commission_splitter, commission_address, **tx_arguments)
 
         tx_receipt.info()
         tx_receipt.info_to_log()
