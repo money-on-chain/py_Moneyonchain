@@ -43,7 +43,7 @@ log.info("Current commission address (splitter): {0}".format(commission_address)
 splitter = RDOCCommissionSplitter(network_manager, contract_address=commission_address).from_abi()
 
 log.info("Splitter address: [{0}]".format(commission_address))
-log.info("Multisig address: [{0}] <- ReverseAuction-BTC2MOC".format(splitter.commission_address()))
+log.info("Multisig address: [{0}] <- ReverseAuction-RIF2MOC".format(splitter.commission_address()))
 log.info("MoC address: [{0}]".format(splitter.moc_address()))
 log.info("Splitter balance: [{0}] RIF".format(rif_token.balance_of(commission_address)))
 
