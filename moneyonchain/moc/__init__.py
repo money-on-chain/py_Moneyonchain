@@ -13,7 +13,7 @@ from .changers import MoCSettlementChanger, MoCPriceProviderChanger, MoCSetCommi
     MoCSetCommissionFinalAddressChanger, MoCInrateCommissionsAddressChanger, \
     MoCInrateRiskProRateChangerChanger, MocInrateBitProInterestChanger, \
     MocStateMaxMintBProChanger, MocMakeStoppableChanger, MocInrateBtcxInterestChanger, \
-    MocInrateDocInterestChanger
+    MocInrateDocInterestChanger, MocInrateBitProInterestAddressChanger
 from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, MoCExchangeRiskProRedeem, \
     MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, MoCSettlementRedeemRequestProcessed, \
