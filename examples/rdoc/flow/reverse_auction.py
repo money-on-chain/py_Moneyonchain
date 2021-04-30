@@ -24,8 +24,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskMainnetPublic'
-config_network = 'rdocMainnet'
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
@@ -46,6 +46,7 @@ log.info("Splitter address: [{0}]".format(commission_address))
 log.info("Multisig address: [{0}] <- ReverseAuction-RIF2MOC".format(splitter.commission_address()))
 log.info("MoC address: [{0}]".format(splitter.moc_address()))
 log.info("Splitter balance: [{0}] RIF".format(rif_token.balance_of(commission_address)))
+log.info("Riskpro interest address: [{0}] <- ReverseAuction-RIF2MOC".format(moc_inrate.bitpro_interest_address()))
 
 # finally disconnect from network
 network_manager.disconnect()

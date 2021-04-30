@@ -10,5 +10,6 @@ from .mocsettlement import RDOCMoCSettlement
 from .mocstate import RDOCMoCState
 from .changers import RDOCMoCSettlementChanger, RDOCMoCInrateStableChanger, \
     RDOCMoCInrateRiskproxChanger, RDOCMoCBucketContainerChanger, RDOCCommissionSplitterAddressChanger, \
-    RDOCMoCStateMaxMintRiskProChanger, RDOCPriceProviderChanger, RDOCMocMakeStoppableChanger
+    RDOCMoCStateMaxMintRiskProChanger, RDOCPriceProviderChanger, RDOCMocMakeStoppableChanger, \
+    RDOCMocInrateRiskProInterestAddressChanger
 from .commission import RDOCCommissionSplitter
