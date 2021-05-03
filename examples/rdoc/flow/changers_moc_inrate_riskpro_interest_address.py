@@ -34,9 +34,9 @@ riskpro_interest_address = '0x728967DD751F5f21bF390eeE66527dBC17bD7E25'
 
 tx_receipt = contract.constructor(riskpro_interest_address, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

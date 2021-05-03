@@ -18,6 +18,9 @@ console.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
 console.setFormatter(formatter)
 
+log = logging.getLogger()
+log.addHandler(console)
+
 
 connection_network = 'rskMainnetPublic'
 config_network = 'mocMainnet2'
@@ -30,11 +33,11 @@ network_manager.connect(connection_network=connection_network, config_network=co
 contract = PriceFeederAdderChanger(network_manager)
 
 price_feeder_owner = '0x64dcc3bcbeae8ce586cabdef79104986beafcad6'
-tx_hash, tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
+tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 
 # finally disconnect from network

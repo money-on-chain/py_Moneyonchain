@@ -36,9 +36,9 @@ tx_receipt = contract.constructor(contract_address_pricefeed,
                                   contract_address_medianizer=contract_address_medianizer,
                                   execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

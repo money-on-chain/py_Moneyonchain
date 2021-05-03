@@ -35,9 +35,9 @@ doc_power = int(0)
 
 tx_receipt = contract.constructor(doc_tmin, doc_tmax, doc_power, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

@@ -1,32 +1,44 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import MoCPriceProviderChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MoCPriceProviderChanger
 
 import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_price_provider.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
 
-contract = MoCPriceProviderChanger(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+contract = MoCPriceProviderChanger(network_manager)
 # BTC: 0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849
 # RIF: 0x9315AFD6aEc0bb1C1FB3fdcdC2E43797B0A61853
 #price_provider = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
 price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
-tx_hash, tx_receipt = contract.constructor(price_provider, execute_change=False)
+tx_receipt = contract.constructor(price_provider, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
-"""
-
-"""
+# finally disconnect from network
+network_manager.disconnect()
