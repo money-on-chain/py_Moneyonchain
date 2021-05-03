@@ -21,8 +21,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -30,7 +30,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = RDOCMocInrateRiskProInterestAddressChanger(network_manager)
 
-riskpro_interest_address = '0x30d4433fF09757D33fFf99Cbe49C6384463bF551'
+riskpro_interest_address = '0x728967DD751F5f21bF390eeE66527dBC17bD7E25'
 
 tx_receipt = contract.constructor(riskpro_interest_address, execute_change=False)
 if tx_receipt:

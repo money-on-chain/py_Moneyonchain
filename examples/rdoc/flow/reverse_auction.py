@@ -24,8 +24,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
