@@ -1,12 +1,18 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCState
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-moc_state = RDOCMoCState(connection_manager)
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+moc_state = RDOCMoCState(network_manager).from_abi()
 
 print("Max Mint RiskPro setted: {0}".format(moc_state.max_mint_bpro()))
 print("Max mint RiskPro available: {0}".format(moc_state.max_mint_bpro_available()))
+
+# finally disconnect from network
+network_manager.disconnect()

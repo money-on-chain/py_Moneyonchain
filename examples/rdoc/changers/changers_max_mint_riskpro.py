@@ -1,18 +1,43 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import RDOCMoCStateMaxMintRiskProChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.rdoc import RDOCMoCStateMaxMintRiskProChanger
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+import logging
+import logging.config
 
-contract = RDOCMoCStateMaxMintRiskProChanger(connection_manager)
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_max_mint_riskpro.log',
+                    filemode='a')
 
-max_mint_riskpro = int(20000000 * 10 ** 18)
-tx_hash, tx_receipt = contract.constructor(max_mint_riskpro, execute_change=False)
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
+
+
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
+
+log.info('Connecting enviroment {0}...'.format(config_network))
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+contract = RDOCMoCStateMaxMintRiskProChanger(network_manager)
+
+max_mint_riskpro = int(1000000000 * 10 ** 18)
+tx_receipt = contract.constructor(max_mint_riskpro, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
+# finally disconnect from network
+network_manager.disconnect()

@@ -21,8 +21,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 
 # Connect to network
@@ -30,7 +30,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 contract = MocInrateBitProInterestAddressChanger(network_manager)
-bitpro_interest_address = '0xb908E56e1f386d6F955569a687d5286F7e49A90F'
+bitpro_interest_address = '0xB64DC1c93573001551f32bC7443452e93A00344f'
 
 if config_network in ['mocTestnetAlpha']:
     execute_change = True
