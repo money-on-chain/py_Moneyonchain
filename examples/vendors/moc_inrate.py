@@ -29,6 +29,17 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_inrate = VENDORSMoCInrate(network_manager).from_abi()
 
+"""
+0.25% Annual
+"""
+
+print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
+print("Bitpro holders interest: {0}".format(moc_inrate.calc_bitpro_holders_interest()))
+print("Bitpro interest address: {0}".format(moc_inrate.bitpro_interest_address()))
+print("Bitpro interest block span: {0}".format(moc_inrate.bitpro_interest_blockspan()))
+print("Bitpro interest last payed block: {0}".format(moc_inrate.last_bitpro_interest_block()))
+
+
 tx_type = moc_inrate.tx_type_mint_bpro_fees_rbtc()
 print("mint_bpro_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
 tx_type = moc_inrate.tx_type_redeem_bpro_fees_rbtc()

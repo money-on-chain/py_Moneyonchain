@@ -33,9 +33,9 @@ contract = MoCSettlementChanger(network_manager)
 
 tx_receipt = contract.constructor(90000, execute_change=True)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

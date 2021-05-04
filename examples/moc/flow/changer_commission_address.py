@@ -22,8 +22,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
@@ -44,7 +44,7 @@ if config_network in ['mocTestnetAlpha']:
 else:
     execute_change = False
 
-beneficiary_address = '0xb908E56e1f386d6F955569a687d5286F7e49A90F'
+beneficiary_address = '0xB64DC1c93573001551f32bC7443452e93A00344f'
 tx_receipt = contract.constructor(beneficiary_address,
                                   commission_splitter=contract_splitter,
                                   execute_change=execute_change)

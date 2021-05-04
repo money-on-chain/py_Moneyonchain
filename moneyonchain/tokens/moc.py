@@ -42,3 +42,6 @@ class MoCToken(ERC20Token):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
+
+    def owner(self):
+        return self.sc.owner()

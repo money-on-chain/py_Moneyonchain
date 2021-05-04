@@ -35,7 +35,7 @@ class RIFDoC(ERC20Token):
 
         if not contract_address:
             config_network = network_manager.config_network
-            contract_address = network_manager.options['networks'][config_network]['addresses']['BProToken']
+            contract_address = network_manager.options['networks'][config_network]['addresses']['DoCToken']
 
         super().__init__(network_manager,
                          contract_name=contract_name,

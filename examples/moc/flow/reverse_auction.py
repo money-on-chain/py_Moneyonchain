@@ -23,8 +23,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
@@ -36,7 +36,7 @@ moc_inrate = MoCInrate(network_manager).from_abi()
 # get splitter from commission address
 commission_address = moc_inrate.commission_address()
 
-log.info("Current commission address (splitter): {0}".format(commission_address))
+log.info("Current commission address (splitter): [{0}]".format(commission_address))
 
 splitter = CommissionSplitter(network_manager, contract_address=commission_address).from_abi()
 
@@ -44,6 +44,7 @@ log.info("Splitter address: [{0}]".format(commission_address))
 log.info("Multisig address: [{0}] <- ReverseAuction-BTC2MOC".format(splitter.commission_address()))
 log.info("MoC address: [{0}]".format(splitter.moc_address()))
 log.info("Splitter balance: [{0}] RBTC".format(splitter.balance()))
+log.info("Bitpro interest address: [{0}] <- ReverseAuction-BTC2MOC".format(moc_inrate.bitpro_interest_address()))
 
 # finally disconnect from network
 network_manager.disconnect()

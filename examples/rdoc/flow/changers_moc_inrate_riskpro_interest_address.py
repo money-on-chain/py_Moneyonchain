@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MocInrateDocInterestChanger
+from moneyonchain.rdoc import RDOCMocInrateRiskProInterestAddressChanger
 
 import logging
 import logging.config
@@ -7,7 +7,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/changers_inrate_doc_interest.log',
+                    filename='logs/changers_moc_inrate_riskpro_interest_address.log',
                     filemode='a')
 
 # set up logging to console
@@ -22,18 +22,17 @@ log.addHandler(console)
 
 
 connection_network = 'rskMainnetPublic'
-config_network = 'mocMainnet2'
+config_network = 'rdocMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-contract = MocInrateDocInterestChanger(network_manager)
 
-doc_tmin = int(0.0 * 10 ** 18)
-doc_tmax = int(0.000000000000000001 * 10 ** 18)
-doc_power = int(0)
+contract = RDOCMocInrateRiskProInterestAddressChanger(network_manager)
 
-tx_receipt = contract.constructor(doc_tmin, doc_tmax, doc_power, execute_change=False)
+riskpro_interest_address = '0x728967DD751F5f21bF390eeE66527dBC17bD7E25'
+
+tx_receipt = contract.constructor(riskpro_interest_address, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
