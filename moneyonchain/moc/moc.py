@@ -286,8 +286,9 @@ class MoC(ContractBase):
         result = self.sc_moc_token_oracle.peek(
             formatted=formatted,
             block_identifier=block_identifier)
-
-        return result
+        if not result[1]:
+            raise Exception("Price provided is not valid")
+        return result[0]
 
     def sc_precision(self,
                      formatted: bool = True,
