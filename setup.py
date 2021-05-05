@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='2.0.18',
+    version='2.0.19',
     packages=['moneyonchain', 'moneyonchain.tokens', 'moneyonchain.tex',
               'moneyonchain.rrc20', 'moneyonchain.rdoc', 'moneyonchain.oracle',
               'moneyonchain.moc', 'moneyonchain.medianizer', 'moneyonchain.governance',
@@ -45,6 +45,8 @@ setuptools.setup(
                          "medianizer/abi_rdoc/*.bin",
                          "medianizer/abi_rrc20/*.abi",
                          "medianizer/abi_rrc20/*.bin",
+                         "medianizer/abi_eth/*.abi",
+                         "medianizer/abi_eth/*.bin",
                          "moc/abi/*.abi",
                          "moc/abi/*.bin",
                          "moc_vendors/abi/*.abi",
