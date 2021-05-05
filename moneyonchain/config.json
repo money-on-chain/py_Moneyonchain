@@ -296,8 +296,35 @@
         "mocOracle": "0x686ca7e1724963a6872784d2a71100906970f0c4",
         "MoCVendors": "0x99b5aEb18447036Bf1Cd4143B0d007520213A9C1"
       }
+    },
+    "ethTestnet": {
+      "app_mode": "ETH",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
+        "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
+        "oracle": "",
+        "FeedFactory": "",
+        "MoCMedianizer": "",
+        "PriceFeed": ""
+      }
+    },
+    "ethMainnet": {
+      "app_mode": "ETH",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
+        "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
+        "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
+        "oracle": "",
+        "FeedFactory": "",
+        "MoCMedianizer": "",
+        "PriceFeed": ""
+      }
     }
-
 
   }
 

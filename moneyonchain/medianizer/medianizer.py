@@ -161,3 +161,17 @@ class RDOCMoCMedianizer(RRC20MoCMedianizer):
     mode = 'RRC20'
     project = 'RDoC'
     precision = 10 ** 18
+
+
+class ETHMoCMedianizer(MoCMedianizer):
+
+    contract_name = 'ETHMoCMedianizer'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/MoCMedianizer.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/MoCMedianizer.bin'))
+
+    mode = 'ETH'
+    project = 'ETH'
+    precision = 10 ** 18

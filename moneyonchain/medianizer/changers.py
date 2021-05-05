@@ -272,3 +272,36 @@ class RDOCPriceFeederRemoverChanger(BaseChanger):
             self.log.info("Change successfull!")
 
         return tx_receipt
+
+
+class ETHPriceFeederRemoverChanger(PriceFeederRemoverChanger):
+    contract_name = 'ETHPriceFeederRemoverChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederRemover.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederRemover.bin'))
+
+    mode = 'ETH'
+
+
+class ETHPriceFeederAdderChanger(PriceFeederAdderChanger):
+    contract_name = 'ETHPriceFeederAdderChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederAdder.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederAdder.bin'))
+
+    mode = 'ETH'
+
+
+class ETHPriceFeederWhitelistChanger(PriceFeederWhitelistChanger):
+    contract_name = 'ETHPriceFeederWhitelistChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederWhitelist.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeederWhitelist.bin'))
+
+    mode = 'ETH'
