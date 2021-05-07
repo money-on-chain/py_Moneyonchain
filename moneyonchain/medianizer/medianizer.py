@@ -22,7 +22,7 @@ from moneyonchain.transaction import receipt_to_log
 
 class MoCMedianizer(ContractBase):
 
-    contract_name = 'MoCDecentralizedExchange'
+    contract_name = 'MoCMedianizer'
 
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCMedianizer.abi'))
@@ -175,3 +175,70 @@ class ETHMoCMedianizer(MoCMedianizer):
     mode = 'ETH'
     project = 'ETH'
     precision = 10 ** 18
+
+
+class ProxyMoCMedianizer(ContractBase):
+
+    contract_name = 'ProxyMoCMedianizer'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyMoCMedianizer.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyMoCMedianizer.bin'))
+
+    mode = 'MoC'
+    project = 'Medianizer'
+    precision = 10 ** 18
+
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
+
+        if not contract_address:
+            config_network = network_manager.config_network
+            contract_address = network_manager.options['networks'][config_network]['addresses']['ProxyMoCMedianizer']
+
+        super().__init__(network_manager,
+                         contract_name=contract_name,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+    def governor(self, block_identifier: BlockIdentifier = 'latest'):
+        """Contract address output"""
+
+        result = self.sc.governor(block_identifier=block_identifier)
+
+        return result
+
+    def price(self, formatted: bool = True,
+              block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.peek(block_identifier=block_identifier)
+
+        if not result[1]:
+            raise Exception("No source value price")
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price
+
+    def peek(self, formatted: bool = True,
+             block_identifier: BlockIdentifier = 'latest'):
+        """Get price"""
+
+        result = self.sc.peek(block_identifier=block_identifier)
+
+        price = Web3.toInt(result[0])
+
+        if formatted:
+            price = Web3.fromWei(price, 'ether')
+
+        return price, result[1]
