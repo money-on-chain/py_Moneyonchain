@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.medianizer import PriceFeederAdderChanger
+from moneyonchain.medianizer import ETHPriceFeederAdderChanger
 
 
 import logging
@@ -30,7 +30,7 @@ config_network = 'ethMainnet'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-contract = PriceFeederAdderChanger(network_manager)
+contract = ETHPriceFeederAdderChanger(network_manager)
 
 price_feeder_owner = '0x4CDA74bB371137Caf8F5ECDe315b55BA49075980'
 tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
