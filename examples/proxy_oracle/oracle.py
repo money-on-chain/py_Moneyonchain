@@ -11,14 +11,14 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'ethMainnet'
 
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-oracle_address = '0xE25F5C08029cDAA3F86e782D79aC3B4578bFaa64'
+oracle_address = '0x84c260568cFE148dBcFb4C8cc62C4e0b6d998F91'
 
 oracle = ProxyMoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 log.info(oracle.price())

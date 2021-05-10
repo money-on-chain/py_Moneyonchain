@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.medianizer import PriceFeederAdderChanger
+from moneyonchain.medianizer import ETHMoCMedianizer
 
 
 import logging
@@ -8,7 +8,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/changers_feedadder.log',
+                    filename='logs/poke.log',
                     filemode='a')
 
 # set up logging to console
@@ -29,16 +29,10 @@ config_network = 'ethMainnet'
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
+contract = ETHMoCMedianizer(network_manager).from_abi()
 
-contract = PriceFeederAdderChanger(network_manager)
 
-price_feeder_owner = '0x4CDA74bB371137Caf8F5ECDe315b55BA49075980'
-tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
-if tx_receipt:
-    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
-else:
-    log.info("Error deploying changer")
-
+tx_hash, tx_receipt = contract.poke()
 
 # finally disconnect from network
 network_manager.disconnect()

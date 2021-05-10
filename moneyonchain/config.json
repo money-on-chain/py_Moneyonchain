@@ -308,21 +308,23 @@
         "oracle": "0x4D4254D3744e1E4beb090ab5d8eB48096ff4aE27",
         "FeedFactory": "0xB29c04a95F4911411304900885A719315689f2eC",
         "MoCMedianizer": "0x4D4254D3744e1E4beb090ab5d8eB48096ff4aE27",
-        "PriceFeed": ""
+        "PriceFeed": "",
+        "ProxyMoCMedianizer": "0xB55866090B93F00a9d7C725D906ea55dBDA3e8D7"
       }
     },
     "ethMainnet": {
       "app_mode": "ETH",
-      "gas_price": 68000000,
+      "gas_price": 60000000,
       "addresses": {
         "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
         "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
         "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
         "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
-        "oracle": "",
-        "FeedFactory": "",
-        "MoCMedianizer": "",
-        "PriceFeed": ""
+        "oracle": "0x68862C30d45605EAd8D01eF1632F7BFB18FAB587",
+        "FeedFactory": "0x84e97D93108129d0dEE2d2b338b783fc953F58F2",
+        "MoCMedianizer": "0x68862C30d45605EAd8D01eF1632F7BFB18FAB587",
+        "PriceFeed": "0x87079F2669192626Ca572A1264f11DAF2d40AA84",
+        "ProxyMoCMedianizer": "0x84c260568cFE148dBcFb4C8cc62C4e0b6d998F91"
       }
     }
 
