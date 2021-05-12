@@ -249,8 +249,9 @@ class MoC(ContractBase):
         config_network = self.network_manager.config_network
         contract_address = self.network_manager.options['networks'][config_network]['addresses']['mocOracle']
 
-        sc = TokenPriceProviderLastClosingPrice(self.network_manager,
-                      contract_address=contract_address).from_abi()
+        sc = TokenPriceProviderLastClosingPrice(
+            self.network_manager,
+            contract_address=contract_address).from_abi()
 
         return sc
 
