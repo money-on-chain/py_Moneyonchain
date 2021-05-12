@@ -31,6 +31,8 @@ log.addHandler(console)
 connection_network='rskTestnetPublic'
 config_network = 'mocTestnetAlpha'
 
+log.info('Connecting enviroment {0}...'.format(config_network))
+
 # init network manager
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -51,9 +53,9 @@ contract_stopper = MoCStopper(network_manager).from_abi()
 contract_to_pause = contract_moc.address()
 tx_receipt = contract_stopper.unpause(contract_to_pause)
 if tx_receipt:
-    print("Stop Contract Address: {address} successfully!".format(address=contract_to_pause))
+    log.info("Stop Contract Address: {address} successfully!".format(address=contract_to_pause))
 else:
-    print("Error Stopping contract")
+    log.info("Error Stopping contract")
 
 # finally disconnect from network
 network_manager.disconnect()

@@ -17,3 +17,6 @@ moc_main = MoC(network_manager).from_abi()
 
 res = moc_main.moc_price()
 print(res)
+
+# finally disconnect from network
+network_manager.disconnect()

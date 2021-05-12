@@ -65,13 +65,13 @@ else:
     execute_change = False
 
 beneficiary_address = '0xf69287F5Ca3cC3C6d3981f2412109110cB8af076'
-tx_hash, tx_receipt = contract.constructor(beneficiary_address,
-                                           commission_splitter=contract_splitter,
-                                           execute_change=execute_change)
+tx_receipt = contract.constructor(beneficiary_address,
+                                  commission_splitter=contract_splitter,
+                                  execute_change=execute_change)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

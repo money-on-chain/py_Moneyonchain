@@ -34,30 +34,30 @@ network_manager.connect(connection_network=connection_network, config_network=co
 moc_inrate = MoCInrate(network_manager).from_abi()
 moc_state = MoCState(network_manager).from_abi()
 
-print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
+log.info("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
 
-print("DOC Freestable reedeem")
-print("=======================")
+log.info("DOC Freestable reedeem")
+log.info("=======================")
 info = moc_inrate.doc_inrate()
-print(info)
+log.info(info)
 
 info = moc_inrate.spot_inrate()
-print("Spot Inrate: {0}".format(info))
+log.info("Spot Inrate: {0}".format(info))
 
 info = moc_state.current_abundance_ratio()
-print("Current Abundance ratio: {0}".format(info))
+log.info("Current Abundance ratio: {0}".format(info))
 
-print("Interest of reedeeming 1000 DOC")
+log.info("Interest of reedeeming 1000 DOC")
 interest_no_days = moc_inrate.doc_inrate_avg(1000)
-print(interest_no_days)
+log.info(interest_no_days)
 
 for day_to_sett in reversed(range(0, 30)):
-    print("Days to settlement: {0} Interest: {1}".format(day_to_sett, interest_no_days * day_to_sett))
+    log.info("Days to settlement: {0} Interest: {1}".format(day_to_sett, interest_no_days * day_to_sett))
 
-print("BTCX Inrate")
-print("===========")
+log.info("BTCX Inrate")
+log.info("===========")
 info = moc_inrate.btcx_inrate()
-print(info)
+log.info(info)
 
 
 info = dict()
@@ -67,38 +67,38 @@ info['btcx']['mint'] = dict()
 info['btcx']['mint']['amount'] = Decimal(0.001)
 info['btcx']['redeem']['amount'] = Decimal(0.001)
 
-print("BTCX Mint Amount: {0:.6f}".format(info['btcx']['mint']['amount']))
-print("BTCX Redeem Amount: {0:.6f}".format(info['btcx']['redeem']['amount']))
+log.info("BTCX Mint Amount: {0:.6f}".format(info['btcx']['mint']['amount']))
+log.info("BTCX Redeem Amount: {0:.6f}".format(info['btcx']['redeem']['amount']))
 
-print("BTCX On Mint (Inrate Avg...)")
+log.info("BTCX On Mint (Inrate Avg...)")
 interest_no_days = moc_inrate.btc2x_inrate_avg(info['btcx']['mint']['amount'], on_minting=True)
 for day_to_sett in reversed(range(0, 30)):
     interest_perc = interest_no_days * day_to_sett * 100
     interest_amount = interest_perc * info['btcx']['mint']['amount'] / 100
-    print("... Days to settl: {0} Int. Perc: {1:.2f} % Int Amount. {2:.7f}".format(day_to_sett, interest_perc,
+    log.info("... Days to settl: {0} Int. Perc: {1:.2f} % Int Amount. {2:.7f}".format(day_to_sett, interest_perc,
                                                                                    interest_amount))
 # Mint BTCX
 info['btcx']['mint']['interest'] = Decimal(moc_inrate.calc_mint_interest_value(info['btcx']['mint']['amount']))
 info['btcx']['mint']['percent'] = info['btcx']['mint']['interest'] * 100 / info['btcx']['mint']['amount']
 
-print("BTCX Mint Interest: {0:.7f}".format(info['btcx']['mint']['interest']))
-print("BTCX Mint Interest perc: {0:.2f} %".format(info['btcx']['mint']['percent']))
+log.info("BTCX Mint Interest: {0:.7f}".format(info['btcx']['mint']['interest']))
+log.info("BTCX Mint Interest perc: {0:.2f} %".format(info['btcx']['mint']['percent']))
 
 
-print("BTCX On redeem (Inrate Avg...)")
+log.info("BTCX On redeem (Inrate Avg...)")
 interest_no_days = Decimal(moc_inrate.btc2x_inrate_avg(info['btcx']['redeem']['amount'], on_minting=False))
 for day_to_sett in reversed(range(0, 30)):
     interest_perc = interest_no_days * day_to_sett * 100
     interest_amount = interest_perc * info['btcx']['redeem']['amount'] / 100
-    print("... Days to settl: {0} Int. Perc: {1:.2f} % Int Amount. {2:.7f}".format(day_to_sett, interest_perc,
+    log.info("... Days to settl: {0} Int. Perc: {1:.2f} % Int Amount. {2:.7f}".format(day_to_sett, interest_perc,
                                                                                    interest_amount))
 
 # Redeem BTCX
 info['btcx']['redeem']['interest'] = Decimal(moc_inrate.calc_final_redeem_interest(info['btcx']['redeem']['amount']))
 info['btcx']['redeem']['percent'] = info['btcx']['redeem']['interest'] * 100 / info['btcx']['redeem']['amount']
 
-print("BTCX Redeem Interest: {0:.7f}".format(info['btcx']['redeem']['interest']))
-print("BTCX Redeem Interest perc: {0:.2f} %".format(info['btcx']['redeem']['percent']))
+log.info("BTCX Redeem Interest: {0:.7f}".format(info['btcx']['redeem']['interest']))
+log.info("BTCX Redeem Interest perc: {0:.2f} %".format(info['btcx']['redeem']['percent']))
 
 # finally disconnect from network
 network_manager.disconnect()

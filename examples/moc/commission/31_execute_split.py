@@ -65,51 +65,51 @@ info_dict['proportion'] = dict()
 info_dict['proportion']['moc'] = Web3.fromWei(splitter.moc_proportion(), 'ether')
 info_dict['proportion']['multisig'] = 1 - info_dict['proportion']['moc']
 
-print("Splitter address: [{0}]".format(contact_address))
-print("Multisig address: [{0}]".format(splitter.commission_address()))
-print("MoC address: [{0}]".format(splitter.moc_address()))
-print("Proportion MOC: [{0}]".format(info_dict['proportion']['moc']))
-print("Proportion Multisig: [{0}]".format(info_dict['proportion']['multisig']))
+log.info("Splitter address: [{0}]".format(contact_address))
+log.info("Multisig address: [{0}]".format(splitter.commission_address()))
+log.info("MoC address: [{0}]".format(splitter.moc_address()))
+log.info("Proportion MOC: [{0}]".format(info_dict['proportion']['moc']))
+log.info("Proportion Multisig: [{0}]".format(info_dict['proportion']['multisig']))
 
-print("BEFORE SPLIT:")
-print("=============")
+log.info("BEFORE SPLIT:")
+log.info("=============")
 
 
 info_dict['before']['splitter'] = splitter.balance()
-print("Splitter balance: [{0}]".format(info_dict['before']['splitter']))
+log.info("Splitter balance: [{0}]".format(info_dict['before']['splitter']))
 
 # balances commision
 balance = Web3.fromWei(network_manager.network_balance(splitter.commission_address()), 'ether')
 info_dict['before']['commission'] = balance
-print("Multisig balance (proportion: {0}): [{1}]".format(info_dict['proportion']['multisig'],
+log.info("Multisig balance (proportion: {0}): [{1}]".format(info_dict['proportion']['multisig'],
                                                          info_dict['before']['commission']))
 
 # balances moc
 balance = Web3.fromWei(network_manager.network_balance(splitter.moc_address()), 'ether')
 info_dict['before']['moc'] = balance
-print("MoC balance (proportion: {0}): [{1}]".format(info_dict['proportion']['moc'],
+log.info("MoC balance (proportion: {0}): [{1}]".format(info_dict['proportion']['moc'],
                                                     info_dict['before']['moc']))
 
 
 tx_receipt = splitter.split()
 if tx_receipt:
-    print("Sucessfully splited!")
+    log.info("Sucessfully splited!")
 else:
-    print("Error splited!!!")
+    log.info("Error splited!!!")
 
 
-print("AFTER SPLIT:")
-print("=============")
+log.info("AFTER SPLIT:")
+log.info("=============")
 
 info_dict['after']['splitter'] = splitter.balance()
 dif = info_dict['after']['splitter'] - info_dict['before']['splitter']
-print("Splitter balance: [{0}] Difference: [{1}]".format(info_dict['after']['splitter'], dif))
+log.info("Splitter balance: [{0}] Difference: [{1}]".format(info_dict['after']['splitter'], dif))
 
 # balances commision
 balance = Web3.fromWei(network_manager.network_balance(splitter.commission_address()), 'ether')
 info_dict['after']['commission'] = balance
 dif = info_dict['after']['commission'] - info_dict['before']['commission']
-print("Multisig balance (proportion: {0}): [{1}] Difference: [{2}]".format(
+log.info("Multisig balance (proportion: {0}): [{1}] Difference: [{2}]".format(
     info_dict['proportion']['multisig'],
     info_dict['after']['commission'],
     dif))
@@ -118,12 +118,11 @@ print("Multisig balance (proportion: {0}): [{1}] Difference: [{2}]".format(
 balance = Web3.fromWei(network_manager.network_balance(splitter.moc_address()), 'ether')
 info_dict['after']['moc'] = balance
 dif = info_dict['after']['moc'] - info_dict['before']['moc']
-print("MoC balance (proportion: {0}): [{1}] Difference: [{2}]".format(
+log.info("MoC balance (proportion: {0}): [{1}] Difference: [{2}]".format(
     info_dict['proportion']['moc'],
     info_dict['after']['moc'],
     dif))
 
 
-"""
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

@@ -61,19 +61,18 @@ moc_address = network_manager.options['networks'][config_network]['addresses']['
 comission_address = settings[config_network]['CommissionAddress']
 moc_proportion = settings[config_network]['MocProportion']
 
-print("Initializing contract with this parameters:")
-print("Network: {0}".format(config_network))
-print("MoC Address: {0}".format(moc_address))
-print("Commission Address: {0}".format(comission_address))
-print("Moc Proportion: {0}".format(moc_proportion))
-print("Governor Address: {0}".format(governor_address))
+log.info("Initializing contract with this parameters:")
+log.info("Network: {0}".format(config_network))
+log.info("MoC Address: {0}".format(moc_address))
+log.info("Commission Address: {0}".format(comission_address))
+log.info("Moc Proportion: {0}".format(moc_proportion))
+log.info("Governor Address: {0}".format(governor_address))
 
 tx_hash, tx_receipt = splitter.initialize(moc_address, comission_address, moc_proportion, governor_address)
 if tx_receipt:
-    print("Sucessfully initialized")
+    log.info("Sucessfully initialized")
 else:
-    print("Error initialized")
+    log.info("Error initialized")
 
-"""
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

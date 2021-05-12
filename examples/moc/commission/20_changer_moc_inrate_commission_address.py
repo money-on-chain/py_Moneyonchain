@@ -61,12 +61,12 @@ if config_network in ['mocTestnetAlpha']:
 else:
     execute_change = False
 
-tx_hash, tx_receipt = contract.constructor(contract_splitter,
-                                           execute_change=execute_change)
+tx_receipt = contract.constructor(contract_splitter,
+                                  execute_change=execute_change)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
 # finally disconnect from network
 network_manager.disconnect()

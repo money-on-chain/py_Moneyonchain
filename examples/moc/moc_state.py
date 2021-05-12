@@ -2,8 +2,8 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoCState
 
 
-connection_network='rskTestnetPublic'
-config_network = 'mocTestTyD'
+connection_network='rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # init network manager
 # connection network is the brownie connection network

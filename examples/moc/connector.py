@@ -1,13 +1,18 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
 
 
-network = 'mocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
-moc_moc = MoC(connection_manager, contracts_discovery=True)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_moc = MoC(network_manager, load_sub_contract=False).from_abi().contracts_discovery()
+
 print("Connector: {0}".format(moc_moc.connector()))
 
 print("Addresses: {0}".format(moc_moc.connector_addresses()))
+
+# finally disconnect from network
+network_manager.disconnect()

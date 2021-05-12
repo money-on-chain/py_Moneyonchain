@@ -14,6 +14,8 @@ log = logging.getLogger('default')
 connection_network='rskTestnetPublic'
 config_network = 'mocTestnetAlpha'
 
+log.info('Connecting enviroment {0}...'.format(config_network))
+
 # init network manager
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -32,10 +34,10 @@ network_manager.connect()
 contract_moc = MoC(network_manager).from_abi()
 contract_stopper = MoCStopper(network_manager).from_abi()
 
-print("Paused: {0}".format(contract_moc.paused()))
-print("Stoppable: {0}".format(contract_moc.stoppable()))
-print("Stopper: {0}".format(contract_moc.stopper()))
-print("Owner: {0}".format(contract_stopper.owner()))
+log.info("Paused: {0}".format(contract_moc.paused()))
+log.info("Stoppable: {0}".format(contract_moc.stoppable()))
+log.info("Stopper: {0}".format(contract_moc.stopper()))
+log.info("Owner: {0}".format(contract_stopper.owner()))
 
 # finally disconnect from network
 network_manager.disconnect()

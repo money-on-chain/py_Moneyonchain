@@ -17,3 +17,6 @@ moc_main = MoC(network_manager).from_abi()
 
 res = moc_main.moc_balance_of("0xcd8a1c9acc980ae031456573e34dc05cd7dae6e3")
 print(res)
+
+# finally disconnect from network
+network_manager.disconnect()
