@@ -30,6 +30,8 @@ from .mocvendors import VENDORSMoCVendors
 
 from moneyonchain.tokens import BProToken, DoCToken, MoCToken
 
+from moneyonchain.tex import TokenPriceProviderLastClosingPrice
+
 
 STATE_LIQUIDATED = 0
 STATE_BPRO_DISCOUNT = 1
@@ -69,6 +71,7 @@ class VENDORSMoC(MoC):
                  contract_address_moc_bpro_token=None,
                  contract_address_moc_doc_token=None,
                  contract_address_moc_moc_token=None,
+                 contract_address_moc_token_oracle=None,
                  contract_address_moc_vendors=None,
                  load_sub_contract=True):
 
@@ -88,6 +91,8 @@ class VENDORSMoC(MoC):
                          contract_address_moc_settlement=contract_address_moc_settlement,
                          contract_address_moc_bpro_token=contract_address_moc_bpro_token,
                          contract_address_moc_doc_token=contract_address_moc_doc_token,
+                         contract_address_moc_moc_token=contract_address_moc_moc_token,
+                         contract_address_moc_token_oracle=contract_address_moc_token_oracle,
                          load_sub_contract=False
                          )
 
@@ -101,6 +106,7 @@ class VENDORSMoC(MoC):
             contract_addresses['BProToken'] = contract_address_moc_bpro_token
             contract_addresses['DoCToken'] = contract_address_moc_doc_token
             contract_addresses['MoCToken'] = contract_address_moc_moc_token
+            contract_addresses['MoCOracle'] = contract_address_moc_token_oracle
             contract_addresses['MoCVendors'] = contract_address_moc_vendors
 
             # load contract addresses
@@ -134,6 +140,14 @@ class VENDORSMoC(MoC):
             self.sc_moc_moc_token = self.load_moc_moc_token_contract(contract_addresses['MoCToken'])
         else:
             self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
+
+        # load contract moc MoC Oracle
+        if 'MoCOracle' in contract_addresses:
+            moc_oracle_address = contract_addresses['MoCOracle']
+        else:
+            moc_oracle_address = None
+
+        self.sc_moc_token_oracle = self.load_moc_token_oracle(moc_oracle_address)
 
         # load contract moc vendors
         if contract_addresses['MoCVendors']:
@@ -246,6 +260,19 @@ class VENDORSMoC(MoC):
 
         sc = MoCToken(self.network_manager,
                       contract_address=contract_address).from_abi()
+
+        return sc
+
+    def load_moc_token_oracle(self, contract_address):
+
+        config_network = self.network_manager.config_network
+
+        if not contract_address:
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCOracle']
+
+        sc = TokenPriceProviderLastClosingPrice(
+            self.network_manager,
+            contract_address=contract_address).from_abi()
 
         return sc
 

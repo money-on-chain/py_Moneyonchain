@@ -26,7 +26,8 @@ from .mocexchange import RRC20MoCExchange
 from .mocconnector import RRC20MoCConnector
 from .mocsettlement import RRC20MoCSettlement
 
-from moneyonchain.tokens import RiskProToken, StableToken, ReserveToken
+from moneyonchain.tokens import RiskProToken, StableToken, ReserveToken, MoCToken
+from moneyonchain.tex import TokenPriceProviderLastClosingPrice
 
 
 class RRC20MoC(MoC):
@@ -56,6 +57,8 @@ class RRC20MoC(MoC):
                  contract_address_moc_bpro_token=None,
                  contract_address_moc_doc_token=None,
                  contract_address_reserve_token=None,
+                 contract_address_moc_moc_token=None,
+                 contract_address_moc_token_oracle=None,
                  load_sub_contract=True):
 
         config_network = network_manager.config_network
@@ -74,6 +77,8 @@ class RRC20MoC(MoC):
                          contract_address_moc_settlement=contract_address_moc_settlement,
                          contract_address_moc_bpro_token=contract_address_moc_bpro_token,
                          contract_address_moc_doc_token=contract_address_moc_doc_token,
+                         contract_address_moc_moc_token=contract_address_moc_moc_token,
+                         contract_address_moc_token_oracle=contract_address_moc_token_oracle,
                          load_sub_contract=False
                          )
 
@@ -87,6 +92,8 @@ class RRC20MoC(MoC):
             contract_addresses['BProToken'] = contract_address_moc_bpro_token
             contract_addresses['DoCToken'] = contract_address_moc_doc_token
             contract_addresses['ReserveToken'] = contract_address_reserve_token
+            contract_addresses['MoCToken'] = contract_address_moc_moc_token
+            contract_addresses['MoCOracle'] = contract_address_moc_token_oracle
 
             # load contract addresses
             self.load_sub_contracts(contract_addresses)
@@ -116,6 +123,22 @@ class RRC20MoC(MoC):
 
         # load_reserve_token_contract
         self.sc_reserve_token = self.load_reserve_token_contract(contract_addresses['ReserveToken'])
+
+        # load contract moc moc_token
+        if 'MoCToken' in contract_addresses:
+            moc_token_address = contract_addresses['MoCToken']
+        else:
+            moc_token_address = None
+
+        self.sc_moc_moc_token = self.load_moc_moc_token_contract(moc_token_address)
+
+        # load contract moc MoC Oracle
+        if 'MoCOracle' in contract_addresses:
+            moc_oracle_address = contract_addresses['MoCOracle']
+        else:
+            moc_oracle_address = None
+
+        self.sc_moc_token_oracle = self.load_moc_token_oracle(moc_oracle_address)
 
     def contracts_discovery(self):
         """ This implementation get sub contracts only with MoC Contract address"""
@@ -221,6 +244,30 @@ class RRC20MoC(MoC):
 
         sc = ReserveToken(self.network_manager,
                           contract_address=contract_address).from_abi()
+
+        return sc
+
+    def load_moc_moc_token_contract(self, contract_address):
+
+        config_network = self.network_manager.config_network
+        if not contract_address:
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCToken']
+
+        sc = MoCToken(self.network_manager,
+                      contract_address=contract_address).from_abi()
+
+        return sc
+
+    def load_moc_token_oracle(self, contract_address):
+
+        config_network = self.network_manager.config_network
+
+        if not contract_address:
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCOracle']
+
+        sc = TokenPriceProviderLastClosingPrice(
+            self.network_manager,
+            contract_address=contract_address).from_abi()
 
         return sc
 

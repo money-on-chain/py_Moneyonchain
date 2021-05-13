@@ -33,7 +33,7 @@
         "EternalStorageGobernanza": "0xf83733316eb5f1AcE72B21a4df2FB5e3070aA5A8",
         "CommissionSplitter": "0x97Dff2039A3b0ab6AD6a315507f8CABd83a9Cb05",
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
-        "mocOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
+        "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0x7F814742f1094e0A0Df0F3c7d6E0478BF04B60C3"
       }
 
@@ -67,7 +67,7 @@
         "MoCMedianizer": "0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d",
         "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40",
-        "mocOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
+        "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab"
       }
 
@@ -101,7 +101,7 @@
         "MoCMedianizer": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
         "PriceFeed": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "CommissionSplitter": "0xa5467535851263122ef1476e24C529CFc6CFc086",
-        "mocOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
+        "MoCOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
         "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10"
       }
     },
@@ -133,7 +133,7 @@
         "CoinPairPrice": "0xEE9339E9A4Ca067e6AA57834B073ACd0D2b4D699",
         "CommissionSplitter": "0xE79fE1d8D321d01aA973E319112Fb98eA319B7a1",
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
-        "mocOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D"
+        "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D"
       }
 
     },
@@ -163,7 +163,7 @@
         "FeedFactory": "0xABAAff5aFAf29c85023C8C24024C3818A0320E62",
         "PriceFeed": "0x462D7082F3671a3BE160638Be3f8C23Ca354F48A",
         "CommissionSplitter": "0x5aF95c49461ef2bE429CD84aDe50867ff5A20fB6",
-        "mocOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
+        "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab"
       }
 
@@ -194,7 +194,7 @@
         "FeedFactory": "0x54878866F5324B56AEE9B6619a1e1A213B2fCC30",
         "PriceFeed": "0x461750b4824b14c3d9b7702bC6fBB82469082b23",
         "CommissionSplitter": "0xaC7dE98a426F6FF51e1Bd6588b41544C8Addb2D1",
-        "mocOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
+        "MoCOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
         "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10"
       }
 
