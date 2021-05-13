@@ -35,7 +35,7 @@ if 'RiskProHoldersInterestPay' in l_events:
         count = 0
         for e_event_block in l_events['RiskProHoldersInterestPay']:
             for e_event in e_event_block:
-                tx_event = MoCInrateRiskProHoldersInterestPay(connection_manager, e_event)
+                tx_event = MoCInrateRiskProHoldersInterestPay(e_event)
                 l_historic_data.append(tx_event.row())
 
 # Write list to CSV File

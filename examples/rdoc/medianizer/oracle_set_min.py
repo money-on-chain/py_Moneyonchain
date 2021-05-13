@@ -2,9 +2,9 @@
 Oracle price get current oracle from MOC
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC
-from moneyonchain.rdoc import RDOCMoCMedianizer
+from moneyonchain.medianizer import RDOCMoCMedianizer
 
 # Network types
 #
@@ -12,14 +12,19 @@ from moneyonchain.rdoc import RDOCMoCMedianizer
 # rdocMainnet: Production Mainnet
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
 oracle_provider = '0xDC3551f16FfDeBAa3Cb8D3b6C16d2A5bB9646dA4'
-oracle = RDOCMoCMedianizer(connection_manager, contract_address=oracle_provider)
+oracle = RDOCMoCMedianizer(network_manager, contract_address=oracle_provider).from_abi()
 
 print("RIF Price in USD: {0}".format(oracle.price()))
 print("Min: {0}".format(oracle.min()))
+
+# finally disconnect from network
+network_manager.disconnect()
