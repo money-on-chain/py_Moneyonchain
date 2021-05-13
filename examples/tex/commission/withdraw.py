@@ -9,16 +9,27 @@ from web3 import Web3
 import json
 import os
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
+from moneyonchain.networks import network_manager
+from moneyonchain.tex import MoCDecentralizedExchange
 
 import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/withdraw.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
 def options_from_settings(filename='settings.json'):
@@ -30,26 +41,26 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainetPublic'
+config_network = 'dexMainnet'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
 # instantiate DEX Contract
-dex = MoCDecentralizedExchange(connection_manager)
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 
 token_name = 'DOC'
-token = settings[network][token_name]
+token = settings[config_network][token_name]
 
 print("Withdraw commission from token: {0}. Please wait to the transaction be mined!...".format(
     token_name
 ))
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = dex.withdraw_commissions(
+tx_receipt = dex.withdraw_commissions(
     token)
-print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
-if tx_logs:
-    print(tx_logs_formatted['CommissionWithdrawn'].print_row())

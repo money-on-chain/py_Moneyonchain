@@ -1,17 +1,22 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.dex import MoCDecentralizedExchange
+from moneyonchain.networks import network_manager
+from moneyonchain.tex import MoCDecentralizedExchange
+
+connection_network = 'rskTestnetPublic'
+config_network = 'dexTestnet'
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 print("Connecting to MoCDecentralizedExchange")
-dex = MoCDecentralizedExchange(connection_manager)
+dex = MoCDecentralizedExchange(network_manager).from_abi()
 print(dex.token_pairs())
 
 pair = ['0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0', '0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf']
-tx_hash, tx_receipt = dex.run_tick_for_pair(pair)
+tx_receipt = dex.run_tick_for_pair(pair)
 
 print("Done!")
+
+# finally disconnect from network
+network_manager.disconnect()
