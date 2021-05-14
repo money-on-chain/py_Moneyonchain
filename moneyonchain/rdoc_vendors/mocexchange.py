@@ -23,7 +23,7 @@ from moneyonchain.rdoc import RDOCMoCExchange
 from .utils import array_to_dictionary
 
 
-class VENDORS_RDOCMoCExchange(RDOCMoCExchange):
+class VENDORSRDOCMoCExchange(RDOCMoCExchange):
     contract_name = 'MoCExchange'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCExchange.abi'))

@@ -18,7 +18,7 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoCSettlement
 
 
-class VENDORS_RDOCMoCSettlement(RDOCMoCSettlement):
+class VENDORSRDOCMoCSettlement(RDOCMoCSettlement):
     contract_name = 'MoCSettlement'
 
     contract_abi = ContractBase.content_abi_file(

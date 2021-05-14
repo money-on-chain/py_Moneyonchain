@@ -20,7 +20,7 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoCInrate
 
 
-class VENDORS_RDOCMoCInrate(RDOCMoCInrate):
+class VENDORSRDOCMoCInrate(RDOCMoCInrate):
     contract_name = 'MoCInrate'
 
     contract_abi = ContractBase.content_abi_file(

@@ -20,7 +20,7 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoCState
 
 
-class VENDORS_RDOCMoCState(RDOCMoCState):
+class VENDORSRDOCMoCState(RDOCMoCState):
     contract_name = 'MoCState'
 
     contract_abi = ContractBase.content_abi_file(

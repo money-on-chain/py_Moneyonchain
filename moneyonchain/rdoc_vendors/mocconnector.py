@@ -18,7 +18,7 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoCConnector
 
 
-class VENDORS_RDOCMoCConnector(RDOCMoCConnector):
+class VENDORSRDOCMoCConnector(RDOCMoCConnector):
     contract_name = 'MoCConnector'
 
     contract_abi = ContractBase.content_abi_file(

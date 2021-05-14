@@ -18,7 +18,7 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoCHelperLib
 
 
-class VENDORS_RDOCMoCHelperLib(RDOCMoCHelperLib):
+class VENDORSRDOCMoCHelperLib(RDOCMoCHelperLib):
     contract_name = 'MoCHelperLib'
 
     contract_abi = ContractBase.content_abi_file(

@@ -22,12 +22,12 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.rdoc import RDOCMoC
 from moneyonchain.transaction import receipt_to_log
 
-from .mocconnector import VENDORS_RDOCMoCConnector
-from .mocinrate import VENDORS_RDOCMoCInrate
-from .mocstate import VENDORS_RDOCMoCState
-from .mocexchange import VENDORS_RDOCMoCExchange
-from .mocsettlement import VENDORS_RDOCMoCSettlement
-from .mocvendors import VENDORS_RDOCMoCVendors
+from .mocconnector import VENDORSRDOCMoCConnector
+from .mocinrate import VENDORSRDOCMoCInrate
+from .mocstate import VENDORSRDOCMoCState
+from .mocexchange import VENDORSRDOCMoCExchange
+from .mocsettlement import VENDORSRDOCMoCSettlement
+from .mocvendors import VENDORSRDOCMoCVendors
 
 from moneyonchain.tokens import RIFPro, RIFDoC, RIF, MoCToken
 
@@ -40,9 +40,10 @@ STATE_ABOVE_COBJ = 3
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
-ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
-class VENDORS_RDOCMoC(RDOCMoC):
+
+class VENDORSRDOCMoC(RDOCMoC):
     contract_name = 'MoC'
 
     contract_abi = ContractBase.content_abi_file(
@@ -173,7 +174,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
 
-        sc = VENDORS_RDOCMoCInrate(self.network_manager,
+        sc = VENDORSRDOCMoCInrate(self.network_manager,
                               contract_address=contract_address).from_abi()
 
         return sc
@@ -184,7 +185,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
 
-        sc = VENDORS_RDOCMoCState(self.network_manager,
+        sc = VENDORSRDOCMoCState(self.network_manager,
                              contract_address=contract_address).from_abi()
 
         return sc
@@ -195,7 +196,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCExchange']
 
-        sc = VENDORS_RDOCMoCExchange(self.network_manager,
+        sc = VENDORSRDOCMoCExchange(self.network_manager,
                                 contract_address=contract_address).from_abi()
 
         return sc
@@ -206,7 +207,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCConnector']
 
-        sc = VENDORS_RDOCMoCConnector(self.network_manager,
+        sc = VENDORSRDOCMoCConnector(self.network_manager,
                           contract_address=contract_address).from_abi()
 
         return sc
@@ -217,7 +218,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCSettlement']
 
-        sc = VENDORS_RDOCMoCSettlement(self.network_manager,
+        sc = VENDORSRDOCMoCSettlement(self.network_manager,
                                   contract_address=contract_address).from_abi()
 
         return sc
@@ -272,7 +273,7 @@ class VENDORS_RDOCMoC(RDOCMoC):
         if not contract_address:
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCVendors']
 
-        sc = VENDORS_RDOCMoCVendors(self.network_manager,
+        sc = VENDORSRDOCMoCVendors(self.network_manager,
                                contract_address=contract_address).from_abi()
 
         return sc
