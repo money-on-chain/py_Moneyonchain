@@ -8,11 +8,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='2.0.25',
+    version='2.0.26',
     packages=['moneyonchain', 'moneyonchain.tokens', 'moneyonchain.tex',
               'moneyonchain.rrc20', 'moneyonchain.rdoc', 'moneyonchain.oracle',
               'moneyonchain.moc', 'moneyonchain.medianizer', 'moneyonchain.governance',
-              'moneyonchain.moc_vendors'],
+              'moneyonchain.moc_vendors', 'moneyonchain.rdoc_vendors'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',
     author_email='martin.mulone@moneyonchain.com',
