@@ -67,7 +67,7 @@ setuptools.setup(
     install_requires=[
         'web3>=5.7.0',
         'eth-brownie==1.12.2',
-        'PyYAML==5.3.1',
+        'PyYAML==5.4.1',
         'tabulate'
     ],
 )
