@@ -1,5 +1,5 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.rdoc import RDOCPriceFeed, RDOCMoCMedianizer
+from moneyonchain.networks import network_manager
+from moneyonchain.medianizer import RDOCPriceFeed, RDOCMoCMedianizer
 
 import logging
 import logging.config
@@ -11,15 +11,18 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 oracle_address = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
 
-oracle = RDOCMoCMedianizer(connection_manager,
-                           contract_address=oracle_address)
+oracle = RDOCMoCMedianizer(network_manager,
+                           contract_address=oracle_address).from_abi()
 
 print("Peek:")
 print(oracle.peek())
@@ -32,3 +35,6 @@ if not oracle.compute()[1] and oracle.peek()[1]:
     print("Oracle status updated!")
 else:
     print("Not time to recalculate status!")
+
+# finally disconnect from network
+network_manager.disconnect()

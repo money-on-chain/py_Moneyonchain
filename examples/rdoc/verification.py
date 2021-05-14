@@ -1,4 +1,17 @@
 """
+If is the first time to py_Moneyonchain we need brownie framework installed
+
+`pip install eth-brownie==1.12.2`
+
+and to install connection nodes required to connect, also run :
+
+```
+console> brownie networks add RskNetwork rskTestnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTestnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+```
+
 This script list all of the proxy and implementation addresses of the contracts in the network.
 
 Output:
@@ -24,7 +37,7 @@ Connected: True
 
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC, \
     RDOCMoCConverter, \
     RDOCMoCSettlement, \
@@ -33,17 +46,19 @@ from moneyonchain.rdoc import RDOCMoC, \
     RDOCMoCBurnout, \
     RDOCMoCBProxManager, \
     RDOCMoCState, \
-    RDOCMoCConnector, \
-    RDOCMoCMedianizer
-from moneyonchain.token import RIFDoC, RIFPro
+    RDOCMoCConnector
+from moneyonchain.medianizer import RDOCMoCMedianizer
+from moneyonchain.tokens import RIFDoC, RIFPro
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
-moc_main = RDOCMoC(connection_manager)
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_main = RDOCMoC(network_manager).from_abi()
 addresses = moc_main.connector_addresses()
 
 count = 0
@@ -61,7 +76,7 @@ lines.append(line)
 
 # MoCConnector
 count += 1
-contract = RDOCMoCConnector(connection_manager)
+contract = RDOCMoCConnector(network_manager).from_abi()
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConnector', contract.address(),
                                             contract.implementation())
 lines.append(line)
@@ -69,34 +84,34 @@ lines.append(line)
 
 # MoCState
 count += 1
-contract = RDOCMoCState(connection_manager)
+contract = RDOCMoCState(network_manager).from_abi()
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCState', addresses['MoCState'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCConverter
-contract = RDOCMoCConverter(connection_manager)
+contract = RDOCMoCConverter(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConverter', addresses['MoCConverter'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCSettlement
-contract = RDOCMoCSettlement(connection_manager)
+contract = RDOCMoCSettlement(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCSettlement', addresses['MoCSettlement'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCExchange
-contract = RDOCMoCExchange(connection_manager)
+contract = RDOCMoCExchange(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCExchange', addresses['MoCExchange'],
-                                            contract.implementation())
+                                            contract.implementation()) # block_identifier=1757099
 lines.append(line)
 
 # MoCInrate
-contract = RDOCMoCInrate(connection_manager)
+contract = RDOCMoCInrate(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCInrate', addresses['MoCInrate'],
                                             contract.implementation())
@@ -104,21 +119,21 @@ lines.append(line)
 
 
 # MoCBurnout
-contract = RDOCMoCBurnout(connection_manager)
+contract = RDOCMoCBurnout(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBurnout', addresses['MoCBurnout'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCBProxManager
-contract = RDOCMoCBProxManager(connection_manager)
+contract = RDOCMoCBProxManager(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBProxManager', addresses['MoCBProxManager'],
                                             contract.implementation())
 lines.append(line)
 
 # RIFDoC
-contract = RIFDoC(connection_manager)
+contract = RIFDoC(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'RIFDoC', '',
                                             contract.address())
@@ -126,7 +141,7 @@ lines.append(line)
 
 
 # RIFPro
-contract = RIFPro(connection_manager)
+contract = RIFPro(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'RIFPro', '',
                                             contract.address())
@@ -134,7 +149,7 @@ lines.append(line)
 
 
 # Oracle
-contract = RDOCMoCMedianizer(connection_manager)
+contract = RDOCMoCMedianizer(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCMedianizer', '',
                                             contract.address())

@@ -7,19 +7,22 @@ Get events RiskProHoldersInterestPay from mocinrate
 import time
 import csv
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC, RDOCMoCSettlement
-from moneyonchain.events import MoCSettlementSettlementCompleted
+from moneyonchain.moc import MoCSettlementSettlementCompleted
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 print("Starting to import events from contract...")
 start_time = time.time()
 
-moc_settlement_contract = RDOCMoCSettlement(connection_manager)
+moc_settlement_contract = RDOCMoCSettlement(network_manager).from_abi()
 
 events_functions = ['SettlementCompleted']
 hours_delta = 0
@@ -34,14 +37,14 @@ if 'SettlementCompleted' in l_events:
         count = 0
         for e_event_block in l_events['SettlementCompleted']:
             for e_event in e_event_block:
-                tx_event = MoCSettlementSettlementCompleted(connection_manager, e_event)
+                tx_event = MoCSettlementSettlementCompleted(e_event)
                 l_historic_data.append(tx_event.row())
 
 # Write list to CSV File
 
 if l_historic_data:
     columns = MoCSettlementSettlementCompleted.columns()
-    path_file = '{0}_settlement_completed_{1}_{2}.csv'.format(network, from_block, to_block)
+    path_file = '{0}_settlement_completed_{1}_{2}.csv'.format(config_network, from_block, to_block)
     with open(path_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(columns)
@@ -53,3 +56,6 @@ if l_historic_data:
 
 duration = time.time() - start_time
 print("Getting events from MOC done! Succesfull!! Done in {0} seconds".format(duration))
+
+# finally disconnect from network
+network_manager.disconnect()

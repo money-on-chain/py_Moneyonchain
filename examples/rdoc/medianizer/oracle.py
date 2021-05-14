@@ -1,5 +1,5 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.rdoc import RDOCMoCMedianizer
+from moneyonchain.networks import network_manager
+from moneyonchain.medianizer import RDOCMoCMedianizer
 
 import logging
 import logging.config
@@ -11,10 +11,13 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 #oracle_address = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
 #oracle_address = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
@@ -23,6 +26,9 @@ log.info("Connected: {conectado}".format(conectado=connection_manager.is_connect
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
 #oracle_address = '0xCEE08e06617f8b5974Db353E2c8C66424F91c42A'
 oracle_address = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
-oracle = RDOCMoCMedianizer(connection_manager, contract_address=oracle_address) #contract_address=oracle_address
+oracle = RDOCMoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 print(oracle.peek())
+
+# finally disconnect from network
+network_manager.disconnect()

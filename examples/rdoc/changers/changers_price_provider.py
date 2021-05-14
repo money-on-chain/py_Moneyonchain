@@ -1,22 +1,32 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import RDOCPriceProviderChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.rdoc import RDOCPriceProviderChanger
 
 import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_price_provider.log',
+                    filemode='a')
 
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+log = logging.getLogger()
+log.addHandler(console)
 
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-contract = RDOCPriceProviderChanger(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+contract = RDOCPriceProviderChanger(network_manager)
 
 #price_provider = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
 #price_provider = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
@@ -26,12 +36,11 @@ contract = RDOCPriceProviderChanger(connection_manager)
 #price_provider = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
 price_provider = '0x987ccC60c378a61d167B6DD1EEF7613c6f63938f'
 #price_provider = '0xDC3551f16FfDeBAa3Cb8D3b6C16d2A5bB9646dA4'
-tx_hash, tx_receipt = contract.constructor(price_provider, execute_change=False)
+tx_receipt = contract.constructor(price_provider, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     print("Error deploying changer")
 
-"""
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

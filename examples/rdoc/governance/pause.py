@@ -4,7 +4,7 @@ This pause MOC Contract
 
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.governance import RDOCStopper
 from moneyonchain.rdoc import RDOCMoC
 
@@ -12,27 +12,39 @@ import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/pause.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
 
-contract_moc = RDOCMoC(connection_manager)
-contract_stopper = RDOCStopper(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+contract_moc = RDOCMoC(network_manager).from_abi()
+contract_stopper = RDOCStopper(network_manager).from_abi()
 
 contract_to_pause = contract_moc.address()
-tx_hash, tx_receipt = contract_stopper.pause(contract_to_pause)
+tx_receipt = contract_stopper.pause(contract_to_pause)
 if tx_receipt:
-    print("Stop Contract Address: {address} successfully!".format(address=contract_to_pause))
+    log.info("Stop Contract Address: {address} successfully!".format(address=contract_to_pause))
 else:
-    print("Error Stopping contract")
+    log.info("Error Stopping contract")
 
 
-"""
-"""
+# finally disconnect from network
+network_manager.disconnect()
