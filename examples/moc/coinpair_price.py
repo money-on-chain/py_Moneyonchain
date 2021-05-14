@@ -2,14 +2,18 @@
 Coin pair price
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.oracle import CoinPairPrice
 
 
-network = 'mocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
-contract = CoinPairPrice(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+contract = CoinPairPrice(network_manager).from_abi()
 print(contract.price())
+
+# finally disconnect from network
+network_manager.disconnect()

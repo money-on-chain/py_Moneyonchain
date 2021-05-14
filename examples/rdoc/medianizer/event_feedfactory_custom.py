@@ -1,15 +1,18 @@
 import datetime
 from web3 import Web3
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.rdoc import RDOCFeedFactory
+from moneyonchain.networks import network_manager
+from moneyonchain.medianizer import RDOCFeedFactory
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnet'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 contract_address_feedfactory = '0xbB26D11bd2a9F2274cD1a8E571e5A352816acaEA'
-moc_feedfactory = RDOCFeedFactory(connection_manager, contract_address=contract_address_feedfactory)
+moc_feedfactory = RDOCFeedFactory(network_manager, contract_address=contract_address_feedfactory).from_abi()
 
 events_functions = ['Created']
 hours_delta = 0
@@ -25,7 +28,7 @@ if 'Created' in l_events:
             for e_event in e_event_block:
 
                 count += 1
-                ts = connection_manager.block_timestamp(e_event['blockNumber'])
+                ts = network_manager.block_timestamp(e_event['blockNumber'])
                 dt = ts - datetime.timedelta(hours=hours_delta)
                 d_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -38,14 +41,6 @@ if 'Created' in l_events:
                 l_info.append(d_info)
 
 print(l_info)
-"""
-[
-    {
-        'blockNumber': 863840, 
-        'timestamp': '2020-05-19 09:33:37', 
-        'sender': '0x950C18fa33D079B01Ff7b4Fc18Ec830643CBf9eC', 
-        'feed': '0x0c8F4e12820CA09a9Fba5E3a05e695e8E4C2bf0C'
-    }
-]
 
-"""
+# finally disconnect from network
+network_manager.disconnect()

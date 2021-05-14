@@ -102,3 +102,6 @@ ENV/
 
 # intellij
 .idea
+
+# lol macs
+.DS_Store

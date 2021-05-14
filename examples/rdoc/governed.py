@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.governance import RDOCGoverned
 
 import logging
@@ -10,28 +10,25 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 
-contact_address = connection_manager.options['networks'][network]['addresses']['CommissionSplitter']
-contract = RDOCGoverned(connection_manager, contract_address=contact_address)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+contact_address = network_manager.options['networks'][config_network]['addresses']['CommissionSplitter']
+contract = RDOCGoverned(network_manager, contract_address=contact_address).from_abi()
 print(contract.governor())
 
-governor_address = connection_manager.options['networks'][network]['addresses']['governor']
-tx_hash, tx_receipt = contract.initialize(governor_address)
+governor_address = network_manager.options['networks'][config_network]['addresses']['governor']
+tx_receipt = contract.initialize(governor_address)
 if tx_receipt:
     print("Sucessfully initialized")
 else:
     print("Error initialized")
 
 
-"""
-Connecting to rdocMainnet...
-Connected: True
-0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7
-2020-05-05 17:37:00 root         INFO     Successfully initialized in Block [2329974] Hash: [0xeea7be5c47cdc21b5064fde98fa6e572be8625ebf49af8bc2441541fff77fdb4] Gas used: [55451] From: [0x27a3074Db95Ec5f6a0E73DC41a4859F48990e841]
-Sucessfully initialized
-"""
+# finally disconnect from network
+network_manager.disconnect()

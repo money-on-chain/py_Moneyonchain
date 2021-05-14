@@ -1,5 +1,5 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoCMedianizer
+from moneyonchain.networks import network_manager
+from moneyonchain.medianizer import MoCMedianizer
 
 import logging
 import logging.config
@@ -11,10 +11,13 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'mocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 #oracle_address = '0x2B54819531B7126bDEE2CeFDD9c5342d6c307595'
 #oracle_address = '0x01a165cC33Ff8Bd0457377379962232886be3DE6'
@@ -26,7 +29,11 @@ oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
 
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
 
-oracle = MoCMedianizer(connection_manager, contract_address=oracle_address) #contract_address=oracle_address
+oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 #oracle = MoCMedianizer(connection_manager)
 print(oracle.peek())
+
+
+# finally disconnect from network
+network_manager.disconnect()

@@ -1,14 +1,27 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoCState
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskMainnetPublic'
+config_network = 'mocMainnet2'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
+
 
 print("Connecting to MoCState")
-moc_state = MoCState(connection_manager)
+moc_state = MoCState(network_manager).from_abi()
 print("Bitcoin Price in USD: {0}".format(moc_state.bitcoin_price()))
 print("Bitcoin Moving Average in USD: {0}".format(moc_state.bitcoin_moving_average()))
 print("Days to settlement: {0}".format(moc_state.days_to_settlement()))
@@ -20,18 +33,5 @@ print("BPro Discount: {0}".format(moc_state.bpro_discount_rate()))
 print("BPro Tec Price: {0}".format(moc_state.bpro_tec_price()))
 
 
-
-"""
-Connecting to mocMainnet2...
-Connected: True
-Connecting to MoCState
-Bitcoin Price in USD: 9192.25
-Bitcoin Moving Average in USD: 8691.773665743441728397
-
-Connecting to mocTestnet...
-Connected: True
-Connecting to MoCState
-Bitcoin Price in USD: 9194.28
-Bitcoin Moving Average in USD: 8881.279549746037722543
-"""
-
+# finally disconnect from network
+network_manager.disconnect()

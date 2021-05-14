@@ -2,7 +2,7 @@
 Prices in enviroments from RDOC
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC
 
 # Network types
@@ -11,13 +11,19 @@ from moneyonchain.rdoc import RDOCMoC
 # rdocMainnet: Production Mainnet
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 print("Connecting to RDOC Main Contract")
-moc_contract = RDOCMoC(connection_manager)
+moc_contract = RDOCMoC(network_manager).from_abi()
 
 print("RIF Price in USD: {0}".format(moc_contract.sc_moc_state.bitcoin_price()))
 print("RIF Moving Average in USD: {0}".format(moc_contract.sc_moc_state.bitcoin_moving_average()))
+
+# finally disconnect from network
+network_manager.disconnect()

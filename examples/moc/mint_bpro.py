@@ -1,33 +1,36 @@
 """
 To run this script need private key, run this scripts with:
 
-user> export ACCOUNT_PK_SECRET=fdas46f4dsafds7f89ds7f8dafd4fdsaf3dsA4ds5a
-user> python ./example_moc_mint_bpro.py
+user> export ACCOUNT_PK_SECRET=PK
+user> python ./mint_bpro.py
 
 Where replace with your PK, and also you need to have funds in this account
 """
 
 
 from decimal import Decimal
-from web3 import Web3
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
-import logging
-import logging.config
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnet'
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-moc_main = MoC(connection_manager)
+moc_main = MoC(network_manager).from_abi()
 
 amount_want_to_mint = Decimal(0.001)
 
@@ -36,24 +39,8 @@ print("To mint {0} bitpro need {1} RBTC. Commision {2}".format(format(amount_wan
                                                                format(total_amount, '.18f'),
                                                                format(commission_value, '.18f')))
 
-# Mint BPro
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs, tx_logs_formatted = moc_main.mint_bpro(amount_want_to_mint)
-print("Tx hash: [{0}]".format(Web3.toHex(tx_hash)))
-print("Transaction done!")
-if tx_logs:
-    amount = Decimal(Web3.fromWei(tx_logs['RiskProMint'][0]['args']['amount'], 'ether'))
-    amount_usd = moc_main.bpro_amount_in_usd(amount)
-    print("You mint {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.3f')))
-    print(tx_logs_formatted['RiskProMint'].print_row())
+tx_receipt = moc_main.mint_bpro(amount_want_to_mint)
 
-
-"""
-Connecting to mocTestnet...
-Connected: True
-Connecting to MoC Main Contract
-To mint 0.001000000000000000 bitpro need 0.001001000000000000 RBTC. Commision 0.000001000000000000
-Please wait to the transaction be mined!...
-Transaction done!
-You mint 0.000973158042198576 BPro equivalent to 6.821 USD
-"""
+# finally disconnect from network
+network_manager.disconnect()

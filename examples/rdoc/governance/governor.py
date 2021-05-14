@@ -24,7 +24,7 @@ Connected: True
 
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC, \
     RDOCMoCConverter, \
     RDOCMoCSettlement, \
@@ -34,18 +34,20 @@ from moneyonchain.rdoc import RDOCMoC, \
     RDOCMoCBProxManager, \
     RDOCMoCState, \
     RDOCMoCConnector
-from moneyonchain.token import RIFDoC, RIFPro
+from moneyonchain.tokens import RIFDoC, RIFPro
 from moneyonchain.governance import RDOCGoverned
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
-moc_main = RDOCMoC(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+moc_main = RDOCMoC(network_manager).from_abi()
 addresses = moc_main.connector_addresses()
-governed = RDOCGoverned(connection_manager, contract_address=moc_main.address())
+governed = RDOCGoverned(network_manager, contract_address=moc_main.address()).from_abi()
 
 count = 0
 lines = list()
@@ -64,7 +66,7 @@ lines.append(line)
 
 # MoCConnector
 count += 1
-contract = RDOCMoCConnector(connection_manager)
+contract = RDOCMoCConnector(network_manager).from_abi()
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCConnector', contract.address(),
                                                   contract.implementation(),
                                                   "NO")
@@ -73,15 +75,15 @@ lines.append(line)
 
 # MoCState
 count += 1
-contract = RDOCMoCState(connection_manager)
-governed = RDOCGoverned(connection_manager, contract_address=contract.address())
+contract = RDOCMoCState(network_manager).from_abi()
+governed = RDOCGoverned(network_manager, contract_address=contract.address()).from_abi()
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCState', addresses['MoCState'],
                                                   contract.implementation(),
                                                   governed.governor())
 lines.append(line)
 
 # MoCConverter
-contract = RDOCMoCConverter(connection_manager)
+contract = RDOCMoCConverter(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCConverter', addresses['MoCConverter'],
                                                   contract.implementation(),
@@ -89,8 +91,8 @@ line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCConverter', address
 lines.append(line)
 
 # MoCSettlement
-contract = RDOCMoCSettlement(connection_manager)
-governed = RDOCGoverned(connection_manager, contract_address=contract.address())
+contract = RDOCMoCSettlement(network_manager).from_abi()
+governed = RDOCGoverned(network_manager, contract_address=contract.address()).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCSettlement', addresses['MoCSettlement'],
                                                   contract.implementation(),
@@ -98,7 +100,7 @@ line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCSettlement', addres
 lines.append(line)
 
 # MoCExchange
-contract = RDOCMoCExchange(connection_manager)
+contract = RDOCMoCExchange(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCExchange', addresses['MoCExchange'],
                                                   contract.implementation(),
@@ -106,8 +108,8 @@ line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCExchange', addresse
 lines.append(line)
 
 # MoCInrate
-contract = RDOCMoCInrate(connection_manager)
-governed = RDOCGoverned(connection_manager, contract_address=contract.address())
+contract = RDOCMoCInrate(network_manager).from_abi()
+governed = RDOCGoverned(network_manager, contract_address=contract.address()).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCInrate', addresses['MoCInrate'],
                                                   contract.implementation(),
@@ -116,7 +118,7 @@ lines.append(line)
 
 
 # MoCBurnout
-contract = RDOCMoCBurnout(connection_manager)
+contract = RDOCMoCBurnout(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCBurnout', addresses['MoCBurnout'],
                                                   contract.implementation(),
@@ -124,8 +126,8 @@ line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCBurnout', addresses
 lines.append(line)
 
 # MoCBProxManager
-contract = RDOCMoCBProxManager(connection_manager)
-governed = RDOCGoverned(connection_manager, contract_address=contract.address())
+contract = RDOCMoCBProxManager(network_manager).from_abi()
+governed = RDOCGoverned(network_manager, contract_address=contract.address()).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCBProxManager', addresses['MoCBProxManager'],
                                                   contract.implementation(),
@@ -133,7 +135,7 @@ line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'MoCBProxManager', addr
 lines.append(line)
 
 # RIFDoC
-contract = RIFDoC(connection_manager)
+contract = RIFDoC(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'RIFDoC', '',
                                                   contract.address(),
@@ -142,7 +144,7 @@ lines.append(line)
 
 
 # RIFPro
-contract = RIFPro(connection_manager)
+contract = RIFPro(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} | {4} |'.format(count, 'RIFPro', '',
                                                   contract.address(),
@@ -161,3 +163,6 @@ lines.append(line)
 # finally print
 print(md_header)
 print('\n'.join(lines))
+
+# finally disconnect from network
+network_manager.disconnect()
