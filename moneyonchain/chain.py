@@ -21,7 +21,7 @@ class Chain(_Chain):
     def __init__(self):
         super().__init__()
 
-    def get_block(self, block_number: int) -> BlockData:
+    def get_block(self, block_number: int, full_transactions=True) -> BlockData:
         """
         Return information about a block by block number.
 
@@ -31,6 +31,8 @@ class Chain(_Chain):
             Integer of a block number. If the value is negative, the block returned
             is relative to the most recently mined block, e.g. `chain[-1]` returns
             the most recent block.
+        full_transactions: boolean
+            Full tx
 
         Returns
         -------
@@ -40,8 +42,8 @@ class Chain(_Chain):
         if not isinstance(block_number, int):
             raise TypeError("Block height must be given as an integer")
         if block_number < 0:
-            block_number = web3.eth.blockNumber + 1 + block_number
-        block = web3.eth.getBlock(block_number, full_transactions=True)
+            block_number = web3.eth.block_number + 1 + block_number
+        block = web3.eth.get_block(block_number, full_transactions=full_transactions)
         if block["timestamp"] > self._block_gas_time:
             self._block_gas_limit = block["gasLimit"]
             self._block_gas_time = block["timestamp"]
