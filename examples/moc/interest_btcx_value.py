@@ -1,14 +1,16 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCInrate, MoCState
 
 
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnet'
 
-moc_inrate = MoCInrate(connection_manager)
-moc_state = MoCState(connection_manager)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+moc_inrate = MoCInrate(network_manager).from_abi()
+moc_state = MoCState(network_manager).from_abi()
 
 print("BTCX Inrate")
 print("===========")
@@ -35,3 +37,7 @@ print("Interest on reedeeming...")
 interest_no_days = moc_inrate.btc2x_inrate_avg(amount_value, on_minting=False)
 for day_to_sett in reversed(range(0, 30)):
     print("Days to settlement: {0} Interest: {1}".format(day_to_sett, interest_no_days * day_to_sett))
+
+
+# finally disconnect from network
+network_manager.disconnect()

@@ -1,32 +1,90 @@
 # Money On Chain
 
-Python API to Money On Chain projects.
+Python API to Money On Chain projects. We want to provide easy to use access to our contracts. 
+
+### Versions
+
+There are 3 versions not compatible with each others
+
+* Release 0.X.X: (STABLE) This is current master, this will deprecated in our future.
+* Release 1.X.X: (ALPHA) This is will introduced breaking changes in contract not compatible with older versions
+* Release 2.X.X: (BETA) This is will introduced breaking changes, rework of the api, make support using brownie lib
 
 ### Requirements
 
 * Python 3.6+ support
+* Brownie
+
+### Brownie
+
+[Brownie](https://github.com/eth-brownie/brownie) is a Python-based development and testing framework for smart contracts.
+Brownie is easy so we integrated it with Money on Chain.
+
 
 ### Installation
 
 ```
-pip3 install moneyonchain
+pip install moneyonchain
 ```
 
-### Usage
-
-#### Connection manager 
-
-Connect by default to RSK Testnet public node 
+or with specific version
 
 ```
-from moneyonchain.manager import ConnectionManager
-
-connection_manager = ConnectionManager()
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
+pip install moneyonchain==2.0.5
 ```
 
-#### Connections table
+**Also we need brownie installed**
+
+`pip install eth-brownie==1.12.2`
+
+
+
+#### Network connection 
+
+First we need to install custom networks (RSK Nodes) in brownie:
+
+```
+console> brownie networks add RskNetwork rskTestnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTestnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+```
+
+
+#### Connection table
+
+| Network Name      | Network node          | Host                               | Chain    |
+|-------------------|-----------------------|------------------------------------|----------|
+| rskTestnetPublic   | RSK Testnet Public    | https://public-node.testnet.rsk.co | 31       |    
+| rskTestnetLocal    | RSK Testnet Local     | http://localhost:4444              | 31       |
+| rskMainnetPublic  | RSK Mainnet Public    | https://public-node.rsk.co         | 30       |
+| rskMainnetLocal   | RSK Mainnet Local     | http://localhost:4444              | 30       |
+
+
+Example 1. Connect by default to RSK Testnet public node and to mocTestnet enviroment and print is connected
+
+```
+from moneyonchain.networks import network_manager
+
+# this is our connection node, in this case RSK Public node
+connection_network='rskTestnetPublic'
+
+# this is our enviroment we want to use.
+config_network = 'mocTestnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+print(network_manager.is_connected())
+
+# finally disconnect from network
+network_manager.disconnect()
+
+```
+
+#### Enviroment table
+
+Enviroment is our already deployed contracts. For example **mocMainnet2** is our MOC current production enviroment.
 
 | Network Name      | Project | Enviroment                       | Network    |
 |-------------------|---------|----------------------------------|------------|
@@ -36,7 +94,8 @@ print("Gas price: {gas_price}".format(gas_price=connection_manager.gas_price))
 | rdocTestnetAlpha  | RIF     |                                  | Testnet    |
 | rdocTestnet       | RIF     | rif-testnet.moneyonchain.com     | Testnet    |
 | rdocMainnet       | RIF     | rif.moneyonchain.com             | Mainnet    |
-| dexTestnet        | TEX     | xxx.moneyonchain.com             | Testnet    |
+| dexTestnet        | TEX     | tex-testnet.moneyonchain.com     | Testnet    |
+| dexMainnet        | TEX     | tex.moneyonchain.com             | Mainnet    |
 
 #### Price provider
 
@@ -46,8 +105,8 @@ See example in source/example/price_provider.py
 
 
 ```
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.price_provider import PriceProvider
+from moneyonchain.networks import network_manager
+from moneyonchain.oracle import PriceProvider
 
 import logging
 import logging.config
@@ -58,15 +117,21 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-# Connect to MoC enviroment network
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+# this is our connection node, in this case RSK Public node
+connection_network='rskTestnetPublic'
 
-price_provider = PriceProvider(connection_manager)
+# this is our enviroment we want to use.
+config_network = 'mocTestnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+price_provider = PriceProvider(network_manager)
 
 log.info("Last price: {0}".format(price_provider.price()))
+
+# finally disconnect from network
+network_manager.disconnect()
 
 ```
 
@@ -81,8 +146,8 @@ INFO:root:Last price: 10725.4
 RDOC Contract:
 
 ```
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.price_provider import PriceProvider
+from moneyonchain.networks import network_manager
+from moneyonchain.oracle import PriceProvider
 
 import logging
 import logging.config
@@ -93,15 +158,21 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-# Connect to MoC enviroment network
-network = 'rdocTestnet'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network='rskTestnetPublic'
 
-price_provider = PriceProvider(connection_manager)
+# connect to RDOC Enviroment
+config_network = 'rdocTestnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network,  config_network=config_network)
+
+price_provider = PriceProvider(network_manager)
 
 log.info("Last price: {0}".format(price_provider.price()))
+
+# finally disconnect from network
+network_manager.disconnect()
+
 ```
 
 Result:
@@ -112,152 +183,6 @@ INFO:root:Connected: True
 INFO:root:Last price: 0.092123288999999996
 ```
 
-#### Token Prices
-
-Get token prices in Dollar
-
-```
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoC
-
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-contract = MoC(connection_manager)
-print("Bitcoin price in usd: {0}".format(contract.bitcoin_price()))
-print("BPRO price in usd: {0}".format(contract.bpro_price()))
-print("BTC2X price in usd: {0}".format(contract.btc2x_tec_price() * contract.bitcoin_price()))
-
-```
-
-result:
-
-```
-Connecting to mocMainnet2...
-Connected: True
-Bitcoin price in usd: 9405.100000000000247435
-BPRO price in usd: 9702.108188434730668324
-BTC2X price in usd: 11869.45000000000341040779478
-```
-
-
-#### DOC Token example
-
-Connect to moc-testnet avalaible trought https://moc-testnet.moneyonchain.com
-DoCToken is Dollar on Chain Token
-
-``` 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.token import DoCToken
-
-
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
-
-print("Connecting to DoCToken")
-doc_token = DoCToken(connection_manager)
-print("Token Name: {0}".format(doc_token.name()))
-print("Token Symbol: {0}".format(doc_token.symbol()))
-print("Total Supply: {0}".format(doc_token.total_supply()))
-print("Account: {0} Balance DOC: {1}".format(account, doc_token.balance_of(account)))
-```
-
-this print
-
-```
-Connecting to mocTestnet...
-Connected: True
-Connecting to DoCToken
-Token Name: Dollar on Chain
-Token Symbol: DOC
-Total Supply: 62398.334981863939176967
-Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance DOC: 443.294681738027382034
-```
-
-
-#### RIF Token example balance
-
-**Mainnet**
-
-Connect to RDOC Mainnet avalaible trought https://rif.moneyonchain.com
-
-``` 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.token import RIF
-
-
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
-
-print("Connecting to RIF TOKEN")
-rif_token = RIF(connection_manager)
-print("Token Name: {0}".format(rif_token.name()))
-print("Token Symbol: {0}".format(rif_token.symbol()))
-print("Total Supply: {0}".format(rif_token.total_supply()))
-print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account)))
-```
-
-this print
-
-```
-Connecting to rdocMainnet...
-Connected: True
-Connecting to RIF TOKEN
-Token Name: tRIF Token
-Token Symbol: tRIF
-Total Supply: 1000000000
-Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance RIF: 391.072191029720048275
-```
-
-
-
-**Testnet**
-
-Connect to RDOC Testnet avalaible trought https://rif-testnet.moneyonchain.com
-
-``` 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.token import RIF
-
-
-network = 'rdocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
-
-account = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
-
-print("Connecting to RIF TOKEN")
-rif_token = RIF(connection_manager)
-print("Token Name: {0}".format(rif_token.name()))
-print("Token Symbol: {0}".format(rif_token.symbol()))
-print("Total Supply: {0}".format(rif_token.total_supply()))
-print("Account: {0} Balance RIF: {1}".format(account, rif_token.balance_of(account)))
-```
-
-this print
-
-```
-Connecting to rdocTestnet...
-Connected: True
-Connecting to RIF TOKEN
-Token Name: tRIF Token
-Token Symbol: tRIF
-Total Supply: 1000000000
-Account: 0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3 Balance RIF: 391.072191029720048275
-```
-
-
 
 #### Mint BPro example
 
@@ -265,25 +190,24 @@ To run this script need private key, where replace with your PK in **PRIVATE_KEY
 
 ```
 martin@martin-desktop:~$ export ACCOUNT_PK_SECRET=PRIVATE_KEY
-martin@martin-desktop:~$ python ./example_moc_mint_bpro.py
+martin@martin-desktop:~$ python ./mint_bpro.py
 ```
 
 Example code
 
 ```
 from decimal import Decimal
-from web3 import Web3
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnet'
 
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-print("Connecting to MoC Main Contract")
-moc_main = MoC(connection_manager)
+
+moc_main = MoC(network_manager).from_abi()
 
 amount_want_to_mint = Decimal(0.001)
 
@@ -292,17 +216,12 @@ print("To mint {0} bitpro need {1} RBTC. Commision {2}".format(format(amount_wan
                                                                format(total_amount, '.18f'),
                                                                format(commission_value, '.18f')))
 
-# Mint BPro
-# This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_hash, tx_receipt, tx_logs = moc_main.mint_bpro(amount_want_to_mint)
-if tx_logs:
-    print("Transaction done!")
-    amount = Decimal(Web3.fromWei(tx_logs[0]['args']['amount'], 'ether'))
-    amount_usd = moc_main.bpro_amount_in_usd(amount)
-    print("You mint {0} BPro equivalent to {1} USD".format(format(amount, '.18f'), format(amount_usd, '.3f')))
-else:
-    print("Transaction Failed")
+tx_receipt = moc_main.mint_bpro(amount_want_to_mint)
+
+# finally disconnect from network
+network_manager.disconnect()
+
 ```
 
 this print
@@ -316,3 +235,5 @@ Please wait to the transaction be mined!...
 Transaction done!
 You mint 0.000965723337947316 BPro equivalent to 7.107 USD
 ```
+
+More examples in folder 'examples/'

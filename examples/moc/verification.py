@@ -1,19 +1,43 @@
 """
-This script list all of the proxy and implementation addresses of the contracts
+If is the first time to py_Moneyonchain we need brownie framework installed
+
+`pip install eth-brownie==1.12.2`
+
+and to install connection nodes required to connect, also run :
+
+```
+console> brownie networks add RskNetwork rskTestnetPublic host=https://public-node.testnet.rsk.co chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskTestnetLocal host=http://localhost:4444 chainid=31 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetPublic host=https://public-node.rsk.co chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4444 chainid=30 explorer=https://blockscout.com/rsk/mainnet/api
+```
+
+This script list all of the proxy and implementation addresses of the contracts in the network.
+
 """
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.moc import MoC, MoCConverter, MoCSettlement, MoCExchange, MoCInrate, MoCBurnout, MoCBProxManager, \
-    MoCState, MoCConnector, MoCMedianizer
-from moneyonchain.token import DoCToken, BProToken
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MoC, \
+    MoCConverter, \
+    MoCSettlement, \
+    MoCExchange, \
+    MoCInrate, \
+    MoCBurnout, \
+    MoCBProxManager, \
+    MoCState, \
+    MoCConnector
+from moneyonchain.medianizer import MoCMedianizer
+from moneyonchain.tokens import DoCToken, BProToken
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
-moc_main = MoC(connection_manager)
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_main = MoC(network_manager).from_abi()
 addresses = moc_main.connector_addresses()
 
 count = 0
@@ -31,7 +55,7 @@ lines.append(line)
 
 # MoCConnector
 count += 1
-contract = MoCConnector(connection_manager)
+contract = MoCConnector(network_manager).from_abi()
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConnector', contract.address(),
                                             contract.implementation())
 lines.append(line)
@@ -39,34 +63,34 @@ lines.append(line)
 
 # MoCState
 count += 1
-contract = MoCState(connection_manager)
+contract = MoCState(network_manager).from_abi()
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCState', addresses['MoCState'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCConverter
-contract = MoCConverter(connection_manager)
+contract = MoCConverter(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCConverter', addresses['MoCConverter'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCSettlement
-contract = MoCSettlement(connection_manager)
+contract = MoCSettlement(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCSettlement', addresses['MoCSettlement'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCExchange
-contract = MoCExchange(connection_manager)
+contract = MoCExchange(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCExchange', addresses['MoCExchange'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCInrate
-contract = MoCInrate(connection_manager)
+contract = MoCInrate(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCInrate', addresses['MoCInrate'],
                                             contract.implementation())
@@ -74,21 +98,21 @@ lines.append(line)
 
 
 # MoCBurnout
-contract = MoCBurnout(connection_manager)
+contract = MoCBurnout(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBurnout', addresses['MoCBurnout'],
                                             contract.implementation())
 lines.append(line)
 
 # MoCBProxManager
-contract = MoCBProxManager(connection_manager)
+contract = MoCBProxManager(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCBProxManager', addresses['MoCBProxManager'],
                                             contract.implementation())
 lines.append(line)
 
 # DoCToken
-contract = DoCToken(connection_manager)
+contract = DoCToken(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'DoCToken', '',
                                             contract.address())
@@ -96,7 +120,7 @@ lines.append(line)
 
 
 # BProToken
-contract = BProToken(connection_manager)
+contract = BProToken(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'BProToken', '',
                                             contract.address())
@@ -104,7 +128,7 @@ lines.append(line)
 
 
 # Oracle
-contract = MoCMedianizer(connection_manager)
+contract = MoCMedianizer(network_manager).from_abi()
 count += 1
 line = '| {0} | {1}  | {2}  | {3} |'.format(count, 'MoCMedianizer', '',
                                             contract.address())

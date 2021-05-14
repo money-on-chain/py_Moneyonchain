@@ -2,9 +2,9 @@
 Oracle price get current oracle from MOC
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
-from moneyonchain.moc import MoCMedianizer
+from moneyonchain.medianizer import MoCMedianizer
 
 # Network types
 #
@@ -12,17 +12,21 @@ from moneyonchain.moc import MoCMedianizer
 # mocMainnet2: Production Mainnet
 
 
-network = 'mocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 print("Connecting to MoC Main Contract")
-moc_contract = MoC(connection_manager)
+moc_contract = MoC(network_manager).from_abi()
 
 oracle_provider = moc_contract.sc_moc_state.price_provider()
 print("Oracle address: {0}".format(oracle_provider))
 
-oracle = MoCMedianizer(connection_manager, contract_address=oracle_provider)
+oracle = MoCMedianizer(network_manager, contract_address=oracle_provider).from_abi()
 
 print("Bitcoin Price in USD: {0}".format(oracle.price()))
+
+# finally disconnect from network
+network_manager.disconnect()

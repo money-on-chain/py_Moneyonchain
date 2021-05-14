@@ -1,36 +1,41 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import RDOCMoCSettlementChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.rdoc import RDOCMoCSettlementChanger
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+import logging
+import logging.config
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_settlement.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-contract = RDOCMoCSettlementChanger(connection_manager)
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-tx_hash, tx_receipt = contract.constructor(12000, execute_change=False)
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+contract = RDOCMoCSettlementChanger(network_manager)
+
+tx_receipt = contract.constructor(12000, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     print("Error deploying changer")
 
-"""
-Connecting to rdocTestnetAlpha...
-Connected: True
-Changer Contract Address: 0x2875792db3152F172Afcb6B2a4DD926f17eF0d5B
-
-Connecting to rdocTestnetAlpha...
-Connected: True
-Changer Contract Address: 0x6E66eE1f677CfdB416F458C69696cBcac5d3C4C2
-
-Connecting to rdocTestnetAlpha...
-Connected: True
-Changer Contract Address: 0x37A15637D51C5742b9Fdf23628763AEb14D780dC
-
-
-Connecting to rdocTestnetAlpha...
-Connected: True
-Changer Contract Address: 0xB2785651E23A730c5c56Eb0d870AA717Ff014969
-"""
+# finally disconnect from network
+network_manager.disconnect()

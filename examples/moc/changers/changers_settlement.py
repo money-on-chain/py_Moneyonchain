@@ -1,21 +1,41 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import MoCSettlementChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MoCSettlementChanger
 
 
-network = 'mocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+import logging
+import logging.config
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_settlement.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-contract = MoCSettlementChanger(connection_manager)
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
-tx_hash, tx_receipt = contract.constructor(60, execute_change=True)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+contract = MoCSettlementChanger(network_manager)
+
+tx_receipt = contract.constructor(90000, execute_change=True)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
-"""
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

@@ -1,14 +1,17 @@
 import datetime
 from web3 import Web3
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCInrate, RDOCMoC
 
-network = 'rdocTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnet'
 
-moc_inrate = RDOCMoCInrate(connection_manager)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+moc_inrate = RDOCMoCInrate(network_manager).from_abi()
 
 events_functions = ['InrateDailyPay']
 hours_delta = 0
@@ -24,7 +27,7 @@ if 'InrateDailyPay' in l_events:
             for e_event in e_event_block:
 
                 count += 1
-                ts = connection_manager.block_timestamp(e_event['blockNumber'])
+                ts = network_manager.block_timestamp(e_event['blockNumber'])
                 dt = ts - datetime.timedelta(hours=hours_delta)
                 d_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -38,13 +41,5 @@ if 'InrateDailyPay' in l_events:
                 l_info.append(d_info)
 
 print(l_info)
-"""
-[
-{'blockNumber': 833242, 'timestamp': '2020-05-08 05:43:34', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 17, 'nReserveBucketC0': Decimal('2367.478205379475749698')}, 
-{'blockNumber': 836128, 'timestamp': '2020-05-09 08:18:04', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 16, 'nReserveBucketC0': Decimal('2367.427494777035258405')}, 
-{'blockNumber': 839013, 'timestamp': '2020-05-10 10:39:04', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 15, 'nReserveBucketC0': Decimal('2367.376786601284723118')}, 
-{'blockNumber': 841897, 'timestamp': '2020-05-11 11:57:42', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 14, 'nReserveBucketC0': Decimal('2370.472025514650366083')}, 
-{'blockNumber': 844803, 'timestamp': '2020-05-12 09:49:14', 'amount': Decimal('0.062581989356276525'), 'daysToSettlement': 13, 'nReserveBucketC0': Decimal('2370.421171646839272184')}]
 
-
-"""
+network_manager.disconnect()

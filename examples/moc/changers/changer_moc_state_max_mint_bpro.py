@@ -1,52 +1,47 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import MocStateMaxMintBProChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MocStateMaxMintBProChanger
 
 import logging
 import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_moc_state_max_mint_bpro.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
-contract = MocStateMaxMintBProChanger(connection_manager)
-max_mint_bpro = int(21000000 * 10 ** 18)
 
-if network in ['mocTestnetAlpha']:
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+contract = MocStateMaxMintBProChanger(network_manager)
+max_mint_bpro = int(200 * 10 ** 18)
+
+if config_network in ['mocTestnetAlpha']:
     execute_change = True
 else:
     execute_change = False
 
-tx_hash, tx_receipt = contract.constructor(max_mint_bpro, execute_change=execute_change)
+tx_receipt = contract.constructor(max_mint_bpro, execute_change=execute_change)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
-    print("Error deploying changer")
+    log.info("Error deploying changer")
 
-
-"""
-
-Connecting to mocMainnet2...
-2020-10-07 09:18:29 root         INFO     Deploying new contract...
-Connected: True
-Changer Contract Address: 0xa5cB60AD6f4F4eD815185e67B322Fc036605795b
-2020-10-07 09:18:54 root         INFO     Deployed contract done!
-2020-10-07 09:18:54 root         INFO     0xcbd180140dea3300e47c0f0f90beb29debd817c0fb90f7c0c3356b0a9542c61a
-2020-10-07 09:18:54 root         INFO     AttributeDict({'transactionHash': HexBytes('0xcbd180140dea3300e47c0f0f90beb29debd817c0fb90f7c0c3356b0a9542c61a'), 'transactionIndex': 0, 'blockHash': HexBytes('0xc4e68b9118c537f1beb4bd9a6e60d79554dfdf91ed1df46d260babf0c90cb151'), 'blockNumber': 2760683, 'cumulativeGasUsed': 410672, 'gasUsed': 410672, 'contractAddress': '0xa5cB60AD6f4F4eD815185e67B322Fc036605795b', 'logs': [AttributeDict({'logIndex': 0, 'blockNumber': 2760683, 'blockHash': HexBytes('0xc4e68b9118c537f1beb4bd9a6e60d79554dfdf91ed1df46d260babf0c90cb151'), 'transactionHash': HexBytes('0xcbd180140dea3300e47c0f0f90beb29debd817c0fb90f7c0c3356b0a9542c61a'), 'transactionIndex': 0, 'address': '0xa5cB60AD6f4F4eD815185e67B322Fc036605795b', 'data': '0x', 'topics': [HexBytes('0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0'), HexBytes('0x0000000000000000000000000000000000000000000000000000000000000000'), HexBytes('0x000000000000000000000000ea14c08764c9e5f212c916e11a5c47eaf92571e4')]})], 'from': '0xEA14c08764c9e5F212c916E11a5c47Eaf92571e4', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000000000001000000000000000000000000000800000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000080020000000000000000000800000000000000000000000000000000400000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000800000000000000000400000000000000000000')})
-2020-10-07 09:18:54 root         INFO     Changer Contract Address: 0xa5cB60AD6f4F4eD815185e67B322Fc036605795b
-
-Connecting to mocMainnet2...
-2021-01-06 10:40:50 root         INFO     Deploying new contract...
-Connected: True
-Changer Contract Address: 0xC66dA2130142592c64937E9353FA6c2007cDf061
-2021-01-06 10:41:46 root         INFO     Deployed contract done!
-2021-01-06 10:41:46 root         INFO     0x9fbda766a871670a9406801458b3e4050953b695d4ce35430043e041d7f6d7f3
-2021-01-06 10:41:46 root         INFO     AttributeDict({'transactionHash': HexBytes('0x9fbda766a871670a9406801458b3e4050953b695d4ce35430043e041d7f6d7f3'), 'transactionIndex': 3, 'blockHash': HexBytes('0x16fc606b2ea697bb64b527e5b88b4820df0eb0f84b97c9150ca56e98944170e7'), 'blockNumber': 3003407, 'cumulativeGasUsed': 577693, 'gasUsed': 410736, 'contractAddress': '0xC66dA2130142592c64937E9353FA6c2007cDf061', 'logs': [AttributeDict({'logIndex': 0, 'blockNumber': 3003407, 'blockHash': HexBytes('0x16fc606b2ea697bb64b527e5b88b4820df0eb0f84b97c9150ca56e98944170e7'), 'transactionHash': HexBytes('0x9fbda766a871670a9406801458b3e4050953b695d4ce35430043e041d7f6d7f3'), 'transactionIndex': 3, 'address': '0xC66dA2130142592c64937E9353FA6c2007cDf061', 'data': '0x', 'topics': [HexBytes('0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0'), HexBytes('0x0000000000000000000000000000000000000000000000000000000000000000'), HexBytes('0x000000000000000000000000ea14c08764c9e5f212c916e11a5c47eaf92571e4')]})], 'from': '0xEA14c08764c9e5F212c916E11a5c47Eaf92571e4', 'to': None, 'root': '0x01', 'status': 1, 'logsBloom': HexBytes('0x00000000000000010000001000000000000000000000000800800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000000000800000000000000000000000000000000400000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000200000400000000000000000000')})
-2021-01-06 10:41:46 root         INFO     Changer Contract Address: 0xC66dA2130142592c64937E9353FA6c2007cDf061
-"""
+# finally disconnect from network
+network_manager.disconnect()

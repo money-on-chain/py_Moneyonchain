@@ -1,36 +1,44 @@
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import RDOCMoCInrateStableChanger
+from moneyonchain.networks import network_manager
+from moneyonchain.rdoc import RDOCMoCInrateStableChanger
+
+import logging
+import logging.config
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/changers_inrate_stable_interest.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-contract = RDOCMoCInrateStableChanger(connection_manager)
+contract = RDOCMoCInrateStableChanger(network_manager)
 
-t_min = int(0.0001852564418 * 10 ** 18)
-t_max = int(0.004 * 10 ** 18)
-t_power = int(4)
+t_min = int(0.0 * 10 ** 18)
+t_max = int(0.000000000000000001 * 10 ** 18)
+t_power = int(0)
 
-tx_hash, tx_receipt = contract.constructor(t_min, t_max, t_power, execute_change=False)
+tx_receipt = contract.constructor(t_min, t_max, t_power, execute_change=False)
 if tx_receipt:
-    print("Changer Contract Address: {address}".format(address=tx_receipt.contractAddress))
+    print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     print("Error deploying changer")
 
-"""
-Connecting to rdocTestnetAlpha...
-Connected: True
-Changer Contract Address: 0xccC0aF28935B7715c698E2E1A34e0BF294FC667d
-
-Connecting to rdocTestnet...
-Connected: True
-Changer Contract Address: 0x7732dc9Fb3db490e2f145D8fCA2f5AC60F7cf313
-
-Connecting to rdocMainnet...
-Connected: True
-Changer Contract Address: 0x5fB050a228B1FF958965392e7b2b16C782d3c0De
-
-"""
+# finally disconnect from network
+network_manager.disconnect()

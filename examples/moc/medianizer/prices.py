@@ -2,7 +2,7 @@
 Prices in enviroments from MOC
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
 
 # Network types
@@ -11,13 +11,18 @@ from moneyonchain.moc import MoC
 # mocMainnet2: Production Mainnet
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
 
 print("Connecting to MoC Main Contract")
-moc_contract = MoC(connection_manager)
+moc_contract = MoC(network_manager).from_abi()
 
 print("Bitcoin Price in USD: {0}".format(moc_contract.sc_moc_state.bitcoin_price()))
 print("Bitcoin Moving Average in USD: {0}".format(moc_contract.sc_moc_state.bitcoin_moving_average()))
+
+# finally disconnect from network
+network_manager.disconnect()
