@@ -30,12 +30,12 @@ pip install moneyonchain
 or with specific version
 
 ```
-pip install moneyonchain==2.0.5
+pip install moneyonchain==2.0.24
 ```
 
 **Also we need brownie installed**
 
-`pip install eth-brownie==1.12.2`
+`pip install eth-brownie==1.14.6`
 
 
 
