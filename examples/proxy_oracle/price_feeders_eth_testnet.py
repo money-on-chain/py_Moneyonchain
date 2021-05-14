@@ -1,0 +1,56 @@
+"""
+Price feeder verification. Test if pricefeeder is working and sending prices.
+"""
+
+from moneyonchain.networks import network_manager
+from moneyonchain.medianizer import ETHMoCMedianizer, \
+    ETHPriceFeed
+
+import logging
+import logging.config
+
+# logging module
+# Initialize you log configuration using the base class
+logging.basicConfig(level=logging.INFO)
+# Retrieve the logger instance
+log = logging.getLogger()
+
+
+connection_network = 'rskTestnetPublic'
+config_network = 'ethTestnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+oracle_address = '0x4D4254D3744e1E4beb090ab5d8eB48096ff4aE27'
+feeders = [('0x4B3F85A1E85ef656E0EeF54d50Fb23Dc509332Cc', '# MOC 1'),
+           ('0xEc2FA32050F5585dB4B15E60e1c21742b22740C4', '# MOC 2 <--Current')
+           ]
+
+
+oracle = ETHMoCMedianizer(network_manager,
+                          contract_address=oracle_address).from_abi()
+
+print("Oracle price:")
+print(oracle.peek())
+print('')
+
+for feed_c in feeders:
+    feeder_cl = ETHPriceFeed(network_manager,
+                             contract_address=feed_c[0],
+                             contract_address_moc_medianizer=oracle_address).from_abi()
+
+    print("Price Feeder: {0}".format(feed_c[1]))
+    print("===============")
+    print('Address: {0}'.format(feed_c[0]))
+    print('Price: {0}'.format(feeder_cl.peek()))
+    if int(oracle.indexes(feed_c[0])) > 0:
+        print('Enabled: True')
+    else:
+        print('Enabled: False')
+    print('')
+
+
+# finally disconnect from network
+network_manager.disconnect()

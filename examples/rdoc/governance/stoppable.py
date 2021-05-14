@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.governance import RDOCStopper
 from moneyonchain.rdoc import RDOCMoC
 
@@ -11,13 +11,16 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
-contract_moc = RDOCMoC(connection_manager)
-contract_stopper = RDOCStopper(connection_manager)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+contract_moc = RDOCMoC(network_manager).from_abi()
+contract_stopper = RDOCStopper(network_manager).from_abi()
 
 print("Paused: {0}".format(contract_moc.paused()))
 print("Stoppable: {0}".format(contract_moc.stoppable()))
@@ -25,3 +28,5 @@ print("Stopper Address: {0}".format(contract_moc.stopper()))
 print("Owner: {0}".format(contract_stopper.owner()))
 print("MoC Address: {0}".format(contract_moc.address()))
 
+# finally disconnect from network
+network_manager.disconnect()

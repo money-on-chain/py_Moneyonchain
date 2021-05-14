@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCState
 
 import logging
@@ -10,10 +10,15 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-moc_state = RDOCMoCState(connection_manager)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_state = RDOCMoCState(network_manager).from_abi()
 print(moc_state.price_provider())
+
+# finally disconnect from network
+network_manager.disconnect()

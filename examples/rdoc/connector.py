@@ -1,13 +1,18 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoC
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-moc_moc = RDOCMoC(connection_manager, contracts_discovery=False)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_moc = RDOCMoC(network_manager).from_abi()
 print("Connector: {0}".format(moc_moc.connector()))
 
 print("Addresses: {0}".format(moc_moc.connector_addresses()))
+
+# finally disconnect from network
+network_manager.disconnect()

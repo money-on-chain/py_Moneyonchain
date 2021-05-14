@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCInrate, RDOCMoC
 
 import logging
@@ -11,12 +11,14 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-moc_inrate = RDOCMoCInrate(connection_manager)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_inrate = RDOCMoCInrate(network_manager).from_abi()
 
 print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
 print("Bitpro interest blockspan: {0}".format(moc_inrate.bitpro_interest_blockspan()))
@@ -30,3 +32,5 @@ print("last_daily_pay: {0}".format(moc_inrate.last_daily_pay()))
 print("bitpro_interest_address: {0}".format(moc_inrate.bitpro_interest_address()))
 print("is_bitpro_interest_enabled: {0}".format(moc_inrate.is_bitpro_interest_enabled()))
 
+# finally disconnect from network
+network_manager.disconnect()

@@ -1,4 +1,4 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCInrate, RDOCMoC
 
 import logging
@@ -10,13 +10,14 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnet'
 
-network = 'rdocTestnetAlpha'
-connection_manager = ConnectionManager(network=network)
-log.info("Connecting to %s..." % network)
-log.info("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-moc_inrate = RDOCMoCInrate(connection_manager)
+
+moc_inrate = RDOCMoCInrate(network_manager).from_abi()
 
 print("Bitpro rate: {0}".format(moc_inrate.bitpro_rate()))
 
@@ -25,8 +26,8 @@ print("=======================")
 info = moc_inrate.stable_inrate()
 print(info)
 
-print("Interest of reedeeming 0.01 DOC")
-interest_no_days = moc_inrate.doc_inrate_avg(0.0000001, block_identifier=1233780)
+print("Interest of reedeeming 1000 DOC")
+interest_no_days = moc_inrate.doc_inrate_avg(1)
 
 for day_to_sett in reversed(range(0, 30)):
     print("Days to settlement: {0} Interest: {1}".format(day_to_sett, interest_no_days * day_to_sett))
@@ -50,3 +51,6 @@ for day_to_sett in reversed(range(0, 30)):
 
 info = moc_inrate.calc_mint_interest_value(1.0)
 print(info)
+
+# finally disconnect from network
+network_manager.disconnect()

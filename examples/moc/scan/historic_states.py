@@ -3,7 +3,7 @@ This is script getting historic data from MOC State contract
 16/03/2020
 """
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCState
 from moneyonchain.rdoc import RDOCMoCState
 
@@ -11,22 +11,26 @@ import datetime
 import csv
 import time
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
-if connection_manager.options['networks'][network]['app_mode'] == 'MoC':
-    moc_state = MoCState(connection_manager)
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+if network_manager.options['networks'][config_network]['app_mode'] == 'MoC':
+    moc_state = MoCState(network_manager).from_abi()
 else:
-    moc_state = RDOCMoCState(connection_manager)
+    moc_state = RDOCMoCState(network_manager).from_abi()
 
-from_block = 2243000  # can be manually setting
-to_block = 2244000  # can be manually setting
-block_steps = 2880
-block_skip = 120
+from_block = 2685121  # can be manually setting
+to_block = 3227045  # can be manually setting
+block_steps = 10000
+block_skip = 1440
 hours_delta = 0
-last_block_number = int(connection_manager.block_number)
+last_block_number = int(network_manager.block_number)
+bucket_x2 = moc_state.bucket_x2()
+bucket_c0 = moc_state.bucket_c0()
 
 if to_block <= 0:
     to_block = last_block_number  # last block number in the node
@@ -51,7 +55,7 @@ while current_block <= to_block:
 
         print("Get info from block: {0}".format(n_block))
 
-        ts = connection_manager.block_timestamp(n_block)
+        ts = network_manager.block_timestamp(n_block)
         dt = ts - datetime.timedelta(hours=hours_delta)
         d_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -74,40 +78,40 @@ while current_block <= to_block:
         d_info_data['daysToSettlement'] = int(moc_state.days_to_settlement(block_identifier=n_block))
 
         # bkt_0 Storage DOC
-        d_info_data['C0_getBucketNDoc'] = moc_state.bucket_ndoc(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNDoc'] = moc_state.bucket_ndoc(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage BPro
-        d_info_data['C0_getBucketNBPro'] = moc_state.bucket_nbpro(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNBPro'] = moc_state.bucket_nbpro(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage BTC
-        d_info_data['C0_getBucketNBTC'] = moc_state.bucket_nbtc(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getBucketNBTC'] = moc_state.bucket_nbtc(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage InrateBag
-        d_info_data['C0_getInrateBag'] = moc_state.get_inrate_bag(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_getInrateBag'] = moc_state.get_inrate_bag(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage Coverage
-        d_info_data['C0_coverage'] = moc_state.coverage(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_coverage'] = moc_state.coverage(bucket_c0, block_identifier=n_block)
 
         # bkt_0 Storage Leverage
-        d_info_data['C0_leverage'] = moc_state.leverage(str.encode('C0'), block_identifier=n_block)
+        d_info_data['C0_leverage'] = moc_state.leverage(bucket_c0, block_identifier=n_block)
 
         # bkt_2 Storage DOC
-        d_info_data['X2_getBucketNDoc'] = moc_state.bucket_ndoc(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNDoc'] = moc_state.bucket_ndoc(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage BPro
-        d_info_data['X2_getBucketNBPro'] = moc_state.bucket_nbpro(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNBPro'] = moc_state.bucket_nbpro(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage BTC
-        d_info_data['X2_getBucketNBTC'] = moc_state.bucket_nbtc(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getBucketNBTC'] = moc_state.bucket_nbtc(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Inrate Bag
-        d_info_data['X2_getInrateBag'] = moc_state.get_inrate_bag(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_getInrateBag'] = moc_state.get_inrate_bag(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Coverage
-        d_info_data['X2_coverage'] = moc_state.coverage(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_coverage'] = moc_state.coverage(bucket_x2, block_identifier=n_block)
 
         # bkt_2 Storage Leverage
-        d_info_data['X2_leverage'] = moc_state.leverage(str.encode('X2'), block_identifier=n_block)
+        d_info_data['X2_leverage'] = moc_state.leverage(bucket_x2, block_identifier=n_block)
 
         # Global Coverage
         d_info_data['globalCoverage'] = moc_state.global_coverage(block_identifier=n_block)
@@ -125,7 +129,7 @@ while current_block <= to_block:
         d_info_data['bproTecPrice'] = moc_state.bpro_tec_price(block_identifier=n_block)
 
         # BTC2X Tec price
-        d_info_data['BTC2XTecPrice'] = moc_state.btc2x_tec_price(str.encode('X2'), block_identifier=n_block)
+        d_info_data['BTC2XTecPrice'] = moc_state.btc2x_tec_price(bucket_x2, block_identifier=n_block)
 
         l_historic_data.append(d_info_data)
 
@@ -160,7 +164,7 @@ if l_historic_data:
                'BPro Tec. Price',
                'BTC2X Tec. Price'
                ]
-    path_file = '{0}_historic_data_{1}_{2}.csv'.format(network, from_block, to_block)
+    path_file = '{0}_historic_data_{1}_{2}.csv'.format(config_network, from_block, to_block)
     with open(path_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(columns)
@@ -196,3 +200,6 @@ if l_historic_data:
 
 duration = time.time() - start_time
 print("Getting historic data from MOC/RDOC done! Succesfull!! Done in {0} seconds".format(duration))
+
+# finally disconnect from network
+network_manager.disconnect()

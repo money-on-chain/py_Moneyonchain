@@ -1,14 +1,18 @@
 import datetime
 from web3 import Web3
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.commission import RDOCCommissionSplitter
+from moneyonchain.networks import network_manager
+from moneyonchain.rdoc import RDOCCommissionSplitter
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
 
-splitter = RDOCCommissionSplitter(connection_manager)
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
+
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+
+splitter = RDOCCommissionSplitter(network_manager).from_abi()
 
 events_functions = ['SplitExecuted']
 hours_delta = 0
@@ -24,7 +28,7 @@ if 'SplitExecuted' in l_events:
             for e_event in e_event_block:
 
                 count += 1
-                ts = connection_manager.block_timestamp(e_event['blockNumber'])
+                ts = network_manager.block_timestamp(e_event['blockNumber'])
                 dt = ts - datetime.timedelta(hours=hours_delta)
                 d_timestamp = dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -37,6 +41,6 @@ if 'SplitExecuted' in l_events:
                 l_info.append(d_info)
 
 print(l_info)
-"""
 
-"""
+# finally disconnect from network
+network_manager.disconnect()

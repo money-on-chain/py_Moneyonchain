@@ -1,13 +1,15 @@
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCState
 
 
-network = 'rdocMainnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
-moc_state = RDOCMoCState(connection_manager)
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
+
+moc_state = RDOCMoCState(network_manager).from_abi()
 
 print("State: {0}".format(moc_state.state()))
 
@@ -79,11 +81,5 @@ print("Bucket NBTC: {0}".format(moc_state.bucket_nbtc(str.encode('C0'), formatte
 print("RIF in sysm: {0}".format(moc_state.rbtc_in_system(formatted=False)))
 
 
-#print("Reserves remainder before: {0}".format(moc_state.reserves_remainder(block_identifier=2923820)))
-
-
-
-"""
-
-"""
-
+# finally disconnect from network
+network_manager.disconnect()

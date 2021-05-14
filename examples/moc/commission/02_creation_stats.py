@@ -3,16 +3,29 @@ import logging
 import logging.config
 from web3 import Web3
 
-from moneyonchain.manager import ConnectionManager
+from moneyonchain.networks import NetworkManager
 from moneyonchain.governance import Governed
-from moneyonchain.commission import CommissionSplitter
-from moneyonchain.moc import MoCInrate
+from moneyonchain.moc import CommissionSplitter, MoCInrate
 
+
+import logging
+import logging.config
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-log = logging.getLogger('default')
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='logs/02_creation_stats.log',
+                    filemode='a')
+
+# set up logging to console
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# set a format which is simpler for console use
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+
+log = logging.getLogger()
+log.addHandler(console)
 
 
 def options_from_settings(filename='settings.json'):
@@ -24,48 +37,63 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'mocMainnet2'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
+
+# init network manager
+# connection network is the brownie connection network
+# config network is our enviroment we want to connect
+network_manager = NetworkManager(
+    connection_network=connection_network,
+    config_network=config_network)
+
+# run install() if is the first time and you want to install
+# networks connection from brownie
+# network_manager.install()
+
+# Connect to network
+network_manager.connect()
 
 
 # load settings from file
 settings = options_from_settings()
 
-contact_address = settings[network]['CommissionSplitter']
+contact_address = settings[config_network]['CommissionSplitter']
 
-governed = Governed(connection_manager, contract_address=contact_address)
-splitter = CommissionSplitter(connection_manager, contract_address=contact_address)
-moc_inrate = MoCInrate(connection_manager)
+governed = Governed(network_manager, contract_address=contact_address).from_abi()
+splitter = CommissionSplitter(network_manager, contract_address=contact_address).from_abi()
+moc_inrate = MoCInrate(network_manager).from_abi()
 
 info_dict = dict()
 info_dict['proportion'] = dict()
 info_dict['balance'] = dict()
 
-print("Splitter Address: [{0}]".format(contact_address))
-print("Governor: [{0}]".format(governed.governor()))
-print("Multisig address: [{0}]".format(splitter.commission_address()))
-print("MoC Address: [{0}]".format(splitter.moc_address()))
-print("MoCInrate Target commission: [{0}] (have to be the splitter)".format(moc_inrate.commission_address()))
+log.info("Splitter Address: [{0}]".format(contact_address))
+log.info("Governor: [{0}]".format(governed.governor()))
+log.info("Multisig address: [{0}]".format(splitter.commission_address()))
+log.info("MoC Address: [{0}]".format(splitter.moc_address()))
+log.info("MoCInrate Target commission: [{0}] (have to be the splitter)".format(moc_inrate.commission_address()))
 
 info_dict['proportion']['moc'] = Web3.fromWei(splitter.moc_proportion(), 'ether')
 info_dict['proportion']['multisig'] = 1 - info_dict['proportion']['moc']
 
-print("Proportion MOC: [{0}]".format(info_dict['proportion']['moc']))
+log.info("Proportion MOC: [{0}]".format(info_dict['proportion']['moc']))
 print("Proportion Multisig: [{0}]".format(info_dict['proportion']['multisig']))
 
 info_dict['balance']['splitter'] = splitter.balance()
-print("Splitter balance: [{0}]".format(info_dict['balance']['splitter']))
+log.info("Splitter balance: [{0}]".format(info_dict['balance']['splitter']))
 
 # balances commision
-balance = Web3.fromWei(connection_manager.balance(splitter.commission_address()), 'ether')
+balance = Web3.fromWei(network_manager.network_balance(splitter.commission_address()), 'ether')
 info_dict['balance']['commission'] = balance
-print("Multisig balance (proportion: {0}): [{1}]".format(info_dict['proportion']['multisig'],
+log.info("Multisig balance (proportion: {0}): [{1}]".format(info_dict['proportion']['multisig'],
                                                          info_dict['balance']['commission']))
 
 # balances moc
-balance = Web3.fromWei(connection_manager.balance(splitter.moc_address()), 'ether')
+balance = Web3.fromWei(network_manager.network_balance(splitter.moc_address()), 'ether')
 info_dict['balance']['moc'] = balance
-print("MoC balance (proportion: {0}): [{1}]".format(info_dict['proportion']['moc'],
+log.info("MoC balance (proportion: {0}): [{1}]".format(info_dict['proportion']['moc'],
                                                     info_dict['balance']['moc']))
+
+# finally disconnect from network
+network_manager.disconnect()
