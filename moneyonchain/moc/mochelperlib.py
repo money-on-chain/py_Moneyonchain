@@ -15,9 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
+from moneyonchain.moc_base import MoCHelperLibBase
 
 
-class MoCHelperLib(ContractBase):
+class MoCHelperLib(MoCHelperLibBase):
     contract_name = 'MoCHelperLib'
 
     contract_abi = ContractBase.content_abi_file(
@@ -28,19 +29,3 @@ class MoCHelperLib(ContractBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
-
-    def __init__(self,
-                 network_manager,
-                 contract_name=None,
-                 contract_address=None,
-                 contract_abi=None,
-                 contract_bin=None):
-        if not contract_address:
-            config_network = network_manager.config_network
-            contract_address = network_manager.options['networks'][config_network]['addresses']['MoCHelperLib']
-
-        super().__init__(network_manager,
-                         contract_name=contract_name,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)

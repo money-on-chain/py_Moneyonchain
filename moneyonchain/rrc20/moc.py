@@ -18,7 +18,7 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoC
+from moneyonchain.moc_base import MoCBase
 
 from .mocinrate import RRC20MoCInrate
 from .mocstate import RRC20MoCState
@@ -30,7 +30,7 @@ from moneyonchain.tokens import RiskProToken, StableToken, ReserveToken, MoCToke
 from moneyonchain.tex import TokenPriceProviderLastClosingPrice
 
 
-class RRC20MoC(MoC):
+class RRC20MoC(MoCBase):
     contract_name = 'MoC'
 
     contract_abi = ContractBase.content_abi_file(

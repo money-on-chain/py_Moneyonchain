@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCHelperLib
+from moneyonchain.moc_base import MoCHelperLibBase
 
 
-class RRC20MoCHelperLib(MoCHelperLib):
+class RRC20MoCHelperLib(MoCHelperLibBase):
     contract_name = 'MoCHelperLib'
 
     contract_abi = ContractBase.content_abi_file(
