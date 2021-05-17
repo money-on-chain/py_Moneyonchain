@@ -13,14 +13,12 @@
 """
 
 import os
-from web3 import Web3
-from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
+from moneyonchain.governance import GovernedInterface
 
 
-class MoCConverterBase(ContractBase):
+class MoCConverterBase(GovernedInterface):
     contract_name = 'MoCConverter'
 
     contract_abi = ContractBase.content_abi_file(
@@ -47,11 +45,3 @@ class MoCConverterBase(ContractBase):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)

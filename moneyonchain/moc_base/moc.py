@@ -29,7 +29,7 @@ from .mocconnector import MoCConnectorBase
 from .mocsettlement import MoCSettlementBase
 
 from moneyonchain.tokens import BProToken, DoCToken, MoCToken
-from moneyonchain.governance import ProxyAdmin, GovernedInterface, admin_implementation
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface, StoppableInterface
 from moneyonchain.tex import TokenPriceProviderLastClosingPrice
 
 STATE_LIQUIDATED = 0
@@ -41,20 +41,7 @@ BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
-class MoCGoverned(GovernedInterface):
-    pass
-
-
-class MoCBaseInterface(MoCGoverned):
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        return admin_implementation(self.network_manager,
-                                    self.contract_address,
-                                    block_identifier=block_identifier)
-
-
-class MoCBase(MoCBaseInterface):
+class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
     contract_name = 'MoC'
 
     contract_abi = ContractBase.content_abi_file(

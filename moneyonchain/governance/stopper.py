@@ -20,8 +20,34 @@ from web3 import Web3
 from moneyonchain.contract import ContractBase
 from moneyonchain.transaction import receipt_to_log
 
+from .governor import OwnableInterface
 
-class MoCStopper(ContractBase):
+
+class StoppableInterface(ContractBase):
+
+    def stoppable(self, block_identifier: BlockIdentifier = 'latest'):
+        """stoppable return bool"""
+
+        result = self.sc.stoppable(block_identifier=block_identifier)
+
+        return result
+
+    def stopper(self, block_identifier: BlockIdentifier = 'latest'):
+        """Return address."""
+
+        result = self.sc.stopper(block_identifier=block_identifier)
+
+        return result
+
+    def paused(self, block_identifier: BlockIdentifier = 'latest'):
+        """Returns true if paused."""
+
+        result = self.sc.paused(block_identifier=block_identifier)
+
+        return result
+
+
+class MoCStopper(OwnableInterface):
 
     contract_name = 'Stopper'
     contract_abi = ContractBase.content_abi_file(
@@ -57,13 +83,6 @@ class MoCStopper(ContractBase):
 
         return result
 
-    def owner(self, block_identifier: BlockIdentifier = 'latest'):
-        """Contract address output"""
-
-        result = self.sc.owner(block_identifier=block_identifier)
-
-        return result
-
     def pause(self,
               contract_to_pause,
               **tx_arguments):
@@ -93,25 +112,6 @@ class MoCStopper(ContractBase):
         tx_receipt = self.sc.unpause(
             contract_to_pause,
             tx_args)
-
-        tx_receipt.info()
-        receipt_to_log(tx_receipt, self.log)
-
-        return tx_receipt
-
-    def transfer_ownership(self,
-                           new_owner,
-                           **tx_arguments):
-        """
-        function transferOwnership(address newOwner) public onlyOwner {
-            _transferOwnership(newOwner);
-        }
-        """
-
-        tx_args = self.tx_arguments(**tx_arguments)
-
-        tx_receipt = self.sc.transferOwnership(Web3.toChecksumAddress(new_owner),
-                                               tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)

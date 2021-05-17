@@ -17,14 +17,14 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 
 
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
-class MoCBProxManagerBase(ContractBase):
+class MoCBProxManagerBase(ProxyAdminInterface, GovernedInterface):
     contract_name = 'MoCBProxManager'
 
     contract_abi = ContractBase.content_abi_file(
@@ -52,14 +52,6 @@ class MoCBProxManagerBase(ContractBase):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
     def available_bucket(self,
                          bucket=None,
                          formatted: bool = True,
@@ -70,6 +62,41 @@ class MoCBProxManagerBase(ContractBase):
             bucket = BUCKET_X2
 
         result = self.sc.isAvailableBucket(bucket, block_identifier=block_identifier)
+
+        return result
+
+    def bprox_balanceof(self,
+                        bucket,
+                        account_address,
+                        formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """ returns user balance """
+
+        if not bucket:
+            bucket = BUCKET_X2
+
+        result = self.sc.bproxBalanceOf(bucket,
+                                        Web3.toChecksumAddress(account_address),
+                                        block_identifier=block_identifier)
+
+        return result
+
+    def has_valid_balance(self,
+                          bucket,
+                          account_address,
+                          index,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ verifies that this user has assigned balance for the given bucket """
+
+        if not bucket:
+            bucket = BUCKET_X2
+
+        result = self.sc.hasValidBalance(
+            bucket,
+            Web3.toChecksumAddress(account_address),
+            index,
+            block_identifier=block_identifier)
 
         return result
 

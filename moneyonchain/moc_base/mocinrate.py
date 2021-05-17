@@ -17,14 +17,14 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
+from moneyonchain.governance import GovernedInterface
 
 
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
-class MoCInrateBase(ContractBase):
+class MoCInrateBase(GovernedInterface):
     contract_name = 'MoCInrate'
 
     contract_abi = ContractBase.content_abi_file(
@@ -52,14 +52,6 @@ class MoCInrateBase(ContractBase):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
 
     def commision_rate(self, formatted: bool = True,
                        block_identifier: BlockIdentifier = 'latest'):

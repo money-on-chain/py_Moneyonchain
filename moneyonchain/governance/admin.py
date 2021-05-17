@@ -65,3 +65,12 @@ def admin_implementation(network_manager, contract_address, block_identifier: Bl
     contract_address = Web3.toChecksumAddress(contract_address)
 
     return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+class ProxyAdminInterface(ContractBase):
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        return admin_implementation(self.network_manager,
+                                    self.contract_address,
+                                    block_identifier=block_identifier)
