@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCExchange
+from moneyonchain.moc_base import MoCExchangeBase
 
 
-class RRC20MoCExchange(MoCExchange):
+class RRC20MoCExchange(MoCExchangeBase):
     contract_name = 'MoCExchange'
 
     contract_abi = ContractBase.content_abi_file(

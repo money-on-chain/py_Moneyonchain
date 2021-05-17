@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCConverter
+from moneyonchain.moc_base import MoCConverterBase
 
 
-class RRC20MoCConverter(MoCConverter):
+class RRC20MoCConverter(MoCConverterBase):
     contract_name = 'MoCConverter'
 
     contract_abi = ContractBase.content_abi_file(

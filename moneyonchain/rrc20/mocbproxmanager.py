@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCBProxManager
+from moneyonchain.moc_base import MoCBProxManagerBase
 
 
-class RRC20MoCBProxManager(MoCBProxManager):
+class RRC20MoCBProxManager(MoCBProxManagerBase):
     contract_name = 'MoCBProxManager'
 
     contract_abi = ContractBase.content_abi_file(

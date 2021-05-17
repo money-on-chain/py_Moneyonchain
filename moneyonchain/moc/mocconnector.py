@@ -13,18 +13,12 @@
 """
 
 import os
-import logging
-import datetime
-from decimal import Decimal
-from web3 import Web3
-from web3.types import BlockIdentifier
-import math
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
+from moneyonchain.moc_base import MoCConnectorBase
 
 
-class MoCConnector(ContractBase):
+class MoCConnector(MoCConnectorBase):
     contract_name = 'MoCConnector'
 
     contract_abi = ContractBase.content_abi_file(
@@ -35,50 +29,3 @@ class MoCConnector(ContractBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
-
-    def __init__(self,
-                 network_manager,
-                 contract_name=None,
-                 contract_address=None,
-                 contract_abi=None,
-                 contract_bin=None):
-
-        if not contract_address:
-            config_network = network_manager.config_network
-            contract_address = network_manager.options['networks'][config_network]['addresses']['MoCConnector']
-
-        super().__init__(network_manager,
-                         contract_name=contract_name,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
-    def contracts_addresses(self):
-
-        d_addresses = dict()
-        d_addresses['MoC'] = self.sc.moc()
-        d_addresses['MoCState'] = self.sc.mocState()
-        d_addresses['MoCConverter'] = self.sc.mocConverter()
-        d_addresses['MoCSettlement'] = self.sc.mocSettlement()
-        d_addresses['MoCExchange'] = self.sc.mocExchange()
-        d_addresses['MoCInrate'] = self.sc.mocInrate()
-        d_addresses['MoCBurnout'] = self.sc.mocBurnout()
-        if self.mode == 'MoC':
-            d_addresses['DoCToken'] = self.sc.docToken()
-            d_addresses['BProToken'] = self.sc.bproToken()
-            d_addresses['MoCBProxManager'] = self.sc.bproxManager()
-        else:
-            d_addresses['DoCToken'] = self.sc.stableToken()
-            d_addresses['BProToken'] = self.sc.riskProToken()
-            d_addresses['MoCBProxManager'] = self.sc.riskProxManager()
-            d_addresses['ReserveToken'] = self.sc.reserveToken()
-
-        return d_addresses
