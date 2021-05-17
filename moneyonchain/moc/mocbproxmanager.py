@@ -13,18 +13,16 @@
 """
 
 import os
-from web3 import Web3
-from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
+from moneyonchain.moc_base import MoCBProxManagerBase
 
 
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
-class MoCBProxManager(ContractBase):
+class MoCBProxManager(MoCBProxManagerBase):
     contract_name = 'MoCBProxManager'
 
     contract_abi = ContractBase.content_abi_file(
@@ -35,53 +33,3 @@ class MoCBProxManager(ContractBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
-
-    def __init__(self,
-                 network_manager,
-                 contract_name=None,
-                 contract_address=None,
-                 contract_abi=None,
-                 contract_bin=None):
-        if not contract_address:
-            config_network = network_manager.config_network
-            contract_address = network_manager.options['networks'][config_network]['addresses']['MoCBProxManager']
-
-        super().__init__(network_manager,
-                         contract_name=contract_name,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
-    def available_bucket(self,
-                         bucket=None,
-                         formatted: bool = True,
-                         block_identifier: BlockIdentifier = 'latest'):
-        """ available_bucket """
-
-        if not bucket:
-            bucket = BUCKET_X2
-
-        result = self.sc.isAvailableBucket(bucket, block_identifier=block_identifier)
-
-        return result
-
-    def active_address_count(self,
-                             bucket=None,
-                             formatted: bool = True,
-                             block_identifier: BlockIdentifier = 'latest'):
-        """ Returns all the address that currently have riskProx position for this bucket """
-
-        if not bucket:
-            bucket = BUCKET_X2
-
-        result = self.sc.getActiveAddressesCount(bucket, block_identifier=block_identifier)
-
-        return result

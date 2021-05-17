@@ -20,8 +20,10 @@ from web3.types import BlockIdentifier
 from moneyonchain.contract import ContractBase
 from moneyonchain.governance import ProxyAdmin
 
+from moneyonchain.moc_base import MoCSettlementBase
 
-class MoCSettlement(ContractBase):
+
+class MoCSettlement(MoCSettlementBase):
     contract_name = 'MoCSettlement'
 
     contract_abi = ContractBase.content_abi_file(
@@ -32,46 +34,3 @@ class MoCSettlement(ContractBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
-
-    def __init__(self,
-                 network_manager,
-                 contract_name=None,
-                 contract_address=None,
-                 contract_abi=None,
-                 contract_bin=None):
-
-        if not contract_address:
-            config_network = network_manager.config_network
-            contract_address = network_manager.options['networks'][config_network]['addresses']['MoCSettlement']
-
-        super().__init__(network_manager,
-                         contract_name=contract_name,
-                         contract_address=contract_address,
-                         contract_abi=contract_abi,
-                         contract_bin=contract_bin)
-
-    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
-        """Implementation of contract"""
-
-        contract_admin = ProxyAdmin(self.network_manager).from_abi()
-        contract_address = Web3.toChecksumAddress(self.contract_address)
-
-        return contract_admin.implementation(contract_address, block_identifier=block_identifier)
-
-    def next_block(self, block_identifier: BlockIdentifier = 'latest'):
-        return int(self.sc.nextSettlementBlock(block_identifier=block_identifier))
-
-    def is_enabled(self, block_identifier: BlockIdentifier = 'latest'):
-        return self.sc.isSettlementEnabled(block_identifier=block_identifier)
-
-    def is_ready(self, block_identifier: BlockIdentifier = 'latest'):
-        return self.sc.isSettlementReady(block_identifier=block_identifier)
-
-    def is_running(self, block_identifier: BlockIdentifier = 'latest'):
-        return self.sc.isSettlementRunning(block_identifier=block_identifier)
-
-    def redeem_queue_size(self, block_identifier: BlockIdentifier = 'latest'):
-        return self.sc.redeemQueueSize(block_identifier=block_identifier)
-
-    def block_span(self, block_identifier: BlockIdentifier = 'latest'):
-        return self.sc.getBlockSpan(block_identifier=block_identifier)

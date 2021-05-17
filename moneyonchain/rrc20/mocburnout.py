@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCBurnout
+from moneyonchain.moc_base import MoCBurnoutBase
 
 
-class RRC20MoCBurnout(MoCBurnout):
+class RRC20MoCBurnout(MoCBurnoutBase):
     contract_name = 'MoCBurnout'
 
     contract_abi = ContractBase.content_abi_file(

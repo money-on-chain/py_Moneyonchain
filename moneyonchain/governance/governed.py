@@ -21,7 +21,17 @@ from moneyonchain.contract import ContractBase
 from moneyonchain.transaction import receipt_to_log
 
 
-class Governed(ContractBase):
+class GovernedInterface(ContractBase):
+
+    def governor(self, block_identifier: BlockIdentifier = 'latest'):
+        """Contract address output"""
+
+        result = self.sc.governor(block_identifier=block_identifier)
+
+        return result
+
+
+class Governed(GovernedInterface):
 
     contract_name = 'Governed'
     contract_abi = ContractBase.content_abi_file(
@@ -48,13 +58,6 @@ class Governed(ContractBase):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
-
-    def governor(self, block_identifier: BlockIdentifier = 'latest'):
-        """Contract address output"""
-
-        result = self.sc.governor(block_identifier=block_identifier)
-
-        return result
 
     def initialize(self,
                    governor,

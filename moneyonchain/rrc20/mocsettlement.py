@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCSettlement
+from moneyonchain.moc_base import MoCSettlementBase
 
 
-class RRC20MoCSettlement(MoCSettlement):
+class RRC20MoCSettlement(MoCSettlementBase):
     contract_name = 'MoCState'
 
     contract_abi = ContractBase.content_abi_file(

@@ -16,10 +16,10 @@ import os
 
 from web3.types import BlockIdentifier
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import CommissionSplitter
+from moneyonchain.moc_base import CommissionSplitterBase
 
 
-class RDOCCommissionSplitter(CommissionSplitter):
+class RDOCCommissionSplitter(CommissionSplitterBase):
 
     contract_name = 'RDOCCommissionSplitter'
 

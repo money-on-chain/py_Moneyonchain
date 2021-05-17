@@ -15,6 +15,7 @@
 import os
 import logging
 from web3.types import BlockIdentifier
+from web3 import Web3
 
 from moneyonchain.contract import ContractBase
 
@@ -55,3 +56,21 @@ class ProxyAdmin(ContractBase):
         result = self.sc.getProxyImplementation(contract_address, block_identifier=block_identifier)
 
         return result
+
+
+def admin_implementation(network_manager, contract_address, block_identifier: BlockIdentifier = 'latest'):
+    """Implementation of contract"""
+
+    contract_admin = ProxyAdmin(network_manager).from_abi()
+    contract_address = Web3.toChecksumAddress(contract_address)
+
+    return contract_admin.implementation(contract_address, block_identifier=block_identifier)
+
+
+class ProxyAdminInterface(ContractBase):
+    def implementation(self, block_identifier: BlockIdentifier = 'latest'):
+        """Implementation of contract"""
+
+        return admin_implementation(self.network_manager,
+                                    self.contract_address,
+                                    block_identifier=block_identifier)

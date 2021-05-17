@@ -1,5 +1,5 @@
-from .admin import ProxyAdmin
-from .governed import Governed, RDOCGoverned
-from .governor import Governor, DEXGovernor, RDOCGovernor
-from .stopper import MoCStopper, RDOCStopper
+from .admin import ProxyAdmin, ProxyAdminInterface
+from .governed import Governed, RDOCGoverned, GovernedInterface
+from .governor import Governor, DEXGovernor, RDOCGovernor, BlockableGovernor
+from .stopper import MoCStopper, RDOCStopper, StoppableInterface
 from .changers import UpgraderChanger, RDOCUpgraderChanger

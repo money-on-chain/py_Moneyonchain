@@ -17,10 +17,10 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.moc import MoCInrate
+from moneyonchain.moc_base import MoCInrateBase
 
 
-class RRC20MoCInrate(MoCInrate):
+class RRC20MoCInrate(MoCInrateBase):
     contract_name = 'MoCInrate'
 
     contract_abi = ContractBase.content_abi_file(
