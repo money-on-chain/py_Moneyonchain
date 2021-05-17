@@ -139,6 +139,15 @@ class BlockableGovernor(Governor):
     it is guaranteed that you will be blocked until that date
     """
 
+    contract_name = 'Governor'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BlockableGovernor.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BlockableGovernor.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
+
     def unblock_date(self, block_identifier: BlockIdentifier = 'latest'):
         """Return unblock date"""
 
