@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import GovernedInterface
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 
 
-class MoCExchangeBase(GovernedInterface):
+class MoCExchangeBase(GovernedInterface, ProxyAdminInterface):
     contract_name = 'MoCExchange'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCExchange.abi'))

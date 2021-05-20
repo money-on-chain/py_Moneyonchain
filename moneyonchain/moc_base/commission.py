@@ -18,9 +18,10 @@ from web3.types import BlockIdentifier
 from web3 import Web3
 from moneyonchain.contract import ContractBase
 from moneyonchain.transaction import receipt_to_log
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 
 
-class CommissionSplitterBase(ContractBase):
+class CommissionSplitterBase(ProxyAdminInterface, GovernedInterface):
     contract_name = 'CommissionSplitter'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.abi'))

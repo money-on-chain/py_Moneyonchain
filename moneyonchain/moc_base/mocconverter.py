@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import GovernedInterface
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 
 
-class MoCConverterBase(GovernedInterface):
+class MoCConverterBase(GovernedInterface, ProxyAdminInterface):
     contract_name = 'MoCConverter'
 
     contract_abi = ContractBase.content_abi_file(

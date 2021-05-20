@@ -17,11 +17,11 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import GovernedInterface
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 from moneyonchain.transaction import receipt_to_log
 
 
-class MoCStateBase(GovernedInterface):
+class MoCStateBase(GovernedInterface, ProxyAdminInterface):
     contract_name = 'MoCState'
 
     contract_abi = ContractBase.content_abi_file(

@@ -17,14 +17,14 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import GovernedInterface
+from moneyonchain.governance import GovernedInterface, ProxyAdminInterface
 
 
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
-class MoCInrateBase(GovernedInterface):
+class MoCInrateBase(GovernedInterface, ProxyAdminInterface):
     contract_name = 'MoCInrate'
 
     contract_abi = ContractBase.content_abi_file(
