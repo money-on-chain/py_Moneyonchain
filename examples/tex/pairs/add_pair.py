@@ -8,6 +8,7 @@ BPRO: 0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf
 RIF: 0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE
 RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 MOC: 0x45a97b54021a3F99827641AFe1BFAE574431e6ab
+USDT: 0x4CFE225ce54C6609a525768b13F7d87432358C57
 
 
 1. DOC / WRBTC  <--
@@ -23,6 +24,7 @@ MOC: 0x45a97b54021a3F99827641AFe1BFAE574431e6ab
 11. WRBTC/AMOC
 12. WRBTC / RIF
 13. WRBTC/MOC
+14. DOC/USDT
 
 
 
@@ -36,6 +38,7 @@ BPRO: 0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8
 RIF: 0x2acc95758f8b5f583470ba265eb685a8f45fc9d5
 RIFP: 0xf4d27c56595Ed59B66cC7F03CFF5193e4bd74a61
 MOC: 0x9AC7fE28967B30E3A4e6e03286d715b42B453D10
+USDT: 0xEf213441a85DF4d7acBdAe0Cf78004E1e486BB96
 
 
 1. DOC / WRBTC  <--
@@ -48,11 +51,12 @@ MOC: 0x9AC7fE28967B30E3A4e6e03286d715b42B453D10
 8. WRBTC / RIF
 9. DOC / MOC
 10. WRBTC / MOC
+11. DOC / USDT
 
 """
 
 import json
-from moneyonchain.networks import NetworkManager
+from moneyonchain.networks import network_manager
 from moneyonchain.tex import DexAddTokenPairChanger
 from moneyonchain.tex import ExternalOraclePriceProviderFallback, \
     TokenPriceProviderLastClosingPrice, \
@@ -94,24 +98,13 @@ def options_from_settings(filename='settings.json'):
 connection_network = 'rskMainnetPublic'
 config_network = 'dexMainnet'
 
-# init network manager
-# connection network is the brownie connection network
-# config network is our enviroment we want to connect
-network_manager = NetworkManager(
-    connection_network=connection_network,
-    config_network=config_network)
-
-# run install() if is the first time and you want to install
-# networks connection from brownie
-# network_manager.install()
-
 # Connect to network
-network_manager.connect()
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['WRBTC/MOC']
+settings_pair = settings[config_network]['DOC/USDT']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']

@@ -31,7 +31,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = MoCSettlementChanger(network_manager)
 
-tx_receipt = contract.constructor(90000, execute_change=True)
+tx_receipt = contract.constructor(3000, execute_change=True)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
