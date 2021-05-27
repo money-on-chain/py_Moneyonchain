@@ -46,8 +46,8 @@ feed_factory = ETHFeedFactory(network_manager).from_abi()
 
 events_functions = 'Created'
 hours_delta = 0
-from_block = 3339293  # from block start
-to_block = 3341746  # block end or 0 to last block
+from_block = 3339285  # from block start
+to_block = 3385844  # block end or 0 to last block
 block_steps = 1000
 
 

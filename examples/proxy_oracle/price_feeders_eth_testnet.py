@@ -24,8 +24,11 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 oracle_address = '0x4D4254D3744e1E4beb090ab5d8eB48096ff4aE27'
-feeders = [('0x4B3F85A1E85ef656E0EeF54d50Fb23Dc509332Cc', '# MOC 1'),
-           ('0xEc2FA32050F5585dB4B15E60e1c21742b22740C4', '# MOC 2 <--Current')
+feeders = [('0x4B3F85A1E85ef656E0EeF54d50Fb23Dc509332Cc', '# MOC 1 (DISABLED)'),
+           ('0xEc2FA32050F5585dB4B15E60e1c21742b22740C4', '# MOC 2 <--OK'),
+           ('0xF350BD966E62A7b4C58a34e3f10284435927Fb96', '# SOVRYN 1 (DISABLED)'),
+           ('0x5C4B18226b84788760eB6627D82A70FD4c8c18D7', '# SOVRYN 2 (DISABLED)'),
+           ('0x8Cc876f406D14aa4Ee051048eFc3C59307c61417', '# SOVRYN 3 <----OK')
            ]
 
 

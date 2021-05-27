@@ -24,8 +24,10 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 oracle_address = '0x68862C30d45605EAd8D01eF1632F7BFB18FAB587'
-feeders = [('0x87079F2669192626Ca572A1264f11DAF2d40AA84', '# MOC 1'),
-           ('0xe76Bd65f9C5fD95b6120532CE6a254FA0fB62208', '# MOC 2 <-- Current')]
+feeders = [('0x87079F2669192626Ca572A1264f11DAF2d40AA84', '# MOC 1 (DISABLED)'),
+           ('0xe76Bd65f9C5fD95b6120532CE6a254FA0fB62208', '# MOC 2 <-- OK'),
+           ('0x85c6cD0BCce63fdF9D3fA4C0661aEEd0976C9B97', '# SOVRYN 1 (DISABLED)'),
+           ('0xD4b0244F06B4482248Fc1388b4AC73de3308eb2a', '# SOVRYN 2 <-- OK')]
 
 
 oracle = ETHMoCMedianizer(network_manager,

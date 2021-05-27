@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.medianizer import ETHPriceFeederAdderChanger
+from moneyonchain.medianizer import ETHPriceFeederRemoverChanger
 
 
 import logging
@@ -8,7 +8,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/changers_feedadder.log',
+                    filename='logs/changers_feedremover.log',
                     filemode='a')
 
 # set up logging to console
@@ -30,15 +30,15 @@ config_network = 'ethMainnet'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-contract = ETHPriceFeederAdderChanger(network_manager)
-
-price_feeder_owner = '0xFBaCB4A0529998A998b7c700753ce4551a81965f'
-tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
+contract = ETHPriceFeederRemoverChanger(network_manager)
+contract_address_pricefeed = '0x85c6cD0BCce63fdF9D3fA4C0661aEEd0976C9B97'
+tx_receipt = contract.constructor(contract_address_pricefeed,
+                                  execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     log.info("Error deploying changer")
 
-
 # finally disconnect from network
 network_manager.disconnect()
+
