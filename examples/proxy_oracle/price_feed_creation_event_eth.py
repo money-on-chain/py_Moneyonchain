@@ -32,8 +32,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskMainnetLocal'
-config_network = 'ethMainnet'
+connection_network = 'rskTestnetLocal'
+config_network = 'ethTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -46,8 +46,8 @@ feed_factory = ETHFeedFactory(network_manager).from_abi()
 
 events_functions = 'Created'
 hours_delta = 0
-from_block = 3339285  # from block start
-to_block = 3385844  # block end or 0 to last block
+from_block = 1878681  # from block start
+to_block = 1879681  # block end or 0 to last block
 block_steps = 1000
 
 

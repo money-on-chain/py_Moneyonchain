@@ -22,8 +22,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskMainnetPublic'
-config_network = 'ethMainnet'
+connection_network = 'rskTestnetPublic'
+config_network = 'ethTestnet'
 
 
 # Connect to network
@@ -32,7 +32,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = ETHPriceFeederAdderChanger(network_manager)
 
-price_feeder_owner = '0xFBaCB4A0529998A998b7c700753ce4551a81965f'
+price_feeder_owner = '0xAC9bEa24bdB1402D0CCd1538aBAA20Cd1d4a1906'
 tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
