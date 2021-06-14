@@ -22,7 +22,7 @@ log.addHandler(console)
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -34,12 +34,12 @@ commission_rates = {
     "redeem_doc_fees_rbtc": int(0.001 * 10 ** 18),
     "mint_btcx_fees_rbtc": int(0.001 * 10 ** 18),
     "redeem_btcx_fees_rbtc": int(0.001 * 10 ** 18),
-    "mint_bpro_fees_moc": int(0.001 * 10 ** 18),
-    "redeem_bpro_fees_moc": int(0.001 * 10 ** 18),
-    "mint_doc_fees_moc": int(0.001 * 10 ** 18),
-    "redeem_doc_fees_moc": int(0.001 * 10 ** 18),
-    "mint_btcx_fees_moc": int(0.001 * 10 ** 18),
-    "redeem_btcx_fees_moc": int(0.001 * 10 ** 18),
+    "mint_bpro_fees_moc": int(0.0005 * 10 ** 18),
+    "redeem_bpro_fees_moc": int(0.0005 * 10 ** 18),
+    "mint_doc_fees_moc": int(0.0005 * 10 ** 18),
+    "redeem_doc_fees_moc": int(0.0005 * 10 ** 18),
+    "mint_btcx_fees_moc": int(0.0005 * 10 ** 18),
+    "redeem_btcx_fees_moc": int(0.0005 * 10 ** 18),
 }
 
 moc_inrate = VENDORSMoCInrate(network_manager).from_abi()

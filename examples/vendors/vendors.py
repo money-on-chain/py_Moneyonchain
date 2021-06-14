@@ -21,7 +21,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoCVendors, VENDORSMoCInrate
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -29,13 +29,13 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 
-vendor_account = '0x9032f510a5b54a005f04e81b5c98b7f201c4dac1'
+vendor_account = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
 print("Vendor details: ", moc_vendors.get_vendor(Web3.toChecksumAddress(vendor_account)))
 
 print("Connecting to MoCInrate")
 moc_inrate = VENDORSMoCInrate(network_manager).from_abi()
 vendor_address = Web3.toChecksumAddress(Web3.toChecksumAddress(vendor_account))
-amount = 0.3
+amount = 1
 result = moc_inrate.calculate_vendor_markup(vendor_address, amount)
 print("Vendor markup: ", result)
 

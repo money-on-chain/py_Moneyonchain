@@ -36,23 +36,23 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-vendor_account = Web3.toChecksumAddress('0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3')
-amount_want_to_mint = Decimal(0.00005)
+vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
+amount_want_to_mint = Decimal(0.001)
 
-total_amount, commission_value, markup_value = moc_main.amount_mint_doc(
-    amount=amount_want_to_mint,
-    vendor_account=vendor_account)
-
-print("To mint {0} RBTC in DOC need {1} RBTC. Commission {2}. Markup {3}".format(
-    format(amount_want_to_mint, '.18f'),
-    format(total_amount, '.18f'),
-    format(commission_value, '.18f'),
-    format(markup_value, '.18f')))
+# total_amount, commission_value, markup_value = moc_main.amount_mint_doc(
+#     amount=amount_want_to_mint,
+#     vendor_account=vendor_account)
+#
+# print("To mint {0} RBTC in DOC need {1} RBTC. Commission {2}. Markup {3}".format(
+#     format(amount_want_to_mint, '.18f'),
+#     format(total_amount, '.18f'),
+#     format(commission_value, '.18f'),
+#     format(markup_value, '.18f')))
 
 # Mint DOC
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.mint_doc(amount_want_to_mint)
+tx_receipt = moc_main.mint_doc(amount_want_to_mint, vendor_account=vendor_account)
 
 # finally disconnect from network
 network_manager.disconnect()

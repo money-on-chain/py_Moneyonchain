@@ -26,8 +26,8 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 
-account = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
-markup = 0.001
+account = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
+markup = 0.0005
 tx_receipt = moc_vendors.register(account, markup)
 if tx_receipt:
     print("Vendor registered!")

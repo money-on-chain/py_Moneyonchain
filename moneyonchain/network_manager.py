@@ -10,6 +10,7 @@
  by Martin Mulone (martin.mulone@moneyonchain.com)
 
 """
+import time
 
 import yaml
 import logging
@@ -19,6 +20,7 @@ from typing import Tuple, Union
 from web3 import Web3
 from web3.types import BlockIdentifier
 import datetime
+import subprocess
 
 from brownie import network, web3
 from brownie._config import _get_data_folder
@@ -171,6 +173,49 @@ class NetworkManager(BaseNetworkManager):
         # save to yaml
         with _get_data_folder().joinpath("network-config.yaml").open("w") as fp:
             yaml.dump(current_networks, fp)
+
+    def add_network(
+            self,
+            network_group='live',
+            network_group_name="RskNetwork",
+            network_name='rskCustomNetwork',
+            network_host='https://public-node.testnet.rsk.co',
+            network_chainid='31',
+            network_explorer='https://blockscout.com/rsk/mainnet/api',
+            force=True):
+        """
+        Install network
+        brownie networks add RskNetwork rskTesnetPublic \
+        host=https://public-node.testnet.rsk.co \
+        chainid=31 \
+        explorer=https://blockscout.com/rsk/mainnet/api
+        """
+
+        if network_group not in TYPE_NETWORK_GROUP:
+            raise Exception("Not valid type: Network group")
+
+        # load current brownie networks
+        current_networks = self.load_networks()
+
+        # check if already exist the networks group
+        for c_networks in current_networks[network_group]:
+            if c_networks['name'] == network_group_name and not force:
+                self.log.info("Already exist! Exitting....")
+                return
+            elif c_networks['name'] == network_group_name and force:
+                self.log.info("Already exist! Deleting....")
+
+                subprocess.run(["brownie", "networks", "delete", network_name])
+                time.sleep(1)
+
+        subprocess.run(["brownie", "networks", "add",
+                        network_group_name,
+                        network_name,
+                        "host={}".format(network_host),
+                        "chainid={}".format(network_chainid),
+                        "explorer={}".format(network_explorer)])
+
+        time.sleep(1)
 
     def scan_accounts(self):
         """ Scan accounts from enviroment """

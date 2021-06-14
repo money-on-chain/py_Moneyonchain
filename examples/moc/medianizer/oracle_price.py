@@ -13,7 +13,7 @@ from moneyonchain.medianizer import MoCMedianizer
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)

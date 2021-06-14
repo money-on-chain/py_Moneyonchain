@@ -31,8 +31,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network='rskTesnetLocal'
-config_network = 'dexTestnet'
+connection_network='rskMainnetLocal'
+config_network = 'dexMainnet'
 
 # init network manager
 # connection network is the brownie connection network
@@ -56,8 +56,8 @@ dex = MoCDecentralizedExchange(network_manager).from_abi()
 
 events_functions = 'OrderCancelled'
 hours_delta = 0
-from_block = 1316407  # from block start
-to_block = 1316807  # block end or 0 to last block
+from_block = 3385855  # from block start
+to_block = 3400204  # block end or 0 to last block
 block_steps = 1000
 
 last_block_number = int(network_manager.block_number)

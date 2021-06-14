@@ -31,7 +31,7 @@ network_manager.connect()
 
 moc_main = MoC(network_manager).from_abi()
 
-amount = Decimal(10.0)
+amount = Decimal(100.0)
 print("Reedem Free Doc: {0}".format(amount))
 
 # This transaction is not async, you have to wait to the transaction is mined

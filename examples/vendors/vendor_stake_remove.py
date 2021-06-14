@@ -18,7 +18,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoCVendors
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -26,7 +26,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 
-staking = 0.3
+staking = 1
 tx_receipt = moc_vendors.remove_stake(staking)
 if tx_receipt:
     print("Vendor staking removed!")

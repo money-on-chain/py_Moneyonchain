@@ -12,7 +12,7 @@ log = logging.getLogger()
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+config_network = 'rdocTestnet'
 
 
 # Connect to network

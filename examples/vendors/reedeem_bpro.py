@@ -28,7 +28,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestTyD'
+config_network = 'mocTestnetAlpha'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -36,15 +36,15 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-vendor_account = Web3.toChecksumAddress('0x9032f510a5b54a005f04e81b5c98b7f201c4dac1')
-amount = Decimal(0.001)
+vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
+amount = Decimal(0.1)
 
 print("Reedem BPro: {0}".format(amount))
 
 # Reedeem BPro
 # This transaction is not async, you have to wait to the transaction is mined
 print("Please wait to the transaction be mined!...")
-tx_receipt = moc_main.reedeem_bpro(amount, vendor_account)
+tx_receipt = moc_main.reedeem_bpro(amount, vendor_account=vendor_account)
 
 # finally disconnect from network
 network_manager.disconnect()
