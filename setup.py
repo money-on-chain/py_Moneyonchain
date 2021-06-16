@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='moneyonchain',
-    version='2.0.27',
+    version='2.0.28',
     packages=['moneyonchain',
               'moneyonchain.tokens',
               'moneyonchain.tex',
