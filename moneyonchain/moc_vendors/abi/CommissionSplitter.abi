@@ -1,45 +1,33 @@
 [
     {
-      "constant": true,
-      "inputs": [],
-      "name": "governor",
-      "outputs": [
+      "anonymous": false,
+      "inputs": [
         {
-          "name": "",
-          "type": "address"
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "commissionAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "mocAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "mocTokenCommissionAmount",
+          "type": "uint256"
         }
       ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
+      "name": "SplitExecuted",
+      "type": "event"
     },
     {
-      "constant": true,
-      "inputs": [],
-      "name": "moc",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "mocToken",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
     },
     {
       "constant": true,
@@ -47,6 +35,7 @@
       "name": "PRECISION",
       "outputs": [
         {
+          "internalType": "uint256",
           "name": "",
           "type": "uint256"
         }
@@ -59,6 +48,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "contract IGovernor",
           "name": "newIGovernor",
           "type": "address"
         }
@@ -75,6 +65,7 @@
       "name": "commissionsAddress",
       "outputs": [
         {
+          "internalType": "address payable",
           "name": "",
           "type": "address"
         }
@@ -86,9 +77,25 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "mocTokenCommissionsAddress",
+      "name": "governor",
       "outputs": [
         {
+          "internalType": "contract IGovernor",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "moc",
+      "outputs": [
+        {
+          "internalType": "contract IMoC",
           "name": "",
           "type": "address"
         }
@@ -103,6 +110,7 @@
       "name": "mocProportion",
       "outputs": [
         {
+          "internalType": "uint256",
           "name": "",
           "type": "uint256"
         }
@@ -112,31 +120,34 @@
       "type": "function"
     },
     {
-      "payable": true,
-      "stateMutability": "payable",
-      "type": "fallback"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
+      "constant": true,
+      "inputs": [],
+      "name": "mocToken",
+      "outputs": [
         {
-          "indexed": false,
-          "name": "commissionAmount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "mocAmount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "mocTokenCommissionAmount",
-          "type": "uint256"
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
         }
       ],
-      "name": "SplitExecuted",
-      "type": "event"
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "mocTokenCommissionsAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "constant": false,
@@ -151,6 +162,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "contract IGovernor",
           "name": "_governor",
           "type": "address"
         }
@@ -165,26 +177,32 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "contract IMoC",
           "name": "_mocAddress",
           "type": "address"
         },
         {
+          "internalType": "address payable",
           "name": "_commissionsAddress",
           "type": "address"
         },
         {
+          "internalType": "uint256",
           "name": "_mocProportion",
           "type": "uint256"
         },
         {
+          "internalType": "contract IGovernor",
           "name": "_governor",
           "type": "address"
         },
         {
+          "internalType": "contract IERC20",
           "name": "_mocToken",
           "type": "address"
         },
         {
+          "internalType": "address",
           "name": "_mocTokenCommissionsAddress",
           "type": "address"
         }
@@ -208,6 +226,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "address payable",
           "name": "_commissionsAddress",
           "type": "address"
         }
@@ -222,6 +241,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "uint256",
           "name": "_mocProportion",
           "type": "uint256"
         }
@@ -236,6 +256,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "address",
           "name": "_mocToken",
           "type": "address"
         }
@@ -250,6 +271,7 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "address",
           "name": "_mocTokenCommissionsAddress",
           "type": "address"
         }
