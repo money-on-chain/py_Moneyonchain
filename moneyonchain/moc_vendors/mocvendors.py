@@ -103,11 +103,61 @@ class VENDORSMoCVendors(ContractBase):
         return result
 
     def is_active(self, account, block_identifier: BlockIdentifier = 'latest'):
-        """"""
+        """ Gets if a vendor is active
+        return true if vendor is active; false otherwise
+        """
 
         account = Web3.toChecksumAddress(account)
 
         result = self.sc.getIsActive(account, block_identifier=block_identifier)
+
+        return result
+
+    def markup(
+            self,
+            account,
+            formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Gets vendor markup"""
+
+        account = Web3.toChecksumAddress(account)
+
+        result = self.sc.getMarkup(account, block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def total_paid_in_moc(
+            self,
+            account,
+            formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Gets vendor total paid in MoC"""
+
+        account = Web3.toChecksumAddress(account)
+
+        result = self.sc.getTotalPaidInMoC(account, block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def staking(
+            self,
+            account,
+            formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Gets vendor staking"""
+
+        account = Web3.toChecksumAddress(account)
+
+        result = self.sc.getStaking(account, block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
 
         return result
 

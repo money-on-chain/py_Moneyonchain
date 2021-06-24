@@ -517,7 +517,7 @@ class MoCVendorsVendorStakeAdded(BaseEvent):
         d_event['blockNumber'] = self.blockNumber
         d_event['timestamp'] = self.timestamp
         d_event['account'] = self.event['account']
-        d_event['staking'] = Web3.fromWei(self.event['staking'], 'staking')
+        d_event['staking'] = Web3.fromWei(self.event['staking'], 'ether')
 
         return d_event
 
@@ -543,7 +543,7 @@ class MoCVendorsVendorStakeRemoved(BaseEvent):
         d_event['blockNumber'] = self.blockNumber
         d_event['timestamp'] = self.timestamp
         d_event['account'] = self.event['account']
-        d_event['staking'] = Web3.fromWei(self.event['staking'], 'staking')
+        d_event['staking'] = Web3.fromWei(self.event['staking'], 'ether')
 
         return d_event
 
@@ -578,6 +578,35 @@ class MoCVendorsTotalPaidInMoCReset(BaseEvent):
                 d_event['timestamp'],
                 d_event['account']
                 ]
+
+
+class MoCVendorsVendorReceivedMarkup(BaseEvent):
+    name = "VendorReceivedMarkup"
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'Address', 'paidMoC', 'paidRBTC']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['vendorAdress'] = self.event['vendorAdress']
+        d_event['paidMoC'] = Web3.fromWei(self.event['paidMoC'], 'ether')
+        d_event['paidRBTC'] = Web3.fromWei(self.event['paidRBTC'], 'ether')
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['vendorAdress'],
+                format(float(d_event['paidMoC']), '.18f'),
+                format(float(d_event['paidRBTC']), '.18f')
+                ]
+
 
 class MoCVendorsVendorGuardianAddressChanged(BaseEvent):
     name = "VendorGuardianAddressChanged"

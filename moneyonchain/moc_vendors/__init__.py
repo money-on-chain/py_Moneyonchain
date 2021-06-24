@@ -14,6 +14,8 @@ from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, 
     MoCStateBtcPriceProviderUpdated, MoCStateMoCPriceProviderUpdated, \
     MoCStateMoCTokenChanged, MoCStateMoCVendorsChanged, \
     MoCVendorsVendorRegistered, MoCVendorsVendorUpdated, MoCVendorsVendorUnregistered, \
-    MoCVendorsVendorStakeAdded, MoCVendorsVendorStakeRemoved, MoCVendorsTotalPaidInMoCReset, MoCContractLiquidated
+    MoCVendorsVendorStakeAdded, MoCVendorsVendorStakeRemoved, MoCVendorsTotalPaidInMoCReset, \
+    MoCVendorsVendorReceivedMarkup,\
+    MoCContractLiquidated
 from .changers import MoCStateMoCPriceProviderChanger, MoCStateLiquidationEnabledChanger, MoCVendorsChanger, \
     MoCInrateCommissionsChanger
