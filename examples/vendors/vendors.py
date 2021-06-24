@@ -32,6 +32,8 @@ moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 vendor_account = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
 print("Vendor details: ", moc_vendors.get_vendor(Web3.toChecksumAddress(vendor_account)))
 
+print("Is active: {}".format(moc_vendors.is_active(vendor_account)))
+
 print("Connecting to MoCInrate")
 moc_inrate = VENDORSMoCInrate(network_manager).from_abi()
 vendor_address = Web3.toChecksumAddress(Web3.toChecksumAddress(vendor_account))

@@ -34,7 +34,7 @@
         "CommissionSplitter": "0x9c1e20A0Ea6c71B0AEA47fd8B1E29de208ab7A82",
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
-        "MoCVendors": "0x314E114Fd9a3Ec60b1c02c492Ac3Ba1ec4378864"
+        "MoCVendors": "0xfaA8Aa71d78F9Dd616106C3631aaFDfA3F948666"
       }
 
     },
@@ -300,7 +300,8 @@
         "CommissionSplitter": "0x44b52Ea0081B7d7DD8050529cFe173fD3853b504",
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "mocOracle": "0x686ca7e1724963a6872784d2a71100906970f0c4",
-        "MoCVendors": "0x99b5aEb18447036Bf1Cd4143B0d007520213A9C1"
+        "MoCVendors": "0x99b5aEb18447036Bf1Cd4143B0d007520213A9C1",
+        "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E"
       }
     },
     "ethTestnet": {

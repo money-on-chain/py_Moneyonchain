@@ -102,6 +102,15 @@ class VENDORSMoCVendors(ContractBase):
 
         return result
 
+    def is_active(self, account, block_identifier: BlockIdentifier = 'latest'):
+        """"""
+
+        account = Web3.toChecksumAddress(account)
+
+        result = self.sc.getIsActive(account, block_identifier=block_identifier)
+
+        return result
+
     def get_vendors(self,
                     formatted: bool = True,
                     block_identifier: BlockIdentifier = 'latest'):
