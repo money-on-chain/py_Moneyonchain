@@ -30,6 +30,23 @@ class GovernedInterface(ContractBase):
 
         return result
 
+    def change_governor(self,
+                        new_governor,
+                        **tx_arguments):
+        """Change the contract's governor. Should be called through the old governance system
+        new_governor New governor address"""
+
+        governor_address = Web3.toChecksumAddress(new_governor)
+
+        tx_args = self.tx_arguments(**tx_arguments)
+
+        tx_receipt = self.sc.changeIGovernor(governor_address, tx_args)
+
+        tx_receipt.info()
+        receipt_to_log(tx_receipt, self.log)
+
+        return tx_receipt
+
 
 class Governed(GovernedInterface):
 

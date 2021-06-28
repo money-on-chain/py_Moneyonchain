@@ -2,8 +2,8 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)

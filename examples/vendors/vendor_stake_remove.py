@@ -26,7 +26,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_vendors = VENDORSMoCVendors(network_manager).from_abi()
 
-staking = 1
+staking = 50
 tx_receipt = moc_vendors.remove_stake(staking)
 if tx_receipt:
     print("Vendor staking removed!")

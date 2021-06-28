@@ -35,7 +35,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-amount = Decimal(300.0)
+amount = Decimal(50.0)
 vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
 print("Reedem Free Doc: {0}".format(amount))
 

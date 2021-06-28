@@ -1,0 +1,32 @@
+{
+    "mocTestnetAlpha3": {
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+        "executeChange": false,
+        "proxyOrder": {
+            "MoC": "01",
+            "MoCConnector": "02",
+            "MoCExchange": "03",
+            "MoCSettlement": "04",
+            "MoCInrate": "05",
+            "MoCState": "06",
+            "MoCVendors": "07",
+            "CommissionSplitter": "08"
+        },
+        "proxyAddresses": {
+            "MoC": "0xb3e21A5b64Cd0a5666BB6C0e40D6d6D5233Be544",
+            "MoCConnector": "",
+            "MoCExchange": "",
+            "MoCSettlement": "",
+            "MoCInrate": "",
+            "MoCState": "",
+            "MoCVendors": "",
+            "CommissionSplitter": ""
+        },
+        "changerAddresses": {
+            "01_MoC": "0xcCe5a746aF58aA620ca3c00310e04Bb767eA0aca"
+        }
+    },
+    "mocTestnetAlpha": {},
+    "mocTestnet": {},
+    "mocMainnet2": {}
+}

@@ -14,8 +14,11 @@
 
 import os
 from web3.types import BlockIdentifier
+from web3 import Web3
 
 from moneyonchain.contract import ContractBase
+from moneyonchain.changers import BaseChanger
+from moneyonchain.governance import Governor
 
 
 class UpgraderChanger(ContractBase):
@@ -114,3 +117,72 @@ class RDOCUpgraderChanger(ContractBase):
         result = self.sc.upgradeDelegator(block_identifier=block_identifier)
 
         return result
+
+
+class MoCIGovernorChanger(BaseChanger):
+    contract_name = 'MoCIGovernorChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCIGovernorChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCIGovernorChanger.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, contract_address, new_governor, execute_change=False, **tx_arguments):
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(new_governor),
+            **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
+
+
+class SkipVotingProcessChange(BaseChanger):
+    contract_name = 'SkipVotingProcessChange'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SkipVotingProcessChange.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/SkipVotingProcessChange.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, voting_machine, i_governor, change_contract, execute_change=False, **tx_arguments):
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(voting_machine),
+            Web3.toChecksumAddress(i_governor),
+            Web3.toChecksumAddress(change_contract),
+            **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
