@@ -18,9 +18,11 @@ from web3.types import BlockIdentifier
 from web3 import Web3
 
 from moneyonchain.contract import ContractBase
+from .governor import OwnableInterface
+from .governed import GovernedInterface
 
 
-class ProxyAdmin(ContractBase):
+class ProxyAdmin(OwnableInterface):
 
     contract_name = 'ProxyAdmin'
     contract_abi = ContractBase.content_abi_file(
@@ -74,3 +76,58 @@ class ProxyAdminInterface(ContractBase):
         return admin_implementation(self.network_manager,
                                     self.contract_address,
                                     block_identifier=block_identifier)
+
+
+class UpgradeDelegator(GovernedInterface):
+
+    contract_name = 'UpgradeDelegator'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UpgradeDelegator.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UpgradeDelegator.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
+
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
+
+        if not contract_address:
+            config_network = network_manager.config_network
+            contract_address = network_manager.options['networks'][config_network]['addresses']['upgradeDelegator']
+
+        super().__init__(network_manager,
+                         contract_name=contract_name,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
+
+    def proxy_admin(self, block_identifier: BlockIdentifier = 'latest'):
+        """Return Proxy admin address"""
+
+        result = self.sc.proxyAdmin(block_identifier=block_identifier)
+
+        return result
+
+    def get_proxy_admin(self,
+                        contract_address,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """Returns the admin of a proxy. Only the admin can query it."""
+
+        result = self.sc.getProxyAdmin(contract_address, block_identifier=block_identifier)
+
+        return result
+
+    def get_proxy_implementation(
+            self,
+            contract_address,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Returns the current implementation of a proxy."""
+
+        result = self.sc.getProxyImplementation(contract_address, block_identifier=block_identifier)
+
+        return result

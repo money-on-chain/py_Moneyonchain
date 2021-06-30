@@ -1,0 +1,36 @@
+{
+    "mocTestnetAlpha3": {
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+        "votingMachineGovernor": "0x165138c5a2888fB5230Ebf5ec277F0d2E5611d03",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
+            "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+            "changer_address": "0x46E5aFfe6Ff10A08A34c28765d3eeE81D1d51903"
+        }
+    },
+    "mocTestnetAlpha": {
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+        "votingMachineGovernor": "0x165138c5a2888fB5230Ebf5ec277F0d2E5611d03",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
+            "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+            "changer_address": ""
+        }
+    },
+    "mocTestnet": {
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+        "votingMachineGovernor": "0x165138c5a2888fB5230Ebf5ec277F0d2E5611d03",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
+            "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+            "changer_address": ""
+        }
+    },
+    "mocMainnet2": {
+        "targetGovernor": "",
+        "executeChange": false
+    }
+}

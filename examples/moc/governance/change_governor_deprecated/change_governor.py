@@ -99,16 +99,19 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 proxy_address = settings[config_network]['proxyAddresses'][contract_name]
 log.info('Contract proxy address {0}...'.format(proxy_address))
-contract_change_governor = Governed(network_manager, contract_address=proxy_address).from_abi()
-log.info("Current Governor: {0}".format(contract_change_governor.governor()))
+#contract_change_governor = Governed(network_manager, contract_address=proxy_address).from_abi()
+#log.info("Current Governor: {0}".format(contract_change_governor.governor()))
 
 new_governor = settings[config_network]['targetGovernor']
 execute_change = settings[config_network]['executeChange']
+upgrade_delegator = settings[config_network]['upgradeDelegator']
+
 log.info("Target New Governor: {0}".format(new_governor))
 
 contract_changer = MoCIGovernorChanger(network_manager)
 
-tx_receipt = contract_changer.constructor(contract_change_governor.address(), new_governor,
+tx_receipt = contract_changer.constructor(upgrade_delegator,
+                                          new_governor,
                                           execute_change=execute_change)
 changer_address = ''
 if tx_receipt:

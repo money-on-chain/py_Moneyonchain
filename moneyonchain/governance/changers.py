@@ -129,12 +129,12 @@ class MoCIGovernorChanger(BaseChanger):
 
     mode = 'MoC'
 
-    def constructor(self, contract_address, new_governor, execute_change=False, **tx_arguments):
+    def constructor(self, upgrade_delegator, new_governor, execute_change=False, **tx_arguments):
 
         self.log.info("Deploying new contract...")
 
         tx_receipt = self.deploy(
-            Web3.toChecksumAddress(contract_address),
+            Web3.toChecksumAddress(upgrade_delegator),
             Web3.toChecksumAddress(new_governor),
             **tx_arguments)
 
