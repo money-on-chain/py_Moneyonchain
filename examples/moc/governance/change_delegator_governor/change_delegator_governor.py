@@ -8,7 +8,7 @@ import json
 from optparse import OptionParser
 
 from moneyonchain.networks import network_manager
-from moneyonchain.governance import MoCIGovernorChanger
+from moneyonchain.governance import UpgradeDelegatorIGovernorChanger
 
 import logging
 import logging.config
@@ -84,7 +84,7 @@ upgrade_delegator = network_manager.options['networks'][config_network]['address
 log.info("Current upgrade delegator: {0}".format(upgrade_delegator))
 log.info("Target New Governor: {0}".format(new_governor))
 
-contract_changer = MoCIGovernorChanger(network_manager)
+contract_changer = UpgradeDelegatorIGovernorChanger(network_manager)
 
 tx_receipt = contract_changer.constructor(upgrade_delegator,
                                           new_governor,

@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger('default')
 
 # Connect to network
-network_manager.connect(connection_network='rskTestnetPublic', config_network='mocTestnetAlpha3')
+network_manager.connect(connection_network='rskTestnetPublic', config_network='mocTestnetAlpha')
 
 contract_moc = MoCSettlement(network_manager).from_abi()
 log.info("Block Span: {0}".format(contract_moc.block_span()))

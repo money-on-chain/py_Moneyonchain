@@ -3,7 +3,7 @@ import os
 from optparse import OptionParser
 
 from moneyonchain.networks import network_manager
-from moneyonchain.governance import Governed, UpgradeDelegator
+from moneyonchain.governance import Governed
 
 import logging
 import logging.config
@@ -64,13 +64,9 @@ for proxy_address in proxy_addresses:
     if not address:
         continue
 
-    upgrade_delegator = UpgradeDelegator(network_manager).from_abi()
-    proxy_admin_address = upgrade_delegator.get_proxy_admin(address)
+    contract_governed = Governed(network_manager, contract_address=address).from_abi()
 
-    log.info("Contract: {0}: {1} Governor: {2} Admin: {3}".format(proxy_address, address, upgrade_delegator.governor(), proxy_admin_address))
-
-    #contract_change_governor = Governed(network_manager, contract_address=address).from_abi()
-    #log.info("Contract: {0}: {1} Governor: {2}".format(proxy_address, address, contract_change_governor.governor()))
+    log.info("Contract: {0}: {1} Governor: {2}".format(proxy_address, address, contract_governed.governor()))
 
 
 # finally disconnect from network

@@ -9,73 +9,61 @@
         "executeChange": true,
         "proxyOrder": {
             "MoC": "01",
-            "MoCConnector": "02",
-            "MoCBProxManager": "03",
-            "MoCBurnout": "04",
-            "MoCSettlement": "05",
-            "MoCConverter": "06",
-            "MoCState": "07",
-            "MoCExchange": "08",
-            "MoCInrate": "09",
-            "CommissionSplitter": "10",
-            "MoCVendors": "11"
+            "MoCBProxManager": "02",
+            "MoCBurnout": "03",
+            "MoCSettlement": "04",
+            "MoCState": "05",
+            "MoCInrate": "06",
+            "CommissionSplitter": "07",
+            "MoCVendors": "08"
         },
         "proxyAddresses": {
             "MoC": "0xb3e21A5b64Cd0a5666BB6C0e40D6d6D5233Be544",
-            "MoCConnector": "0x978aea100a84957dFf465708ccb2C9d93CFA0f94",
             "MoCBProxManager": "0x6390689EdaA8f40bcAF8e76c3762D46cC275a21d",
             "MoCBurnout": "",
             "MoCSettlement": "0x5A7456BAa0333466d7fe872d655Bf068b925D1A0",
-            "MoCConverter": "0xc272dce19FD711AC1072F2d03078305736D6a987",
             "MoCState": "0x731751fBF3b6C42d4B4CaAab26939C9b20e9DDBC",
-            "MoCExchange": "0x780A2C4d0666B4ff0B3Bc57f76752291A2aDD91b",
             "MoCInrate": "0xAf0Bc8CE505955D5228d950a3017A32e81441a44",
             "CommissionSplitter": "0x44b52Ea0081B7d7DD8050529cFe173fD3853b504",
             "MoCVendors": ""
         },
-        "changerAddresses": {
-            "01_MoC": "0xcCe5a746aF58aA620ca3c00310e04Bb767eA0aca",
-            "03_MoCBProxManager": null,
-            "07_MoCState": null,
-            "09_MoCInrate": null,
-            "10_CommissionSplitter": null,
-            "08_MoCExchange": null
-        }
+        "changerAddresses": {}
     },
     "mocTestnetAlpha": {
         "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
         "executeChange": true,
         "proxyOrder": {
             "MoC": "01",
-            "MoCConnector": "02",
-            "MoCBProxManager": "03",
-            "MoCBurnout": "04",
-            "MoCSettlement": "05",
-            "MoCConverter": "06",
-            "MoCState": "07",
-            "MoCExchange": "08",
-            "MoCInrate": "09",
-            "CommissionSplitter": "10",
-            "MoCVendors": "11"
+            "MoCBProxManager": "02",
+            "MoCBurnout": "03",
+            "MoCSettlement": "04",
+            "MoCState": "05",
+            "MoCInrate": "06",
+            "CommissionSplitter": "07",
+            "MoCVendors": "08"
         },
         "proxyAddresses": {
-            "MoC": "",
-            "MoCConnector": "",
-            "MoCBProxManager": "",
+            "MoC": "0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039",
+            "MoCBProxManager": "0x6F6cb4802CB9B0551953b0E6c824f32D5809348D",
             "MoCBurnout": "",
-            "MoCSettlement": "",
-            "MoCConverter": "",
-            "MoCState": "",
-            "MoCExchange": "0x416510F57596b877C5e9845b31CeAa879da26D6a",
-            "MoCInrate": "",
-            "CommissionSplitter": "",
+            "MoCSettlement": "0xF3d40B15DCe0b6257a6A8F62c707621E1e464c1e",
+            "MoCState": "0xfb526c0Ace90f52049691389B040a33D03343eb7",
+            "MoCInrate": "0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c",
+            "CommissionSplitter": "0x9c1e20A0Ea6c71B0AEA47fd8B1E29de208ab7A82",
             "MoCVendors": ""
         },
-        "changerAddresses": {}
+        "changerAddresses": {
+            "01_MoC": null,
+            "02_MoCBProxManager": null,
+            "04_MoCSettlement": null,
+            "05_MoCState": null,
+            "06_MoCInrate": null,
+            "07_CommissionSplitter": null
+        }
     },
     "mocTestnet": {
         "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-        "executeChange": true,
+        "executeChange": false,
         "proxyOrder": {
             "MoC": "01",
             "MoCConnector": "02",

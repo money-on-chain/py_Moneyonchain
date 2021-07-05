@@ -1,7 +1,7 @@
 """
 
-Change IGOVERNOR
-To change the governor of contract.
+Proxy change IGovernor
+To change the governor of proxy contract.
 
 """
 
@@ -10,7 +10,7 @@ import os
 from optparse import OptionParser
 
 from moneyonchain.networks import network_manager
-from moneyonchain.governance import MoCIGovernorChanger, Governed
+from moneyonchain.governance import ProxyAdminIGovernorChanger, Governed
 
 import logging
 import logging.config
@@ -76,7 +76,7 @@ proxy_order = settings[config_network]['proxyOrder'][contract_name]
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/{0}_change_{1}.log'.format(proxy_order, contract_name),
+                    filename='logs/{0}_change_proxy_{1}.log'.format(proxy_order, contract_name),
                     filemode='a')
 
 # set up logging to console
@@ -99,18 +99,18 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 proxy_address = settings[config_network]['proxyAddresses'][contract_name]
 log.info('Contract proxy address {0}...'.format(proxy_address))
-#contract_change_governor = Governed(network_manager, contract_address=proxy_address).from_abi()
-#log.info("Current Governor: {0}".format(contract_change_governor.governor()))
+
+contract_change_governor = Governed(network_manager, contract_address=proxy_address).from_abi()
+log.info("Current Governor: {0}".format(contract_change_governor.governor()))
 
 new_governor = settings[config_network]['targetGovernor']
 execute_change = settings[config_network]['executeChange']
-upgrade_delegator = settings[config_network]['upgradeDelegator']
 
 log.info("Target New Governor: {0}".format(new_governor))
 
-contract_changer = MoCIGovernorChanger(network_manager)
+contract_changer = ProxyAdminIGovernorChanger(network_manager)
 
-tx_receipt = contract_changer.constructor(upgrade_delegator,
+tx_receipt = contract_changer.constructor(proxy_address,
                                           new_governor,
                                           execute_change=execute_change)
 changer_address = ''

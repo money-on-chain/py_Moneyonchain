@@ -119,13 +119,13 @@ class RDOCUpgraderChanger(ContractBase):
         return result
 
 
-class MoCIGovernorChanger(BaseChanger):
-    contract_name = 'MoCIGovernorChanger'
+class UpgradeDelegatorIGovernorChanger(BaseChanger):
+    contract_name = 'UpgradeDelegatorIGovernorChanger'
 
     contract_abi = ContractBase.content_abi_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCIGovernorChanger.abi'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UpgradeDelegatorIGovernorChanger.abi'))
     contract_bin = ContractBase.content_bin_file(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCIGovernorChanger.bin'))
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/UpgradeDelegatorIGovernorChanger.bin'))
 
     mode = 'MoC'
 
@@ -135,6 +135,40 @@ class MoCIGovernorChanger(BaseChanger):
 
         tx_receipt = self.deploy(
             Web3.toChecksumAddress(upgrade_delegator),
+            Web3.toChecksumAddress(new_governor),
+            **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt = governor.execute_change(tx_receipt.contract_address, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
+
+
+class ProxyAdminIGovernorChanger(BaseChanger):
+    contract_name = 'ProxyAdminIGovernorChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyAdminIGovernorChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/ProxyAdminIGovernorChanger.bin'))
+
+    mode = 'MoC'
+
+    def constructor(self, moc_contract, new_governor, execute_change=False, **tx_arguments):
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(
+            Web3.toChecksumAddress(moc_contract),
             Web3.toChecksumAddress(new_governor),
             **tx_arguments)
 

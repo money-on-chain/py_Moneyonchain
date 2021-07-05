@@ -77,6 +77,11 @@ governor_address = settings[config_network]['skipVoting']['governor_address']
 changer_address = settings[config_network]['skipVoting']['changer_address']
 execute_change = settings[config_network]['executeChange']
 
+log.info('Voting machine address {0}...'.format(voting_machine_address))
+log.info('Governor address {0}...'.format(governor_address))
+log.info('Changer address {0}...'.format(changer_address))
+log.info('Execute Change {0}...'.format(execute_change))
+
 tx_receipt = contract.constructor(
     voting_machine_address,
     governor_address,
