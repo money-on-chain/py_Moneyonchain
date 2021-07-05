@@ -16,7 +16,7 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0xe6bc99dda43411187a4B3489105F45e5270ae914"
+            "changer_address": "0x90D2563b385bdC3517c5241B28AE80ECdc6A81F2"
         }
     },
     "mocTestnet": {
