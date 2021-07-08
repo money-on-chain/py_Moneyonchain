@@ -37,7 +37,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 moc_main = VENDORSMoC(network_manager).from_abi()
 
 vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
-amount = Decimal(0.1)
+amount = Decimal(0.01)
 
 print("Reedem BPro: {0}".format(amount))
 

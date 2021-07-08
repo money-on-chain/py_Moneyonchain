@@ -42,7 +42,7 @@
       "app_mode": "MoC",
       "gas_price": 68000000,
       "addresses": {
-        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "governor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d",
@@ -68,7 +68,8 @@
         "PriceFeed": "0x033c1D78Fbc34178A7Ee7fa64Fa6f31fEE8f79C2",
         "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40",
         "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
-        "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab"
+        "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab",
+        "MoCVendors": "0xBecCaF10c33E76B798588dfca0d446BbF11a012E"
       }
 
     },

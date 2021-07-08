@@ -66,31 +66,32 @@
         "executeChange": false,
         "proxyOrder": {
             "MoC": "01",
-            "MoCConnector": "02",
-            "MoCBProxManager": "03",
-            "MoCBurnout": "04",
-            "MoCSettlement": "05",
-            "MoCConverter": "06",
-            "MoCState": "07",
-            "MoCExchange": "08",
-            "MoCInrate": "09",
-            "CommissionSplitter": "10",
-            "MoCVendors": "11"
+            "MoCBProxManager": "02",
+            "MoCBurnout": "03",
+            "MoCSettlement": "04",
+            "MoCState": "05",
+            "MoCInrate": "06",
+            "CommissionSplitter": "07",
+            "MoCVendors": "08"
         },
         "proxyAddresses": {
-            "MoC": "",
-            "MoCConnector": "",
-            "MoCBProxManager": "",
+            "MoC": "0x2820f6d4D199B8D8838A4B26F9917754B86a0c1F",
+            "MoCBProxManager": "0x634b6c45Eb7b1D8Fe0961BB4586bf585aE718A96",
             "MoCBurnout": "",
-            "MoCSettlement": "",
-            "MoCConverter": "",
-            "MoCState": "",
-            "MoCExchange": "0xc03Ac60eBbc01A1f4e9b5bb989F359e5D8348919",
-            "MoCInrate": "",
-            "CommissionSplitter": "",
+            "MoCSettlement": "0x367D283c53f8F10e47424e2AeB102F45eCC49FEa",
+            "MoCState": "0x0adb40132cB0ffcEf6ED81c26A1881e214100555",
+            "MoCInrate": "0x76790f846FAAf44cf1B2D717d0A6c5f6f5152B60",
+            "CommissionSplitter": "0xC003A2e210FA3E2fBdDcf564Fe0E1bbCd93E3B40",
             "MoCVendors": ""
         },
-        "changerAddresses": {}
+        "changerAddresses": {
+            "01_MoC": "0x3Fa764e860c4487C3EFf0059F145C4a97Aa0f026",
+            "02_MoCBProxManager": "0xa02EE5356b2eE548aA89557FA7c3151454ea0631",
+            "04_MoCSettlement": "0xD44E073E57b530A6070AAb219a9152F72463C5Fe",
+            "05_MoCState": "0xaa46842D5e4168ba63c856eC5A272ee4aa57cbaE",
+            "06_MoCInrate": "0x9D704B09Ffd52461CF0829B84D7c0943c36Af83f",
+            "07_CommissionSplitter": "0x574b8FC6d684A5A4F0508B081DC0978b65B5d77f"
+        }
     },
     "mocMainnet2": {}
 }

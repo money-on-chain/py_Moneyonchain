@@ -26,7 +26,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.tokens import MoCToken
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -36,7 +36,9 @@ moc_address = network_manager.options['networks'][config_network]['addresses']['
 moc_token_address = network_manager.options['networks'][config_network]['addresses']['MoCToken']
 
 #account_address = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3'
-account_address = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
+#account_address = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
+account_address = '0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD'
+
 amount_allow = 0
 
 moc_token = MoCToken(network_manager, contract_address=moc_token_address).from_abi()

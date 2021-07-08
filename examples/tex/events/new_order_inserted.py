@@ -57,8 +57,8 @@ dex = MoCDecentralizedExchange(network_manager).from_abi()
 
 events_functions = 'NewOrderInserted'
 hours_delta = 0
-from_block = 3438823  # from block start
-to_block = 3458823  # block end or 0 to last block
+from_block = 2871700  # from block start
+to_block = 3497162  # block end or 0 to last block
 block_steps = 1000
 
 last_block_number = int(network_manager.block_number)

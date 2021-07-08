@@ -12,7 +12,7 @@ log = logging.getLogger('default')
 
 
 connection_network='rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 log.info('Connecting enviroment {0}...'.format(config_network))
 
@@ -34,6 +34,7 @@ network_manager.connect()
 contract_moc = MoC(network_manager).from_abi()
 contract_stopper = MoCStopper(network_manager).from_abi()
 
+log.info("MoC Contract: {0}".format(contract_moc.address()))
 log.info("Paused: {0}".format(contract_moc.paused()))
 log.info("Stoppable: {0}".format(contract_moc.stoppable()))
 log.info("Stopper: {0}".format(contract_moc.stopper()))

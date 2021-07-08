@@ -131,3 +131,31 @@ class UpgradeDelegator(GovernedInterface):
         result = self.sc.getProxyImplementation(contract_address, block_identifier=block_identifier)
 
         return result
+
+
+class AdminUpgradeabilityProxy(ContractBase):
+
+    contract_name = 'AdminUpgradeabilityProxy'
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/AdminUpgradeabilityProxy.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/AdminUpgradeabilityProxy.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18
+
+    def __init__(self,
+                 network_manager,
+                 contract_name=None,
+                 contract_address=None,
+                 contract_abi=None,
+                 contract_bin=None):
+
+        if not contract_address:
+            raise Exception("No contract address!")
+
+        super().__init__(network_manager,
+                         contract_name=contract_name,
+                         contract_address=contract_address,
+                         contract_abi=contract_abi,
+                         contract_bin=contract_bin)
