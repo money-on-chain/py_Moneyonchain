@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoCSettlementChanger
+from moneyonchain.moc_vendors import MoCSettlementChanger
 
 
 import logging
@@ -8,7 +8,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/01_changers_settlement.log',
+                    filename='logs/changers_settlement_blockspan.log',
                     filemode='a')
 
 # set up logging to console
@@ -29,13 +29,12 @@ config_network = 'mocTestnet'
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-contract = MoCSettlementChanger(network_manager)
+# changer contract address
+changer_address = '0x614a029B926f87CaA47a2c658C2f3B08c74694dB'
 
-tx_receipt = contract.constructor(90000, execute_change=False)
-if tx_receipt:
-    log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
-else:
-    log.info("Error deploying changer")
+contract_changer = MoCSettlementChanger(network_manager, contract_address=changer_address).from_abi()
+
+print("Block span to change: {0}".format(contract_changer.block_span()))
 
 # finally disconnect from network
 network_manager.disconnect()

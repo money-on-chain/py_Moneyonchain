@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoCSettlementChanger
+from moneyonchain.moc_vendors import MoCSettlementChanger
 
 
 import logging
@@ -8,7 +8,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/01_changers_settlement.log',
+                    filename='logs/changers_settlement_blockspan.log',
                     filemode='a')
 
 # set up logging to console

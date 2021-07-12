@@ -18,4 +18,4 @@ from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, 
     MoCVendorsVendorReceivedMarkup,\
     MoCContractLiquidated
 from .changers import MoCStateMoCPriceProviderChanger, MoCStateLiquidationEnabledChanger, MoCVendorsChanger, \
-    MoCInrateCommissionsChanger
+    MoCInrateCommissionsChanger, MoCSettlementChanger
