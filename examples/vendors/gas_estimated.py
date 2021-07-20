@@ -10,10 +10,10 @@ Where replace with your PK, and also you need to have funds in this account
 
 from decimal import Decimal
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoC
+from moneyonchain.moc_vendors import VENDORSMoC
 
-connection_network = 'rskMainnetPublic'
-config_network = 'mocMainnet2'
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(
@@ -21,7 +21,7 @@ network_manager.connect(
     config_network=config_network)
 
 
-moc_main = MoC(network_manager).from_abi()
+moc_main = VENDORSMoC(network_manager).from_abi()
 
 amount_want_to_mint = Decimal(0.0001)
 

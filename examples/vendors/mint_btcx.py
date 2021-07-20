@@ -26,7 +26,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -34,7 +34,8 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 moc_main = VENDORSMoC(network_manager).from_abi()
 
-vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
+#vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
+vendor_account = Web3.toChecksumAddress('0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD')
 amount_want_to_mint = Decimal(0.001)
 
 # total_amount, commission_value, markup_value, interest_value = moc_main.amount_mint_btc2x(

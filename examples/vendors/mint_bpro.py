@@ -26,7 +26,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+config_network = 'mocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -35,7 +35,8 @@ moc_main = VENDORSMoC(network_manager).from_abi()
 
 amount_want_to_mint = Decimal(0.01)
 
-vendor_account = Web3.toChecksumAddress('0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD')
+#0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD
+vendor_account = Web3.toChecksumAddress('0xDda74880D638451e6D2c8D3fC19987526A7Af730')
 
 total_amount, commission_value, markup_value = moc_main.amount_mint_bpro(
     amount=amount_want_to_mint,

@@ -329,6 +329,12 @@ class VENDORSMoC(MoC):
         if precision:
             amount = amount * self.precision
 
+        # On fail add default account for estimate gas consumption
+        try:
+            self.network_manager.accounts[self.network_manager.default_account]
+        except IndexError:
+            self.network_manager.accounts.add('0xca751356c37a98109fd969d8e79b42d768587efc6ba35e878bc8c093ed95d8a9')
+
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
@@ -344,6 +350,12 @@ class VENDORSMoC(MoC):
 
         if precision:
             amount = amount * self.precision
+
+        # On fail add default account for estimate gas consumption
+        try:
+            self.network_manager.accounts[self.network_manager.default_account]
+        except IndexError:
+            self.network_manager.accounts.add('0xca751356c37a98109fd969d8e79b42d768587efc6ba35e878bc8c093ed95d8a9')
 
         tx_args = self.tx_arguments(**tx_arguments)
 
@@ -362,6 +374,12 @@ class VENDORSMoC(MoC):
 
         if precision:
             amount = amount * self.precision
+
+        # On fail add default account for estimate gas consumption
+        try:
+            self.network_manager.accounts[self.network_manager.default_account]
+        except IndexError:
+            self.network_manager.accounts.add('0xca751356c37a98109fd969d8e79b42d768587efc6ba35e878bc8c093ed95d8a9')
 
         tx_args = self.tx_arguments(**tx_arguments)
 
@@ -393,7 +411,6 @@ class VENDORSMoC(MoC):
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
-
 
         tx_args = self.tx_arguments(**tx_arguments)
         tx_args['amount'] = int(total_amount * self.precision)
