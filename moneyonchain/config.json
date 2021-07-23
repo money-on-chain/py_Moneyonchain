@@ -334,6 +334,36 @@
         "PriceFeed": "0x87079F2669192626Ca572A1264f11DAF2d40AA84",
         "ProxyMoCMedianizer": "0x84c260568cFE148dBcFb4C8cc62C4e0b6d998F91"
       }
+    },
+    "tetherTestnet": {
+      "app_mode": "USDT",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
+        "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
+        "oracle": "0xB4A44672b55d66fAFA23b4F9Ba28c9C55F76fbfB",
+        "FeedFactory": "0xe1F5EdE6E949F74A3015bEC36317F3F89ccf3962",
+        "MoCMedianizer": "0xB4A44672b55d66fAFA23b4F9Ba28c9C55F76fbfB",
+        "PriceFeed": "0x15c7cF2c90695176dadB6c19bE34a2588Bd4eA53",
+        "ProxyMoCMedianizer": "0xB48042419F737f831E93605048B85D1964822269"
+      }
+    },
+    "tetherMainnet": {
+      "app_mode": "USDT",
+      "gas_price": 60000000,
+      "addresses": {
+        "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
+        "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
+        "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
+        "oracle": "0x5741d55C96176eEca86316b5840Cb208784d5188",
+        "FeedFactory": "0x85917Be893fC2b6A1c5Dd7fc5a63Ce8592537169",
+        "MoCMedianizer": "0x5741d55C96176eEca86316b5840Cb208784d5188",
+        "PriceFeed": "0xda6BA2D0162f1C5f3E1F5722E527DB53bA24aD31",
+        "ProxyMoCMedianizer": "0x45c907727eD15Bd901560Ff439293E6b89de877e"
+      }
     }
 
   }
