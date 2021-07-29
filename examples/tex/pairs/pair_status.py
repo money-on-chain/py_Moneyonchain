@@ -22,14 +22,34 @@ network_manager.connect(connection_network=connection_network, config_network=co
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['DOC/USDT']
+settings_pair = settings[config_network]['WRBTC/MOC']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']
 
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
+print("TICK STATUS")
+print("==========")
 print(dex.token_pairs_status(base_token, secondary_token))
+print("TICK STAGE")
+print("==========")
+print(dex.tick_stage((base_token, secondary_token)))
+print("SELL ORDER LENGHT")
+print("=================")
+print(dex.sell_orders_length((base_token, secondary_token)))
+print("BUY ORDER LENGHT")
+print("=================")
+print(dex.buy_orders_length((base_token, secondary_token)))
+
+print("PENDING SELL ORDER LENGHT")
+print("=================")
+print(dex.pending_sell_orders_length((base_token, secondary_token)))
+print("PENDING  BUY ORDER LENGHT")
+print("=================")
+print(dex.pending_buy_orders_length((base_token, secondary_token)))
+
+
 
 # finally disconnect from network
 network_manager.disconnect()

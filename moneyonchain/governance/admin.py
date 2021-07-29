@@ -18,6 +18,7 @@ from web3.types import BlockIdentifier
 from web3 import Web3
 
 from moneyonchain.contract import ContractBase
+from moneyonchain.events import BaseEvent
 from .governor import OwnableInterface
 from .governed import GovernedInterface
 
@@ -159,3 +160,31 @@ class AdminUpgradeabilityProxy(ContractBase):
                          contract_address=contract_address,
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
+
+
+class UpgradeabilityProxyInterface(ContractBase):
+    pass
+
+
+class EventUpgradeabilityProxyUpgraded(BaseEvent):
+    name = "UpgradeabilityProxyUpgraded"
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp',  'Implementation']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['implementation'] = self.event['implementation']
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['implementation']
+                ]
