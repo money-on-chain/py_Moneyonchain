@@ -1,5 +1,6 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoCSettlementChanger
+from moneyonchain.governance import BatchChanger
+from moneyonchain.moc import MoCSettlement
 
 
 import logging
@@ -8,7 +9,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/01_changers_settlement.log',
+                    filename='logs/batch_changer.log',
                     filemode='a')
 
 # set up logging to console
@@ -29,9 +30,22 @@ config_network = 'mocTestnetAlpha'
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-contract = MoCSettlementChanger(network_manager)
+targets_to_execute = list()
+data_to_execute = list()
 
-tx_receipt = contract.constructor(90000, execute_change=False)
+settlement = MoCSettlement(network_manager).from_abi()
+
+targets_to_execute.append(settlement.address())
+data_to_execute.append(settlement.sc.setBlockSpan.encode_input(7000))
+
+log.info("Targets to execute")
+log.info(targets_to_execute)
+log.info("Data to execute")
+log.info(data_to_execute)
+
+contract = BatchChanger(network_manager)
+
+tx_receipt = contract.constructor(targets_to_execute, data_to_execute, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:

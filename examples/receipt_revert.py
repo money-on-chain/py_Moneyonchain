@@ -13,7 +13,7 @@ config_network = 'mocTestnetAlpha'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-tx_id = '0x14b487543f60dc534a83204965466d3665cebe5745ee5c5cebb00b65a9b49ee4'
+tx_id = '0xeb447d9d34efd2713ab89f2fa7d4faa02795e64a66437139bb595097a9c3f9f7'
 tx_receipt = TransactionReceipt(tx_id, trace_enabled=True)
 print(tx_receipt.status)
 #tx_receipt.info()

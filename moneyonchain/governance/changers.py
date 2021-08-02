@@ -220,3 +220,52 @@ class SkipVotingProcessChange(BaseChanger):
             self.log.info("Change successfull!")
 
         return tx_receipt
+
+
+class BatchChanger(BaseChanger):
+    contract_name = 'BatchChanger'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BatchChanger.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/BatchChanger.bin'))
+
+    mode = 'MoC'
+
+    def schedule(self, targets_to_execute, data_to_execute, **tx_arguments):
+
+        tx_args = self.tx_arguments(**tx_arguments)
+        tx_receipt = self.sc.schedule(targets_to_execute, data_to_execute, tx_args)
+
+        return tx_receipt
+
+    def constructor(self, targets_to_execute, data_to_execute, execute_change=False, **tx_arguments):
+
+        self.log.info("Deploying new contract...")
+
+        tx_receipt = self.deploy(
+            **tx_arguments)
+
+        tx_receipt.info()
+        tx_receipt.info_to_log()
+
+        deployed_contract = tx_receipt.contract_address
+
+        self.log.info("Deployed contract done!")
+        self.log.info("Changer Contract Address: {address}".format(address=deployed_contract))
+
+        # load deployed contract
+        self.contract_address = deployed_contract
+        self.from_abi()
+        tx_receipt_schedule = self.schedule(targets_to_execute, data_to_execute, **tx_arguments)
+        tx_receipt_schedule.info()
+
+        self.log.info("Scheduled changes done!")
+
+        if execute_change:
+            self.log.info("Executing change....")
+            governor = Governor(self.network_manager).from_abi()
+            tx_receipt_execute = governor.execute_change(deployed_contract, **tx_arguments)
+            self.log.info("Change successfull!")
+
+        return tx_receipt
