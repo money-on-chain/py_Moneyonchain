@@ -27,10 +27,10 @@ network_manager.connect(connection_network=connection_network, config_network=co
 #oracle_address = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
 #oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
 #oracle_address = '0x4A4D3130905Ec11C648D10EA494a0F0FD95a13Ad'
-
 #oracle_address = '0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4'
-oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
+#oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
+oracle_address = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
 
 oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
