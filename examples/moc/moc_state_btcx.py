@@ -5,7 +5,7 @@ from web3 import Web3
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+config_network = 'mocTestnetAlpha'
 
 # init network manager
 # connection network is the brownie connection network
@@ -52,6 +52,11 @@ print("BproX Tec Price: {0}".format(moc_state.btc2x_tec_price()))
 print("Days to settlement: {0}".format(moc_state.days_to_settlement()))
 print("coverage: {0}".format(moc_state.coverage(bucket_x2)))
 print("Is Liquidation: {0}".format(moc_state.is_liquidation()))
+
+print("BproX rBTC: {0}".format(moc_state.bucket_nbtc(bucket_x2)))
+print("BproX DOC: {0}".format(moc_state.bucket_ndoc(bucket_x2)))
+print("BproX BTCX: {0}".format(moc_state.bucket_nbpro(bucket_x2)))
+
 
 
 print("Is calculated: {0}".format(moc_state.is_calculate_ema()))
