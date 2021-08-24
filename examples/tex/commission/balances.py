@@ -5,7 +5,7 @@ from rich.console import Console
 from rich.table import Table
 
 from moneyonchain.networks import network_manager
-from moneyonchain.tokens import DoCToken, WRBTCToken, BProToken, RIFDoC, RIF, RIFPro
+from moneyonchain.tokens import DoCToken, WRBTCToken, BProToken, RIFDoC, RIF, RIFPro, MoCToken
 
 
 def options_from_settings(filename='settings.json'):
@@ -44,7 +44,7 @@ table.add_column("Block N")
 
 token_name = 'WRBTC'
 token = settings[config_network][token_name]
-token_sc = WRBTCToken(network_manager, contract_address=token)
+token_sc = WRBTCToken(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -52,7 +52,7 @@ table.add_row(
 
 token_name = 'DOC'
 token = settings[config_network][token_name]
-token_sc = DoCToken(network_manager, contract_address=token)
+token_sc = DoCToken(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -60,7 +60,7 @@ table.add_row(
 
 token_name = 'BPRO'
 token = settings[config_network][token_name]
-token_sc = BProToken(network_manager, contract_address=token)
+token_sc = BProToken(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -68,7 +68,7 @@ table.add_row(
 
 token_name = 'RDOC'
 token = settings[config_network][token_name]
-token_sc = RIFDoC(network_manager, contract_address=token)
+token_sc = RIFDoC(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -76,7 +76,7 @@ table.add_row(
 
 token_name = 'RIF'
 token = settings[config_network][token_name]
-token_sc = RIF(network_manager, contract_address=token)
+token_sc = RIF(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -84,7 +84,7 @@ table.add_row(
 
 token_name = 'RIFP'
 token = settings[config_network][token_name]
-token_sc = RIFPro(network_manager, contract_address=token)
+token_sc = RIFPro(network_manager, contract_address=token).from_abi()
 
 table.add_row(
     token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
@@ -92,6 +92,18 @@ table.add_row(
 
 
 console.print(table)
+
+token_name = 'MOC'
+token = settings[config_network][token_name]
+token_sc = MoCToken(network_manager, contract_address=token).from_abi()
+
+table.add_row(
+    token_name, str(token_sc.balance_of(account)), token, str(block_identifier)
+)
+
+
+console.print(table)
+
 
 # finally disconnect from network
 network_manager.disconnect()

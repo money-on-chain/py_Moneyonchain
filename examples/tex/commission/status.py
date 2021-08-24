@@ -75,4 +75,9 @@ token_name = 'RIFP'
 token = settings[config_network][token_name]
 display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
 
+token_name = 'MOC'
+token = settings[config_network][token_name]
+display_table.append([token_name, str(dex_commission.exchange_commissions(token, block_identifier=block_identifier)), token, str(block_identifier)])
+
+
 print(tabulate(display_table, headers=titles, tablefmt="pipe"))
