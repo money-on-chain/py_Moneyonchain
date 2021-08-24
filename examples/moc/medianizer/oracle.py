@@ -1,5 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.medianizer import MoCMedianizer
+from moneyonchain.medianizer import MoCMedianizer, MoCGovernedAuthority
 
 import logging
 import logging.config
@@ -30,12 +30,19 @@ network_manager.connect(connection_network=connection_network, config_network=co
 #oracle_address = '0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4'
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
 #oracle_address = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
-oracle_address = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
+#oracle_address = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
+oracle_address = '0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4'
 
 oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 #oracle = MoCMedianizer(connection_manager)
 print(oracle.peek())
+
+authority_address = oracle.authority()
+print(authority_address)
+auth = MoCGovernedAuthority(network_manager, contract_address=authority_address).from_abi()
+print(auth.governor())
+print(oracle.owner())
 
 
 # finally disconnect from network

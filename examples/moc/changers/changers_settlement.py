@@ -23,7 +23,7 @@ log.addHandler(console)
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnetAlpha3'
 
 
 # Connect to network
@@ -31,7 +31,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = MoCSettlementChanger(network_manager)
 
-tx_receipt = contract.constructor(86400, execute_change=True)
+tx_receipt = contract.constructor(586400, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:

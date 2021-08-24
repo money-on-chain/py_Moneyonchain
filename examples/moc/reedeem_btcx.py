@@ -13,7 +13,7 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+config_network = 'mocTestnetAlpha3'
 
 # init network manager
 # connection network is the brownie connection network
@@ -31,7 +31,7 @@ network_manager.connect()
 
 moc_main = MoC(network_manager).from_abi()
 
-amount = Decimal(0.00008)
+amount = Decimal(0.000001)
 print("Reedem BTC2x: {0}".format(amount))
 
 # This transaction is not async, you have to wait to the transaction is mined

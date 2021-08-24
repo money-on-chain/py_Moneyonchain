@@ -25,7 +25,9 @@ network_manager.connect(connection_network=connection_network, config_network=co
 #oracle_address = '0x9315AFD6aEc0bb1C1FB3fdcdC2E43797B0A61853'
 #oracle_address = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
 #oracle_address = '0xCEE08e06617f8b5974Db353E2c8C66424F91c42A'
-oracle_address = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
+#oracle_address = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
+oracle_address = '0xb8deE36b3488E205aB8E5Fd2502e4104917F46FF'
+
 oracle = RDOCMoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 print(oracle.peek())

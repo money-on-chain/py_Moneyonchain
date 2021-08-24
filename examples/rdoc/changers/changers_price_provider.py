@@ -33,9 +33,10 @@ contract = RDOCPriceProviderChanger(network_manager)
 #price_provider = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
 #price_provider = '0x9315AFD6aEc0bb1C1FB3fdcdC2E43797B0A61853'
 ##price_provider = '0xb856Ca7c722cfb202D81c55DC7925e02ed3f0A2F'
-price_provider = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
 #price_provider = '0x987ccC60c378a61d167B6DD1EEF7613c6f63938f'
 #price_provider = '0xDC3551f16FfDeBAa3Cb8D3b6C16d2A5bB9646dA4'
+#price_provider = '0x9d4b2c05818A0086e641437fcb64ab6098c7BbEc'
+price_provider = '0xb8deE36b3488E205aB8E5Fd2502e4104917F46FF'
 tx_receipt = contract.constructor(price_provider, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))

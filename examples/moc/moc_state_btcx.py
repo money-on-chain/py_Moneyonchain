@@ -5,7 +5,7 @@ from web3 import Web3
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnetAlpha3'
 
 # init network manager
 # connection network is the brownie connection network

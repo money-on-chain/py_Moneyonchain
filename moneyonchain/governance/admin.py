@@ -167,7 +167,7 @@ class UpgradeabilityProxyInterface(ContractBase):
 
 
 class EventUpgradeabilityProxyUpgraded(BaseEvent):
-    name = "UpgradeabilityProxyUpgraded"
+    name = "Upgraded"
 
     @staticmethod
     def columns():

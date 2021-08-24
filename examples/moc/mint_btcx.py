@@ -12,7 +12,7 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+config_network = 'mocTestnetAlpha3'
 
 # init network manager
 # connection network is the brownie connection network

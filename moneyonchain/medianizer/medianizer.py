@@ -73,6 +73,20 @@ class MoCMedianizer(ContractBase):
 
         return result
 
+    def authority(self, block_identifier: BlockIdentifier = 'latest'):
+        """ authority address """
+
+        result = self.sc.authority(block_identifier=block_identifier)
+
+        return result
+
+    def owner(self, block_identifier: BlockIdentifier = 'latest'):
+        """ owner address """
+
+        result = self.sc.owner(block_identifier=block_identifier)
+
+        return result
+
     def set_min(self,
                 minimum,
                 **tx_arguments):

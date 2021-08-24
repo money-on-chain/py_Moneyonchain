@@ -629,6 +629,21 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "contract IGovernor",
+          "name": "_governor",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
           "components": [
             {
               "internalType": "address",
@@ -694,21 +709,6 @@
           "internalType": "struct MoCInrateStructs.InitializeParams",
           "name": "params",
           "type": "tuple"
-        }
-      ],
-      "name": "initialize",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "internalType": "contract IGovernor",
-          "name": "_governor",
-          "type": "address"
         }
       ],
       "name": "initialize",
@@ -1040,6 +1040,27 @@
         }
       ],
       "name": "calcFinalRedeemInterestValue",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "rbtcAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "calcCommissionValue",
       "outputs": [
         {
           "internalType": "uint256",

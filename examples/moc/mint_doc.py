@@ -13,7 +13,7 @@ from moneyonchain.networks import NetworkManager
 from moneyonchain.moc import MoC
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+config_network = 'mocTestnetAlpha3'
 
 # init network manager
 # connection network is the brownie connection network
@@ -32,7 +32,7 @@ network_manager.connect()
 
 moc_main = MoC(network_manager).from_abi()
 
-amount_want_to_mint = Decimal(0.001)
+amount_want_to_mint = Decimal(0.0001)
 
 total_amount, commission_value = moc_main.amount_mint_doc(amount_want_to_mint)
 print("To mint {0} RBTC in DOC need {1} RBTC. Commision {2}".format(format(amount_want_to_mint, '.18f'),
