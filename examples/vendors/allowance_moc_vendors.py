@@ -39,7 +39,7 @@ moc_token_address = network_manager.options['networks'][config_network]['address
 #account_address = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
 account_address = '0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD'
 
-amount_allow = 0
+amount_allow = 30000
 
 moc_token = MoCToken(network_manager, contract_address=moc_token_address).from_abi()
 

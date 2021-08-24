@@ -21,7 +21,7 @@ from moneyonchain.moc_vendors import VENDORSMoCState
 
 
 connection_network='rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnetAlpha3'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect

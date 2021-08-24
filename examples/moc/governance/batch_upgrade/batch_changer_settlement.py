@@ -9,7 +9,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/batch_changer.log',
+                    filename='logs/batch_changer_settlement.log',
                     filemode='a')
 
 # set up logging to console
