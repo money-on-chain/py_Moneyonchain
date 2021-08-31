@@ -103,7 +103,8 @@
         "PriceFeed": "0xfE05Ee3d651670F807Db7dD56e1E0FCBa29B234a",
         "CommissionSplitter": "0xa5467535851263122ef1476e24C529CFc6CFc086",
         "MoCOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
-        "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10"
+        "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10",
+        "MoCVendors": "0x2d442aA5D391475b6Af3ad361eA3b9818fb35BcA"
       }
     },
     "rdocTestnetAlpha": {
