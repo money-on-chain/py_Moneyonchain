@@ -25,19 +25,22 @@ from decimal import Decimal
 from moneyonchain.networks import network_manager
 from moneyonchain.tokens import MoCToken
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 moc_vendors_address = network_manager.options['networks'][config_network]['addresses']['MoCVendors']
 moc_address = network_manager.options['networks'][config_network]['addresses']['MoC']
-account_address = '0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD'
+#account_address = '0xbB3552267f52B0F06BefBD1bd587E3dBFc7d06BD'
 #account_address = '0xDda74880D638451e6D2c8D3fC19987526A7Af730'
 #account_address = '0xCD8a1C9aCC980Ae031456573e34Dc05CD7dAE6e3'
+#account_address = '0xf69287F5Ca3cC3C6d3981f2412109110cB8af076'
+account_address = '0xC61820bFB8F87391d62Cd3976dDc1d35e0cf7128'
 
-moc_token_address = '0x45A97b54021A3F99827641AFE1bFae574431E6ab'
+moc_token_address = '0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10'
+#moc_token_address = '0x45A97b54021A3F99827641AFE1bFae574431E6ab'
 #moc_token_address = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635'
 amount_allow = 0
 

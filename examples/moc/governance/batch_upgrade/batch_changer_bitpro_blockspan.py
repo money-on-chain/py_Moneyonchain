@@ -1,6 +1,6 @@
 from moneyonchain.networks import network_manager
 from moneyonchain.governance import BatchChanger
-from moneyonchain.moc_vendors import VENDORSMoCSettlement
+from moneyonchain.moc_vendors import VENDORSMoCInrate
 
 
 import logging
@@ -33,10 +33,10 @@ network_manager.connect(connection_network=connection_network, config_network=co
 targets_to_execute = list()
 data_to_execute = list()
 
-settlement = VENDORSMoCSettlement(network_manager).from_abi()
+contract_moc_inrate = VENDORSMoCInrate(network_manager).from_abi()
 
-targets_to_execute.append(settlement.address())
-data_to_execute.append(settlement.sc.setBlockSpan.encode_input(300))
+targets_to_execute.append(contract_moc_inrate.address())
+data_to_execute.append(contract_moc_inrate.sc.setBitProInterestBlockSpan.encode_input(40))
 
 log.info("Targets to execute")
 log.info(targets_to_execute)

@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-connection_network = 'rskMainnetPublic'
-config_network = 'rdocMainnet'
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
 
 # Connect to network
@@ -28,6 +28,9 @@ print(splitter.moc_address())
 
 print("Reserve Address")
 print(splitter.reserve_address())
+
+print("Proportion:")
+print(splitter.moc_proportion())
 
 # finally disconnect from network
 network_manager.disconnect()

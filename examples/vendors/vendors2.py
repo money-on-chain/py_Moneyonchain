@@ -17,8 +17,8 @@ console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4
 from moneyonchain.networks import network_manager
 from moneyonchain.moc_vendors import VENDORSMoCVendors
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
