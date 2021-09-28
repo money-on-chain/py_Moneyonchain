@@ -13,6 +13,8 @@
 """
 
 import os
+from web3 import Web3
+from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
 from moneyonchain.rrc20 import RRC20MoCInrate
@@ -29,3 +31,135 @@ class RDOCMoCInrate(RRC20MoCInrate):
     precision = 10 ** 18
     mode = 'RRC20'
     project = 'RDoC'
+
+    def commision_rate(self,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+        """Gets commision rate"""
+
+        raise Exception('DEPRECATED')
+
+    def commission_rate_by_transaction_type(
+            self,
+            tx_type,
+            formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Gets commision rate by transaction type from mapping"""
+
+        result = self.sc.commissionRatesByTxType(tx_type, block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calc_commission_value(
+            self,
+            amount,
+            tx_type,
+            formatted: bool = True):
+        """ Calc commission value amount in ether float"""
+
+        result = self.sc.calcCommissionValue(int(amount * self.precision), tx_type)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calculate_vendor_markup(
+            self,
+            vendor_account,
+            amount,
+            formatted: bool = True):
+        """ Calc vendor markup in ether float"""
+
+        result = self.sc.calculateVendorMarkup(vendor_account, int(amount * self.precision))
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def tx_type_mint_riskpro_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_RISKPRO_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_riskpro_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_RISKPRO_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_mint_stabletoken_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_STABLETOKEN_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_stabletoken_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_STABLETOKEN_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_mint_riskprox_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_RISKPROX_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_riskprox_fees_reserve(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_RISKPROX_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_mint_riskpro_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_RISKPRO_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_riskpro_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_RISKPRO_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_mint_stabletoken_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_STABLETOKEN_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_stabletoken_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_STABLETOKEN_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_mint_riskprox_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.MINT_RISKPROX_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    def tx_type_redeem_riskprox_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+        result = self.sc.REDEEM_RISKPROX_FEES_MOC(block_identifier=block_identifier)
+
+        return result

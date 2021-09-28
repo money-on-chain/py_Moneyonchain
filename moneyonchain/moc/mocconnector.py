@@ -29,3 +29,25 @@ class MoCConnector(MoCConnectorBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
+
+    def contracts_addresses(self):
+
+        d_addresses = dict()
+        d_addresses['MoC'] = self.sc.moc()
+        d_addresses['MoCState'] = self.sc.mocState()
+        d_addresses['MoCConverter'] = self.sc.mocConverter()
+        d_addresses['MoCSettlement'] = self.sc.mocSettlement()
+        d_addresses['MoCExchange'] = self.sc.mocExchange()
+        d_addresses['MoCInrate'] = self.sc.mocInrate()
+        if self.mode == 'MoC':
+            d_addresses['DoCToken'] = self.sc.docToken()
+            d_addresses['BProToken'] = self.sc.bproToken()
+            d_addresses['MoCBProxManager'] = self.sc.bproxManager()
+        else:
+            d_addresses['MoCBurnout'] = self.sc.mocBurnout()
+            d_addresses['DoCToken'] = self.sc.stableToken()
+            d_addresses['BProToken'] = self.sc.riskProToken()
+            d_addresses['MoCBProxManager'] = self.sc.riskProxManager()
+            d_addresses['ReserveToken'] = self.sc.reserveToken()
+
+        return d_addresses

@@ -23,7 +23,7 @@ from moneyonchain.transaction import receipt_to_log
 from .utils import array_to_dictionary
 
 
-class VENDORSMoCVendors(ContractBase):
+class MoCVendors(ContractBase):
     contract_name = 'MoCVendors'
 
     contract_abi = ContractBase.content_abi_file(

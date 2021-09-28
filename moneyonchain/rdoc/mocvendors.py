@@ -22,7 +22,7 @@ from moneyonchain.governance import ProxyAdmin
 from .utils import array_to_dictionary
 
 
-class VENDORSRDOCMoCVendors(ContractBase):
+class RDOCMoCVendors(ContractBase):
     contract_name = 'MoCVendors'
 
     contract_abi = ContractBase.content_abi_file(
