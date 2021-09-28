@@ -1,5 +1,5 @@
-web3==5.23.0
-eth-brownie==1.16.2
+web3==5.23.1
+eth-brownie==1.16.4
 setuptools==40.8.0
 PyYAML==5.4.1
 tabulate

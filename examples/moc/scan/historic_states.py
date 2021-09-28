@@ -12,7 +12,7 @@ import csv
 import time
 
 connection_network = 'rskMainnetPublic'
-config_network = 'mocMainnet2'
+config_network = 'rdocMainnet'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect
@@ -23,10 +23,10 @@ if network_manager.options['networks'][config_network]['app_mode'] == 'MoC':
 else:
     moc_state = RDOCMoCState(network_manager).from_abi()
 
-from_block = 2685121  # can be manually setting
-to_block = 3227045  # can be manually setting
+from_block = 3710582  # can be manually setting
+to_block = 3710683  # can be manually setting
 block_steps = 10000
-block_skip = 1440
+block_skip = 1
 hours_delta = 0
 last_block_number = int(network_manager.block_number)
 bucket_x2 = moc_state.bucket_x2()
