@@ -17,7 +17,7 @@ console> brownie networks add RskNetwork rskMainnetLocal host=http://localhost:4
 from web3 import Web3
 
 from moneyonchain.networks import network_manager
-from moneyonchain.moc_vendors import VENDORSMoCState
+from moneyonchain.moc import MoCState
 
 
 connection_network='rskMainnetPublic'
@@ -27,7 +27,7 @@ config_network = 'mocMainnet2'
 # config network is our enviroment we want to connect
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-moc_state = VENDORSMoCState(network_manager).from_abi()
+moc_state = MoCState(network_manager).from_abi()
 
 bucket_x2 = moc_state.bucket_x2()
 bucket_c0 = moc_state.bucket_c0()

@@ -2,10 +2,8 @@ from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCState
 
 
-connection_network = 'rskMainnetPublic'
-config_network = 'rdocMainnet'
-
-
+connection_network = 'rskTestnetPublic'
+config_network = 'rdocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -87,6 +85,18 @@ print("Bucket NDOC: {0}".format(moc_state.bucket_ndoc(bucket_c0, formatted=False
 print("RDOC Totaly: {0}".format(moc_state.doc_total_supply(formatted=False)))
 print("Bucket NBTC: {0}".format(moc_state.bucket_nbtc(bucket_c0, formatted=False)))
 print("RIF in sysm: {0}".format(moc_state.rbtc_in_system(formatted=False)))
+
+
+print()
+print("Vendors STATS:")
+print("==============")
+print("MoC Price: {0}".format(moc_state.moc_price()))
+print("MoC Price Provider: {0}".format(moc_state.moc_price_provider()))
+print("MoC Token: {0}".format(moc_state.moc_token()))
+print("MoC Vendors: {0}".format(moc_state.moc_vendors()))
+print("Protected: {0}".format(moc_state.protected()))
+print("Liquidation enabled: {0}".format(moc_state.liquidation_enabled()))
+
 
 
 # finally disconnect from network
