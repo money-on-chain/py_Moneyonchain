@@ -1,5 +1,4 @@
 from moneyonchain.rdoc import RDOCMoC as VENDORSRDOCMoC
-from moneyonchain.rdoc import RDOCMoCConverter as VENDORSRDOCMoCConverter
 from moneyonchain.rdoc import RDOCMoCConnector as VENDORSRDOCMoCConnector
 from moneyonchain.rdoc import RDOCMoCExchange as VENDORSRDOCMoCExchange
 from moneyonchain.rdoc import RDOCMoCHelperLib as VENDORSRDOCMoCHelperLib

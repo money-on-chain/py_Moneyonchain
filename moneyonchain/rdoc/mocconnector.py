@@ -35,7 +35,6 @@ class RDOCMoCConnector(RRC20MoCConnector):
         d_addresses = dict()
         d_addresses['MoC'] = self.sc.moc()
         d_addresses['MoCState'] = self.sc.mocState()
-        d_addresses['MoCConverter'] = self.sc.mocConverter()
         d_addresses['MoCSettlement'] = self.sc.mocSettlement()
         d_addresses['MoCExchange'] = self.sc.mocExchange()
         d_addresses['MoCInrate'] = self.sc.mocInrate()

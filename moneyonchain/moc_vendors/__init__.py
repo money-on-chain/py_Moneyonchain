@@ -1,5 +1,4 @@
 from moneyonchain.moc import MoC as VENDORSMoC
-from moneyonchain.moc import MoCConverter as VENDORSMoCConverter
 from moneyonchain.moc import MoCConnector as VENDORSMoCConnector
 from moneyonchain.moc import MoCExchange as VENDORSMoCExchange
 from moneyonchain.moc import MoCHelperLib as VENDORSMoCHelperLib
