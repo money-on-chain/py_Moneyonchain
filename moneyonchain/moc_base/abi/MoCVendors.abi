@@ -43,7 +43,7 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "paidReserveToken",
+          "name": "paidRBTC",
           "type": "uint256"
         }
       ],
@@ -508,7 +508,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "resTokenAmount",
+          "name": "rbtcAmount",
           "type": "uint256"
         }
       ],

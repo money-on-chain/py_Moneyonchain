@@ -7,6 +7,7 @@ from .mochelperlib import MoCHelperLibBase
 from .mocinrate import MoCInrateBase
 from .mocsettlement import MoCSettlementBase
 from .mocstate import MoCStateBase
+from .mocvendors import MoCVendorsBase
 from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, MoCExchangeRiskProRedeem, \
     MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, MoCSettlementRedeemRequestProcessed, \
