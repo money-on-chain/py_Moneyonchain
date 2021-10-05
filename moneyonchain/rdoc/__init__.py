@@ -12,10 +12,22 @@ from .changers import RDOCMoCSettlementChanger, RDOCMoCInrateStableChanger, \
     RDOCMoCStateMaxMintRiskProChanger, RDOCPriceProviderChanger, RDOCMocMakeStoppableChanger, \
     RDOCMocInrateRiskProInterestAddressChanger
 from .commission import RDOCCommissionSplitter
-from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, \
-    MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
-    MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, \
-    MoCStateBtcPriceProviderUpdated, MoCStateMoCPriceProviderUpdated, \
-    MoCStateMoCTokenChanged, MoCStateMoCVendorsChanged, \
-    MoCVendorsVendorRegistered, MoCVendorsVendorUpdated, MoCVendorsVendorUnregistered, \
-    MoCVendorsVendorStakeAdded, MoCVendorsVendorStakeRemoved, MoCVendorsTotalPaidInMoCReset, MoCContractLiquidated
+from .events import MoCExchangeRiskProMint, \
+    MoCExchangeRiskProRedeem, \
+    MoCExchangeRiskProWithDiscountMint, \
+    MoCExchangeStableTokenMint, \
+    MoCExchangeStableTokenRedeem, \
+    MoCExchangeFreeStableTokenRedeem, \
+    MoCExchangeRiskProxMint, \
+    MoCExchangeRiskProxRedeem, \
+    MoCStateBtcPriceProviderUpdated, \
+    MoCStateMoCPriceProviderUpdated, \
+    MoCStateMoCTokenChanged, \
+    MoCStateMoCVendorsChanged, \
+    MoCVendorsVendorRegistered, \
+    MoCVendorsVendorUpdated, \
+    MoCVendorsVendorUnregistered, \
+    MoCVendorsVendorStakeAdded, \
+    MoCVendorsVendorStakeRemoved, \
+    MoCVendorsTotalPaidInMoCReset, \
+    MoCContractLiquidated

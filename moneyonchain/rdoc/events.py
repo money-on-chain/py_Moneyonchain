@@ -23,7 +23,7 @@ class MoCExchangeRiskProMint(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'Amount', 'reserveTotal', 'commission', 'reservePrice',
-                   'mocCommissionValue', 'mocPrice', 'btcMarkup', 'mocMarkup', 'vendorAccount']
+                   'mocCommissionValue', 'mocPrice', 'reserveTokenMarkup', 'mocMarkup', 'vendorAccount']
         return columns
 
     def formatted(self):
@@ -37,7 +37,7 @@ class MoCExchangeRiskProMint(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -54,7 +54,51 @@ class MoCExchangeRiskProMint(BaseEvent):
                 format(float(d_event['reservePrice']), '.18f'),
                 format(float(d_event['mocCommissionValue']), '.18f'),
                 format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
+                format(float(d_event['mocMarkup']), '.18f'),
+                d_event['vendorAccount']
+                ]
+
+
+class MoCExchangeRiskProRedeem(BaseEvent):
+
+    name = "RiskProRedeem"
+
+    @staticmethod
+    def columns():
+        columns = ['Block Nº', 'Timestamp', 'Account', 'Amount', 'reserveTotal', 'commission', 'reservePrice',
+                   'mocCommissionValue', 'mocPrice', 'reserveTokenMarkup', 'mocMarkup', 'vendorAccount']
+        return columns
+
+    def formatted(self):
+        d_event = dict()
+        d_event['blockNumber'] = self.blockNumber
+        d_event['timestamp'] = self.timestamp
+        d_event['account'] = self.event['account']
+        d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
+        d_event['reserveTotal'] = Web3.fromWei(self.event['reserveTotal'], 'ether')
+        d_event['commission'] = Web3.fromWei(self.event['commission'], 'ether')
+        d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
+        d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
+        d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
+        d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
+        d_event['vendorAccount'] = self.event['vendorAccount']
+
+        return d_event
+
+    def row(self):
+        d_event = self.formatted()
+        return [d_event['blockNumber'],
+                d_event['timestamp'],
+                d_event['account'],
+                format(float(d_event['amount']), '.18f'),
+                format(float(d_event['reserveTotal']), '.18f'),
+                format(float(d_event['commission']), '.18f'),
+                format(float(d_event['reservePrice']), '.18f'),
+                format(float(d_event['mocCommissionValue']), '.18f'),
+                format(float(d_event['mocPrice']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
                 format(float(d_event['mocMarkup']), '.18f'),
                 d_event['vendorAccount']
                 ]
@@ -65,8 +109,7 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
 
     @staticmethod
     def columns():
-        columns = ['Block Nº', 'Timestamp', 'riskProTecPrice', 'riskProDiscountPrice', 'amount',
-                   'mocCommissionValue', 'mocPrice', 'btcMarkup', 'mocMarkup', 'vendorAccount']
+        columns = ['Block Nº', 'Timestamp', 'riskProTecPrice', 'riskProDiscountPrice', 'amount' ]
         return columns
 
     def formatted(self):
@@ -76,11 +119,6 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
         d_event['riskProTecPrice'] = Web3.fromWei(self.event['riskProTecPrice'], 'ether')
         d_event['riskProDiscountPrice'] = Web3.fromWei(self.event['riskProDiscountPrice'], 'ether')
         d_event['amount'] = Web3.fromWei(self.event['amount'], 'ether')
-        d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
-        d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
-        d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
-        d_event['vendorAccount'] = self.event['vendorAccount']
 
         return d_event
 
@@ -90,13 +128,7 @@ class MoCExchangeRiskProWithDiscountMint(BaseEvent):
                 d_event['timestamp'],
                 format(float(d_event['riskProTecPrice']), '.18f'),
                 format(float(d_event['riskProDiscountPrice']), '.18f'),
-                format(float(d_event['amount']), '.18f'),
-                format(float(d_event['reservePrice']), '.18f'),
-                format(float(d_event['mocCommissionValue']), '.18f'),
-                format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
-                format(float(d_event['mocMarkup']), '.18f'),
-                d_event['vendorAccount']
+                format(float(d_event['amount']), '.18f')
                 ]
 
 
@@ -106,7 +138,7 @@ class MoCExchangeStableTokenMint(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'amount', 'reserveTotal', 'commission', 'reservePrice',
-                   'mocCommissionValue', 'mocPrice', 'btcMarkup', 'mocMarkup', 'vendorAccount']
+                   'mocCommissionValue', 'mocPrice', 'reserveTokenMarkup', 'mocMarkup', 'vendorAccount']
         return columns
 
     def formatted(self):
@@ -120,7 +152,7 @@ class MoCExchangeStableTokenMint(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -138,7 +170,7 @@ class MoCExchangeStableTokenMint(BaseEvent):
                 format(float(d_event['reservePrice']), '.18f'),
                 format(float(d_event['mocCommissionValue']), '.18f'),
                 format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
                 format(float(d_event['mocMarkup']), '.18f'),
                 d_event['vendorAccount']
                 ]
@@ -150,7 +182,7 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'amount', 'reserveTotal', 'commission', 'reservePrice',
-                   'mocCommissionValue', 'mocPrice', 'btcMarkup', 'mocMarkup', 'vendorAccount']
+                   'mocCommissionValue', 'mocPrice', 'reserveTokenMarkup', 'mocMarkup', 'vendorAccount']
         return columns
 
     def formatted(self):
@@ -164,7 +196,7 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -182,7 +214,7 @@ class MoCExchangeStableTokenRedeem(BaseEvent):
                 format(float(d_event['reservePrice']), '.18f'),
                 format(float(d_event['mocCommissionValue']), '.18f'),
                 format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
                 format(float(d_event['mocMarkup']), '.18f'),
                 d_event['vendorAccount']
                 ]
@@ -194,7 +226,7 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Account', 'Amount', 'ReserveTotal', 'Commission', 'Interests',
-                   'ReservePrice', 'MoCCommission', 'MoCPrice', 'BtcMarkup', 'MoCMarkup', 'VendorAccount']
+                   'ReservePrice', 'MoCCommission', 'MoCPrice', 'reserveTokenMarkup', 'MoCMarkup', 'VendorAccount']
         return columns
 
     def formatted(self):
@@ -209,7 +241,7 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -224,7 +256,12 @@ class MoCExchangeFreeStableTokenRedeem(BaseEvent):
                 format(float(d_event['reserveTotal']), '.18f'),
                 format(float(d_event['commission']), '.18f'),
                 format(float(d_event['interests']), '.18f'),
-                format(float(d_event['reservePrice']), '.18f')]
+                format(float(d_event['reservePrice']), '.18f'),
+                format(float(d_event['mocCommissionValue']), '.18f'),
+                format(float(d_event['mocPrice']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
+                format(float(d_event['mocMarkup']), '.18f'),
+                d_event['vendorAccount']]
 
 
 class MoCExchangeRiskProxMint(BaseEvent):
@@ -233,7 +270,7 @@ class MoCExchangeRiskProxMint(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Bucket', 'Account', 'Amount', 'Reserve Total', 'Interests',  'Leverage',
-                   'Commission',  'Reserve Price', 'MoC Commission', 'MoC Price', 'Btc Markup', 'MoC Markup', 'Vendor Account']
+                   'Commission',  'Reserve Price', 'MoC Commission', 'MoC Price', 'Reserve Token Markup', 'MoC Markup', 'Vendor Account']
         return columns
 
     def formatted(self):
@@ -250,7 +287,7 @@ class MoCExchangeRiskProxMint(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -268,10 +305,9 @@ class MoCExchangeRiskProxMint(BaseEvent):
                 format(float(d_event['leverage']), '.18f'),
                 format(float(d_event['commission']), '.18f'),
                 format(float(d_event['reservePrice']), '.18f'),
-                format(float(d_event['reservePrice']), '.18f'),
                 format(float(d_event['mocCommissionValue']), '.18f'),
                 format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
                 format(float(d_event['mocMarkup']), '.18f'),
                 d_event['vendorAccount']
                 ]
@@ -283,8 +319,8 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
     @staticmethod
     def columns():
         columns = ['Block Nº', 'Timestamp', 'Bucket', 'Account', 'Amount', 'Reserve Total', 'Interests',  'Leverage',
-                   'Commission',  'Reserve Price', 'MoC Commission', 'MoC Price', 'Btc Markup', 'MoC Markup',
-                   'Vendor Account']
+                   'Commission',  'Reserve Price', 'MoC Commission', 'MoC Price', 'Reserve Token Markup Markup',
+                   'MoC Markup', 'Vendor Account']
         return columns
 
     def formatted(self):
@@ -301,7 +337,7 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
         d_event['reservePrice'] = Web3.fromWei(self.event['reservePrice'], 'ether')
         d_event['mocCommissionValue'] = Web3.fromWei(self.event['mocCommissionValue'], 'ether')
         d_event['mocPrice'] = Web3.fromWei(self.event['mocPrice'], 'ether')
-        d_event['btcMarkup'] = Web3.fromWei(self.event['btcMarkup'], 'ether')
+        d_event['reserveTokenMarkup'] = Web3.fromWei(self.event['reserveTokenMarkup'], 'ether')
         d_event['mocMarkup'] = Web3.fromWei(self.event['mocMarkup'], 'ether')
         d_event['vendorAccount'] = self.event['vendorAccount']
 
@@ -322,7 +358,7 @@ class MoCExchangeRiskProxRedeem(BaseEvent):
                 format(float(d_event['reservePrice']), '.18f'),
                 format(float(d_event['mocCommissionValue']), '.18f'),
                 format(float(d_event['mocPrice']), '.18f'),
-                format(float(d_event['btcMarkup']), '.18f'),
+                format(float(d_event['reserveTokenMarkup']), '.18f'),
                 format(float(d_event['mocMarkup']), '.18f'),
                 d_event['vendorAccount']
                 ]
@@ -578,6 +614,7 @@ class MoCVendorsTotalPaidInMoCReset(BaseEvent):
                 d_event['timestamp'],
                 d_event['account']
                 ]
+
 
 class MoCVendorsVendorGuardianAddressChanged(BaseEvent):
     name = "VendorGuardianAddressChanged"
