@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoCSettlement
+from moneyonchain.moc_base import MoCSettlementBase
 
 
-class RDOCMoCSettlement(RRC20MoCSettlement):
+class RDOCMoCSettlement(MoCSettlementBase):
     contract_name = 'MoCSettlement'
 
     contract_abi = ContractBase.content_abi_file(

@@ -17,10 +17,10 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoCInrate
+from moneyonchain.moc_base import MoCInrateBase
 
 
-class RDOCMoCInrate(RRC20MoCInrate):
+class RDOCMoCInrate(MoCInrateBase):
     contract_name = 'MoCInrate'
 
     contract_abi = ContractBase.content_abi_file(
@@ -31,6 +31,50 @@ class RDOCMoCInrate(RRC20MoCInrate):
     precision = 10 ** 18
     mode = 'RRC20'
     project = 'RDoC'
+
+    def stable_inrate(self,
+                      formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate Stable"""
+
+        info = dict()
+
+        result = self.sc.getStableTmax(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['StableTmax'] = result
+
+        result = self.sc.getStablePower(block_identifier=block_identifier)
+        info['StablePower'] = result
+
+        result = self.sc.getStableTmin(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['StableTmin'] = result
+
+        return info
+
+    def riskprox_inrate(self,
+                        formatted: bool = True,
+                        block_identifier: BlockIdentifier = 'latest'):
+        """Parameters inrate riskprox"""
+
+        info = dict()
+
+        result = self.sc.getRiskProxTmax(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['RiskProxTmax'] = result
+
+        result = self.sc.getRiskProxPower(block_identifier=block_identifier)
+        info['RiskProxPower'] = result
+
+        result = self.sc.getRiskProxTmin(block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+        info['RiskProxTmin'] = result
+
+        return info
 
     def commision_rate(self,
                        formatted: bool = True,

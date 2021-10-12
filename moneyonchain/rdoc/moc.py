@@ -14,11 +14,14 @@
 
 import os
 from decimal import Decimal
+from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoC
+from moneyonchain.moc_base import MoCBase
 from moneyonchain.tokens import RIFPro, RIFDoC, RIF, MoCToken
+from moneyonchain.tex import TokenPriceProviderLastClosingPrice
+
 
 from .mocinrate import RDOCMoCInrate
 from .mocstate import RDOCMoCState
@@ -39,7 +42,7 @@ BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 
-class RDOCMoC(RRC20MoC):
+class RDOCMoC(MoCBase):
     contract_name = 'MoC'
 
     contract_abi = ContractBase.content_abi_file(
@@ -67,6 +70,7 @@ class RDOCMoC(RRC20MoC):
                  contract_address_moc_doc_token=None,
                  contract_address_reserve_token=None,
                  contract_address_moc_moc_token=None,
+                 contract_address_moc_token_oracle=None,
                  contract_address_moc_vendors=None,
                  load_sub_contract=True):
 
@@ -86,6 +90,8 @@ class RDOCMoC(RRC20MoC):
                          contract_address_moc_settlement=contract_address_moc_settlement,
                          contract_address_moc_bpro_token=contract_address_moc_bpro_token,
                          contract_address_moc_doc_token=contract_address_moc_doc_token,
+                         contract_address_moc_moc_token=contract_address_moc_moc_token,
+                         contract_address_moc_token_oracle=contract_address_moc_token_oracle,
                          load_sub_contract=False
                          )
 
@@ -100,6 +106,7 @@ class RDOCMoC(RRC20MoC):
             contract_addresses['DoCToken'] = contract_address_moc_doc_token
             contract_addresses['ReserveToken'] = contract_address_reserve_token
             contract_addresses['MoCToken'] = contract_address_moc_moc_token
+            contract_addresses['MoCOracle'] = contract_address_moc_token_oracle
             contract_addresses['MoCVendors'] = contract_address_moc_vendors
 
             # load contract addresses
@@ -136,6 +143,14 @@ class RDOCMoC(RRC20MoC):
             self.sc_moc_moc_token = self.load_moc_moc_token_contract(contract_addresses['MoCToken'])
         else:
             self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
+
+        # load contract moc MoC Oracle
+        if 'MoCOracle' in contract_addresses:
+            moc_oracle_address = contract_addresses['MoCOracle']
+        else:
+            moc_oracle_address = None
+
+        self.sc_moc_token_oracle = self.load_moc_token_oracle(moc_oracle_address)
 
         # load contract moc vendors
         if contract_addresses['MoCVendors']:
@@ -263,6 +278,19 @@ class RDOCMoC(RRC20MoC):
 
         return sc
 
+    def load_moc_token_oracle(self, contract_address):
+
+        config_network = self.network_manager.config_network
+
+        if not contract_address:
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCOracle']
+
+        sc = TokenPriceProviderLastClosingPrice(
+            self.network_manager,
+            contract_address=contract_address).from_abi()
+
+        return sc
+
     def load_moc_vendors_contract(self, contract_address):
 
         config_network = self.network_manager.config_network
@@ -273,6 +301,32 @@ class RDOCMoC(RRC20MoC):
                             contract_address=contract_address).from_abi()
 
         return sc
+
+    def spendable_balance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Spendable Balance """
+
+        result = self.sc.getAllowance(account_address, block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def reserve_allowance(self,
+                          account_address,
+                          formatted: bool = True,
+                          block_identifier: BlockIdentifier = 'latest'):
+        """ Reserve allowance """
+
+        result = self.sc_reserve_token.allowance(account_address,
+                                                 self.sc.address,
+                                                 formatted=formatted,
+                                                 block_identifier=block_identifier)
+
+        return result
 
     def moc_price(self,
                   formatted: bool = True,

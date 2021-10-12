@@ -18,12 +18,12 @@ from web3.types import BlockIdentifier
 
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoCExchange
+from moneyonchain.moc_base import MoCExchangeBase
 
 from .utils import array_to_dictionary
 
 
-class RDOCMoCExchange(RRC20MoCExchange):
+class RDOCMoCExchange(MoCExchangeBase):
     contract_name = 'MoCExchange'
     contract_abi = ContractBase.content_abi_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/MoCExchange.abi'))
