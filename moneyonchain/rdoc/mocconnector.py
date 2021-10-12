@@ -15,10 +15,10 @@
 import os
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoCConnector
+from moneyonchain.moc_base import MoCConnectorBase
 
 
-class RDOCMoCConnector(RRC20MoCConnector):
+class RDOCMoCConnector(MoCConnectorBase):
     contract_name = 'MoCState'
 
     contract_abi = ContractBase.content_abi_file(

@@ -17,10 +17,10 @@ from web3 import Web3
 from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
-from moneyonchain.rrc20 import RRC20MoCState
+from moneyonchain.moc_base import MoCStateBase
 
 
-class RDOCMoCState(RRC20MoCState):
+class RDOCMoCState(MoCStateBase):
     contract_name = 'MoCState'
 
     contract_abi = ContractBase.content_abi_file(
@@ -31,6 +31,18 @@ class RDOCMoCState(RRC20MoCState):
     mode = 'RRC20'
     project = 'RDoC'
     precision = 10 ** 18
+
+    def collateral_reserves(self,
+                            formatted: bool = True,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """RiskProx values and interests holdings"""
+
+        result = self.sc.collateralReserves(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
 
     def moc_price(self,
                   formatted: bool = True,
