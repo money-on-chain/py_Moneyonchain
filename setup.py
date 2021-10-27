@@ -1,18 +1,15 @@
-import setuptools
-#from setuptools import find_packages
+from setuptools import setup, Extension
+from pathlib import Path
 
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
-
-
-setuptools.setup(
+setup(
     name='moneyonchain',
-    version='2.1.5',
+    version='2.1.7',
     packages=['moneyonchain',
               'moneyonchain.tokens',
               'moneyonchain.tex',
-              'moneyonchain.rrc20',
               'moneyonchain.rdoc',
               'moneyonchain.oracle',
               'moneyonchain.moc',
@@ -73,8 +70,8 @@ setuptools.setup(
     },
     python_requires='>=3.6',
     install_requires=[
-        'web3==5.23.1',
-        'eth-brownie==1.16.4',
+        'web3==5.24.0',
+        'eth-brownie==1.17.0',
         'PyYAML==5.4.1',
         'tabulate'
     ],

@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO)
 # Retrieve the logger instance
 log = logging.getLogger()
 
-connection_network = 'rskMainnetPublic'
-config_network = 'mocMainnet2'
+connection_network = 'rskTestnetPublic'
+config_network = 'mocTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)

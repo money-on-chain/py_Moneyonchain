@@ -3,7 +3,7 @@ import os
 from optparse import OptionParser
 
 from moneyonchain.networks import network_manager
-from moneyonchain.governance import Governed
+from moneyonchain.governance import Governed, UpgradeDelegator, ProxyAdmin
 
 import logging
 import logging.config
@@ -55,18 +55,44 @@ if not connection_network:
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-log.info('Connecting environment {0}...'.format(config_network))
+log.info('Connecting enviroment {0}...'.format(config_network))
 
 proxy_addresses = settings[config_network]['proxyAddresses']
+
+upgrade_delegator = UpgradeDelegator(network_manager).from_abi()
+contract_admin = ProxyAdmin(network_manager).from_abi()
+log.info("Upgrade delegator: {0}".format(upgrade_delegator.address()))
+log.info("Upgrade delegator Governor: {0}".format(upgrade_delegator.governor()))
+log.info("Proxy Admin: {0}".format(contract_admin.address()))
+log.info("")
 
 for proxy_address in proxy_addresses:
     address = settings[config_network]['proxyAddresses'][proxy_address]
     if not address:
         continue
 
-    contract_governed = Governed(network_manager, contract_address=address).from_abi()
+    log.info("Contract: {0}: {1} ".format(proxy_address, address))
+    error = False
+    try:
+        proxy_admin_address = upgrade_delegator.get_proxy_admin(address)
+    except:
+        proxy_admin_address = None
+        log.info("Error! Proxy admin is not controlled by current upgrade delegator")
 
-    log.info("Contract: {0}: {1} Governor: {2}".format(proxy_address, address, contract_governed.governor()))
+    if proxy_admin_address and proxy_admin_address == upgrade_delegator.proxy_admin():
+        log.info("OK: Proxy admin are equal {0} / {1}".format(proxy_admin_address, upgrade_delegator.proxy_admin()))
+    else:
+        log.info("Error: Proxy admin are not equal {0} / {1} (Except on Upgrade Delegator)".format(
+            proxy_admin_address, upgrade_delegator.proxy_admin()))
+
+    if contract_admin.owner() == upgrade_delegator.address():
+        log.info("OK: Contract admin owner is upgrade delegator {0} / {1}".format(
+            contract_admin.owner(), upgrade_delegator.address()))
+    else:
+        log.info("Error: Contract admin owner is not upgrade delegator {0} / {1}".format(
+            contract_admin.owner(), upgrade_delegator.address()))
+
+    log.info("")
 
 
 # finally disconnect from network

@@ -1,5 +1,6 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.moc import MoCPriceProviderChanger
+from moneyonchain.medianizer import ETHPriceFeederAdderChanger
+
 
 import logging
 import logging.config
@@ -7,7 +8,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/changers_price_provider.log',
+                    filename='logs/changers_feedadder.log',
                     filemode='a')
 
 # set up logging to console
@@ -22,25 +23,22 @@ log.addHandler(console)
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+config_network = 'tetherTestnet'
 
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-contract = MoCPriceProviderChanger(network_manager)
-# BTC: 0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849
-# RIF: 0x9315AFD6aEc0bb1C1FB3fdcdC2E43797B0A61853
-#price_provider = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
-#price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
-price_provider = '0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4'
-#price_provider = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
-tx_receipt = contract.constructor(price_provider, execute_change=False)
+contract = ETHPriceFeederAdderChanger(network_manager)
+
+price_feeder_owner = '0xe317349c7279ffF242cc8ADCb575EbA0153760BA'
+tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:
     log.info("Error deploying changer")
+
 
 # finally disconnect from network
 network_manager.disconnect()
