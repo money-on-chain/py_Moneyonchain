@@ -13,7 +13,6 @@
 """
 
 import os
-from web3.types import BlockIdentifier
 
 from moneyonchain.contract import ContractBase
 from moneyonchain.moc_base import CommissionSplitterBase
@@ -28,17 +27,3 @@ class CommissionSplitter(CommissionSplitterBase):
 
     mode = 'MoC'
     precision = 10 ** 18
-
-    def moc_token(self, block_identifier: BlockIdentifier = 'latest'):
-        """the address of MoC Token contract"""
-
-        result = self.sc.mocToken(block_identifier=block_identifier)
-
-        return result
-
-    def moc_token_commission_address(self, block_identifier: BlockIdentifier = 'latest'):
-        """the address in which the Moc Token commissions are sent"""
-
-        result = self.sc.mocTokenCommissionsAddress(block_identifier=block_identifier)
-
-        return result

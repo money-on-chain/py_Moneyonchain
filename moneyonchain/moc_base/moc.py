@@ -27,6 +27,7 @@ from .mocstate import MoCStateBase
 from .mocexchange import MoCExchangeBase
 from .mocconnector import MoCConnectorBase
 from .mocsettlement import MoCSettlementBase
+from .mocvendors import MoCVendorsBase
 
 from moneyonchain.tokens import BProToken, DoCToken, MoCToken
 from moneyonchain.governance import GovernedInterface, ProxyAdminInterface, StoppableInterface
@@ -39,6 +40,8 @@ STATE_ABOVE_COBJ = 3
 
 BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
+
+ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 
 class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
@@ -71,8 +74,8 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
                  contract_address_moc_doc_token=None,
                  contract_address_moc_moc_token=None,
                  contract_address_moc_token_oracle=None,
-                 load_sub_contract=True
-                 ):
+                 contract_address_moc_vendors=None,
+                 load_sub_contract=True):
 
         config_network = network_manager.config_network
         if not contract_address:
@@ -82,7 +85,8 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
                          contract_name=contract_name,
                          contract_address=contract_address,
                          contract_abi=contract_abi,
-                         contract_bin=contract_bin)
+                         contract_bin=contract_bin
+                         )
 
         if load_sub_contract:
             contract_addresses = dict()
@@ -95,6 +99,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_addresses['DoCToken'] = contract_address_moc_doc_token
             contract_addresses['MoCToken'] = contract_address_moc_moc_token
             contract_addresses['MoCOracle'] = contract_address_moc_token_oracle
+            contract_addresses['MoCVendors'] = contract_address_moc_vendors
 
             # load contract addresses
             self.load_sub_contracts(contract_addresses)
@@ -123,12 +128,10 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         self.sc_moc_doc_token = self.load_moc_doc_token_contract(contract_addresses['DoCToken'])
 
         # load contract moc moc_token
-        if 'MoCToken' in contract_addresses:
-            moc_token_address = contract_addresses['MoCToken']
+        if contract_addresses['MoCToken']:
+            self.sc_moc_moc_token = self.load_moc_moc_token_contract(contract_addresses['MoCToken'])
         else:
-            moc_token_address = None
-
-        self.sc_moc_moc_token = self.load_moc_moc_token_contract(moc_token_address)
+            self.sc_moc_moc_token = self.load_moc_moc_token_contract(self.sc_moc_state.moc_token())
 
         # load contract moc MoC Oracle
         if 'MoCOracle' in contract_addresses:
@@ -137,6 +140,12 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             moc_oracle_address = None
 
         self.sc_moc_token_oracle = self.load_moc_token_oracle(moc_oracle_address)
+
+        # load contract moc vendors
+        if contract_addresses['MoCVendors']:
+            self.sc_moc_vendors = self.load_moc_vendors_contract(contract_addresses['MoCVendors'])
+        else:
+            self.sc_moc_vendors = self.load_moc_vendors_contract(self.sc_moc_state.moc_vendors())
 
     def contracts_discovery(self):
         """ This implementation get sub contracts only with MoC Contract address"""
@@ -151,6 +160,9 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         contract_addresses['MoCSettlement'] = connector_addresses['MoCSettlement']
         contract_addresses['BProToken'] = connector_addresses['BProToken']
         contract_addresses['DoCToken'] = connector_addresses['DoCToken']
+        contract_addresses['MoCToken'] = None
+        contract_addresses['MoCVendors'] = None
+
         self.load_sub_contracts(contract_addresses)
 
         return self
@@ -177,7 +189,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCInrate']
 
         sc = MoCInrateBase(self.network_manager,
-                           contract_address=contract_address).from_abi()
+                       contract_address=contract_address).from_abi()
 
         return sc
 
@@ -188,7 +200,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCState']
 
         sc = MoCStateBase(self.network_manager,
-                          contract_address=contract_address).from_abi()
+                      contract_address=contract_address).from_abi()
 
         return sc
 
@@ -199,7 +211,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCExchange']
 
         sc = MoCExchangeBase(self.network_manager,
-                             contract_address=contract_address).from_abi()
+                         contract_address=contract_address).from_abi()
 
         return sc
 
@@ -210,7 +222,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCConnector']
 
         sc = MoCConnectorBase(self.network_manager,
-                              contract_address=contract_address).from_abi()
+                          contract_address=contract_address).from_abi()
 
         return sc
 
@@ -221,7 +233,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
             contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCSettlement']
 
         sc = MoCSettlementBase(self.network_manager,
-                               contract_address=contract_address).from_abi()
+                           contract_address=contract_address).from_abi()
 
         return sc
 
@@ -271,6 +283,17 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         return sc
 
+    def load_moc_vendors_contract(self, contract_address):
+
+        config_network = self.network_manager.config_network
+        if not contract_address:
+            contract_address = self.network_manager.options['networks'][config_network]['addresses']['MoCVendors']
+
+        sc = MoCVendorsBase(self.network_manager,
+                        contract_address=contract_address).from_abi()
+
+        return sc
+
     def connector(self):
 
         return self.sc.connector()
@@ -300,12 +323,33 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
                   block_identifier: BlockIdentifier = 'latest'):
         """MoC price in USD"""
 
-        result = self.sc_moc_token_oracle.peek(
+        result = self.sc_moc_state.moc_price(
             formatted=formatted,
             block_identifier=block_identifier)
-        if not result[1]:
-            raise Exception("Price provided is not valid")
-        return result[0]
+
+        return result
+
+    def moc_balance_of(self,
+                       account_address,
+                       formatted: bool = True,
+                       block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.balance_of(
+            account_address,
+            formatted=formatted,
+            block_identifier=block_identifier)
+
+    def moc_allowance(self,
+                      account_address,
+                      contract_address,
+                      formatted: bool = True,
+                      block_identifier: BlockIdentifier = 'latest'):
+
+        return self.sc_moc_moc_token.allowance(
+            account_address,
+            contract_address,
+            formatted=formatted,
+            block_identifier=block_identifier)
 
     def sc_precision(self,
                      formatted: bool = True,
@@ -739,43 +783,111 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         return result
 
-    def amount_mint_bpro(self, amount: Decimal):
+    def amount_mint_bpro(self,
+                         amount: Decimal,
+                         vendor_account=ZERO_ADDRESS,
+                         default_account=None):
         """Final amount need it to mint bitpro in RBTC"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        total_amount = amount + commission_value
+        if not default_account:
+            default_account = 0
 
-        return total_amount, commission_value
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_bpro_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_bpro_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        if self.mode == 'MoC':
+            commission_value = commissions["btcCommission"]
+            markup_value = commissions["btcMarkup"]
+        else:
+            commission_value = commissions["reserveTokenCommission"]
+            markup_value = commissions["reserveTokenMarkup"]
+
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
 
     # alias
     amount_mint_riskpro = amount_mint_bpro
 
-    def amount_mint_doc(self, amount: Decimal):
+    def amount_mint_doc(self,
+                        amount: Decimal,
+                        vendor_account=ZERO_ADDRESS,
+                        default_account=None):
         """Final amount need it to mint doc"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        total_amount = amount + commission_value
+        if not default_account:
+            default_account = 0
 
-        return total_amount, commission_value
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_doc_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_doc_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        if self.mode == 'MoC':
+            commission_value = commissions["btcCommission"]
+            markup_value = commissions["btcMarkup"]
+        else:
+            commission_value = commissions["reserveTokenCommission"]
+            markup_value = commissions["reserveTokenMarkup"]
+
+        total_amount = amount + commission_value + markup_value
+
+        return total_amount, commission_value, markup_value
 
     # alias
     amount_mint_stable = amount_mint_doc
 
-    def amount_mint_btc2x(self, amount: Decimal):
+    def amount_mint_btc2x(self,
+                          amount: Decimal,
+                          vendor_account=ZERO_ADDRESS,
+                          default_account=None):
         """Final amount need it to mint btc2x"""
 
-        commission_value = self.sc_moc_inrate.calc_commission_value(amount)
-        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
-        interest_value_margin = interest_value + interest_value * Decimal(0.01)
-        total_amount = amount + commission_value + interest_value_margin
+        if not default_account:
+            default_account = 0
 
-        return total_amount, commission_value, interest_value
+        tx_type_fees_MOC = self.sc_moc_inrate.tx_type_mint_btcx_fees_moc()
+        tx_type_fees_RBTC = self.sc_moc_inrate.tx_type_mint_btcx_fees_rbtc()
+
+        commissions = self.sc_moc_exchange.calculate_commissions_with_prices(
+            amount,
+            tx_type_fees_MOC,
+            tx_type_fees_RBTC,
+            vendor_account,
+            default_account=default_account)
+
+        interest_value = self.sc_moc_inrate.calc_mint_interest_value(amount)
+
+        if self.mode == 'MoC':
+            commission_value = commissions["btcCommission"]
+            markup_value = commissions["btcMarkup"]
+        else:
+            commission_value = commissions["reserveTokenCommission"]
+            markup_value = commissions["reserveTokenMarkup"]
+
+        interest_value_margin = interest_value + interest_value * Decimal(0.01)
+        total_amount = amount + commission_value + markup_value + interest_value_margin
+
+        return total_amount, commission_value, markup_value, interest_value
 
     # alias
     amount_mint_riskprox = amount_mint_btc2x
 
     def mint_bpro_gas_estimated(self,
                                 amount,
+                                vendor_account=ZERO_ADDRESS,
                                 precision=False,
                                 **tx_arguments):
 
@@ -791,15 +903,16 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintBPro.estimate_gas(int(amount), tx_args)
+            return self.sc.mintBProVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintRiskPro.estimate_gas(int(amount), tx_args)
+            return self.sc.mintRiskProVendors.estimate_gas(int(amount), tx_args)
 
     # alias
     mint_riskpro_gas_estimated = mint_bpro_gas_estimated
 
     def mint_doc_gas_estimated(self,
                                amount,
+                               vendor_account=ZERO_ADDRESS,
                                precision=False,
                                **tx_arguments):
 
@@ -815,15 +928,16 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintDoc.estimate_gas(int(amount), tx_args)
+            return self.sc.mintDocVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintStableToken.estimate_gas(int(amount), tx_args)
+            return self.sc.mintStableTokenVendors.estimate_gas(int(amount), tx_args)
 
     # alias
     mint_stable_gas_estimated = mint_doc_gas_estimated
 
     def mint_bprox_gas_estimated(self,
                                  amount,
+                                 vendor_account=ZERO_ADDRESS,
                                  precision=False,
                                  **tx_arguments):
 
@@ -841,15 +955,16 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         tx_args = self.tx_arguments(**tx_arguments)
 
         if self.mode == 'MoC':
-            return self.sc.mintBProx.estimate_gas(bucket, int(amount), tx_args)
+            return self.sc.mintBProxVendors.estimate_gas(bucket, int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintRiskProx.estimate_gas(bucket, int(amount), tx_args)
+            return self.sc.mintRiskProxVendors.estimate_gas(bucket, int(amount), tx_args)
 
     # alias
     mint_riskprox_gas_estimated = mint_bprox_gas_estimated
 
     def mint_bpro(self,
                   amount: Decimal,
+                  vendor_account=ZERO_ADDRESS,
                   **tx_arguments):
         """ Mint amount bitpro
         NOTE: amount is in RBTC value
@@ -866,22 +981,24 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value = self.amount_mint_bpro(amount)
+        total_amount, commission_value, markup_value = self.amount_mint_bpro(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
-        max_mint_bpro_available = self.max_mint_bpro_available()
-        if total_amount >= max_mint_bpro_available:
-            raise Exception("You are trying to mint more than the limit. Mint BPro limit: {0}".format(
-                max_mint_bpro_available))
-
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['amount'] = int(total_amount * self.precision)
 
-        tx_receipt = self.sc.mintBPro(
-            int(amount * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_args['amount'] = int(total_amount * self.precision)
+            tx_receipt = self.sc.mintBProVendors(
+                int(amount * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.mintRiskProVendors(
+                int(amount * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -893,6 +1010,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
     def mint_doc(self,
                  amount: Decimal,
+                 vendor_account=ZERO_ADDRESS,
                  **tx_arguments):
         """ Mint amount DOC
         NOTE: amount is in RBTC value
@@ -918,17 +1036,24 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         if amount <= self.minimum_amount:
             raise Exception("Amount value to mint too low")
 
-        total_amount, commission_value = self.amount_mint_doc(amount)
+        total_amount, commission_value, markup_value = self.amount_mint_doc(amount, vendor_account, default_account)
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['amount'] = int(total_amount * self.precision)
 
-        tx_receipt = self.sc.mintDoc(
-            int(amount * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_args['amount'] = int(total_amount * self.precision)
+            tx_receipt = self.sc.mintDocVendors(
+                int(amount * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.mintStableTokenVendors(
+                int(amount * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -939,8 +1064,9 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
     mint_stable = mint_doc
 
     def mint_btcx(self,
-                   amount: Decimal,
-                   **tx_arguments):
+                  amount: Decimal,
+                  vendor_account=ZERO_ADDRESS,
+                  **tx_arguments):
         """ Mint amount BTC2X
         NOTE: amount is in RBTC value
         """
@@ -961,21 +1087,29 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         max_bprox_btc_value = self.max_bprox_btc_value()
         if amount > max_bprox_btc_value:
-            raise Exception("You are trying to mint more than availables. BTCx available: {0}".format(
+            raise Exception("You are trying to mint more than availables. BTC2x available: {0}".format(
                 max_bprox_btc_value))
 
-        total_amount, commission_value, interest_value = self.amount_mint_btc2x(amount)
+        total_amount, commission_value, markup_value, interest_value = self.amount_mint_btc2x(amount, vendor_account,
+                                                                                              default_account)
         bucket = BUCKET_X2
 
         if total_amount > self.balance_of(default_account):
             raise Exception("You don't have suficient funds")
 
         tx_args = self.tx_arguments(**tx_arguments)
-        tx_args['amount'] = int(math.ceil(total_amount * self.precision))
 
-        tx_receipt = self.sc.mintBProx(
-            bucket, int(amount * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_args['amount'] = int(math.ceil(total_amount * self.precision))
+            tx_receipt = self.sc.mintBProxVendors(
+                bucket, int(amount * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.mintRiskProxVendors(
+                bucket, int(amount * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -987,6 +1121,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
     def reedeem_bpro(self,
                      amount_token: Decimal,
+                     vendor_account=ZERO_ADDRESS,
                      **tx_arguments):
         """ Reedem BitPro amount of token """
 
@@ -1015,9 +1150,16 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemBPro(
-            int(amount_token * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_receipt = self.sc.redeemBProVendors(
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.redeemRiskProVendors(
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -1029,6 +1171,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
     def reedeem_free_doc(self,
                          amount_token: Decimal,
+                         vendor_account=ZERO_ADDRESS,
                          **tx_arguments):
         """
         Reedem Free DOC amount of token
@@ -1058,9 +1201,16 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemFreeDoc(
-            int(amount_token * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_receipt = self.sc.redeemFreeDocVendors(
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.redeemFreeStableTokenVendors(
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -1099,9 +1249,14 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemDocRequest(
-            int(amount_token * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_receipt = self.sc.redeemDocRequest(
+                int(amount_token * self.precision),
+                tx_args)
+        else:
+            tx_receipt = self.sc.redeemStableTokenRequest(
+                int(amount_token * self.precision),
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)
@@ -1156,6 +1311,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
     def reedeem_btc2x(self,
                       amount_token: Decimal,
+                      vendor_account=ZERO_ADDRESS,
                       **tx_arguments):
         """ Reedem BTC2X amount of token """
 
@@ -1182,10 +1338,18 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
 
         tx_args = self.tx_arguments(**tx_arguments)
 
-        tx_receipt = self.sc.redeemBProx(
-            bucket,
-            int(amount_token * self.precision),
-            tx_args)
+        if self.mode == 'MoC':
+            tx_receipt = self.sc.redeemBProxVendors(
+                bucket,
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
+        else:
+            tx_receipt = self.sc.redeemRiskProxVendors(
+                bucket,
+                int(amount_token * self.precision),
+                vendor_account,
+                tx_args)
 
         tx_receipt.info()
         receipt_to_log(tx_receipt, self.log)

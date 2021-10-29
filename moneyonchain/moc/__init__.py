@@ -13,8 +13,8 @@ from moneyonchain.moc_base.events import MoCExchangeRiskProRedeem, MoCSettlement
     MoCSettlementSettlementRedeemStableToken, MoCSettlementSettlementCompleted, \
     MoCSettlementSettlementDeleveraging, MoCSettlementSettlementStarted, \
     MoCSettlementRedeemRequestAlter, MoCInrateDailyPay, MoCInrateRiskProHoldersInterestPay, ERC20Transfer, \
-    ERC20Approval, MoCBucketLiquidation, MoCStateStateTransition
-from .events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, \
+    ERC20Approval, MoCBucketLiquidation, MoCStateStateTransition, \
+    MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, \
     MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
     MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, \
     MoCStateBtcPriceProviderUpdated, MoCStateMoCPriceProviderUpdated, \

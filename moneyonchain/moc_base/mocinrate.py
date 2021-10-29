@@ -57,11 +57,7 @@ class MoCInrateBase(GovernedInterface, ProxyAdminInterface):
                        block_identifier: BlockIdentifier = 'latest'):
         """Gets commision rate"""
 
-        result = self.sc.getCommissionRate(block_identifier=block_identifier)
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-
-        return result
+        raise Exception('DEPRECATED')
 
     def bitpro_rate(self, formatted: bool = True,
                     block_identifier: BlockIdentifier = 'latest'):
@@ -164,14 +160,31 @@ class MoCInrateBase(GovernedInterface, ProxyAdminInterface):
 
         return result
 
-    def calc_commission_value(self,
-                              amount,
-                              formatted: bool = True,
-                              block_identifier: BlockIdentifier = 'latest'):
+    def commission_rate_by_transaction_type(
+            self,
+            tx_type,
+            formatted: bool = True,
+            block_identifier: BlockIdentifier = 'latest'):
+        """Gets commision rate by transaction type from mapping"""
+
+        result = self.sc.commissionRatesByTxType(tx_type, block_identifier=block_identifier)
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def calc_commission_value(
+            self,
+            amount,
+            tx_type,
+            formatted: bool = True):
         """ Calc commission value amount in ether float"""
 
-        result = self.sc.calcCommissionValue(int(amount * self.precision),
-                                             block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.calcCommissionValue(int(amount * self.precision), tx_type)
+        else:
+            result = self.sc.calcCommissionValue(int(amount * self.precision))
+
         if formatted:
             result = Web3.fromWei(result, 'ether')
 
@@ -346,3 +359,191 @@ class MoCInrateBase(GovernedInterface, ProxyAdminInterface):
             result = Web3.fromWei(result, 'ether')
 
         return result
+
+    def tx_type_mint_bpro_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_BPRO_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_RISKPRO_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_riskpro_fees_rbtc = tx_type_mint_bpro_fees_rbtc
+
+    def tx_type_redeem_bpro_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_BPRO_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_RISKPRO_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_riskpro_fees_rbtc = tx_type_redeem_bpro_fees_rbtc
+
+    def tx_type_mint_doc_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_DOC_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_STABLETOKEN_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_stabletoken_fees_rbtc = tx_type_mint_doc_fees_rbtc
+
+    def tx_type_redeem_doc_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_DOC_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_STABLETOKEN_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_stabletoken_fees_rbtc = tx_type_redeem_doc_fees_rbtc
+
+    def tx_type_mint_btcx_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_BTCX_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_RISKPROX_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_riskprox_fees_rbtc = tx_type_mint_btcx_fees_rbtc
+
+    def tx_type_redeem_btcx_fees_rbtc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_BTCX_FEES_RBTC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_RISKPROX_FEES_RESERVE(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_riskprox_fees_rbtc = tx_type_redeem_btcx_fees_rbtc
+
+    def tx_type_mint_bpro_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_BPRO_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_RISKPRO_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_riskpro_fees_moc = tx_type_mint_bpro_fees_moc
+
+    def tx_type_redeem_bpro_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_BPRO_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_RISKPRO_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_riskpro_fees_moc = tx_type_redeem_bpro_fees_moc
+
+    def tx_type_mint_doc_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_DOC_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_STABLETOKEN_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_stabletoken_fees_moc = tx_type_mint_doc_fees_moc
+
+    def tx_type_redeem_doc_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_DOC_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_STABLETOKEN_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_stabletoken_fees_moc = tx_type_redeem_doc_fees_moc
+
+    def tx_type_mint_btcx_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.MINT_BTCX_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.MINT_RISKPROX_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_mint_riskprox_fees_moc = tx_type_mint_btcx_fees_moc
+
+    def tx_type_redeem_btcx_fees_moc(
+            self,
+            block_identifier: BlockIdentifier = 'latest'):
+
+        if self.mode == 'MoC':
+            result = self.sc.REDEEM_BTCX_FEES_MOC(block_identifier=block_identifier)
+        else:
+            result = self.sc.REDEEM_RISKPROX_FEES_MOC(block_identifier=block_identifier)
+
+        return result
+
+    # alias
+    tx_type_redeem_riskprox_fees_moc = tx_type_redeem_btcx_fees_moc
+
+    def calculate_vendor_markup(
+            self,
+            vendor_account,
+            amount,
+            formatted: bool = True):
+        """ Calc vendor markup in ether float"""
+
+        if self.mode == 'MoC':
+            result = self.sc.calculateVendorMarkup(vendor_account, int(amount * self.precision))
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+
+
