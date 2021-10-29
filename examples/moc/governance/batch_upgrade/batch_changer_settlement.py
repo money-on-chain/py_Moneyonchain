@@ -36,7 +36,7 @@ data_to_execute = list()
 settlement = VENDORSMoCSettlement(network_manager).from_abi()
 
 targets_to_execute.append(settlement.address())
-data_to_execute.append(settlement.sc.setBlockSpan.encode_input(300))
+data_to_execute.append(settlement.sc.setBlockSpan.encode_input(1000))
 
 log.info("Targets to execute")
 log.info(targets_to_execute)

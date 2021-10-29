@@ -10,11 +10,3 @@
  by Martin Mulone (martin.mulone@moneyonchain.com)
 
 """
-
-from moneyonchain.moc_base.events import MoCExchangeRiskProMint, MoCExchangeRiskProWithDiscountMint, MoCExchangeRiskProRedeem, \
-    MoCExchangeStableTokenMint, MoCExchangeStableTokenRedeem, MoCExchangeFreeStableTokenRedeem, \
-    MoCExchangeRiskProxMint, MoCExchangeRiskProxRedeem, MoCSettlementRedeemRequestProcessed, \
-    MoCSettlementSettlementRedeemStableToken, MoCSettlementSettlementCompleted, \
-    MoCSettlementSettlementDeleveraging, MoCSettlementSettlementStarted, \
-    MoCSettlementRedeemRequestAlter, MoCInrateDailyPay, MoCInrateRiskProHoldersInterestPay, ERC20Transfer, \
-    ERC20Approval, MoCBucketLiquidation, MoCStateStateTransition

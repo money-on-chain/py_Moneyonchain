@@ -55,7 +55,7 @@ if not connection_network:
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-log.info('Connecting enviroment {0}...'.format(config_network))
+log.info('Connecting environment {0}...'.format(config_network))
 
 proxy_addresses = settings[config_network]['proxyAddresses']
 

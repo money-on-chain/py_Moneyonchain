@@ -24,3 +24,6 @@ class CommissionSplitter(CommissionSplitterBase):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.abi'))
     contract_bin = ContractBase.content_bin_file(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi/CommissionSplitter.bin'))
+
+    mode = 'MoC'
+    precision = 10 ** 18

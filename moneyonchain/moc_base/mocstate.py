@@ -141,15 +141,7 @@ class MoCStateBase(GovernedInterface, ProxyAdminInterface):
                                 block_identifier: BlockIdentifier = 'latest'):
         """return the bpro available to mint"""
 
-        if self.mode == 'MoC':
-            result = self.sc.maxMintBProAvalaible(block_identifier=block_identifier)
-        else:
-            result = self.sc.maxMintRiskProAvalaible(block_identifier=block_identifier)
-
-        if formatted:
-            result = Web3.fromWei(result, 'ether')
-
-        return result
+        raise Exception('DEPRECATED')
 
     # alias
     max_mint_riskpro_available = max_mint_bpro_available
@@ -211,7 +203,10 @@ class MoCStateBase(GovernedInterface, ProxyAdminInterface):
                             block_identifier: BlockIdentifier = 'latest'):
         """GLOBAL max bprox to mint"""
 
-        result = self.sc.maxBProxBtcValue(self.bucket_x2(), block_identifier=block_identifier)
+        if self.mode == 'MoC':
+            result = self.sc.maxBProxBtcValue(self.bucket_x2(), block_identifier=block_identifier)
+        else:
+            result = self.sc.maxRiskProxRiskProValue(self.bucket_x2(), block_identifier=block_identifier)
 
         if formatted:
             result = Web3.fromWei(result, 'ether')
@@ -660,3 +655,74 @@ class MoCStateBase(GovernedInterface, ProxyAdminInterface):
             receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
+
+    def moc_price(self,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """MoC price in USD.
+        NOTE: This call have a required if the price is valid, so it can fail.
+        """
+
+        if self.mode == 'MoC':
+            result = self.sc.getMoCPrice(block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def moc_price_provider(self,
+                           block_identifier: BlockIdentifier = 'latest'):
+        """MoC Price provider address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.getMoCPriceProvider(block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
+    def moc_token(self,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """MoC token address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.getMoCToken(block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
+    def moc_vendors(self,
+                    block_identifier: BlockIdentifier = 'latest'):
+        """MoC Vendor address"""
+
+        if self.mode == 'MoC':
+            result = self.sc.getMoCVendors(block_identifier=block_identifier)
+        else:
+            raise NotImplementedError('Only supported in MoC mode')
+
+        return result
+
+    def protected(self,
+                  formatted: bool = True,
+                  block_identifier: BlockIdentifier = 'latest'):
+        """protected"""
+
+        result = self.sc.getProtected(block_identifier=block_identifier)
+
+        if formatted:
+            result = Web3.fromWei(result, 'ether')
+
+        return result
+
+    def liquidation_enabled(self,
+                            block_identifier: BlockIdentifier = 'latest'):
+        """liquidation enabled"""
+
+        result = self.sc.getLiquidationEnabled(block_identifier=block_identifier)
+
+        return result
+

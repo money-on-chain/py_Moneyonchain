@@ -13,17 +13,8 @@
 """
 
 import os
-from web3 import Web3
-from web3.types import BlockIdentifier
-
 from moneyonchain.contract import ContractBase
-from moneyonchain.governance import ProxyAdmin
-
 from moneyonchain.moc_base import MoCInrateBase
-
-
-BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
-BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000'
 
 
 class MoCInrate(MoCInrateBase):
@@ -37,3 +28,4 @@ class MoCInrate(MoCInrateBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
+

@@ -28,3 +28,4 @@ class MoCExchange(MoCExchangeBase):
     precision = 10 ** 18
     mode = 'MoC'
     project = 'MoC'
+

@@ -119,3 +119,18 @@ class CommissionSplitterBase(ProxyAdminInterface, GovernedInterface):
         receipt_to_log(tx_receipt, self.log)
 
         return tx_receipt
+
+    def moc_token(self, block_identifier: BlockIdentifier = 'latest'):
+        """the address of MoC Token contract"""
+
+        result = self.sc.mocToken(block_identifier=block_identifier)
+
+        return result
+
+    def moc_token_commission_address(self, block_identifier: BlockIdentifier = 'latest'):
+        """the address in which the Moc Token commissions are sent"""
+
+        result = self.sc.mocTokenCommissionsAddress(block_identifier=block_identifier)
+
+        return result
+

@@ -2,13 +2,7 @@
 
 Python API to Money On Chain projects. We want to provide easy to use access to our contracts. 
 
-### Versions
-
-There are 3 versions not compatible with each others
-
-* Release 0.X.X: (STABLE) This is current master, this will deprecated in our future.
-* Release 1.X.X: (ALPHA) This is will introduced breaking changes in contract not compatible with older versions
-* Release 2.X.X: (BETA) This is will introduced breaking changes, rework of the api, make support using brownie lib
+**Note**: Use version 2.0.39 for RIF Project on production.
 
 ### Requirements
 
@@ -30,7 +24,7 @@ pip install moneyonchain
 or with specific version
 
 ```
-pip install moneyonchain==2.0.24
+pip install moneyonchain==2.1.0
 ```
 
 **Also we need brownie installed**
