@@ -1,6 +1,5 @@
 web3==5.24.0
 eth-brownie==1.17.0
-setuptools==40.8.0
 PyYAML==5.4.1
 tabulate
 requests
