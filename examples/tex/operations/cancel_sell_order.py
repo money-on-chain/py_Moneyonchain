@@ -68,9 +68,9 @@ settings = options_from_settings(
 # instantiate DEX Contract
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-base_token = settings[config_network]['DOC']
-secondary_token = settings[config_network]['RIF']
-order_id = 136
+base_token = settings[config_network]['WRBTC']
+secondary_token = settings[config_network]['MOC']
+order_id = 257
 previous_order_id = 0
 
 print("Order cancel. Please wait to the transaction be mined!...")
