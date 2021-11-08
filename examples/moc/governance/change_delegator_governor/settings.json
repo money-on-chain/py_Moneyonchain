@@ -26,7 +26,7 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0xf7F8a3F1aE4F031745D949448a1f1491c4eDf3CD"
+            "changer_address": "0x5ecAb590B7d2981e66C26DE807fdf0d3D4913BdB"
         }
     },
     "mocMainnet2": {
@@ -41,6 +41,16 @@
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
             "changer_address": "0xC2Ce001ca6796fA5cBB7B8541baCfd73F58bE316"
+        }
+    },
+    "rdocTestnet": {
+        "targetGovernor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "votingMachineGovernor": "0x165138c5a2888fB5230Ebf5ec277F0d2E5611d03",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
+            "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+            "changer_address": "0x7F939B5D51333Ca2DC177CfD353A721e325b3a42"
         }
     }
 }

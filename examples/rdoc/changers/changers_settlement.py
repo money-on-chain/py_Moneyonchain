@@ -31,7 +31,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = RDOCMoCSettlementChanger(network_manager)
 
-tx_receipt = contract.constructor(3000, execute_change=False)
+tx_receipt = contract.constructor(86400, execute_change=False)
 if tx_receipt:
     print("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:

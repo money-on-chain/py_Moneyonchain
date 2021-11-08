@@ -54,8 +54,7 @@
             "MoCVendors": "0xCDaCa57171cF101e52b391E024e0D3cCbB892588",
             "upgradeDelegator": "0x00a47D7d7B9bD22e0A862908EC493bDE893f627B"
         },
-        "changerAddresses": {
-        }
+        "changerAddresses": {}
     },
     "mocTestnet": {
         "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
@@ -80,8 +79,7 @@
             "MoCVendors": "0x84b895A1b7be8fAc64d43757479281Bf0b5E3719",
             "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8"
         },
-        "changerAddresses": {
-        }
+        "changerAddresses": {}
     },
     "mocMainnet2": {},
     "rdocTestnetAlpha": {
@@ -116,6 +114,35 @@
             "05_MoCState": null,
             "06_MoCInrate": null,
             "07_CommissionSplitter": null
+        }
+    },
+    "rdocTestnet": {
+        "targetGovernor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "executeChange": false,
+        "proxyOrder": {
+            "MoC": "01",
+            "MoCBProxManager": "02",
+            "MoCBurnout": "03",
+            "MoCSettlement": "04",
+            "MoCState": "05",
+            "MoCInrate": "06",
+            "CommissionSplitter": "07",
+            "MoCVendors": "08",
+            "upgradeDelegator": "09"
+        },
+        "proxyAddresses": {
+            "MoC": "0x7e2F245F7dc8e78576ECB13AEFc0a101E9BE1AD3",
+            "MoCBProxManager": "0xDd67D17eDABF2b320A18C00753C4D1c1008Abd73",
+            "MoCBurnout": "",
+            "MoCSettlement": "0x163D79dB568417983Aa2D64AA6310Bed0f23Ab61",
+            "MoCState": "0x496eD67F77D044C8d9471fe86085Ccb5DC4d2f63",
+            "MoCInrate": "0x4C54053845F4f219AddB43ef3A7d4478E89a2A47",
+            "CommissionSplitter": "0x5aF95c49461ef2bE429CD84aDe50867ff5A20fB6",
+            "MoCVendors": "",
+            "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8"
+        },
+        "changerAddresses": {
+            "09_upgradeDelegator": "0x7F939B5D51333Ca2DC177CfD353A721e325b3a42"
         }
     }
 }
