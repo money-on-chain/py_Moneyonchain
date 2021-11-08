@@ -117,7 +117,7 @@
         }
     },
     "rdocTestnet": {
-        "targetGovernor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
         "executeChange": false,
         "proxyOrder": {
             "MoC": "01",
@@ -142,7 +142,7 @@
             "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8"
         },
         "changerAddresses": {
-            "09_upgradeDelegator": "0x7F939B5D51333Ca2DC177CfD353A721e325b3a42"
+            "09_upgradeDelegator": "0xa3695fa549beB0fC08B5C29521f68f8869b4A5D6"
         }
     }
 }

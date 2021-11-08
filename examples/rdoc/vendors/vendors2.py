@@ -18,7 +18,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCVendors
 
 connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+config_network = 'rdocTestnet'
 
 # connection network is the brownie connection network
 # config network is our enviroment we want to connect

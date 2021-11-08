@@ -905,7 +905,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         if self.mode == 'MoC':
             return self.sc.mintBProVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintRiskProVendors.estimate_gas(int(amount), tx_args)
+            return self.sc.mintRiskProVendors.estimate_gas(int(amount), vendor_account, tx_args)
 
     # alias
     mint_riskpro_gas_estimated = mint_bpro_gas_estimated
@@ -930,7 +930,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         if self.mode == 'MoC':
             return self.sc.mintDocVendors.estimate_gas(int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintStableTokenVendors.estimate_gas(int(amount), tx_args)
+            return self.sc.mintStableTokenVendors.estimate_gas(int(amount), vendor_account, tx_args)
 
     # alias
     mint_stable_gas_estimated = mint_doc_gas_estimated
@@ -957,7 +957,7 @@ class MoCBase(ProxyAdminInterface, GovernedInterface, StoppableInterface):
         if self.mode == 'MoC':
             return self.sc.mintBProxVendors.estimate_gas(bucket, int(amount), vendor_account, tx_args)
         else:
-            return self.sc.mintRiskProxVendors.estimate_gas(bucket, int(amount), tx_args)
+            return self.sc.mintRiskProxVendors.estimate_gas(bucket, int(amount), vendor_account, tx_args)
 
     # alias
     mint_riskprox_gas_estimated = mint_bprox_gas_estimated
