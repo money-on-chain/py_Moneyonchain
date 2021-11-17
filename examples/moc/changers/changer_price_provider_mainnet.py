@@ -21,8 +21,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 
 # Connect to network
@@ -30,12 +30,8 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 contract = MoCPriceProviderChanger(network_manager)
-# BTC: 0x667bd3d048FaEBb85bAa0E9f9D87cF4c8CDFE849
-# RIF: 0x9315AFD6aEc0bb1C1FB3fdcdC2E43797B0A61853
-#price_provider = '0x2d39Cc54dc44FF27aD23A91a9B5fd750dae4B218'
-#price_provider = '0x26a00aF444928d689DDEC7b4D17c0E4a8c9D407d'
-#price_provider = '0x78c892Dc5b7139d0Ec1eF513C9E28eDfAA44f2d4'
-price_provider = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
+# BTC: 0xe2927A0620b82A66D67F678FC9b826B0E01B1bFD
+price_provider = '0xe2927A0620b82A66D67F678FC9b826B0E01B1bFD'
 tx_receipt = contract.constructor(price_provider, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))

@@ -6,14 +6,14 @@ from web3 import Web3
 from moneyonchain.networks import network_manager, web3
 from moneyonchain.transaction import TransactionReceipt
 
-connection_network = 'rskTestnetLocal'
+connection_network = 'rskTestnetLocal2'
 config_network = 'mocTestnetAlpha'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-tx_id = '0xeb447d9d34efd2713ab89f2fa7d4faa02795e64a66437139bb595097a9c3f9f7'
+tx_id = '0xf331d9ee5058b3fe89adf891c4d48bc0f16210968a7ec07d63399f4e14c833e5'
 tx_receipt = TransactionReceipt(tx_id, trace_enabled=True)
 print(tx_receipt.status)
 #tx_receipt.info()

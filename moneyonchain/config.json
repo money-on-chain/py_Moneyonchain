@@ -368,6 +368,60 @@
         "PriceFeed": "0xda6BA2D0162f1C5f3E1F5722E527DB53bA24aD31",
         "ProxyMoCMedianizer": "0x45c907727eD15Bd901560Ff439293E6b89de877e"
       }
+    },
+    "bscMoCAlphaTestnet": {
+      "app_mode": "MoC",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x95268323cfBA8f8CCf66d21ADF088B35af180070",
+        "stopper": "0xE54d6D36517337C5ae5B33f7Ed7E3d24f6a403b3",
+        "admin": "0xE3D751E904f9E332F83227c4668E85d9A23a4274",
+        "oracle": "",
+        "upgradeDelegator": "0x376E8fc28ebF057CEeeA3220f049A7FF515e1C8d",
+        "MoC": "",
+        "MoCInrate": "",
+        "MoCState": "",
+        "MoCConverter": "",
+        "MoCExchange": "",
+        "MoCConnector": "",
+        "MoCHelperLib": "",
+        "MoCBProxManager": "",
+        "MoCSettlement": "",
+        "BProToken": "",
+        "DoCToken": "",
+        "MoCMedianizer": "",
+        "CommissionSplitter": "",
+        "MoCOracle": "",
+        "MoCToken": "",
+        "MoCVendors": ""
+      }
+    },
+    "btcbAlphaTestnet": {
+      "app_mode": "RRC20",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x95268323cfBA8f8CCf66d21ADF088B35af180070",
+        "stopper": "0xE54d6D36517337C5ae5B33f7Ed7E3d24f6a403b3",
+        "admin": "0xE3D751E904f9E332F83227c4668E85d9A23a4274",
+        "oracle": "0x89E7bF2C08E7a8bfcADcaCb439099B0251803b39",
+        "upgradeDelegator": "0x376E8fc28ebF057CEeeA3220f049A7FF515e1C8d",
+        "MoC": "0xec4E0c0dF6470b905c4065f0736A591BD1e229D5",
+        "MoCInrate": "0x0389e15815004387C2e1962374D147A651c69471",
+        "MoCState": "0x2c84AA2AC5606f3A3A2f78f29e71959016C753C4",
+        "MoCConverter": "",
+        "MoCExchange": "",
+        "MoCConnector": "",
+        "MoCHelperLib": "",
+        "MoCBProxManager": "",
+        "MoCSettlement": "",
+        "BProToken": "",
+        "DoCToken": "",
+        "MoCMedianizer": "",
+        "CommissionSplitter": "",
+        "MoCOracle": "",
+        "MoCToken": "",
+        "MoCVendors": ""
+      }
     }
 
   }

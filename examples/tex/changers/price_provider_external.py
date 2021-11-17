@@ -4,9 +4,8 @@ Price Provider Changer
 import json
 import os
 
-from moneyonchain.manager import ConnectionManager
-from moneyonchain.changers import DexPriceProviderChanger
-from moneyonchain.dex import ExternalOraclePriceProviderFallback
+from moneyonchain.networks import network_manager
+from moneyonchain.tex import ExternalOraclePriceProviderFallback, DexPriceProviderChanger
 
 import logging
 import logging.config
@@ -26,21 +25,22 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-network = 'dexTestnet'
-connection_manager = ConnectionManager(network=network)
-print("Connecting to %s..." % network)
-print("Connected: {conectado}".format(conectado=connection_manager.is_connected))
+connection_network = 'rskTestnetPublic'
+config_network = 'dexTestnet'
+
+# Connect to network
+network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
 # load settings from file
 settings = options_from_settings(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), 'settings.json'))
 
-base_token = settings[network]['DOC']
-secondary_token = settings[network]['RIF']
+base_token = settings[config_network]['DOC']
+secondary_token = settings[config_network]['RIF']
 external_price_provider = '0x987ccC60c378a61d167B6DD1EEF7613c6f63938f'
 
-price_provider = ExternalOraclePriceProviderFallback(connection_manager)
+price_provider = ExternalOraclePriceProviderFallback(network_manager)
 tx_hash, tx_receipt = price_provider.constructor(external_price_provider, base_token, secondary_token)
 
 price_provider_address = None
@@ -52,7 +52,7 @@ else:
 
 if price_provider_address:
 
-    contract = DexPriceProviderChanger(connection_manager)
+    contract = DexPriceProviderChanger(network_manager)
 
     tx_hash, tx_receipt = contract.constructor(base_token,
                                                secondary_token,

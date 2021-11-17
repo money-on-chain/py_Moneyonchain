@@ -34,7 +34,5 @@ print("BPro Tec Price: {0}".format(moc_state.bpro_tec_price()))
 print("Cobj: {0}".format(moc_state.cobj()))
 
 
-
-
 # finally disconnect from network
 network_manager.disconnect()
