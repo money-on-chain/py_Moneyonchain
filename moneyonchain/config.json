@@ -369,6 +369,28 @@
         "ProxyMoCMedianizer": "0x45c907727eD15Bd901560Ff439293E6b89de877e"
       }
     },
+    "proxyBTCUSDTestnet": {
+      "app_mode": "BTCUSD",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
+        "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
+        "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8",
+        "ProxyMoCMedianizer": "0xb76c405Dfd042D88FD7b8dd2e5d66fe7974A1458"
+      }
+    },
+    "proxyBTCUSDMainnet": {
+      "app_mode": "BTCUSD",
+      "gas_price": 60000000,
+      "addresses": {
+        "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
+        "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
+        "upgradeDelegator": "0x5cE577f6Ec969CE9a282838D350206C52A6F338C",
+        "ProxyMoCMedianizer": "0x972a21C61B436354C0F35836195D7B67f54E482C"
+      }
+    },
     "bscMoCAlphaTestnet": {
       "app_mode": "MoC",
       "gas_price": 68000000,
@@ -378,17 +400,17 @@
         "admin": "0xE3D751E904f9E332F83227c4668E85d9A23a4274",
         "oracle": "",
         "upgradeDelegator": "0x376E8fc28ebF057CEeeA3220f049A7FF515e1C8d",
-        "MoC": "",
-        "MoCInrate": "",
-        "MoCState": "",
+        "MoC": "0xC0321b74Ce197FFCBA1c88bdFA36B046De6F7ADF",
+        "MoCInrate": "0x757C3Eb9E15e46c80AD07981ef9Ce35b9b8a8a3f",
+        "MoCState": "0x402bb7E64123220E858dD479e6b11AF10CaFfe07",
         "MoCConverter": "",
-        "MoCExchange": "",
-        "MoCConnector": "",
+        "MoCExchange": "0x985b104DaDBeC704A39Bc6f87cDBE8ecf72e1F9a",
+        "MoCConnector": "0x17b5772510B4dE74380D0df8FbdC36C05fe29A6A",
         "MoCHelperLib": "",
-        "MoCBProxManager": "",
-        "MoCSettlement": "",
-        "BProToken": "",
-        "DoCToken": "",
+        "MoCBProxManager": "0x059731b2d9C9E384b277b5804b9BFDe165901EA6",
+        "MoCSettlement": "0xab2EfeE9c758415758A189f9c61D32F89bcd9E75",
+        "BProToken": "0xbC3D95d030E275E299e312c06Bd63425B00e0807",
+        "DoCToken": "0x6F40966C21FBA0439f61E22E5d38163041336dDe",
         "MoCMedianizer": "",
         "CommissionSplitter": "",
         "MoCOracle": "",
