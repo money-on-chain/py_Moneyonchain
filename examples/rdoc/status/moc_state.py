@@ -2,8 +2,8 @@ from moneyonchain.networks import network_manager
 from moneyonchain.rdoc import RDOCMoCState
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'rdocMainnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
