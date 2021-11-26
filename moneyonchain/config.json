@@ -391,14 +391,14 @@
         "ProxyMoCMedianizer": "0x972a21C61B436354C0F35836195D7B67f54E482C"
       }
     },
-    "bscMoCAlphaTestnet": {
+    "bnbAlphaTestnet": {
       "app_mode": "MoC",
       "gas_price": 68000000,
       "addresses": {
         "governor": "0x95268323cfBA8f8CCf66d21ADF088B35af180070",
         "stopper": "0xE54d6D36517337C5ae5B33f7Ed7E3d24f6a403b3",
         "admin": "0xE3D751E904f9E332F83227c4668E85d9A23a4274",
-        "oracle": "",
+        "oracle": "0xF934e563502BCE084eDd687E55f465E306f87841",
         "upgradeDelegator": "0x376E8fc28ebF057CEeeA3220f049A7FF515e1C8d",
         "MoC": "0xC0321b74Ce197FFCBA1c88bdFA36B046De6F7ADF",
         "MoCInrate": "0x757C3Eb9E15e46c80AD07981ef9Ce35b9b8a8a3f",
@@ -411,11 +411,11 @@
         "MoCSettlement": "0xab2EfeE9c758415758A189f9c61D32F89bcd9E75",
         "BProToken": "0xbC3D95d030E275E299e312c06Bd63425B00e0807",
         "DoCToken": "0x6F40966C21FBA0439f61E22E5d38163041336dDe",
-        "MoCMedianizer": "",
-        "CommissionSplitter": "",
-        "MoCOracle": "",
-        "MoCToken": "",
-        "MoCVendors": ""
+        "MoCMedianizer": "0xF934e563502BCE084eDd687E55f465E306f87841",
+        "CommissionSplitter": "0x968f128228b6F284C206bF8C793BB851f13E9EA1",
+        "MoCOracle": "0x5d2048f730481c0B9B15962C01C6572e925A9333",
+        "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
+        "MoCVendors": "0x5ce3B794124135490b688D908BC4306C09b0783c"
       }
     },
     "btcbAlphaTestnet": {
@@ -427,22 +427,23 @@
         "admin": "0xE3D751E904f9E332F83227c4668E85d9A23a4274",
         "oracle": "0x89E7bF2C08E7a8bfcADcaCb439099B0251803b39",
         "upgradeDelegator": "0x376E8fc28ebF057CEeeA3220f049A7FF515e1C8d",
-        "MoC": "0xec4E0c0dF6470b905c4065f0736A591BD1e229D5",
-        "MoCInrate": "0x0389e15815004387C2e1962374D147A651c69471",
-        "MoCState": "0x2c84AA2AC5606f3A3A2f78f29e71959016C753C4",
+        "MoC": "0x88DF76BEe402a1Bc152d5C53f04E631ac50242a8",
+        "MoCInrate": "0x5fBE7545E6C7851739c9E85b8b90aF0558C58817",
+        "MoCState": "0xC97715324739F0C4b6DD06A2aDB90bfA1D15De49",
         "MoCConverter": "",
-        "MoCExchange": "",
-        "MoCConnector": "",
+        "MoCExchange": "0x5E53Ca4f9219DA8e1776024cb043474936CD3132",
+        "MoCConnector": "0x1d8f5769F6b53F60B2d304167C43C6C481ae1528",
         "MoCHelperLib": "",
-        "MoCBProxManager": "",
-        "MoCSettlement": "",
-        "BProToken": "",
-        "DoCToken": "",
-        "MoCMedianizer": "",
-        "CommissionSplitter": "",
-        "MoCOracle": "",
-        "MoCToken": "",
-        "MoCVendors": ""
+        "MoCBProxManager": "0xD79182952E52fAEDA05525Da46213aB7A5DB40a3",
+        "MoCSettlement": "0x0df9e3aA0dA54CFd8aFFBb1f982CF82920286d83",
+        "BProToken": "0x5bb99BE9fdD9EFaABbDc032850f1232Dd5731228",
+        "DoCToken": "0x155d7043CB7c3C752f75f7093f297af97ab2049F",
+        "ReserveToken": "0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8",
+        "MoCMedianizer": "0x89E7bF2C08E7a8bfcADcaCb439099B0251803b39",
+        "CommissionSplitter": "0x73331c7821d69dE1Bb09870E4c6adA1cCDed115A",
+        "MoCOracle": "0x54CB8BfcDb40E9DEFE166E966e072b4ba8e4CDDe",
+        "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
+        "MoCVendors": "0xCed191D8c04D1077F456638301d95400022E5A79"
       }
     }
 
