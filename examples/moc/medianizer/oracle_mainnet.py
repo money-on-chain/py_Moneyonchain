@@ -20,7 +20,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 oracle_address = '0xe2927A0620b82A66D67F678FC9b826B0E01B1bFD'
 
-
+# 3881519
 oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 print(oracle.peek())
 

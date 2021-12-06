@@ -111,7 +111,7 @@
       "app_mode": "RRC20",
       "gas_price": 68000000,
       "addresses": {
-        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "governor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x987ccC60c378a61d167B6DD1EEF7613c6f63938f",
@@ -144,7 +144,7 @@
       "app_mode": "RRC20",
       "gas_price": 68000000,
       "addresses": {
-        "governor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
+        "governor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
         "stopper": "0x5bCdf8A2E61BD238AEe43b99962Ee8BfBda1Beca",
         "admin": "0xffb65F6E24806B7e1A988EeD1Ad07BB2654fF695",
         "oracle": "0x987ccC60c378a61d167B6DD1EEF7613c6f63938f",

@@ -32,8 +32,8 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskMainnetLocal2'
-config_network = 'tetherMainnet'
+connection_network = 'rskTestnetLocal2'
+config_network = 'tetherTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -46,12 +46,13 @@ feed_factory = ETHFeedFactory(network_manager).from_abi()
 
 events_functions = 'Created'
 hours_delta = 0
-from_block = 3801249  # from block start
-to_block = 3804249  # block end or 0 to last block
+from_block = 2395804  # from block start
+to_block = 2395904  # block end or 0 to last block
 block_steps = 1000
 
 
 last_block_number = int(network_manager.block_number)
+print(last_block_number)
 
 if to_block <= 0:
     to_block = last_block_number  # last block number in the node

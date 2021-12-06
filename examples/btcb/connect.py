@@ -1,11 +1,12 @@
 """
  brownie networks add BSCNetwork bscTestnet host=https://data-seed-prebsc-1-s1.binance.org:8545/ chainid=97 explorer=https://blockscout.com/rsk/mainnet/api
+ brownie networks add BSCNetwork bscTestnetPrivate host=http://localhost:8575/ chainid=97 explorer=https://blockscout.com/rsk/mainnet/api
 """
 
 from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoC
 
-connection_network = 'bscTestnet'
+connection_network = 'bscTestnetPrivate'
 config_network = 'bscMoCAlphaTestnet'
 
 # Connect to network

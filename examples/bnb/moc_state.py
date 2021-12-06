@@ -6,7 +6,7 @@ from moneyonchain.networks import network_manager
 from moneyonchain.moc import MoCState
 
 
-connection_network = 'bscTestnet'
+connection_network = 'bscTestnetPrivate'
 config_network = 'bnbAlphaTestnet'
 
 # Connect to network

@@ -24,7 +24,9 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 
 oracle_address = '0x5741d55C96176eEca86316b5840Cb208784d5188'
-feeders = [('0xda6BA2D0162f1C5f3E1F5722E527DB53bA24aD31', '# MOC 1')]
+feeders = [('0xda6BA2D0162f1C5f3E1F5722E527DB53bA24aD31', '# MOC 1'),
+           ('0x1f6a8F851A661c04C09A6E7dDdc759aa48cf2FfC', '# TROPYKUS 1'),
+           ('0xdADF68aFf1981B605101473cC996581A5B17Fc68', '# RSK 1')]
 
 
 oracle = USDTMoCMedianizer(network_manager,

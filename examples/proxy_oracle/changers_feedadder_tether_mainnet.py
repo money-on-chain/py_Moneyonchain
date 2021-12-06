@@ -32,7 +32,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 
 contract = ETHPriceFeederAdderChanger(network_manager)
 
-price_feeder_owner = '0x02a682Ec42ba08Ec83c4AF7E8be8dbea42D11aFa'
+price_feeder_owner = '0xCcD7ac4278cf8642F8204d87b23C11B8f31903F9'
 tx_receipt = contract.constructor(price_feeder_owner, execute_change=False)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))

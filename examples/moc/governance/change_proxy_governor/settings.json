@@ -88,23 +88,21 @@
         "proxyOrder": {
             "MoC": "01",
             "MoCBProxManager": "02",
-            "MoCBurnout": "03",
-            "MoCSettlement": "04",
-            "MoCState": "05",
-            "MoCInrate": "06",
-            "CommissionSplitter": "07",
-            "MoCVendors": "08",
-            "upgradeDelegator": "09"
+            "MoCSettlement": "03",
+            "MoCState": "04",
+            "MoCInrate": "05",
+            "CommissionSplitter": "06",
+            "MoCVendors": "07",
+            "upgradeDelegator": "08"
         },
         "proxyAddresses": {
             "MoC": "0x4512f4C1d984bbf8B7f7404EddFb1881cFA79EfD",
             "MoCBProxManager": "0xBB2d536d3fCa262516e950984085C745E5EE824e",
-            "MoCBurnout": "",
             "MoCSettlement": "0xF7a2835aF44DF2b831291D7229DcD13D32E57d4A",
             "MoCState": "0xB80C23576053A1a5278C1a43DC8471F432f77245",
             "MoCInrate": "0x2B57fb820601655ca7Da16a5134db4780Aa93E74",
             "CommissionSplitter": "0xE79fE1d8D321d01aA973E319112Fb98eA319B7a1",
-            "MoCVendors": "",
+            "MoCVendors": "0xd282f98475A6996E1E0325BEa4ADe201Eb4c33B5",
             "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8"
         },
         "changerAddresses": {
@@ -122,27 +120,50 @@
         "proxyOrder": {
             "MoC": "01",
             "MoCBProxManager": "02",
-            "MoCBurnout": "03",
-            "MoCSettlement": "04",
-            "MoCState": "05",
-            "MoCInrate": "06",
-            "CommissionSplitter": "07",
-            "MoCVendors": "08",
-            "upgradeDelegator": "09"
+            "MoCSettlement": "03",
+            "MoCState": "04",
+            "MoCInrate": "05",
+            "CommissionSplitter": "06",
+            "MoCVendors": "07",
+            "upgradeDelegator": "08"
         },
         "proxyAddresses": {
             "MoC": "0x7e2F245F7dc8e78576ECB13AEFc0a101E9BE1AD3",
             "MoCBProxManager": "0xDd67D17eDABF2b320A18C00753C4D1c1008Abd73",
-            "MoCBurnout": "",
             "MoCSettlement": "0x163D79dB568417983Aa2D64AA6310Bed0f23Ab61",
             "MoCState": "0x496eD67F77D044C8d9471fe86085Ccb5DC4d2f63",
             "MoCInrate": "0x4C54053845F4f219AddB43ef3A7d4478E89a2A47",
-            "CommissionSplitter": "0x5aF95c49461ef2bE429CD84aDe50867ff5A20fB6",
-            "MoCVendors": "",
+            "CommissionSplitter": "0xe65C567B0AB8A138A3fF8df7febad994a8060E47",
+            "MoCVendors": "0x60E38CB11562C665A6efac87406B7B0bDE725576",
             "upgradeDelegator": "0xCDAbFbF334A5F6BCe900D2f73470D1e6722365d8"
         },
         "changerAddresses": {
-            "09_upgradeDelegator": "0xa3695fa549beB0fC08B5C29521f68f8869b4A5D6"
+        }
+    },
+    "rdocMainnet": {
+        "targetGovernor": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
+        "executeChange": false,
+        "proxyOrder": {
+            "MoC": "01",
+            "MoCBProxManager": "02",
+            "MoCSettlement": "03",
+            "MoCState": "04",
+            "MoCInrate": "05",
+            "CommissionSplitter": "06",
+            "MoCVendors": "07",
+            "upgradeDelegator": "08"
+        },
+        "proxyAddresses": {
+            "MoC": "0xCfF3fcaeC2352C672C38d77cb1a064B7D50ce7e1",
+            "MoCBProxManager": "",
+            "MoCSettlement": "",
+            "MoCState": "",
+            "MoCInrate": "",
+            "CommissionSplitter": "",
+            "MoCVendors": "",
+            "upgradeDelegator": ""
+        },
+        "changerAddresses": {
         }
     }
 }

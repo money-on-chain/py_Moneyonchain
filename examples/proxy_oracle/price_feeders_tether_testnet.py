@@ -26,7 +26,9 @@ network_manager.connect(connection_network=connection_network, config_network=co
 oracle_address = '0xB4A44672b55d66fAFA23b4F9Ba28c9C55F76fbfB'
 feeders = [
     ('0x15c7cF2c90695176dadB6c19bE34a2588Bd4eA53', '# MOC 1'),
-    ('0x6E2A377da524B2a6b5c86472b1c1906cC0f58B22', '# TROPYKUS 1')
+    ('0x6E2A377da524B2a6b5c86472b1c1906cC0f58B22', '# TROPYKUS 1'),
+    ('0x157D53a2ecB44D190E5199670cd34C5c513b72Ec', '# RSK 1'),
+    ('0xD942e57ECc9C016025ee30CE4acF302379Da215C', '# RSK 2')
 ]
 
 

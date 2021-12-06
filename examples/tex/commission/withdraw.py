@@ -41,9 +41,10 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskMainetPublic'
+connection_network = 'rskMainnetPublic'
 config_network = 'dexMainnet'
 
+log.info("Connecting to {0}".format(config_network))
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -56,11 +57,16 @@ settings = options_from_settings(
 # instantiate DEX Contract
 dex = MoCDecentralizedExchange(network_manager).from_abi()
 
-token_name = 'DOC'
+token_name = 'WRBTC'
 token = settings[config_network][token_name]
 
-print("Withdraw commission from token: {0}. Please wait to the transaction be mined!...".format(
-    token_name
+log.info("Withdraw commission from token: [{0}] {1}. Please wait to the transaction be mined!...".format(
+    token_name,
+    token
 ))
 tx_receipt = dex.withdraw_commissions(
     token)
+
+
+# finally disconnect from network
+network_manager.disconnect()
