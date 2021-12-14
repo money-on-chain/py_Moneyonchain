@@ -77,7 +77,7 @@
       "app_mode": "MoC",
       "gas_price": 60000000,
       "addresses": {
-        "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "governor": "0x3b8853DF65AfBd94853E6D77ee0Ab5590F41bB08",
         "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
         "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
         "oracle": "0x7B19bb8e6c5188eC483b784d6fB5d807a77b21bF",
@@ -133,7 +133,7 @@
         "PriceFeed": "0x462D7082F3671a3BE160638Be3f8C23Ca354F48A",
         "FeedFactory": "0xABAAff5aFAf29c85023C8C24024C3818A0320E62",
         "CoinPairPrice": "0xEE9339E9A4Ca067e6AA57834B073ACd0D2b4D699",
-        "CommissionSplitter": "0xE79fE1d8D321d01aA973E319112Fb98eA319B7a1",
+        "CommissionSplitter": "0xE379f66A1Ec08f93b7F78Ebe34873bE0c2D9ac49",
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0xd282f98475A6996E1E0325BEa4ADe201Eb4c33B5"
@@ -176,7 +176,7 @@
       "app_mode": "RRC20",
       "gas_price": 60000000,
       "addresses": {
-        "governor": "0xC61F0392d5170214b5D93C0BC4c4354163aBC1f7",
+        "governor": "0x3b8853DF65AfBd94853E6D77ee0Ab5590F41bB08",
         "stopper": "0x40662eD57284B4B541A42D347BE2447ABd1b119d",
         "admin": "0x009C51E1f6feDcDB8014Ea9AE1E39B6dbF2AC0EC",
         "oracle": "0x504EfCadFB020d6bBaeC8a5c5BB21453719d0E00",

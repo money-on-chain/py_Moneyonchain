@@ -33,7 +33,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0xF3d40B15DCe0b6257a6A8F62c707621E1e464c1e",
             "CommissionSplitter": "0x9c1e20A0Ea6c71B0AEA47fd8B1E29de208ab7A82",
             "MoCVendors": ""
         },
@@ -44,7 +44,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0x6d46489BC2747dE701924d42EBcF6AaeC5BA434f",
             "CommissionSplitter": "0x81c45938d3C1Bd5A631f5a3F719BF0BC07bff089",
             "MoCVendors": ""
         }

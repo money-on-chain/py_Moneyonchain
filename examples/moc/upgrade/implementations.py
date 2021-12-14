@@ -13,7 +13,7 @@ config_network = 'mocTestnetAlpha'
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-block_identifier = None
+block_identifier = 2213100
 is_vendor = True
 
 if is_vendor:
@@ -31,11 +31,11 @@ available_list = list()
 available_list.append(('MoC', connector_addresses['MoC'], True))
 available_list.append(('MoCConnector', moc_moc.connector(), True))
 available_list.append(('MoCState', connector_addresses['MoCState'], True))
-available_list.append(('MoCConverter', connector_addresses['MoCConverter'], True))
+#available_list.append(('MoCConverter', connector_addresses['MoCConverter'], True))
 available_list.append(('MoCSettlement', connector_addresses['MoCSettlement'], True))
 available_list.append(('MoCExchange', connector_addresses['MoCExchange'], True))
 available_list.append(('MoCInrate', connector_addresses['MoCInrate'], True))
-available_list.append(('MoCBurnout', connector_addresses['MoCBurnout'], True))
+#available_list.append(('MoCBurnout', connector_addresses['MoCBurnout'], True))
 available_list.append(('DoCToken', connector_addresses['DoCToken'], False))
 available_list.append(('BProToken', connector_addresses['BProToken'], False))
 available_list.append(('MoCBProxManager', connector_addresses['MoCBProxManager'], True))

@@ -16,7 +16,7 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0x7c06F2573496c9e18757661cc3e89bc5c559133d"
+            "changer_address": "0xaeb90D148aC9066B8dfd7D563C8E820C0C99cCE9"
         }
     },
     "mocTestnet": {
@@ -26,12 +26,18 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0x64a42965A4af16D7d964749BC642AE59F71AC090"
+            "changer_address": "0x2Bd6cc87AF0b7C117EBb907C1A8Dc6499ca4AD56"
         }
     },
     "mocMainnet2": {
         "targetGovernor": "",
-        "executeChange": false
+        "votingMachineGovernor": "",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "",
+            "governor_address": "",
+            "changer_address": ""
+        }
     },
     "rdocTestnetAlpha": {
         "targetGovernor": "0x4eAC4518e81B3A5198aADAb998D2610B46aAA609",
@@ -40,7 +46,7 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0xC2Ce001ca6796fA5cBB7B8541baCfd73F58bE316"
+            "changer_address": "0x2255DB704535Cc6E633c9D4b1f0e70Aec5A99319"
         }
     },
     "rdocTestnet": {
@@ -50,7 +56,17 @@
         "skipVoting": {
             "voting_machine_address": "0x7D124cC0f59aDA5793AD8edA9eD1836cB7e797a3",
             "governor_address": "0x7b716178771057195bB511f0B1F7198EEE62Bc22",
-            "changer_address": "0x7F939B5D51333Ca2DC177CfD353A721e325b3a42"
+            "changer_address": "0xe9e414041872ae2e214d3ADd249E075F2f48bF6E"
+        }
+    },
+    "rdocMainnet": {
+        "targetGovernor": "",
+        "votingMachineGovernor": "0x5cD03636BDBCC2502d7e4d4BC3d3feD54aF4eF5B",
+        "executeChange": false,
+        "skipVoting": {
+            "voting_machine_address": "0x65a5681bE95d212F0c90eAd40170D8277de81169",
+            "governor_address": "0x3b8853DF65AfBd94853E6D77ee0Ab5590F41bB08",
+            "changer_address": "0xf768e478B6497F318Bc5237628cCF6E9A220D69B"
         }
     }
 }

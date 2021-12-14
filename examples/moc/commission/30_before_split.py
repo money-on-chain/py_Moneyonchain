@@ -35,8 +35,8 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # init network manager
 # connection network is the brownie connection network
