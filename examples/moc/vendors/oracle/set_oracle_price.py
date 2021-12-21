@@ -37,7 +37,7 @@ config_network = 'mocTestnetAlpha3'
 # config network is our enviroment we want to connect
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-
+# Owner: 0xB7d4B3c37d17D66B88da41e8A87561323A6DBDA0
 oracle_address = '0x4A4D3130905Ec11C648D10EA494a0F0FD95a13Ad'
 price_feeder = '0xD628179e15b51287271Eb73ee961b1da11A31cF9'
 
@@ -48,7 +48,7 @@ feeder = PriceFeed(network_manager,
                    contract_address=price_feeder,
                    contract_address_moc_medianizer=oracle_address).from_abi()
 
-feeder.post(10000 * 10 ** 18, block_expiration=1000000)
+feeder.post(47000 * 10 ** 18, block_expiration=1000000)
 print(feeder.zzz())
 print(feeder.peek())
 

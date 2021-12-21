@@ -13,7 +13,7 @@ from moneyonchain.medianizer import RDOCMoCMedianizer
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
+config_network = 'rdocTestnet'
 
 
 # Connect to network

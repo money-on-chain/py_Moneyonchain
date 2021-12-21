@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='moneyonchain',
-    version='2.1.12',
+    version='2.1.13',
     packages=['moneyonchain',
               'moneyonchain.tokens',
               'moneyonchain.tex',
@@ -17,6 +17,7 @@ setup(
               'moneyonchain.medianizer',
               'moneyonchain.governance',
               'moneyonchain.moc_vendors',
+              'moneyonchain.multicall',
               'moneyonchain.rdoc_vendors'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',
@@ -65,7 +66,9 @@ setup(
                          "tex/abi/*.abi",
                          "tex/abi/*.bin",
                          "tokens/abi/*.abi",
-                         "tokens/abi/*.bin"
+                         "tokens/abi/*.bin",
+                         "multicall/abi/*.abi",
+                         "multicall/abi/*.bin"
                          ]
     },
     python_requires='>=3.6',
