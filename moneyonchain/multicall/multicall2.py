@@ -42,7 +42,7 @@ class Multicall2(ContractBase):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-    def aggregate_multiple(self, call_list):
+    def aggregate_multiple(self, call_list, require_success=False):
 
         list_aggregate = list()
         if not isinstance(call_list, list):
@@ -63,15 +63,15 @@ class Multicall2(ContractBase):
             else:
                 list_aggregate.append((aggregate_tuple[0], aggregate_tuple[1].encode_input()))
 
-        results = self.sc.aggregate(list_aggregate)
+        results = self.sc.tryAggregate(require_success, list_aggregate)
 
         # decode results
         count = 0
         decoded_results = list()
-        for result in results[1]:
+        for result in results:
             fn = call_list[count][1]
             format_result = call_list[count][3]
-            decoded_result = fn.decode_output(result)
+            decoded_result = fn.decode_output(result[1])
             if format_result:
                 decoded_result = format_result(decoded_result)
 

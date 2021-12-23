@@ -12,7 +12,7 @@ network_manager.connect(
     config_network=config_network)
 
 print("Connecting to Multicall2")
-multicall = Multicall2(network_manager, contract_address='0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103').from_abi()
+multicall = Multicall2(network_manager, contract_address='0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8').from_abi()
 moc_state = MoCState(network_manager).from_abi()
 
 moc_state_address = moc_state.address()

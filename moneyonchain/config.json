@@ -35,7 +35,7 @@
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0xCDaCa57171cF101e52b391E024e0D3cCbB892588",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
 
     },
@@ -71,7 +71,7 @@
         "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab",
         "MoCVendors": "0x84b895A1b7be8fAc64d43757479281Bf0b5E3719",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
 
     },
@@ -140,7 +140,7 @@
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0xd282f98475A6996E1E0325BEa4ADe201Eb4c33B5",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
 
     },
@@ -173,7 +173,7 @@
         "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab",
         "MoCVendors": "0x60E38CB11562C665A6efac87406B7B0bDE725576",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
 
     },
@@ -221,7 +221,7 @@
         "dex": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
         "commissionManager": "0x17264Fce635B6974A1b726F2f10f74e723Dee016",
         "MoCExchangeLib": "0x643ef47e91c15d503899dF27D8F1DC3B2829bE97",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
 
     },
@@ -424,7 +424,7 @@
         "MoCOracle": "0x5d2048f730481c0B9B15962C01C6572e925A9333",
         "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
         "MoCVendors": "0x5ce3B794124135490b688D908BC4306C09b0783c",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
     },
     "btcbAlphaTestnet": {
@@ -453,7 +453,7 @@
         "MoCOracle": "0x54CB8BfcDb40E9DEFE166E966e072b4ba8e4CDDe",
         "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
         "MoCVendors": "0xCed191D8c04D1077F456638301d95400022E5A79",
-        "Multicall2": "0x9E469E1FC7Fb4c5d17897b68eaF1aFC9df39f103"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
       }
     }
 
