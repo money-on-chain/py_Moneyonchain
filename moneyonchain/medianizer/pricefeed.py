@@ -154,3 +154,17 @@ class USDTPriceFeed(PriceFeed):
     mode = 'USDT'
     project = 'USDT'
     precision = 10 ** 18
+
+
+class BNBPriceFeed(PriceFeed):
+
+    contract_name = 'PriceFeed'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeed.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/PriceFeed.bin'))
+
+    mode = 'BNB'
+    project = 'BNB'
+    precision = 10 ** 18

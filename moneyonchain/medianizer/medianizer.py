@@ -205,6 +205,20 @@ class USDTMoCMedianizer(MoCMedianizer):
     precision = 10 ** 18
 
 
+class BNBMoCMedianizer(MoCMedianizer):
+
+    contract_name = 'BNBMoCMedianizer'
+
+    contract_abi = ContractBase.content_abi_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/MoCMedianizer.abi'))
+    contract_bin = ContractBase.content_bin_file(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'abi_eth/MoCMedianizer.bin'))
+
+    mode = 'BNB'
+    project = 'BNB'
+    precision = 10 ** 18
+
+
 class ProxyMoCMedianizer(ContractBase):
 
     contract_name = 'ProxyMoCMedianizer'
