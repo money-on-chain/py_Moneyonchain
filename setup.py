@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='moneyonchain',
-    version='2.1.15',
+    version='2.1.16',
     packages=['moneyonchain',
               'moneyonchain.tokens',
               'moneyonchain.tex',

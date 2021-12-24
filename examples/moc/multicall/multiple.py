@@ -26,5 +26,10 @@ list_aggregate.append((moc_state_address, moc_state.sc.bproxBProPrice, [BUCKET_X
 results = multicall.aggregate_multiple(list_aggregate)
 print(results)
 
+"""
+Return:
+(2444270, [Decimal('50939.75'), Decimal('72325.875801944869857594'), Decimal('0.601392786713140003')])
+"""
+
 # finally disconnect from network
 network_manager.disconnect()

@@ -13,6 +13,7 @@
 """
 
 import os
+from web3.types import BlockIdentifier
 from moneyonchain.contract import ContractBase
 
 
@@ -42,7 +43,7 @@ class Multicall2(ContractBase):
                          contract_abi=contract_abi,
                          contract_bin=contract_bin)
 
-    def aggregate_multiple(self, call_list, require_success=False):
+    def aggregate_multiple(self, call_list, require_success=False, block_identifier: BlockIdentifier = 'latest'):
 
         list_aggregate = list()
         if not isinstance(call_list, list):
@@ -63,8 +64,7 @@ class Multicall2(ContractBase):
             else:
                 list_aggregate.append((aggregate_tuple[0], aggregate_tuple[1].encode_input()))
 
-        results = self.sc.tryBlockAndAggregate(require_success, list_aggregate)
-        print(results)
+        results = self.sc.tryBlockAndAggregate(require_success, list_aggregate, block_identifier=block_identifier)
 
         # decode results
         count = 0
