@@ -16,10 +16,12 @@ multicall = Multicall2(network_manager, contract_address='0xaf7be1ef9537018feda5
 moc_state = MoCState(network_manager).from_abi()
 
 moc_state_address = moc_state.address()
+BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000'
 
 list_aggregate = list()
 list_aggregate.append((moc_state_address, moc_state.sc.getBitcoinPrice, [], lambda x: Web3.fromWei(x, 'ether')))
 list_aggregate.append((moc_state_address, moc_state.sc.bproUsdPrice, [], lambda x: Web3.fromWei(x, 'ether')))
+list_aggregate.append((moc_state_address, moc_state.sc.bproxBProPrice, [BUCKET_X2], lambda x: Web3.fromWei(x, 'ether')))
 
 results = multicall.aggregate_multiple(list_aggregate)
 print(results)

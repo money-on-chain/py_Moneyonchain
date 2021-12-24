@@ -63,12 +63,13 @@ class Multicall2(ContractBase):
             else:
                 list_aggregate.append((aggregate_tuple[0], aggregate_tuple[1].encode_input()))
 
-        results = self.sc.tryAggregate(require_success, list_aggregate)
+        results = self.sc.tryBlockAndAggregate(require_success, list_aggregate)
+        print(results)
 
         # decode results
         count = 0
         decoded_results = list()
-        for result in results:
+        for result in results[2]:
             fn = call_list[count][1]
             format_result = call_list[count][3]
             decoded_result = fn.decode_output(result[1])
@@ -78,4 +79,5 @@ class Multicall2(ContractBase):
             decoded_results.append(decoded_result)
             count += 1
 
-        return decoded_results
+        # return tuple (BlockNumber, List of results)
+        return results[0], decoded_results
