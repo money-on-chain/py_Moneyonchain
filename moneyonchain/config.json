@@ -424,7 +424,7 @@
         "MoCOracle": "0x5d2048f730481c0B9B15962C01C6572e925A9333",
         "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
         "MoCVendors": "0x5ce3B794124135490b688D908BC4306C09b0783c",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576"
       }
     },
     "btcbAlphaTestnet": {
@@ -453,10 +453,37 @@
         "MoCOracle": "0x54CB8BfcDb40E9DEFE166E966e072b4ba8e4CDDe",
         "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
         "MoCVendors": "0xCed191D8c04D1077F456638301d95400022E5A79",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576"
+      }
+    },
+    "bnbTestnet": {
+      "app_mode": "MoC",
+      "gas_price": 68000000,
+      "addresses": {
+        "governor": "0x236796E659B89af7b466f30cD61051d0Ccb52564",
+        "stopper": "0x14C9fD9d70e4835A4e971bd4b38FdaF7dF4A3f87",
+        "admin": "0x9BB99419B8c86Ad1041dCf86466977dCCDe15D2E",
+        "oracle": "0x6cf318ecf1Cd101755ccdA027B1D47B48b542cBA",
+        "upgradeDelegator": "0x675C29A9E26a86bC1356A11cEf47270a8e26a3BC",
+        "MoC": "0x80cBD706D1Db7840736C34F5177ADEf847f338Cc",
+        "MoCInrate": "0x0EDfFCde8eB7Ce745b5E29a7df9368F8F747ce3b",
+        "MoCState": "0x2BF567c39C0fEc49E6E9Ca67E7422f3926C50414",
+        "MoCConverter": "",
+        "MoCExchange": "0xe0Bf87c17c096E0f6203619946e3A431E9cCE84a",
+        "MoCConnector": "0xFF32330bBAA256C64D670DdA18BCCffF01a0Ab5E",
+        "MoCHelperLib": "",
+        "MoCBProxManager": "0xE5C354461Fe641c1F5Cc24BC22B222769f19Ed4C",
+        "MoCSettlement": "0x3B7FeE64A9f3b8128659dA6E50D759Dc2eE39927",
+        "BProToken": "0xFEB317Ad11f1876198E8A459179EDE54eBf28166",
+        "DoCToken": "0xb817041bF50B3dC35d313EBba729ba094f7AB20D",
+        "MoCMedianizer": "0x6cf318ecf1Cd101755ccdA027B1D47B48b542cBA",
+        "CommissionSplitter": "0x5F1984BdFB81EbA96E95693a08Aec4B5C853Da0C",
+        "MoCOracle": "0x5e7342bE665E10A62Eb5001Fd40A8aB9A58e6B86",
+        "MoCToken": "0x1C382A7C0481ff75C69EC1757Eff297C9255494B",
+        "MoCVendors": "0x4851daB54B6b45a2732C04aF3d5afCBfe7282F6b",
+        "Multicall2": "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576"
       }
     }
-
   }
 
 }

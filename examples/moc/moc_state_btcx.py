@@ -4,8 +4,8 @@ from brownie.convert import to_bytes
 from web3 import Web3
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha3'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # init network manager
 # connection network is the brownie connection network

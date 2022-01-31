@@ -8,12 +8,12 @@ from moneyonchain.governance import ProxyAdminInterface
 
 
 connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnetAlpha'
+config_network = 'mocTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-block_identifier = 2213100
+block_identifier = 2304407
 is_vendor = True
 
 if is_vendor:

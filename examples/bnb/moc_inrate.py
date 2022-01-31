@@ -15,8 +15,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
 
-connection_network = 'bscTestnet'
-config_network = 'bnbAlphaTestnet'
+connection_network = 'bscTestnetPrivate'
+config_network = 'bnbTestnet'
 
 
 # Connect to network
@@ -35,6 +35,32 @@ print("commission_address: {0}".format(moc_inrate.commission_address()))
 print("last_daily_pay: {0}".format(moc_inrate.last_daily_pay()))
 print("bitpro_interest_address: {0}".format(moc_inrate.bitpro_interest_address()))
 print("is_bitpro_interest_enabled: {0}".format(moc_inrate.is_bitpro_interest_enabled()))
+
+tx_type = moc_inrate.tx_type_mint_bpro_fees_rbtc()
+print("mint_bpro_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_bpro_fees_rbtc()
+print("redeem_bpro_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_mint_doc_fees_rbtc()
+print("mint_doc_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_doc_fees_rbtc()
+print("redeem_doc_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_mint_btcx_fees_rbtc()
+print("mint_btcx_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_btcx_fees_rbtc()
+print("redeem_btcx_fees_rbtc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_mint_bpro_fees_moc()
+print("mint_bpro_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_bpro_fees_moc()
+print("redeem_bpro_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_mint_doc_fees_moc()
+print("mint_doc_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_doc_fees_moc()
+print("redeem_doc_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_mint_btcx_fees_moc()
+print("mint_btcx_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+tx_type = moc_inrate.tx_type_redeem_btcx_fees_moc()
+print("redeem_btcx_fees_moc: {0}".format(moc_inrate.commission_rate_by_transaction_type(tx_type)))
+
 
 # finally disconnect from network
 network_manager.disconnect()

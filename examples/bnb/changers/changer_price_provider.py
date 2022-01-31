@@ -1,7 +1,5 @@
 from moneyonchain.networks import network_manager
-from moneyonchain.governance import BatchChanger
-from moneyonchain.moc_vendors import VENDORSMoCSettlement
-
+from moneyonchain.moc import MoCPriceProviderChanger
 
 import logging
 import logging.config
@@ -9,7 +7,7 @@ import logging.config
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/batch_changer_settlement.log',
+                    filename='logs/changers_price_provider.log',
                     filemode='a')
 
 # set up logging to console
@@ -23,29 +21,15 @@ log = logging.getLogger()
 log.addHandler(console)
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
-
+connection_network = 'bscTestnetPrivate'
+config_network = 'bnbAlphaTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-targets_to_execute = list()
-data_to_execute = list()
-
-settlement = VENDORSMoCSettlement(network_manager).from_abi()
-
-targets_to_execute.append(settlement.address())
-data_to_execute.append(settlement.sc.setBlockSpan.encode_input(120))
-
-log.info("Targets to execute")
-log.info(targets_to_execute)
-log.info("Data to execute")
-log.info(data_to_execute)
-
-contract = BatchChanger(network_manager)
-
-tx_receipt = contract.constructor(targets_to_execute, data_to_execute, execute_change=False)
+contract = MoCPriceProviderChanger(network_manager)
+price_provider = '0x6cf318ecf1Cd101755ccdA027B1D47B48b542cBA'
+tx_receipt = contract.constructor(price_provider, execute_change=True)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:

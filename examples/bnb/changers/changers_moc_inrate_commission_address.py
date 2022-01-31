@@ -1,15 +1,15 @@
-from moneyonchain.networks import network_manager
-from moneyonchain.governance import BatchChanger
-from moneyonchain.moc_vendors import VENDORSMoCSettlement
-
-
+import json
 import logging
 import logging.config
+
+from moneyonchain.networks import network_manager
+from moneyonchain.moc import MoCInrateCommissionsAddressChanger
+
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='logs/batch_changer_settlement.log',
+                    filename='logs/changers_moc_inrate_commission_address.log',
                     filemode='a')
 
 # set up logging to console
@@ -22,30 +22,22 @@ console.setFormatter(formatter)
 log = logging.getLogger()
 log.addHandler(console)
 
-
-connection_network = 'rskTestnetPublic'
-config_network = 'rdocTestnetAlpha'
-
+connection_network = 'bscTestnetPrivate'
+config_network = 'bnbTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-targets_to_execute = list()
-data_to_execute = list()
+contract = MoCInrateCommissionsAddressChanger(network_manager)
 
-settlement = VENDORSMoCSettlement(network_manager).from_abi()
+if config_network in ['bnbTestnet']:
+    execute_change = True
+else:
+    execute_change = False
 
-targets_to_execute.append(settlement.address())
-data_to_execute.append(settlement.sc.setBlockSpan.encode_input(120))
-
-log.info("Targets to execute")
-log.info(targets_to_execute)
-log.info("Data to execute")
-log.info(data_to_execute)
-
-contract = BatchChanger(network_manager)
-
-tx_receipt = contract.constructor(targets_to_execute, data_to_execute, execute_change=False)
+contract_splitter = '0x5F1984BdFB81EbA96E95693a08Aec4B5C853Da0C'
+tx_receipt = contract.constructor(contract_splitter,
+                                  execute_change=execute_change)
 if tx_receipt:
     log.info("Changer Contract Address: {address}".format(address=tx_receipt.contract_address))
 else:

@@ -58,7 +58,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0x367D283c53f8F10e47424e2AeB102F45eCC49FEa",
             "CommissionSplitter": "",
             "MoCVendors": ""
         },
@@ -69,7 +69,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0xE84A3960eF618d3a3f5258FC53e84e9b2FD9E8C7",
             "CommissionSplitter": "",
             "MoCVendors": ""
         }
@@ -108,7 +108,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0xF7a2835aF44DF2b831291D7229DcD13D32E57d4A",
             "CommissionSplitter": "",
             "MoCVendors": ""
         },
@@ -119,7 +119,7 @@
             "MoCState": "",
             "MoCConverter": "",
             "MoCExchange": "",
-            "MoCSettlement": "",
+            "MoCSettlement": "0x1bE97081cA31ecd40EA89500D1B456EE2D827896",
             "CommissionSplitter": "",
             "MoCVendors": ""
         }
