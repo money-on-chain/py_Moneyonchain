@@ -12,7 +12,6 @@
 """
 
 from web3 import Web3, Account
-from web3._utils.transactions import wait_for_transaction_receipt
 from web3._utils.threads import Timeout
 from web3.exceptions import TimeExhausted
 import json
@@ -319,7 +318,7 @@ class ConnectionManager(BaseConnectionManager):
     def wait_for_transaction_receipt(self, tx_hash, timeout=180, poll_latency=0.1):
 
         try:
-            return wait_for_transaction_receipt(self.web3,
+            return self.web3.eth.wait_for_transaction_receipt(
                                                 tx_hash,
                                                 timeout=timeout,
                                                 poll_latency=poll_latency)
