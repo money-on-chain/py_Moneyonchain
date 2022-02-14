@@ -88,7 +88,12 @@ class Multicall2(ContractBase):
             l_validity_results.append(result[0])
             count += 1
 
-        d_validity['valid'] = validity
+        if count == 0:
+            # no results so not valid
+            d_validity['valid'] = False
+        else:
+            d_validity['valid'] = validity
+
         d_validity['results'] = l_validity_results
 
         # return tuple (BlockNumber, List of results, Validation)
