@@ -36,13 +36,13 @@ oracle_address = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
 oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 #oracle = MoCMedianizer(connection_manager)
-print(oracle.peek())
+print(oracle.peek(block_identifier=2564639))
 
-authority_address = oracle.authority()
-print(authority_address)
-auth = MoCGovernedAuthority(network_manager, contract_address=authority_address).from_abi()
-print(auth.governor())
-print(oracle.owner())
+# authority_address = oracle.authority()
+# print(authority_address)
+# auth = MoCGovernedAuthority(network_manager, contract_address=authority_address).from_abi()
+# print(auth.governor())
+# print(oracle.owner())
 
 
 # finally disconnect from network

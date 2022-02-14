@@ -69,6 +69,9 @@ class Multicall2(ContractBase):
         # decode results
         count = 0
         decoded_results = list()
+        validity = True
+        d_validity = dict()
+        l_validity_results = list()
         for result in results[2]:
             fn = call_list[count][1]
             format_result = call_list[count][3]
@@ -77,7 +80,16 @@ class Multicall2(ContractBase):
                 decoded_result = format_result(decoded_result)
 
             decoded_results.append(decoded_result)
+
+            # Results validity
+            if validity and not result[0]:
+                validity = False
+
+            l_validity_results.append(result[0])
             count += 1
 
-        # return tuple (BlockNumber, List of results)
-        return results[0], decoded_results
+        d_validity['valid'] = validity
+        d_validity['results'] = l_validity_results
+
+        # return tuple (BlockNumber, List of results, Validation)
+        return results[0], decoded_results, d_validity
