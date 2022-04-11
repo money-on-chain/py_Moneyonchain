@@ -36,7 +36,8 @@ oracle_address = '0xbffBD993FF1d229B0FfE55668F2009d20d4F7C5f'
 oracle = MoCMedianizer(network_manager, contract_address=oracle_address).from_abi()
 #print(oracle.price())
 #oracle = MoCMedianizer(connection_manager)
-print(oracle.peek(block_identifier=2564639))
+#print(oracle.peek(block_identifier=2564639))
+print(oracle.peek())
 
 # authority_address = oracle.authority()
 # print(authority_address)
