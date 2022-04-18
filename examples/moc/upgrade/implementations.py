@@ -7,13 +7,13 @@ from moneyonchain.moc_vendors import VENDORSMoC
 from moneyonchain.governance import ProxyAdminInterface
 
 
-connection_network = 'rskTestnetPublic'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetPublic'
+config_network = 'mocMainnet2'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
-block_identifier = 2304407
+block_identifier = None
 is_vendor = True
 
 if is_vendor:

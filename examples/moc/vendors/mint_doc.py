@@ -37,7 +37,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 moc_main = VENDORSMoC(network_manager).from_abi()
 
 vendor_account = Web3.toChecksumAddress('0xf69287F5Ca3cC3C6d3981f2412109110cB8af076')
-amount_want_to_mint = Decimal(0.001)
+amount_want_to_mint = Decimal(0.0001)
 
 # total_amount, commission_value, markup_value = moc_main.amount_mint_doc(
 #     amount=amount_want_to_mint,
