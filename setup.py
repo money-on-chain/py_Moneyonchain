@@ -68,7 +68,9 @@ setup(
                          "tokens/abi/*.abi",
                          "tokens/abi/*.bin",
                          "multicall/abi/*.abi",
-                         "multicall/abi/*.bin"
+                         "multicall/abi/*.bin",
+                         "fastbtc/abi/*.abi",
+                         "fastbtc/abi/*.bin"
                          ]
     },
     python_requires='>=3.6',

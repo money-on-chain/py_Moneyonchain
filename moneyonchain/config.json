@@ -35,7 +35,8 @@
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0xCDaCa57171cF101e52b391E024e0D3cCbB892588",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
+        "FastBtcBridge": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A"
       }
 
     },
@@ -71,7 +72,8 @@
         "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab",
         "MoCVendors": "0x84b895A1b7be8fAc64d43757479281Bf0b5E3719",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
+        "FastBtcBridge": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A"
       }
 
     },
@@ -107,7 +109,8 @@
         "MoCOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
         "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10",
         "MoCVendors": "0x2d442aA5D391475b6Af3ad361eA3b9818fb35BcA",
-        "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a"
+        "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a",
+        "FastBtcBridge": "0x0D5006330289336ebdF9d0AC9E0674f91b4851eA"
       }
     },
     "rdocTestnetAlpha": {
@@ -140,7 +143,8 @@
         "MoCToken": "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635",
         "MoCOracle": "0xE972c8E83A5b97bB4FC867855A0aA13EF96f228D",
         "MoCVendors": "0xd282f98475A6996E1E0325BEa4ADe201Eb4c33B5",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
+        "FastBtcBridge": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A"
       }
 
     },
@@ -173,7 +177,8 @@
         "MoCOracle": "0x8DCE78BbD4D757EF7777Be113277cf5A35283b1E",
         "MoCToken": "0x45A97b54021A3F99827641AFE1bFae574431E6ab",
         "MoCVendors": "0x60E38CB11562C665A6efac87406B7B0bDE725576",
-        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8"
+        "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
+        "FastBtcBridge": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A"
       }
 
     },
@@ -206,7 +211,8 @@
         "MoCOracle": "0x72835fDc4F73cb33b1E7e03bFe067AAfED2BDB9C",
         "MoCToken": "0x9aC7Fe28967b30e3a4E6E03286D715B42B453d10",
         "MoCVendors": "0x581C819c48ed1a6c716A736361001B53D54A0a80",
-        "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a"
+        "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a",
+        "FastBtcBridge": "0x0D5006330289336ebdF9d0AC9E0674f91b4851eA"
       }
 
     },
