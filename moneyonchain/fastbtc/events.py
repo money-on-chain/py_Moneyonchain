@@ -22,14 +22,14 @@ class NewBitcoinTransfer(BaseEvent):
 
     @staticmethod
     def columns():
-        columns = ['transferIdº', 'btcAddress', 'nonce', 'amountSatoshi', 'feeSatoshi', 'rskAddress']
+        columns = ['transferId', 'btcAddress', 'nonce', 'amountSatoshi', 'feeSatoshi', 'rskAddress']
         return columns
 
     def formatted(self):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
         d_event['timestamp'] = self.timestamp
-        d_event['transferIdº'] = self.event['transferIdº']
+        d_event['transferId'] = self.event['transferId']
         d_event['btcAddress'] = self.event['btcAddress']
         d_event['nonce'] = self.event['nonce']
         d_event['amountSatoshi'] = self.event['amountSatoshi']
@@ -42,7 +42,7 @@ class NewBitcoinTransfer(BaseEvent):
         d_event = self.formatted()
         return [d_event['blockNumber'],
                 d_event['timestamp'],
-                d_event['transferIdº'],
+                d_event['transferId'],
                 d_event['btcAddress'],
                 d_event['nonce'],
                 d_event['amountSatoshi'],
@@ -63,7 +63,7 @@ class BitcoinTransferStatusUpdated(BaseEvent):
         d_event = dict()
         d_event['blockNumber'] = self.blockNumber
         d_event['timestamp'] = self.timestamp
-        d_event['transferIdº'] = self.event['transferIdº']
+        d_event['transferId'] = self.event['transferId']
         d_event['newStatus'] = self.event['newStatus']
 
         return d_event
@@ -72,6 +72,6 @@ class BitcoinTransferStatusUpdated(BaseEvent):
         d_event = self.formatted()
         return [d_event['blockNumber'],
                 d_event['timestamp'],
-                d_event['transferIdº'],
+                d_event['transferId'],
                 d_event['newStatus']
                 ]
