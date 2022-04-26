@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='moneyonchain',
-    version='2.1.18',
+    version='2.1.20',
     packages=['moneyonchain',
               'moneyonchain.tokens',
               'moneyonchain.tex',
@@ -18,6 +18,7 @@ setup(
               'moneyonchain.governance',
               'moneyonchain.moc_vendors',
               'moneyonchain.multicall',
+              'moneyonchain.fastbtc',
               'moneyonchain.rdoc_vendors'],
     url='https://github.com/moneyonchain/py_Moneyonchain/',
     author='Martin Mulone',
