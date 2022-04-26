@@ -10,11 +10,11 @@ config_network = 'mocMainnet2'
 network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 
-user_address = '0x5d2691B2F9f4F89e5d6a6759079dF629B36CCF51'
+user_address = '0x0a1Db9F51C1F06C5635Fde17711d94bF6159B5f7'
 
 # Block Number
-block_number = 2609806
-balance = Web3.fromWei(network_manager.balance_block_number(user_address, block_number=block_number), 'ether')
+block_number = 4255498
+balance = Web3.fromWei(network_manager.network_balance(user_address, block_identifier=block_number), 'ether')
 
 print("RBTC Balance of: {0} balance: {1} blockNumber: {2}".format(
     user_address,
@@ -23,8 +23,8 @@ print("RBTC Balance of: {0} balance: {1} blockNumber: {2}".format(
 
 
 # Block Number
-block_number = 2609807
-balance = Web3.fromWei(network_manager.network_balance(user_address, block_number=block_number), 'ether')
+block_number = 4255499
+balance = Web3.fromWei(network_manager.network_balance(user_address, block_identifier=block_number), 'ether')
 
 print("RBTC Balance of: {0} balance: {1} blockNumber: {2}".format(
     user_address,
