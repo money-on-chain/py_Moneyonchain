@@ -56,7 +56,7 @@ class BitcoinTransferStatusUpdated(BaseEvent):
 
     @staticmethod
     def columns():
-        columns = ['transferIdº', 'newStatus']
+        columns = ['transferId', 'newStatus']
         return columns
 
     def formatted(self):

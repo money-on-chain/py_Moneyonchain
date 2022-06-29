@@ -6,14 +6,14 @@ from web3 import Web3
 #from moneyonchain.networks import network_manager, web3
 #from moneyonchain.transaction import TransactionReceipt
 
-connection_network = 'rskTestnetLocal2'
-config_network = 'mocTestnet'
+connection_network = 'rskMainnetLocal2'
+config_network = 'mocMainnet2'
 
 # Connect to network
 #network_manager.connect(connection_network=connection_network, config_network=config_network)
 
 w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:4454', request_kwargs={'timeout': 300}))
-print(w3.manager.request_blocking('debug_traceTransaction', ["0x66faf6a7e4034557c26f52c2601f31f59924924f39bbe81faea43d589a9c638c"]))
+print(w3.manager.request_blocking('debug_traceTransaction', ["0x6ffabe8da76e70bf6cb31c4041380fe1be5fad9b129ad29d2942a2f9e6653ab8"]))
 
 """
 curl \

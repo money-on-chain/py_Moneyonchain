@@ -32,7 +32,6 @@ print("Implementation: {0}".format(moc_state.implementation()))
 print("BPro Discount: {0}".format(moc_state.bpro_discount_rate()))
 print("BPro Tec Price: {0}".format(moc_state.bpro_tec_price()))
 print("Cobj: {0}".format(moc_state.cobj()))
-
-
+print("Smothing factor: {0}".format(moc_state.smoothing_factor()))
 # finally disconnect from network
 network_manager.disconnect()
