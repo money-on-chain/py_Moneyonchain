@@ -14,9 +14,11 @@ import logging
 import logging.config
 
 # Some Params
-range_blocks = [5285307, 5286552]
+range_blocks = [5000000, 5000010] # Change this!
+
 # connection network is the brownie connection network
 connection_network = 'rskMainnetPublic'
+
 # config network is our enviroment we want to connect
 config_network = 'rdocMainnet'
 
