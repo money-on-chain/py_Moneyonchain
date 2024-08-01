@@ -9,6 +9,7 @@ RIF: 0x19F64674D8A5B4E652319F5e239eFd3bc969A1fE
 RIFP: 0x23A1aA7b11e68beBE560a36beC04D1f79357f28d
 MOC: 0x45a97b54021a3F99827641AFe1BFAE574431e6ab
 USDT: 0x4CFE225ce54C6609a525768b13F7d87432358C57
+FLIP: 0xf698561a2c88F4B057f1D5A5285B9cc38fE61D76
 
 
 1. DOC / WRBTC  <--
@@ -25,6 +26,9 @@ USDT: 0x4CFE225ce54C6609a525768b13F7d87432358C57
 12. WRBTC / RIF
 13. WRBTC/MOC
 14. DOC/USDT
+15. DOC/MOC
+16. DOC/FLIP
+17. BPRO/FLIP
 
 
 
@@ -95,8 +99,8 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskMainnetPublic'
-config_network = 'dexMainnet'
+connection_network = 'rskTestnetPublic'
+config_network = 'dexTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -104,7 +108,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['DOC/USDT']
+settings_pair = settings[config_network]['BPRO/FLIP']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']

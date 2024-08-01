@@ -13,8 +13,8 @@ def options_from_settings(filename='settings.json'):
     return config_options
 
 
-connection_network = 'rskMainnetPublic'
-config_network = 'dexMainnet'
+connection_network = 'rskTestnetPublic'
+config_network = 'dexTestnet'
 
 # Connect to network
 network_manager.connect(connection_network=connection_network, config_network=config_network)
@@ -22,7 +22,7 @@ network_manager.connect(connection_network=connection_network, config_network=co
 # load settings from file
 settings = options_from_settings()
 
-settings_pair = settings[config_network]['WRBTC/MOC']
+settings_pair = settings[config_network]['BPRO/FLIP']
 
 base_token = settings_pair['baseToken']
 secondary_token = settings_pair['secondaryToken']

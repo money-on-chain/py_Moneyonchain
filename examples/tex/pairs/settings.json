@@ -149,6 +149,26 @@
         "type": "last_closing_price",
         "address": ""
       }
+    },
+    "DOC/FLIP":{
+      "baseToken": "0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0",
+      "secondaryToken": "0xf698561a2c88F4B057f1D5A5285B9cc38fE61D76",
+      "price": "1000000000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "last_closing_price",
+        "address": ""
+      }
+    },
+    "BPRO/FLIP":{
+      "baseToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+      "secondaryToken": "0xf698561a2c88F4B057f1D5A5285B9cc38fE61D76",
+      "price": "10000000000000",
+      "precision": "1000000000000000000",
+      "provider": {
+        "type": "last_closing_price",
+        "address": ""
+      }
     }
   },
   "dexMainnet": {
